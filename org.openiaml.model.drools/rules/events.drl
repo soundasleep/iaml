@@ -1,5 +1,5 @@
 /**
- * Create the default {@model EventTrigger}s for {@model Accessible} and {@model Changeable} elements.
+ * Create the default {@model Event}s for {@model Accessible} and {@model Changeable} elements.
  */
 #created on: 4/11/2008
 package org.openiaml.model.drools.rules.events
@@ -22,37 +22,37 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference Changeable,DomainAttribute 
- *		A {@model Changeable} thing contains an {@model EventTrigger} named 'onChange'. 
+ *		A {@model Changeable} thing contains an {@model Event} named 'onChange'. 
  */
 rule "Create 'onChange' event trigger for Changeable things"
 	when
 		f : Changeable( )
 		g : GeneratesElements ( this == f )
-		not (event : EventTrigger( f.onChange == event ))
+		not (event : Event( f.onChange == event ))
 				
 		eval ( handler.veto( g ))
 			
 	then
-		EventTrigger event = handler.generatedEventTriggerOnChange(g, f);
+		Event event = handler.generatedEventOnChange(g, f);
 		queue.add(event, drools);
 		
 end
 
 /**
  * @inference Accessible
- *		An {@model Accessible} thing contains an {@model EventTrigger} named 'onAccess'.
+ *		An {@model Accessible} thing contains an {@model Event} named 'onAccess'.
  */
 rule "Create 'onAccess' event trigger for Accessible things"
 	when
 		f : Accessible( )
 		g : GeneratesElements ( this == f )
-		not (event : EventTrigger( f.onAccess == event ))
+		not (event : Event( f.onAccess == event ))
 				
 		eval ( handler.veto( g ))
 			
 	then
 		handler.veto(g);
-		EventTrigger event = handler.generatedEventTriggerOnAccess(g, f);
+		Event event = handler.generatedEventOnAccess(g, f);
 		queue.add(event, drools);
 		
 end

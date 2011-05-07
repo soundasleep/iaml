@@ -1,5 +1,5 @@
 /**
- * Connects {@model ConditionEdge}s and {@model ParameterEdge}s due to {@model Wire} completion.
+ * Connects {@model SimpleCondition}s and {@model ParameterEdge}s due to {@model Wire} completion.
  */
 package org.openiaml.model.drools.rules.conditions
 
@@ -28,11 +28,11 @@ function boolean connects(Wire wire, Object a, Object b) {
 /**
  * TODO these rules should be refactored somehow.
  *
- * @inference SyncWire,ActionEdge,ConditionEdge 
- *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} will be 
+ * @inference SyncWire,ECARule,SimpleCondition 
+ *		{@model ECARule ECARules} with incoming {@model SimpleCondition conditions} will be 
  *		copied to elements created by {@model SyncWire SyncWires}.
  */
-rule "Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (onChange)"
+rule "Connect SimpleConditions to ECARules created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
 		sw : SyncWire( )
@@ -41,28 +41,28 @@ rule "Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (
 		eval(functions.connects(sw, source, target))  
 		
 		# which has a run wire between event and operation (generated)
-		event : EventTrigger( source.onChange == event )
+		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and the sync wire had a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionEdge (from == condition, to == run )) 
+		not (SimpleCondition (from == condition, to == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
 		# copy the condition
-		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
 		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
 
-rule "Connect ConditionEdges to ActionEdges created by SyncWires (access/init) (onAccess)"
+rule "Connect SimpleConditions to ECARules created by SyncWires (access/init) (onAccess)"
 	when
 		# we have a sync wire
 		sw : SyncWire( )
@@ -71,38 +71,38 @@ rule "Connect ConditionEdges to ActionEdges created by SyncWires (access/init) (
 		eval(functions.connects(sw, source, target))  
 		
 		# which has a run wire between event and operation (generated)
-		event : EventTrigger( source.onAccess == event )
+		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
-		fvalue : Property ( target.fieldValue == fvalue )
-		param : ParameterEdge ( from == fvalue, to == run ) 
+		fvalue : Value ( target.fieldValue == fvalue )
+		param : Parameter ( from == fvalue, to == run ) 
 		
 		# and the sync wire had a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionEdge (from == condition, to == run )) 
+		not (SimpleCondition (from == condition, to == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
 		# copy the condition
-		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
 		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
 
 /**
- * @inference SyncWire,ActionEdge,ConditionEdge,ParameterEdge 
- *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} 
- *		with {@model ParameterEdge parameters} will be copied to elements 
+ * @inference SyncWire,ECARule,SimpleCondition,ParameterEdge 
+ *		{@model ECARule ECARules} with incoming {@model SimpleCondition conditions} 
+ *		with {@model Parameter parameters} will be copied to elements 
  *		created by {@model SyncWire SyncWires}.
  */
-rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (edit/update) (onChange)"
+rule "Connect ParameterEdges to SimpleConditions connected to ECARules created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
 		sw : SyncWire( )
@@ -110,36 +110,36 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a ActionEdge
-		event : EventTrigger( source.onChange == event )
+		# that has created a ECARule
+		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and this SyncWire has a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
-		# and the ActionEdge has the same condition 
-		targetCw : ConditionEdge (from == condition, to == run ) 
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : ParameterEdge( from == param, to == sourceCw )
+		paramWire : Parameter( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterEdge (from == param, to == targetCw ))
+		not (Parameter (from == param, to == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
 
 end
 
-rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (access/init) (onAccess)"
+rule "Connect ParameterEdges to SimpleConditions connected to ECARules created by SyncWires (access/init) (onAccess)"
 	when
 		# we have a syncwire
 		sw : SyncWire( )
@@ -147,33 +147,33 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a ActionEdge
-		event : EventTrigger( source.onAccess == event )
+		# that has created a ECARule
+		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and targets' value is being used for source's init
-		fvalue : Property ( target.fieldValue == fvalue ) 
-		param2 : ParameterEdge ( from == fvalue, to == run ) 
+		fvalue : Value ( target.fieldValue == fvalue ) 
+		param2 : Parameter ( from == fvalue, to == run ) 
 
 		# and this SyncWire has a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
-		# and the ActionEdge has the same condition 
-		targetCw : ConditionEdge (from == condition, to == run ) 
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : ParameterEdge( from == param, to == sourceCw )
+		paramWire : Parameter( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterEdge (from == param, to == targetCw ))
+		not (Parameter (from == param, to == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
@@ -181,11 +181,11 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 end
 
 /**
- * @inference SetWire,ActionEdge,ConditionEdge 
- *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} will be 
+ * @inference SetWire,ECARule,SimpleCondition 
+ *		{@model ECARule ECARules} with incoming {@model SimpleCondition conditions} will be 
  *		copied to elements created by {@model SetWire}s.
  */
-rule "Connect ConditionEdges to ActionEdges created by SetWires (edit/update) (onChange)"
+rule "Connect SimpleConditions to ECARules created by SetWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
 		sw : SetWire( )
@@ -194,28 +194,28 @@ rule "Connect ConditionEdges to ActionEdges created by SetWires (edit/update) (o
 		eval(functions.connects(sw, source, target))  
 		
 		# which has a run wire between event and operation (generated)
-		event : EventTrigger( source.onChange == event )
+		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and the sync wire had a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionEdge (from == condition, to == run )) 
+		not (SimpleCondition (from == condition, to == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
 		# copy the condition
-		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
 		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
 
-rule "Connect ConditionEdges to ActionEdges created by SetWires (access/init) (onAccess)"
+rule "Connect SimpleConditions to ECARules created by SetWires (access/init) (onAccess)"
 	when
 		# we have a sync wire
 		sw : SetWire( )
@@ -224,38 +224,38 @@ rule "Connect ConditionEdges to ActionEdges created by SetWires (access/init) (o
 		eval(functions.connects(sw, source, target))  
 		
 		# which has a run wire between event and operation (generated)
-		event : EventTrigger( source.onAccess == event )
+		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
-		fvalue : Property ( target.fieldValue == fvalue )
-		param : ParameterEdge ( from == fvalue, to == run ) 
+		fvalue : Value ( target.fieldValue == fvalue )
+		param : Parameter ( from == fvalue, to == run ) 
 		
 		# and the sync wire had a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionEdge (from == condition, to == run )) 
+		not (SimpleCondition (from == condition, to == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
 		# copy the condition
-		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
 		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
 
 /**
- * @inference SetWire,ActionEdge,ConditionEdge,ParameterEdge 
- *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} 
- *		with {@model ParameterEdge parameters} will be copied to elements 
+ * @inference SetWire,ECARule,SimpleCondition,ParameterEdge 
+ *		{@model ECARule ECARules} with incoming {@model SimpleCondition conditions} 
+ *		with {@model Parameter parameters} will be copied to elements 
  *		created by {@model SetWire}s.
  */
-rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SetWires (edit/update) (onChange)"
+rule "Connect ParameterEdges to SimpleConditions connected to ECARules created by SetWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
 		sw : SetWire( )
@@ -263,36 +263,36 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a ActionEdge
-		event : EventTrigger( source.onChange == event )
+		# that has created a ECARule
+		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and this SyncWire has a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
-		# and the ActionEdge has the same condition 
-		targetCw : ConditionEdge (from == condition, to == run ) 
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : ParameterEdge( from == param, to == sourceCw )
+		paramWire : Parameter( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterEdge (from == param, to == targetCw ))
+		not (Parameter (from == param, to == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
 
 end
 
-rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SetWires (access/init) (onAccess)"
+rule "Connect ParameterEdges to SimpleConditions connected to ECARules created by SetWires (access/init) (onAccess)"
 	when
 		# we have a syncwire
 		sw : SetWire( )
@@ -300,33 +300,33 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a ActionEdge
-		event : EventTrigger( source.onAccess == event )
+		# that has created a ECARule
+		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and targets' value is being used for source's init
-		fvalue : Property ( target.fieldValue == fvalue ) 
-		param2 : ParameterEdge ( from == fvalue, to == run ) 
+		fvalue : Value ( target.fieldValue == fvalue ) 
+		param2 : Parameter ( from == fvalue, to == run ) 
 
 		# and this SyncWire has a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		sourceCw : SimpleCondition( from == condition, to == sw )
 		
-		# and the ActionEdge has the same condition 
-		targetCw : ConditionEdge (from == condition, to == run ) 
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : ParameterEdge( from == param, to == sourceCw )
+		paramWire : Parameter( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterEdge (from == param, to == targetCw ))
+		not (Parameter (from == param, to == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);

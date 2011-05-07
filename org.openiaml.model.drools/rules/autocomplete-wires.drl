@@ -78,14 +78,14 @@ rule "Connect parameter for input field for Autocomplete"
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
-		fieldValue : Property ( text.fieldValue == fieldValue )
+		fieldValue : Value ( text.fieldValue == fieldValue )
 		
-		not ( ParameterEdge ( from == fieldValue, to == iterator ) )
+		not ( Parameter ( from == fieldValue, to == iterator ) )
 		
 		eval ( handler.veto( wire ))
 		
 	then
-		ParameterEdge param = handler.generatedParameterEdge(wire, text, fieldValue, iterator);
+		Parameter param = handler.generatedParameter(wire, text, fieldValue, iterator);
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
@@ -123,22 +123,22 @@ rule "Input field for Autocomplete should update instantly"
 		
 		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
 	
-		onInput : EventTrigger ( text.onInput == onInput )
-		currentInput : Property ( text.currentInput == currentInput )
+		onInput : Event ( text.onInput == onInput )
+		currentInput : Value ( text.currentInput == currentInput )
 		
 		updateOperation : Operation ( eContainer == text, name == "update" )
 		
-		not ( ActionEdge ( from == onInput, to == updateOperation ))
+		not ( ECARule ( from == onInput, to == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 		
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, text, onInput, updateOperation);
+		ECARule run = handler.generatedECARule(wire, text, onInput, updateOperation);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
 		// add a parameter
-		ParameterEdge param = handler.generatedParameterEdge(wire, text, currentInput, run);
+		Parameter param = handler.generatedParameter(wire, text, currentInput, run);
 		queue.add(param, drools);
 		
 end
@@ -189,22 +189,22 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 
 		# the value of the given label
 		targetLabel : VisibleThing ( eContainer == list, name == attribute.name )
-		value : Property ( targetLabel.fieldValue == value )
+		value : Value ( targetLabel.fieldValue == value )
 			
 		# for every label within (including target label)
 		label : VisibleThing ( eContainer == list )
-		onClick : EventTrigger ( label.onClick == onClick )
+		onClick : Event ( label.onClick == onClick )
 		
-		not ( ActionEdge ( from == onClick, to == updateOperation ))
+		not ( ECARule ( from == onClick, to == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, label, onClick, updateOperation);
+		ECARule run = handler.generatedECARule(wire, label, onClick, updateOperation);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(wire, label, value, run);
+		Parameter param = handler.generatedParameter(wire, label, value, run);
 		queue.add(param, drools);
 	
 end
@@ -222,12 +222,12 @@ rule "InternetApplication has a readonly Property 'blank' created"
 			// remove eval() to reduce memory usage  
 			definition.URI == "http://openiaml.org/model/datatypes#iamlString" )
 	
-		not ( Property ( eContainer == container, defaultValue == "" ))
+		not ( Value ( eContainer == container, defaultValue == "" ))
 		
 		eval ( handler.veto( container ))
 		
 	then
-		Property blank = handler.generatedProperty(container, container);
+		Value blank = handler.generatedValue(container, container);
 		handler.setName(blank, "blank");
 		handler.setReadOnly(blank, true);
 		handler.setType(blank, type);
@@ -256,22 +256,22 @@ rule "IteratorList labels clear the input onClick"
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
 		updateOperation : Operation ( eContainer == input, name == "update" )
 		
-		blank : Property ( eContainer == ia, defaultValue == "" )
+		blank : Value ( eContainer == ia, defaultValue == "" )
 		
 		# for every label within
 		label : VisibleThing ( eContainer == list )
-		onClick : EventTrigger ( label.onClick == onClick )
+		onClick : Event ( label.onClick == onClick )
 		
-		not ( ActionEdge ( from == onClick, to == updateOperation ))
+		not ( ECARule ( from == onClick, to == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, label, onClick, updateOperation);
+		ECARule run = handler.generatedECARule(wire, label, onClick, updateOperation);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(wire, label, blank, run);
+		Parameter param = handler.generatedParameter(wire, label, blank, run);
 		queue.add(param, drools);
 	
 end
@@ -289,7 +289,7 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		
 		# input
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
-		condition : Condition ( input.empty == condition )
+		condition : Function ( input.empty == condition )
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
@@ -299,19 +299,19 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		hide : Operation ( eContainer == list, name == "hide" )
 		
 		# Frame.onAccess
-		onAccess : EventTrigger ( container.onAccess == onAccess )
+		onAccess : Event ( container.onAccess == onAccess )
 		
-		not ( ActionEdge ( from == onAccess, to == hide ))
+		not ( ECARule ( from == onAccess, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, container, onAccess, hide);
+		ECARule run = handler.generatedECARule(wire, container, onAccess, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
-		# ConditionEdge
-		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
 		queue.add(edge, drools);
 	
 end
@@ -329,7 +329,7 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		
 		# input
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
-		condition : Condition ( eContainer == input, name == "not empty" ) 
+		condition : Function ( eContainer == input, name == "not empty" ) 
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
@@ -339,19 +339,19 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		hide : Operation ( eContainer == list, name == "show" )
 		
 		# Frame.onAccess
-		onAccess : EventTrigger ( container.onAccess == onAccess )
+		onAccess : Event ( container.onAccess == onAccess )
 		
-		not ( ActionEdge ( from == onAccess, to == hide ))
+		not ( ECARule ( from == onAccess, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, container, onAccess, hide);
+		ECARule run = handler.generatedECARule(wire, container, onAccess, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
-		# ConditionEdge
-		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
 		queue.add(edge, drools);
 	
 end
@@ -369,7 +369,7 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		
 		# input
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
-		condition : Condition ( input.empty == condition )
+		condition : Function ( input.empty == condition )
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
@@ -379,19 +379,19 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		hide : Operation ( eContainer == list, name == "hide" )
 		
 		# Frame.onAccess
-		onChange : EventTrigger ( input.onChange == onChange )
+		onChange : Event ( input.onChange == onChange )
 		
-		not ( ActionEdge ( from == onChange, to == hide ))
+		not ( ECARule ( from == onChange, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, container, onChange, hide);
+		ECARule run = handler.generatedECARule(wire, container, onChange, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
-		# ConditionEdge
-		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
 		queue.add(edge, drools);
 	
 end
@@ -410,7 +410,7 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		
 		# input
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
-		condition : Condition ( eContainer == input, name == "not empty" ) 
+		condition : Function ( eContainer == input, name == "not empty" ) 
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
@@ -420,19 +420,19 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		hide : Operation ( eContainer == list, name == "show" )
 		
 		# Frame.onAccess
-		onChange : EventTrigger ( input.onChange == onChange )
+		onChange : Event ( input.onChange == onChange )
 		
-		not ( ActionEdge ( from == onChange, to == hide ))
+		not ( ECARule ( from == onChange, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(wire, container, onChange, hide);
+		ECARule run = handler.generatedECARule(wire, container, onChange, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
-		# ConditionEdge
-		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
 		queue.add(edge, drools);
 	
 end

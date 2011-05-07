@@ -124,15 +124,15 @@ rule "Run instance wire from edit to update (onChange)"
 		target : ContainsOperations( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "run" )
 		
-		event : EventTrigger( source.onChange == event ) 
+		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ActionEdge( eContainer == sw, from == event, to == operation ))
+		not (ECARule( eContainer == sw, from == event, to == operation ))
 				
 		eval ( handler.veto( sw ))
 		
 	then
-		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
 		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
@@ -151,20 +151,20 @@ rule "Run instance wire from edit to Property update (onChange)"
 		source : Changeable( )
 		
 		targetContainer : ContainsOperations ( )
-		target : Property ( eContainer == targetContainer )
+		target : Value ( eContainer == targetContainer )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "run" )
 
-		event : EventTrigger( source.onChange == event ) 
+		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == targetContainer, 
 			name != null, 
 			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
 		
-		not (ActionEdge( eContainer == sw, from == event, to == operation ))
+		not (ECARule( eContainer == sw, from == event, to == operation ))
 				
 		eval ( handler.veto( sw ))
 		
 	then
-		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
 		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
@@ -176,15 +176,15 @@ rule "Run instance wire from edit to update, instant SetWire (onInput)"
 		target : ContainsOperations( )
 		sw : SetWire( from == source, to == target, executeOnInput == true, overriddenNames not contains "run" ) 
 		
-		event : EventTrigger( source.onInput == event ) 
+		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ActionEdge( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw, from == event, to == operation, name == "run" ))
 				
 		eval ( handler.veto( sw ))
 		
 	then
-		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
 		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
@@ -197,17 +197,17 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		target : CanBeSynced( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.edit)" )
 	
-		event : EventTrigger( eContainer == source, name=="edit" )
+		event : Event( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 				
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
@@ -219,17 +219,17 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		target : CanBeSynced( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.edit)" )
 	
-		event : EventTrigger( source.onChange == event ) 
+		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
@@ -240,23 +240,23 @@ rule "Connect parameter wire to: Run instance wire from edit to Property update 
 		source : Changeable( )
 		
 		targetContainer : ContainsOperations ( )
-		target : Property ( eContainer == targetContainer )
+		target : Value ( eContainer == targetContainer )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.edit)" )
 		
-		event : EventTrigger( source.onChange == event ) 
+		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == targetContainer, 
 			name != null, 
 			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
 
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 				
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 				
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
@@ -269,17 +269,17 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		target : CanBeSynced( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter, instant SetWire (source.edit)" )
 	
-		event : EventTrigger( source.onInput == event ) 
+		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
-		field : Property( source.currentInput == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.currentInput == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[set] run instance parameter, instant SetWire (source.edit)"); 
 		queue.add(pw, drools);
 
@@ -292,43 +292,43 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 		target : Accessible( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "run" )
 		
-		event : EventTrigger( target.onAccess == event )
+		event : Event( target.onAccess == event )
 		operation : Operation( eContainer == target, name=="init" )
-		field : Property( source.fieldValue == field )
+		field : Value( source.fieldValue == field )
 		
-		not (ActionEdge( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw, from == event, to == operation, name == "run" ))
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
 		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
 end
 
-rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set [set] (onAccess)"
+rule "Run instance wire from target.access to target.init, adding SimpleCondition to check it is set [set] (onAccess)"
 	when
 		source : ContainsOperations( )
 		target : Accessible( )
 		sw : SetWire( from == source, to == target )
 		
-		event : EventTrigger( target.onAccess == event )
+		event : Event( target.onAccess == event )
 		operation : Operation( eContainer == target, name=="init" )
-		field : Property( source.fieldValue == field )
+		field : Value( source.fieldValue == field )
 		
-		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
-		param : ParameterEdge( from == field, to == run )
+		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		param : Parameter( from == field, to == run )
 		
 		# condition check
-		condition : Condition ( eContainer == source, name == "fieldValue is set" )
+		condition : Function ( eContainer == source, name == "fieldValue is set" )
 		
-		not ( ConditionEdge ( from == condition, to == run ))
+		not ( SimpleCondition ( from == condition, to == run ))
 					
 		eval ( handler.veto( sw ))
 	
 	then
-		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
+		SimpleCondition cw = handler.generatedSimpleCondition(sw, sw, condition, run);
 		queue.add(cw, drools);
 		
 end	
@@ -340,17 +340,17 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		target : CanBeSynced( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "[sync] run instance parameter (source.access)" )
 	
-		event : EventTrigger( eContainer == target, name=="access" )
+		event : Event( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
@@ -362,17 +362,17 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		target : Accessible( )
 		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.access)" )
 	
-		event : EventTrigger( target.onAccess == event ) 
+		event : Event( target.onAccess == event ) 
 		operation : Operation( eContainer == target, name=="init" )
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[set] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
@@ -385,17 +385,17 @@ rule "Connect parameter wire: Domain Instance (source)"
 		target : CanBeSynced( )
 		sw : SetWire( from == source_container, to == target, overriddenNames not contains "[sync] run instance parameter (source.access)" )
 	
-		event : EventTrigger( eContainer == target, name=="access" )
+		event : Event( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
@@ -408,17 +408,17 @@ rule "Connect parameter wire: Domain Instance (target)"
 		target : DomainInstance ( eContainer == target_container )
 		sw : SetWire( from == source, to == target_container, overriddenNames not contains "[sync] run instance parameter (source.access)" )
 	
-		event : EventTrigger( eContainer == target, name=="access" )
+		event : Event( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
-		field : Property( source.fieldValue == field )
-		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, from == field, to == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
 		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
@@ -464,16 +464,16 @@ rule "Cascaded SetWires: Conditions from parent to child [set]"
 		esw : SetWire( from == e1, to == e2 )
 		
 		# there is a condition on the containing sync wire
-		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		cw : SimpleCondition( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : ConditionEdge( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( from == condition, to == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
 	then
-		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
+		SimpleCondition ecw = handler.generatedSimpleCondition( cw, sw, condition, esw );
 		handler.setName(ecw, "[copied] from: " + cw.getId());
 		queue.add(ecw, drools);
 
@@ -494,16 +494,16 @@ rule "Cascaded SetWires: Conditions: Domain Iterator (source)"
 		esw : SetWire( from == e1, to == e2 )
 		
 		# there is a condition on the containing sync wire
-		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		cw : SimpleCondition( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : ConditionEdge( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( from == condition, to == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
 	then
-		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
+		SimpleCondition ecw = handler.generatedSimpleCondition( cw, sw, condition, esw );
 		handler.setName(ecw, "[copied] from: " + cw.getId());
 		queue.add(ecw, drools);
 
@@ -524,16 +524,16 @@ rule "Cascaded SetWires: Conditions: Domain Iterator (target)"
 		esw : SetWire( from == e1, to == e2 )
 		
 		# there is a condition on the containing sync wire
-		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		cw : SimpleCondition( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : ConditionEdge( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( from == condition, to == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
 	then
-		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
+		SimpleCondition ecw = handler.generatedSimpleCondition( cw, sw, condition, esw );
 		handler.setName(ecw, "[copied] from: " + cw.getId());
 		queue.add(ecw, drools);
 
@@ -553,24 +553,24 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 		esw : SetWire( from == e1, to == e2 )
 		
 		# there is a condition on the containing sync wire
-		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		cw : SimpleCondition( from == condition, to == sw )
 		
 		# the generated condition wire
-		ecw : ConditionEdge( from == condition, to == esw )
+		ecw : SimpleCondition( from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : ParameterEdge( from == parameter, to == cw )
+		pw : Parameter( from == parameter, to == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+		not (epw : Parameter( from == parameter, to == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
 	then
 		# create it
-		ParameterEdge epw = handler.generatedParameterEdge( cw, sw, parameter, ecw );
+		Parameter epw = handler.generatedParameter( cw, sw, parameter, ecw );
 		handler.setName(epw, "[copied] from: " + pw.getId());
 		queue.add(epw, drools);
 
@@ -591,24 +591,24 @@ rule "Cascaded SetWires: Parameters: Domain Iterator (source)"
 		esw : SetWire( from == e1, to == e2 )
 		
 		# there is a condition on the containing sync wire
-		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		cw : SimpleCondition( from == condition, to == sw )
 		
 		# the generated condition wire
-		ecw : ConditionEdge( from == condition, to == esw )
+		ecw : SimpleCondition( from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : ParameterEdge( from == parameter, to == cw )
+		pw : Parameter( from == parameter, to == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+		not (epw : Parameter( from == parameter, to == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
 	then
 		# create it
-		ParameterEdge epw = handler.generatedParameterEdge( cw, sw, parameter, ecw );
+		Parameter epw = handler.generatedParameter( cw, sw, parameter, ecw );
 		handler.setName(epw, "[copied] from: " + pw.getId());
 		queue.add(epw, drools);
 
@@ -629,24 +629,24 @@ rule "Cascaded SetWires: Parameters: Domain Iterator (target)"
 		esw : SetWire( from == e1, to == e2 )
 		
 		# there is a condition on the containing sync wire
-		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw )
+		condition : Function ( )
+		cw : SimpleCondition( from == condition, to == sw )
 		
 		# the generated condition wire
-		ecw : ConditionEdge( from == condition, to == esw )
+		ecw : SimpleCondition( from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : ParameterEdge( from == parameter, to == cw )
+		pw : Parameter( from == parameter, to == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+		not (epw : Parameter( from == parameter, to == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
 	then
 		# create it
-		ParameterEdge epw = handler.generatedParameterEdge( cw, sw, parameter, ecw );
+		Parameter epw = handler.generatedParameter( cw, sw, parameter, ecw );
 		handler.setName(epw, "[copied] from: " + pw.getId());
 		queue.add(epw, drools);
 
@@ -665,18 +665,18 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw, overriddenNames not contains "run" )
 
-		event : EventTrigger( sourceElement.onChange == event ) 
+		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ActionEdge( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, session.onInit == inite )
+		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
 		
-		not (ActionEdge( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw2, from == inite, to == operation, name == "run" ))
 						
 		eval ( handler.veto( sw2 ))
 		
 	then
-		ActionEdge rw2 = handler.generatedActionEdge(sw2, sw2, inite, operation);
+		ECARule rw2 = handler.generatedECARule(sw2, sw2, inite, operation);
 		handler.setName(rw2, "run");
 		queue.add(rw2, drools);
 		
@@ -693,18 +693,18 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw, overriddenNames not contains "run" )
 
-		event : EventTrigger( sourceElement.onChange == event ) 
+		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ActionEdge( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, session.onInit == inite )
+		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
 		
-		not (ActionEdge( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw2, from == inite, to == operation, name == "run" ))
 						
 		eval ( handler.veto( sw2 ))
 		
 	then
-		ActionEdge rw2 = handler.generatedActionEdge(sw2, sw2, inite, operation);
+		ECARule rw2 = handler.generatedECARule(sw2, sw2, inite, operation);
 		handler.setName(rw2, "run");
 		queue.add(rw2, drools);
 		
@@ -721,23 +721,23 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw)
 
-		event : EventTrigger( sourceElement.onChange == event )
+		event : Event( sourceElement.onChange == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ActionEdge( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, session.onInit == inite )
+		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
 
-		initrw : ActionEdge( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : ECARule( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
-		field : Property( sourceElement.fieldValue == field )
-		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
+		field : Value( sourceElement.fieldValue == field )
+		pw : Parameter( eContainer == sw2, from == field, to == rw ) 
 
-		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+		not( Parameter ( eContainer == sw2, from == field, to == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
+		Parameter pw2 = handler.generatedParameter(sw, sw, field, initrw);
 		queue.add(pw2, drools);		
 end
 
@@ -752,23 +752,23 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw )
 
-		event : EventTrigger( sourceElement.onChange == event )
+		event : Event( sourceElement.onChange == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ActionEdge( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, session.onInit == inite )
+		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
 
-		initrw : ActionEdge( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : ECARule( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
-		field : Property( sourceElement.fieldValue == field )
-		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
+		field : Value( sourceElement.fieldValue == field )
+		pw : Parameter( eContainer == sw2, from == field, to == rw ) 
 
-		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+		not( Parameter ( eContainer == sw2, from == field, to == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
+		Parameter pw2 = handler.generatedParameter(sw, sw, field, initrw);
 		queue.add(pw2, drools);		
 end
 
@@ -1095,25 +1095,25 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		sync2 : SetWire ( from == tf, to == attribute, overriddenNames not contains "check new instance exists" )
 		
 		# text field access/init events
-		access : EventTrigger ( tf.onAccess == access ) 
+		access : Event ( tf.onAccess == access ) 
 		initOp : Operation ( eContainer == tf, name == "init" )
-		run : ActionEdge ( from == access, to == initOp )
+		run : ECARule ( from == access, to == initOp )
 		
-		attributeValue : Property ( attribute.fieldValue == attributeValue )
+		attributeValue : Value ( attribute.fieldValue == attributeValue )
 		
-		param : ParameterEdge ( from == attributeValue, to == run )  
+		param : Parameter ( from == attributeValue, to == run )  
 		
 		# 'not empty' condition in the instance
-		existsCondition : Condition ( eContainer == iterator, name == "not empty" )
+		existsCondition : Function ( eContainer == iterator, name == "not empty" )
 		
 		# but not connected		
-		not (ConditionEdge ( from == existsCondition, to == run ))
+		not (SimpleCondition ( from == existsCondition, to == run ))
 						
 		eval ( handler.veto( sync2 ))
 		
 	then
 		# connect it
-		ConditionEdge cw = handler.generatedConditionEdge(sync2, sync2, existsCondition, run);
+		SimpleCondition cw = handler.generatedSimpleCondition(sync2, sync2, existsCondition, run);
 		handler.setName(cw, "check new instance exists");
 		queue.add(cw, drools);
 
@@ -1143,25 +1143,25 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		sync2 : SetWire ( from == attribute, to == tf, overriddenNames not contains "check new instance exists" )
 		
 		# text field access/init events
-		onChange : EventTrigger ( attribute.onChange == onChange ) 
+		onChange : Event ( attribute.onChange == onChange ) 
 		initOp : Operation ( eContainer == tf, name == "update" )
-		run : ActionEdge ( from == onChange, to == initOp )
+		run : ECARule ( from == onChange, to == initOp )
 		
-		attributeValue : Property ( attribute.fieldValue == attributeValue )
+		attributeValue : Value ( attribute.fieldValue == attributeValue )
 		
-		param : ParameterEdge ( from == attributeValue, to == run )  
+		param : Parameter ( from == attributeValue, to == run )  
 		
 		# 'not empty' condition in the instance
-		existsCondition : Condition ( eContainer == iterator, name == "not empty" )
+		existsCondition : Function ( eContainer == iterator, name == "not empty" )
 		
 		# but not connected		
-		not (ConditionEdge ( from == existsCondition, to == run ))
+		not (SimpleCondition ( from == existsCondition, to == run ))
 						
 		eval ( handler.veto( sync2 ))
 		
 	then
 		# connect it
-		ConditionEdge cw = handler.generatedConditionEdge(sync2, sync2, existsCondition, run);
+		SimpleCondition cw = handler.generatedSimpleCondition(sync2, sync2, existsCondition, run);
 		handler.setName(cw, "check new instance exists");
 		queue.add(cw, drools);
 

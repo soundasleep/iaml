@@ -118,13 +118,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return fieldValue;
 	}
 
-	public Value generatedPropertyFieldValue(GeneratesElements by, Changeable container) throws InferenceException {
+	public Value generatedValueFieldValue(GeneratesElements by, Changeable container) throws InferenceException {
 		Value fieldValue = (Value) createElement( container, ModelPackage.eINSTANCE.getValue(), ModelPackage.eINSTANCE.getChangeable_FieldValue() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
 	
-	public Value generatedPropertyCurrentInput(GeneratesElements by, VisibleThing container) throws InferenceException {
+	public Value generatedValueCurrentInput(GeneratesElements by, VisibleThing container) throws InferenceException {
 		Value fieldValue = (Value) createElement( container, ModelPackage.eINSTANCE.getValue(), ModelPackage.eINSTANCE.getVisibleThing_CurrentInput() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;

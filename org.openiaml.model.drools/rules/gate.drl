@@ -22,14 +22,14 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' ActionEdge"
+rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' ECARule"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
+		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
 		
 		not (Button ( eContainer == target, name == "Continue" ))
-		not (ActionEdge ( to == gate ))
+		not (ECARule ( to == gate ))
 		
 		eval ( handler.veto( gate ))
 	
@@ -44,17 +44,17 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
+		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
 		button : Button ( eContainer == target, name == "Continue" )
 		
-		click : EventTrigger ( button.onClick == click, eContainer == button )
+		click : Event ( button.onClick == click, eContainer == button )
 		
-		not (ActionEdge ( from == click, to == gate ))
+		not (ECARule ( from == click, to == gate ))
 		
 		eval ( handler.veto( gate ))
 	
 	then
-		ActionEdge wire = handler.generatedActionEdge(gate, target, click, gate);
+		ECARule wire = handler.generatedECARule(gate, target, click, gate);
 		handler.setName(wire, "resume");
 		queue.add(wire, drools);
 
@@ -65,25 +65,25 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		
-		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( from == gate, name == "first" || name == "last" )
 		
-		not (Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
+		not (Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
 		
 		eval ( handler.veto( gate ))
 	
 	then
-		Property prop = handler.generatedProperty(gate, session);
+		Value prop = handler.generatedValue(gate, session);
 		handler.setName(prop, gate.getName() + " flag");
-		handler.setValue(prop, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "false");
+		handler.setValue(prop, ModelPackage.eINSTANCE.getValue_DefaultValue(), "false");
 		queue.add(prop, drools);
 	
 end
 
-rule "Create 'set flag' operation for Frames connected with 'first' or 'last' ActionEdge"
+rule "Create 'set flag' operation for Frames connected with 'first' or 'last' ECARule"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
+		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
@@ -101,17 +101,17 @@ rule "Connect 'access' event with 'set flag' operation"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
+		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
-		access : EventTrigger ( eContainer == target, target.onAccess == access )
+		access : Event ( eContainer == target, target.onAccess == access )
 		
-		not (ActionEdge ( from == access, to == op ))
+		not (ECARule ( from == access, to == op ))
 			
 		eval ( handler.veto( gate ))
 		
 	then
-		ActionEdge run = handler.generatedActionEdge(gate, target, access, op);
+		ECARule run = handler.generatedECARule(gate, target, access, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -122,9 +122,9 @@ rule "Create contents of 'set flag' operation"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		target : Frame ( )
-		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
+		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
-		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
+		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
 		
@@ -137,7 +137,7 @@ rule "Create contents of 'set flag' operation"
 		FinishNode finish = handler.generatedFinishNode(gate, op);
 		PrimitiveOperation set = handler.generatedPrimitiveOperation(gate, op);
 		handler.setName(set, "set");
-		Property value = handler.generatedProperty(gate, op);
+		Value value = handler.generatedValue(gate, op);
 		handler.setReadOnly(value, true);
 		handler.setName(value, "true");
 		handler.setDefaultValue(value, "true");
@@ -162,9 +162,9 @@ rule "Create condition 'check (gate)'"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( from == gate, name == "first" || name == "last" )
 		
-		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
+		not ( Function ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
 		
 		eval ( handler.veto( gate ))
 	
@@ -179,16 +179,16 @@ rule "Connect condition 'check (gate)' with gate"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( from == gate, name == "first" || name == "last" )
 		
-		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
+		cond : Function ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
-		not ( ConditionEdge ( from == cond, to == gate ))
+		not ( SimpleCondition ( from == cond, to == gate ))
 		
 		eval ( handler.veto( gate ))
 	
 	then
-		ConditionEdge cw = handler.generatedConditionEdge(gate, session, cond, gate);
+		SimpleCondition cw = handler.generatedSimpleCondition(gate, session, cond, gate);
 		handler.setName(cw, "condition");
 		queue.add(cw, drools);
 
@@ -198,11 +198,11 @@ rule "Create contents of 'check (gate)' condition"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
-		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
+		wire : ECARule ( from == gate, name == "first" || name == "last" )
+		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
 		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
-		cw : ConditionEdge ( from == cond, to == gate )
+		cw : SimpleCondition ( from == cond, to == gate )
 		
 		not ( StartNode ( eContainer == cond ))
 		
@@ -276,13 +276,13 @@ rule "For EntryGates that require Label values, connect a NavigateWire to the pr
 		provide : Frame ( eContainer == container, name != null,
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
 		
-		# allow other ActionEdges to override this one
-		not ( ActionEdge ( from == gate )) 
+		# allow other ECARules to override this one
+		not ( ECARule ( from == gate )) 
 	
 		eval ( handler.veto( gate ))
 	
 	then
-		ActionEdge nav = handler.generatedActionEdge(gate, gate, gate, provide);
+		ECARule nav = handler.generatedECARule(gate, gate, gate, provide);
 		handler.setName(nav, "fail");
 		queue.add(nav, drools);
 	
@@ -313,7 +313,7 @@ rule "Create TextFields for all Labels required by an EntryGate"
 	
 end
 
-rule "If an EntryGate requires a Label value, then the 'is set?' Condition in the Label is used as the Gate Condition"
+rule "If an EntryGate requires a Label value, then the 'is set?' Function in the Label is used as the Gate Condition"
 	when
 		container : Scope ( )
 		
@@ -323,14 +323,14 @@ rule "If an EntryGate requires a Label value, then the 'is set?' Condition in th
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
 		
-		cond : Condition ( eContainer == label, name == "fieldValue is set" )
+		cond : Function ( eContainer == label, name == "fieldValue is set" )
 		
-		not ( ConditionEdge ( from == cond, to == gate ))
+		not ( SimpleCondition ( from == cond, to == gate ))
 
 		eval ( handler.veto( gate ))
 	
 	then
-		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, cond, gate);
+		SimpleCondition edge = handler.generatedSimpleCondition(gate, gate, cond, gate);
 		queue.add(edge, drools);
 	
 end
@@ -349,25 +349,25 @@ rule "If an EntryGate requires a Label, get the containing Scope to update the L
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
 			
 		field : VisibleThing ( eContainer == provide, name == label.name )
-		value : Property ( field.fieldValue == value )
+		value : Value ( field.fieldValue == value )
 
 		# Scope.onAccess
-		onAccess : EventTrigger ( session.onAccess == onAccess )
+		onAccess : Event ( session.onAccess == onAccess )
 		
 		# Label.update()
 		op : Operation ( eContainer == label, name == "update" )
 		
-		not ( ActionEdge ( from == onAccess, to == op ))
+		not ( ECARule ( from == onAccess, to == op ))
 
 		eval ( handler.veto( gate ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(gate, gate, onAccess, op);
+		ECARule run = handler.generatedECARule(gate, gate, onAccess, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
 		# connect with Parameter
-		ParameterEdge param = handler.generatedParameterEdge(gate, gate, value, run);
+		Parameter param = handler.generatedParameter(gate, gate, value, run);
 		queue.add(param, drools);
 	
 end
@@ -388,23 +388,23 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		field : VisibleThing ( eContainer == provide, name == label.name )
 
 		# Scope.onAccess
-		onAccess : EventTrigger ( session.onAccess == onAccess )
+		onAccess : Event ( session.onAccess == onAccess )
 		
 		# Label.update()
 		op : Operation ( eContainer == label, name == "update" )
 		
 		# Scope.onAccess --> Label.update()
-		run : ActionEdge ( from == onAccess, to == op )
+		run : ECARule ( from == onAccess, to == op )
 		
 		# Text.isSet?
-		condition : Condition ( eContainer == field, name == "fieldValue is set" )
+		condition : Function ( eContainer == field, name == "fieldValue is set" )
 		
-		not ( ConditionEdge ( from == condition, to == run ))
+		not ( SimpleCondition ( from == condition, to == run ))
 
 		eval ( handler.veto( gate ))
 	
 	then
-		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, condition, run);
+		SimpleCondition edge = handler.generatedSimpleCondition(gate, gate, condition, run);
 		queue.add(edge, drools);
 	
 end
@@ -423,30 +423,30 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
 			
 		field : VisibleThing ( eContainer == provide, name == label.name )
-		value : Property ( field.fieldValue == value )
+		value : Value ( field.fieldValue == value )
 
 		# Scope.onAccess
-		onAccess : EventTrigger ( session.onAccess == onAccess )
+		onAccess : Event ( session.onAccess == onAccess )
 		
 		# Label.update()
 		op : Operation ( eContainer == label, name == "update" )
 		
 		# Scope.onAccess --> Label.update()
-		run : ActionEdge ( from == onAccess, to == op )
+		run : ECARule ( from == onAccess, to == op )
 		
 		# Label.can cast?
-		condition : Condition ( eContainer == label, name == "can cast?" )
+		condition : Function ( eContainer == label, name == "can cast?" )
 		
-		not ( ConditionEdge ( from == condition, to == run ))
+		not ( SimpleCondition ( from == condition, to == run ))
 
 		eval ( handler.veto( gate ))
 	
 	then
-		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, condition, run);
+		SimpleCondition edge = handler.generatedSimpleCondition(gate, gate, condition, run);
 		queue.add(edge, drools);
 		
 		# connect with fieldValue
-		ParameterEdge param = handler.generatedParameterEdge(gate, gate, value, edge);
+		Parameter param = handler.generatedParameter(gate, gate, value, edge);
 		queue.add(param, drools);
 	
 end

@@ -1,5 +1,5 @@
 /**
- * Creates the 'onInit' {@model EventTrigger} for {@model Session}s.
+ * Creates the 'onInit' {@model Event} for {@model Session}s.
  */
 package org.openiaml.model.drools.rules.sessions
 
@@ -22,17 +22,17 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference Scope
- *    A {@model Scope} contains an 'onInit' {@model EventTrigger}.
+ *    A {@model Scope} contains an 'onInit' {@model Event}.
  */
 rule "Create 'init' event for Sessions"
 	when
 		session : Scope( )
-		not (event : EventTrigger( eContainer == session, session.onInit == event ))
+		not (event : Event( eContainer == session, session.onInit == event ))
 				
 		eval ( handler.veto( session ))
 		
 	then
-		EventTrigger event = handler.generatedEventTriggerOnInit(session, session);
+		Event event = handler.generatedEventOnInit(session, session);
 		queue.add(event, drools);
 	
 end

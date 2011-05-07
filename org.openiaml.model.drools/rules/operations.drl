@@ -91,7 +91,7 @@ rule "Create 'set property XXX' Operation for all Properties, except fieldValue"
 	when
 		container : ContainsOperations ( )
 		gen : GeneratesElements ( this == container )
-		p : Property ( eContainer == container, name != "fieldValue" )
+		p : Value ( eContainer == container, name != "fieldValue" )
 		
 		exists ( setWire : SetWire ( to == p ) )
 
@@ -116,14 +116,14 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 	when
 		c : Changeable ( )
 		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c)
-		field : Property( c.fieldValue == field )
+		field : Value( c.fieldValue == field )
 		
 		not ( StartNode ( eContainer == o ))
 		
 		eval ( handler.veto( o ))
 
 	then
-		Parameter parameter = handler.generatedParameter(o, o);
+		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
 		handler.setName(parameter, "setValueTo");
 		queue.add(parameter, drools);
 		
@@ -195,7 +195,7 @@ end
 rule "Create components of 'set property XXX' operations"
 	when
 		container : ContainsOperations ( )
-		field : Property ( eContainer == container, name != "fieldValue" )
+		field : Value ( eContainer == container, name != "fieldValue" )
 
 		o : CompositeOperation ( eContainer == container, name != null, eval( ("set property " + field.getName()).equals(o.getName()) ) )
 		
@@ -204,7 +204,7 @@ rule "Create components of 'set property XXX' operations"
 		eval ( handler.veto( o ))
 
 	then
-		Parameter parameter = handler.generatedParameter(o, o);
+		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
 		handler.setName(parameter, "setValueTo");
 		queue.add(parameter, drools);
 		
@@ -280,7 +280,7 @@ rule "Create components of 'alert' operation"
 		eval ( handler.veto( o ))
 
 	then
-		Parameter parameter = handler.generatedParameter(o, o);
+		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
 		handler.setName(parameter, "alertText");
 		queue.add(parameter, drools);
 		

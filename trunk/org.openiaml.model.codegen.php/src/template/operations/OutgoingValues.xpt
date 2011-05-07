@@ -39,7 +39,7 @@
 «ENDDEFINE»
 
 /* we have a property to set [in Javascript] */
-«DEFINE outgoingValue(emf::EObject container) FOR model::Property»
+«DEFINE outgoingValue(emf::EObject container) FOR model::Value»
 	«IF isFieldValue(this)»
 		// reload value from page
 		var value = «EXPAND Parameters::dataSourceOnFrame FOR container»;
@@ -49,7 +49,7 @@
 	«EXPAND outgoingValueTarget(false, "value")»
 «ENDDEFINE»
 
-«DEFINE outgoingValueTarget(Boolean php, String valueName) FOR model::Property»
+«DEFINE outgoingValueTarget(Boolean php, String valueName) FOR model::Value»
 	/* containingSession = «containingSession(this)» */
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»		

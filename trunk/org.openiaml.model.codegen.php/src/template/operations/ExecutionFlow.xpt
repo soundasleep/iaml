@@ -353,7 +353,7 @@
 	«EXPAND continueChainedOperations(php) FOREACH outActions.sortBy(e|-e.priority)»
 «ENDDEFINE»
 
-«DEFINE continueChainedOperations(Boolean php) FOR model::ActionEdge»
+«DEFINE continueChainedOperations(Boolean php) FOR model::ECARule»
 	«IF name == "fail"»
 		// ignoring fail wire
 	«ELSE»

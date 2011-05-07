@@ -8,7 +8,7 @@
 /**
  * Parameter definitions within the signature of an operation/method.
  */
-«DEFINE signatures(Boolean php) FOR model::operations::Parameter-»
+«DEFINE signatures(Boolean php) FOR model::operations::ActivityParameter-»
 	/* «name» */
 	«IF php»
 		$«safeName()-»
@@ -22,7 +22,7 @@
  *
  * @param addKeys add associative array keys to PHP parameters
  */
-«DEFINE callParameter(Boolean php, Boolean inStoreDb, Boolean addKeys) FOR model::wires::ParameterEdge»
+«DEFINE callParameter(Boolean php, Boolean inStoreDb, Boolean addKeys) FOR model::Parameter»
 	«IF addKeys && php»
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
@@ -37,7 +37,7 @@
 /**
  * Does the given parameter exist? Return 'true' or 'false'. Expected to be in PHP mode.
  */
-«DEFINE callParameterExists(Boolean php) FOR model::wires::ParameterEdge»
+«DEFINE callParameterExists(Boolean php) FOR model::Parameter»
 	«EXPAND callParameterValueExists(php) FOR from»
 «ENDDEFINE»
 
@@ -72,7 +72,7 @@
  *		the <i>storage semantics</i> for that {@model Scope} are globally
  *		accessible; otherwise, they follow the semantics of the {@model Session}.
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Property»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Value»
 	«IF php»
 		«IF inStoreDb»
 			$arg0 /* we assume the value is already in $arg0 */
@@ -237,7 +237,7 @@
 /**
  * Is the given property set?
  */
-«DEFINE isSetParameter(Boolean php) FOR model::Property»
+«DEFINE isSetParameter(Boolean php) FOR model::Value»
 	«IF php»
 		«REM»
 			values stored in sessions will not always be called 'fieldValue';
@@ -302,7 +302,7 @@
 		<?php /* DomainAttributeInstances are cached */ echo has_attribute_instance_«safeName()»() ? "true" : "false"; ?>
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE callParameterValueExists(Boolean php) FOR model::Property»
+«DEFINE callParameterValueExists(Boolean php) FOR model::Value»
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::visual::InputTextField»

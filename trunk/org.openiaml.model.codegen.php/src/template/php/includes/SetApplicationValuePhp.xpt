@@ -82,7 +82,7 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE potentialUpdatesRequired FOR model::Property»
+«DEFINE potentialUpdatesRequired FOR model::Value»
 	if ($id == "«IF containingSession() != null»«safeName(containingSession())»_«ENDIF»«safeName()-»") {
 		/* Property "«name-»" («id-») */
 		
@@ -104,21 +104,21 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE directPropertyUpdatesFrom FOR model::wires::SyncWire»
-	«IF model::Property.isInstance(to)»
-		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) to»
+	«IF model::Value.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Value) to»
 	«ENDIF»
 «ENDDEFINE»
 
 /* bidirectionality */
 «DEFINE directPropertyUpdatesTo FOR model::wires::SyncWire»
-	«IF model::Property.isInstance(from)»
-		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) from»
+	«IF model::Value.isInstance(from)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Value) from»
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE directPropertyUpdatesFrom FOR model::wires::SetWire»
-	«IF model::Property.isInstance(to)»
-		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) to»
+	«IF model::Value.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Value) to»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -138,7 +138,7 @@ echo_necessary_update_callbacks();
 	«throwException("Unknown potential update wire edge: " + this)»
 «ENDDEFINE»
 
-«DEFINE potentialParameterUpdates FOR model::wires::ParameterEdge»
+«DEFINE potentialParameterUpdates FOR model::Parameter»
 	/* ParameterEdge "«this-»" */
 	«EXPAND potentialUpdatesParameter FOR to»
 «ENDDEFINE»
@@ -239,7 +239,7 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE outgoingValue FOR model::Property»
+«DEFINE outgoingValue FOR model::Value»
 	if ($frame_id == "«safeNameString(containingFrame(this).id)-»") {
 		/* the property "«this»" needs to be updated on the client */
 		«IF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»

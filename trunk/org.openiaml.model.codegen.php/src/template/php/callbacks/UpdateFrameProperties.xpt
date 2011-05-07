@@ -27,7 +27,7 @@ if (!require_get("ignore_updates", 0)) {
 }
 «ENDDEFINE»
 
-«DEFINE outgoingEmailValue FOR model::Property»
+«DEFINE outgoingEmailValue FOR model::Value»
 	«IF model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this»
 	«IF model::visual::InputTextField.isInstance(eContainer)»
 		/* container: InputTextField */

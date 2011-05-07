@@ -129,7 +129,7 @@
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::Property»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::Value»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		if (get_application_value("«safeNameString(id)»", null) !== null) {

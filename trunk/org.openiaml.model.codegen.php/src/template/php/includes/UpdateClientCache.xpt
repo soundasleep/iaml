@@ -38,7 +38,7 @@
 	?>
 «ENDDEFINE»
 
-«DEFINE updateCachedPrimitiveConditions FOR model::Condition»
+«DEFINE updateCachedPrimitiveConditions FOR model::Function»
 	«throwException("Cannot expand client-side cached operation '" + this + "'")»
 «ENDDEFINE»
 
@@ -64,7 +64,7 @@
 /**
  * Cached properties can be stored anywhere.
  */
-«DEFINE updateCachedProperties FOR model::Property»
+«DEFINE updateCachedProperties FOR model::Value»
 	{
 		// property '«name»'
 		$new_value = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR this»; 

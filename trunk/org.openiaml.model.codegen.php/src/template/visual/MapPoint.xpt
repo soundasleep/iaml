@@ -238,7 +238,7 @@
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
-«DEFINE staticInitialMapPointValue(model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE staticInitialMapPointValue(model::visual::Frame currentFrame) FOR model::Value»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		if (get_application_value("«safeNameString(id)»", null) !== null || /* or a default value is set */ "«escapeString(defaultValue)»") {
@@ -280,7 +280,7 @@
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
-«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::Value»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		if (get_application_value("«safeNameString(id)»", null) !== null) {

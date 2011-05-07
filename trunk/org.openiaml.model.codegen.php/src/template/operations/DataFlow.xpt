@@ -53,7 +53,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php) FOR model::operations::Parameter»
+«DEFINE dataSource(Boolean php) FOR model::operations::ActivityParameter»
 	«IF php»
 	$«safeName()»
 	«ELSE»
@@ -97,7 +97,7 @@
  * In particular, the <code>null</code> parameter will probably cause
  * problems later...
  */
-«DEFINE dataSource(Boolean php) FOR model::Property»
+«DEFINE dataSource(Boolean php) FOR model::Value»
 	«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR this»
 «ENDDEFINE»
 
@@ -108,26 +108,26 @@
 	«throwException("Unknown data flow edge target for dataTarget: " + this)»
 «ENDDEFINE»
 
-«DEFINE dataTarget(Boolean php) FOR model::Property»	
+«DEFINE dataTarget(Boolean php) FOR model::Value»	
 	«EXPAND dataTargetContainer(php, this) FOR eContainer»
 «ENDDEFINE»
 
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR emf::EObject»
+«DEFINE dataTargetContainer(Boolean php, model::Value property) FOR emf::EObject»
 	«throwException("Unknown property container: " + this)»
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::InputTextField»
+«DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::InputTextField»
 	document.getElementById('«safeNameString(id)»').value
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Button»
+«DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::Button»
 	document.getElementById('«safeNameString(id)»').value
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Label»
+«DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::Label»
 	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::MapPoint»
+«DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::MapPoint»
 	document.getElementById('map_point_«safeNameString(id)»_value').value
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Map»
+«DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::Map»
 	document.getElementById('map_single_«safeNameString(id)»_value').value
 «ENDDEFINE»
 
@@ -148,22 +148,22 @@
 	«throwException("Unknown data flow edge target for dataTargetOnChange: " + this)»
 «ENDDEFINE»
 
-«DEFINE dataTargetOnChange(Boolean php) FOR model::Property»	
+«DEFINE dataTargetOnChange(Boolean php) FOR model::Value»	
 	«EXPAND dataTargetOnChangeContainer(php, this) FOR eContainer»
 «ENDDEFINE»
 
-«DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR emf::EObject»
+«DEFINE dataTargetOnChangeContainer(Boolean php, model::Value property) FOR emf::EObject»
 	«REM»by default, does nothing«ENDREM»
 «ENDDEFINE»
 «REM»
-«DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR model::visual::Hidden»
+«DEFINE dataTargetOnChangeContainer(Boolean php, model::Value property) FOR model::visual::Hidden»
 	«IF !php»
 		// must call onChange manually
 		onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>'));
 	«ENDIF»
 «ENDDEFINE»
 «ENDREM»
-«DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR model::visual::MapPoint»
+«DEFINE dataTargetOnChangeContainer(Boolean php, model::Value property) FOR model::visual::MapPoint»
 	// need to refresh map point manually
 	set_map_point_«safeNameString(id)»(«EXPAND dataTargetContainer(php, property)»);
 «ENDDEFINE»
@@ -179,6 +179,6 @@
 	«throwException("Unknown data flow edge source for isSet: " + this)»
 «ENDDEFINE»
 
-«DEFINE isSet(Boolean php) FOR model::Property»
+«DEFINE isSet(Boolean php) FOR model::Value»
 	«EXPAND template::operations::Parameters::isSetParameter(php) FOR this»
 «ENDDEFINE»

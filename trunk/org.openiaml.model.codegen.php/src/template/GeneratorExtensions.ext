@@ -83,7 +83,7 @@ operationName(model::Operation this) :
 conditionName(emf::EObject this ) :
 	throwException("Invalid condition: " + this);
 
-conditionName(model::Condition this) :
+conditionName(model::Function this) :
 	safeName(this);
 	
 attributeName(model::domain::DomainAttribute this) :
@@ -210,8 +210,8 @@ List[model::Operation] allContainerOperations(model::InternetApplication this) :
 	 	.select(o | operationUsed(o));	 
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
-List[model::Property] allProperties(model::InternetApplication this) :
-	eAllContents.typeSelect(model::Property);
+List[model::Value] allProperties(model::InternetApplication this) :
+	eAllContents.typeSelect(model::Value);
 
 /* for a frame that is part of a session/scope */
 possibleParentOperations(model::scopes::Session this ) :
@@ -263,7 +263,7 @@ getPassFlows(model::operations::ExecutionEdgesSource this):
 getFailEdge(model::CompositeOperation this) :
 	outActions.selectFirst( e | e.isFailEdge() ) ;
 	
-isFailEdge(model::ActionEdge this ) :
+isFailEdge(model::ECARule this ) :
 	name == "fail" ;
 
 /**
@@ -377,8 +377,8 @@ model::InternetApplication getRoot(model::InternetApplication this) :
 	this;
 
 /** get all Conditions in the InternetApplication */
-cached List[model::Condition] getAllConditions(model::InternetApplication this) :
-	eAllContents.typeSelect(model::Condition)
+cached List[model::Function] getAllConditions(model::InternetApplication this) :
+	eAllContents.typeSelect(model::Function)
 		.select(o | conditionUsed(o));
 		
 /** get all Frames in the InternetApplication */
@@ -571,7 +571,7 @@ getExitResumeTargets(model::components::Gate this) :
  * the client needs to be updated.
  * <strong>All of these operations need to be consequence-free.</strong>
  */
-List[model::Condition] getClientSideCacheConditions(model::InternetApplication this) :
+List[model::Function] getClientSideCacheConditions(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveCondition)
 		.select(o | model::domain::DomainIterator.isInstance(o.eContainer))
 		.select(o | conditionUsed(o));
@@ -580,12 +580,12 @@ List[model::Condition] getClientSideCacheConditions(model::InternetApplication t
  * Get all {@model Property}s which the server needs to keep track of, and 
  * the client needs to be updated.
  */
-List[model::Property] getClientSideCacheProperties(model::InternetApplication this) :
+List[model::Value] getClientSideCacheProperties(model::InternetApplication this) :
 	eAllContents.typeSelect(model::domain::DomainIterator)
 		.select(o | o.results != null)
 		.results.toSet()
 	.addAll(eAllContents.typeSelect(model::VisibleThing).properties.toSet())
-	.addAll(eAllContents.typeSelect(model::Property).select(p|p.readOnly));
+	.addAll(eAllContents.typeSelect(model::Value).select(p|p.readOnly));
 
 /**
  * Should the given exit gate be activated/enabled on the given frame?
@@ -637,12 +637,12 @@ model::visual::Map getParentMap(emf::EObject this) :
 model::visual::Map getParentMap(model::visual::Map this) :
 	this;
 	
-isDomainIteratorResults(model::Property this) :
+isDomainIteratorResults(model::Value this) :
 	eContainer != null && 
 	model::domain::DomainIterator.isInstance(eContainer) 
 		&& ((model::domain::DomainIterator) eContainer).results == this;
 
-isDomainIteratorCurrentPointer(model::Property this) :
+isDomainIteratorCurrentPointer(model::Value this) :
 	eContainer != null && 
 	model::domain::DomainIterator.isInstance(eContainer) 
 		&& ((model::domain::DomainIterator) eContainer).currentPointer == this;
@@ -669,13 +669,13 @@ boolean isNumeric(model::EXSDDataType this) :
 operationUsed(model::Operation this) :
 	!(inActions.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 
 
-conditionUsed(model::Condition this) :
+conditionUsed(model::Function this) :
 	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
 
 /**
  * Is the given property the fieldValue property of its containing object?
  */
-isFieldValue(model::Property this) :
+isFieldValue(model::Value this) :
 	name == "fieldValue" || (model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this); 
 
 /**

@@ -12,7 +12,7 @@
 	«throwException("Unknown data type container '" + this + "'")»
 «ENDDEFINE»
 
-«DEFINE getDataType(Boolean php) FOR model::Property-»
+«DEFINE getDataType(Boolean php) FOR model::Value-»
 	/* xsd type '«type.name»' */ «EXPAND template::operations::Parameters::getTypeURI FOR type»
 «ENDDEFINE»
 

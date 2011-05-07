@@ -21,7 +21,7 @@ import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.ICodeGeneratorInMemory;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 
 /**
  * @author jmwright
@@ -144,13 +144,13 @@ public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory 
 	
 	/**
 	 * Does the given EObject have an {@link EAttribute} 'name' that can be
-	 * overridden with a new {@link Property}?
+	 * overridden with a new {@link Value}?
 	 * 
 	 * @param object the EObject to check (checks the {@link EObject#eClass() EClass})
 	 * @param name the property name to check
 	 * @return true only if the given property name exists, and is an {@link EAttribute}
 	 */
-	public static boolean isValidPropertyName(EObject object, String name) {
+	public static boolean isValidValueName(EObject object, String name) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature(name);
 		if (f == null)
 			return false;

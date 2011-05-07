@@ -11,12 +11,12 @@
     <classifier href="iaml.ecore#//VisibleThing"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(255,255,192)"/>
   </figureConfigurations>
-  <figureConfigurations name="EventTrigger" customShape="id1">
-    <classifier href="iaml.ecore#//EventTrigger"/>
+  <figureConfigurations name="Event" customShape="id1">
+    <classifier href="iaml.ecore#//Event"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(202,225,173)"/>
   </figureConfigurations>
-  <figureConfigurations name="Parameter">
-    <classifier href="iaml.ecore#//operations/Parameter"/>
+  <figureConfigurations name="ActivityParameter">
+    <classifier href="iaml.ecore#//operations/ActivityParameter"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
   </figureConfigurations>
   <figureConfigurations name="Property">
@@ -27,8 +27,8 @@
     <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
   </figureConfigurations>
-  <figureConfigurations name="Condition" shape="ELLIPSE">
-    <classifier href="iaml.ecore#//Condition"/>
+  <figureConfigurations name="Function" shape="ELLIPSE">
+    <classifier href="iaml.ecore#//Function"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(246,212,154)"/>
     <properties xsi:type="sgmf:FlowLayout" flowLayout="true" majorAlignment="CENTER" minorAlignment="CENTER"/>
   </figureConfigurations>
@@ -69,8 +69,8 @@
     <properties xsi:type="sgmf:LinePattern"/>
     <properties xsi:type="sgmf:ForegroundColor" color="black"/>
   </edgeConfigurations>
-  <edgeConfigurations name="ActionEdge" targetArrow="true">
-    <classifier href="iaml.ecore#//ActionEdge"/>
+  <edgeConfigurations name="ECARule" targetArrow="true">
+    <classifier href="iaml.ecore#//ECARule"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
   <edgeConfigurations id="" name="SyncWire" sourceArrow="true" targetArrow="true">
@@ -81,7 +81,7 @@
     <classifier href="iaml.ecore#//Wire"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
-  <customShapes id="id1" name="EventTrigger">
+  <customShapes id="id1" name="Event">
     <points/>
     <points x="60"/>
     <points x="80" y="20"/>
@@ -89,10 +89,10 @@
     <points y="40"/>
   </customShapes>
   <labelConfigurations name="ContainmentFeature" readOnly="true" specialLabel="CONTAINMENT_NAME">
-    <classifiers href="iaml.ecore#//EventTrigger"/>
-    <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//PrimitiveCondition"/>
     <classifiers href="iaml.ecore#//components/Gate"/>
+    <classifiers href="iaml.ecore#//Event"/>
+    <classifiers href="iaml.ecore#//Value"/>
     <properties xsi:type="sgmf:LabelBold" value="true"/>
     <properties xsi:type="sgmf:ForegroundColor" color="darkBlue"/>
   </labelConfigurations>
@@ -117,13 +117,13 @@
     <classifiers href="iaml.ecore#//visual/Label"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/type"/>
   </labelConfigurations>
-  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
-    <classifiers href="iaml.ecore#//operations/Parameter"/>
-    <feature xsi:type="ecore:EReference" href="iaml.ecore#//operations/Parameter/type"/>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " defaultText="" providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//operations/ActivityParameter"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//operations/ActivityParameter/type"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
-    <classifiers href="iaml.ecore#//Property"/>
-    <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
+    <classifiers href="iaml.ecore#//Value"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//Value/type"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//operations/TemporaryVariable"/>
@@ -143,14 +143,14 @@
   </labelConfigurations>
   <labelConfigurations name="ParentName" readOnly="true" defaultText="[none]" parentFeature="true">
     <classifiers href="iaml.ecore#//Operation"/>
-    <classifiers href="iaml.ecore#//Condition"/>
     <classifiers href="iaml.ecore#//VisibleThing"/>
-    <classifiers href="iaml.ecore#//EventTrigger"/>
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//visual/Frame"/>
-    <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//components/Gate"/>
     <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
+    <classifiers href="iaml.ecore#//Function"/>
+    <classifiers href="iaml.ecore#//Event"/>
+    <classifiers href="iaml.ecore#//Value"/>
     <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
   </labelConfigurations>
   <palettes name="Domain Modelling">
@@ -171,22 +171,21 @@
     <classifiers href="iaml.ecore#//Scope"/>
   </palettes>
   <palettes name="Components">
-    <classifiers href="iaml.ecore#//DynamicApplicationElementSet"/>
     <classifiers href="iaml.ecore#//components/LoginHandler"/>
     <classifiers href="iaml.ecore#//components/AccessControlHandler"/>
   </palettes>
   <palettes name="Edges">
     <classifiers href="iaml.ecore#//Wire"/>
-    <classifiers href="iaml.ecore#//wires/ConditionEdge"/>
-    <classifiers href="iaml.ecore#//ActionEdge"/>
     <classifiers href="iaml.ecore#//operations/DataFlowEdge"/>
     <classifiers href="iaml.ecore#//operations/ExecutionEdge"/>
+    <classifiers href="iaml.ecore#//Parameter"/>
+    <classifiers href="iaml.ecore#//ECARule"/>
   </palettes>
   <palettes name="Event Triggers">
-    <classifiers href="iaml.ecore#//EventTrigger"/>
+    <classifiers href="iaml.ecore#//Event"/>
   </palettes>
-  <palettes name="Conditions">
-    <classifiers href="iaml.ecore#//Condition"/>
+  <palettes name="Functions">
+    <classifiers href="iaml.ecore#//Function"/>
   </palettes>
   <diagramEditors id="condition">
     <classifier href="iaml.ecore#//CompositeCondition"/>
@@ -211,8 +210,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CastNode">
       <classifier href="iaml.ecore#//operations/CastNode"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Parameter">
-      <classifier href="iaml.ecore#//operations/Parameter"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityParameter">
+      <classifier href="iaml.ecore#//operations/ActivityParameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="TemporaryVariable">
       <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
@@ -223,11 +222,11 @@
     <elements xsi:type="sgmf:ContainedEdge" name="ExecutionEdge">
       <classifier href="iaml.ecore#//operations/ExecutionEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="element">
@@ -244,17 +243,17 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="email">
@@ -268,8 +267,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Gate">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/entryGate"/>
@@ -282,11 +281,11 @@
     <elements xsi:type="sgmf:ContainedNode" id="" name="Label">
       <classifier href="iaml.ecore#//visual/Label"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+    <elements xsi:type="sgmf:ContainedNode" name="Event">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//scopes/Email/onSent"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//scopes/Email/onFailure"/>
-      <classifier href="iaml.ecore#//EventTrigger"/>
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>
@@ -294,20 +293,20 @@
     <elements xsi:type="sgmf:ContainedEdge" name="SetWire">
       <classifier href="iaml.ecore#//wires/SetWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
-      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="Parameter">
+      <classifier href="iaml.ecore#//Parameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
       <classifier href="iaml.ecore#//domain/SelectEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainSource">
       <classifier href="iaml.ecore#//domain/DomainSource"/>
@@ -339,10 +338,10 @@
   </diagramEditors>
   <diagramEditors id="frame">
     <classifier href="iaml.ecore#//visual/Frame"/>
-    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+    <elements xsi:type="sgmf:ContainedNode" name="Event">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
-      <classifier href="iaml.ecore#//EventTrigger"/>
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
       <classifier href="iaml.ecore#//PrimitiveOperation"/>
@@ -353,8 +352,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="InputForm">
       <classifier href="iaml.ecore#//visual/InputForm"/>
@@ -407,11 +406,11 @@
     <elements xsi:type="sgmf:ContainedEdge" name="AutocompleteWire">
       <classifier href="iaml.ecore#//wires/AutocompleteWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
-      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="Parameter">
+      <classifier href="iaml.ecore#//Parameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
       <classifier href="iaml.ecore#//domain/SelectEdge"/>
@@ -419,8 +418,8 @@
     <elements xsi:type="sgmf:ContainedEdge" name="SchemaEdge">
       <classifier href="iaml.ecore#//domain/SchemaEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="RequiresEdge">
       <classifier href="iaml.ecore#//wires/RequiresEdge"/>
@@ -428,8 +427,8 @@
     <elements xsi:type="sgmf:ContainedEdge" name="ConstraintEdge">
       <classifier href="iaml.ecore#//wires/ConstraintEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>
@@ -461,17 +460,17 @@
   </diagramEditors>
   <diagramEditors id="iterator">
     <classifier href="iaml.ecore#//domain/DomainIterator"/>
-    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+    <elements xsi:type="sgmf:ContainedNode" name="Event">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/onChange"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/onIterate"/>
-      <classifier href="iaml.ecore#//EventTrigger"/>
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" id="" name="Property">
+    <elements xsi:type="sgmf:ContainedNode" id="" name="Value">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/results"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/currentPointer"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
-      <classifier href="iaml.ecore#//Property"/>
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveOperation">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/previous"/>
@@ -502,17 +501,17 @@
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
-      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="Parameter">
+      <classifier href="iaml.ecore#//Parameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" id="" name="ExtendsEdge">
       <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Frame">
       <classifier href="iaml.ecore#//visual/Frame"/>
@@ -556,14 +555,14 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Parameter">
-      <classifier href="iaml.ecore#//operations/Parameter"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityParameter">
+      <classifier href="iaml.ecore#//operations/ActivityParameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="TemporaryVariable">
       <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="DataFlowEdge">
       <classifier href="iaml.ecore#//operations/DataFlowEdge"/>
@@ -571,14 +570,14 @@
     <elements xsi:type="sgmf:ContainedEdge" name="ExecutionEdge">
       <classifier href="iaml.ecore#//operations/ExecutionEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
-      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="Parameter">
+      <classifier href="iaml.ecore#//Parameter"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
@@ -598,8 +597,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
@@ -628,11 +627,11 @@
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="DetailWire">
       <classifier href="iaml.ecore#//wires/DetailWire"/>
@@ -649,8 +648,8 @@
     <elements xsi:type="sgmf:ContainedEdge" name="ExtendsEdge">
       <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" id="" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Permission">
       <classifier href="iaml.ecore#//users/Permission"/>
@@ -670,10 +669,10 @@
   </diagramEditors>
   <diagramEditors id="session">
     <classifier href="iaml.ecore#//scopes/Session"/>
-    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+    <elements xsi:type="sgmf:ContainedNode" name="Event">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
-      <classifier href="iaml.ecore#//EventTrigger"/>
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
       <classifier href="iaml.ecore#//PrimitiveOperation"/>
@@ -684,8 +683,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Property">
-      <classifier href="iaml.ecore#//Property"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Frame">
       <classifier href="iaml.ecore#//visual/Frame"/>
@@ -719,17 +718,17 @@
     <elements xsi:type="sgmf:ContainedEdge" name="AutocompleteWire">
       <classifier href="iaml.ecore#//wires/AutocompleteWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
-      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="Parameter">
+      <classifier href="iaml.ecore#//Parameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
       <classifier href="iaml.ecore#//domain/SelectEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="RequiresEdge">
       <classifier href="iaml.ecore#//wires/RequiresEdge"/>
@@ -737,8 +736,8 @@
     <elements xsi:type="sgmf:ContainedEdge" name="ConstraintEdge">
       <classifier href="iaml.ecore#//wires/ConstraintEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>
@@ -767,12 +766,12 @@
   </diagramEditors>
   <diagramEditors id="visual">
     <classifier href="iaml.ecore#//VisibleThing"/>
-    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+    <elements xsi:type="sgmf:ContainedNode" id="" name="Event">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onInput"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/onChange"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onClick"/>
-      <classifier href="iaml.ecore#//EventTrigger"/>
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
       <classifier href="iaml.ecore#//PrimitiveOperation"/>
@@ -789,11 +788,11 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsConditions/conditions"/>
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Property">
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/currentInput"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
-      <classifier href="iaml.ecore#//Property"/>
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="InputForm">
       <classifier href="iaml.ecore#//visual/InputForm"/>
@@ -822,20 +821,20 @@
     <elements xsi:type="sgmf:ContainedEdge" name="DetailWire">
       <classifier href="iaml.ecore#//wires/DetailWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
-      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
+      <classifier href="iaml.ecore#//SimpleCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
-      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="Parameter">
+      <classifier href="iaml.ecore#//Parameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
       <classifier href="iaml.ecore#//domain/SelectEdge"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
+      <classifier href="iaml.ecore#//ECARule"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Event">
+      <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>
@@ -866,13 +865,13 @@
     </elements>
   </diagramEditors>
   <rootElement href="iaml.ecore#//InternetApplication"/>
-  <edgeTypes href="iaml.ecore#//ActionEdge"/>
-  <edgeTypes href="iaml.ecore#//wires/ConditionEdge"/>
+  <edgeTypes href="iaml.ecore#//ECARule"/>
+  <edgeTypes href="iaml.ecore#//SimpleCondition"/>
   <edgeTypes href="iaml.ecore#//wires/ConstraintEdge"/>
   <edgeTypes href="iaml.ecore#//operations/DataFlowEdge"/>
   <edgeTypes href="iaml.ecore#//operations/ExecutionEdge"/>
   <edgeTypes href="iaml.ecore#//wires/ExtendsEdge"/>
-  <edgeTypes href="iaml.ecore#//wires/ParameterEdge"/>
+  <edgeTypes href="iaml.ecore#//Parameter"/>
   <edgeTypes href="iaml.ecore#//wires/ProvidesEdge"/>
   <edgeTypes href="iaml.ecore#//wires/RequiresEdge"/>
   <edgeTypes href="iaml.ecore#//domain/SchemaEdge"/>

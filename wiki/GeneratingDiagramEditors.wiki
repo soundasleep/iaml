@@ -5,7 +5,7 @@
 
 =Tips=
 
-Here is a basic script to delete the generated code from all generated editors ([http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model/model/scripts/remove-generated-gmf.bat?r=1140 source]).
+Here is a basic script to delete the generated code from all generated editors ([http://code.google.com/p/iaml/source/browse/trunk/cleanup_diagram_editors.bat current source]).
 
 {{{
 rem we should be in workspace\

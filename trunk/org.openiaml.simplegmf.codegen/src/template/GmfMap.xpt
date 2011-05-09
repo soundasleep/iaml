@@ -173,10 +173,10 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 		href="«root.id».gmfgraph#«classifier.name»"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="«EXPAND toHref(root) FOR deriveSourceMetaElement(classifier)»"/>
+        href="«EXPAND toHref(root) FOR deriveSourceMetaElement(root, classifier)»"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="«EXPAND toHref(root) FOR deriveTargetMetaElement(classifier)»"/>
+        href="«EXPAND toHref(root) FOR deriveTargetMetaElement(root, classifier)»"/>
 «ENDIF»
 	
 	«EXPAND labelMappings(root, this) FOREACH gmfmapLabelMapGet(classifier)»

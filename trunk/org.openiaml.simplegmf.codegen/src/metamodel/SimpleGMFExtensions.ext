@@ -4,17 +4,29 @@ import ecore;
 List[ecore::EClass] getAllNonAbstractElements(ecore::EPackage this) :
 	eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface));
 
+simplegmf::GMFConfiguration getRoot(simplegmf::GMFConfiguration this) :
+	this;
+
+simplegmf::GMFConfiguration getRoot(emf::EObject this) :
+	if eContainer == null
+		then null
+		else getRoot(eContainer);
+
 /**
  * Is the given EClass an edge type?
  */
 isEdgeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
 	root.edgeTypes.exists(et|toBoolean(et.isSuperTypeOf(cls)));
 
-ecore::EStructuralFeature deriveSourceMetaElement(ecore::EClass cls) :
-	cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "from" || toString(f.name) == "source");
+ecore::EStructuralFeature deriveSourceMetaElement(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if root.edgeReferences.exists(r|r.classifier == cls)
+		then root.edgeReferences.selectFirst(r|r.classifier == cls).sourceFeature
+		else cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "from" || toString(f.name) == "source");
 
-ecore::EStructuralFeature deriveTargetMetaElement(ecore::EClass cls) :
-	cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "to" || toString(f.name) == "target");
+ecore::EStructuralFeature deriveTargetMetaElement(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if root.edgeReferences.exists(r|r.classifier == cls)
+		then root.edgeReferences.selectFirst(r|r.classifier == cls).targetFeature
+		else cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "to" || toString(f.name) == "target");
 
 /**
  * Get the derived FigureConfiguration for this element.
@@ -64,6 +76,12 @@ simplegmf::CustomShape getCustomShape(simplegmf::GMFConfiguration root, ecore::E
  */
 String getResourceFileName(emf::EObject object) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getResourceFileName(org.eclipse.emf.ecore.EObject);
+
+/**
+ * Is the given EObject a valid reference?
+ */
+boolean isValidEObject(emf::EObject object) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.isValidEObject(org.eclipse.emf.ecore.EObject);
 
 /**
  * Extensions to satisfy OAW's bugs.

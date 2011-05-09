@@ -23,6 +23,7 @@ import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
@@ -32,7 +33,6 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
@@ -600,7 +600,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 	
 	/**
-	 * Look at the editor's children to see if a PrimitiveCondition is being displayed.
+	 * Look at the editor's children to see if a {@link BuiltinProperty} is being displayed.
 	 *
 	 * @param root
 	 * @param pageName
@@ -608,7 +608,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasPrimitiveCondition(DiagramDocumentEditor root, String operationName,
 			boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, PrimitiveCondition.class, operationName, true, shortcutRequired);
+		return assertHasRenderedNamedObject(root, BuiltinProperty.class, operationName, true, shortcutRequired);
 	}
 
 	/**
@@ -621,15 +621,6 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasCompositeCondition(DiagramDocumentEditor root, String operationName,
 			boolean checkShortcut, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(root, CompositeCondition.class, operationName, checkShortcut, shortcutRequired);
-	}
-
-	/**
-	 * Assert that a {@link ECARule} exists between two elements in the editor.
-	 * 
-	 * @deprecated use {@link #assertHasECARule(DiagramDocumentEditor, EditPart, EditPart, String)} instead.
-	 */
-	public ConnectionNodeEditPart assertHasRunAction(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
-		return assertHasECARule(editor, source, target, name);
 	}
 	
 	/**

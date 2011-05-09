@@ -35,7 +35,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart chained = assertHasEvent(editor, true, ModelPackage.eINSTANCE.getScope_OnInit());
 
 		// they should be connected
-		assertHasRunAction(editor, chained, op, "run2");
+		assertHasECARule(editor, chained, op, "run2");
 		assertShortcut(chained);
 		assertNotShortcut(page);
 		assertNotShortcut(op);
@@ -51,7 +51,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart op2 = assertHasOperation(editor_page, "op");
 
 		// they should be connected
-		assertHasRunAction(editor_page, chained2, op2, "run2");
+		assertHasECARule(editor_page, chained2, op2, "run2");
 		assertShortcut(op2);
 		assertNotShortcut(chained2);
 

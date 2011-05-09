@@ -48,7 +48,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			ShapeNodeEditPart op = assertHasCompositeOperation(editor_page, "some operation", true);
 			
 			// connected by a RunAction
-			ConnectionNodeEditPart run = assertHasRunAction(editor_page, button, op, "onClick");
+			ConnectionNodeEditPart run = assertHasECARule(editor_page, button, op, "onClick");
 			
 			// this RunAction has an incoming parameter
 			assertHasParameter(editor_page, staticValue, run);
@@ -91,7 +91,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 				ShapeNodeEditPart op = assertHasCompositeOperation(editor_button, "some operation", true);
 				
 				// the event is connected to the op by a RunAction
-				ConnectionNodeEditPart run = assertHasRunAction(editor_button, event, op, "run");
+				ConnectionNodeEditPart run = assertHasECARule(editor_button, event, op, "run");
 				
 				// there is also a shortcutted StaticValue, which is the parameter
 				ShapeNodeEditPart staticValue = assertHasValue(editor_button, "parameter", true);
@@ -134,13 +134,13 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			ShapeNodeEditPart button = assertHasButton(editor_page, "direct", true);
 			
 			// connected by a RunAction to the operation
-			ConnectionNodeEditPart run = assertHasRunAction(editor_page, button, op, "onClick");
+			ConnectionNodeEditPart run = assertHasECARule(editor_page, button, op, "onClick");
 			
 			// there is a shortcutted event 'onChange'
 			ShapeNodeEditPart event = assertHasEvent(editor_page, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
 			
 			// also connected by a RunAction
-			ConnectionNodeEditPart run2 = assertHasRunAction(editor_page, event, op, "run");
+			ConnectionNodeEditPart run2 = assertHasECARule(editor_page, event, op, "run");
 			
 			// finally, there is a static value that has a shortcut
 			ShapeNodeEditPart staticValue = assertHasValue(editor_page, "parameter", true);

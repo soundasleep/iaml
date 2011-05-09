@@ -3,9 +3,9 @@
  */
 package org.openiaml.model.tests.inference.model0_5_3;
 
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.ActivityParameter;
@@ -43,8 +43,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		InputTextField text1 = assertHasInputTextField(home, "text1");
 		PrimitiveOperation init1 = assertHasPrimitiveOperation(text1, "init");
 		PrimitiveOperation update1 = assertHasPrimitiveOperation(text1, "update");
-		PrimitiveCondition cast1 = assertHasPrimitiveCondition(text1, "can cast?");
-		PrimitiveCondition set1 = assertHasPrimitiveCondition(text1, "fieldValue is set");
+		BuiltinProperty cast1 = assertHasBuiltinProperty(text1, "can cast?");
+		BuiltinProperty set1 = assertHasBuiltinProperty(text1, "fieldValue is set");
 
 		InputTextField text2 = assertHasInputTextField(home, "text2");
 		CompositeOperation init2 = assertHasCompositeOperation(text2, "init");
@@ -150,7 +150,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 
 		InputTextField text1 = assertHasInputTextField(home, "text1");
-		PrimitiveCondition cast1 = assertHasPrimitiveCondition(text1, "can cast?");
+		BuiltinProperty cast1 = assertHasBuiltinProperty(text1, "can cast?");
 
 		assertFalse(cast1 instanceof CompositeCondition);
 

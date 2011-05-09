@@ -27,8 +27,8 @@ global DroolsHelperFunctions functions;
  *
  * <p>Issue 221: Add 'can cast?' Primitive Function to all Changeable elements
  *
- * @inference Changeable,PrimitiveCondition
- *		{@model Changeable}s will contain a {@model PrimitiveCondition} named 'can cast?'.
+ * @inference Changeable,BuiltinProperty
+ *		{@model Changeable}s will contain a {@model BuiltinProperty} named 'can cast?'.
  */
 rule "Create 'can cast?' condition for Changeables"
 	when
@@ -38,7 +38,7 @@ rule "Create 'can cast?' condition for Changeables"
 		eval ( handler.veto( tf ))
 	
 	then
-		PrimitiveCondition condition = handler.generatedPrimitiveCondition(tf, tf);
+		BuiltinProperty condition = handler.generatedBuiltinProperty(tf, tf);
 		handler.setName(condition, "can cast?");
 		queue.add(condition, drools);
 

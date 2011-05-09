@@ -85,9 +85,9 @@ end
 
 /**
  * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model PrimitiveCondition} 'empty'.
+ *		{@model VisibleThing}s have an {@model BuiltinProperty} 'empty'.
  */
-rule "VisibleThings have a PrimitiveCondition 'empty'"
+rule "VisibleThings have a BuiltinProperty 'empty'"
 	when
 		f : VisibleThing( )
 		not (condition : Function( f.empty == condition ))
@@ -95,7 +95,7 @@ rule "VisibleThings have a PrimitiveCondition 'empty'"
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f,
+		BuiltinProperty condition = handler.generatedBuiltinProperty(f, f,
 			ModelPackage.eINSTANCE.getVisibleThing_Empty());
 		handler.setName(condition, "empty");
 		queue.add(condition, drools);
@@ -104,9 +104,9 @@ end
 
 /**
  * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model PrimitiveCondition} 'not empty'.
+ *		{@model VisibleThing}s have an {@model BuiltinProperty} 'not empty'.
  */
-rule "VisibleThings have a PrimitiveCondition 'not empty'"
+rule "VisibleThings have a BuiltinProperty 'not empty'"
 	when
 		f : VisibleThing( )
 		not (condition : Function( f.notEmpty == condition ))
@@ -114,7 +114,7 @@ rule "VisibleThings have a PrimitiveCondition 'not empty'"
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f,
+		BuiltinProperty condition = handler.generatedBuiltinProperty(f, f,
 			ModelPackage.eINSTANCE.getVisibleThing_NotEmpty());
 		handler.setName(condition, "not empty");
 		queue.add(condition, drools);

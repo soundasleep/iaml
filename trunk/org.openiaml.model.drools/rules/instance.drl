@@ -124,11 +124,11 @@ rule "Create 'jump' PrimitiveOperation"
 end
 
 /**
- * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} 
+ * @inference DomainIterator,BuiltinProperty
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} 
  *		called '{@model DomainIterator#hasNext}'.
  */
-rule "Create 'hasNext' PrimitiveCondition"
+rule "Create 'hasNext' BuiltinProperty"
 	when
 		instance : DomainIterator( )
 		not ( cond : Function ( instance.hasNext == cond ) )
@@ -136,7 +136,7 @@ rule "Create 'hasNext' PrimitiveCondition"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
+		BuiltinProperty cond = handler.generatedBuiltinProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_HasNext());
 		handler.setName(cond, "has next");
 		queue.add(cond, drools);
@@ -144,11 +144,11 @@ rule "Create 'hasNext' PrimitiveCondition"
 end
 
 /**
- * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} 
+ * @inference DomainIterator,BuiltinProperty
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} 
  *		called '{@model DomainIterator#hasPrevious}'.
  */
-rule "Create 'hasPrevious' PrimitiveCondition"
+rule "Create 'hasPrevious' BuiltinProperty"
 	when
 		instance : DomainIterator( )
 		not ( cond : Function ( instance.hasPrevious == cond ) )
@@ -156,7 +156,7 @@ rule "Create 'hasPrevious' PrimitiveCondition"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
+		BuiltinProperty cond = handler.generatedBuiltinProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_HasPrevious());
 		handler.setName(cond, "has previous");
 		queue.add(cond, drools);
@@ -164,11 +164,11 @@ rule "Create 'hasPrevious' PrimitiveCondition"
 end
 
 /**
- * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} 
+ * @inference DomainIterator,BuiltinProperty
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} 
  *		called '{@model DomainIterator#hasNext}'.
  */
-rule "Create 'empty' PrimitiveCondition"
+rule "Create 'empty' BuiltinProperty"
 	when
 		instance : DomainIterator( )
 		not ( cond : Function ( instance.empty == cond ) )
@@ -176,7 +176,7 @@ rule "Create 'empty' PrimitiveCondition"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
+		BuiltinProperty cond = handler.generatedBuiltinProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Empty());
 		handler.setName(cond, "empty");
 		queue.add(cond, drools);

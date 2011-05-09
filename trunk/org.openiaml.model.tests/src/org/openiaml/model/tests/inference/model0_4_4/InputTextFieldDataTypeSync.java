@@ -4,14 +4,15 @@
 package org.openiaml.model.tests.inference.model0_4_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.Function;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -22,7 +23,6 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -296,19 +296,19 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 		{
-			PrimitiveCondition canCast = assertHasPrimitiveCondition(email, "can cast?");
+			BuiltinProperty canCast = assertHasBuiltinProperty(email, "can cast?");
 			assertGenerated(canCast);
 		}
 
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		{
-			PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
+			BuiltinProperty canCast = assertHasBuiltinProperty(integer, "can cast?");
 			assertGenerated(canCast);
 		}
 
 		InputTextField def = assertHasInputTextField(home, "Default");
 		{
-			PrimitiveCondition canCast = assertHasPrimitiveCondition(def, "can cast?");
+			BuiltinProperty canCast = assertHasBuiltinProperty(def, "can cast?");
 			assertGenerated(canCast);
 		}
 
@@ -329,7 +329,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Value emailValue = assertHasFieldValue(email);
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 
-		PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
+		BuiltinProperty canCast = assertHasBuiltinProperty(integer, "can cast?");
 
 		Event onEdit = email.getOnChange();
 		Operation update = assertHasOperation(integer, "update");
@@ -359,7 +359,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Value intValue = assertHasFieldValue(integer);
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 
-		PrimitiveCondition canCast = assertHasPrimitiveCondition(email, "can cast?");
+		BuiltinProperty canCast = assertHasBuiltinProperty(email, "can cast?");
 
 		Event onEdit = integer.getOnChange();
 		Operation update = assertHasOperation(email, "update");
@@ -398,7 +398,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		assertHasParameter(root, emailValue, run);
 
 		// now make sure that the Function is connected
-		PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
+		BuiltinProperty canCast = assertHasBuiltinProperty(integer, "can cast?");
 
 		SimpleCondition edge = assertHasSimpleCondition(root, canCast, run);
 		assertHasParameter(root, emailValue, edge);

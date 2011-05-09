@@ -4,16 +4,16 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.90" name="session page">
       <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d38" query="new" outSelects="domain.128807fbeba.d39">
         <currentInstance id="migrated0" name="Current instance">
-          <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.1213cee9b4f.265" name="name" outWires="wires.1213cee9bad.52" outExtendsEdges="wires.128665d425c.df">
-            <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.337" name="save" inActions="wires.1213cee9bad.8d"/>
+          <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.1213cee9b4f.265" outWires="wires.1213cee9bad.52" name="name" outExtendsEdges="wires.128665d425c.df">
             <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.52" name="sync" from="model.1213cee9b4f.265" to="visual.1213cee9bad.ad"/>
             <extendsEdges id="wires.128665d425c.df" from="model.1213cee9b4f.265" to="model.1213cee9b4f.57"/>
+            <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.337" name="save" rules="wires.1213cee9bad.8d"/>
           </featureInstances>
         </currentInstance>
       </elements>
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.1213cee9bad.52" id="visual.1213cee9bad.ad" name="edit new name"/>
-      <children xsi:type="iaml.visual:Button" id="visual.1213cee9bad.f9" name="manually save" outActions="wires.1213cee9bad.8d">
-        <actions id="wires.1213cee9bad.8d" name="click" from="visual.1213cee9bad.f9" to="model.1213cee9b4f.337"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1213cee9bad.f9" name="manually save" listeners="wires.1213cee9bad.8d">
+        <ecaRules id="wires.1213cee9bad.8d" name="click" trigger="visual.1213cee9bad.f9" target="model.1213cee9b4f.337"/>
       </children>
     </scopes>
   </scopes>

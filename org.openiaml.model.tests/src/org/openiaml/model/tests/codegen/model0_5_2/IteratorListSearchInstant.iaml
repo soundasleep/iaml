@@ -8,13 +8,13 @@
     </elements>
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.128a9b17daf.1" id="visual.128a9b17daf.17" name="List"/>
     <children xsi:type="iaml.visual:InputTextField" id="visual.128ae917bd0.4a" name="search" outParameterEdges="wires.128ae917be0.19" defaultValue="">
-      <operations xsi:type="iaml:CompositeOperation" id="model.128b555c911.4f" name="update" inActions="wires.128b555c9eb.19"/>
-      <parameterEdges id="wires.128ae917be0.19" from="visual.128ae917bd0.4a" to="domain.128a9b17dce.34"/>
+      <operations xsi:type="iaml:CompositeOperation" id="model.128b555c911.4f" name="update" rules="wires.128b555c9eb.19"/>
+      <parameterEdges id="wires.128ae917be0.19" term="visual.128ae917bd0.4a" value="domain.128a9b17dce.34"/>
       <currentInput id="model.128b555c911.1d" name="current input" outParameterEdges="wires.128b555c9eb.1a">
-        <parameterEdges id="wires.128b555c9eb.1a" from="model.128b555c911.1d" to="wires.128b555c9eb.19"/>
+        <parameterEdges id="wires.128b555c9eb.1a" term="model.128b555c911.1d" value="wires.128b555c9eb.19"/>
       </currentInput>
-      <onInput id="model.128b555c911.1f" outActions="wires.128b555c9eb.19">
-        <actions id="wires.128b555c9eb.19" inParameterEdges="wires.128b555c9eb.1a" name="run" from="model.128b555c911.1f" to="model.128b555c911.4f"/>
+      <onInput id="model.128b555c911.1f" listeners="wires.128b555c9eb.19">
+        <ecaRules id="wires.128b555c9eb.19" inParameterEdges="wires.128b555c9eb.1a" name="run" trigger="model.128b555c911.1f" target="model.128b555c911.4f"/>
       </onInput>
     </children>
   </scopes>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12311dd5ff7.1">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311dd6084.1" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" id="model.12311dd5ff7.c" name="target operation" inActions="wires.12311ff15e6.4">
+    <operations xsi:type="iaml:CompositeOperation" id="model.12311dd5ff7.c" name="target operation" rules="wires.12311ff15e6.4">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="set" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.14" name="set" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.15" name="set" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
@@ -27,8 +27,8 @@
       <executionEdges id="model.12311e69386.26" from="model.12311e69386.15" to="operations.12311e693f4.9"/>
       <executionEdges id="model.12311e69386.27" from="operations.12311e693f4.9" to="operations.12311dd6093.3f"/>
     </operations>
-    <onAccess id="model.12311eb1e33.140" outActions="wires.12311ff15e6.4">
-      <actions id="wires.12311ff15e6.4" name="run" from="model.12311eb1e33.140" to="model.12311dd5ff7.c"/>
+    <onAccess id="model.12311eb1e33.140" listeners="wires.12311ff15e6.4">
+      <ecaRules id="wires.12311ff15e6.4" name="run" trigger="model.12311eb1e33.140" target="model.12311dd5ff7.c"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8a" name="field1">
       <fieldValue id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>

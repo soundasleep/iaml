@@ -2,11 +2,11 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <properties id="model.12109c6242e.483" name="a missing id" outParameterEdges="wires.12109c6249b.123" defaultValue="impossible" readOnly="true">
-      <parameterEdges id="wires.12109c6249b.123" from="model.12109c6242e.483" to="domain.128807fbeba.dda"/>
+      <parameterEdges id="wires.12109c6249b.123" term="model.12109c6242e.483" value="domain.128807fbeba.dda"/>
     </properties>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.dda" name="select" inParameterEdges="wires.12109c6249b.123" query="id = ?" outSelects="domain.128807fbeba.ddb">
       <currentInstance id="migrated0" name="Current instance">
-        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.12109c6242e.482" name="name" outWires="wires.12109c6249b.124" outExtendsEdges="wires.128665d425c.193">
+        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.12109c6242e.482" outWires="wires.12109c6249b.124" name="name" outExtendsEdges="wires.128665d425c.193">
           <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.124" name="sync" from="model.12109c6242e.482" to="visual.12109c6248b.227"/>
           <extendsEdges id="wires.128665d425c.193" from="model.12109c6242e.482" to="model.12109331eea.10ac"/>
         </featureInstances>

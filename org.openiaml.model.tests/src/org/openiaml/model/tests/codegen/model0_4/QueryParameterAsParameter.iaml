@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
   <scopes xsi:type="iaml.visual:Frame" id="visual.123172cef6c.2b" name="Home">
     <parameters id="model.123172ceeef.92" name="user_id" outParameterEdges="wires.123172cef6c.15" defaultValue="1">
-      <parameterEdges id="wires.123172cef6c.15" from="model.123172ceeef.92" to="domain.128807fbeba.dff"/>
+      <parameterEdges id="wires.123172cef6c.15" term="model.123172ceeef.92" value="domain.128807fbeba.dff"/>
     </parameters>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.dff" name="select" outWires="wires.123172cef6c.17" inParameterEdges="wires.123172cef6c.15" query="id = ?" outSelects="domain.128807fbeba.e03">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.123172cef6c.17" name="sync" from="domain.128807fbeba.dff" to="visual.123172cef6c.3f"/>

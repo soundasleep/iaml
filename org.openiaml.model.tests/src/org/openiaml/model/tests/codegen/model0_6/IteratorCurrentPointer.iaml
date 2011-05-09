@@ -4,15 +4,15 @@
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.12f76f3ecf5.19" name="iterator" outWires="wires.12f948872c2.1" limit="7" outSelects="domain.12f948872d2.7b">
       <wires xsi:type="iaml.wires:SetWire" id="wires.12f948872c2.1" name="paginate" from="domain.12f76f3ecf5.19" to="visual.12f948872b2.30"/>
       <selectEdges id="domain.12f948872d2.7b" from="domain.12f76f3ecf5.19" to="domain.12f76da5174.8"/>
-      <onIterate id="model.12f9492b645.c" outActions="model.12f9492b645.14">
-        <actions id="model.12f9492b645.14" inParameterEdges="wires.12f9492b711.3" name="run" from="model.12f9492b645.c" to="model.12f948871d7.91"/>
+      <onIterate id="model.12f9492b645.c" listeners="model.12f9492b645.14">
+        <ecaRules id="model.12f9492b645.14" inParameterEdges="wires.12f9492b711.3" name="run" trigger="model.12f9492b645.c" target="model.12f948871d7.91"/>
       </onIterate>
       <currentPointer id="model.12f9492b645.16" name="current pointer" outParameterEdges="wires.12f9492b711.3">
-        <parameterEdges id="wires.12f9492b711.3" from="model.12f9492b645.16" to="model.12f9492b645.14"/>
+        <parameterEdges id="wires.12f9492b711.3" term="model.12f9492b645.16" value="model.12f9492b645.14"/>
       </currentPointer>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12f948872b2.19" name="current pointer">
-      <operations xsi:type="iaml:CompositeOperation" id="model.12f948871d7.91" name="update" inActions="model.12f9492b645.14"/>
+      <operations xsi:type="iaml:CompositeOperation" id="model.12f948871d7.91" name="update" rules="model.12f9492b645.14"/>
     </children>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12f948872c2.1" id="visual.12f948872b2.30" name="current instance"/>
   </scopes>

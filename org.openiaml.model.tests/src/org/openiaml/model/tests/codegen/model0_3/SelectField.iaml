@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.d82" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.fe7" name="select" outSelects="domain.128807fbeba.fe8" autosave="true">
       <currentInstance id="migrated0" name="Current instance">
-        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.12109331eea.edd" name="name" outWires="wires.12109331f38.5c9" outExtendsEdges="wires.128665d425c.13">
+        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.12109331eea.edd" outWires="wires.12109331f38.5c9" name="name" outExtendsEdges="wires.128665d425c.13">
           <wires xsi:type="iaml.wires:SyncWire" id="wires.12109331f38.5c9" name="sync" from="model.12109331eea.edd" to="visual.12109331f38.d99"/>
           <extendsEdges id="wires.128665d425c.13" from="model.12109331eea.edd" to="model.12109331eea.e62"/>
         </featureInstances>

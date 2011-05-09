@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.9" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f56" query="new" outSelects="domain.128807fbeba.f5a" autosave="true">
       <currentInstance id="migrated0" name="Current instance">
-        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.1213cee9b4f.e1" name="name" inWires="wires.1213cee9bad.18"/>
+        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.1213cee9b4f.e1" inWires="wires.1213cee9bad.18" name="name"/>
       </currentInstance>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.1213cee9bad.18" id="visual.1213cee9bad.48" name="edit new instance name">

@@ -42,7 +42,7 @@ public class SeparatedInstances extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart event = assertHasEvent(editor_page, "access", false);
 		// shortcut
 		ShapeNodeEditPart op = assertHasOperation(editor_page, "target operation", true);
-		assertHasRunAction(editor_page, event, op, "run");
+		assertHasECARule(editor_page, event, op, "run");
 		
 		assertEditorHasChildren(2, editor_page);
 

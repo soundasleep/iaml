@@ -17,7 +17,7 @@ import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.ContainsConditions;
+import org.openiaml.model.model.ContainsFunctions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
@@ -266,11 +266,11 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 
-	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
-		return generatedPrimitiveCondition(by, container, ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
+	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsFunctions container) throws InferenceException {
+		return generatedPrimitiveCondition(by, container, ModelPackage.eINSTANCE.getContainsFunctions_Functions() );
 	}
 	
-	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsConditions container, EReference reference) throws InferenceException {
+	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsFunctions container, EReference reference) throws InferenceException {
 		PrimitiveCondition operation = (PrimitiveCondition) createElement( container, ModelPackage.eINSTANCE.getPrimitiveCondition(), reference );
 		setGeneratedBy(operation, by);
 		return operation;
@@ -453,13 +453,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public ECARule generatedECARule(GeneratesElements by, ContainsWires container, ActionEdgeSource source, Action target) throws InferenceException {
-		ECARule wire = (ECARule) createRelationship(container, ModelPackage.eINSTANCE.getECARule(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getECARule_From(), ModelPackage.eINSTANCE.getECARule_To());
+		ECARule wire = (ECARule) createRelationship(container, ModelPackage.eINSTANCE.getECARule(), source, target, ModelPackage.eINSTANCE.getContainsWires_EcaRules(), ModelPackage.eINSTANCE.getECARule_Trigger(), ModelPackage.eINSTANCE.getECARule_Target());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
 
 	public Parameter generatedParameter(GeneratesElements by, ContainsWires container, ParameterEdgesSource source, ParameterEdgeDestination target) throws InferenceException {
-		Parameter wire = (Parameter) createRelationship(container, ModelPackage.eINSTANCE.getParameter(), source, target, ModelPackage.eINSTANCE.getContainsWires_ParameterEdges(), ModelPackage.eINSTANCE.getParameter_From(), ModelPackage.eINSTANCE.getParameter_To());
+		Parameter wire = (Parameter) createRelationship(container, ModelPackage.eINSTANCE.getParameter(), source, target, ModelPackage.eINSTANCE.getContainsWires_ParameterEdges(), ModelPackage.eINSTANCE.getParameter_Term(), ModelPackage.eINSTANCE.getParameter_Value() );
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -578,14 +578,14 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return field;
 	}
 	
-	public CompositeCondition generatedCompositeCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
-		CompositeCondition object = (CompositeCondition) createElement( container, ModelPackage.eINSTANCE.getCompositeCondition(), ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
+	public CompositeCondition generatedCompositeCondition(GeneratesElements by, ContainsFunctions container) throws InferenceException {
+		CompositeCondition object = (CompositeCondition) createElement( container, ModelPackage.eINSTANCE.getCompositeCondition(), ModelPackage.eINSTANCE.getContainsFunctions_Functions() );
 		setGeneratedBy(object, by);
 		return object;
 	}
 
 	public SimpleCondition generatedSimpleCondition(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
-		SimpleCondition wire = (SimpleCondition) createRelationship(container, ModelPackage.eINSTANCE.getSimpleCondition(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), ModelPackage.eINSTANCE.getSimpleCondition_From(), ModelPackage.eINSTANCE.getSimpleCondition_To());
+		SimpleCondition wire = (SimpleCondition) createRelationship(container, ModelPackage.eINSTANCE.getSimpleCondition(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), ModelPackage.eINSTANCE.getSimpleCondition_Function(), ModelPackage.eINSTANCE.getSimpleCondition_Conditioned());
 		setGeneratedBy(wire, by);
 		return wire;
 	}

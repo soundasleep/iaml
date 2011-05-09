@@ -66,7 +66,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getPrimitiveOperation(),
 		ModelPackage.eINSTANCE.getCompositeOperation(),
 		// Condition
-		ModelPackage.eINSTANCE.getPrimitiveCondition(),
+		ModelPackage.eINSTANCE.getBuiltinProperty(),
 		ModelPackage.eINSTANCE.getCompositeCondition(),
 		// Value
 		ModelPackage.eINSTANCE.getValue(),
@@ -172,7 +172,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	private static final EClass[] CONTAINMENT_FEATURE_ELEMENTS = new EClass[] {
 		ModelPackage.eINSTANCE.getEvent(),
 		ModelPackage.eINSTANCE.getValue(),
-		ModelPackage.eINSTANCE.getPrimitiveCondition(),
+		ModelPackage.eINSTANCE.getBuiltinProperty(),
 		ComponentsPackage.eINSTANCE.getGate(),
 	};
 	

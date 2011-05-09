@@ -113,6 +113,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml:Parameter";
 		}
 		
+		// issue 244
+		// "iaml:PrimitiveCondition"
+		// --> "iaml:BuiltinProperty"
+		if (xsiType.equals("iaml:PrimitiveCondition")) {
+			return "iaml:BuiltinProperty";
+		}
+		
 		return super.replaceType(element, xsiType, errors);
 	}
 

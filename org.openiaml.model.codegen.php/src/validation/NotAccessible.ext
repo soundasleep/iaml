@@ -2,13 +2,13 @@ import iaml;
 
 // initial def
 Set[model::visual::Frame] incomingPages(model::visual::Frame this) :
-	inActions.select(w|w.name == "onClick")
-		.from.typeSelect(model::visual::Button)
+	listeners.select(w|w.name == "onClick")
+		.trigger.typeSelect(model::visual::Button)
 		.eContainer.typeSelect(model::visual::Frame)
 		
 	.union(
-		inActions
-		.from.typeSelect(model::Event).select(e|e.name == "click" || e.name == "onClick")
+		rules
+		.trigger.typeSelect(model::Event).select(e|e.name == "click" || e.name == "onClick")
 		.eContainer.typeSelect(model::visual::Button)
 		.eContainer.typeSelect(model::visual::Frame)		
 	);

@@ -56,7 +56,7 @@ if (exit_gate_needs_to_redirect_«safeName()»(get_frame_id())) {
 		
 		/* expand conditions - do any of them fail? */
 		if (!(
-			«EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH inConditionEdges SEPARATOR " && "»
+			«EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH conditions SEPARATOR " && "»
 		)) {
 			// one condition failed
 			log_message("[exitgate] Exit gate «name» failed");

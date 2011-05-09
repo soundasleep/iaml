@@ -40,13 +40,13 @@
 	«IF argName=="url"»
 		«throwException("Cannot use argName 'url'")»
 	«ENDIF»
-	«LET onClick.outActions.select(a|model::visual::Frame.isInstance(a.to)).toSet().union(
-		outActions.select(a|model::visual::Frame.isInstance(a.to)).select(a|a.name == "click" || a.name == "onClick"))
+	«LET onClick.listeners.select(a|model::visual::Frame.isInstance(a.target)).toSet().union(
+		listeners.select(a|model::visual::Frame.isInstance(a.target)).select(a|a.name == "click" || a.name == "onClick"))
 		AS actions»
 	$url = null;
-	«FOREACH actions AS action»	
+	«FOREACH listeners AS action»	
 		if ($url === null) {
-			«EXPAND template::operations::OperationCall::getNavigateActionDestination(true, false, action, includeSession) FOR action.to»
+			«EXPAND template::operations::OperationCall::getNavigateActionDestination(true, false, action, includeSession) FOR action.target»
 		}
 	«ENDFOREACH»
 	if ($url === null) {

@@ -31,14 +31,14 @@
 	«ELSE»
 		/* «name» */
 	«ENDIF»
-	«EXPAND callParameterValue(php, inStoreDb) FOR from»
+	«EXPAND callParameterValue(php, inStoreDb) FOR term»
 «ENDDEFINE»
 
 /**
  * Does the given parameter exist? Return 'true' or 'false'. Expected to be in PHP mode.
  */
 «DEFINE callParameterExists(Boolean php) FOR model::Parameter»
-	«EXPAND callParameterValueExists(php) FOR from»
+	«EXPAND callParameterValueExists(php) FOR term»
 «ENDDEFINE»
 
 /**

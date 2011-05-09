@@ -40,7 +40,7 @@
 			«EXPAND Render::getVisibilityInlineCode(currentFrame, true)»
 			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			«REM»is onInput called at all?«ENDREM»
-			«IF onInput != null && !onInput.outActions.isEmpty»
+			«IF onInput != null && !onInput.listeners.isEmpty»
 				onKeyUp="return onInput_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			«ENDIF»
 			«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
@@ -119,7 +119,7 @@
 			}
 
 			«REM»is onInput called at all?«ENDREM»
-			«IF onInput != null && !onInput.outActions.isEmpty»
+			«IF onInput != null && !onInput.listeners.isEmpty»
 			var onInput_timeout_«safeName()» = null;
 			var onInput_timeout_«safeName()»_last_input = null;
 			
@@ -190,15 +190,15 @@
 /* if it connects to a SyncWire that is an Property, use this
    property as the value */
 «DEFINE getInitialValuesSyncWire(model::visual::Frame currentFrame) FOR model::wires::SyncWire»
-	«IF inConditionEdges.size > 0»
+	«IF conditions.size > 0»
 		<?php 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH inConditionEdges SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH conditions SEPARATOR " && "») {
 		?>
 	«ENDIF»
 	«EXPAND staticInitialValue(currentFrame) FOR from»
 	«EXPAND staticInitialValue(currentFrame) FOR to»
-	«IF inConditionEdges.size > 0»
+	«IF conditions.size > 0»
 		<?php
 		}
 		?>
@@ -208,14 +208,14 @@
 /* if it connects to a SetWire that is an Property, use this
    property as the value */
 «DEFINE getInitialValuesSetWire(model::visual::Frame currentFrame) FOR model::wires::SetWire»
-	«IF inConditionEdges.size > 0»
+	«IF conditions.size > 0»
 		<?php 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH inConditionEdges SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH conditions SEPARATOR " && "») {
 		?>
 	«ENDIF»
 	«EXPAND staticInitialValue(currentFrame) FOR from»
-	«IF inConditionEdges.size > 0»
+	«IF conditions.size > 0»
 		<?php
 		}
 		?>

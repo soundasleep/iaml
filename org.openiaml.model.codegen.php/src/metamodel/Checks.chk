@@ -21,11 +21,11 @@ context model::components::LoginHandler ERROR "A login handler must have an inco
 	
 context model::components::LoginHandler ERROR "A login handler of type USER must have at least one incoming parameter of type Role or Permission":
 	type != model::components::LoginHandlerTypes::USER ||
-	!(inParameterEdges.from.typeSelect(model::users::Role).isEmpty && inParameterEdges.from.typeSelect(model::users::Permission).isEmpty);
+	!(inParameterEdges.term.typeSelect(model::users::Role).isEmpty && inParameterEdges.term.typeSelect(model::users::Permission).isEmpty);
 
 context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OBJECT must have at least one incoming parameter of type DomainAttribute":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
-	!inParameterEdges.from.typeSelect(domain::DomainAttribute).isEmpty;
+	!inParameterEdges.term.typeSelect(domain::DomainAttribute).isEmpty;
 
 context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY must have exactly one incoming parameter":
 	type != model::components::LoginHandlerTypes::SECRET_KEY ||
@@ -33,7 +33,7 @@ context model::components::LoginHandler ERROR "A login handler of type SECRET_KE
 
 context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainSchema":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
-	inParameterEdges.from.eContainer.typeSelect(model::domain::DomainSchema).toSet().size == 1;
+	inParameterEdges.term.eContainer.typeSelect(model::domain::DomainSchema).toSet().size == 1;
 
 context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
 	(name == "equal?" && inFlows.size >= 2) 
@@ -72,10 +72,10 @@ context model::Wire ERROR "A Wire must have a 'from'" :
 context model::Wire ERROR "A Wire must have a 'to'" :
 	to != null;
 
-context model::ECARule ERROR "An ActionEdge must have a 'from'" :
-	from != null;
-context model::ECARule ERROR "An ActionEdge must have a 'to'" :
-	to != null;
+context model::ECARule ERROR "An ActionEdge must have a 'trigger'" :
+	trigger != null;
+context model::ECARule ERROR "An ActionEdge must have a 'target'" :
+	target != null;
 
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
 	from != to;
@@ -90,11 +90,11 @@ context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
  */
 
 context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one ActionEdge connecting it to an Operation" :
-	outActions.size == 1
-		&& model::Operation.isInstance(outActions.first().to);
+	listeners.size == 1
+		&& model::Operation.isInstance(listeners.first().target);
 
 context model::ECARule WARNING "This ECA Rule will not do anything: consider naming it 'onClick'" :
-	!(model::VisibleThing.isInstance(from) && !(name == "click" || name == "onClick"));
+	!(model::VisibleThing.isInstance(trigger) && !(name == "click" || name == "onClick"));
 
 context model::Value WARNING "A session value used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
 	!(defaultValue == null && inWires.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
@@ -167,25 +167,25 @@ context model::operations::Arithmetic ERROR "Arithmetic must have at least one i
 context model::components::Gate ERROR "An entry Gate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' wire, or it will never permit access" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).entryGate != this
-	|| (inConditionEdges.size >= 1
+	|| (conditions.size >= 1
 		|| outRequiresEdges.size >= 1
 		|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first"));
 
 context model::components::Gate ERROR "An exit Gate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).exitGate != this
-	|| (inConditionEdges.size >= 1
+	|| (conditions.size >= 1
 		|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last"));
 
 context model::components::Gate ERROR "An entry Gate nneeds to have at least one outgoing ActionEdge" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).entryGate != this
-	|| !outActions.isEmpty;
+	|| !listeners.isEmpty;
 
 context model::components::Gate ERROR "An exit Gate nneeds to have at least one outgoing ActionEdge" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).exitGate != this
-	|| !outActions.isEmpty;
+	|| !listeners.isEmpty;
 	
 context model::operations::DecisionNode ERROR "A 'can cast?' DecisionNode needs to have an incoming DataFlowEdge from a CastNode" :
 	name != "can cast?" || 
@@ -241,11 +241,11 @@ context model::domain::DomainIterator WARNING "A DomainIterator should have one 
 	outSelects.size == 1;
 
 context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this AccessControlHandler" :
-	(!model::components::AccessControlHandler.isInstance(from)) ||
+	(!model::components::AccessControlHandler.isInstance(trigger)) ||
 		(name == "login" || name == "logout" || name == "success");
 	
 context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this LoginHandler" :
-	(!model::components::LoginHandler.isInstance(from)) ||
+	(!model::components::LoginHandler.isInstance(trigger)) ||
 		(name == "login" || name == "logout" || name == "success");
 
 context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name + "'" :
@@ -280,7 +280,7 @@ context domain::DomainAttribute ERROR "Using a reserved SQL word for a DomainAtt
  * as the login page can never be accessed.
  */
 context model::ECARule ERROR "A 'login' ECARule for an AccessControlHandler should not be in the same Scope as the handler; this will cause an infinite redirection, as the login page can never be accessed." :
-	!(from != null && to != null && model::components::AccessControlHandler.isInstance(from) 
-		&& name == "login" && to.eContainer != null && from.eContainer != null
-		&& to.eContainer == from.eContainer);
+	!(trigger != null && target != null && model::components::AccessControlHandler.isInstance(trigger) 
+		&& name == "login" && target.eContainer != null && trigger.eContainer != null
+		&& target.eContainer == trigger.eContainer);
 		 

@@ -5,8 +5,8 @@ shouldBeSecure(model::visual::Frame this) :
 		&& !((model::scopes::Session) eContainer).elements.typeSelect(model::components::LoginHandler).isEmpty;	
 
 isSecure(model::visual::Frame this) :
-	onAccess.outActions
-		.to.typeSelect(model::Operation).exists(o | isSecureOperation(o));
+	onAccess.listeners
+		.target.typeSelect(model::Operation).exists(o | isSecureOperation(o));
 
 isSecureOperation(model::Operation this) :
 	false;

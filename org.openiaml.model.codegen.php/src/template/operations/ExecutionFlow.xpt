@@ -316,7 +316,7 @@
 	«ENDREM»
 	
 	«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-	«EXPAND OperationCall::callOperation(php, false) FOREACH outActions.sortBy(e|-e.priority)-»
+	«EXPAND OperationCall::callOperation(php, false) FOREACH listeners.sortBy(e|-e.priority)-»
 	
 	«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
 		/* No conditional flows; it was just an operation call */
@@ -350,7 +350,7 @@
  *		are executed in oirder of {@model ActionEdge#priority}.
  */
 «DEFINE continueChainedOperations(Boolean php) FOR model::PrimitiveOperation-»
-	«EXPAND continueChainedOperations(php) FOREACH outActions.sortBy(e|-e.priority)»
+	«EXPAND continueChainedOperations(php) FOREACH listeners.sortBy(e|-e.priority)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::ECARule»

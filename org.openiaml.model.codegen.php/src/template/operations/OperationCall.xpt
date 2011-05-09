@@ -11,9 +11,9 @@
 «ENDDEFINE»
 
 «DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::ECARule»
-	«IF inConditionEdges.size > 0» 
+	«IF conditions.size > 0» 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb) FOREACH inConditionEdges SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb) FOREACH conditions SEPARATOR " && "») {
 			«EXPAND callOperationContents(php, inStoreDb) FOR this»
 		}
 	«ELSE»
@@ -27,7 +27,7 @@
  *		implicitly be a navigation, rather than executing an {@model Operation}.
  */
 «DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
-	«IF model::visual::Frame.isInstance(to) || model::components::Gate.isInstance(to)»
+	«IF model::visual::Frame.isInstance(target) || model::components::Gate.isInstance(target)»
 		«REM»implicit: a NavigateAction«ENDREM»
 		«EXPAND callOperationContentsNavigate(php, inStoreDb) FOR this»
 	«ELSE»
@@ -53,7 +53,7 @@
  *		the type of activity executed is dependent on the subtype of the given {@model Action}.
  */
 «DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
-	/* eContainer == «to.eContainer» */
+	/* eContainer == «target.eContainer» */
 	
 	«IF php»
 		$result = null;
@@ -67,55 +67,55 @@
 		result = 
 	«ENDIF»
 
-	«IF model::VisibleThing.isInstance(to.eContainer) || model::visual::Frame.isInstance(to.eContainer)-»
+	«IF model::VisibleThing.isInstance(target.eContainer) || model::visual::Frame.isInstance(target.eContainer)-»
 		«REM»VisibleThing includes InputTextField«ENDREM»
 		«REM»
 			is both source and target on the same frame? NOTE this
 			will also return true for Event-->Operation if they are
 			both on the same frame.
 		«ENDREM»
-		«IF php || availableInCurrentScriptAction(from, to)-»
+		«IF php || availableInCurrentScriptAction(trigger, target)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
-			call_remote_event('«safeNameString(frameContainingOperation(to).id)»', '«operationName(to)-»'
+			call_remote_event('«safeNameString(frameContainingOperation(target).id)»', '«operationName(target)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
-	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
-		«IF php || availableInCurrentScriptAction(from, to)-»
+	«ELSEIF model::scopes::Session.isInstance(target.eContainer)-»
+		«IF php || availableInCurrentScriptAction(trigger, target)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
-			call_remote_event('«safeNameString(frameContainingOperation(to).id)»', '«operationName(to)-»'
+			call_remote_event('«safeNameString(frameContainingOperation(target).id)»', '«operationName(target)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
-	«ELSEIF model::CompositeOperation.isInstance(to) && model::scopes::Email.isInstance(to.eContainer)-»
-		«IF php || availableInCurrentScriptAction(from, to)-»
+	«ELSEIF model::CompositeOperation.isInstance(target) && model::scopes::Email.isInstance(target.eContainer)-»
+		«IF php || availableInCurrentScriptAction(trigger, target)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
-			call_remote_event('«safeNameString(frameContainingOperation(to).id)»', '«operationName(to)-»'
+			call_remote_event('«safeNameString(frameContainingOperation(target).id)»', '«operationName(target)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»		
-	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
+	«ELSEIF isDomainAttributeInstance(target.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::domain::DomainAttributeInstance) to.eContainer) FOR to»;
-	«ELSEIF isDomainIterator(to.eContainer)-»
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::domain::DomainAttributeInstance) target.eContainer) FOR target»;
+	«ELSEIF isDomainIterator(target.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
-		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::domain::DomainIterator) to.eContainer) FOR to»;
-	«ELSEIF model::components::AccessControlHandler.isInstance(to.eContainer)-»
-		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) to.eContainer) FOR to»;
-	«ELSEIF model::scopes::Email.isInstance(to.eContainer)-»
-		«EXPAND template::emails::Email::emailOperationCall(php, this, (model::scopes::Email) to.eContainer) FOR to»;
+		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::domain::DomainIterator) target.eContainer) FOR target»;
+	«ELSEIF model::components::AccessControlHandler.isInstance(target.eContainer)-»
+		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) target.eContainer) FOR target»;
+	«ELSEIF model::scopes::Email.isInstance(target.eContainer)-»
+		«EXPAND template::emails::Email::emailOperationCall(php, this, (model::scopes::Email) target.eContainer) FOR target»;
 	«ELSE-»
-		alert('unknown target operation type in «to.eContainer.metaType.name»');
-		«throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
+		alert('unknown target operation type in «target.eContainer.metaType.name»');
+		«throwException("Unknown target operation type in '" + target.eContainer.metaType.name + "' (this=" + this + ")")»
 	«ENDIF-»
 
 «ENDDEFINE»
@@ -126,7 +126,7 @@
  * of new destinations?
  */
 «DEFINE callOperationContentsNavigate(Boolean php, Boolean inStoreDb) FOR model::ECARule»
-	«EXPAND navigateTo(php, inStoreDb, this) FOR to» 
+	«EXPAND navigateTo(php, inStoreDb, this) FOR target» 
 «ENDDEFINE»
 
 «DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ECARule wire) FOR model::Action»
@@ -355,8 +355,8 @@
 		var arg5 = null;	/* no parameter */
 	«ENDIF»
 	call_remote_event(
-		'«safeNameString(containingFrame(to).id)»', 
-		'«operationName(to)-»',
+		'«safeNameString(containingFrame(target).id)»', 
+		'«operationName(target)-»',
 		arg0,
 		arg1,
 		arg2,

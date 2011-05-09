@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1254759b7c1.724">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" id="model.1254759b7c1.72b" name="fibonacci" inActions="wires.1254759bc84.8f">
+    <operations xsi:type="iaml:CompositeOperation" id="model.1254759b7c1.72b" name="fibonacci" rules="wires.1254759bc84.8f">
       <parameters id="model.1254759b7c1.75d" name="max" outFlows="model.1254759b7c1.79e"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.760" name="set" inFlows="model.1254759b7c1.798" inExecutions="model.1254759b7c1.761" outFlows="model.1254759b7c1.763" outExecutions="model.1254759b7c1.79a"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.764" name="set" inFlows="model.1254759b7c1.799" inExecutions="model.1254759b7c1.79a" outFlows="model.1254759b7c1.79b" outExecutions="model.1254759b7c1.79c"/>
@@ -38,11 +38,11 @@
       <variables id="model.1254759b7c1.75e" name="current" outFlows="model.1254759b7c1.7a2" inFlows="model.1254759b7c1.763 model.1254759b7c1.7a5"/>
       <variables id="model.1254759b7c1.765" name="position" outFlows="model.1254759b7c1.79d model.1254759b7c1.7a3 model.1254759b7c1.7a7" inFlows="model.1254759b7c1.79b model.1254759b7c1.7aa"/>
     </operations>
-    <onAccess id="model.1254759b7c1.72a" outActions="wires.1254759bc84.8f">
-      <actions id="wires.1254759bc84.8f" inParameterEdges="wires.1254759bc84.94" name="run" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b"/>
+    <onAccess id="model.1254759b7c1.72a" listeners="wires.1254759bc84.8f">
+      <ecaRules id="wires.1254759bc84.8f" inParameterEdges="wires.1254759bc84.94" name="run" trigger="model.1254759b7c1.72a" target="model.1254759b7c1.72b"/>
     </onAccess>
     <properties id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" defaultValue="5" readOnly="true">
-      <parameterEdges id="wires.1254759bc84.94" from="model.1254759b7c1.741" to="wires.1254759bc84.8f"/>
+      <parameterEdges id="wires.1254759bc84.94" term="model.1254759b7c1.741" value="wires.1254759bc84.8f"/>
     </properties>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

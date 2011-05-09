@@ -3,17 +3,17 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.127b83e57e8.24" name="address">
       <fieldValue id="model.127b83e573d.56" name="fieldValue" outParameterEdges="wires.127b83e57f8.a" type="builtin_iamlAddress">
-        <parameterEdges id="wires.127b83e57f8.a" from="model.127b83e573d.56" to="wires.127b83e57f8.8"/>
+        <parameterEdges id="wires.127b83e57f8.a" term="model.127b83e573d.56" value="wires.127b83e57f8.8"/>
       </fieldValue>
     </children>
     <children xsi:type="iaml.visual:Map" id="visual.127b84b628d.29" name="containing map">
       <children xsi:type="iaml.visual:MapPoint" id="visual.127b84b628d.2a" name="target point">
-        <operations xsi:type="iaml:CompositeOperation" id="model.127b83e573d.76" name="update" inActions="wires.127b83e57f8.8"/>
+        <operations xsi:type="iaml:CompositeOperation" id="model.127b83e573d.76" name="update" rules="wires.127b83e57f8.8"/>
         <fieldValue id="model.127b83e573d.32" name="fieldValue" type="builtin_iamlAddress"/>
       </children>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.127b83e57e8.66" name="update address" outActions="wires.127b83e57f8.8">
-      <actions id="wires.127b83e57f8.8" inParameterEdges="wires.127b83e57f8.a" name="onClick" from="visual.127b83e57e8.66" to="model.127b83e573d.76"/>
+    <children xsi:type="iaml.visual:Button" id="visual.127b83e57e8.66" name="update address" listeners="wires.127b83e57f8.8">
+      <ecaRules id="wires.127b83e57f8.8" inParameterEdges="wires.127b83e57f8.a" name="onClick" trigger="visual.127b83e57e8.66" target="model.127b83e573d.76"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

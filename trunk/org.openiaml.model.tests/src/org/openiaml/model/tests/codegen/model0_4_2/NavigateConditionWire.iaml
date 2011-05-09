@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126aaf83900.45f">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <conditions xsi:type="iaml:CompositeCondition" id="model.126aaf83900.478" name="is value = 1?" outConditionEdges="wires.126aaf8398c.11e">
-      <conditionEdges id="wires.126aaf8398c.11e" from="model.126aaf83900.478" to="wires.126aaf8398c.11d"/>
+    <functions xsi:type="iaml:CompositeCondition" id="model.126aaf83900.478" name="is value = 1?" conditioned="wires.126aaf8398c.11e">
+      <conditionEdges id="wires.126aaf8398c.11e" function="model.126aaf83900.478" conditioned="wires.126aaf8398c.11d"/>
       <properties id="model.126aaf83900.49b" name="1" outFlows="model.126aaf83900.4a8" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.126aaf8398c.113" outExecutions="model.126aaf83900.4a4 model.126aaf83900.4a5" inExecutions="model.126aaf83900.4a2" inFlows="model.126aaf83900.4a6 model.126aaf83900.4a8" name="equal?"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126aaf8398c.111" outExecutions="model.126aaf83900.4a2"/>
@@ -13,15 +13,15 @@
       <executionEdges id="model.126aaf83900.4a2" from="operations.126aaf8398c.111" to="operations.126aaf8398c.113"/>
       <executionEdges id="model.126aaf83900.4a4" name="y" from="operations.126aaf8398c.113" to="operations.126aaf8398c.118"/>
       <executionEdges id="model.126aaf83900.4a5" name="n" from="operations.126aaf8398c.113" to="operations.126aaf8398c.119"/>
-    </conditions>
-    <children xsi:type="iaml.visual:Button" id="visual.126aaf8397d.1b5" name="Button" outActions="wires.126aaf8398c.11d">
-      <actions id="wires.126aaf8398c.11d" inConditionEdges="wires.126aaf8398c.11e" name="click" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb"/>
+    </functions>
+    <children xsi:type="iaml.visual:Button" id="visual.126aaf8397d.1b5" name="Button" listeners="wires.126aaf8398c.11d">
+      <ecaRules id="wires.126aaf8398c.11d" conditions="wires.126aaf8398c.11e" name="click" trigger="visual.126aaf8397d.1b5" target="visual.126aaf8397d.1bb"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.126aaf8397d.1c3" name="value">
       <fieldValue id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.1bb" name="Destination" inActions="wires.126aaf8398c.11d"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.1bb" name="Destination" rules="wires.126aaf8398c.11d"/>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">
     <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
   </xsdDataTypes>

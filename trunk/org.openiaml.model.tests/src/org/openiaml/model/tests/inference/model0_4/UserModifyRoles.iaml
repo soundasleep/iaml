@@ -4,10 +4,10 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
     <wires xsi:type="iaml.wires:SyncWire" id="sync" name="sync" from="domain.128807fbeba.e9d" to="new"/>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e9d" name="new instance" outWires="sync" query="new" outSelects="domain.128807fbeba.ea8">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.14" name="save" inActions="wires.1233b53a3ce.a"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.14" name="save" rules="wires.1233b53a3ce.a"/>
     </elements>
-    <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" outActions="wires.1233b53a3ce.a">
-      <actions id="wires.1233b53a3ce.a" name="onClick" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14"/>
+    <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" listeners="wires.1233b53a3ce.a">
+      <ecaRules id="wires.1233b53a3ce.a" name="onClick" trigger="visual.1233b53a313.1a" target="model.1233b53a1ca.14"/>
     </children>
     <children xsi:type="iaml.visual:InputForm" inWires="sync" id="new" name="create a new user form"/>
   </scopes>
@@ -19,30 +19,30 @@
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" name="set" from="components.1233b53a67e.19" to="domain.128807fbeba.e9e"/>
     </elements>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e9e" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.71" name="add role" inActions="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.72" name="remove role" inActions="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.73" name="add permission" inActions="wires.1233b53a3ce.a6"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.74" name="remove permission" inActions="wires.1233b53a3ce.16c"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.71" name="add role" rules="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.72" name="remove role" rules="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.73" name="add permission" rules="wires.1233b53a3ce.a6"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.74" name="remove permission" rules="wires.1233b53a3ce.16c"/>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.7d" name="add new roles">
-      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ec" name="add role 1" outActions="wires.1233b53a3ce.a8">
-        <actions id="wires.1233b53a3ce.a8" inParameterEdges="wires.1233b53a3ce.a9" name="onClick" from="visual.1233b53a313.ec" to="model.1233b53a1ca.71"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ec" name="add role 1" listeners="wires.1233b53a3ce.a8">
+        <ecaRules id="wires.1233b53a3ce.a8" inParameterEdges="wires.1233b53a3ce.a9" name="onClick" trigger="visual.1233b53a313.ec" target="model.1233b53a1ca.71"/>
       </children>
-      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ed" name="add role 2" outActions="wires.1233b53a3ce.a7">
-        <actions id="wires.1233b53a3ce.a7" inParameterEdges="wires.1233b53a3ce.aa" name="onClick" from="visual.1233b53a313.ed" to="model.1233b53a1ca.71"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ed" name="add role 2" listeners="wires.1233b53a3ce.a7">
+        <ecaRules id="wires.1233b53a3ce.a7" inParameterEdges="wires.1233b53a3ce.aa" name="onClick" trigger="visual.1233b53a313.ed" target="model.1233b53a1ca.71"/>
       </children>
-      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ee" name="add permission 1" outActions="wires.1233b53a3ce.a6">
-        <actions id="wires.1233b53a3ce.a6" inParameterEdges="wires.1233b53a3ce.ab" name="onClick" from="visual.1233b53a313.ee" to="model.1233b53a1ca.73"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ee" name="add permission 1" listeners="wires.1233b53a3ce.a6">
+        <ecaRules id="wires.1233b53a3ce.a6" inParameterEdges="wires.1233b53a3ce.ab" name="onClick" trigger="visual.1233b53a313.ee" target="model.1233b53a1ca.73"/>
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.117" name="remove roles">
-      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15a" name="remove all roles" outActions="wires.1233b53a3ce.168 wires.1233b53a3ce.169">
-        <actions id="wires.1233b53a3ce.168" inParameterEdges="wires.1233b53a3ce.16a" name="onClick" from="visual.1233b53a313.15a" to="model.1233b53a1ca.72"/>
-        <actions id="wires.1233b53a3ce.169" inParameterEdges="wires.1233b53a3ce.16b" name="onClick" from="visual.1233b53a313.15a" to="model.1233b53a1ca.72"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15a" name="remove all roles" listeners="wires.1233b53a3ce.168 wires.1233b53a3ce.169">
+        <ecaRules id="wires.1233b53a3ce.168" inParameterEdges="wires.1233b53a3ce.16a" name="onClick" trigger="visual.1233b53a313.15a" target="model.1233b53a1ca.72"/>
+        <ecaRules id="wires.1233b53a3ce.169" inParameterEdges="wires.1233b53a3ce.16b" name="onClick" trigger="visual.1233b53a313.15a" target="model.1233b53a1ca.72"/>
       </children>
-      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15b" name="remove all permissions" outActions="wires.1233b53a3ce.16c">
-        <actions id="wires.1233b53a3ce.16c" inParameterEdges="wires.1233b53a3ce.16d" name="onClick" from="visual.1233b53a313.15b" to="model.1233b53a1ca.74"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15b" name="remove all permissions" listeners="wires.1233b53a3ce.16c">
+        <ecaRules id="wires.1233b53a3ce.16c" inParameterEdges="wires.1233b53a3ce.16d" name="onClick" trigger="visual.1233b53a313.15b" target="model.1233b53a1ca.74"/>
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">
@@ -62,20 +62,20 @@
     </scopes>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.e9f" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.ea1" inRequiresEdges="wires.1233afe62eb.2d">
-    <parameterEdges id="wires.1233b53a3ce.5a" from="domain.128807fbeba.e9f" to="components.1233b53a67e.19"/>
+    <parameterEdges id="wires.1233b53a3ce.5a" term="domain.128807fbeba.e9f" value="components.1233b53a67e.19"/>
     <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
-      <parameterEdges id="wires.1233b53a3ce.ab" from="users.1233b53a814.6f" to="wires.1233b53a3ce.a6"/>
-      <parameterEdges id="wires.1233b53a3ce.16d" from="users.1233b53a814.6f" to="wires.1233b53a3ce.16c"/>
+      <parameterEdges id="wires.1233b53a3ce.ab" term="users.1233b53a814.6f" value="wires.1233b53a3ce.a6"/>
+      <parameterEdges id="wires.1233b53a3ce.16d" term="users.1233b53a814.6f" value="wires.1233b53a3ce.16c"/>
     </permissions>
     <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
   </schemas>
   <schemas xsi:type="iaml.users:Role" name="additional role 1" id="domain.128807fbeba.ea2" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inSchemas="domain.128807fbeba.ea4" inRequiresEdges="wires.1233b53a3ce.23a">
-    <parameterEdges id="wires.1233b53a3ce.a9" from="domain.128807fbeba.ea2" to="wires.1233b53a3ce.a8"/>
-    <parameterEdges id="wires.1233b53a3ce.16a" from="domain.128807fbeba.ea2" to="wires.1233b53a3ce.168"/>
+    <parameterEdges id="wires.1233b53a3ce.a9" term="domain.128807fbeba.ea2" value="wires.1233b53a3ce.a8"/>
+    <parameterEdges id="wires.1233b53a3ce.16a" term="domain.128807fbeba.ea2" value="wires.1233b53a3ce.168"/>
   </schemas>
   <schemas xsi:type="iaml.users:Role" name="additional role 2" id="domain.128807fbeba.ea5" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" inSchemas="domain.128807fbeba.ea7" outProvidesEdges="wires.1233b53a3ce.36">
-    <parameterEdges id="wires.1233b53a3ce.aa" from="domain.128807fbeba.ea5" to="wires.1233b53a3ce.a7"/>
-    <parameterEdges id="wires.1233b53a3ce.16b" from="domain.128807fbeba.ea5" to="wires.1233b53a3ce.169"/>
+    <parameterEdges id="wires.1233b53a3ce.aa" term="domain.128807fbeba.ea5" value="wires.1233b53a3ce.a7"/>
+    <parameterEdges id="wires.1233b53a3ce.16b" term="domain.128807fbeba.ea5" value="wires.1233b53a3ce.169"/>
     <providesEdges id="wires.1233b53a3ce.36" from="domain.128807fbeba.ea5" to="users.1233b53a814.70"/>
   </schemas>
   <sources id="domain.128807fbeba.ea0" outSchemas="domain.128807fbeba.ea1" inSelects="domain.128807fbeba.ea8">

@@ -3,14 +3,14 @@
   <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
       <properties id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" defaultValue="hello" readOnly="true">
-        <parameterEdges id="wires.1207ff8322b.4e" from="model.1207ff82f9b.319" to="wires.1207ff8322b.4d"/>
+        <parameterEdges id="wires.1207ff8322b.4e" term="model.1207ff82f9b.319" value="wires.1207ff8322b.4d"/>
       </properties>
-      <onChange id="model.1207ff82f9b.1ae" outActions="wires.1207ff8322b.4d">
-        <actions id="wires.1207ff8322b.4d" inParameterEdges="wires.1207ff8322b.4e" name="run" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf"/>
+      <onChange id="model.1207ff82f9b.1ae" listeners="wires.1207ff8322b.4d">
+        <ecaRules id="wires.1207ff8322b.4d" inParameterEdges="wires.1207ff8322b.4e" name="run" trigger="model.1207ff82f9b.1ae" target="model.1207ff82f9b.1bf"/>
       </onChange>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fb" name="target">
-      <operations xsi:type="iaml:CompositeOperation" id="model.1207ff82f9b.1bf" name="set to a static value" inActions="wires.1207ff8322b.4d wires.1207ff8322b.61">
+      <operations xsi:type="iaml:CompositeOperation" id="model.1207ff82f9b.1bf" name="set to a static value" rules="wires.1207ff8322b.4d wires.1207ff8322b.61">
         <parameters id="model.1207ff82f9b.1f8" name="value" outFlows="model.1207ff82f9b.269"/>
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1207ff82f9b.1fd" name="set" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
@@ -24,10 +24,10 @@
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.251" name="setToWorld">
       <properties id="model.1207ff82f9b.38d" name="value" outParameterEdges="wires.1207ff8322b.62" defaultValue="world!" readOnly="true">
-        <parameterEdges id="wires.1207ff8322b.62" from="model.1207ff82f9b.38d" to="wires.1207ff8322b.61"/>
+        <parameterEdges id="wires.1207ff8322b.62" term="model.1207ff82f9b.38d" value="wires.1207ff8322b.61"/>
       </properties>
-      <onChange id="model.1207ff82f9b.38c" outActions="wires.1207ff8322b.61">
-        <actions id="wires.1207ff8322b.61" inParameterEdges="wires.1207ff8322b.62" name="run2" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf"/>
+      <onChange id="model.1207ff82f9b.38c" listeners="wires.1207ff8322b.61">
+        <ecaRules id="wires.1207ff8322b.61" inParameterEdges="wires.1207ff8322b.62" name="run2" trigger="model.1207ff82f9b.38c" target="model.1207ff82f9b.1bf"/>
       </onChange>
     </children>
   </scopes>

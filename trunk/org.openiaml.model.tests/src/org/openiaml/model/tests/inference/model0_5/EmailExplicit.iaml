@@ -2,11 +2,11 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.127b1fff682.6">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <scopes xsi:type="iaml.scopes:Email" id="scopes.127b254e216.17" name="Email" to="test@openiaml.org" subject="A test e-mail" toName="Test User" from="source@openiaml.org" fromName="Source">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.35" name="send" inActions="wires.127b1fff8c4.6"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.35" name="send" rules="wires.127b1fff8c4.6"/>
       <properties id="model.127b1fff682.1e" name="content" defaultValue="hello, world!" readOnly="true"/>
     </scopes>
-    <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.1c" name="send an email" outActions="wires.127b1fff8c4.6">
-      <actions id="wires.127b1fff8c4.6" name="onClick" from="visual.127b1fff818.1c" to="model.127b1fff682.35"/>
+    <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.1c" name="send an email" listeners="wires.127b1fff8c4.6">
+      <ecaRules id="wires.127b1fff8c4.6" name="onClick" trigger="visual.127b1fff818.1c" target="model.127b1fff682.35"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

@@ -3,20 +3,20 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b5" name="text field" outParameterEdges="wires.1281e15c5ee.67">
       <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.f2" name="update"/>
-      <parameterEdges id="wires.1281e15c5ee.67" from="visual.1281e15c5ee.b5" to="wires.1281e15c5ee.65"/>
+      <parameterEdges id="wires.1281e15c5ee.67" term="visual.1281e15c5ee.b5" value="wires.1281e15c5ee.65"/>
     </children>
     <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.b6" name="label value" outParameterEdges="wires.1281e15c5ee.69">
-      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.103" name="update" inActions="wires.1281e15c5ee.65"/>
-      <parameterEdges id="wires.1281e15c5ee.69" from="visual.1281e15c5ee.b6" to="wires.1281e15c5ee.66"/>
+      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.103" name="update" rules="wires.1281e15c5ee.65"/>
+      <parameterEdges id="wires.1281e15c5ee.69" term="visual.1281e15c5ee.b6" value="wires.1281e15c5ee.66"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b7" name="target field">
-      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.12e" name="update" inActions="wires.1281e15c5ee.66"/>
+      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.12e" name="update" rules="wires.1281e15c5ee.66"/>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.141" name="update label" outActions="wires.1281e15c5ee.65">
-      <actions id="wires.1281e15c5ee.65" inParameterEdges="wires.1281e15c5ee.67" name="onClick" from="visual.1281e15c5ee.141" to="model.1281e15c552.103"/>
+    <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.141" name="update label" listeners="wires.1281e15c5ee.65">
+      <ecaRules id="wires.1281e15c5ee.65" inParameterEdges="wires.1281e15c5ee.67" name="onClick" trigger="visual.1281e15c5ee.141" target="model.1281e15c552.103"/>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.142" name="update target" outActions="wires.1281e15c5ee.66">
-      <actions id="wires.1281e15c5ee.66" inParameterEdges="wires.1281e15c5ee.69" name="onClick" from="visual.1281e15c5ee.142" to="model.1281e15c552.12e"/>
+    <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.142" name="update target" listeners="wires.1281e15c5ee.66">
+      <ecaRules id="wires.1281e15c5ee.66" inParameterEdges="wires.1281e15c5ee.69" name="onClick" trigger="visual.1281e15c5ee.142" target="model.1281e15c552.12e"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

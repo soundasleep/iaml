@@ -8,15 +8,15 @@
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.128a9b17daf.1" id="visual.128a9b17daf.17" name="List">
       <children xsi:type="iaml.visual:Label" id="visual.128b5279ae4.36" name="title">
         <fieldValue id="model.128b5279a48.e3" name="current value" outParameterEdges="wires.128b5279ae4.21">
-          <parameterEdges id="wires.128b5279ae4.21" from="model.128b5279a48.e3" to="wires.128b5279ae4.1f"/>
+          <parameterEdges id="wires.128b5279ae4.21" term="model.128b5279a48.e3" value="wires.128b5279ae4.1f"/>
         </fieldValue>
-        <onClick id="model.128b5279a48.47" outActions="wires.128b5279ae4.1f">
-          <actions id="wires.128b5279ae4.1f" inParameterEdges="wires.128b5279ae4.21" name="run" from="model.128b5279a48.47" to="model.128b5279a48.b8"/>
+        <onClick id="model.128b5279a48.47" listeners="wires.128b5279ae4.1f">
+          <ecaRules id="wires.128b5279ae4.1f" inParameterEdges="wires.128b5279ae4.21" name="run" trigger="model.128b5279a48.47" target="model.128b5279a48.b8"/>
         </onClick>
       </children>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.128b5279ae4.1c" name="clicked title">
-      <operations xsi:type="iaml:CompositeOperation" id="model.128b5279a48.b8" name="update" inActions="wires.128b5279ae4.1f"/>
+      <operations xsi:type="iaml:CompositeOperation" id="model.128b5279a48.b8" name="update" rules="wires.128b5279ae4.1f"/>
     </children>
   </scopes>
   <schemas name="News" id="domain.128a9b17dce.1" inSchemas="domain.128a9b17dce.5">

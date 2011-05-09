@@ -89,10 +89,10 @@
     <points y="40"/>
   </customShapes>
   <labelConfigurations name="ContainmentFeature" readOnly="true" specialLabel="CONTAINMENT_NAME">
-    <classifiers href="iaml.ecore#//PrimitiveCondition"/>
     <classifiers href="iaml.ecore#//components/Gate"/>
     <classifiers href="iaml.ecore#//Event"/>
     <classifiers href="iaml.ecore#//Value"/>
+    <classifiers href="iaml.ecore#//BuiltinProperty"/>
     <properties xsi:type="sgmf:LabelBold" value="true"/>
     <properties xsi:type="sgmf:ForegroundColor" color="darkBlue"/>
   </labelConfigurations>
@@ -109,6 +109,7 @@
   </labelConfigurations>
   <labelConfigurations name="EType" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement"/>
+    <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
     <feature xsi:type="ecore:EReference" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement/eType"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
@@ -237,8 +238,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveCondition">
-      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinProperty">
+      <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
@@ -480,12 +481,12 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
       <classifier href="iaml.ecore#//PrimitiveOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveOperation">
+    <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveProperty">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/hasPrevious"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/hasNext"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/empty"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/canSave"/>
-      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+      <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
@@ -582,8 +583,8 @@
     <elements xsi:type="sgmf:ReferencedNode" name="CompositeCondition">
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" id="" name="PrimitiveCondition">
-      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="BuiltinProperty">
+      <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="root">
@@ -779,10 +780,10 @@
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveCondition">
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinProperty">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/empty"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/notEmpty"/>
-      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+      <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>

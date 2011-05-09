@@ -249,6 +249,7 @@ function echo_mock_map_point_script($id, $parent_id) {
 			hidden_label_<?php echo $id; ?> = null;
 			hidden_point_<?php echo $id; ?> = null;
 		}
+		document.getElementById('<?php echo $id; ?>').style.display = "";
 		document.getElementById('<?php echo $id; ?>_label').style.display = "";
 		document.getElementById('mock_map_point_<?php echo $id; ?>_address').style.display = "";
 	}
@@ -257,6 +258,7 @@ function echo_mock_map_point_script($id, $parent_id) {
 		hidden_point_<?php echo $id; ?> = document.getElementById('mock_map_point_<?php echo $id; ?>_address').innerHTML;
 		document.getElementById('<?php echo $id; ?>_label').innerHTML = "";
 		document.getElementById('mock_map_point_<?php echo $id; ?>_address').innerHTML = "";
+		document.getElementById('<?php echo $id; ?>').style.display = "none";
 		document.getElementById('<?php echo $id; ?>_label').style.display = "none";
 		document.getElementById('mock_map_point_<?php echo $id; ?>_address').style.display = "none";
 	}

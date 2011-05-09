@@ -91,8 +91,9 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		
 		// NavigateAction, RunAction --> ActionEdge
 		// (EMF reloading/resaving will remove the xsiType entirely)
-		if (xsiType.equals("iaml.wires:NavigateAction") || xsiType.equals("iaml.wires:RunAction")) {
-			return "iaml:ActionEdge";
+		if (xsiType.equals("iaml.wires:NavigateAction") || xsiType.equals("iaml.wires:RunAction")
+				|| /* issue 244 */ xsiType.equals("iaml:ActionEdge")) {
+			return "iaml:ECARule";
 		}
 
 		// <children xsi:type="iaml.visual:Hidden">
@@ -105,6 +106,11 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> "iaml.domain:DomainAttribute"
 		if (xsiType.equals("iaml:DomainAttribute")) {
 			return "iaml.domain:DomainAttribute";
+		}
+		
+		// issue 244
+		if (xsiType.equals("iaml.wires:ParameterEdge")) {
+			return "iaml:Parameter";
 		}
 		
 		return super.replaceType(element, xsiType, errors);

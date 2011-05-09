@@ -83,17 +83,17 @@ public class SyncWireTestCase extends InferenceTestCase {
 		Parameter name1editParam = null;
 		Parameter name2editParam = null;
 		// get RunActions first
-		for (ECARule w : wire.getActions()) {
-			if (w.getFrom().equals(name1edit) && w.getTo().equals(name2update) )
+		for (ECARule w : wire.getEcaRules()) {
+			if (w.getTrigger().equals(name1edit) && w.getTarget().equals(name2update) )
 				name1editRun = w;
-			if (w.getFrom().equals(name2edit) && w.getTo().equals(name1update) )
+			if (w.getTrigger().equals(name2edit) && w.getTarget().equals(name1update) )
 				name2editRun = w;
 		}
 		// then ParameterWires
 		for (Parameter w : wire.getParameterEdges()) {
-			if (w.getFrom().equals(name1value) && w.getTo().equals(name1editRun) )
+			if (w.getTerm().equals(name1value) && w.getValue().equals(name1editRun) )
 				name1editParam = w;
-			if (w.getFrom().equals(name2value) && w.getTo().equals(name2editRun) )
+			if (w.getTerm().equals(name2value) && w.getValue().equals(name2editRun) )
 				name2editParam = w;
 		}
 

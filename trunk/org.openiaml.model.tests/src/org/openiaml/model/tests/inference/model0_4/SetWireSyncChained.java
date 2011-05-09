@@ -76,7 +76,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 			public boolean accept(ECARule r) {
 				if (r.getInParameterEdges().size() != 1)
 					return false;
-				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getFrom();
+				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getTerm();
 				if (paramSource.eContainer().equals(source))
 					return true;
 				return false;
@@ -124,7 +124,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 			public boolean accept(ECARule r) {
 				if (r.getInParameterEdges().size() != 1)
 					return false;
-				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getFrom();
+				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getTerm();
 				if (paramSource.eContainer().equals(changed))
 					return true;
 				return false;

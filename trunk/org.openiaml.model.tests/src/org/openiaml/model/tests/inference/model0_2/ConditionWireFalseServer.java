@@ -44,8 +44,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 
 		// [already in model]
 		// there should be a Function wire from cond to sync
-		assertEquals(cw.getFrom(), cond);
-		assertEquals(cw.getTo(), wire);
+		assertEquals(cw.getFunction(), cond);
+		assertEquals(cw.getConditioned(), wire);
 
 		// [inferred]
 		// field1 and field2 should be connected by SyncWires

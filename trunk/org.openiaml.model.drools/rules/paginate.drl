@@ -109,7 +109,7 @@ rule "Connect Next button to 'next' operation on DomainIterator"
 		
 		nextOp : Operation ( instance.next == nextOp )
 	
-		not ( run : ECARule ( from == onClick, to == nextOp ))  
+		not ( run : ECARule ( trigger == onClick, target == nextOp ))  
 		
 		eval ( handler.veto( next ))
 
@@ -132,9 +132,9 @@ rule "Connect 'hasNext' condition to Next button action"
 		onClick : Event ( next.onClick == onClick )
 		
 		nextOp : Operation ( instance.next == nextOp )
-		run : ECARule ( from == onClick, to == nextOp )
+		run : ECARule ( trigger == onClick, target == nextOp )
 	
-		not ( ce : SimpleCondition ( from == hasNext, to == run ) )  
+		not ( ce : SimpleCondition ( function == hasNext, conditioned == run ) )  
 		
 		eval ( handler.veto( run ))
 
@@ -156,7 +156,7 @@ rule "Connect Previous button to 'previous' operation on DomainIterator"
 		
 		prevOp : Operation ( instance.previous == prevOp )
 	
-		not ( run : ECARule ( from == onClick, to == prevOp ))  
+		not ( run : ECARule ( trigger == onClick, target == prevOp ))  
 		
 		eval ( handler.veto( prev ))
 
@@ -179,9 +179,9 @@ rule "Connect 'hasPrevious' condition to Previous button action"
 		onClick : Event ( prev.onClick == onClick )
 		
 		prevOp : Operation ( instance.previous == prevOp )
-		run : ECARule ( from == onClick, to == prevOp )
+		run : ECARule ( trigger == onClick, target == prevOp )
 	
-		not ( ce : SimpleCondition ( from == hasPrevious, to == run ) )  
+		not ( ce : SimpleCondition ( function == hasPrevious, conditioned == run ) )  
 		
 		eval ( handler.veto( run ))
 
@@ -203,7 +203,7 @@ rule "Connect First button to 'reset' operation on DomainIterator"
 		
 		resetOp : Operation ( instance.reset == resetOp )
 	
-		not ( run : ECARule ( from == onClick, to == resetOp ))  
+		not ( run : ECARule ( trigger == onClick, target == resetOp ))  
 		
 		eval ( handler.veto( first ))
 
@@ -226,9 +226,9 @@ rule "Connect 'not empty' condition to First button action"
 		onClick : Event ( first.onClick == onClick )
 		
 		resetOp : Operation ( instance.reset == resetOp )
-		run : ECARule ( from == onClick, to == resetOp )
+		run : ECARule ( trigger == onClick, target == resetOp )
 	
-		not ( ce : SimpleCondition ( from == notEmpty, to == run ) )  
+		not ( ce : SimpleCondition ( function == notEmpty, conditioned == run ) )  
 		
 		eval ( handler.veto( run ))
 
@@ -250,7 +250,7 @@ rule "Connect Last button to 'jump' operation on DomainIterator"
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
 	
-		not ( run : ECARule ( from == onClick, to == jumpOp ))  
+		not ( run : ECARule ( trigger == onClick, target == jumpOp ))  
 		
 		eval ( handler.veto( last ))
 
@@ -273,9 +273,9 @@ rule "Connect 'not empty' condition to Last button action"
 		onClick : Event ( last.onClick == onClick )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ECARule ( from == onClick, to == jumpOp )
+		run : ECARule ( trigger == onClick, target == jumpOp )
 	
-		not ( ce : SimpleCondition ( from == notEmpty, to == run ) )  
+		not ( ce : SimpleCondition ( function == notEmpty, conditioned == run ) )  
 		
 		eval ( handler.veto( run ))
 
@@ -318,9 +318,9 @@ rule "Connect 'target' property to ECARule in Last button"
 		property : Value ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ECARule ( from == onClick, to == jumpOp )
+		run : ECARule ( trigger == onClick, target == jumpOp )
 		
-		not ( param : Parameter ( from == property, to == run ))
+		not ( param : Parameter ( term == property, value == run ))
 		
 		eval ( handler.veto( run ))
 
@@ -362,11 +362,11 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		property : Value ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ECARule ( from == onClick, to == jumpOp )
+		run : ECARule ( trigger == onClick, target == jumpOp )
 		
 		op : Operation ( eContainer == last, name == "update target" )
 		
-		not ( run2 : ECARule ( from == onClick, to == op ) ) 
+		not ( run2 : ECARule ( trigger == onClick, target == op ) ) 
 		
 		eval ( handler.veto( last ))
 
@@ -451,7 +451,7 @@ rule "Connect Instance.onChange to Results.update"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		not ( run : ECARule ( from == event, to == updateOp ) )
+		not ( run : ECARule ( trigger == event, target == updateOp ) )
 		
 		eval ( handler.veto( set ))
 		
@@ -473,10 +473,10 @@ rule "Connect results parameter to Results label update (onChange)"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		run : ECARule ( from == event, to == updateOp )
+		run : ECARule ( trigger == event, target == updateOp )
 		property : Value ( instance.results == property )
 		
-		not ( param : Parameter ( from == property, to == run ))
+		not ( param : Parameter ( term == property, value == run ))
 		
 		eval ( handler.veto( set ))
 		
@@ -502,7 +502,7 @@ rule "Connect Instance.onAccess to Results.update"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		not ( run : ECARule ( from == event, to == updateOp ) )
+		not ( run : ECARule ( trigger == event, target == updateOp ) )
 		
 		eval ( handler.veto( set ))
 		
@@ -524,10 +524,10 @@ rule "Connect results parameter to Results label update (onAccess)"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		run : ECARule ( from == event, to == updateOp )
+		run : ECARule ( trigger == event, target == updateOp )
 		property : Value ( instance.results == property )
 		
-		not ( param : Parameter ( from == property, to == run ))
+		not ( param : Parameter ( term == property, value == run ))
 		
 		eval ( handler.veto( set ))
 		

@@ -127,7 +127,7 @@ rule "Run instance wire from edit to update (onChange)"
 		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ECARule( eContainer == sw, from == event, to == operation ))
+		not (ECARule( eContainer == sw, trigger == event, target == operation ))
 				
 		eval ( handler.veto( sw ))
 		
@@ -159,7 +159,7 @@ rule "Run instance wire from edit to Property update (onChange)"
 			name != null, 
 			eval( ("set value " + target.getName()).equals(operation.getName()) ) )
 		
-		not (ECARule( eContainer == sw, from == event, to == operation ))
+		not (ECARule( eContainer == sw, trigger == event, target == operation ))
 				
 		eval ( handler.veto( sw ))
 		
@@ -179,7 +179,7 @@ rule "Run instance wire from edit to update, instant SetWire (onInput)"
 		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ECARule( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw, trigger == event, target == operation, name == "run" ))
 				
 		eval ( handler.veto( sw ))
 		
@@ -200,9 +200,9 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : Event( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 				
 		eval ( handler.veto( sw ))
 		
@@ -222,9 +222,9 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -249,9 +249,9 @@ rule "Connect parameter wire to: Run instance wire from edit to Property update 
 			eval( ("set value " + target.getName()).equals(operation.getName()) ) )
 
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 				
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 				
 		eval ( handler.veto( sw ))
 		
@@ -272,9 +272,9 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		field : Value( source.currentInput == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -296,7 +296,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 		operation : Operation( eContainer == target, name=="init" )
 		field : Value( source.fieldValue == field )
 		
-		not (ECARule( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw, trigger == event, target == operation, name == "run" ))
 						
 		eval ( handler.veto( sw ))
 		
@@ -317,13 +317,13 @@ rule "Run instance wire from target.access to target.init, adding SimpleConditio
 		operation : Operation( eContainer == target, name=="init" )
 		field : Value( source.fieldValue == field )
 		
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
-		param : Parameter( from == field, to == run )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+		param : Parameter( term == field, value == run )
 		
 		# condition check
 		condition : Function ( eContainer == source, name == "fieldValue is set" )
 		
-		not ( SimpleCondition ( from == condition, to == run ))
+		not ( SimpleCondition ( function == condition, conditioned == run ))
 					
 		eval ( handler.veto( sw ))
 	
@@ -343,9 +343,9 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		event : Event( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -365,9 +365,9 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		event : Event( target.onAccess == event ) 
 		operation : Operation( eContainer == target, name=="init" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -388,9 +388,9 @@ rule "Connect parameter wire: Domain Instance (source)"
 		event : Event( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -411,9 +411,9 @@ rule "Connect parameter wire: Domain Instance (target)"
 		event : Event( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not (Parameter( eContainer == sw, from == field, to == wire )) 
+		not (Parameter( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -465,10 +465,10 @@ rule "Cascaded SetWires: Conditions from parent to child [set]"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : SimpleCondition( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -495,10 +495,10 @@ rule "Cascaded SetWires: Conditions: Domain Iterator (source)"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : SimpleCondition( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -525,10 +525,10 @@ rule "Cascaded SetWires: Conditions: Domain Iterator (target)"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : SimpleCondition( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -554,17 +554,17 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# the generated condition wire
-		ecw : SimpleCondition( from == condition, to == esw )
+		ecw : SimpleCondition( function == condition, conditioned == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( from == parameter, to == cw )
+		pw : Parameter( term == parameter, value == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( from == parameter, to == ecw )) 
+		not (epw : Parameter( term == parameter, value == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -592,17 +592,17 @@ rule "Cascaded SetWires: Parameters: Domain Iterator (source)"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# the generated condition wire
-		ecw : SimpleCondition( from == condition, to == esw )
+		ecw : SimpleCondition( function == condition, conditioned == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( from == parameter, to == cw )
+		pw : Parameter( term == parameter, value == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( from == parameter, to == ecw )) 
+		not (epw : Parameter( term == parameter, value == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -630,17 +630,17 @@ rule "Cascaded SetWires: Parameters: Domain Iterator (target)"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# the generated condition wire
-		ecw : SimpleCondition( from == condition, to == esw )
+		ecw : SimpleCondition( function == condition, conditioned == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( from == parameter, to == cw )
+		pw : Parameter( term == parameter, value == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( from == parameter, to == ecw )) 
+		not (epw : Parameter( term == parameter, value == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -668,10 +668,10 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 		
-		not (ECARule( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" ))
 						
 		eval ( handler.veto( sw2 ))
 		
@@ -696,10 +696,10 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 		
-		not (ECARule( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" ))
 						
 		eval ( handler.veto( sw2 ))
 		
@@ -724,15 +724,15 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		event : Event( sourceElement.onChange == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 
-		initrw : ECARule( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
 		
 		field : Value( sourceElement.fieldValue == field )
-		pw : Parameter( eContainer == sw2, from == field, to == rw ) 
+		pw : Parameter( eContainer == sw2, term == field, value == rw ) 
 
-		not( Parameter ( eContainer == sw2, from == field, to == initrw ))  
+		not( Parameter ( eContainer == sw2, term == field, value == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
@@ -755,15 +755,15 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		event : Event( sourceElement.onChange == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 
-		initrw : ECARule( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
 		
 		field : Value( sourceElement.fieldValue == field )
-		pw : Parameter( eContainer == sw2, from == field, to == rw ) 
+		pw : Parameter( eContainer == sw2, term == field, value == rw ) 
 
-		not( Parameter ( eContainer == sw2, from == field, to == initrw ))  
+		not( Parameter ( eContainer == sw2, term == field, value == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
@@ -1097,17 +1097,17 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		# text field access/init events
 		access : Event ( tf.onAccess == access ) 
 		initOp : Operation ( eContainer == tf, name == "init" )
-		run : ECARule ( from == access, to == initOp )
+		run : ECARule ( trigger == access, target == initOp )
 		
 		attributeValue : Value ( attribute.fieldValue == attributeValue )
 		
-		param : Parameter ( from == attributeValue, to == run )  
+		param : Parameter ( term == attributeValue, value == run )  
 		
 		# 'not empty' condition in the instance
 		existsCondition : Function ( eContainer == iterator, name == "not empty" )
 		
 		# but not connected		
-		not (SimpleCondition ( from == existsCondition, to == run ))
+		not (SimpleCondition ( function == existsCondition, conditioned == run ))
 						
 		eval ( handler.veto( sync2 ))
 		
@@ -1145,17 +1145,17 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		# text field access/init events
 		onChange : Event ( attribute.onChange == onChange ) 
 		initOp : Operation ( eContainer == tf, name == "update" )
-		run : ECARule ( from == onChange, to == initOp )
+		run : ECARule ( trigger == onChange, target == initOp )
 		
 		attributeValue : Value ( attribute.fieldValue == attributeValue )
 		
-		param : Parameter ( from == attributeValue, to == run )  
+		param : Parameter ( term == attributeValue, value == run )  
 		
 		# 'not empty' condition in the instance
 		existsCondition : Function ( eContainer == iterator, name == "not empty" )
 		
 		# but not connected		
-		not (SimpleCondition ( from == existsCondition, to == run ))
+		not (SimpleCondition ( function == existsCondition, conditioned == run ))
 						
 		eval ( handler.veto( sync2 ))
 		

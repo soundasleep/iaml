@@ -123,7 +123,7 @@ rule "Run instance wire from edit to update (onChange)"
 		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ECARule( from == event, to == operation, name == "run", eContainer == sw ))
+		not (ECARule( trigger == event, target == operation, name == "run", eContainer == sw ))
 						
 		eval ( handler.veto( sw ))
 		
@@ -144,7 +144,7 @@ rule "Run instance wire from edit to update, instant SyncWire (onInput)"
 		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ECARule( from == event, to == operation, name == "run", eContainer == sw ))
+		not (ECARule( trigger == event, target == operation, name == "run", eContainer == sw ))
 						
 		eval ( handler.veto( sw ))
 		
@@ -165,9 +165,9 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
 		field : Value( source.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not ( Parameter ( eContainer == sw, from == field, to == wire )) 
+		not ( Parameter ( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -188,9 +188,9 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		field : Value( source.currentInput == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not ( Parameter ( eContainer == sw, from == field, to == wire )) 
+		not ( Parameter ( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -213,7 +213,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Value( target.fieldValue == field )
 		
-		not (ECARule( from == event, to == operation, name == "run", eContainer == sw ))
+		not (ECARule( trigger == event, target == operation, name == "run", eContainer == sw ))
 						
 		eval ( handler.veto( sw ))
 		
@@ -235,12 +235,12 @@ rule "Run instance wire from source.access to source.init, adding SimpleConditio
 		operation : Operation( eContainer == source, name=="init" )
 		field : Value( target.fieldValue == field )
 		
-		run : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		run : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
 		# condition check
 		condition : Function ( eContainer == target, name == "fieldValue is set" )
 		
-		not ( SimpleCondition ( from == condition, to == run ))
+		not ( SimpleCondition ( function == condition, conditioned == run ))
 					
 		eval ( handler.veto( sw ))
 	
@@ -261,9 +261,9 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
 		field : Value( target.fieldValue == field )
-		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not ( Parameter ( eContainer == sw, from == field, to == wire )) 
+		not ( Parameter ( eContainer == sw, term == field, value == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -320,10 +320,10 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : SimpleCondition( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -357,10 +357,10 @@ rule "Cascaded SyncWires: Conditions from parent to child (Domain Instances)"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : SimpleCondition( from == condition, to == esw )) 
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -389,17 +389,17 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# the generated condition wire
-		ecw : SimpleCondition( from == condition, to == esw )
+		ecw : SimpleCondition( function == condition, conditioned == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( from == parameter, to == cw )
+		pw : Parameter( term == parameter, value == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( from == parameter, to == ecw )) 
+		not (epw : Parameter( term == parameter, value == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -434,17 +434,17 @@ rule "Cascaded SyncWires: Parameters from parent to child (Domain Instances)"
 		
 		# there is a condition on the containing sync wire
 		condition : Function ( )
-		cw : SimpleCondition( from == condition, to == sw )
+		cw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# the generated condition wire
-		ecw : SimpleCondition( from == condition, to == esw )
+		ecw : SimpleCondition( function == condition, conditioned == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( from == parameter, to == cw )
+		pw : Parameter( term == parameter, value == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( from == parameter, to == ecw )) 
+		not (epw : Parameter( term == parameter, value == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -474,10 +474,10 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange
 		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 		
-		not (ECARule( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" ))
 						
 		eval ( handler.veto( sw2 ))
 		
@@ -504,10 +504,10 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange
 		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 		
-		not (ECARule( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" ))
 						
 		eval ( handler.veto( sw2 ))
 		
@@ -534,15 +534,15 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 
-		initrw : ECARule( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
 		
 		field : Value( sourceElement.fieldValue == field )
-		pw : Parameter( eContainer == sw2, from == field, to == rw ) 
+		pw : Parameter( eContainer == sw2, term == field, value == rw ) 
 
-		not( Parameter ( eContainer == sw2, from == field, to == initrw ))  
+		not( Parameter ( eContainer == sw2, term == field, value == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
@@ -567,15 +567,15 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		event : Event( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : ECARule( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
 		inite : Event (eContainer == session, session.onInit == inite )
 
-		initrw : ECARule( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
 		
 		field : Value( sourceElement.fieldValue == field )
-		pw : Parameter( eContainer == sw2, from == field, to == rw ) 
+		pw : Parameter( eContainer == sw2, term == field, value == rw ) 
 
-		not( Parameter ( eContainer == sw2, from == field, to == initrw ))  
+		not( Parameter ( eContainer == sw2, term == field, value == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
@@ -737,18 +737,18 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		# text field access/init events
 		access : Event ( tf.onAccess == access ) 
 		initOp : Operation ( eContainer == tf, name == "init" )
-		run : ECARule ( from == access, to == initOp )
+		run : ECARule ( trigger == access, target == initOp )
 		
 		attributeValue : Value ( attribute.fieldValue == attributeValue )
 		
-		param : Parameter ( from == attributeValue, to == run )  
+		param : Parameter ( term == attributeValue, value == run )  
 		
 		# 'not empty' condition in the iterator
 		# TODO this could also be part of the DomainInstance
 		existsCondition : Function ( eContainer == iterator, name == "not empty" )
 		
 		# but not connected		
-		not (SimpleCondition ( from == existsCondition, to == run ))
+		not (SimpleCondition ( function == existsCondition, conditioned == run ))
 						
 		eval ( handler.veto( sync2 ))
 		

@@ -78,9 +78,9 @@ rule "If an AccessControlHandler specifies a Login page, connect this to the gen
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ECARule ( from == ach, to == login_page, name == "login" )
+		login_edge : ECARule ( trigger == ach, target == login_page, name == "login" )
 		
-		not ( ECARule( from == login_handler, name == "login" ))
+		not ( ECARule( trigger == login_handler, name == "login" ))
 		
 		eval ( handler.veto( ach ))
 
@@ -106,9 +106,9 @@ rule "If an AccessControlHandler specifies a Logout page, connect this to the ge
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ECARule ( from == ach, to == login_page, name == "logout" )
+		login_edge : ECARule ( trigger == ach, target == login_page, name == "logout" )
 		
-		not ( ECARule( from == login_handler, name == "logout" ))
+		not ( ECARule( trigger == login_handler, name == "logout" ))
 		
 		eval ( handler.veto( ach ))
 
@@ -134,9 +134,9 @@ rule "If an AccessControlHandler specifies a Success page, connect this to the g
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ECARule ( from == ach, to == login_page, name == "success" )
+		login_edge : ECARule ( trigger == ach, target == login_page, name == "success" )
 		
-		not ( ECARule( from == login_handler, name == "success" ))
+		not ( ECARule( trigger == login_handler, name == "success" ))
 		
 		eval ( handler.veto( ach ))
 
@@ -188,7 +188,7 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 		access : Event ( eContainer == page, page.onAccess == access ) 
 		check : Operation ( eContainer == page, name == "permissions check" )
 		
-		not ( ECARule ( from == access, to == check ))
+		not ( ECARule ( trigger == access, target == check ))
 					
 		eval ( handler.veto( ach ))
 	
@@ -206,7 +206,7 @@ rule "Connect 'permissions check' up to the 'access' event of the page (ACH in p
 		access : Event ( eContainer == page, page.onAccess == access )
 		check : Operation ( eContainer == page, name == "page permissions check" )
 		
-		not ( ECARule ( from == access, to == check ))
+		not ( ECARule ( trigger == access, target == check ))
 					
 		eval ( handler.veto( ach ))
 	
@@ -228,7 +228,7 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login : Frame ( name == "login", eContainer == root ) 
 		
-		not ( ECARule ( from == check, to == login, name == "fail" ))
+		not ( ECARule ( trigger == check, target == login, name == "fail" ))
 					
 		eval ( handler.veto( ach ))
 	
@@ -251,7 +251,7 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 		login_session : Session ( eContainer == root, eval(functions.loginHandlerScopeMatches( login_session, lh )) )
 		login : Frame ( name == "login", eContainer == login_session ) 
 		
-		not ( ECARule ( from == check, to == login, name == "fail" ))
+		not ( ECARule ( trigger == check, target == login, name == "fail" ))
 					
 		eval ( handler.veto( ach ))
 	
@@ -361,9 +361,9 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		user : Role ( eContainer == root, name == "User" )
 	
 		# if there is already an incoming parameter wire, don't connect up User
-		not (Parameter ( to == login_handler ))
+		not (Parameter ( value == login_handler ))
 		
-		not (Parameter ( from == user, to == login_handler ))
+		not (Parameter ( term == user, value == login_handler ))
 		
 		eval ( handler.veto( login_handler ))
 	
@@ -512,7 +512,7 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( Parameter ( from == instance, to == ach )) 
+		not ( Parameter ( term == instance, value == ach )) 
 					
 		eval ( handler.veto( ach ))
 	
@@ -532,7 +532,7 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( Parameter ( from == instance, to == ach )) 
+		not ( Parameter ( term == instance, value == ach )) 
 					
 		eval ( handler.veto( ach ))
 	

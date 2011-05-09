@@ -115,11 +115,11 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		event : Event ( source.onChange == event )
 		upd : Operation ( name == "update", eContainer == target )
 		
-		run : ECARule ( from == event, to == upd )
+		run : ECARule ( trigger == event, target == upd )
 		
 		condition : Function ( name == "can cast?", eContainer == target )
 		
-		not ( ce : SimpleCondition ( from == condition, to == run )) 
+		not ( ce : SimpleCondition ( function == condition, conditioned == run )) 
 		
 		eval ( handler.veto( sw ))
 	
@@ -152,12 +152,12 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		event : Event ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : ECARule ( from == event, to == upd )
-		p2 : Parameter ( from == fieldValue, to == run )
+		run : ECARule ( trigger == event, target == upd )
+		p2 : Parameter ( term == fieldValue, value == run )
 		
 		condition : Function ( name == "can cast?", eContainer == source )
 		
-		not ( ce : SimpleCondition ( from == condition, to == run )) 
+		not ( ce : SimpleCondition ( function == condition, conditioned == run )) 
 		
 		eval ( handler.veto( sw ))
 	
@@ -185,11 +185,11 @@ rule "After 'init' has been called on a typed element, call 'validate'"
 		event : Event ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : ECARule ( from == event, to == upd )
+		run : ECARule ( trigger == event, target == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
 		
-		not ( runValidate : ECARule ( from == event, to == validate ))
+		not ( runValidate : ECARule ( trigger == event, target == validate ))
 		
 		eval ( handler.veto( source ))
 	
@@ -214,14 +214,14 @@ rule "Only call 'validate' operation onAccess if fieldValue has been set"
 		event : Event ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : ECARule ( from == event, to == upd )
+		run : ECARule ( trigger == event, target == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
-		runValidate : ECARule ( from == event, to == validate )
+		runValidate : ECARule ( trigger == event, target == validate )
 		
 		isSet : Function ( name == "fieldValue is set", eContainer == source )
 		
-		not ( edge : SimpleCondition ( from == isSet, to == runValidate) )
+		not ( edge : SimpleCondition ( function == isSet, conditioned == runValidate) )
 		
 		eval ( handler.veto( runValidate ))
 	

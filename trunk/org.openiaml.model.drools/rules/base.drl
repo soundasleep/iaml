@@ -102,7 +102,7 @@ end
  */
 rule "Properties will also have a related 'is set' condition (not fieldValue)"
 	when
-		container : ContainsConditions ( )
+		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
 		value : Value ( eContainer == container, name != "fieldValue" )
 		
@@ -122,7 +122,7 @@ end
  */
 rule "Properties will also have a related 'is set' condition (fieldValue)"
 	when
-		container : ContainsConditions ( )
+		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
 		value : Value ( eContainer == container, name == "fieldValue" )
 		
@@ -160,7 +160,7 @@ end
 
 rule "Create contents of 'X is set' operation"
 	when
-		container : ContainsConditions ( )
+		container : ContainsFunctions ( )
 		value : Value ( eContainer == container )
 		
 		o : CompositeCondition( eval(name.equals(value.getName() + " is set")), eContainer == container )

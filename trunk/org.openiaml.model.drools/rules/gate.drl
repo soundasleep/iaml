@@ -25,16 +25,16 @@ global DroolsHelperFunctions functions;
 rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' ECARule"
 	when
 		gate : Gate ( )
-		target : Frame ( )
-		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
+		tf : Frame ( )
+		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" || name == "fail" )
 		
-		not (Button ( eContainer == target, name == "Continue" ))
-		not (ECARule ( to == gate ))
+		not (Button ( eContainer == tf, name == "Continue" ))
+		not (ECARule ( target == gate ))
 		
 		eval ( handler.veto( gate ))
 	
 	then
-		Button button = handler.generatedButton(gate, target);
+		Button button = handler.generatedButton(gate, tf);
 		handler.setName(button, "Continue");
 		queue.add(button, drools);
 
@@ -43,18 +43,18 @@ end
 rule "Connect 'click' on 'Continue' button to resume Gate"
 	when
 		gate : Gate ( )
-		target : Frame ( )
-		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
-		button : Button ( eContainer == target, name == "Continue" )
+		tf : Frame ( )
+		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" || name == "fail" ) 
+		button : Button ( eContainer == tf, name == "Continue" )
 		
 		click : Event ( button.onClick == click, eContainer == button )
 		
-		not (ECARule ( from == click, to == gate ))
+		not (ECARule ( trigger == click, target == gate ))
 		
 		eval ( handler.veto( gate ))
 	
 	then
-		ECARule wire = handler.generatedECARule(gate, target, click, gate);
+		ECARule wire = handler.generatedECARule(gate, tf, click, gate);
 		handler.setName(wire, "resume");
 		queue.add(wire, drools);
 
@@ -65,7 +65,7 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		
-		wire : ECARule ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
 		
 		not (Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
 		
@@ -82,16 +82,16 @@ end
 rule "Create 'set flag' operation for Frames connected with 'first' or 'last' ECARule"
 	when
 		gate : Gate ( )
-		target : Frame ( )
-		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" )
-		button : Button ( eContainer == target, name == "Continue" )
+		tf : Frame ( )
+		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" )
+		button : Button ( eContainer == tf, name == "Continue" )
 		
-		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
+		not (CompositeOperation ( eContainer == tf, name == "Set gate flag" ))
 			
 		eval ( handler.veto( gate ))
 		
 	then
-		CompositeOperation op = handler.generatedCompositeOperation(gate, target);
+		CompositeOperation op = handler.generatedCompositeOperation(gate, tf);
 		handler.setName(op, "Set gate flag");
 		queue.add(op, drools);
 
@@ -100,18 +100,18 @@ end
 rule "Connect 'access' event with 'set flag' operation"
 	when
 		gate : Gate ( )
-		target : Frame ( )
-		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" )
-		button : Button ( eContainer == target, name == "Continue" )
-		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
-		access : Event ( eContainer == target, target.onAccess == access )
+		tf : Frame ( )
+		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" )
+		button : Button ( eContainer == tf, name == "Continue" )
+		op : CompositeOperation ( eContainer == tf, name == "Set gate flag" )
+		access : Event ( eContainer == tf, tf.onAccess == access )
 		
-		not (ECARule ( from == access, to == op ))
+		not ( ECARule ( trigger == access, target == op ))
 			
 		eval ( handler.veto( gate ))
 		
 	then
-		ECARule run = handler.generatedECARule(gate, target, access, op);
+		ECARule run = handler.generatedECARule(gate, tf, access, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -121,12 +121,12 @@ rule "Create contents of 'set flag' operation"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		target : Frame ( )
-		nav : ECARule ( from == gate, to == target, name == "first" || name == "last" )
-		button : Button ( eContainer == target, name == "Continue" )
+		tf : Frame ( )
+		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" )
+		button : Button ( eContainer == tf, name == "Continue" )
 		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
-		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
+		op : CompositeOperation ( eContainer == tf, name == "Set gate flag" )
 		
 		not (StartNode ( eContainer == op ))
 			
@@ -162,7 +162,7 @@ rule "Create condition 'check (gate)'"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : ECARule ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
 		
 		not ( Function ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
 		
@@ -179,11 +179,11 @@ rule "Connect condition 'check (gate)' with gate"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : ECARule ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
 		
 		cond : Function ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
-		not ( SimpleCondition ( from == cond, to == gate ))
+		not ( SimpleCondition ( function == cond, conditioned == gate ))
 		
 		eval ( handler.veto( gate ))
 	
@@ -198,11 +198,11 @@ rule "Create contents of 'check (gate)' condition"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : ECARule ( from == gate, name == "first" || name == "last" )
+		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
 		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
 		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
-		cw : SimpleCondition ( from == cond, to == gate )
+		cw : SimpleCondition ( function == cond, conditioned == gate )
 		
 		not ( StartNode ( eContainer == cond ))
 		
@@ -277,7 +277,7 @@ rule "For EntryGates that require Label values, connect a NavigateWire to the pr
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
 		
 		# allow other ECARules to override this one
-		not ( ECARule ( from == gate )) 
+		not ( ECARule ( trigger == gate )) 
 	
 		eval ( handler.veto( gate ))
 	
@@ -325,7 +325,7 @@ rule "If an EntryGate requires a Label value, then the 'is set?' Function in the
 		
 		cond : Function ( eContainer == label, name == "fieldValue is set" )
 		
-		not ( SimpleCondition ( from == cond, to == gate ))
+		not ( SimpleCondition ( function == cond, conditioned == gate ))
 
 		eval ( handler.veto( gate ))
 	
@@ -357,7 +357,7 @@ rule "If an EntryGate requires a Label, get the containing Scope to update the L
 		# Label.update()
 		op : Operation ( eContainer == label, name == "update" )
 		
-		not ( ECARule ( from == onAccess, to == op ))
+		not ( ECARule ( trigger == onAccess, target == op ))
 
 		eval ( handler.veto( gate ))
 	
@@ -394,12 +394,12 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		op : Operation ( eContainer == label, name == "update" )
 		
 		# Scope.onAccess --> Label.update()
-		run : ECARule ( from == onAccess, to == op )
+		run : ECARule ( trigger == onAccess, target == op )
 		
 		# Text.isSet?
 		condition : Function ( eContainer == field, name == "fieldValue is set" )
 		
-		not ( SimpleCondition ( from == condition, to == run ))
+		not ( SimpleCondition ( function == condition, conditioned == run ))
 
 		eval ( handler.veto( gate ))
 	
@@ -432,12 +432,12 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		op : Operation ( eContainer == label, name == "update" )
 		
 		# Scope.onAccess --> Label.update()
-		run : ECARule ( from == onAccess, to == op )
+		run : ECARule ( trigger == onAccess, target == op )
 		
 		# Label.can cast?
 		condition : Function ( eContainer == label, name == "can cast?" )
 		
-		not ( SimpleCondition ( from == condition, to == run ))
+		not ( SimpleCondition ( function == condition, conditioned == run ))
 
 		eval ( handler.veto( gate ))
 	

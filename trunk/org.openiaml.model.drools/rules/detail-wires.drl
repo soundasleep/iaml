@@ -220,7 +220,7 @@ rule "Create a Link Button for the source of a DetailWire: Connect ECARule"
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : Event ( button.onClick == onClick )
 		
-		not ( ECARule ( from == onClick, to == target )) 
+		not ( ECARule ( trigger == onClick, target == target )) 
 	
 		eval ( handler.veto( detail ))
 	
@@ -252,7 +252,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : Event ( button.onClick == onClick )
-		nav : ECARule ( from == onClick, to == target )
+		nav : ECARule ( trigger == onClick, target == target )
 
 		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
 		pkInstance : DomainAttributeInstance ( eContainer == inst2 )
@@ -260,7 +260,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		
 		pk : Value ( pkInstance.fieldValue == pk ) 
 		
-		not ( Parameter ( from == pk, to == nav ))
+		not ( Parameter ( term == pk, value == nav ))
 	
 		eval ( handler.veto( detail ))
 	
@@ -290,7 +290,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : Event ( button.onClick == onClick )
-		nav : ECARule ( from == onClick, to == target )
+		nav : ECARule ( trigger == onClick, target == target )
 
 		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
 		pkInstance : DomainAttributeInstance ( eContainer == inst2 )
@@ -302,7 +302,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		
 		pk : Value ( hidden.fieldValue == pk ) 
 		
-		not ( Parameter ( from == pk, to == nav ))
+		not ( Parameter ( term == pk, value == nav ))
 	
 		eval ( handler.veto( detail ))
 	

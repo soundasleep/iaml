@@ -78,7 +78,7 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 		
 		op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) )
 		
-		not ( run : ECARule ( from == event, to == op ) )
+		not ( run : ECARule ( trigger == event, target == op ) )
 						
 		eval ( handler.veto( sw ))
 		

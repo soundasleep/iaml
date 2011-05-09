@@ -80,7 +80,7 @@ rule "Connect parameter for input field for Autocomplete"
 		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
 		fieldValue : Value ( text.fieldValue == fieldValue )
 		
-		not ( Parameter ( from == fieldValue, to == iterator ) )
+		not ( Parameter ( term == fieldValue, value == iterator ) )
 		
 		eval ( handler.veto( wire ))
 		
@@ -128,7 +128,7 @@ rule "Input field for Autocomplete should update instantly"
 		
 		updateOperation : Operation ( eContainer == text, name == "update" )
 		
-		not ( ECARule ( from == onInput, to == updateOperation ))
+		not ( ECARule ( trigger == onInput, target == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 		
@@ -195,7 +195,7 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 		label : VisibleThing ( eContainer == list )
 		onClick : Event ( label.onClick == onClick )
 		
-		not ( ECARule ( from == onClick, to == updateOperation ))
+		not ( ECARule ( trigger == onClick, target == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 	
@@ -262,7 +262,7 @@ rule "IteratorList labels clear the input onClick"
 		label : VisibleThing ( eContainer == list )
 		onClick : Event ( label.onClick == onClick )
 		
-		not ( ECARule ( from == onClick, to == updateOperation ))
+		not ( ECARule ( trigger == onClick, target == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 	
@@ -301,7 +301,7 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		# Frame.onAccess
 		onAccess : Event ( container.onAccess == onAccess )
 		
-		not ( ECARule ( from == onAccess, to == hide ))
+		not ( ECARule ( trigger == onAccess, target == hide ))
 		
 		eval ( handler.veto( wire ))
 	
@@ -341,7 +341,7 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		# Frame.onAccess
 		onAccess : Event ( container.onAccess == onAccess )
 		
-		not ( ECARule ( from == onAccess, to == hide ))
+		not ( ECARule ( trigger == onAccess, target == hide ))
 		
 		eval ( handler.veto( wire ))
 	
@@ -381,7 +381,7 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		# Frame.onAccess
 		onChange : Event ( input.onChange == onChange )
 		
-		not ( ECARule ( from == onChange, to == hide ))
+		not ( ECARule ( trigger == onChange, target == hide ))
 		
 		eval ( handler.veto( wire ))
 	
@@ -422,7 +422,7 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		# Frame.onAccess
 		onChange : Event ( input.onChange == onChange )
 		
-		not ( ECARule ( from == onChange, to == hide ))
+		not ( ECARule ( trigger == onChange, target == hide ))
 		
 		eval ( handler.veto( wire ))
 	

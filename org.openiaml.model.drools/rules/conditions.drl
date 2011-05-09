@@ -43,14 +43,14 @@ rule "Connect SimpleConditions to ECARules created by SyncWires (edit/update) (o
 		# which has a run wire between event and operation (generated)
 		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 		
 		# and the sync wire had a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# but our run wire doesn't 
-		not (SimpleCondition (from == condition, to == run )) 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -73,18 +73,18 @@ rule "Connect SimpleConditions to ECARules created by SyncWires (access/init) (o
 		# which has a run wire between event and operation (generated)
 		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue )
-		param : Parameter ( from == fvalue, to == run ) 
+		param : Parameter ( term == fvalue, value == run ) 
 		
 		# and the sync wire had a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# but our run wire doesn't 
-		not (SimpleCondition (from == condition, to == run )) 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -113,21 +113,21 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		# that has created a ECARule
 		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 
 		# and this SyncWire has a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition ( function == condition, conditioned == sw )
 		
 		# and the ECARule has the same condition 
-		targetCw : SimpleCondition (from == condition, to == run ) 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( from == param, to == sourceCw )
+		paramWire : Parameter( term == param, value == sourceCw )
 
 		# but this wire does not have it
-		not (Parameter (from == param, to == targetCw ))
+		not ( Parameter ( term == param, value == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -150,25 +150,25 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		# that has created a ECARule
 		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue ) 
-		param2 : Parameter ( from == fvalue, to == run ) 
+		param2 : Parameter ( term == fvalue, value == run ) 
 
 		# and this SyncWire has a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# and the ECARule has the same condition 
-		targetCw : SimpleCondition (from == condition, to == run ) 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( from == param, to == sourceCw )
+		paramWire : Parameter( term == param, value == sourceCw )
 
 		# but this wire does not have it
-		not (Parameter (from == param, to == targetCw ))
+		not ( Parameter ( term == param, value == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -196,14 +196,14 @@ rule "Connect SimpleConditions to ECARules created by SetWires (edit/update) (on
 		# which has a run wire between event and operation (generated)
 		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 		
 		# and the sync wire had a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# but our run wire doesn't 
-		not (SimpleCondition (from == condition, to == run )) 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -226,18 +226,18 @@ rule "Connect SimpleConditions to ECARules created by SetWires (access/init) (on
 		# which has a run wire between event and operation (generated)
 		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue )
-		param : Parameter ( from == fvalue, to == run ) 
+		param : Parameter ( term == fvalue, value == run ) 
 		
 		# and the sync wire had a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
 		
 		# but our run wire doesn't 
-		not (SimpleCondition (from == condition, to == run )) 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -266,21 +266,21 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		# that has created a ECARule
 		event : Event( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 
 		# and this SyncWire has a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition ( function == condition, conditioned == sw )
 		
 		# and the ECARule has the same condition 
-		targetCw : SimpleCondition (from == condition, to == run ) 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( from == param, to == sourceCw )
+		paramWire : Parameter( term == param, value == sourceCw )
 
 		# but this wire does not have it
-		not (Parameter (from == param, to == targetCw ))
+		not ( Parameter ( term == param, value == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -303,25 +303,25 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		# that has created a ECARule
 		event : Event( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		run : ECARule( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
 
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue ) 
-		param2 : Parameter ( from == fvalue, to == run ) 
+		param2 : Parameter ( term == fvalue, value == run ) 
 
 		# and this SyncWire has a condition
 		condition : Function ( )
-		sourceCw : SimpleCondition( from == condition, to == sw )
+		sourceCw : SimpleCondition ( function == condition, conditioned == sw )
 		
 		# and the ECARule has the same condition 
-		targetCw : SimpleCondition (from == condition, to == run ) 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( from == param, to == sourceCw )
+		paramWire : Parameter( term == param, value == sourceCw )
 
 		# but this wire does not have it
-		not (Parameter (from == param, to == targetCw ))
+		not (Parameter ( term == param, value == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		

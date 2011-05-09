@@ -72,16 +72,16 @@
 
 /**
  *
+ * @implementation Changeable,BuiltinProperty
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'can cast?'. 
+ * @implementation Changeable,BuiltinProperty
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'fieldValue is set?'. 
+ * @implementation Changeable,BuiltinProperty
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'empty?'. 
  * @implementation Changeable,PrimitiveCondition
- *		A {@model Changeable} has a {@model PrimitiveCondition} named 'can cast?'. 
- * @implementation Changeable,PrimitiveCondition
- *		A {@model Changeable} has a {@model PrimitiveCondition} named 'fieldValue is set?'. 
- * @implementation Changeable,PrimitiveCondition
- *		A {@model Changeable} has a {@model PrimitiveCondition} named 'empty?'. 
- * @implementation Changeable,PrimitiveCondition
- *		A {@model Changeable} has a {@model PrimitiveCondition} named 'not empty?'. 
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'not empty?'. 
  */
-«DEFINE conditionDefinition(Boolean php) FOR model::PrimitiveCondition»
+«DEFINE conditionDefinition(Boolean php) FOR model::BuiltinProperty»
 	/** primitive condition "«name»" */
 	function condition_«safeName()»(
 	«IF php»
@@ -147,7 +147,7 @@
 	}
 «ENDDEFINE»
 
-«DEFINE conditionDefinition_canCast(Boolean php, model::PrimitiveCondition condition) FOR model::Changeable»
+«DEFINE conditionDefinition_canCast(Boolean php, model::BuiltinProperty condition) FOR model::Changeable»
 	/* PrimitiveOperation 'can cast?' */
 	«IF php»
 		$type = «EXPAND template::operations::Parameters::getTypeURI FOR fieldValue.type»; 
@@ -158,7 +158,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE conditionDefinition_fieldValueIsSet(Boolean php, model::PrimitiveCondition condition) FOR model::Changeable»
+«DEFINE conditionDefinition_fieldValueIsSet(Boolean php, model::BuiltinProperty condition) FOR model::Changeable»
 	/* PrimitiveOperation 'fieldValue is set?' */
 	return «EXPAND template::operations::DataFlow::isSet(php) FOR fieldValue»;
 «ENDDEFINE»

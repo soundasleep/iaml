@@ -567,12 +567,12 @@ getExitResumeTargets(model::components::Gate this) :
 	getRoot().eAllContents.typeSelect(model::visual::Frame);
 
 /**
- * Get all {@model Condition}s which the server needs to keep track of, and 
+ * Get all {@model BuiltinProperty}s which the server needs to keep track of, and 
  * the client needs to be updated.
  * <strong>All of these operations need to be consequence-free.</strong>
  */
 List[model::Function] getClientSideCacheConditions(model::InternetApplication this) :
-	eAllContents.typeSelect(model::PrimitiveCondition)
+	eAllContents.typeSelect(model::BuiltinProperty)
 		.select(o | model::domain::DomainIterator.isInstance(o.eContainer))
 		.select(o | conditionUsed(o));
 

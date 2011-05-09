@@ -147,7 +147,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	// a Value 'XXX' will generate a PrimitiveOperation named 'set XXX'		
 	(eContainer != null && eContainer.eContents.typeSelect(model::Value).exists(p|name == "set " + p.name));
 
-context model::PrimitiveCondition WARNING "Unknown primitive condition name '" + name + "'" :
+context model::BuiltinProperty WARNING "Unknown builtin property name '" + name + "'" :
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).hasNext == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).hasPrevious == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).canSave == this) || 

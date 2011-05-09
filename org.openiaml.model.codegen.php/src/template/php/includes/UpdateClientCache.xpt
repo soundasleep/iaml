@@ -42,7 +42,7 @@
 	«throwException("Cannot expand client-side cached operation '" + this + "'")»
 «ENDDEFINE»
 
-«DEFINE updateCachedPrimitiveConditions FOR model::PrimitiveCondition»
+«DEFINE updateCachedPrimitiveConditions FOR model::BuiltinProperty»
 	«LET ((model::domain::DomainIterator) eContainer) AS object»
 		
 		{

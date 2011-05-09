@@ -162,15 +162,15 @@
  * A condition defined by containing feature.
  *
  * @implementation DomainIterator,PrimitiveCondition
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'hasNext'. 
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} named 'hasNext'. 
  * @implementation DomainIterator,PrimitiveCondition
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'hasPrevious'. 
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} named 'hasPrevious'. 
  * @implementation DomainIterator,PrimitiveCondition
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'empty'. 
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} named 'empty'. 
  * @implementation DomainIterator,PrimitiveCondition
- *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'canSave'. 
+ *		A {@model DomainIterator} has a {@model BuiltinProperty} named 'canSave'. 
  */
-«DEFINE domainInstanceCondition(Boolean php, model::domain::DomainIterator instance) FOR model::PrimitiveCondition»
+«DEFINE domainInstanceCondition(Boolean php, model::domain::DomainIterator instance) FOR model::BuiltinProperty»
 	«IF php»
 		«IF instance.hasNext == this»
 			can_object_instance_next_«safeName(instance)»()

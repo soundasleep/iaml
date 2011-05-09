@@ -134,7 +134,7 @@
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		if (get_application_value("«safeNameString(id)»", null) !== null) {
 			if (!$label_set) {
-				$temp = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»", null);
+				$temp = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
 				$«argName» = $temp;
 				$label_set = true;
 			}

@@ -112,14 +112,14 @@
 			is_array_equal(new Array(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
 	«ELSEIF name == "true" || name == "true?"-»
-		«IF inConditionEdges.isEmpty»
+		«IF conditions.isEmpty»
 			«IF php»
 				«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
 			«ELSE»
 				is_array_true(new Array(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR ", "»))
 			«ENDIF»
 		«ELSE»
-			«EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH inConditionEdges SEPARATOR " && "»
+			«EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH conditions SEPARATOR " && "»
 		«ENDIF»
 	«ELSEIF name == "empty" || name == "empty?"-»
 		(«IF php»
@@ -193,7 +193,7 @@
 «DEFINE chainedEvent(Boolean php, Boolean inStoreDb, String type) FOR model::Event»
 	// expanding chained event trigger «name»
 	«IF type=="edit"»
-		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outActions.sortBy(e|-e.priority)»
+		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH listeners.sortBy(e|-e.priority)»
 	«ELSEIF type=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»

@@ -261,7 +261,7 @@ getPassFlows(model::operations::ExecutionEdgesSource this):
 
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :
-	outActions.selectFirst( e | e.isFailEdge() ) ;
+	listeners.selectFirst( e | e.isFailEdge() ) ;
 	
 isFailEdge(model::ECARule this ) :
 	name == "fail" ;
@@ -401,7 +401,7 @@ getAllDomainSchemas(emf::EObject this) :
 	eAllContents.typeSelect(model::domain::DomainSchema);
 
 getFailHandler(model::ActionEdgeSource this) :
-	outActions.select( w | w.isFailEdge()).first();
+	listeners.select( w | w.isFailEdge()).first();
 
 isAutosaveOff(domain::DomainAttributeInstance this) :
 	isAutosaveOff(eContainer);
@@ -667,10 +667,10 @@ boolean isNumeric(model::EXSDDataType this) :
 	isNumericXSD(definition);
 
 operationUsed(model::Operation this) :
-	!(inActions.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 
+	!(rules.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 
 
 conditionUsed(model::Function this) :
-	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
+	!(conditioned.isEmpty && outFlows.isEmpty && outWires.isEmpty);
 
 /**
  * Is the given property the fieldValue property of its containing object?

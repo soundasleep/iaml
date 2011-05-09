@@ -140,7 +140,7 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialParameterUpdates FOR model::Parameter»
 	/* ParameterEdge "«this-»" */
-	«EXPAND potentialUpdatesParameter FOR to»
+	«EXPAND potentialUpdatesParameter FOR value»
 «ENDDEFINE»
 «DEFINE potentialUpdates FOR model::wires::SyncWire»
 	/* SyncWire "«this-»" */

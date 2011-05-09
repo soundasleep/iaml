@@ -65,14 +65,14 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialEditEvent(String eventName) FOR model::Event»
 	«IF eventName=="edit"»
-		«EXPAND editEvent FOREACH outActions.sortBy(e|-e.priority)»
+		«EXPAND editEvent FOREACH listeners.sortBy(e|-e.priority)»
 	«ELSE»
 		«throwException("Invalid event name '" + eventName + "'")»
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE editEvent FOR model::ECARule»
-	«EXPAND editEventTarget(this) FOR to»
+	«EXPAND editEventTarget(this) FOR target»
 «ENDDEFINE»
 
 «DEFINE editEventTarget(model::ECARule wire) FOR model::WireDestination»
@@ -108,5 +108,5 @@ echo_necessary_update_callbacks();
  * The parameter to pass to the client.
  */
 «DEFINE clientSideOperationCallParamater(model::ECARule wire) FOR model::Parameter»
-	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR from»)
+	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR term»)
 «ENDDEFINE»

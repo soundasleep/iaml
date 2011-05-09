@@ -13,7 +13,7 @@
 «DEFINE callEvent(Boolean php) FOR model::Event»
 	// Event '«simpleName()»'
 	// expand out all outgoing edges
-	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outActions.sortBy(e|-e.priority)»
+	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH listeners.sortBy(e|-e.priority)»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

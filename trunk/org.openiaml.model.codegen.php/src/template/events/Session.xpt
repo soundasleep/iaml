@@ -9,7 +9,7 @@
 	// Session EventTrigger «this» '«eventName»'
 	«IF eventName == "init" || eventName == "access"-»
 		// Actions sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.sortBy(e|-e.priority)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH listeners.sortBy(e|-e.priority)-»
 	«ELSE-»
 		// I don't know what to do with session event "«name»"
 	«ENDIF-»

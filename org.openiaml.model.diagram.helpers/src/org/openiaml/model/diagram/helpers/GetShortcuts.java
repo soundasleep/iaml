@@ -76,12 +76,12 @@ public class GetShortcuts {
 			if (e instanceof ActionEdgeSource) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromECARules(doneAlready, edges, view, e,
-						((ActionEdgeSource) e).getOutActions(), registry, updater));
+						((ActionEdgeSource) e).getListeners(), registry, updater));
 			}
 			if (e instanceof Action) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromECARules(doneAlready, edges, view, e,
-						((Action) e).getInActions(), registry, updater));
+						((Action) e).getRules(), registry, updater));
 			}
 			if (e instanceof ExecutionEdgesSource) {
 				// get all incoming edges
@@ -156,12 +156,12 @@ public class GetShortcuts {
 			if (e instanceof ConditionEdgesSource) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, e,
-						((ConditionEdgesSource) e).getOutConditionEdges(), registry, updater));
+						((ConditionEdgesSource) e).getConditioned(), registry, updater));
 			}
 			if (e instanceof ConditionEdgeDestination) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, e,
-						((ConditionEdgeDestination) e).getInConditionEdges(), registry, updater));
+						((ConditionEdgeDestination) e).getConditions(), registry, updater));
 			}
 			if (e instanceof DomainSchema) {
 				// get all incoming edges
@@ -230,12 +230,12 @@ public class GetShortcuts {
 			if (wire instanceof ConditionEdgesSource) {
 				// get all incoming edges
 				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
-						((ConditionEdgesSource) wire).getOutConditionEdges(), registry, updater));
+						((ConditionEdgesSource) wire).getConditioned(), registry, updater));
 			}
 			if (wire instanceof ConditionEdgeDestination) {
 				// get all incoming edges
 				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
-						((ConditionEdgeDestination) wire).getInConditionEdges(), registry, updater));
+						((ConditionEdgeDestination) wire).getConditions(), registry, updater));
 			}
 
 			// ParameterEdges are now done in #getAllShortcutsFromParameterEdges()
@@ -262,8 +262,8 @@ public class GetShortcuts {
 		for (ECARule wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
-				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getTrigger(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getTarget(), wire, view, source, doneAlready, result, edges);
 			}
 
 			// additional special logic: if we have a WireDestination, get all of the incoming edges
@@ -288,12 +288,12 @@ public class GetShortcuts {
 			if (wire instanceof ConditionEdgesSource) {
 				// get all incoming edges
 				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
-						((ConditionEdgesSource) wire).getOutConditionEdges(), registry, updater));
+						((ConditionEdgesSource) wire).getConditioned(), registry, updater));
 			}
 			if (wire instanceof ConditionEdgeDestination) {
 				// get all incoming edges
 				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
-						((ConditionEdgeDestination) wire).getInConditionEdges(), registry, updater));
+						((ConditionEdgeDestination) wire).getConditions(), registry, updater));
 			}
 		}
 
@@ -318,8 +318,8 @@ public class GetShortcuts {
 		for (Parameter wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
-				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getTerm(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getValue(), wire, view, source, doneAlready, result, edges);
 			}
 		}
 
@@ -511,8 +511,8 @@ public class GetShortcuts {
 		for (SimpleCondition wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
-				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getFunction(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getConditioned(), wire, view, source, doneAlready, result, edges);
 
 				// additional special logic: if we have a WireDestination, get all of the incoming edges
 				// that are RunActions, and render these as shortcut elements too (i.e. parameters)
@@ -625,7 +625,7 @@ public class GetShortcuts {
 			return ((Wire) relationship).getFrom();
 		}
 		if (relationship instanceof ECARule) {
-			return ((ECARule) relationship).getFrom();
+			return ((ECARule) relationship).getTrigger();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getFrom();
@@ -634,7 +634,7 @@ public class GetShortcuts {
 			return ((DataFlowEdge) relationship).getFrom();
 		}
 		if (relationship instanceof Parameter) {
-			return ((Parameter) relationship).getFrom();
+			return ((Parameter) relationship).getTerm();
 		}
 		if (relationship instanceof ExtendsEdge) {
 			return ((ExtendsEdge) relationship).getFrom();
@@ -649,7 +649,7 @@ public class GetShortcuts {
 			return ((ConstraintEdge) relationship).getFrom();
 		}
 		if (relationship instanceof SimpleCondition) {
-			return ((SimpleCondition) relationship).getFrom();
+			return ((SimpleCondition) relationship).getFunction();
 		}
 		if (relationship instanceof SelectEdge) {
 			return ((SelectEdge) relationship).getFrom();
@@ -691,7 +691,7 @@ public class GetShortcuts {
 			return ((Wire) relationship).getTo();
 		}
 		if (relationship instanceof ECARule) {
-			return ((ECARule) relationship).getTo();
+			return ((ECARule) relationship).getTarget();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getTo();
@@ -700,7 +700,7 @@ public class GetShortcuts {
 			return ((DataFlowEdge) relationship).getTo();
 		}
 		if (relationship instanceof Parameter) {
-			return ((Parameter) relationship).getTo();
+			return ((Parameter) relationship).getValue();
 		}
 		if (relationship instanceof ExtendsEdge) {
 			return ((ExtendsEdge) relationship).getTo();
@@ -715,7 +715,7 @@ public class GetShortcuts {
 			return ((ConstraintEdge) relationship).getTo();
 		}
 		if (relationship instanceof SimpleCondition) {
-			return ((SimpleCondition) relationship).getTo();
+			return ((SimpleCondition) relationship).getConditioned();
 		}
 		if (relationship instanceof SelectEdge) {
 			return ((SelectEdge) relationship).getTo();

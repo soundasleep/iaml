@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
  *
  * <p>In the future most of this functionality should be refactored into an abstract superclass.
  *
- * <p>Changes in model version 0.6:
+ * <p>Changes in model version 0.5.3:
  * 
  * <ol>
  *   <li>'fieldValue' Property is now a directly referenced Property
@@ -171,28 +171,74 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				"schemas".equals(element.getParentNode().getNodeName())) {
 			return "eStructuralFeatures";
 		}
-
+		
+		/* issue 244 */
+		if ("conditions".equals(element.getNodeName())) {
+			return "functions";
+		}
+		if ("actions".equals(element.getNodeName())) {
+			return "ecaRules";
+		}
+		
 		return super.getRenamedNode(nodeName, element, errors);
 	}
 	
 	@Override
 	public String getRenamedAttribute(Element oldElement, Element newElement,
 			String name, String value) {
+		
+		String nodeName = oldElement.getNodeName();
 
 		// <values value="static">
 		// --> <properties defaultValue="static" readOnly="true">
-		if (("properties".equals(oldElement.getNodeName()) || "values".equals(oldElement.getNodeName())) &&
+		if (("properties".equals(nodeName) || "values".equals(nodeName)) &&
 				"value".equals(name)) {
 			return "defaultValue";
 		}
 		
 		// <attributes type="xsd_string">
 		// --> <eStructuralFeatures eType="xsd_string">
-		if ("attributes".equals(oldElement.getNodeName()) && 
+		if ("attributes".equals(nodeName) && 
 				"type".equals(name)) {
 			return "eType";
 		}
 		
+		/* issue 244 */
+		
+		if ("parameterEdges".equals(nodeName) && "from".equals(name)) {
+			return "term";
+		}
+		if ("parameterEdges".equals(nodeName) && "to".equals(name)) {
+			return "value";
+		}
+
+		if ("actions".equals(nodeName) && "from".equals(name)) {
+			return "trigger";
+		}
+		if ("actions".equals(nodeName) && "to".equals(name)) {
+			return "target";
+		}
+
+		if ("conditionEdges".equals(nodeName) && "from".equals(name)) {
+			return "function";
+		}
+		if ("conditionEdges".equals(nodeName) && "to".equals(name)) {
+			return "conditioned";
+		}
+
+		if ("inConditionEdges".equals(name)) {
+			return "conditions";
+		}
+		if ("outConditionEdges".equals(name)) {
+			return "conditioned";
+		}
+		if ("inActions".equals(name)) {
+			return "rules";
+		}
+		if ("outActions".equals(name)) {
+			return "listeners";
+		}
+
 		// otherwise, just return the same name
 		return super.getRenamedAttribute(oldElement, newElement, name, value);
 	}

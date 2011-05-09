@@ -123,10 +123,10 @@ public class EdgeTypes {
 				ModelPackage.eINSTANCE.getECARule(), /* type */
 				ModelPackage.eINSTANCE.getActionEdgeSource(), /* source */
 				ModelPackage.eINSTANCE.getAction(), /* destination */
-				ModelPackage.eINSTANCE.getECARule_From(), /* from ref */
-				ModelPackage.eINSTANCE.getECARule_To(), /* to ref */
-				ModelPackage.eINSTANCE.getActionEdgeSource_OutActions(), /* from opposite */
-				ModelPackage.eINSTANCE.getAction_InActions() /* to opposite */
+				ModelPackage.eINSTANCE.getECARule_Trigger(), /* from ref */
+				ModelPackage.eINSTANCE.getECARule_Target(), /* to ref */
+				ModelPackage.eINSTANCE.getActionEdgeSource_Listeners(), /* from opposite */
+				ModelPackage.eINSTANCE.getAction_Rules() /* to opposite */
 		) );
 
 		edgeTypes.add( new EdgeType(
@@ -143,10 +143,10 @@ public class EdgeTypes {
 				ModelPackage.eINSTANCE.getSimpleCondition(), /* type */
 				WiresPackage.eINSTANCE.getConditionEdgesSource(), /* source */
 				WiresPackage.eINSTANCE.getConditionEdgeDestination(), /* destination */
-				ModelPackage.eINSTANCE.getSimpleCondition_From(), /* from ref */
-				ModelPackage.eINSTANCE.getSimpleCondition_To(), /* to ref */
-				WiresPackage.eINSTANCE.getConditionEdgesSource_OutConditionEdges(),
-				WiresPackage.eINSTANCE.getConditionEdgeDestination_InConditionEdges()
+				ModelPackage.eINSTANCE.getSimpleCondition_Function(), /* from ref */
+				ModelPackage.eINSTANCE.getSimpleCondition_Conditioned(), /* to ref */
+				WiresPackage.eINSTANCE.getConditionEdgesSource_Conditioned(),
+				WiresPackage.eINSTANCE.getConditionEdgeDestination_Conditions()
 		) );
 		
 		edgeTypes.add( new EdgeType(
@@ -183,8 +183,8 @@ public class EdgeTypes {
 				ModelPackage.eINSTANCE.getParameter(), /* type */
 				WiresPackage.eINSTANCE.getParameterEdgesSource(), /* source */
 				WiresPackage.eINSTANCE.getParameterEdgeDestination(), /* destination */
-				ModelPackage.eINSTANCE.getParameter_From(), /* from ref */
-				ModelPackage.eINSTANCE.getParameter_To(), /* to ref */
+				ModelPackage.eINSTANCE.getParameter_Term(), /* from ref */
+				ModelPackage.eINSTANCE.getParameter_Value(), /* to ref */
 				WiresPackage.eINSTANCE.getParameterEdgesSource_OutParameterEdges(),
 				WiresPackage.eINSTANCE.getParameterEdgeDestination_InParameterEdges()
 		) );

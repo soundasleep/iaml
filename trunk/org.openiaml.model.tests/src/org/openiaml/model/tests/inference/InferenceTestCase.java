@@ -24,7 +24,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.ContainsConditions;
+import org.openiaml.model.model.ContainsFunctions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ECARule;
@@ -254,8 +254,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public PrimitiveCondition assertHasPrimitiveCondition(ContainsConditions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getConditions(), PrimitiveCondition.class), string);
+	public PrimitiveCondition assertHasPrimitiveCondition(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), PrimitiveCondition.class), string);
 		assertEquals(1, results.size());
 		return (PrimitiveCondition) results.get(0);
 	}
@@ -278,7 +278,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public Function assertHasFunction(ContainsConditions element, String string) throws JaxenException {
+	public Function assertHasFunction(ContainsFunctions element, String string) throws JaxenException {
 		return (Function) queryOne(element, "iaml:conditions[iaml:name='" + string + "']");
 	}
 
@@ -288,8 +288,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public CompositeCondition assertHasCompositeCondition(ContainsConditions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getConditions(), CompositeCondition.class), string);
+	public CompositeCondition assertHasCompositeCondition(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), CompositeCondition.class), string);
 		assertEquals(1, results.size());
 		return (CompositeCondition) results.get(0);
 	}
@@ -298,8 +298,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element does <em>not</em> contain the given
 	 * CompositeCondition.
 	 */
-	public void assertHasNoCompositeCondition(ContainsConditions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getConditions(), CompositeCondition.class), string);
+	public void assertHasNoCompositeCondition(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), CompositeCondition.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -307,8 +307,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element does <em>not</em> contain the given
 	 * PrimitiveCondition.
 	 */
-	public void assertHasNoPrimitiveCondition(ContainsConditions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getConditions(), PrimitiveCondition.class), string);
+	public void assertHasNoPrimitiveCondition(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), PrimitiveCondition.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -316,8 +316,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element does <em>not</em> contain the given
 	 * Function.
 	 */
-	public void assertHasNoFunction(ContainsConditions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getConditions(), Function.class), string);
+	public void assertHasNoFunction(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), Function.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -1343,8 +1343,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * the given elements.
 	 */
 	public void assertHasNoSimpleConditions(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		for (SimpleCondition e : from.getOutConditionEdges()) {
-			if (to.equals(e.getTo()) && name.equals(e.getName())) {
+		for (SimpleCondition e : from.getConditioned()) {
+			if (to.equals(e.getConditioned()) && name.equals(e.getName())) {
 				fail("Found a SimpleCondition from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
 			}
 		}

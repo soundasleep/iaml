@@ -56,3 +56,5 @@ context simplegmf::DiagramEditor ERROR "DiagramEditor " + toString(id) + " must 
 context simplegmf::DiagramEditor ERROR "DiagramEditor " + toString(id) + " has an invalid contained DiagramElement" :
 	elements.forAll(e|isValidEObject(e.classifier));
 	
+context simplegmf::LabelConfiguration ERROR "LabelConfiguration " + toString(name) + " has an invalid classifier":
+	classifiers.forAll(c|isValidEObject(c));

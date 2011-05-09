@@ -157,7 +157,7 @@ rule "Run instance wire from edit to Property update (onChange)"
 		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == targetContainer, 
 			name != null, 
-			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
+			eval( ("set value " + target.getName()).equals(operation.getName()) ) )
 		
 		not (ECARule( eContainer == sw, from == event, to == operation ))
 				
@@ -246,7 +246,7 @@ rule "Connect parameter wire to: Run instance wire from edit to Property update 
 		event : Event( source.onChange == event ) 
 		operation : Operation( eContainer == targetContainer, 
 			name != null, 
-			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
+			eval( ("set value " + target.getName()).equals(operation.getName()) ) )
 
 		field : Value( source.fieldValue == field )
 		wire : ECARule( from == event, to == operation, name == "run", eContainer == sw )

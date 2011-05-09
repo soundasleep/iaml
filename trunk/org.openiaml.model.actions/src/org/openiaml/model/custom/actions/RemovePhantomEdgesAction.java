@@ -192,7 +192,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	/**
 	 * Should the given object be removed, i.e. does it contain a phantom edge?
 	 * 
-	 * TODO Should be refactored using {@link EdgeTypes}.
+	 * <p>TODO Should be refactored using {@link EdgeTypes}.
 	 * 
 	 * @see EdgeTypes#getEdgeTypes() 
 	 * @param obj
@@ -202,8 +202,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		if (obj instanceof Wire && (((Wire) obj).getFrom() == null 
 				|| ((Wire) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof ECARule && (((ECARule) obj).getFrom() == null 
-				|| ((ECARule) obj).getTo() == null)) {
+		} else if (obj instanceof ECARule && (((ECARule) obj).getTrigger() == null 
+				|| ((ECARule) obj).getTarget() == null)) {
 			return true;
 		} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null 
 				|| ((ExecutionEdge) obj).getTo() == null)) {
@@ -211,8 +211,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		} else if (obj instanceof DataFlowEdge && (((DataFlowEdge) obj).getFrom() == null 
 				|| ((DataFlowEdge) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof SimpleCondition && (((SimpleCondition) obj).getFrom() == null 
-				|| ((SimpleCondition) obj).getTo() == null)) {
+		} else if (obj instanceof SimpleCondition && (((SimpleCondition) obj).getFunction() == null 
+				|| ((SimpleCondition) obj).getConditioned() == null)) {
 			return true;
 		} else if (obj instanceof ConstraintEdge && (((ConstraintEdge) obj).getFrom() == null 
 				|| ((ConstraintEdge) obj).getTo() == null)) {
@@ -223,8 +223,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		} else if (obj instanceof ExtendsEdge && (((ExtendsEdge) obj).getFrom() == null 
 				|| ((ExtendsEdge) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof Parameter && (((Parameter) obj).getFrom() == null 
-				|| ((Parameter) obj).getTo() == null)) {
+		} else if (obj instanceof Parameter && (((Parameter) obj).getTerm() == null 
+				|| ((Parameter) obj).getValue() == null)) {
 			return true;
 		} else if (obj instanceof ProvidesEdge && (((ProvidesEdge) obj).getFrom() == null 
 				|| ((ProvidesEdge) obj).getTo() == null)) {

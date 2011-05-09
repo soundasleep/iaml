@@ -11,7 +11,7 @@
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f75" name="new" outWires="wires.128240e326e.3f1" query="new" outSelects="domain.128807fbeba.f7a">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.10a0" name="save" rules="wires.128240e326e.659"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.128240e326e.3f1" name="sync" from="domain.128807fbeba.f75" to="visual.128240e326e.468"/>
-      <canSave xsi:type="iaml:PrimitiveCondition" id="model.1283779cdf7.c0" name="can save?" conditioned="wires.12837b6de10.f">
+      <canSave xsi:type="iaml:BuiltinProperty" id="model.1283779cdf7.c0" name="can save?" conditioned="wires.12837b6de10.f">
         <conditionEdges id="wires.12837b6de10.f" name="condition" function="model.1283779cdf7.c0" conditioned="operations.12837813716.23"/>
       </canSave>
     </elements>

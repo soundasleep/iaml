@@ -6,11 +6,12 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveCondition;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
@@ -27,7 +28,6 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -128,7 +128,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotGenerated(aname);
 
 		// the instance should also contain an 'empty' PrimitiveCondition
-		PrimitiveCondition exists = (PrimitiveCondition) iterator.getEmpty();
+		BuiltinProperty exists = (BuiltinProperty) iterator.getEmpty();
 		assertGenerated(exists);
 
 	}
@@ -317,7 +317,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// find 'empty'
 		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 		assertNotGenerated(instance);
-		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
+		BuiltinProperty exists = (BuiltinProperty) instance.getEmpty();
 		assertGenerated(exists);
 
 		// has a DecisionNode

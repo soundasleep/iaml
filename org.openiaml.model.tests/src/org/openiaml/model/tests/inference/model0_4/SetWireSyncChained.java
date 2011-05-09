@@ -3,10 +3,10 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
@@ -92,7 +92,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		// but there should only be one
 		assertEquals(run.getInParameterEdges().toString(), 1, run.getInParameterEdges().size());
 
-		PrimitiveCondition cond = assertHasPrimitiveCondition(source, "fieldValue is set");
+		BuiltinProperty cond = assertHasBuiltinProperty(source, "fieldValue is set");
 		assertGenerated(cond);
 
 		assertGenerated(assertHasSimpleCondition(root, cond, run));
@@ -140,7 +140,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		// but there should only be one
 		assertEquals(run.getInParameterEdges().toString(), 1, run.getInParameterEdges().size());
 
-		PrimitiveCondition cond = assertHasPrimitiveCondition(changed, "fieldValue is set");
+		BuiltinProperty cond = assertHasBuiltinProperty(changed, "fieldValue is set");
 		assertGenerated(cond);
 
 		assertGenerated(assertHasSimpleCondition(root, cond, run));

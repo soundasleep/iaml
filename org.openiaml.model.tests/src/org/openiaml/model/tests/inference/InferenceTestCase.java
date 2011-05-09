@@ -21,6 +21,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -34,7 +35,6 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
@@ -250,14 +250,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * PrimitiveCondition.
+	 * {@link BuiltinProperty}.
 	 *
 	 * @return The element found
 	 */
-	public PrimitiveCondition assertHasPrimitiveCondition(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), PrimitiveCondition.class), string);
+	public BuiltinProperty assertHasBuiltinProperty(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), BuiltinProperty.class), string);
 		assertEquals(1, results.size());
-		return (PrimitiveCondition) results.get(0);
+		return (BuiltinProperty) results.get(0);
 	}
 
 	/**
@@ -305,10 +305,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
-	 * PrimitiveCondition.
+	 * {@link BuiltinProperty}.
 	 */
-	public void assertHasNoPrimitiveCondition(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), PrimitiveCondition.class), string);
+	public void assertHasNoBuiltinProperty(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), BuiltinProperty.class), string);
 		assertEquals(0, results.size());
 	}
 

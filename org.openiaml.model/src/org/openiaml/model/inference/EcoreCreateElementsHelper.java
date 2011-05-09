@@ -14,6 +14,7 @@ import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -30,7 +31,6 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
@@ -266,12 +266,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 
-	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsFunctions container) throws InferenceException {
-		return generatedPrimitiveCondition(by, container, ModelPackage.eINSTANCE.getContainsFunctions_Functions() );
+	public BuiltinProperty generatedBuiltinProperty(GeneratesElements by, ContainsFunctions container) throws InferenceException {
+		return generatedBuiltinProperty(by, container, ModelPackage.eINSTANCE.getContainsFunctions_Functions() );
 	}
 	
-	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsFunctions container, EReference reference) throws InferenceException {
-		PrimitiveCondition operation = (PrimitiveCondition) createElement( container, ModelPackage.eINSTANCE.getPrimitiveCondition(), reference );
+	public BuiltinProperty generatedBuiltinProperty(GeneratesElements by, ContainsFunctions container, EReference reference) throws InferenceException {
+		BuiltinProperty operation = (BuiltinProperty) createElement( container, ModelPackage.eINSTANCE.getBuiltinProperty(), reference );
 		setGeneratedBy(operation, by);
 		return operation;
 	}

@@ -4,12 +4,13 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveCondition;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
@@ -26,7 +27,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -145,7 +145,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(set);
 
 		// this user instance should have an 'empty' PrimitiveCondition
-		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
+		BuiltinProperty exists = (BuiltinProperty) instance.getEmpty();
 		assertGenerated(exists);
 
 	}

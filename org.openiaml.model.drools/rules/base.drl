@@ -118,9 +118,9 @@ rule "Properties will also have a related 'is set' condition (not fieldValue)"
 end
 
 /**
- * "fieldValue is set" is generated as a PrimitiveCondition, not a CompositeCondition.
+ * "fieldValue is set" is generated as a BuiltinProperty, not a CompositeCondition.
  */
-rule "Properties will also have a related 'is set' condition (fieldValue)"
+rule "Properties will also have a related 'is set' BuiltinProperty (fieldValue)"
 	when
 		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
@@ -131,7 +131,7 @@ rule "Properties will also have a related 'is set' condition (fieldValue)"
 		eval ( handler.veto( containerGe ))
 	
 	then
-		PrimitiveCondition cond = handler.generatedPrimitiveCondition(containerGe, container);
+		BuiltinProperty cond = handler.generatedBuiltinProperty(containerGe, container);
 		handler.setName(cond, "fieldValue is set");
 		queue.add(cond, drools);
 

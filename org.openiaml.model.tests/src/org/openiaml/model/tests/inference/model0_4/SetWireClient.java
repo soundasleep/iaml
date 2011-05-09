@@ -5,16 +5,16 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
+import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
-import org.openiaml.model.model.PrimitiveCondition;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.SimpleCondition;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 import org.openiaml.model.tests.inference.model0_2.SessionSyncWires;
@@ -168,7 +168,7 @@ public class SetWireClient extends InferenceTestCase {
 		ECARule run = assertHasRunAction(page, access, init, "run");
 
 		// newly created condition
-		PrimitiveCondition cond = assertHasPrimitiveCondition(source, "fieldValue is set");
+		BuiltinProperty cond = assertHasBuiltinProperty(source, "fieldValue is set");
 		assertGenerated(cond);
 
 		SimpleCondition cw = assertHasSimpleCondition(root, cond, run);

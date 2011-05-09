@@ -122,6 +122,20 @@ public class SimpleGMFCodegenFunctions {
 		}
 	}
 	
+	/**
+	 * Is the given EObject a valid reference?
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isValidEObject(EObject obj) {
+		if (obj == null)
+			return false;
+		if (obj.eResource() == null)
+			return false;
+		return true;
+	}
+	
 	// counter functions
 	private Map<String,Integer> counterMap = new HashMap<String,Integer>();
 	

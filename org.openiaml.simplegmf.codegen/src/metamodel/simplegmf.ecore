@@ -21,6 +21,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rootElement" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="edgeTypes" upperBound="-1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edgeReferences" upperBound="-1"
+        eType="#//EdgeReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractFigure" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
@@ -86,12 +88,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//DiagramElement" containment="true"/>
+        eType="#//DiagramElement" containment="true" eOpposite="#//DiagramElement/editor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DiagramElement" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containmentFeatures" upperBound="-1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="editor" eType="#//DiagramEditor"
+        eOpposite="#//DiagramEditor/elements"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainedNode" eSuperTypes="#//DiagramElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReferencedNode" eSuperTypes="#//DiagramElement"/>
@@ -135,5 +139,10 @@
     <eLiterals name="CENTER" value="1"/>
     <eLiterals name="END" value="2"/>
     <eLiterals name="FILL" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceFeature" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetFeature" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
   </eClassifiers>
 </ecore:EPackage>

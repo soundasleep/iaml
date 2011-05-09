@@ -93,8 +93,8 @@ public class DroolsHelperFunctions {
 	 */
 	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainSchema dobj) {
 		for (Parameter edge : handler.getInParameterEdges()) {
-			if (edge.getFrom() instanceof DomainAttribute) {
-				if (dobj.equals(((DomainAttribute) edge.getFrom()).eContainer())) {
+			if (edge.getTerm() instanceof DomainAttribute) {
+				if (dobj.equals(((DomainAttribute) edge.getTerm()).eContainer())) {
 					// found one
 					return true;
 				}
@@ -118,9 +118,9 @@ public class DroolsHelperFunctions {
 	 * What is the last chained operation for the given PrimitiveOperation?
 	 */
 	public PrimitiveOperation lastChainedOperation(PrimitiveOperation op) {
-		for (ECARule action : op.getOutActions()) {
-			if (action.getTo() instanceof PrimitiveOperation) {
-				return lastChainedOperation((PrimitiveOperation) action.getTo());
+		for (ECARule action : op.getListeners()) {
+			if (action.getTarget() instanceof PrimitiveOperation) {
+				return lastChainedOperation((PrimitiveOperation) action.getTarget());
 			}
 		}
 		return op;
@@ -177,10 +177,10 @@ public class DroolsHelperFunctions {
 	public String getQueryString(LoginHandler login_handler, DomainSchema dobj) {
 		String q = "";
 		for (Parameter wire : login_handler.getInParameterEdges()) {
-			if (wire.getFrom() instanceof DomainAttribute &&
-					dobj.equals(wire.getFrom().eContainer())) {
+			if (wire.getTerm() instanceof DomainAttribute &&
+					dobj.equals(wire.getTerm().eContainer())) {
 				// add this attribute as a query
-				DomainAttribute attribute = (DomainAttribute) wire.getFrom();
+				DomainAttribute attribute = (DomainAttribute) wire.getTerm();
 				if (notPrimaryKey(attribute)) {
 					if (!q.isEmpty()) {
 						q += " and ";

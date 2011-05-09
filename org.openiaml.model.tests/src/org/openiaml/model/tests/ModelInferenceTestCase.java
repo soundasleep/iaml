@@ -384,7 +384,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 */
 	protected ECARule getECARuleFrom(ActionEdgeSource from, String name) throws JaxenException {
-		for (ECARule w : from.getOutActions()) {
+		for (ECARule w : from.getListeners()) {
 			if (w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
 				return w;
 			}
@@ -434,7 +434,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		int count = 0;
 		
 		for (Parameter e : edges) {
-			if (from.equals(e.getFrom())) {
+			if (from.equals(e.getTerm())) {
 				count++;
 				result = e;
 			}
@@ -455,7 +455,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		Set<Parameter> result = new HashSet<Parameter>();
 		
 		for (Parameter w : from.getOutParameterEdges()) {
-			if (to.equals(w.getTo())) {
+			if (to.equals(w.getValue())) {
 				result.add(w);
 			}
 		}
@@ -475,7 +475,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		Set<Parameter> result = new HashSet<Parameter>();
 		
 		for (Parameter w : from.getOutParameterEdges()) {
-			if (name.equals(w.getName()) && to.equals(w.getTo())) {
+			if (name.equals(w.getName()) && to.equals(w.getValue())) {
 				result.add(w);
 			}
 		}
@@ -493,8 +493,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<SimpleCondition> getSimpleConditionsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
 		Set<SimpleCondition> result = new HashSet<SimpleCondition>();
 		
-		for (SimpleCondition w : from.getOutConditionEdges()) {
-			if (to.equals(w.getTo())) {
+		for (SimpleCondition w : from.getConditioned()) {
+			if (to.equals(w.getConditioned())) {
 				result.add(w);
 			}
 		}
@@ -514,8 +514,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<SimpleCondition> getSimpleConditionsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
 		Set<SimpleCondition> result = new HashSet<SimpleCondition>();
 		
-		for (SimpleCondition w : from.getOutConditionEdges()) {
-			if (to.equals(w.getTo())) {
+		for (SimpleCondition w : from.getConditioned()) {
+			if (to.equals(w.getConditioned())) {
 				result.add(w);
 			}
 		}
@@ -624,8 +624,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 */
 	protected Set<ECARule> getECARulesFromTo(EObject container, ActionEdgeSource fromElement, Action toElement, Class<? extends ECARule> type) throws JaxenException {
 		Set<ECARule> results = new HashSet<ECARule>();
-		for (ECARule w : fromElement.getOutActions()) {
-			if (type.isInstance(w) && w.getTo().equals(toElement)) {
+		for (ECARule w : fromElement.getListeners()) {
+			if (type.isInstance(w) && w.getTarget().equals(toElement)) {
 				results.add(w);
 			}
 		}
@@ -738,7 +738,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 
 	protected void assertNoECARulesFrom(EObject container, ActionEdgeSource fromElement, Class<? extends ECARule> cls) throws JaxenException {
-		for (ECARule w : fromElement.getOutActions()) {
+		for (ECARule w : fromElement.getListeners()) {
 			if (cls.isInstance(w)) {
 				fail("Unexpectedly found action '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
 			}

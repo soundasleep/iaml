@@ -66,7 +66,7 @@ public class AccessControlHandlerSpecifyLogoutPage extends ValidInferenceTestCas
 
 		// there is only three outgoing ActionEdges from the LoginHandler
 		List<String> actions = new ArrayList<String>();
-		for (ECARule e : handler.getOutActions()) {
+		for (ECARule e : handler.getListeners()) {
 			actions.add(e.getName());
 		}
 

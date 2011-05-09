@@ -53,8 +53,8 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 		assertContainsNamedElement(di.getOperations(), "save", true);
 
 		// and lots of conditions
-		assertContainsNamedElement(di.getConditions(), "results count is set", true);
-		assertContainsNamedElement(di.getConditions(), "not empty", true);
+		assertContainsNamedElement(di.getFunctions(), "results count is set", true);
+		assertContainsNamedElement(di.getFunctions(), "not empty", true);
 
 		// since DomainIterator.fieldValue makes absolutely no sense, there
 		// should not be the fieldValue and associated condition

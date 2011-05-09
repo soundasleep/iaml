@@ -66,7 +66,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Wire" abstract="true" eSuperTypes="#//GeneratedElement #//NamedElement #//GeneratesElements #//ContainsConditions #//ContainsProperties #//wires/ParameterEdgeDestination #//wires/ConditionEdgeDestination #//ContainsWires">
+  <eClassifiers xsi:type="ecore:EClass" name="Wire" abstract="true" eSuperTypes="#//GeneratedElement #//NamedElement #//GeneratesElements #//ContainsFunctions #//ContainsProperties #//wires/ParameterEdgeDestination #//wires/ConditionEdgeDestination #//ContainsWires">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A {@mode Wire} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s."/>
     </eAnnotations>
@@ -150,7 +150,7 @@
       <details key="documentation" value="Fundamental building blocks of application functionality. Their intent is based on their name."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//PrimitiveOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//PrimitiveOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//ContainsFunctions #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 added Scope supertype&#xD;&#xA;0.4 removed '_shouldnt_properties'&#xD;&#xA;0.4.2 removed Scope supertype"/>
     </eAnnotations>
@@ -166,7 +166,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//operations/TemporaryVariable" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Function #//GeneratesElements #//ContainsOperations #//ContainsProperties">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsFunctions #//Function #//GeneratesElements #//ContainsOperations #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4&#xD;&#xA;ContainsOperations added in 0.4.1"/>
     </eAnnotations>
@@ -197,7 +197,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" abstract="true"
-      eSuperTypes="#//ContainsOperations #//NamedElement #//GeneratesElements #//ContainsConditions #//CanBeSynced #//ContainsProperties">
+      eSuperTypes="#//ContainsOperations #//NamedElement #//GeneratesElements #//ContainsFunctions #//CanBeSynced #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.element"/>
       <details key="comment" value="Scope supertype added in 0.2"/>
@@ -223,7 +223,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" abstract="true" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireSource #//WireDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//Accessible #//ContainsProperties #//Changeable">
+  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" abstract="true" eSuperTypes="#//ContainsFunctions #//ContainsOperations #//ContainsWires #//WireSource #//WireDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//Accessible #//ContainsProperties #//Changeable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
       <details key="editor" value="org.openiaml.model.diagram.visual"/>
@@ -299,7 +299,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties #//Scope">
+  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsFunctions #//ContainsProperties #//Scope">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
@@ -331,7 +331,7 @@
         <details key="documentation" value="A list of contained {@model Wire}s."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecaRules" upperBound="-1"
         eType="#//ECARule" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A list of contained {@model Action}s."/>
@@ -395,7 +395,7 @@
       <details key="documentation" value="A temporary marker for classes that &lt;em>shouldn't&lt;/em> {@model ContainsWires contain wires}, but GMF limitations require it."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//NamedElement #//GeneratedElement #//ContainsConditions #//CanBeSynced #//Accessible #//ContainsOperations #//ActionEdgeSource #//ContainsProperties #//Wireable">
+  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//NamedElement #//GeneratedElement #//ContainsFunctions #//CanBeSynced #//Accessible #//ContainsOperations #//ActionEdgeSource #//ContainsProperties #//Wireable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
@@ -447,15 +447,14 @@
       <details key="documentation" value="A Condition allows for conditional execution of {@model Wire wires} when {@model ConditionEdge connected}."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContainsConditions" abstract="true"
-      interface="true">
+  <eClassifiers xsi:type="ecore:EClass" name="ContainsFunctions" abstract="true" interface="true">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="added in 0.2"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents an element which can directly contain {@model Condition}s."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="#//Function" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A list of contained {@model Condition}s."/>
@@ -476,13 +475,13 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CanBeSynced" abstract="true" interface="true"
-      eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//ContainsWires #//ContainsOperations #//ContainsConditions #//WireSource #//WireDestination">
+      eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//ContainsWires #//ContainsOperations #//ContainsFunctions #//WireSource #//WireDestination">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents something that can be synchronised through a {@model SyncWire} or {@model SetWire}."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Changeable" abstract="true" interface="true"
-      eSuperTypes="#//GeneratesElements #//wires/ParameterEdgesSource #//GeneratedElement #//ContainsConditions #//Wireable">
+      eSuperTypes="#//GeneratesElements #//wires/ParameterEdgesSource #//GeneratedElement #//ContainsFunctions #//Wireable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents something that {@model Changeable#fieldValue has a value}, and can register when it {@model Changeable#onChange can change}. Since it has a {@model Changeable#fieldValue value}, it can be used as a {@model ParameterEdgesSource parameter}."/>
     </eAnnotations>
@@ -530,14 +529,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An {@mode ActionEdge} represents the major relationship of the {@model EventTrigger Event}-{@model Condition}-{@model Action} paradigm. Also see: {@model Wire}"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ActionEdgeSource"
-        eOpposite="#//ActionEdgeSource/outActions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" lowerBound="1"
+        eType="#//ActionEdgeSource" eOpposite="#//ActionEdgeSource/listeners">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The source element for the {@model ActionEdge}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Action"
-        eOpposite="#//Action/inActions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Action" eOpposite="#//Action/rules">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The target element for the {@model ActionEdge}."/>
       </eAnnotations>
@@ -558,8 +557,8 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.5.3 renamed ActionEdgeDestination to Action"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inActions" upperBound="-1"
-        eType="#//ECARule" eOpposite="#//ECARule/to">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//ECARule" eOpposite="#//ECARule/target">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A list of incoming {@model ActionEdge}s."/>
       </eAnnotations>
@@ -573,8 +572,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A possible source for an {@model ActionEdge}."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outActions" upperBound="-1"
-        eType="#//ECARule" eOpposite="#//ECARule/from">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listeners" upperBound="-1"
+        eType="#//ECARule" eOpposite="#//ECARule/trigger">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A list of outgoing {@model Action}s."/>
       </eAnnotations>
@@ -606,9 +605,9 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//wires/ParameterEdgesSource"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" eType="#//wires/ParameterEdgesSource"
         eOpposite="#//wires/ParameterEdgesSource/outParameterEdges"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ParameterEdgeDestination"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//wires/ParameterEdgeDestination"
         eOpposite="#//wires/ParameterEdgeDestination/inParameterEdges"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleCondition" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
@@ -618,10 +617,10 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model Wire wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//wires/ConditionEdgesSource"
-        eOpposite="#//wires/ConditionEdgesSource/outConditionEdges"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ConditionEdgeDestination"
-        eOpposite="#//wires/ConditionEdgeDestination/inConditionEdges"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+        eType="#//wires/ConditionEdgesSource" eOpposite="#//wires/ConditionEdgesSource/conditioned"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditioned" lowerBound="1"
+        eType="#//wires/ConditionEdgeDestination" eOpposite="#//wires/ConditionEdgeDestination/conditions"/>
   </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//Scope #//wires/ParameterEdgesSource #//Action">
@@ -803,7 +802,7 @@
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outParameterEdges" upperBound="-1"
-          eType="#//Parameter" eOpposite="#//Parameter/from"/>
+          eType="#//Parameter" eOpposite="#//Parameter/term"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterEdgeDestination" abstract="true"
         interface="true">
@@ -814,7 +813,7 @@
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inParameterEdges" upperBound="-1"
-          eType="#//Parameter" eOpposite="#//Parameter/to"/>
+          eType="#//Parameter" eOpposite="#//Parameter/value"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdgesSource" abstract="true"
         interface="true">
@@ -868,8 +867,8 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="outConditionEdges" upperBound="-1"
-          eType="#//SimpleCondition" eOpposite="#//SimpleCondition/from"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditioned" upperBound="-1"
+          eType="#//SimpleCondition" eOpposite="#//SimpleCondition/function"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdgeDestination" abstract="true"
         interface="true">
@@ -879,8 +878,8 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="inConditionEdges" upperBound="-1"
-          eType="#//SimpleCondition" eOpposite="#//SimpleCondition/to"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
+          eType="#//SimpleCondition" eOpposite="#//SimpleCondition/conditioned"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DetailWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1081,7 +1080,7 @@
       <details key="comment2" value="(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)"/>
       <details key="comment3" value="some scopes aren't here: Host, Organisation, we can add these in later."/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsConditions">
+    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsFunctions">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination&#xD;&#xA;0.4.2 removed 'agents' reference"/>
       </eAnnotations>
@@ -1095,7 +1094,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Email" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsConditions #//ContainsProperties #//CanBeSynced">
+    <eClassifiers xsi:type="ecore:EClass" name="Email" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsFunctions #//ContainsProperties #//CanBeSynced">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents an e-mail. The lifecycle is as follows: {@model PrimitiveOperation send} -> {@model EventTrigger sent} or {@model EventTrigger failed}."/>
       </eAnnotations>

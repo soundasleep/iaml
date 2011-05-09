@@ -492,7 +492,7 @@
       <classifier href="iaml.ecore#//CompositeOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsConditions/conditions"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainInstance">
@@ -785,7 +785,7 @@
       <classifier href="iaml.ecore#//PrimitiveCondition"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsConditions/conditions"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>
       <classifier href="iaml.ecore#//CompositeCondition"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
@@ -877,4 +877,19 @@
   <edgeTypes href="iaml.ecore#//domain/SchemaEdge"/>
   <edgeTypes href="iaml.ecore#//domain/SelectEdge"/>
   <edgeTypes href="iaml.ecore#//Wire"/>
+  <edgeReferences name="ECARule">
+    <classifier href="iaml.ecore#//ECARule"/>
+    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//ECARule/trigger"/>
+    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//ECARule/target"/>
+  </edgeReferences>
+  <edgeReferences name="Parameter">
+    <classifier href="iaml.ecore#//Parameter"/>
+    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//Parameter/term"/>
+    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//Parameter/value"/>
+  </edgeReferences>
+  <edgeReferences name="SimpleCondition">
+    <classifier href="iaml.ecore#//SimpleCondition"/>
+    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//SimpleCondition/function"/>
+    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//SimpleCondition/conditioned"/>
+  </edgeReferences>
 </sgmf:GMFConfiguration>

@@ -99,12 +99,12 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		Email email = assertHasEmail(home, "Target");
 
-		Operation update1 = assertHasCompositeOperation(email, "set Value set directly");
+		Operation update1 = assertHasCompositeOperation(email, "set value set directly");
 		assertGenerated(update1);
 
 		// since the other Value does not have an incoming SetWire, no
 		// such operation is generated
-		assertHasNoOperation(email, "set Value not set");
+		assertHasNoOperation(email, "set value not set");
 
 	}
 
@@ -123,7 +123,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		Event onChange = label1.getOnChange();
 		assertGenerated(onChange);
 
-		Operation update = assertHasCompositeOperation(email, "set Value set directly");
+		Operation update = assertHasCompositeOperation(email, "set value set directly");
 		assertGenerated(update);
 
 		ECARule edge = assertHasECARule(root, onChange, update);
@@ -149,7 +149,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		Email email = assertHasEmail(home, "Target");
 		Label label1 = assertHasLabel(email, "field 1");
 
-		assertHasNoOperation(label1, "set Value fieldValue");
+		assertHasNoOperation(label1, "set value fieldValue");
 
 	}
 
@@ -162,7 +162,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		Email email = assertHasEmail(home, "Target");
-		CompositeOperation update = assertHasCompositeOperation(email, "set Value set directly");
+		CompositeOperation update = assertHasCompositeOperation(email, "set value set directly");
 
 		// -- traverse from start node --
 		StartNode start = assertHasStartNode(update);

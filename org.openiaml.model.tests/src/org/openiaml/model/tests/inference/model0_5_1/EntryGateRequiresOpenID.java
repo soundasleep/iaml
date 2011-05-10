@@ -5,10 +5,10 @@ package org.openiaml.model.tests.inference.model0_5_1;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ECARule;
-import org.openiaml.model.model.Function;
-import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.scopes.Session;
@@ -16,7 +16,6 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**

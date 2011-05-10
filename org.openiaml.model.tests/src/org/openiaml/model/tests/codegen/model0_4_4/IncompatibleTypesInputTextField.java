@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.codegen.model0_4_4;
 
 import org.eclipse.core.runtime.IStatus;
-import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**

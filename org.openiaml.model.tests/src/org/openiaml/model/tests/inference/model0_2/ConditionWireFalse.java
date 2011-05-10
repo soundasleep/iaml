@@ -5,8 +5,8 @@ package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ECARule;
-import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;

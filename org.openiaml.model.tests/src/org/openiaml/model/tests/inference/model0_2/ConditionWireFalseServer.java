@@ -5,13 +5,13 @@ package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ECARule;
-import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 

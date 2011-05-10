@@ -5,11 +5,11 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
@@ -97,7 +97,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		boolean passwordSet = false;
 
 		for (Object o : sets) {
-			PrimitiveOperation set = (PrimitiveOperation) o;
+			BuiltinOperation set = (BuiltinOperation) o;
 			assertEquals("set", set.getName());
 
 			assertHasExecutionEdge(doLogin, split, set);

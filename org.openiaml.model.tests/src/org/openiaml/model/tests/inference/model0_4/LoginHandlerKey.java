@@ -6,8 +6,8 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Value;

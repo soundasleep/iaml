@@ -3,8 +3,8 @@
  */
 package org.openiaml.model.tests.inference.model0_6;
 
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
@@ -38,7 +38,7 @@ public class VisibleThingVisibilityProperty extends ValidInferenceTestCase {
 		assertHasValue(set, "visible");
 
 		Operation setTarget = assertHasOperation(target, "set visible");
-		assertInstanceOf(PrimitiveOperation.class, setTarget);
+		assertInstanceOf(BuiltinOperation.class, setTarget);
 
 	}
 
@@ -61,7 +61,7 @@ public class VisibleThingVisibilityProperty extends ValidInferenceTestCase {
 		Operation setVis = assertHasOperation(set, "set visible");
 
 		// it is a primitive operation
-		assertInstanceOf(PrimitiveOperation.class, setVis);
+		assertInstanceOf(BuiltinOperation.class, setVis);
 		assertGenerated(setVis);
 	}
 

@@ -3,11 +3,12 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
-import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.operations.CancelNode;
@@ -17,7 +18,6 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -138,7 +138,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(start);
 		FinishNode finish = assertHasFinishNode(set);
 		assertGenerated(finish);
-		PrimitiveOperation s = assertHasPrimitiveOperation(set, "set");
+		BuiltinOperation s = assertHasBuiltinOperation(set, "set");
 		assertGenerated(s);
 		Value value = assertHasValue(set, "true");
 		assertTrue(value.isReadOnly());

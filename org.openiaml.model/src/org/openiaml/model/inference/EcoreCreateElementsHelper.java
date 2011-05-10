@@ -29,7 +29,6 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
@@ -244,8 +243,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 	
-	public ActivityParameter generatedActivityParameter(GeneratesElements by, Operation container) throws InferenceException {
-		ActivityParameter parameter = (ActivityParameter) createElement( container, OperationsPackage.eINSTANCE.getActivityParameter(), ModelPackage.eINSTANCE.getOperation_Parameters() );
+	public ActivityParameter generatedActivityParameter(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		ActivityParameter parameter = (ActivityParameter) createElement( container, OperationsPackage.eINSTANCE.getActivityParameter(), ModelPackage.eINSTANCE.getCompositeOperation_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
 	}	

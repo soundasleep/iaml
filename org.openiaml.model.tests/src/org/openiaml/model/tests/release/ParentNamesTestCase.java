@@ -237,6 +237,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	private static final EClass[] ETYPED_ELEMENTS = new EClass[] {
 		// ETypedElements
 		DomainPackage.eINSTANCE.getDomainAttribute(),
+		DomainPackage.eINSTANCE.getDomainFeature(),
 	};
 	
 	private static List<String> inst_getETypedElements = null;
@@ -303,7 +304,10 @@ public class ParentNamesTestCase extends XmlTestCase {
 			// descriptors > actualFigure > children
 			Element descriptor = (Element) ((Element) child.getParentNode()).getParentNode();
 			assertEquals(descriptor.getNodeName(), "descriptors");
-			assertEquals(childName.replace(figureName, "Figure"), descriptor.getAttribute("name"));
+			
+			// ignore ETypedElement when searching for TypedElement
+			if (!childName.replace(figureName, "Figure").equals(descriptor.getAttribute("name")))
+				continue;
 			
 			String fn = childName.replace(figureName, "");
 			if (ignore.contains(fn))

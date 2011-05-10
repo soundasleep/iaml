@@ -7,12 +7,12 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
@@ -115,12 +115,12 @@ public class DroolsHelperFunctions {
 	}
 
 	/**
-	 * What is the last chained operation for the given PrimitiveOperation?
+	 * What is the last chained operation for the given {@link BuiltinOperation}?
 	 */
-	public PrimitiveOperation lastChainedOperation(PrimitiveOperation op) {
+	public BuiltinOperation lastChainedOperation(BuiltinOperation op) {
 		for (ECARule action : op.getListeners()) {
-			if (action.getTarget() instanceof PrimitiveOperation) {
-				return lastChainedOperation((PrimitiveOperation) action.getTarget());
+			if (action.getTarget() instanceof BuiltinOperation) {
+				return lastChainedOperation((BuiltinOperation) action.getTarget());
 			}
 		}
 		return op;

@@ -402,7 +402,7 @@ rule "Create contents of 'update target' operation"
 		queue.add(start, drools);
 		queue.add(finish, drools);
 		
-		PrimitiveOperation setOp = handler.generatedPrimitiveOperation(op, op);
+		BuiltinOperation setOp = handler.generatedBuiltinOperation(op, op);
 		handler.setName(setOp, "set");
 		queue.add(setOp, drools);
 		

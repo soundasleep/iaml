@@ -25,10 +25,10 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} 
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} 
  *		called '{@model DomainIterator#previous}'.
  */
-rule "Create 'previous' PrimitiveOperation"
+rule "Create 'previous' BuiltinOperation"
 	when
 		instance : DomainIterator( )
 		not ( op : Operation ( instance.previous == op ) )
@@ -36,7 +36,7 @@ rule "Create 'previous' PrimitiveOperation"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+		BuiltinOperation op = handler.generatedBuiltinOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Previous());
 		handler.setName(op, "previous");
 		queue.add(op, drools);
@@ -45,10 +45,10 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} 
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} 
  *		called '{@model DomainIterator#next}'.
  */
-rule "Create 'next' PrimitiveOperation"
+rule "Create 'next' BuiltinOperation"
 	when
 		instance : DomainIterator( )
 		not ( op : Operation ( instance.next == op ) )
@@ -56,7 +56,7 @@ rule "Create 'next' PrimitiveOperation"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+		BuiltinOperation op = handler.generatedBuiltinOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Next());
 		handler.setName(op, "next");
 		queue.add(op, drools);
@@ -65,10 +65,10 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} 
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} 
  *		called '{@model DomainIterator#reset}'.
  */
-rule "Create 'reset' PrimitiveOperation"
+rule "Create 'reset' BuiltinOperation"
 	when
 		instance : DomainIterator( )
 		not ( op : Operation ( instance.reset == op ) )
@@ -76,7 +76,7 @@ rule "Create 'reset' PrimitiveOperation"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+		BuiltinOperation op = handler.generatedBuiltinOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Reset());
 		handler.setName(op, "reset");
 		queue.add(op, drools);
@@ -85,10 +85,10 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} 
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} 
  *		called '{@model DomainIterator#skip}'.
  */
-rule "Create 'skip' PrimitiveOperation"
+rule "Create 'skip' BuiltinOperation"
 	when
 		instance : DomainIterator( )
 		not ( op : Operation ( instance.skip == op ) )
@@ -96,7 +96,7 @@ rule "Create 'skip' PrimitiveOperation"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+		BuiltinOperation op = handler.generatedBuiltinOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Skip());
 		handler.setName(op, "skip");
 		queue.add(op, drools);
@@ -105,10 +105,10 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} 
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} 
  *		called '{@model DomainIterator#jump}'.
  */
-rule "Create 'jump' PrimitiveOperation"
+rule "Create 'jump' BuiltinOperation"
 	when
 		instance : DomainIterator( )
 		not ( op : Operation ( instance.jump == op ) )
@@ -116,7 +116,7 @@ rule "Create 'jump' PrimitiveOperation"
 		eval ( handler.veto( instance ))
 	
 	then
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+		BuiltinOperation op = handler.generatedBuiltinOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Jump());
 		handler.setName(op, "jump");
 		queue.add(op, drools);

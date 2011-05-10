@@ -14,6 +14,7 @@ import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
@@ -30,7 +31,6 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.SimpleCondition;
@@ -255,12 +255,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return parameter;
 	}
 
-	public PrimitiveOperation generatedPrimitiveOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
-		return generatedPrimitiveOperation(by, container, ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+	public BuiltinOperation generatedBuiltinOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
+		return generatedBuiltinOperation(by, container, ModelPackage.eINSTANCE.getContainsOperations_Operations() );
 	}
 	
-	public PrimitiveOperation generatedPrimitiveOperation(GeneratesElements by, ContainsOperations container, EReference reference) throws InferenceException {
-		PrimitiveOperation operation = (PrimitiveOperation) createElement( container, ModelPackage.eINSTANCE.getPrimitiveOperation(), reference );
+	public BuiltinOperation generatedBuiltinOperation(GeneratesElements by, ContainsOperations container, EReference reference) throws InferenceException {
+		BuiltinOperation operation = (BuiltinOperation) createElement( container, ModelPackage.eINSTANCE.getBuiltinOperation(), reference );
 		setGeneratedBy(operation, by);
 		return operation;
 	}

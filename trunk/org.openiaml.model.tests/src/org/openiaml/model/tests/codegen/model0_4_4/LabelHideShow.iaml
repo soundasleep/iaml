@@ -2,8 +2,8 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1275ffa62dc.16">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:Label" id="visual.1275ffa6388.6e" name="Label" defaultValue="test value">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1275ffa62dc.23" name="show" rules="wires.1275ffa6397.2a"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1275ffa62dc.25" name="hide" rules="wires.1275ffa6397.2c"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1275ffa62dc.23" name="show" rules="wires.1275ffa6397.2a"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1275ffa62dc.25" name="hide" rules="wires.1275ffa6397.2c"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1275ffa6388.6f" name="show" listeners="wires.1275ffa6397.2a">
       <ecaRules id="wires.1275ffa6397.2a" name="onClick" trigger="visual.1275ffa6388.6f" target="model.1275ffa62dc.23"/>

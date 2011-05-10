@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126f8149d3d.68">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml:PrimitiveOperation" id="model.126f8149d3d.6e" name="o1" listeners="wires.126f8149daa.19">
+    <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.6e" name="o1" listeners="wires.126f8149daa.19">
       <ecaRules id="wires.126f8149daa.19" name="r1" trigger="model.126f8149d3d.6e" target="model.126f8149d3d.73"/>
     </operations>
-    <operations xsi:type="iaml:PrimitiveOperation" id="model.126f8149d3d.73" name="o2" rules="wires.126f8149daa.19" listeners="wires.126f8149daa.1b">
+    <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.73" name="o2" rules="wires.126f8149daa.19" listeners="wires.126f8149daa.1b">
       <ecaRules id="wires.126f8149daa.1b" name="r2" trigger="model.126f8149d3d.73" target="model.126f8149d3d.74"/>
     </operations>
-    <operations xsi:type="iaml:PrimitiveOperation" id="model.126f8149d3d.74" name="o3" rules="wires.126f8149daa.1b"/>
-    <operations xsi:type="iaml:PrimitiveOperation" id="model.126f8149d3d.75" name="o4"/>
+    <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.74" name="o3" rules="wires.126f8149daa.1b"/>
+    <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.75" name="o4"/>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">
     <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>

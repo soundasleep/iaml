@@ -93,8 +93,8 @@ public class DroolsHelperFunctions {
 	 */
 	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainSchema dobj) {
 		for (Parameter edge : handler.getInParameterEdges()) {
-			if (edge.getTerm() instanceof DomainAttribute) {
-				if (dobj.equals(((DomainAttribute) edge.getTerm()).eContainer())) {
+			if (edge.getParameterValue() instanceof DomainAttribute) {
+				if (dobj.equals(((DomainAttribute) edge.getParameterValue()).eContainer())) {
 					// found one
 					return true;
 				}
@@ -177,10 +177,10 @@ public class DroolsHelperFunctions {
 	public String getQueryString(LoginHandler login_handler, DomainSchema dobj) {
 		String q = "";
 		for (Parameter wire : login_handler.getInParameterEdges()) {
-			if (wire.getTerm() instanceof DomainAttribute &&
-					dobj.equals(wire.getTerm().eContainer())) {
+			if (wire.getParameterValue() instanceof DomainAttribute &&
+					dobj.equals(wire.getParameterValue().eContainer())) {
 				// add this attribute as a query
-				DomainAttribute attribute = (DomainAttribute) wire.getTerm();
+				DomainAttribute attribute = (DomainAttribute) wire.getParameterValue();
 				if (notPrimaryKey(attribute)) {
 					if (!q.isEmpty()) {
 						q += " and ";

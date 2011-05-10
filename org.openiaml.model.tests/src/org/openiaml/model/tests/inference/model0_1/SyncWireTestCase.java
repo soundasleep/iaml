@@ -91,9 +91,9 @@ public class SyncWireTestCase extends InferenceTestCase {
 		}
 		// then ParameterWires
 		for (Parameter w : wire.getParameterEdges()) {
-			if (w.getTerm().equals(name1value) && w.getValue().equals(name1editRun) )
+			if (w.getParameterValue().equals(name1value) && w.getParameterTerm().equals(name1editRun) )
 				name1editParam = w;
-			if (w.getTerm().equals(name2value) && w.getValue().equals(name2editRun) )
+			if (w.getParameterValue().equals(name2value) && w.getParameterTerm().equals(name2editRun) )
 				name2editParam = w;
 		}
 

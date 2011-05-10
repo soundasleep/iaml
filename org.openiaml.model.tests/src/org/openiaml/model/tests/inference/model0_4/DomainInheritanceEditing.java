@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.Set;
 
 import org.openiaml.model.model.BuiltinProperty;
+import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Function;
@@ -86,7 +87,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(exists);
 
 		// NOT connected to the run instance wire
-		Set<SimpleCondition> conds = getSimpleConditionsFromTo(root, exists, run);
+		Set<ComplexTerm> conds = getComplexTermsFromTo(root, exists, run);
 		assertEquals(conds.toString(), 0, conds.size());
 	}
 

@@ -24,6 +24,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
+import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsFunctions;
@@ -1350,9 +1351,12 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * the given elements.
 	 */
 	public void assertHasNoSimpleConditions(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		for (SimpleCondition e : from.getConditioned()) {
-			if (to.equals(e.getConditioned()) && name.equals(e.getName())) {
-				fail("Found a SimpleCondition from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
+		for (ComplexTerm ef : from.getConditioned()) {
+			if (ef instanceof SimpleCondition) {
+				SimpleCondition e = (SimpleCondition) ef;
+				if (to.equals(e.getConditioned()) && name.equals(e.getName())) {
+					fail("Found a SimpleCondition from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
+				}
 			}
 		}
 	}
@@ -1364,9 +1368,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public SimpleCondition assertHasSimpleCondition(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		Set<SimpleCondition> params = getSimpleConditionsFromTo(container, from, to, name);
-		assertEquals("Should be exactly one Function edge with the name '" + name + "': " + params, 1, params.size());
-		return params.iterator().next();
+		Set<Object> params = typeSelect(getComplexTermsFromTo(container, from, to, name), SimpleCondition.class);
+		assertEquals("Should be exactly one SimpleCondition edge with the name '" + name + "': " + params, 1, params.size());
+		return (SimpleCondition) params.iterator().next();
 	}
 
 	/**
@@ -1376,9 +1380,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public SimpleCondition assertHasSimpleCondition(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
-		Set<SimpleCondition> params = getSimpleConditionsFromTo(container, from, to);
-		assertEquals("Should be exactly one Function edge: " + params, 1, params.size());
-		return params.iterator().next();
+		Set<Object> params = typeSelect(getComplexTermsFromTo(container, from, to), SimpleCondition.class);
+		assertEquals("Should be exactly one SimpleCondition edge: " + params, 1, params.size());
+		return (SimpleCondition) params.iterator().next();
 	}
 
 	/**
@@ -1781,7 +1785,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	protected void assertEqualType(Value a,
 			Changeable b) {
-		assertTrue(equalType(a.getType(), b.getType()));
+		assertInstanceOf(EDataType.class, a.getType());
+		assertTrue(equalType((EDataType) a.getType(), b.getType()));
 	}
 
 	/**
@@ -1790,7 +1795,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	protected void assertEqualType(Value a,
 			DomainAttribute b) {
-		assertTrue(equalType(a.getType(), (EXSDDataType) b.getEType()));
+		assertInstanceOf(EDataType.class, a.getType());
+		assertTrue(equalType((EDataType) a.getType(), (EXSDDataType) b.getEType()));
 	}
 
 	/**
@@ -1817,7 +1823,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	protected void assertEqualType(Changeable a,
 			Value b) {
-		assertTrue(equalType(a.getType(), b.getType()));
+		assertInstanceOf(EDataType.class, a.getType());
+		assertInstanceOf(EDataType.class, b.getType());
+		assertTrue(equalType((EDataType) a.getType(), (EDataType) b.getType()));
 	}
 
 	/**
@@ -1826,7 +1834,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	protected void assertEqualType(Value a,
 			Value b) {
-		assertTrue(equalType(a.getType(), b.getType()));
+		assertInstanceOf(EDataType.class, a.getType());
+		assertInstanceOf(EDataType.class, b.getType());
+		assertTrue(equalType((EDataType) a.getType(), (EDataType) b.getType()));
 	}
 
 	/**
@@ -1865,11 +1875,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	protected void assertNoParamtersToSimpleConditions(InternetApplication container,
 			ConditionEdgesSource from, ConditionEdgeDestination to, ParameterEdgesSource page) throws JaxenException {
 
-		Set<SimpleCondition> conditions = getSimpleConditionsFromTo(container, from, to);
-		for (SimpleCondition condition : conditions) {
+		Set<ComplexTerm> conditions = getComplexTermsFromTo(container, from, to);
+		for (ComplexTerm c : conditions) {
+			if (c instanceof SimpleCondition) {
+				SimpleCondition condition = (SimpleCondition) c;
 
-			Set<Parameter> params = getParametersFromTo(container, page, condition);
-			assertEquals("Unexpectedly found ParameterEdge: " + params, 0, params.size());
+				Set<Parameter> params = getParametersFromTo(container, page, condition);
+				assertEquals("Unexpectedly found ParameterEdge: " + params, 0, params.size());
+			}
 		}
 
 	}

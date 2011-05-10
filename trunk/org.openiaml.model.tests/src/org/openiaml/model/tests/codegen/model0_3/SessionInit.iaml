@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.120a748ea9e.c7">
   <scopes xsi:type="iaml.scopes:Session" id="scopes.120a748ed3d.de" name="session">
     <properties id="model.120a748ea9e.103" name="initial value" outParameterEdges="wires.120a748ec72.9d" defaultValue="initialised by init" readOnly="true">
-      <parameterEdges id="wires.120a748ec72.9d" term="model.120a748ea9e.103" value="wires.120a748ec72.9b"/>
+      <parameterEdges id="wires.120a748ec72.9d" parameterValue="model.120a748ea9e.103" parameterTerm="wires.120a748ec72.9b"/>
     </properties>
     <onInit id="model.120a748ea9e.d9" listeners="wires.120a748ec72.9b">
       <ecaRules id="wires.120a748ec72.9b" inParameterEdges="wires.120a748ec72.9d" name="run on init" trigger="model.120a748ea9e.d9" target="model.120a748ea9e.ec"/>

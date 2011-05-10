@@ -13,7 +13,7 @@
     </scopes>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="User" id="domain.128807fbeba.df8" outParameterEdges="wires.1233b453e32.d" inSchemas="domain.128807fbeba.dfa">
-    <parameterEdges id="wires.1233b453e32.d" term="domain.128807fbeba.df8" value="components.1233b453f6b.5"/>
+    <parameterEdges id="wires.1233b453e32.d" parameterValue="domain.128807fbeba.df8" parameterTerm="components.1233b453f6b.5"/>
   </schemas>
   <sources id="domain.128807fbeba.df9" outSchemas="domain.128807fbeba.dfa">
     <schemaEdges id="domain.128807fbeba.dfa" from="domain.128807fbeba.df9" to="domain.128807fbeba.df8"/>

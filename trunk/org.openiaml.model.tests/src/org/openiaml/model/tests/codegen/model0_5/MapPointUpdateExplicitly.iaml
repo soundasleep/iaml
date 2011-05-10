@@ -2,8 +2,8 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.127b83e573d.1a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.127b83e57e8.24" name="address">
-      <fieldValue id="model.127b83e573d.56" name="fieldValue" outParameterEdges="wires.127b83e57f8.a" type="builtin_iamlAddress">
-        <parameterEdges id="wires.127b83e57f8.a" term="model.127b83e573d.56" value="wires.127b83e57f8.8"/>
+      <fieldValue id="model.127b83e573d.56" name="fieldValue" type="builtin_iamlAddress" outParameterEdges="wires.127b83e57f8.a">
+        <parameterEdges id="wires.127b83e57f8.a" parameterValue="model.127b83e573d.56" parameterTerm="wires.127b83e57f8.8"/>
       </fieldValue>
     </children>
     <children xsi:type="iaml.visual:Map" id="visual.127b84b628d.29" name="containing map">

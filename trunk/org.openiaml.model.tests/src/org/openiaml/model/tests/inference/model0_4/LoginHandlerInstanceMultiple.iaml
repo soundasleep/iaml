@@ -18,11 +18,11 @@
   </scopes>
   <schemas name="User" id="domain.128807fbeba.fa9" inSchemas="domain.128807fbeba.fab">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.122f7c69efd.37" outParameterEdges="wires.122f7c6a100.1">
-      <parameterEdges id="wires.122f7c6a100.1" term="model.122f7c69efd.37" value="components.122f7c6a40e.1"/>
+      <parameterEdges id="wires.122f7c6a100.1" parameterValue="model.122f7c69efd.37" parameterTerm="components.122f7c6a40e.1"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.122f7c69efd.38"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.122f7c69efd.1ed" outParameterEdges="wires.122f7c6a100.63">
-      <parameterEdges id="wires.122f7c6a100.63" term="model.122f7c69efd.1ed" value="components.122f7c6a40e.1"/>
+      <parameterEdges id="wires.122f7c6a100.63" parameterValue="model.122f7c69efd.1ed" parameterTerm="components.122f7c6a40e.1"/>
     </eStructuralFeatures>
   </schemas>
   <sources id="domain.128807fbeba.faa" name="domain source" outSchemas="domain.128807fbeba.fab">

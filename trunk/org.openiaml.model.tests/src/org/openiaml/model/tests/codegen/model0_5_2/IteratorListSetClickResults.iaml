@@ -8,7 +8,7 @@
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.128a9b17daf.1" id="visual.128a9b17daf.17" name="List">
       <children xsi:type="iaml.visual:Label" id="visual.128b5279ae4.36" name="title">
         <fieldValue id="model.128b5279a48.e3" name="current value" outParameterEdges="wires.128b5279ae4.21">
-          <parameterEdges id="wires.128b5279ae4.21" term="model.128b5279a48.e3" value="wires.128b5279ae4.1f"/>
+          <parameterEdges id="wires.128b5279ae4.21" parameterValue="model.128b5279a48.e3" parameterTerm="wires.128b5279ae4.1f"/>
         </fieldValue>
         <onClick id="model.128b5279a48.47" listeners="wires.128b5279ae4.1f">
           <ecaRules id="wires.128b5279ae4.1f" inParameterEdges="wires.128b5279ae4.21" name="run" trigger="model.128b5279a48.47" target="model.128b5279a48.b8"/>

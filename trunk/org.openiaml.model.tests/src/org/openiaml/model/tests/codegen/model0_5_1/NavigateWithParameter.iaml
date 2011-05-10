@@ -2,11 +2,11 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12813a548f4.11">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <properties id="model.12813a548f4.37" name="one" outParameterEdges="wires.12813b48b22.d" defaultValue="one" readOnly="true">
-      <parameterEdges id="wires.12813b48b22.d" name="select" term="model.12813a548f4.37" value="wires.12813a54ad9.d"/>
+      <parameterEdges id="wires.12813b48b22.d" name="select" parameterValue="model.12813a548f4.37" parameterTerm="wires.12813a54ad9.d"/>
     </properties>
     <properties id="model.12813a548f4.38" name="two" outParameterEdges="wires.12813b48b22.b wires.12813b48b22.f" defaultValue="two" readOnly="true">
-      <parameterEdges id="wires.12813b48b22.b" name="select" term="model.12813a548f4.38" value="wires.12813b48b22.a"/>
-      <parameterEdges id="wires.12813b48b22.f" name="incorrect" term="model.12813a548f4.38" value="wires.12813b48b22.e"/>
+      <parameterEdges id="wires.12813b48b22.b" name="select" parameterValue="model.12813a548f4.38" parameterTerm="wires.12813b48b22.a"/>
+      <parameterEdges id="wires.12813b48b22.f" name="incorrect" parameterValue="model.12813a548f4.38" parameterTerm="wires.12813b48b22.e"/>
     </properties>
     <children xsi:type="iaml.visual:Button" id="visual.12813a54a8b.37" name="one" listeners="wires.12813a54ad9.d">
       <ecaRules id="wires.12813a54ad9.d" inParameterEdges="wires.12813b48b22.d" name="onClick" trigger="visual.12813a54a8b.37" target="visual.12813a54a8b.c"/>
@@ -28,7 +28,7 @@
       <ecaRules id="model.12fc42b4f75.1fc" inParameterEdges="wires.12fc42b52ff.34" name="run" trigger="model.12fc42b4f75.1e7" target="model.12fc42b4f75.1c4"/>
     </onAccess>
     <parameters id="model.12813a548f4.2e" name="select" outParameterEdges="wires.12fc42b52ff.34">
-      <parameterEdges id="wires.12fc42b52ff.34" term="model.12813a548f4.2e" value="model.12fc42b4f75.1fc"/>
+      <parameterEdges id="wires.12fc42b52ff.34" parameterValue="model.12813a548f4.2e" parameterTerm="model.12fc42b4f75.1fc"/>
     </parameters>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12813a54a8b.20" name="parameter:">
       <operations xsi:type="iaml:BuiltinOperation" id="model.12fc42b4f75.1c4" name="update" rules="model.12fc42b4f75.1fc"/>

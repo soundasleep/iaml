@@ -62,20 +62,20 @@
     </scopes>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.cdb" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.cdd" inRequiresEdges="wires.1233afe62eb.2d">
-    <parameterEdges id="wires.1233b53a3ce.5a" term="domain.128807fbeba.cdb" value="components.1233b53a67e.19"/>
+    <parameterEdges id="wires.1233b53a3ce.5a" parameterValue="domain.128807fbeba.cdb" parameterTerm="components.1233b53a67e.19"/>
     <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
-      <parameterEdges id="wires.1233b53a3ce.ab" term="users.1233b53a814.6f" value="wires.1233b53a3ce.a6"/>
-      <parameterEdges id="wires.1233b53a3ce.16d" term="users.1233b53a814.6f" value="wires.1233b53a3ce.16c"/>
+      <parameterEdges id="wires.1233b53a3ce.ab" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.a6"/>
+      <parameterEdges id="wires.1233b53a3ce.16d" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.16c"/>
     </permissions>
     <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
   </schemas>
   <schemas xsi:type="iaml.users:Role" name="additional role 1" id="domain.128807fbeba.cde" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inSchemas="domain.128807fbeba.ce0" inRequiresEdges="wires.1233b53a3ce.23a">
-    <parameterEdges id="wires.1233b53a3ce.a9" term="domain.128807fbeba.cde" value="wires.1233b53a3ce.a8"/>
-    <parameterEdges id="wires.1233b53a3ce.16a" term="domain.128807fbeba.cde" value="wires.1233b53a3ce.168"/>
+    <parameterEdges id="wires.1233b53a3ce.a9" parameterValue="domain.128807fbeba.cde" parameterTerm="wires.1233b53a3ce.a8"/>
+    <parameterEdges id="wires.1233b53a3ce.16a" parameterValue="domain.128807fbeba.cde" parameterTerm="wires.1233b53a3ce.168"/>
   </schemas>
   <schemas xsi:type="iaml.users:Role" name="additional role 2" id="domain.128807fbeba.ce1" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" inSchemas="domain.128807fbeba.ce3" outProvidesEdges="wires.1233b53a3ce.36">
-    <parameterEdges id="wires.1233b53a3ce.aa" term="domain.128807fbeba.ce1" value="wires.1233b53a3ce.a7"/>
-    <parameterEdges id="wires.1233b53a3ce.16b" term="domain.128807fbeba.ce1" value="wires.1233b53a3ce.169"/>
+    <parameterEdges id="wires.1233b53a3ce.aa" parameterValue="domain.128807fbeba.ce1" parameterTerm="wires.1233b53a3ce.a7"/>
+    <parameterEdges id="wires.1233b53a3ce.16b" parameterValue="domain.128807fbeba.ce1" parameterTerm="wires.1233b53a3ce.169"/>
     <providesEdges id="wires.1233b53a3ce.36" from="domain.128807fbeba.ce1" to="users.1233b53a814.70"/>
   </schemas>
   <sources id="domain.128807fbeba.cdc" outSchemas="domain.128807fbeba.cdd" inSelects="domain.128807fbeba.ce4">

@@ -42,7 +42,7 @@
       <ecaRules id="wires.1254759bc84.8f" inParameterEdges="wires.1254759bc84.94" name="run" trigger="model.1254759b7c1.72a" target="model.1254759b7c1.72b"/>
     </onAccess>
     <properties id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" defaultValue="5" readOnly="true">
-      <parameterEdges id="wires.1254759bc84.94" term="model.1254759b7c1.741" value="wires.1254759bc84.8f"/>
+      <parameterEdges id="wires.1254759bc84.94" parameterValue="model.1254759b7c1.741" parameterTerm="wires.1254759bc84.8f"/>
     </properties>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

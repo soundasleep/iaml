@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.openiaml.model.editor"
+      id="org.openiaml.model.feature"
       label="IAML Modelling Platform"
       version="0.5.3.qualifier"
       provider-name="www.openiaml.org">

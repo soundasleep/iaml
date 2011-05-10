@@ -148,7 +148,7 @@
 «ENDDEFINE»
 
 «DEFINE conditionDefinition_canCast(Boolean php, model::BuiltinProperty condition) FOR model::Changeable»
-	/* PrimitiveOperation 'can cast?' */
+	/* BuiltinOperation 'can cast?' */
 	«IF php»
 		$type = «EXPAND template::operations::Parameters::getTypeURI FOR fieldValue.type»; 
 		return can_cast($default_arg, $type);
@@ -159,6 +159,6 @@
 «ENDDEFINE»
 
 «DEFINE conditionDefinition_fieldValueIsSet(Boolean php, model::BuiltinProperty condition) FOR model::Changeable»
-	/* PrimitiveOperation 'fieldValue is set?' */
+	/* BuiltinOperation 'fieldValue is set?' */
 	return «EXPAND template::operations::DataFlow::isSet(php) FOR fieldValue»;
 «ENDDEFINE»

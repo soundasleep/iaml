@@ -32,7 +32,7 @@
 				$iterator->save();
 			«ENDIF»
 			«EXPAND template::operations::ExecutionFlow::continueChainedOperations(true) 
-				FOREACH operations.typeSelect(model::PrimitiveOperation).select(o|o.name == "save")»
+				FOREACH operations.typeSelect(model::BuiltinOperation).select(o|o.name == "save")»
 		}
 		
 		«IF !isGeneratedPrimaryKey()»
@@ -111,7 +111,7 @@
 		$iterator = DomainIterator_«safeName()»::getInstance();
 		$iterator->save();
 		«EXPAND template::operations::ExecutionFlow::continueChainedOperations(true) 
-			FOREACH operations.typeSelect(model::PrimitiveOperation).select(o|o.name == "save")»
+			FOREACH operations.typeSelect(model::BuiltinOperation).select(o|o.name == "save")»
 	}
 	
 	/**

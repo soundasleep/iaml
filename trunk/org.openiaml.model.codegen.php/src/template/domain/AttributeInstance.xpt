@@ -14,8 +14,8 @@
 «ENDDEFINE»
 
 /**
- * @implementation DomainAttributeInstance,PrimitiveOperation
- *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'save'. 
+ * @implementation DomainAttributeInstance,BuiltinOperation
+ *		A {@model DomainAttributeInstance} has a {@model BuiltinOperation} named 'save'. 
  */
 «DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, domain::DomainAttributeInstance attribute) FOR model::Operation»
 	/* domain attribute instance: attribute = «simpleName(attribute)», this = «simpleName(this)» */

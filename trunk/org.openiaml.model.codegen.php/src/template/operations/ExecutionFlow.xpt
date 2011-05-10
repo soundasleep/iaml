@@ -253,7 +253,7 @@
 «ENDDEFINE»
 
 /* a primitive operation: carry on */
-«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	// primitive operation "«name-»"
 	«EXPAND Contents::operationContents(start, php) FOR this-»
 	
@@ -345,11 +345,11 @@
 /**
  * Continue operations chained onto the current one.
  *
- * @implementation PrimitiveOperation,ExecutionEdge 
- * 		After a {@model PrimitiveOperation} has completed, all outgoing {@model ActionEdge}s 
+ * @implementation BuiltinOperation,ExecutionEdge 
+ * 		After a {@model BuiltinOperation} has completed, all outgoing {@model ActionEdge}s 
  *		are executed in oirder of {@model ActionEdge#priority}.
  */
-«DEFINE continueChainedOperations(Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE continueChainedOperations(Boolean php) FOR model::BuiltinOperation-»
 	«EXPAND continueChainedOperations(php) FOREACH listeners.sortBy(e|-e.priority)»
 «ENDDEFINE»
 

@@ -13,12 +13,12 @@
  * Expand the definition of an operation, assumed to be called 
  * as part of an existing function call.
  *
- * @implementation AccessControlHandler,PrimitiveOperation
- *		A {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'.
- * @implementation PrimitiveOperation
- *		A {@model PrimitiveOperation} can only accept a single argument or {@model Parameter} at most. 
+ * @implementation AccessControlHandler,BuiltinOperation
+ *		A {@model AccessControlHandler} has a {@model BuiltinOperation} named 'check permissions'.
+ * @implementation BuiltinOperation
+ *		A {@model BuiltinOperation} can only accept a single argument or {@model Parameter} at most. 
  */
-«DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«REM»special primitive operation names«ENDREM»
 	«IF name == "set"»
 		«EXPAND setOperation(start, php) FOR this»
@@ -54,7 +54,7 @@
 		«REM»this operation requires an incoming parameter«ENDREM»
 		«EXPAND template::Common::runtimeException(php, "Cannot call 'remove role' without a RunAction")»
 	«ELSEIF name == "update" || name == "init"»
-		«REM»Issue 210: Change 'update' CompositeOperation to PrimitiveOperation.«ENDREM»
+		«REM»Issue 210: Change 'update' CompositeOperation to BuiltinOperation.«ENDREM»
 		«EXPAND updateOperation(php) FOR this»
 	«ELSEIF name.startsWith("set ") && eContainer.eContents.typeSelect(model::Value).exists(p|"set " + p.name == name)»
 		«REM»Issue 223: create 'set XXX' operation for all properties«ENDREM»
@@ -308,9 +308,9 @@
 /**
  * outflowTarget <-- inflowTarget
  */
-«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Value property) FOR model::PrimitiveOperation-»
+«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Value property) FOR model::BuiltinOperation-»
 	«IF inFlows.isEmpty»
-		«throwException("Trying to call a PrimitiveOperation with no incoming flows: " + this)»
+		«throwException("Trying to call a BuiltinOperation with no incoming flows: " + this)»
 	«ENDIF»
 	«IF php»
 		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
@@ -350,10 +350,10 @@
 /**
  * Set temporary variable <-- inFlow
  *
- * @implementation PrimitiveOperation
- *		There is a global {@model PrimitiveOperation} named 'set'. 
+ * @implementation BuiltinOperation
+ *		There is a global {@model BuiltinOperation} named 'set'. 
  */
-«DEFINE setOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE setOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«IF model::operations::TemporaryVariable.isInstance(outFlows.first().to)»
 		«REM»set a temporary variable«ENDREM»
 		«IF php»
@@ -378,10 +378,10 @@
  * Hide a visible thing.
  * TODO Remove this method and replace with setVisibility(boolean) : see issue 223
  *
- * @implementation VisibleThing,PrimitiveOperation
- *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'hide'. 
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'hide'. 
  */
-«DEFINE hideOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE hideOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	/* hide a visible thing: «this» */
 	«IF php»
 		// server-side: set property for later
@@ -418,10 +418,10 @@
  * Show a visible thing.
  * TODO Remove this method and replace with setVisibility(boolean) : see issue 223
  *
- * @implementation VisibleThing,PrimitiveOperation
- *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'show'. 
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'show'. 
  */
-«DEFINE showOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE showOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	/* show a visible thing: «this» */
 	«IF php»
 		// server-side: set property for later
@@ -460,10 +460,10 @@
  *
  * TODO remove this and replace with a generic 'alert()' method.
  *
- * @implementation PrimitiveOperation
- *		There is a global {@model PrimitiveOperation} named 'alert'. 
+ * @implementation BuiltinOperation
+ *		There is a global {@model BuiltinOperation} named 'alert'. 
  */
-«DEFINE alert(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE alert(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«IF php»
 		/*
 		 * Alert: We can only alert on the server-side if we can pass instructions
@@ -472,7 +472,7 @@
 		if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
 			$message = «IF inFlows.from.isEmpty»
 				«REM»
-					this PrimitiveOperation is being called from an ECA rule, 
+					this BuiltinOperation is being called from an ECA rule, 
 					not within an operation; use the passed parameter as input
 				«ENDREM» 
 				$default_arg
@@ -495,7 +495,7 @@
 		«ENDREM»
 		alert_without_repeat(«IF inFlows.from.isEmpty»
 				«REM»
-					this PrimitiveOperation is being called from an ECA rule, 
+					this BuiltinOperation is being called from an ECA rule, 
 					not within an operation; use the passed parameter as input
 				«ENDREM» 
 				default_arg
@@ -513,10 +513,10 @@
 /**
  * Send an e-mail.
  *
- * @implementation Email,PrimitiveOperation
- *		An {@model Email} has a {@model PrimitiveOperation} named 'send'. 
+ * @implementation Email,BuiltinOperation
+ *		An {@model Email} has a {@model BuiltinOperation} named 'send'. 
  */
-«DEFINE sendOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE sendOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«IF model::scopes::Email.isInstance(eContainer)»
 		/* send an e-mail: «this» */
 		«LET (model::scopes::Email) eContainer AS email»
@@ -535,7 +535,7 @@
 /**
  * Save a domain object instance.
  */
-«DEFINE saveOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE saveOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«IF model::domain::DomainIterator.isInstance(eContainer)»
 		/* save object instance */
 		«LET (model::domain::DomainIterator) eContainer AS instance»
@@ -577,7 +577,7 @@
 /**
  * Create a new domain object instance.
  */
-«DEFINE newOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE newOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«IF model::domain::DomainIterator.isInstance(eContainer)»
 		/* new instance */
 		«LET (model::domain::DomainIterator) eContainer AS instance»
@@ -603,33 +603,33 @@
 «ENDDEFINE»
 
 /**
- * Issue 210: Change 'update' CompositeOperation inference to a PrimitiveOperation.
+ * Issue 210: Change 'update' CompositeOperation inference to a BuiltinOperation.
  *
  * IMPORTANT: We must provide identical semantics for both the Primitive and
  * the generated Composite operations. 
  */
-«DEFINE updateOperation(Boolean php) FOR model::PrimitiveOperation»
+«DEFINE updateOperation(Boolean php) FOR model::BuiltinOperation»
 	«EXPAND updateOperationForContainer(php, this) FOR eContainer»
 «ENDDEFINE»
-«DEFINE initOperation(Boolean php) FOR model::PrimitiveOperation»
+«DEFINE initOperation(Boolean php) FOR model::BuiltinOperation»
 	«EXPAND updateOperationForContainer(php, this) FOR eContainer»
 «ENDDEFINE»
 
-«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR emf::EObject»
-	«throwException("'update' PrimitiveOperation not defined for container " + this)»
+«DEFINE updateOperationForContainer(Boolean php, model::BuiltinOperation operation) FOR emf::EObject»
+	«throwException("'update' BuiltinOperation not defined for container " + this)»
 «ENDDEFINE»
 
 /**
- * @implementation VisibleThing,PrimitiveOperation
- *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'update'. 
- * @implementation VisibleThing,PrimitiveOperation
- *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'init'. 
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'update'. 
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'init'. 
  */
-«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::VisibleThing»
+«DEFINE updateOperationForContainer(Boolean php, model::BuiltinOperation operation) FOR model::VisibleThing»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»
 	«ENDIF»
-	/* 'update' PrimitiveOperation */
+	/* 'update' BuiltinOperation */
 	«IF php»
 		$arg0 = $default_arg;
 		«EXPAND setFieldValue(php) FOR fieldValue»
@@ -645,16 +645,16 @@
 «ENDDEFINE»
 
 /**
- * @implementation DomainAttributeInstance,PrimitiveOperation
- *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'update'. 
- * @implementation DomainAttributeInstance,PrimitiveOperation
- *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'init'. 
+ * @implementation DomainAttributeInstance,BuiltinOperation
+ *		A {@model DomainAttributeInstance} has a {@model BuiltinOperation} named 'update'. 
+ * @implementation DomainAttributeInstance,BuiltinOperation
+ *		A {@model DomainAttributeInstance} has a {@model BuiltinOperation} named 'init'. 
  */
-«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR domain::DomainAttributeInstance»
+«DEFINE updateOperationForContainer(Boolean php, model::BuiltinOperation operation) FOR domain::DomainAttributeInstance»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»
 	«ENDIF»
-	/* 'update' PrimitiveOperation */
+	/* 'update' BuiltinOperation */
 	«IF php»
 		$arg0 = $default_arg;
 		«EXPAND setFieldValue(php) FOR fieldValue»

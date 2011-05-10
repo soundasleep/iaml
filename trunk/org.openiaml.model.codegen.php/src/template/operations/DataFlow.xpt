@@ -116,19 +116,19 @@
 	«throwException("Unknown property container: " + this)»
 «ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::InputTextField»
-	document.getElementById('«safeNameString(id)»').value
+	document.getElementById('«safeNameString(id)»').parameterTerm
 «ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::Button»
-	document.getElementById('«safeNameString(id)»').value
+	document.getElementById('«safeNameString(id)»').parameterTerm
 «ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::Label»
 	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::MapPoint»
-	document.getElementById('map_point_«safeNameString(id)»_value').value
+	document.getElementById('map_point_«safeNameString(id)»_value').parameterTerm
 «ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Value property) FOR model::visual::Map»
-	document.getElementById('map_single_«safeNameString(id)»_value').value
+	document.getElementById('map_single_«safeNameString(id)»_value').parameterTerm
 «ENDDEFINE»
 
 /**

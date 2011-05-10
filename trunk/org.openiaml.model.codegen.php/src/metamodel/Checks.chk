@@ -21,11 +21,11 @@ context model::components::LoginHandler ERROR "A login handler must have an inco
 	
 context model::components::LoginHandler ERROR "A login handler of type USER must have at least one incoming parameter of type Role or Permission":
 	type != model::components::LoginHandlerTypes::USER ||
-	!(inParameterEdges.term.typeSelect(model::users::Role).isEmpty && inParameterEdges.term.typeSelect(model::users::Permission).isEmpty);
+	!(inParameterEdges.parameterValue.typeSelect(model::users::Role).isEmpty && inParameterEdges.parameterValue.typeSelect(model::users::Permission).isEmpty);
 
 context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OBJECT must have at least one incoming parameter of type DomainAttribute":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
-	!inParameterEdges.term.typeSelect(domain::DomainAttribute).isEmpty;
+	!inParameterEdges.parameterValue.typeSelect(domain::DomainAttribute).isEmpty;
 
 context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY must have exactly one incoming parameter":
 	type != model::components::LoginHandlerTypes::SECRET_KEY ||
@@ -33,7 +33,7 @@ context model::components::LoginHandler ERROR "A login handler of type SECRET_KE
 
 context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainSchema":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
-	inParameterEdges.term.eContainer.typeSelect(model::domain::DomainSchema).toSet().size == 1;
+	inParameterEdges.parameterValue.eContainer.typeSelect(model::domain::DomainSchema).toSet().size == 1;
 
 context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
 	(name == "equal?" && inFlows.size >= 2) 

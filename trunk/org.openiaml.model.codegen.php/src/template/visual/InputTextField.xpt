@@ -66,16 +66,16 @@
 			function onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 				// check data type
 				«IF type != null»
-					var value = obj.value;
+					var value = obj.parameterTerm;
 					if (!can_cast(value, «EXPAND template::operations::Parameters::getTypeURI FOR type»)) {
 						// reset
-						obj.value = "";
+						obj.parameterTerm = "";
 						return false;
 					} else {
 						// reformat it
 						// but make sure it's represented as a string
 						// (this prevents the Date from switching timezones, etc)
-						obj.value = do_cast(do_cast(value, «EXPAND template::operations::Parameters::getTypeURI FOR type»), 'http://openiaml.org/model/datatypes#iamlString');						
+						obj.parameterTerm = do_cast(do_cast(value, «EXPAND template::operations::Parameters::getTypeURI FOR type»), 'http://openiaml.org/model/datatypes#iamlString');						
 					}
 				«ENDIF»
 			
@@ -91,9 +91,9 @@
 						this solves a problem where JWebUnit test cases would fail, but
 						running them locally (in a non-AJAX-synchronized environment) would pass. 
 					«ENDREM»
-					var pre_onChange_value = obj.value;
+					var pre_onChange_value = obj.parameterTerm;
 					«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»
-					obj.value = pre_onChange_value;
+					obj.parameterTerm = pre_onChange_value;
 				«ENDIF»
 
 				«REM»
@@ -130,12 +130,12 @@
 			 */
 			function onInput_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 				var f = function() {
-					if (onInput_timeout_«safeName()»_last_input === obj.value) {
+					if (onInput_timeout_«safeName()»_last_input === obj.parameterTerm) {
 						// only if the input is identical, do we actually execute onInput
 						// expand all onInputs
-						var pre_onChange_value = obj.value;
+						var pre_onChange_value = obj.parameterTerm;
 						«EXPAND template::events::EventCall::callEvent(false) FOR onInput-»
-						obj.value = pre_onChange_value;
+						obj.parameterTerm = pre_onChange_value;
 						
 						// reset
 						onInput_timeout_«safeName()»_last_input = null;
@@ -145,7 +145,7 @@
 						ajaxDecrement();
 					} else {
 						// otherwise, we re-register the onInput
-						onInput_timeout_«safeName()»_last_input = obj.value;
+						onInput_timeout_«safeName()»_last_input = obj.parameterTerm;
 						onInput_timeout_«safeName()» = window.setTimeout(f, 250);
 					}
 				};
@@ -154,7 +154,7 @@
 					// enable ajax block
 					ajaxIncrement();
 				
-					onInput_timeout_«safeName()»_last_input = obj.value;
+					onInput_timeout_«safeName()»_last_input = obj.parameterTerm;
 					onInput_timeout_«safeName()» = window.setTimeout(f, 250);
 				}
 			}
@@ -293,7 +293,7 @@
 				<?php log_message("Current URL: " . get_current_url()); ?>
 				var url = "open_id_callback.php?mode=start";
 				url += "&id=" + encodeURIComponent('«safeName()»');
-				url += "&url=" + encodeURIComponent(document.getElementById('«safeNameString(id)»').value);
+				url += "&url=" + encodeURIComponent(document.getElementById('«safeNameString(id)»').parameterTerm);
 				url += "&final=" + encodeURIComponent('<?php echo htmlspecialchars(get_current_url()); ?>');
 				url += create_stacktrace_parameter();
 				execute_queued_url(url, 'new_domain_instance');

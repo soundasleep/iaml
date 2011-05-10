@@ -655,6 +655,9 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Permission">
       <classifier href="iaml.ecore#//users/Permission"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="schema">
     <classifier href="iaml.ecore#//domain/DomainSchema"/>
@@ -863,6 +866,15 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainIterator">
       <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="library">
+    <classifier href="iaml.ecore#//FunctionLibrary"/>
+    <elements xsi:type="sgmf:ContainedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="EXSDDataType">
+      <classifier href="iaml.ecore#//EXSDDataType"/>
     </elements>
   </diagramEditors>
   <rootElement href="iaml.ecore#//InternetApplication"/>

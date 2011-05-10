@@ -18,8 +18,8 @@
 «ENDDEFINE»
 
 /**
- * @implementation PrimitiveOperation,AccessControlHandler
- *		An {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'. 
+ * @implementation BuiltinOperation,AccessControlHandler
+ *		An {@model AccessControlHandler} has a {@model BuiltinOperation} named 'check permissions'. 
  */
 «DEFINE accessControlHandlerOperationCall(Boolean php, model::ECARule wire, model::components::AccessControlHandler object) FOR model::Operation»
 	«IF php»

@@ -57,28 +57,28 @@
 /**
  * An operation defined by name.
  *
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'save'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'new'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'add role'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'add permission'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'remove role'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'remove permission'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'next'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'previous'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'reset'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'skip'. 
- * @implementation DomainIterator,PrimitiveOperation
- *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'jump'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'save'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'new'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'add role'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'add permission'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'remove role'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'remove permission'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'next'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'previous'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'reset'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'skip'. 
+ * @implementation DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} has a {@model BuiltinOperation} named 'jump'. 
  */
 «DEFINE namedDomainInstanceCall(Boolean php, model::ECARule wire, model::domain::DomainIterator object) FOR model::Operation»
 	«IF php»

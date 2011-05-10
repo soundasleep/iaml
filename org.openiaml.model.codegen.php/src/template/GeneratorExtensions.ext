@@ -335,11 +335,11 @@ model::domain::DomainSchema getDomainSchema(emf::EObject this) :
  * This is designed to return <code>true</code> if the current Operation
  * is 'set', and within an Operation called 'update'.
  */
-shouldExpandEventTriggers(model::PrimitiveOperation this ) :
+shouldExpandEventTriggers(model::BuiltinOperation this ) :
 	model::Operation.isInstance(eContainer) &&
 		getOperationName( eContainer ) == "update";
 	
-shouldExpandEventTriggersServer(model::PrimitiveOperation this ) :
+shouldExpandEventTriggersServer(model::BuiltinOperation this ) :
 	shouldExpandEventTriggers(this);
 	
 getOperationName(model::Operation this) :

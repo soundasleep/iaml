@@ -167,7 +167,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		field : Value( source.fieldValue == field )
 		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not ( Parameter ( eContainer == sw, term == field, value == wire )) 
+		not ( Parameter ( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -190,7 +190,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		field : Value( source.currentInput == field )
 		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not ( Parameter ( eContainer == sw, term == field, value == wire )) 
+		not ( Parameter ( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -263,7 +263,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		field : Value( target.fieldValue == field )
 		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
 		
-		not ( Parameter ( eContainer == sw, term == field, value == wire )) 
+		not ( Parameter ( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
 						
 		eval ( handler.veto( sw ))
 		
@@ -396,10 +396,10 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( term == parameter, value == cw )
+		pw : Parameter( parameterValue == parameter, parameterTerm == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( term == parameter, value == ecw )) 
+		not (epw : Parameter( parameterValue == parameter, parameterTerm == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -441,10 +441,10 @@ rule "Cascaded SyncWires: Parameters from parent to child (Domain Instances)"
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
-		pw : Parameter( term == parameter, value == cw )
+		pw : Parameter( parameterValue == parameter, parameterTerm == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : Parameter( term == parameter, value == ecw )) 
+		not (epw : Parameter( parameterValue == parameter, parameterTerm == ecw )) 
 						
 		eval ( handler.veto( cw ))
 		
@@ -540,9 +540,9 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
 		
 		field : Value( sourceElement.fieldValue == field )
-		pw : Parameter( eContainer == sw2, term == field, value == rw ) 
+		pw : Parameter( eContainer == sw2, parameterValue == field, parameterTerm == rw ) 
 
-		not( Parameter ( eContainer == sw2, term == field, value == initrw ))  
+		not( Parameter ( eContainer == sw2, parameterValue == field, parameterTerm == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
@@ -573,9 +573,9 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
 		
 		field : Value( sourceElement.fieldValue == field )
-		pw : Parameter( eContainer == sw2, term == field, value == rw ) 
+		pw : Parameter( eContainer == sw2, parameterValue == field, parameterTerm == rw ) 
 
-		not( Parameter ( eContainer == sw2, term == field, value == initrw ))  
+		not( Parameter ( eContainer == sw2, parameterValue == field, parameterTerm == initrw ))  
 						
 		eval ( handler.veto( sw ))
 		
@@ -741,7 +741,7 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		
 		attributeValue : Value ( attribute.fieldValue == attributeValue )
 		
-		param : Parameter ( term == attributeValue, value == run )  
+		param : Parameter ( parameterValue == attributeValue, parameterTerm == run )  
 		
 		# 'not empty' condition in the iterator
 		# TODO this could also be part of the DomainInstance

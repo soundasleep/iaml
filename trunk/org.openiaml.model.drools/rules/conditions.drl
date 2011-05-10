@@ -77,7 +77,7 @@ rule "Connect SimpleConditions to ECARules created by SyncWires (access/init) (o
 		
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue )
-		param : Parameter ( term == fvalue, value == run ) 
+		param : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
 		
 		# and the sync wire had a condition
 		condition : Function ( )
@@ -124,10 +124,10 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( term == param, value == sourceCw )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
 
 		# but this wire does not have it
-		not ( Parameter ( term == param, value == targetCw ))
+		not ( Parameter ( parameterValue == param, parameterTerm == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -154,7 +154,7 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue ) 
-		param2 : Parameter ( term == fvalue, value == run ) 
+		param2 : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
 
 		# and this SyncWire has a condition
 		condition : Function ( )
@@ -165,10 +165,10 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( term == param, value == sourceCw )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
 
 		# but this wire does not have it
-		not ( Parameter ( term == param, value == targetCw ))
+		not ( Parameter ( parameterValue == param, parameterTerm == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -230,7 +230,7 @@ rule "Connect SimpleConditions to ECARules created by SetWires (access/init) (on
 		
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue )
-		param : Parameter ( term == fvalue, value == run ) 
+		param : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
 		
 		# and the sync wire had a condition
 		condition : Function ( )
@@ -277,10 +277,10 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( term == param, value == sourceCw )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
 
 		# but this wire does not have it
-		not ( Parameter ( term == param, value == targetCw ))
+		not ( Parameter ( parameterValue == param, parameterTerm == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		
@@ -307,7 +307,7 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 
 		# and targets' value is being used for source's init
 		fvalue : Value ( target.fieldValue == fvalue ) 
-		param2 : Parameter ( term == fvalue, value == run ) 
+		param2 : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
 
 		# and this SyncWire has a condition
 		condition : Function ( )
@@ -318,10 +318,10 @@ rule "Connect ParameterEdges to SimpleConditions connected to ECARules created b
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
-		paramWire : Parameter( term == param, value == sourceCw )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
 
 		# but this wire does not have it
-		not (Parameter ( term == param, value == targetCw ))
+		not (Parameter ( parameterValue == param, parameterTerm == targetCw ))
 			
 		eval ( handler.veto( sourceCw ))
 		

@@ -80,7 +80,7 @@ rule "Connect parameter for input field for Autocomplete"
 		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
 		fieldValue : Value ( text.fieldValue == fieldValue )
 		
-		not ( Parameter ( term == fieldValue, value == iterator ) )
+		not ( Parameter ( parameterValue == fieldValue, parameterTerm == iterator ) )
 		
 		eval ( handler.veto( wire ))
 		

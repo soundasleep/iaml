@@ -217,7 +217,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
 		wire : ECARule( trigger == access, target == check )
-		not ( Parameter ( term == value, value == wire ))
+		not ( Parameter ( parameterValue == value, parameterTerm == wire ))
 				
 		eval ( handler.veto( scope ))
 		
@@ -254,7 +254,7 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		
 		expected : Value( ) 
-		expected_param : Parameter ( term == expected, value == login_handler )
+		expected_param : Parameter ( parameterValue == expected, parameterTerm == login_handler )
 		
 		not (StartNode( eContainer == o))
 		# not (FinishNode( eContainer == o)) - not necessary
@@ -499,7 +499,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 
 		expected : Value( ) 
-		expected_param : Parameter( term == expected, value == login_handler )
+		expected_param : Parameter( parameterValue == expected, parameterTerm == login_handler )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
@@ -607,7 +607,7 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
-		param : Parameter ( term == attribute, value == login_handler )
+		param : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		not ( InputTextField ( eContainer == form, name == attribute.name ))
 		
@@ -639,7 +639,7 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 
 		# from a role		
 		role : Role ( )
-		param : Parameter ( term == role, value == login_handler )
+		param : Parameter ( parameterValue == role, parameterTerm == login_handler )
 		
 		# an attribute in that role
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
@@ -677,7 +677,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
-		param : Parameter ( term == attribute, value == login_handler )
+		param : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
 		fieldValue : Value ( field.fieldValue == fieldValue )
@@ -685,7 +685,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		button : Button ( eContainer == form, name == "Login" )
 		run : ECARule ( trigger == button, target == operation, name == "onClick" )
 		
-		not ( Parameter ( term == fieldValue, value == run, name == attribute.name )) 
+		not ( Parameter ( parameterValue == fieldValue, parameterTerm == run, name == attribute.name )) 
 		
 		eval ( handler.veto( login_handler ))
 
@@ -712,7 +712,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		# from a role
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		param : Parameter ( term == role, value == login_handler )
+		param : Parameter ( parameterValue == role, parameterTerm == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
 		fieldValue : Value ( field.fieldValue == fieldValue )		
@@ -720,7 +720,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		button : Button ( eContainer == form, name == "Login" )
 		run : ECARule ( trigger == button, target == operation, name == "onClick" )
 		
-		not ( Parameter ( term == fieldValue, value == run, name == attribute.name )) 
+		not ( Parameter ( parameterValue == fieldValue, parameterTerm == run, name == attribute.name )) 
 		
 		eval ( handler.veto( login_handler ))
 
@@ -847,7 +847,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		attribute : DomainAttribute ( )
-		paramWire : Parameter ( term == attribute, value == login_handler )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
@@ -979,7 +979,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		paramWire : Parameter( term == role, value == login_handler )
+		paramWire : Parameter( parameterValue == role, parameterTerm == login_handler )
 		
 		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
@@ -1248,7 +1248,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 
 		attribute : DomainAttribute ( )
-		paramWire : Parameter ( term == attribute, value == login_handler )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
@@ -1298,7 +1298,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
-		paramWire : Parameter ( term == role, value == login_handler )
+		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
 		
 		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
@@ -1515,7 +1515,7 @@ rule "Create Query from a DomainSchema [user]"
 		)
 		
 		# the Role is the incoming parameter, not just a DomainAttribute
-		param : Parameter ( term == role, value == login_handler )
+		param : Parameter ( parameterValue == role, parameterTerm == login_handler )
 
 		# with at least one attribute
 		exists ( DomainAttribute ( eContainer == role ))
@@ -1546,7 +1546,7 @@ rule "Update Query from a DomainSchema [user]"
 		)
 		
 		# the Role is the incoming parameter, not just a DomainAttribute
-		param : Parameter ( term == dobj, value == login_handler )
+		param : Parameter ( parameterValue == dobj, parameterTerm == login_handler )
 
 		# with at least one attribute (trigger)
 		DomainAttribute ( eContainer == dobj )
@@ -1570,7 +1570,7 @@ rule "Create 'key attribute' property for LoginHandler[type = object]s"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		attribute : DomainAttribute ( )
-		paramWire : Parameter ( term == attribute, value == login_handler )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		not ( p : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
@@ -1593,7 +1593,7 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
-		paramWire : Parameter ( term == role, value == login_handler )
+		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
 		
 		not ( p : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
@@ -1616,7 +1616,7 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 		
 		object : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == object )
-		paramWire : Parameter ( term == attribute, value == login_handler )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1644,7 +1644,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		
 		object : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == object )
-		paramWire : Parameter ( term == attribute, value == login_handler )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1654,7 +1654,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
-		not ( Parameter ( term == key, value == instance ))
+		not ( Parameter ( parameterValue == key, parameterTerm == instance ))
 		
 		eval ( handler.veto( login_handler ))
 		
@@ -1672,7 +1672,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		paramWire : Parameter ( term == role, value == login_handler )
+		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
 		
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1682,7 +1682,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
-		not ( Parameter ( term == key, value == instance ))
+		not ( Parameter ( parameterValue == key, parameterTerm == instance ))
 		
 		eval ( handler.veto( login_handler ))
 		
@@ -1794,7 +1794,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		# LoginHandler selecting from a DomainAttribute
 		exists (
 			sourceAttribute : DomainAttribute ( eContainer == schema ) and
-			param : Parameter ( term == sourceAttribute, value == login_handler )
+			param : Parameter ( parameterValue == sourceAttribute, parameterTerm == login_handler )
 		)
 		
 		source : DomainSource ( )
@@ -1826,7 +1826,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		schema : DomainSchema ( )
 		
 		# LoginHandler selecting from a DomainSchema
-		param : Parameter ( term == schema, value == login_handler )
+		param : Parameter ( parameterValue == schema, parameterTerm == login_handler )
 		
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == schema )
@@ -1875,7 +1875,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 
 		# but a <em>different</em> schema is connected		
 		other_schema : DomainSchema ( )
-		param : Parameter ( term == other_schema, value == login_handler )
+		param : Parameter ( parameterValue == other_schema, parameterTerm == login_handler )
 		eval ( other_schema != expected_schema )
 		
 		# and our expected schema has a source
@@ -1910,7 +1910,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		# this will also cover if there is a Role and a Permission
 
 		# but the same schema is selected		
-		param : Parameter ( term == expected_schema, value == login_handler )
+		param : Parameter ( parameterValue == expected_schema, parameterTerm == login_handler )
 		
 		# and our expected schema has a source
 		source : DomainSource ( )
@@ -1954,7 +1954,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		set : SetWire ( from == login_handler, to == iterator )
 		
 		# the expected schema is connected		
-		param : Parameter ( term == default_schema, value == login_handler )
+		param : Parameter ( parameterValue == default_schema, parameterTerm == login_handler )
 		
 		# and our expected schema has a source
 		source : DomainSource ( )

@@ -361,9 +361,9 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		user : Role ( eContainer == root, name == "User" )
 	
 		# if there is already an incoming parameter wire, don't connect up User
-		not (Parameter ( value == login_handler ))
+		not (Parameter ( parameterTerm == login_handler ))
 		
-		not (Parameter ( term == user, value == login_handler ))
+		not (Parameter ( parameterValue == user, parameterTerm == login_handler ))
 		
 		eval ( handler.veto( login_handler ))
 	
@@ -512,7 +512,7 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( Parameter ( term == instance, value == ach )) 
+		not ( Parameter ( parameterValue == instance, parameterTerm == ach )) 
 					
 		eval ( handler.veto( ach ))
 	
@@ -532,7 +532,7 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( Parameter ( term == instance, value == ach )) 
+		not ( Parameter ( parameterValue == instance, parameterTerm == ach )) 
 					
 		eval ( handler.veto( ach ))
 	

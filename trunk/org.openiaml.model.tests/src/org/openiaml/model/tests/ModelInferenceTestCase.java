@@ -31,6 +31,7 @@ import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
+import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
@@ -434,7 +435,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		int count = 0;
 		
 		for (Parameter e : edges) {
-			if (from.equals(e.getTerm())) {
+			if (from.equals(e.getParameterValue())) {
 				count++;
 				result = e;
 			}
@@ -455,7 +456,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		Set<Parameter> result = new HashSet<Parameter>();
 		
 		for (Parameter w : from.getOutParameterEdges()) {
-			if (to.equals(w.getValue())) {
+			if (to.equals(w.getParameterTerm())) {
 				result.add(w);
 			}
 		}
@@ -475,7 +476,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		Set<Parameter> result = new HashSet<Parameter>();
 		
 		for (Parameter w : from.getOutParameterEdges()) {
-			if (name.equals(w.getName()) && to.equals(w.getValue())) {
+			if (name.equals(w.getName()) && to.equals(w.getParameterTerm())) {
 				result.add(w);
 			}
 		}
@@ -484,16 +485,16 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
-	 * Get <em>all</em> ConditionEdge connecting the given elements,
+	 * Get <em>all</em> {@link ComplexTerm}s connecting the given elements,
 	 * contained with the given container element or any of its children.
 	 *
-	 * @return the found ConditionEdges
+	 * @return the found {@link ComplexTerm}s
 	 * @throws JaxenException
 	 */
-	protected Set<SimpleCondition> getSimpleConditionsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
-		Set<SimpleCondition> result = new HashSet<SimpleCondition>();
+	protected Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+		Set<ComplexTerm> result = new HashSet<ComplexTerm>();
 		
-		for (SimpleCondition w : from.getConditioned()) {
+		for (ComplexTerm w : from.getConditioned()) {
 			if (to.equals(w.getConditioned())) {
 				result.add(w);
 			}
@@ -503,18 +504,18 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
-	 * Get <em>all</em> SimpleConditions connecting the given elements,
+	 * Get <em>all</em> {@link ComplexTerm}s connecting the given elements,
 	 * contained with the given container element or any of its children,
 	 * with the given name.
 	 *
 	 * @param name the name to search for
-	 * @return the found ConditionEdges
+	 * @return the found {@link ComplexTerm}s
 	 * @throws JaxenException
 	 */
-	protected Set<SimpleCondition> getSimpleConditionsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		Set<SimpleCondition> result = new HashSet<SimpleCondition>();
+	protected Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		Set<ComplexTerm> result = new HashSet<ComplexTerm>();
 		
-		for (SimpleCondition w : from.getConditioned()) {
+		for (ComplexTerm w : from.getConditioned()) {
 			if (to.equals(w.getConditioned())) {
 				result.add(w);
 			}
@@ -779,9 +780,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param type
 	 * @return
 	 */
-	public Set<Wire> typeSelect(Set<? extends Wire> collection, Class<? extends Wire> type) {
-		Set<Wire> result = new HashSet<Wire>();
-		for (Wire o : collection) {
+	public Set<Object> typeSelect(Set<? extends Object> collection, Class<? extends Object> type) {
+		Set<Object> result = new HashSet<Object>();
+		for (Object o : collection) {
 			if (type.isInstance(o))
 				result.add(o);
 		}

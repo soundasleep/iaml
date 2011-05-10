@@ -31,6 +31,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.ParameterValue;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.SimpleCondition;
@@ -458,7 +459,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public Parameter generatedParameter(GeneratesElements by, ContainsWires container, ParameterEdgesSource source, ParameterEdgeDestination target) throws InferenceException {
-		Parameter wire = (Parameter) createRelationship(container, ModelPackage.eINSTANCE.getParameter(), source, target, ModelPackage.eINSTANCE.getContainsWires_ParameterEdges(), ModelPackage.eINSTANCE.getParameter_Term(), ModelPackage.eINSTANCE.getParameter_Value() );
+		Parameter wire = (Parameter) createRelationship(container, ModelPackage.eINSTANCE.getParameter(), source, target, ModelPackage.eINSTANCE.getContainsWires_ParameterEdges(), ModelPackage.eINSTANCE.getParameter_ParameterValue(), ModelPackage.eINSTANCE.getParameter_ParameterTerm() );
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -584,7 +585,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public SimpleCondition generatedSimpleCondition(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
-		SimpleCondition wire = (SimpleCondition) createRelationship(container, ModelPackage.eINSTANCE.getSimpleCondition(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), ModelPackage.eINSTANCE.getSimpleCondition_Function(), ModelPackage.eINSTANCE.getSimpleCondition_Conditioned());
+		SimpleCondition wire = (SimpleCondition) createRelationship(container, ModelPackage.eINSTANCE.getSimpleCondition(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), ModelPackage.eINSTANCE.getComplexTerm_Function(), ModelPackage.eINSTANCE.getComplexTerm_Conditioned());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -651,8 +652,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	
-	public void setType(Value element, EDataType value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getValue_Type(), value);
+	public void setType(ParameterValue element, EDataType value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getParameterValue_Type(), value);
 	}
 
 	public void setType(Arithmetic element, ArithmeticOperationTypes value) throws InferenceException {

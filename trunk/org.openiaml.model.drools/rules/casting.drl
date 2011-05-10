@@ -153,7 +153,7 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		upd : Operation ( name == "init", eContainer == source )
 		
 		run : ECARule ( trigger == event, target == upd )
-		p2 : Parameter ( term == fieldValue, value == run )
+		p2 : Parameter ( parameterValue == fieldValue, parameterTerm == run )
 		
 		condition : Function ( name == "can cast?", eContainer == source )
 		

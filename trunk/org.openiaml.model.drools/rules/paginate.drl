@@ -320,7 +320,7 @@ rule "Connect 'target' property to ECARule in Last button"
 		jumpOp : Operation ( instance.jump == jumpOp )
 		run : ECARule ( trigger == onClick, target == jumpOp )
 		
-		not ( param : Parameter ( term == property, value == run ))
+		not ( param : Parameter ( parameterValue == property, parameterTerm == run ))
 		
 		eval ( handler.veto( run ))
 
@@ -476,7 +476,7 @@ rule "Connect results parameter to Results label update (onChange)"
 		run : ECARule ( trigger == event, target == updateOp )
 		property : Value ( instance.results == property )
 		
-		not ( param : Parameter ( term == property, value == run ))
+		not ( param : Parameter ( parameterValue == property, parameterTerm == run ))
 		
 		eval ( handler.veto( set ))
 		
@@ -527,7 +527,7 @@ rule "Connect results parameter to Results label update (onAccess)"
 		run : ECARule ( trigger == event, target == updateOp )
 		property : Value ( instance.results == property )
 		
-		not ( param : Parameter ( term == property, value == run ))
+		not ( param : Parameter ( parameterValue == property, parameterTerm == run ))
 		
 		eval ( handler.veto( set ))
 		

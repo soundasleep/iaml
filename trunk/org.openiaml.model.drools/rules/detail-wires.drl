@@ -260,7 +260,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		
 		pk : Value ( pkInstance.fieldValue == pk ) 
 		
-		not ( Parameter ( term == pk, value == nav ))
+		not ( Parameter ( parameterValue == pk, parameterTerm == nav ))
 	
 		eval ( handler.veto( detail ))
 	
@@ -302,7 +302,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		
 		pk : Value ( hidden.fieldValue == pk ) 
 		
-		not ( Parameter ( term == pk, value == nav ))
+		not ( Parameter ( parameterValue == pk, parameterTerm == nav ))
 	
 		eval ( handler.veto( detail ))
 	

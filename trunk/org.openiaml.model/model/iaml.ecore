@@ -136,7 +136,7 @@
       <details key="documentation" value="Represents some type of executable step, which may contain logic flows, data flows or other operations."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//operations/ExecutionEdgesSource #//ActionEdgeSource">
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltinOperation" eSuperTypes="#//Operation #//operations/ExecutionEdgesSource #//ActionEdgeSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="renamed from ChainedOperation -> PrimitiveOperation in 0.4"/>
     </eAnnotations>
@@ -144,7 +144,7 @@
       <details key="documentation" value="Fundamental building blocks of application functionality. Their intent is based on their name."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//PrimitiveOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//ContainsFunctions #//ContainsProperties">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//BuiltinOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//ContainsFunctions #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 added Scope supertype&#xD;&#xA;0.4 removed '_shouldnt_properties'&#xD;&#xA;0.4.2 removed Scope supertype"/>
     </eAnnotations>

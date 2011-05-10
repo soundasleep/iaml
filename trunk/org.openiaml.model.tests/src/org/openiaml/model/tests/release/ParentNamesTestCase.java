@@ -63,7 +63,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		// Event
 		ModelPackage.eINSTANCE.getEvent(),
 		// Operation
-		ModelPackage.eINSTANCE.getPrimitiveOperation(),
+		ModelPackage.eINSTANCE.getBuiltinOperation(),
 		ModelPackage.eINSTANCE.getCompositeOperation(),
 		// Condition
 		ModelPackage.eINSTANCE.getBuiltinProperty(),

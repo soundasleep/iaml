@@ -202,8 +202,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="DecisionNode">
       <classifier href="iaml.ecore#//operations/DecisionNode"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -232,8 +232,8 @@
   </diagramEditors>
   <diagramEditors id="element">
     <classifier href="iaml.ecore#//ApplicationElement"/>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -259,8 +259,8 @@
   </diagramEditors>
   <diagramEditors id="email">
     <classifier href="iaml.ecore#//scopes/Email"/>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -344,8 +344,8 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
       <classifier href="iaml.ecore#//Event"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -449,8 +449,8 @@
   </diagramEditors>
   <diagramEditors id="instance">
     <classifier href="iaml.ecore#//domain/DomainInstance"/>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -473,13 +473,13 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveOperation">
+    <elements xsi:type="sgmf:ContainedNode" id="" name="BuiltinOperation">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/previous"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/next"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/reset"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/skip"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveProperty">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/hasPrevious"/>
@@ -550,8 +550,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="CastNode">
       <classifier href="iaml.ecore#//operations/CastNode"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -589,8 +589,8 @@
   </diagramEditors>
   <diagramEditors id="root">
     <classifier href="iaml.ecore#//InternetApplication"/>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="EXSDDataType">
       <classifier href="iaml.ecore#//EXSDDataType"/>
@@ -675,8 +675,8 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
       <classifier href="iaml.ecore#//Event"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -774,8 +774,8 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onClick"/>
       <classifier href="iaml.ecore#//Event"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
-      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>

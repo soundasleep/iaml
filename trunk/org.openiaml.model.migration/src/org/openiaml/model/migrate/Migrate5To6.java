@@ -219,11 +219,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		
 		/* issue 244 */
 		
-		if ("parameterEdges".equals(nodeName) && "from".equals(name)) {
-			return "term";
+		if (("parameterEdges".equals(nodeName) && "from".equals(name)) ||
+				("parameterEdges".equals(nodeName) && "term".equals(name))) {
+			return "parameterValue";
 		}
-		if ("parameterEdges".equals(nodeName) && "to".equals(name)) {
-			return "value";
+		if (("parameterEdges".equals(nodeName) && "to".equals(name)) ||
+				("parameterEdges".equals(nodeName) && "value".equals(name))) {
+			return "parameterTerm";
 		}
 
 		if ("actions".equals(nodeName) && "from".equals(name)) {
@@ -377,7 +379,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			if ("attributes".equals(parentName) || "fieldValue".equals(parentName) 
 					|| "properties".equals(parentName) || "children".equals(parentName)
 					|| "labels".equals(parentName) || "variables".equals(parentName)
-					|| "parameters".equals(parentName)) {
+					|| "parameters".equals(parentName) || "currentInput".equals(parentName)) {
 				
 				return true;
 			}

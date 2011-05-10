@@ -67,9 +67,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsOperations/operations"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ApplicationElement"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//ComplexTerm">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ComplexTerm/function"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ComplexTerm/conditioned"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//ParameterValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ParameterValue/type"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//Value">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Value/defaultValue"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Value/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Value/readOnly"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//VisibleThing">
@@ -153,13 +159,10 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Parameter/parameterName"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/term"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/parameterValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/parameterTerm"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//SimpleCondition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//SimpleCondition/function"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//SimpleCondition/conditioned"/>
-    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//SimpleCondition"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//visual/RenderTypes">

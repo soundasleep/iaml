@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
+import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.SimpleCondition;
@@ -155,12 +156,12 @@ public class GetShortcuts {
 			}
 			if (e instanceof ConditionEdgesSource) {
 				// get all incoming edges
-				elements.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, e,
+				elements.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, e,
 						((ConditionEdgesSource) e).getConditioned(), registry, updater));
 			}
 			if (e instanceof ConditionEdgeDestination) {
 				// get all incoming edges
-				elements.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, e,
+				elements.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, e,
 						((ConditionEdgeDestination) e).getConditions(), registry, updater));
 			}
 			if (e instanceof DomainSchema) {
@@ -229,12 +230,12 @@ public class GetShortcuts {
 
 			if (wire instanceof ConditionEdgesSource) {
 				// get all incoming edges
-				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
+				result.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, wire,
 						((ConditionEdgesSource) wire).getConditioned(), registry, updater));
 			}
 			if (wire instanceof ConditionEdgeDestination) {
 				// get all incoming edges
-				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
+				result.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, wire,
 						((ConditionEdgeDestination) wire).getConditions(), registry, updater));
 			}
 
@@ -287,12 +288,12 @@ public class GetShortcuts {
 
 			if (wire instanceof ConditionEdgesSource) {
 				// get all incoming edges
-				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
+				result.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, wire,
 						((ConditionEdgesSource) wire).getConditioned(), registry, updater));
 			}
 			if (wire instanceof ConditionEdgeDestination) {
 				// get all incoming edges
-				result.addAll(getAllShortcutsFromSimpleConditions(doneAlready, edges, view, wire,
+				result.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, wire,
 						((ConditionEdgeDestination) wire).getConditions(), registry, updater));
 			}
 		}
@@ -318,8 +319,8 @@ public class GetShortcuts {
 		for (Parameter wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
-				updater.considerElementForShortcut(wire.getTerm(), wire, view, source, doneAlready, result, edges);
-				updater.considerElementForShortcut(wire.getValue(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getParameterValue(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getParameterTerm(), wire, view, source, doneAlready, result, edges);
 			}
 		}
 
@@ -493,12 +494,12 @@ public class GetShortcuts {
 		return result;
 	}
 
-	private static List<SimpleCondition> getAllShortcutsFromSimpleConditions(
+	private static List<ComplexTerm> getAllShortcutsFromComplexTerms(
 			List<EObject> doneAlready,
 			List<EObject> edges,
 			View view,
 			EObject source,
-			List<SimpleCondition> outEdges,
+			List<ComplexTerm> outEdges,
 			IVisualIDRegistryInstance registry,
 			IDiagramUpdater updater) {
 		List result = new LinkedList();
@@ -508,7 +509,7 @@ public class GetShortcuts {
 		// get all nodes at the start and end of the edge
 		// that are not the original object source
 		// NOTE: model-specific
-		for (SimpleCondition wire : outEdges) {
+		for (ComplexTerm wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
 				updater.considerElementForShortcut(wire.getFunction(), wire, view, source, doneAlready, result, edges);
@@ -634,7 +635,7 @@ public class GetShortcuts {
 			return ((DataFlowEdge) relationship).getFrom();
 		}
 		if (relationship instanceof Parameter) {
-			return ((Parameter) relationship).getTerm();
+			return ((Parameter) relationship).getParameterValue();
 		}
 		if (relationship instanceof ExtendsEdge) {
 			return ((ExtendsEdge) relationship).getFrom();
@@ -700,7 +701,7 @@ public class GetShortcuts {
 			return ((DataFlowEdge) relationship).getTo();
 		}
 		if (relationship instanceof Parameter) {
-			return ((Parameter) relationship).getValue();
+			return ((Parameter) relationship).getParameterTerm();
 		}
 		if (relationship instanceof ExtendsEdge) {
 			return ((ExtendsEdge) relationship).getTo();

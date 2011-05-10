@@ -140,11 +140,11 @@ public class EdgeTypes {
 		) );
 		
 		edgeTypes.add( new EdgeType(
-				ModelPackage.eINSTANCE.getSimpleCondition(), /* type */
+				ModelPackage.eINSTANCE.getComplexTerm(), /* type */
 				WiresPackage.eINSTANCE.getConditionEdgesSource(), /* source */
 				WiresPackage.eINSTANCE.getConditionEdgeDestination(), /* destination */
-				ModelPackage.eINSTANCE.getSimpleCondition_Function(), /* from ref */
-				ModelPackage.eINSTANCE.getSimpleCondition_Conditioned(), /* to ref */
+				ModelPackage.eINSTANCE.getComplexTerm_Function(), /* from ref */
+				ModelPackage.eINSTANCE.getComplexTerm_Conditioned(), /* to ref */
 				WiresPackage.eINSTANCE.getConditionEdgesSource_Conditioned(),
 				WiresPackage.eINSTANCE.getConditionEdgeDestination_Conditions()
 		) );
@@ -183,8 +183,8 @@ public class EdgeTypes {
 				ModelPackage.eINSTANCE.getParameter(), /* type */
 				WiresPackage.eINSTANCE.getParameterEdgesSource(), /* source */
 				WiresPackage.eINSTANCE.getParameterEdgeDestination(), /* destination */
-				ModelPackage.eINSTANCE.getParameter_Term(), /* from ref */
-				ModelPackage.eINSTANCE.getParameter_Value(), /* to ref */
+				ModelPackage.eINSTANCE.getParameter_ParameterValue(), /* from ref */
+				ModelPackage.eINSTANCE.getParameter_ParameterTerm(), /* to ref */
 				WiresPackage.eINSTANCE.getParameterEdgesSource_OutParameterEdges(),
 				WiresPackage.eINSTANCE.getParameterEdgeDestination_InParameterEdges()
 		) );

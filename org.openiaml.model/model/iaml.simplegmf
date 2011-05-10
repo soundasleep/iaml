@@ -885,12 +885,12 @@
   </edgeReferences>
   <edgeReferences name="Parameter">
     <classifier href="iaml.ecore#//Parameter"/>
-    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//Parameter/term"/>
-    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//Parameter/value"/>
+    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//Parameter/parameterValue"/>
+    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//Parameter/parameterTerm"/>
   </edgeReferences>
-  <edgeReferences name="SimpleCondition">
-    <classifier href="iaml.ecore#//SimpleCondition"/>
-    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//SimpleCondition/function"/>
-    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//SimpleCondition/conditioned"/>
+  <edgeReferences name="ComplexTerm">
+    <classifier href="iaml.ecore#//ComplexTerm"/>
+    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//ComplexTerm/function"/>
+    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//ComplexTerm/conditioned"/>
   </edgeReferences>
 </sgmf:GMFConfiguration>

@@ -20,7 +20,7 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
+ * Issue 210: Create BuiltinOperations rather than CompositeOperations.
  * TODO do not create 'update' operation for {@model Property#readOnly} Properties.
  *
  * @inference VisibleThing,Operation
@@ -36,7 +36,7 @@ rule "Create 'update' operation for VisibleThings"
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
+		BuiltinOperation operation = handler.generatedBuiltinOperation(f, f);
 		handler.setName(operation, "update");
 		queue.add(operation, drools);
 		
@@ -54,14 +54,14 @@ rule "Create 'update' operation for domain attribute instance"
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
+		BuiltinOperation operation = handler.generatedBuiltinOperation(f, f);
 		handler.setName(operation, "update");
 		queue.add(operation, drools);
 		
 end
 
 /**
- * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
+ * Issue 210: Create BuiltinOperations rather than CompositeOperations.
  *
  * @inference VisibleThing
  *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will contain an {@model Operation} named "init".
@@ -76,7 +76,7 @@ rule "Create 'init' operation for VisibleThings"
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
+		BuiltinOperation operation = handler.generatedBuiltinOperation(f, f);
 		handler.setName(operation, "init");
 		queue.add(operation, drools);
 		
@@ -149,7 +149,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		queue.add(cancel, drools);
 		// end add 'cast' node
 		
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
 		handler.setName(op, "set");
 		queue.add(op, drools);
 		
@@ -230,7 +230,7 @@ rule "Create components of 'set value XXX' operations"
 		queue.add(cancel, drools);
 		// end add 'cast' node
 		
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
 		handler.setName(op, "set");
 		queue.add(op, drools);
 		
@@ -269,7 +269,7 @@ end
 /**
  * @inference CompositeOperation
  *		An empty {@model CompositeOperation} named "alert" will automatically be completed 
- *		with {@model ActivityNode}s that will execute the {@model PrimitiveOperation} named "alert".
+ *		with {@model ActivityNode}s that will execute the {@model BuiltinOperation} named "alert".
  */
 rule "Create components of 'alert' operation"
 	when
@@ -284,7 +284,7 @@ rule "Create components of 'alert' operation"
 		handler.setName(parameter, "alertText");
 		queue.add(parameter, drools);
 		
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
 		handler.setName(op, "alert");
 		queue.add(op, drools);
 		

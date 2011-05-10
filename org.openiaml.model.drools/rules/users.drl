@@ -382,7 +382,7 @@ rule "Create 'check permissions' operation in AccessControlHandler"
 		eval ( handler.veto( ach ))
 	
 	then
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(ach, ach);
+		BuiltinOperation op = handler.generatedBuiltinOperation(ach, ach);
 		handler.setName(op, "check permissions");
 		queue.add(op, drools);
 

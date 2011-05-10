@@ -565,7 +565,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		queue.add(edge2, drools);
 
 		# ok: set value operation
-		PrimitiveOperation setProperty = handler.generatedPrimitiveOperation(loginOperation, loginOperation);
+		BuiltinOperation setProperty = handler.generatedBuiltinOperation(loginOperation, loginOperation);
 		handler.setName(setProperty, "set");
 		queue.add(setProperty, drools);
 		
@@ -1169,7 +1169,7 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		queue.add(finish, drools);
 		
 		# set
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
 		handler.setName(op, "set");
 		queue.add(op, drools);
 		
@@ -1264,7 +1264,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 	then
 	
 		# set
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
 		handler.setName(op, "set");
 		queue.add(op, drools);
 	
@@ -1314,7 +1314,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 	then
 	
 		# set
-		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
 		handler.setName(op, "set");
 		queue.add(op, drools);
 	

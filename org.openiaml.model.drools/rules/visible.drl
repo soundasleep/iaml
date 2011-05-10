@@ -123,9 +123,9 @@ end
 
 /**
  * @inference VisibleThing
- *		A {@model VisibleThing} has a {@model PrimitiveOperation} 'hide'.
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} 'hide'.
  */
-rule "Create 'hide' PrimitiveOperation for VisibleThing"
+rule "Create 'hide' BuiltinOperation for VisibleThing"
 	when
 		tf : VisibleThing( )
 		not ( op : Operation ( name == "hide", eContainer == tf ))
@@ -133,7 +133,7 @@ rule "Create 'hide' PrimitiveOperation for VisibleThing"
 		eval ( handler.veto( tf ))
 	
 	then
-		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
+		BuiltinOperation warning = handler.generatedBuiltinOperation(tf, tf);
 		handler.setName(warning, "hide");
 		queue.add(warning, drools);
 	
@@ -141,9 +141,9 @@ end
 
 /**
  * @inference VisibleThing
- *		A {@model VisibleThing} has a {@model PrimitiveOperation} 'show'.
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} 'show'.
  */
-rule "Create 'show' PrimitiveOperation for VisibleThing"
+rule "Create 'show' BuiltinOperation for VisibleThing"
 	when
 		tf : VisibleThing( )
 		not ( op : Operation ( name == "show", eContainer == tf ))
@@ -151,7 +151,7 @@ rule "Create 'show' PrimitiveOperation for VisibleThing"
 		eval ( handler.veto( tf ))
 	
 	then
-		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
+		BuiltinOperation warning = handler.generatedBuiltinOperation(tf, tf);
 		handler.setName(warning, "show");
 		queue.add(warning, drools);
 	

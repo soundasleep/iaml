@@ -660,8 +660,8 @@ boolean isNumericXSD(xsd::XSDSimpleTypeDefinition this) :
 		|| (baseTypeDefinition != null && isNumericXSD(baseTypeDefinition))
 	);
 
-boolean isNumeric(ecore::EDataType this) :
-	throwException("Cannot check isNumeric on EDataTypes");
+boolean isNumeric(ecore::EClassifier this) :
+	throwException("Cannot check isNumeric on EClassifiers");
 
 boolean isNumeric(model::EXSDDataType this) :
 	isNumericXSD(definition);

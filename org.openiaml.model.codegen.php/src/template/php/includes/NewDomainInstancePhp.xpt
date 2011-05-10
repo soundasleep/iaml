@@ -108,5 +108,5 @@ echo_necessary_update_callbacks();
  * The parameter to pass to the client.
  */
 «DEFINE clientSideOperationCallParamater(model::ECARule wire) FOR model::Parameter»
-	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR term»)
+	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR parameterValue»)
 «ENDDEFINE»

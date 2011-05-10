@@ -5,6 +5,10 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+«DEFINE callCondition(Boolean php, Boolean inStoreDb) FOR model::ComplexTerm»
+	«throwException("Runtime implementation of a generic ComplexTerm has not been implemented: " + this)»
+«ENDDEFINE»
+
 «DEFINE callCondition(Boolean php, Boolean inStoreDb) FOR model::SimpleCondition»
 	/* '«simpleName(function)»' */
 	condition_«conditionName(function)»(

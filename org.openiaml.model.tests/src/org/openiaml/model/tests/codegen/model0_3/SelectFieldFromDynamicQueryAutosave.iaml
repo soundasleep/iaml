@@ -6,7 +6,7 @@
         <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.12109c6242e.1dc" outWires="wires.12109c6249b.5e" name="name" outExtendsEdges="wires.128665d425c.85">
           <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" name="sync" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac"/>
           <extendsEdges id="wires.128665d425c.85" from="model.12109c6242e.1dc" to="model.12109331eea.10ac"/>
-          <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.415" name="save" rules="wires.1213cee9bad.f4"/>
+          <operations xsi:type="iaml:BuiltinOperation" id="model.1213cee9b4f.415" name="save" rules="wires.1213cee9bad.f4"/>
         </featureInstances>
       </currentInstance>
     </elements>

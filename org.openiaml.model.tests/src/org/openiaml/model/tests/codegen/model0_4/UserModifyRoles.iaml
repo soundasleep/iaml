@@ -4,7 +4,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
     <wires xsi:type="iaml.wires:SyncWire" id="sync" name="sync" from="domain.128807fbeba.cd9" to="new"/>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cd9" name="new instance" outWires="sync" query="new" outSelects="domain.128807fbeba.ce4">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.14" name="save" rules="wires.1233b53a3ce.a"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.14" name="save" rules="wires.1233b53a3ce.a"/>
     </elements>
     <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" listeners="wires.1233b53a3ce.a">
       <ecaRules id="wires.1233b53a3ce.a" name="onClick" trigger="visual.1233b53a313.1a" target="model.1233b53a1ca.14"/>
@@ -19,10 +19,10 @@
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" name="set" from="components.1233b53a67e.19" to="domain.128807fbeba.cda"/>
     </elements>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cda" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.71" name="add role" rules="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.72" name="remove role" rules="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.73" name="add permission" rules="wires.1233b53a3ce.a6"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.74" name="remove permission" rules="wires.1233b53a3ce.16c"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.71" name="add role" rules="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.72" name="remove role" rules="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.73" name="add permission" rules="wires.1233b53a3ce.a6"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.74" name="remove permission" rules="wires.1233b53a3ce.16c"/>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.7d" name="add new roles">

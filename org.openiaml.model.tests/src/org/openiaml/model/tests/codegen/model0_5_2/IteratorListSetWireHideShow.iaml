@@ -6,8 +6,8 @@
       <selectEdges id="domain.128a9b17dce.42" from="domain.128a9b17dce.34" to="domain.128a9b17dce.3"/>
     </elements>
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.128a9b17daf.1" id="visual.128a9b17daf.17" name="List">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.128ae917af5.1d" name="hide" rules="wires.128ae917be0.9"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.128ae917af5.1f" name="show" rules="wires.128ae917be0.b"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.128ae917af5.1d" name="hide" rules="wires.128ae917be0.9"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.128ae917af5.1f" name="show" rules="wires.128ae917be0.b"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.128ae917bd0.2e" name="hide list" listeners="wires.128ae917be0.9">
       <ecaRules id="wires.128ae917be0.9" name="onClick" trigger="visual.128ae917bd0.2e" target="model.128ae917af5.1d"/>

@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.9" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.1111" query="new" outSelects="domain.128807fbeba.1115">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.1b4" name="save" rules="wires.1213cee9bad.31"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1213cee9b4f.1b4" name="save" rules="wires.1213cee9bad.31"/>
       <currentInstance id="migrated0" name="Current instance">
         <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.1213cee9b4f.e1" inWires="wires.1213cee9bad.18" name="name"/>
       </currentInstance>

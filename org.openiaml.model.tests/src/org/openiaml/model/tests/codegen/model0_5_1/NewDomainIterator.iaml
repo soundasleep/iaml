@@ -4,7 +4,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12848bd2796.7" name="Edit News">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d16" name="new news" outWires="wires.12848bd27a5.1" query="new" outSelects="domain.12848bd2832.1e">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.12848c09018.12" name="save" rules="wires.12848c091be.15"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.12848c09018.12" name="save" rules="wires.12848c091be.15"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12848bd27a5.1" name="sync" from="domain.128807fbeba.d16" to="visual.12848bd2796.20"/>
       <selectEdges id="domain.12848bd2832.1e" from="domain.128807fbeba.d16" to="domain.128488dc790.7"/>
     </elements>

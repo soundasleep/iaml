@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1b6" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1230bdbb0e7.8e" name="my session">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.fb0" name="new" outWires="wires.1230bdbb01c.1d4" query="new" outSelects="domain.128807fbeba.fb4" autosave="true">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1230bdbae76.2d4" name="new" rules="wires.1230bdbb01c.1f7"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1230bdbae76.2d4" name="new" rules="wires.1230bdbb01c.1f7"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1230bdbb01c.1d4" name="sync" from="domain.128807fbeba.fb0" to="visual.1230bdbafce.203"/>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1bb" name="container">

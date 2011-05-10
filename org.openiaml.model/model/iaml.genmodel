@@ -48,7 +48,7 @@
     <genClasses ecoreClass="iaml.ecore#//Event"/>
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation"/>
-    <genClasses ecoreClass="iaml.ecore#//PrimitiveOperation"/>
+    <genClasses ecoreClass="iaml.ecore#//BuiltinOperation"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/dataEdges"/>

@@ -41,7 +41,7 @@ public class PluginsTestCase extends XmlTestCase {
 	
 	public static final String[] NO_MANIFEST_PLUGINS = new String[] {
 		"org.openiaml.model.tests.elements",
-		"org.openiaml.model.editor",
+		"org.openiaml.model.feature",
 		"org.openiaml.update",
 	};
 	

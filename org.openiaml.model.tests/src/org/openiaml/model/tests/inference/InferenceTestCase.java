@@ -138,24 +138,27 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * Value.
+	 * {@link Value}.
 	 *
 	 * @return The element found
 	 */
 	public Value assertHasValue(
 			ContainsProperties element, String string) throws JaxenException {
-		return (Value) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+		List<Object> results = nameSelect(element.getProperties(), string);
+		assertEquals(1, results.size());
+		return (Value) results.get(0);
 	}
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * Value.
+	 * {@link Value}.
 	 *
 	 * @return The element found
 	 */
 	public void assertHasNoValue(
 			ApplicationElement element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
+		List<Object> results = nameSelect(element.getProperties(), string);
+		assertEquals(0, results.size());
 	}
 
 	/**
@@ -166,7 +169,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoValue(
 			Scope element, String string) throws JaxenException {
-		assertHasNone(element, "iaml.scopes:properties[iaml:name='" + string + "']");
+		List<Object> results = nameSelect(element.getProperties(), string);
+		assertEquals(0, results.size());
 	}
 
 	/**
@@ -177,7 +181,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoValue(
 			VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
+		List<Object> results = nameSelect(element.getProperties(), string);
+		assertEquals(0, results.size());
 	}
 
 	/**
@@ -262,7 +267,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * Permission.
+	 * {@link Permission}.
 	 *
 	 * @return The element found
 	 */
@@ -274,12 +279,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * Function.
+	 * {@link Function}.
 	 *
 	 * @return The element found
 	 */
 	public Function assertHasFunction(ContainsFunctions element, String string) throws JaxenException {
-		return (Function) queryOne(element, "iaml:conditions[iaml:name='" + string + "']");
+		List<Object> results = nameSelect(element.getFunctions(), string);
+		assertEquals(1, results.size());
+		return (Function) results.get(0);
 	}
 
 	/**

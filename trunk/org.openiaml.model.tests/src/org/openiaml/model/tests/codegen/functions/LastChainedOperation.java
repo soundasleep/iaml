@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.functions;
 
-import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.visual.Frame;
 
 /**
@@ -21,10 +21,10 @@ public class LastChainedOperation extends DroolsHelperFunctionsTestCase {
 	public void testLastChainedOperation() throws Exception {
 		
 		Frame home = assertHasFrame(root, "Home");
-		PrimitiveOperation o1 = assertHasPrimitiveOperation(home, "o1");
-		PrimitiveOperation o2 = assertHasPrimitiveOperation(home, "o2");
-		PrimitiveOperation o3 = assertHasPrimitiveOperation(home, "o3");
-		PrimitiveOperation o4 = assertHasPrimitiveOperation(home, "o4");
+		BuiltinOperation o1 = assertHasBuiltinOperation(home, "o1");
+		BuiltinOperation o2 = assertHasBuiltinOperation(home, "o2");
+		BuiltinOperation o3 = assertHasBuiltinOperation(home, "o3");
+		BuiltinOperation o4 = assertHasBuiltinOperation(home, "o4");
 		
 		assertEquals(o3, getHelper().lastChainedOperation(o1));
 		assertEquals(o3, getHelper().lastChainedOperation(o2));

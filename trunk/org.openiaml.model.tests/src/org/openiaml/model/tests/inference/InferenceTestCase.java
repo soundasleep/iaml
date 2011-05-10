@@ -21,6 +21,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
@@ -35,7 +36,6 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.SimpleCondition;
@@ -157,7 +157,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoValue(
 			ApplicationElement element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getProperties(), string);
+		List<Object> results = nameSelect(element.getProperties(), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -169,7 +169,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoValue(
 			Scope element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getProperties(), string);
+		List<Object> results = nameSelect(element.getProperties(), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -181,7 +181,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoValue(
 			VisibleThing element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getProperties(), string);
+		List<Object> results = nameSelect(element.getProperties(), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -245,12 +245,12 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * PrimitiveOperation.
+	 * {@link BuiltinOperation}.
 	 *
 	 * @return The element found
 	 */
-	public PrimitiveOperation assertHasPrimitiveOperation(ContainsOperations element, String string) throws JaxenException {
-		return (PrimitiveOperation) assertHasOperation(element, string);
+	public BuiltinOperation assertHasBuiltinOperation(ContainsOperations element, String string) throws JaxenException {
+		return (BuiltinOperation) assertHasOperation(element, string);
 	}
 
 	/**
@@ -306,7 +306,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * CompositeCondition.
 	 */
 	public void assertHasNoCompositeCondition(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), CompositeCondition.class), string);
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), CompositeCondition.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -315,7 +315,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * {@link BuiltinProperty}.
 	 */
 	public void assertHasNoBuiltinProperty(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), BuiltinProperty.class), string);
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), BuiltinProperty.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -324,7 +324,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Function.
 	 */
 	public void assertHasNoFunction(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), Function.class), string);
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), Function.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -333,7 +333,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Operation.
 	 */
 	public void assertHasNoOperation(ContainsOperations element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getOperations(), Operation.class), string);
+		List<Object> results = nameSelect(typeSelect(element.getOperations(), Operation.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -355,7 +355,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * DomainAttribute.
 	 */
 	public void assertHasNoDomainAttribute(DomainSchema element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getEStructuralFeatures(), DomainAttribute.class), string);
+		List<Object> results = nameSelect(typeSelect(element.getEStructuralFeatures(), DomainAttribute.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -406,7 +406,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoDomainAttributeInstance(InternetApplication obj,
 			String string) throws JaxenException {
-		List<Object> list = nameSelect(typeSelect(obj.getElements(), DomainAttributeInstance.class), string);
+		List<Object> list = nameSelect(typeSelect(obj.getElements(), DomainAttributeInstance.class), string, false);
 		assertEquals(0, list.size());
 	}
 
@@ -418,7 +418,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoDomainAttributeInstance(DomainInstance obj,
 			String string) throws JaxenException {
-		List<Object> list = nameSelect(typeSelect(obj.getFeatureInstances(), DomainAttributeInstance.class), string);
+		List<Object> list = nameSelect(typeSelect(obj.getFeatureInstances(), DomainAttributeInstance.class), string, false);
 		assertEquals(0, list.size());
 	}
 
@@ -895,7 +895,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoFinishNode(CompositeOperation element) throws JaxenException {
-		assertHasNone(element, "iaml:nodes", FinishNode.class);
+		assertEquals(0, typeSelect(element.getNodes(), FinishNode.class).size());
 	}
 
 	/**
@@ -944,7 +944,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoCancelNode(CompositeOperation element) throws JaxenException {
-		assertHasNone(element, "iaml:nodes", CancelNode.class);
+		assertEquals(0, typeSelect(element.getNodes(), CancelNode.class).size());
 	}
 
 	/**
@@ -1501,6 +1501,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * For unnamed objects that are only differentiated by xsi:type, we need
 	 * a special method to find that only one of these types exist.
 	 *
+	 * @deprecated use EMF methods instead
 	 * @param container
 	 * @param query
 	 * @param type
@@ -1633,7 +1634,13 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return
 	 */
 	public static List<Object> nameSelect(List<?> list, String name) {
-		assertFalse("List was empty", list.isEmpty());
+		return nameSelect(list, name, true);
+	}
+
+	public static List<Object> nameSelect(List<?> list, String name, boolean checkEmpty) {
+		if (checkEmpty) {
+			assertFalse("List was empty", list.isEmpty());
+		}
 
 		List<Object> results = new ArrayList<Object>();
 		for (Object o : list) {

@@ -5,10 +5,11 @@ package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ECARule;
-import org.openiaml.model.model.Function;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
@@ -21,7 +22,6 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.AutocompleteWire;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -264,7 +264,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		assertGenerated(onAccess);
 
 		{
-			Operation hide = assertHasPrimitiveOperation(list, "hide");
+			Operation hide = assertHasBuiltinOperation(list, "hide");
 			assertGenerated(hide);
 
 			ECARule run = assertHasRunAction(root, onAccess, hide);
@@ -278,7 +278,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		}
 
 		{
-			Operation hide = assertHasPrimitiveOperation(list, "show");
+			Operation hide = assertHasBuiltinOperation(list, "show");
 			assertGenerated(hide);
 
 			ECARule run = assertHasRunAction(root, onAccess, hide);
@@ -308,7 +308,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 
 		// only if the input is empty
 		{
-			Operation hide = assertHasPrimitiveOperation(list, "hide");
+			Operation hide = assertHasBuiltinOperation(list, "hide");
 			ECARule run = assertHasRunAction(root, onChange, hide);
 			Function empty = input.getEmpty();
 			assertGenerated(assertHasSimpleCondition(root, empty, run));
@@ -316,7 +316,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 
 		// only if the input is not empty
 		{
-			Operation show = assertHasPrimitiveOperation(list, "show");
+			Operation show = assertHasBuiltinOperation(list, "show");
 			ECARule run = assertHasRunAction(root, onChange, show);
 			Function notEmpty = input.getNotEmpty();
 			assertGenerated(assertHasSimpleCondition(root, notEmpty, run));

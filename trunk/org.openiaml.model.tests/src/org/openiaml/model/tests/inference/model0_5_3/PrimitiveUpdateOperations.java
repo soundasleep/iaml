@@ -3,10 +3,10 @@
  */
 package org.openiaml.model.tests.inference.model0_5_3;
 
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
@@ -41,8 +41,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 
 		InputTextField text1 = assertHasInputTextField(home, "text1");
-		PrimitiveOperation init1 = assertHasPrimitiveOperation(text1, "init");
-		PrimitiveOperation update1 = assertHasPrimitiveOperation(text1, "update");
+		BuiltinOperation init1 = assertHasBuiltinOperation(text1, "init");
+		BuiltinOperation update1 = assertHasBuiltinOperation(text1, "update");
 		BuiltinProperty cast1 = assertHasBuiltinProperty(text1, "can cast?");
 		BuiltinProperty set1 = assertHasBuiltinProperty(text1, "fieldValue is set");
 
@@ -66,8 +66,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 
 		InputTextField text1 = assertHasInputTextField(home, "text1");
-		PrimitiveOperation init1 = assertHasPrimitiveOperation(text1, "init");
-		PrimitiveOperation update1 = assertHasPrimitiveOperation(text1, "update");
+		BuiltinOperation init1 = assertHasBuiltinOperation(text1, "init");
+		BuiltinOperation update1 = assertHasBuiltinOperation(text1, "update");
 
 		assertFalse(init1 instanceof CompositeOperation);
 		assertFalse(update1 instanceof CompositeOperation);
@@ -88,7 +88,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		DecisionNode check = assertHasDecisionNode(update, "can cast?");
 		CastNode cast = assertHasCastNode(update);
 
-		PrimitiveOperation set = assertHasPrimitiveOperation(update, "set");
+		BuiltinOperation set = assertHasBuiltinOperation(update, "set");
 
 		assertHasExecutionEdge(update, start, check);
 		assertHasExecutionEdge(update, check, cancel, "no");
@@ -121,7 +121,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		DecisionNode check = assertHasDecisionNode(init, "can cast?");
 		CastNode cast = assertHasCastNode(init);
 
-		PrimitiveOperation set = assertHasPrimitiveOperation(init, "set");
+		BuiltinOperation set = assertHasBuiltinOperation(init, "set");
 
 		assertHasExecutionEdge(init, start, check);
 		assertHasExecutionEdge(init, check, cancel, "no");

@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttribute;
@@ -16,7 +17,6 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**

@@ -3,13 +3,14 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.Function;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
@@ -25,7 +26,6 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -293,7 +293,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		StartNode start = assertHasStartNode(op);
 		FinishNode finish = assertHasFinishNode(op);
 
-		PrimitiveOperation set = assertHasPrimitiveOperation(op, "set");
+		BuiltinOperation set = assertHasBuiltinOperation(op, "set");
 
 		assertGenerated(assertHasExecutionEdge(op, start, set));
 		assertGenerated(assertHasExecutionEdge(op, set, finish));

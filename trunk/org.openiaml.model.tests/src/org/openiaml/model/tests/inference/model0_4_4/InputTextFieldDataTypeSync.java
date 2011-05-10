@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_4_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
@@ -11,7 +12,6 @@ import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.CastNode;
@@ -129,9 +129,9 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		{
 			Label annotation = assertHasLabel(def, "Warning");
 
-			PrimitiveOperation show = assertHasPrimitiveOperation(annotation, "show");
+			BuiltinOperation show = assertHasBuiltinOperation(annotation, "show");
 			assertGenerated(show);
-			PrimitiveOperation hide = assertHasPrimitiveOperation(annotation, "hide");
+			BuiltinOperation hide = assertHasBuiltinOperation(annotation, "hide");
 			assertGenerated(hide);
 
 			// and a fieldValue
@@ -142,9 +142,9 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		{
 			Label annotation = assertHasLabel(integer, "Warning");
 
-			PrimitiveOperation show = assertHasPrimitiveOperation(annotation, "show");
+			BuiltinOperation show = assertHasBuiltinOperation(annotation, "show");
 			assertGenerated(show);
-			PrimitiveOperation hide = assertHasPrimitiveOperation(annotation, "hide");
+			BuiltinOperation hide = assertHasBuiltinOperation(annotation, "hide");
 			assertGenerated(hide);
 
 			// and a fieldValue
@@ -224,9 +224,9 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
 
 		Label annotation = assertHasLabel(integer, "Warning");
-		PrimitiveOperation show = assertHasPrimitiveOperation(annotation, "show");
-		PrimitiveOperation hide = assertHasPrimitiveOperation(annotation, "hide");
-		PrimitiveOperation update = assertHasPrimitiveOperation(annotation, "update");
+		BuiltinOperation show = assertHasBuiltinOperation(annotation, "show");
+		BuiltinOperation hide = assertHasBuiltinOperation(annotation, "hide");
+		BuiltinOperation update = assertHasBuiltinOperation(annotation, "update");
 
 		// target
 		InputTextField email2 = assertHasInputTextField(home, "Email 2");

@@ -5,11 +5,11 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
@@ -74,7 +74,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(value);
 
 		// and an 'update' event in target
-		PrimitiveOperation update = assertHasPrimitiveOperation(target, "update");
+		BuiltinOperation update = assertHasBuiltinOperation(target, "update");
 		assertGenerated(update);
 
 		// connected with a run wire
@@ -106,7 +106,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(value);
 
 		// and an 'update' event in target
-		PrimitiveOperation update = assertHasPrimitiveOperation(source, "update");
+		BuiltinOperation update = assertHasBuiltinOperation(source, "update");
 		assertGenerated(update);
 	}
 
@@ -131,7 +131,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(value);
 
 		// and an 'update' event in target
-		PrimitiveOperation init = assertHasPrimitiveOperation(target, "init");
+		BuiltinOperation init = assertHasBuiltinOperation(target, "init");
 		assertGenerated(init);
 
 		// connected with a run wire
@@ -164,7 +164,7 @@ public class SetWireClient extends InferenceTestCase {
 
 		// there should be an 'edit' event in target
 		Event access = target.getOnAccess();
-		PrimitiveOperation init = assertHasPrimitiveOperation(target, "init");
+		BuiltinOperation init = assertHasBuiltinOperation(target, "init");
 		ECARule run = assertHasRunAction(page, access, init, "run");
 
 		// newly created condition

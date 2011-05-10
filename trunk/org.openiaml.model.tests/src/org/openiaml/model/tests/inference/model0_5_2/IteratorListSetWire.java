@@ -5,9 +5,9 @@ package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ECARule;
-import org.openiaml.model.model.Function;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttribute;

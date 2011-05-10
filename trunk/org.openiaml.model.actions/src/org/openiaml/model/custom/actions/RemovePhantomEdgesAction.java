@@ -27,9 +27,9 @@ import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
+import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
@@ -211,8 +211,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		} else if (obj instanceof DataFlowEdge && (((DataFlowEdge) obj).getFrom() == null 
 				|| ((DataFlowEdge) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof SimpleCondition && (((SimpleCondition) obj).getFunction() == null 
-				|| ((SimpleCondition) obj).getConditioned() == null)) {
+		} else if (obj instanceof ComplexTerm && (((ComplexTerm) obj).getFunction() == null 
+				|| ((ComplexTerm) obj).getConditioned() == null)) {
 			return true;
 		} else if (obj instanceof ConstraintEdge && (((ConstraintEdge) obj).getFrom() == null 
 				|| ((ConstraintEdge) obj).getTo() == null)) {
@@ -223,8 +223,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		} else if (obj instanceof ExtendsEdge && (((ExtendsEdge) obj).getFrom() == null 
 				|| ((ExtendsEdge) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof Parameter && (((Parameter) obj).getTerm() == null 
-				|| ((Parameter) obj).getValue() == null)) {
+		} else if (obj instanceof Parameter && (((Parameter) obj).getParameterValue() == null 
+				|| ((Parameter) obj).getParameterTerm() == null)) {
 			return true;
 		} else if (obj instanceof ProvidesEdge && (((ProvidesEdge) obj).getFrom() == null 
 				|| ((ProvidesEdge) obj).getTo() == null)) {

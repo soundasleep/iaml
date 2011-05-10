@@ -158,7 +158,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//EXSDDataType/definition"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Parameter/parameterName"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/parameterValue"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/parameterTerm"/>
     </genClasses>

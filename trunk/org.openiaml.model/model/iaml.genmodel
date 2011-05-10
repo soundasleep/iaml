@@ -47,15 +47,14 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//Wireable"/>
     <genClasses ecoreClass="iaml.ecore#//Event"/>
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
-    <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Operation/parameters"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Operation"/>
     <genClasses ecoreClass="iaml.ecore#//PrimitiveOperation"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/dataEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/executionEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/parameters"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/nodes"/>

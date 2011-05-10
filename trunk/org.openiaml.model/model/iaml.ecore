@@ -135,8 +135,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents some type of executable step, which may contain logic flows, data flows or other operations."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//operations/ActivityParameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//operations/ExecutionEdgesSource #//ActionEdgeSource">
     <eAnnotations source="http://openiaml.org/comment">
@@ -161,6 +159,8 @@
         eType="#//operations/ExecutionEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
         eType="#//operations/TemporaryVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//operations/ActivityParameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsFunctions #//Function #//GeneratesElements #//ContainsOperations #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">

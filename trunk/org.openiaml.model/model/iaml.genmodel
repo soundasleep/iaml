@@ -162,6 +162,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/parameterTerm"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//SimpleCondition"/>
+    <genClasses ecoreClass="iaml.ecore#//XQueryFunction"/>
+    <genClasses ecoreClass="iaml.ecore#//FunctionLibrary">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//FunctionLibrary/xsdDataTypes"/>
+    </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//visual/RenderTypes">

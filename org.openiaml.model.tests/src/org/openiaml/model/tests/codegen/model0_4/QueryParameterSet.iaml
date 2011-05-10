@@ -5,7 +5,7 @@
       <ecaRules id="model.12fc42b4f75.7f" inParameterEdges="wires.12fc42b52ff.1" name="run" trigger="model.12fc42b4f75.7d" target="model.12fc42b4f75.53"/>
     </onAccess>
     <parameters id="model.123172ceeef.2a" name="name" outParameterEdges="wires.12fc42b52ff.1" defaultValue="empty">
-      <parameterEdges id="wires.12fc42b52ff.1" term="model.123172ceeef.2a" value="model.12fc42b4f75.7f"/>
+      <parameterEdges id="wires.12fc42b52ff.1" parameterValue="model.123172ceeef.2a" parameterTerm="model.12fc42b4f75.7f"/>
     </parameters>
     <children xsi:type="iaml.visual:InputTextField" id="visual.123172cef6c.25" name="current name">
       <operations xsi:type="iaml:BuiltinOperation" id="model.12fc42b4f75.53" name="update" rules="model.12fc42b4f75.7f"/>

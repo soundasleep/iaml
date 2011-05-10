@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <properties id="model.12109c6242e.5e" name="static value" outParameterEdges="wires.12109dbdd39.54" defaultValue="43" readOnly="true">
-      <parameterEdges id="wires.12109dbdd39.54" term="model.12109c6242e.5e" value="domain.128807fbeba.d89"/>
+      <parameterEdges id="wires.12109dbdd39.54" parameterValue="model.12109c6242e.5e" parameterTerm="domain.128807fbeba.d89"/>
     </properties>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d89" name="select" inParameterEdges="wires.12109dbdd39.54" query="id = ?" outSelects="domain.128807fbeba.d8d" autosave="true">
       <currentInstance id="migrated0" name="Current instance">

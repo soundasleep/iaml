@@ -21,7 +21,7 @@
         <ecaRules id="wires.120ac60dd48.b8" inParameterEdges="wires.120ac60dd48.cc" name="run" trigger="model.120ac60dcea.133" target="model.120ac60dcea.198"/>
       </onChange>
       <fieldValue id="model.120ac60dcea.1d9" name="fieldValue" outParameterEdges="wires.120ac60dd48.cc">
-        <parameterEdges id="wires.120ac60dd48.cc" term="model.120ac60dcea.1d9" value="wires.120ac60dd48.b8"/>
+        <parameterEdges id="wires.120ac60dd48.cc" parameterValue="model.120ac60dcea.1d9" parameterTerm="wires.120ac60dd48.b8"/>
       </fieldValue>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.120ac60dd48.2c7" name="destination">

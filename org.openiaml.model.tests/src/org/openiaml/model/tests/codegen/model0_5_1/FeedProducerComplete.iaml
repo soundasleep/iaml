@@ -10,13 +10,13 @@
         <ecaRules id="wires.1280b46d1f2.ae" inParameterEdges="wires.1281e15c5ee.d4" name="onClick" trigger="visual.1280b46d1e2.9f" target="visual.1280b46d1e2.46"/>
       </children>
       <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.248" name="id" outParameterEdges="wires.1281e15c5ee.d4" type="builtin_iamlInteger">
-        <parameterEdges id="wires.1281e15c5ee.d4" name="id" term="visual.1281e15c5ee.248" value="wires.1280b46d1f2.ae"/>
+        <parameterEdges id="wires.1281e15c5ee.d4" name="id" parameterValue="visual.1281e15c5ee.248" parameterTerm="wires.1280b46d1f2.ae"/>
       </children>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News" rules="wires.1280b46d1f2.ae">
     <parameters id="model.1280b46d146.f5" name="id" outParameterEdges="wires.1280b46d1f2.3a">
-      <parameterEdges id="wires.1280b46d1f2.3a" term="model.1280b46d146.f5" value="domain.128807fbeba.dc0"/>
+      <parameterEdges id="wires.1280b46d1f2.3a" parameterValue="model.1280b46d146.f5" parameterTerm="domain.128807fbeba.dc0"/>
     </parameters>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.dc0" name="select" outWires="wires.1280b46d1f2.3c" inParameterEdges="wires.1280b46d1f2.3a" query="id = ?" outSelects="domain.128807fbeba.dc4">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" name="set" from="domain.128807fbeba.dc0" to="visual.1280b46d1e2.58"/>

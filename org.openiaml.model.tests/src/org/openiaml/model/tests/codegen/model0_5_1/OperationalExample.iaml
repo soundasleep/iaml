@@ -8,10 +8,10 @@
       <executionEdges id="model.1283d8dbd2d.253" from="operations.1283d8dbe46.c3" to="operations.1283d8dbe46.c4"/>
     </functions>
     <operations xsi:type="iaml:CompositeOperation" id="model.1283d80df01.a" name="Composite Operation" rules="wires.1283d80dfad.1">
-      <parameterEdges id="wires.1283d98dcaf.b" term="model.1283d80df01.3b" value="wires.1283d80dfad.73"/>
+      <parameterEdges id="wires.1283d98dcaf.b" parameterValue="model.1283d80df01.3b" parameterTerm="wires.1283d80dfad.73"/>
       <operations xsi:type="iaml:BuiltinOperation" id="model.1283d80df01.d5" name="set" inFlows="model.1283d80df01.d7" inExecutions="model.1283d80df01.d6" outFlows="model.1283d80df01.d8" outExecutions="model.1283d80df01.14a"/>
       <operations xsi:type="iaml:BuiltinOperation" id="model.1283d80df01.14d" name="set" inFlows="model.1283d80df01.14e" inExecutions="model.1283d80df01.382" outFlows="model.1283d80df01.150" outExecutions="model.1283d80df01.383"/>
-      <properties id="model.1283d80df01.14b" name="one" outFlows="model.1283d80df01.14f" defaultValue="1" type="builtin_iamlInteger" readOnly="true"/>
+      <properties id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" outFlows="model.1283d80df01.14f" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1283d80dfbd.1" outExecutions="model.1283d80df01.ac"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1283d80dfbd.b" outExecutions="model.1283d80df01.ae model.1283d80df01.d6" inExecutions="model.1283d80df01.ac" inFlows="model.1283d80df01.50" name="can cast?"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.1283d80dfbd.14" outFlows="model.1283d80df01.50 model.1283d80df01.51 model.1283d80df01.d7" inFlows="model.1283d80df01.4e"/>
@@ -51,7 +51,7 @@
       <ecaRules id="wires.1283d80dfad.1" inParameterEdges="wires.1283d80dfad.3" name="onClick" trigger="visual.1283d80dfad.9" target="model.1283d80df01.a"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1283d80dfad.1e" name="Input" outParameterEdges="wires.1283d80dfad.3" type="builtin_iamlString">
-      <parameterEdges id="wires.1283d80dfad.3" term="visual.1283d80dfad.1e" value="wires.1283d80dfad.1"/>
+      <parameterEdges id="wires.1283d80dfad.3" parameterValue="visual.1283d80dfad.1e" parameterTerm="wires.1283d80dfad.1"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1283d80dfad.af" name="Result" type="builtin_iamlInteger">
       <operations xsi:type="iaml:CompositeOperation" id="model.1283d80df01.26b" name="update" rules="wires.1283d80dfad.73"/>

@@ -11,7 +11,7 @@
         </currentInstance>
       </elements>
       <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.1a2" name="select name" outParameterEdges="wires.12109c6249b.ef">
-        <parameterEdges id="wires.12109c6249b.ef" term="visual.12109c6248b.1a2" value="domain.128807fbeba.10d7"/>
+        <parameterEdges id="wires.12109c6249b.ef" parameterValue="visual.12109c6248b.1a2" parameterTerm="domain.128807fbeba.10d7"/>
       </children>
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.112" id="visual.12109c6248b.1a3" name="edit email"/>
     </scopes>

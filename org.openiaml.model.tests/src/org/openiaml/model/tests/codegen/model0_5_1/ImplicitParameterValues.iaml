@@ -3,11 +3,11 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b5" name="text field" outParameterEdges="wires.1281e15c5ee.67">
       <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.f2" name="update"/>
-      <parameterEdges id="wires.1281e15c5ee.67" term="visual.1281e15c5ee.b5" value="wires.1281e15c5ee.65"/>
+      <parameterEdges id="wires.1281e15c5ee.67" parameterValue="visual.1281e15c5ee.b5" parameterTerm="wires.1281e15c5ee.65"/>
     </children>
     <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.b6" name="label value" outParameterEdges="wires.1281e15c5ee.69">
       <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.103" name="update" rules="wires.1281e15c5ee.65"/>
-      <parameterEdges id="wires.1281e15c5ee.69" term="visual.1281e15c5ee.b6" value="wires.1281e15c5ee.66"/>
+      <parameterEdges id="wires.1281e15c5ee.69" parameterValue="visual.1281e15c5ee.b6" parameterTerm="wires.1281e15c5ee.66"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b7" name="target field">
       <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.12e" name="update" rules="wires.1281e15c5ee.66"/>

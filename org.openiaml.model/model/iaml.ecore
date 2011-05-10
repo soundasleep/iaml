@@ -618,11 +618,6 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ParameterEdge"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValue" lowerBound="1"
         eType="#//wires/ParameterEdgesSource" eOpposite="#//wires/ParameterEdgesSource/outParameterEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterTerm" lowerBound="1"

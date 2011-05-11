@@ -391,7 +391,7 @@ cached List[model::scopes::Email] getAllEmails(model::InternetApplication this) 
 
 /** get all Domain Attribute Instances in the InternetApplication */
 List[domain::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
-	eAllContents.typeSelect( domain::DomainAttributeInstance );
+	eAllContents.typeSelect( model::domain::DomainAttributeInstance );
 
 /** get all Domain Object Instances in the InternetApplication */
 List[model::domain::DomainIterator] getAllDomainIterators(model::InternetApplication this) :

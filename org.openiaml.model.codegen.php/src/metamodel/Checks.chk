@@ -127,8 +127,8 @@ context model::BuiltinOperation WARNING "Unknown builtin operation name '" + nam
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).skip == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) ||
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "update") || 
-	(eContainer != null && domain::DomainAttribute.isInstance(eContainer) && name == "update") || 
-	(eContainer != null && domain::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::domain::DomainAttribute.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::domain::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") ||
 	
 	// primitive operations defined with no parent	
@@ -224,8 +224,8 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
 	!model::scopes::Email.isInstance(to) &&
 	!model::scopes::Email.isInstance(from);
 
-context domain::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
-	!outExtendsEdges.to.typeSelect(domain::DomainAttribute).isEmpty;
+context model::domain::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
+	!outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).isEmpty;
 	
 context model::domain::DomainSource ERROR "A DomainSource can only have one Schema" :
 	outSchemas.size <= 1;
@@ -268,7 +268,7 @@ context model::Value ERROR "Readonly Values must have a default value set" :
  * words to also be column names. TODO IAML should instead allow all names, but
  * modify their runtime name if they are a reserved word (issue 211).
  */
-context domain::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttribute name" :
+context model::domain::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttribute name" :
 	!{"alter", "analyze", "attach", "begin", "commit", "create", 
 	"delete", "detach", "drop", "end", "explain", "from", "group", "having", "indexed", 
 	"insert", "limit", "not", "on", "order", "pragma", "reindex", "release", "replace", 

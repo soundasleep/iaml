@@ -10,9 +10,26 @@
 «ENDDEFINE»
 
 «DEFINE callCondition(Boolean php, Boolean inStoreDb) FOR model::SimpleCondition»
-	/* '«simpleName(function)»' */
-	condition_«conditionName(function)»(
-		«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges SEPARATOR ", "»
+	«EXPAND functionCall(php, inStoreDb, this) FOR function»
+«ENDDEFINE»
+
+«DEFINE functionCall(Boolean php, Boolean inStoreDb, model::SimpleCondition edge) FOR model::wires::ConditionEdgesSource»
+	«throwException("Unknown function call: " + this)» 
+«ENDDEFINE»
+
+«DEFINE functionCall(Boolean php, Boolean inStoreDb, model::SimpleCondition edge) FOR model::Function»
+	/* '«simpleName()»' */
+	condition_«conditionName()»(
+		«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false) FOREACH edge.inParameterEdges SEPARATOR ", "»
+	)
+«ENDDEFINE»
+
+«DEFINE functionCall(Boolean php, Boolean inStoreDb, model::SimpleCondition edge) FOR model::XQueryFunction»
+	/* xquery function '«simpleName()»' */
+	xquery_function_callback(
+		'«func»'
+		«IF !edge.inParameterEdges.isEmpty»,«ENDIF»
+		«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false) FOREACH edge.inParameterEdges SEPARATOR ", "»
 	)
 «ENDDEFINE»
 

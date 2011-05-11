@@ -24,6 +24,8 @@ import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.domain.DomainFactory;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.messaging.MessagingFactory;
+import org.openiaml.model.model.messaging.MessagingPackage;
 import org.openiaml.model.model.operations.OperationsFactory;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.scopes.ScopesFactory;
@@ -65,6 +67,7 @@ public class ModelTestCase extends TestCase {
 			factoryMap.put( ComponentsPackage.eINSTANCE , ComponentsFactory.eINSTANCE );
 			factoryMap.put( DomainPackage.eINSTANCE , DomainFactory.eINSTANCE );
 			factoryMap.put( UsersPackage.eINSTANCE , UsersFactory.eINSTANCE );
+			factoryMap.put( MessagingPackage.eINSTANCE , MessagingFactory.eINSTANCE );
 		}
 		return factoryMap;
 	}

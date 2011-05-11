@@ -20,6 +20,22 @@
       <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//BUILTIN_PROPERTIES/HAS_NEXT"/>
       <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//BUILTIN_PROPERTIES/HAS_PREVIOUS"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//XQUERY_FUNCTIONS">
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_ADD"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_SUBTRACT"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_MULTIPLY"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_DIVIDE"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_ABS"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_FLOOR"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_CONCAT"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_SUBSTRING"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_CONTAINS"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_CODEPOINT_EQUAL"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_EQUAL"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/OP_NUMERIC_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//XQUERY_FUNCTIONS/FN_NOT"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="iaml.ecore#//GeneratedElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratedElement/generatedBy"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/isGenerated"/>
@@ -162,6 +178,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/parameterTerm"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//SimpleCondition"/>
+    <genClasses ecoreClass="iaml.ecore#//XQueryFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//XQueryFunction/func"/>
+    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//XQueryPredicate"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//visual/RenderTypes">

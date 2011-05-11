@@ -46,16 +46,20 @@ function xquery_function_callback($function_name, $arg0 = false, $arg1 = false, 
 			return $arg0 . $arg1;
 
 		case "fn_substring":
+			assert_is_string($function_name, $arg0);
 			if ($arg2 === false) {
 				assert_is_numeric($function_name, $arg1);
-				return substr($arg0, $arg1);
+				$result = substr($arg0, $arg1);		// substr() returns FALSE on an empty string or failure
+				return $result === false ? "" : $result;
 			} else {
 				assert_is_numeric($function_name, $arg1);
 				assert_is_numeric($function_name, $arg2);
-				return arg0($arg0, $arg1, $arg2);
+				$result = arg0($arg0, $arg1, $arg2);	// substr() returns FALSE on an empty string or failure
+				return $result === false ? "" : $result;
 			}
 
 		case "fn_contains":
+			assert_is_string($function_name, $arg0);
 			// "If the value of $arg2 is the zero-length string, then the function returns true."
 			if ($arg1 === "")
 				return true;
@@ -96,3 +100,10 @@ function assert_is_numeric($function_name, $argument_value) {
 		throw new IamlIllegalArgumentException("XQuery function '$function_name' expected a numeric argument: got '$argument_value'");
 	}
 }
+
+function assert_is_string($function_name, $argument_value) {
+	if (!is_string($argument_value)) {
+		throw new IamlIllegalArgumentException("XQuery function '$function_name' expected a string argument: got '$argument_value'");
+	}
+}
+

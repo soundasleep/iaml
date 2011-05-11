@@ -54,6 +54,7 @@ if (file_exists(CUSTOM_PATH . "templates/meta/" . $body_id . ".php")) {
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/maps.js"></script>
+	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/xquery-functions.js"></script>
 	<script language="Javascript" type="application/javascript" src="onCurrentFrame.js"></script>
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */

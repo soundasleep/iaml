@@ -12,13 +12,13 @@
 			«EXPAND template::Template::phpCheck»
 			
 			// a list of all operations required
-			«FOREACH getAllConditions() AS o»
+			«FOREACH getAllConditions().reject(c|model::XQueryFunction.isInstance(c)) AS o»
 				require_once(ROOT_PATH . "conditions/«safeName(o)».php");
 			«ENDFOREACH»
 	«ENDFILE»
 	«ENDIF»
 
-	«FOREACH getAllConditions() AS c»
+	«FOREACH getAllConditions().reject(c|model::XQueryFunction.isInstance(c)) AS c»
 		«IF php»
 			«FILE "output/conditions/" + safeName(c) + ".php"»
 			<?php				
@@ -51,7 +51,7 @@
 	«IF php»
 		require_once(ROOT_PATH . "all_conditions.php");
 	«ELSE»
-		«EXPAND conditionInclude(php) FOREACH getAllConditions()-»
+		«EXPAND conditionInclude(php) FOREACH getAllConditions().reject(c|model::XQueryFunction.isInstance(c))-»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -69,6 +69,9 @@
 «DEFINE conditionDefinition(Boolean php) FOR model::Function-»
 	«throwException("Cannot expand an abstract Condition: " + this)»
 «ENDDEFINE»
+
+// XQueryFunctions should not be defined; they are provided as part
+// of the runtime library
 
 /**
  *

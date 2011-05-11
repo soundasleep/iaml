@@ -376,7 +376,9 @@ model::InternetApplication getRoot(emf::EObject this) :
 model::InternetApplication getRoot(model::InternetApplication this) :
 	this;
 
-/** get all Conditions in the InternetApplication */
+/** 
+ * Get all {@model Function}s in the InternetApplication.
+ **/
 cached List[model::Function] getAllConditions(model::InternetApplication this) :
 	eAllContents.typeSelect(model::Function)
 		.select(o | conditionUsed(o));

@@ -229,6 +229,12 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="element">
     <classifier href="iaml.ecore#//ApplicationElement"/>
@@ -255,6 +261,12 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Event">
       <classifier href="iaml.ecore#//Event"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="email">
@@ -335,6 +347,12 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="frame">
@@ -446,6 +464,12 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Role">
       <classifier href="iaml.ecore#//users/Role"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="instance">
     <classifier href="iaml.ecore#//domain/DomainInstance"/>
@@ -520,6 +544,12 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="operation">
     <classifier href="iaml.ecore#//CompositeOperation"/>
@@ -586,6 +616,12 @@
     <elements xsi:type="sgmf:ReferencedNode" id="" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="root">
     <classifier href="iaml.ecore#//InternetApplication"/>
@@ -597,6 +633,12 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -764,6 +806,12 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="visual">
     <classifier href="iaml.ecore#//VisibleThing"/>
@@ -863,6 +911,12 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainIterator">
       <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
+      <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
   </diagramEditors>
   <rootElement href="iaml.ecore#//InternetApplication"/>

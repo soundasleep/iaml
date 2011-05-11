@@ -631,6 +631,26 @@
       <details key="documentation" value="Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model Wire wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XQueryFunction" eSuperTypes="#//Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="func" lowerBound="1" eType="#//XQUERY_FUNCTIONS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XQueryPredicate" eSuperTypes="#//XQueryFunction #//Predicate"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="XQUERY_FUNCTIONS">
+    <eLiterals name="OP_NUMERIC_ADD"/>
+    <eLiterals name="OP_NUMERIC_SUBTRACT" value="1"/>
+    <eLiterals name="OP_NUMERIC_MULTIPLY" value="2"/>
+    <eLiterals name="OP_NUMERIC_DIVIDE" value="3"/>
+    <eLiterals name="FN_ABS" value="4"/>
+    <eLiterals name="FN_FLOOR" value="5"/>
+    <eLiterals name="FN_CONCAT" value="6"/>
+    <eLiterals name="FN_SUBSTRING" value="7"/>
+    <eLiterals name="FN_CONTAINS" value="8"/>
+    <eLiterals name="FN_CODEPOINT_EQUAL" value="9"/>
+    <eLiterals name="OP_NUMERIC_EQUAL" value="10"/>
+    <eLiterals name="OP_NUMERIC_LESS_THAN" value="11"/>
+    <eLiterals name="OP_NUMERIC_GREATER_THAN" value="12"/>
+    <eLiterals name="FN_NOT" value="13"/>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//Scope #//wires/ParameterEdgesSource #//Action">
       <eAnnotations source="http://openiaml.org/comment">

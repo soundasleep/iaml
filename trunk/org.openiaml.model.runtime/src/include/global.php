@@ -42,6 +42,7 @@ function ob_error_handler($output) {
 	return $output;
 }
 
+require("core.php");
 require("databases.php");
 require("first_class_types.php");
 require("emails.php");
@@ -66,7 +67,7 @@ function log_message($msg, $also_debug = true) {
 	if (count($stored_log_messages) > 10) {
 		flush_log_messages();
 	}
-	
+
 	// also echo to debug
 	if ($also_debug) {
 		global $enable_queue_log_messages;
@@ -92,13 +93,13 @@ function shutdown($value = 1) {
 register_shutdown_function('flush_log_messages');
 function flush_log_messages() {
 	global $stored_log_messages;
-	
+
 	$fp = fopen(ROOT_PATH . "php.log", "a");
 	foreach ($stored_log_messages as $msg_indent) {
 		fwrite($fp, $msg_indent);
 	}
 	fclose($fp);
-	
+
 	$stored_log_messages = array();
 }
 
@@ -231,40 +232,6 @@ function is_absolute_url($url) {
 	return strpos($url, ":/") !== false;
 }
 
-/**
- * Similar to a Java's RuntimeException.
- * We can also pass along additional information.
- */
-class IamlRuntimeException extends Exception {
-	var $more_info;
-
-	public function __construct($message = "", $more_info = "") {
-		parent::__construct($message);
-		$this->more_info = $more_info;
-	}
-}
-
-/**
- * Similar to a Java's IllegalArgumentException.
- * We can also pass along additional information.
- */
-class IamlIllegalArgumentException extends IamlRuntimeException {
-	public function __construct($message = "", $more_info = "") {
-		parent::__construct($message, $more_info);
-	}
-}
-
-/**
- * A specific runtime exception to say that data from the current
- * session seems invalid. Perhaps the user needs to reset their
- * session?
- */
-class IamlInvalidSessionException extends IamlRuntimeException {
-	public function __construct($message = "", $more_info = "") {
-		parent::__construct($message, $more_info);
-	}
-}
-
 $get_application_value_cache = array();
 
 /**
@@ -305,7 +272,7 @@ function get_application_value($id, $default, $ignore_cache = false) {
 		return $default;
 	} else {
 		$get_application_value_cache[$id] = $row["arg0"];
-	
+
 		return $row["arg0"];
 	}
 }
@@ -355,7 +322,7 @@ function set_application_value($id, $value) {
 	// save into the cache
 	global $get_application_value_cache;
 	$get_application_value_cache[$id] = $value;
-	
+
 	/*
 	if (get_application_value($id, "not " . $value) != $value) {
 		throw new IamlRuntimeException("The application value '$id' was not saved (value='$value').");

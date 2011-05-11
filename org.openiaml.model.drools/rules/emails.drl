@@ -14,6 +14,7 @@ import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.domain.*;
+import org.openiaml.model.model.messaging.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;

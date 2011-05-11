@@ -46,6 +46,7 @@ function can_cast($value, $type) {
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
 		case "http://openiaml.org/model/datatypes#iamlURL":
+		case "http://www.w3.org/2001/XMLSchema#string":
 			// can always convert anything to a String
 			return true;
 
@@ -97,6 +98,7 @@ function can_cast($value, $type) {
 
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+		case "http://www.w3.org/2001/XMLSchema#integer":
 			if (is_bool($value))
 				return true;	// all booleans can be integers
 
@@ -160,7 +162,8 @@ function can_cast($value, $type) {
 			return false;
 
 		// casting to boolean
-		case "http://openiaml.org/model/datatypes#iamlInteger":
+		case "http://openiaml.org/model/datatypes#iamlBoolean":
+		case "http://www.w3.org/2001/XMLSchema#boolean":
 			// all objects can be cast to boolean
 			return true;
 
@@ -184,13 +187,14 @@ function do_cast($value, $type) {
 	// PHP's <code>null</code> is the same as the empty string ""
 	if ($value === null)
 		$value = "";
-			
+
 	switch ($type) {
 		// casting to string
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
 		case "http://openiaml.org/model/datatypes#iamlURL":
+		case "http://www.w3.org/2001/XMLSchema#string":
 			// a date?
 			if ($value instanceof DateTime) {
 				// change to UTC first
@@ -258,9 +262,10 @@ function do_cast($value, $type) {
 
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+		case "http://www.w3.org/2001/XMLSchema#integer":
 			if (is_bool($value))
 				return $value ? 1 : 0;
-							
+
 			if (is_int($value))
 				return $value;	// return copy
 

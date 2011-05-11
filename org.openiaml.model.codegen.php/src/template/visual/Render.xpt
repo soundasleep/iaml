@@ -64,12 +64,8 @@
 
 /**
  * We are currently in a HTML tag - should the current element be hidden?
- * 
- * @param defaultVisibilty is the element normally visible? this should
- *		be false for {@model MapPoint}s, for example.
  */
-«DEFINE getVisibilityInlineCode(model::visual::Frame currentFrame,
-		boolean defaultVisibility) FOR model::VisibleThing»
+«DEFINE getVisibilityInlineCode(model::visual::Frame currentFrame) FOR model::VisibleThing»
 	<?php
 	$found_visible_value = false;
 	$visible_value = null;
@@ -89,7 +85,7 @@
 			$visible_value = «IF visible»true«ELSE»false«ENDIF»;
 			$found_visible_value = true;
 		} else {
-			$visible_value = «IF defaultVisibility»true«ELSE»false«ENDIF»;
+			$visible_value = true;
 			$found_visible_value = true;
 		}
 	}

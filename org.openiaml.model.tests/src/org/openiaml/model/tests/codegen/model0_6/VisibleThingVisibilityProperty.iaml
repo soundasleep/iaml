@@ -10,7 +10,7 @@
       <properties id="model.12eeb3f61e6.4a" name="visible" type="xsd_boolean"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12eeb3f62a1.42" name="visibility value" outParameterEdges="wires.12eeb49d384.1" type="xsd_boolean">
-      <parameterEdges id="wires.12eeb49d384.1" term="visual.12eeb3f62a1.42" value="model.12eeb49d2c8.53"/>
+      <parameterEdges id="wires.12eeb49d384.1" parameterValue="visual.12eeb3f62a1.42" parameterTerm="model.12eeb49d2c8.53"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

@@ -749,8 +749,27 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param expected the expected value
 	 */
 	public void assertInputTextFieldEquals(String label, String expected) {
-		String target = getLabelIDForText(label);
-		assertLabeledFieldEquals(target, expected);
+		String id = getLabelIDForText(label);
+		assertLabeledFieldEquals(id, expected);
+	}
+	
+	/**
+	 * Set the given {@model InputTextField} with the given text.
+	 */
+	public void setInputTextField(String label, String value) {
+		String id = getLabelIDForText(label);
+		setLabeledFormElementField(id, value);
+	}
+	
+	/**
+	 * Set the given {@model InputTextField} with the given text,
+	 * after checking that it is currently set to the expected text.
+	 * 
+	 */
+	public void setInputTextField(String label, String expected, String value) {
+		String id = getLabelIDForText(label);
+		assertLabeledFieldEquals(id, expected);
+		setLabeledFormElementField(id, value);
 	}
 	
 	/**
@@ -1241,6 +1260,39 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		
 		return match;
 	}
+	
+    /**
+     * This method is extended to also check that any found buttons are
+     * <em>not</em> invisible.
+     * 
+     * <p>{@inheritDoc}
+     */
+    @Override
+	public void assertButtonPresentWithText(String text) {
+    	IElement button = getButtonWithText(text);
+    	// we found a button; check that it is visible
+        assertTrue("Found button with text '" + text + "', but it was hidden", isDisplayed(button));
+    }
+	
+    /**
+     * This method is extended to also check that any found buttons are
+     * also invisible.
+     * 
+     * <p>{@inheritDoc}
+     */
+    @Override
+	public void assertButtonNotPresentWithText(String text) {
+    	IElement button;
+    	try {
+    		button = getButtonWithText(text);
+    	} catch (AssertionFailedError e) {
+    		// expected
+    		return;
+    	}
+    	
+    	// we found a button, but it should be invisible
+        assertFalse("Found button with text '" + text + "', but it was displayed", isDisplayed(button));
+    }
 	
 	/**
 	 * Example: <code>Fri, 03 Dec 1901 20:45:52 +0000</code>

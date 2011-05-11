@@ -53,13 +53,13 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12fdcc0cca7.13" name="Numeric Predicates">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.251" name="arg1" outParameterEdges="model.12fdcc0ca07.bf6 model.12fdcc0ca07.bfa model.12fdcc0ca07.bfe model.12fdcc0ca07.1c3f" type="xsd_integer">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.251" name="arg1" outParameterEdges="model.12fdcc0ca07.bf6 model.12fdcc0ca07.bfa model.12fdcc0ca07.bfe model.12fdcc0ca07.1c3f" type="xsd_integer" defaultValue="0">
       <parameterEdges id="model.12fdcc0ca07.bf6" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.bed"/>
       <parameterEdges id="model.12fdcc0ca07.bfa" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.bee"/>
       <parameterEdges id="model.12fdcc0ca07.bfe" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.bf1"/>
       <parameterEdges id="model.12fdcc0ca07.1c3f" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.1c3d"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.252" name="arg2" outParameterEdges="model.12fdcc0ca07.bf8 model.12fdcc0ca07.bfc model.12fdcc0ca07.c00" type="xsd_integer">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.252" name="arg2" outParameterEdges="model.12fdcc0ca07.bf8 model.12fdcc0ca07.bfc model.12fdcc0ca07.c00" type="xsd_integer" defaultValue="0">
       <parameterEdges id="model.12fdcc0ca07.bf8" name="b" parameterValue="visual.12fdcc0cca7.252" parameterTerm="model.12fdcc0ca07.bed"/>
       <parameterEdges id="model.12fdcc0ca07.bfc" name="b" parameterValue="visual.12fdcc0cca7.252" parameterTerm="model.12fdcc0ca07.bee"/>
       <parameterEdges id="model.12fdcc0ca07.c00" name="b" parameterValue="visual.12fdcc0cca7.252" parameterTerm="model.12fdcc0ca07.bf1"/>

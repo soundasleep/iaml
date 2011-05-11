@@ -23,6 +23,7 @@ public class AllModel0_6CodegenTests {
 		suite.addTestSuite(VisibleThingVisibility.class);
 		suite.addTestSuite(VisibleThingVisibilityProperty.class);
 		suite.addTestSuite(IteratorCurrentPointer.class);
+		suite.addTestSuite(XQueryPredicates.class);
 
 		return suite;
 	}

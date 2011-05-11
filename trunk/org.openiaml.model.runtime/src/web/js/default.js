@@ -804,6 +804,7 @@ function can_cast(value, type) {
 		case "http://openiaml.org/model/datatypes#iamlAddress":
 		case "http://openiaml.org/model/datatypes#iamlURL":
 		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
+		case "http://www.w3.org/2001/XMLSchema#string":
 			// can always convert anything to a String
 			return true;
 
@@ -849,6 +850,7 @@ function can_cast(value, type) {
 
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+		case "http://www.w3.org/2001/XMLSchema#integer":
 			if (typeof(value) == "boolean") {
 				return true;	// can always cast boolean to int
 			}
@@ -954,6 +956,7 @@ function do_cast(value, type) {
 		case "http://openiaml.org/model/datatypes#iamlAddress":
 		case "http://openiaml.org/model/datatypes#iamlURL":
 		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
+		case "http://www.w3.org/2001/XMLSchema#string":
 			// a date?
 			if (value instanceof Date) {
 				// format as RFC 2822
@@ -1009,6 +1012,7 @@ function do_cast(value, type) {
 
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+		case "http://www.w3.org/2001/XMLSchema#integer":
 			if (typeof(value) == "boolean") {
 				return value ? 1 : 0;
 			}

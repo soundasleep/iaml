@@ -244,8 +244,8 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "currentInput is set", false);
 		ShapeNodeEditPart notEmpty = assertHasPrimitiveCondition(editor_text, "not empty", false);
 		ShapeNodeEditPart empty = assertHasPrimitiveCondition(editor_text, "empty", false);
-		ShapeNodeEditPart show = assertHasPrimitiveOperation(editor_text, "show", false);
-		ShapeNodeEditPart hide = assertHasPrimitiveOperation(editor_text, "hide", false);
+		ShapeNodeEditPart show = assertHasBuiltinOperation(editor_text, "show", false);
+		ShapeNodeEditPart hide = assertHasBuiltinOperation(editor_text, "hide", false);
 		ShapeNodeEditPart onClick = assertHasEvent(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnClick());
 		ShapeNodeEditPart onInput = assertHasEvent(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnInput());
 

@@ -20,8 +20,8 @@ import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.scopes.Email;
-import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.messaging.Email;
+import org.openiaml.model.model.messaging.MessagingPackage;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.release.ParentNamesTestCase;
 
@@ -199,7 +199,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEquals(root.getName(), "root element");
 
 		// Email is not in Parents
-		assertFalse(ParentNamesTestCase.getParentNameElements().contains(ScopesPackage.eINSTANCE.getEmail()));
+		assertFalse(ParentNamesTestCase.getParentNameElements().contains(MessagingPackage.eINSTANCE.getEmail()));
 
 		// create an Email
 		Email page = gmf.createEmail(root);

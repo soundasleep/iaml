@@ -23,6 +23,7 @@ import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -33,7 +34,6 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttribute;
@@ -42,12 +42,12 @@ import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SelectEdge;
+import org.openiaml.model.model.messaging.Email;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdge;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.TemporaryVariable;
-import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
@@ -582,9 +582,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasPrimitiveOperation(DiagramDocumentEditor root, String operationName,
+	public ShapeNodeEditPart assertHasBuiltinOperation(DiagramDocumentEditor root, String operationName,
 			boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, checkShortcut, shortcutRequired);
+		return assertHasRenderedNamedObject(root, BuiltinOperation.class, operationName, checkShortcut, shortcutRequired);
 	}
 	
 	/**
@@ -594,9 +594,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasPrimitiveOperation(DiagramDocumentEditor root, String operationName,
+	public ShapeNodeEditPart assertHasBuiltinOperation(DiagramDocumentEditor root, String operationName,
 			boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, true, shortcutRequired);
+		return assertHasRenderedNamedObject(root, BuiltinOperation.class, operationName, true, shortcutRequired);
 	}
 	
 	/**

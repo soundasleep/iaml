@@ -8,7 +8,7 @@
         <ecaRules id="model.12f9492b645.14" inParameterEdges="wires.12f9492b711.3" name="run" trigger="model.12f9492b645.c" target="model.12f948871d7.91"/>
       </onIterate>
       <currentPointer id="model.12f9492b645.16" name="current pointer" outParameterEdges="wires.12f9492b711.3">
-        <parameterEdges id="wires.12f9492b711.3" term="model.12f9492b645.16" value="model.12f9492b645.14"/>
+        <parameterEdges id="wires.12f9492b711.3" parameterValue="model.12f9492b645.16" parameterTerm="model.12f9492b645.14"/>
       </currentPointer>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12f948872b2.19" name="current pointer">

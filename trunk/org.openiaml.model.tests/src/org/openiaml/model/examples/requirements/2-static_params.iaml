@@ -7,7 +7,7 @@
         <ecaRules id="wires.1203bbadbb8.152" inParameterEdges="wires.1203bbadbb8.153" name="run" trigger="model.1203bbadb5b.53c" target="model.1203bbadb5b.53d"/>
       </onAccess>
       <properties id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" defaultValue="value goes here" readOnly="true">
-        <parameterEdges id="wires.1203bbadbb8.153" term="model.1203bbadb5b.53e" value="wires.1203bbadbb8.152"/>
+        <parameterEdges id="wires.1203bbadbb8.153" parameterValue="model.1203bbadb5b.53e" parameterTerm="wires.1203bbadbb8.152"/>
       </properties>
     </children>
   </scopes>

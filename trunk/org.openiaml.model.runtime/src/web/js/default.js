@@ -189,7 +189,7 @@ function execute_queued_url(url, counter, function_queue) {
 
 		      						set_map_point_handler(element_id, value);
 		      						break;
-		      					
+
 		      					case "iterator_list_rows":
 		      						// the given number of rows are visible to the iterator list
 		      						if (bits.length != 3) {
@@ -198,19 +198,19 @@ function execute_queued_url(url, counter, function_queue) {
 		      						var element_id = decodeURIComponent(bits[1]);
 		      						var value = decodeURIComponent(bits[2]);
 		      						debug("[instruction] iterator_list_rows(" + element_id + ") : " + value);
-		      						
+
 		      						for (var j = 0; j < 102; j++) {
 			      						// max 101 rows
 		      							if (j > 101) {
 		      								throw new IamlJavascriptException("Too many rows visible through 'iterator_list_rows': " + j);
 		      							}
-		      							
+
 		      							var e = document.getElementById(element_id + "_row_" + j);
 		      							if (!e) {
 		      								// no more rows to process
 		      								break;
 		      							}
-		      							
+
 		      							if (j < value) {
 		      								// show
 		      								e.style.display = "";
@@ -230,7 +230,7 @@ function execute_queued_url(url, counter, function_queue) {
 									window.location = url;
 									ajaxIncrement();	// prevent other events from executing
 									return;		// cancel any other instructions
-		      					
+
 		      					case "alert":
 		      						if (bits.length != 2) {
 		      							throw new IamlJavascriptException("'alert' instruction called with incorrect number of arguments: expected 2, found " + bits.length);
@@ -458,28 +458,28 @@ function queued_email_send(email_id, function_queue) {
 }
 
 function queued_instance_next(instance_id, function_queue) {
-	var url = 'instance_next.php?instance_id=' + encodeURIComponent(instance_id) 
+	var url = 'instance_next.php?instance_id=' + encodeURIComponent(instance_id)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_previous(instance_id, function_queue) {
-	var url = 'instance_previous.php?instance_id=' + encodeURIComponent(instance_id) 
+	var url = 'instance_previous.php?instance_id=' + encodeURIComponent(instance_id)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_reset(instance_id, function_queue) {
-	var url = 'instance_reset.php?instance_id=' + encodeURIComponent(instance_id) 
+	var url = 'instance_reset.php?instance_id=' + encodeURIComponent(instance_id)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_skip(instance_id, arg0, function_queue) {
-	var url = 'instance_skip.php?instance_id=' + encodeURIComponent(instance_id) 
+	var url = 'instance_skip.php?instance_id=' + encodeURIComponent(instance_id)
 		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	url += create_stacktrace_parameter();
@@ -487,7 +487,7 @@ function queued_instance_skip(instance_id, arg0, function_queue) {
 }
 
 function queued_instance_jump(instance_id, arg0, function_queue) {
-	var url = 'instance_jump.php?instance_id=' + encodeURIComponent(instance_id) 
+	var url = 'instance_jump.php?instance_id=' + encodeURIComponent(instance_id)
 		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	url += create_stacktrace_parameter();
@@ -793,7 +793,7 @@ function get_email_datatype_regexp() {
  * Returns true if the given value (any type) can be successfully cast into the given
  * XSD type.
  *
- * <p>See also the documentation for {@model CastNode}. 
+ * <p>See also the documentation for {@model CastNode}.
  */
 function can_cast(value, type) {
 	debug("can_cast('" + value + "', '" + type + "')");
@@ -806,34 +806,34 @@ function can_cast(value, type) {
 		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// can always convert anything to a String
 			return true;
-		
+
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
 			// can only convert strings
 			if (typeof(value) == "string") {
 				if (value == "")
 					return true;	// can match empty string
-			
+
 				return new RegExp(get_email_datatype_regexp()).test(value);
 			}
-			
+
 			// everything else fails
 			return false;
-		
+
 		// casting to dateTime
 		case "http://openiaml.org/model/datatypes#iamlDateTime":
 			if (value instanceof Date) {
 				// already a datetime
 				return true;
 			}
-		
+
 			if (typeof(value) == "number") {
 				// numbers are both int's and float's; make sure it's
 				// not one of the maximums on int
 				return value >= -2147483648 &&
 					value <= 2147483647;
 			}
-		
+
 			// a string
 			if (typeof(value) == "string") {
 				// check it can be converted
@@ -843,69 +843,69 @@ function can_cast(value, type) {
 				}
 				return true;
 			}
-			
+
 			// everything else fails
 			return false;
-		
+
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
 			if (typeof(value) == "boolean") {
 				return true;	// can always cast boolean to int
 			}
-		
+
 			if (typeof(value) == "number") {
 				// numbers are both int's and float's; make sure it's
 				// not one of the maximums on int
 				return value >= -2147483648 &&
 					value <= 2147483647;
 			}
-		
-			// a string		
+
+			// a string
 			if (typeof(value) == "string") {
 				// "" = 0
 				if (value == "") {
 					return true;
 				}
-			
+
 				var int = parseInt(value);
-				
+
 				// conversion failed?
 				if (isNaN(int)) {
 					return false;
 				}
-				
+
 				// integer is represented the same in string as in int?
 				if (value != ("" + int)) {
 					return false;
 				}
-	
+
 				// numbers are both int's and float's; make sure it's
 				// not one of the maximums on int
 				return int >= -2147483648 &&
 					int <= 2147483647;
-				
+
 			}
-			
+
 			// a date/time (PHP class)
 			if (value instanceof Date) {
 				var int = value.getTime() / 1000;	// convert from msec to sec
-			
+
 				// numbers are both int's and float's; make sure it's
 				// not one of the maximums on int
 				return int >= -2147483648 &&
 					int <= 2147483647;
-				
+
 			}
-			
+
 			// don't know how to deal with this otherwise
 			return false;
-			
+
 		// casting to boolean
 		case "http://openiaml.org/model/datatypes#iamlBoolean":
 		case "http://www.w3.org/2001/XMLSchema#boolean":
 			// all objects can be cast to boolean
 			return true;
-				
+
 		default:
 			throw new IamlJavascriptException("Unknown cast type '" + type + "'");
 	}
@@ -915,35 +915,35 @@ function can_cast(value, type) {
 }
 
 /**
- * Get the given date in RFC 2822 format. This actually converts it to 
+ * Get the given date in RFC 2822 format. This actually converts it to
  * UTC format for consistency (i.e. +0000 timezone).
  *
  * <p>Example: <code>Tue, 19 Jan 2038 03:14:07 +0000</code>
  */
 function rfc2822(date) {
-	function pad(n) { 
-		return n < 10 ? '0' + n : n; 
+	function pad(n) {
+		return n < 10 ? '0' + n : n;
 	}
 	function pad4(n) {
 		return n < 10 ? '000' + n :
 			(n < 100 ? '00' + n :
-				(n < 1000 ? '0' + n : n)); 
+				(n < 1000 ? '0' + n : n));
 	}
-	
+
 	var days = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 	var months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-	
+
 	return days[date.getUTCDay()] + ", " + pad(date.getUTCDate())
 		+ " " + months[date.getUTCMonth()] + " " + date.getUTCFullYear()
 		+ " " + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes())
 		+ ":" + pad(date.getUTCSeconds()) + " +0000";
-	
+
 }
 
 /**
  * Cast the given value to the given type, as best as possible.
  *
- * <p>See also the documentation for {@model CastNode}. 
+ * <p>See also the documentation for {@model CastNode}.
  */
 function do_cast(value, type) {
 	debug("do_cast('" + value + "', '" + type + "')");
@@ -959,9 +959,9 @@ function do_cast(value, type) {
 				// format as RFC 2822
 				return rfc2822(value);
 			}
-			
+
 			return "" + value;
-		
+
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
 			// can only convert strings
@@ -972,58 +972,58 @@ function do_cast(value, type) {
 				}
 
 				// otherwise, fails
-				return "";			
+				return "";
 			}
-			
+
 			// everything else fails
 			return "";
-		
+
 		// casting to dateTime
 		case "http://openiaml.org/model/datatypes#iamlDateTime":
 			if (value instanceof Date) {
 				// same thing
 				return value;
 			}
-			
+
 			if (typeof(value) == "number") {
 				// if it can't be returned, just return the unix epoch
 				if (!can_cast(value, type))
 					return new Date(0);
-					
+
 				// convert timestamp to date
 				return new Date(parseInt(value) * 1000);	// convert s to msec
 			}
-			
+
 			// a string
 			if (typeof(value) == "string") {
 				// if it can't be returned, just return the unix epoch
 				if (!can_cast(value, type))
 					return new Date(0);
-			
+
 				// use DateTime to create object
 				return new Date(value);
 			}
-			
+
 			// everything else fails
 			return new Date("0");
-		
+
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
 			if (typeof(value) == "boolean") {
 				return value ? 1 : 0;
 			}
-		
+
 			if (typeof(value) == "number") {
 				// too big?
 				if (!(value >= -2147483648 &&
 						value <= 2147483647)) {
 					return 0;
 				}
-			
+
 				return Math.floor(value);	// return copy
 			}
-		
-			// a string		
+
+			// a string
 			if (typeof(value) == "string") {
 				// remove all alphanumeric characters
 				value = trim(value.replace(new RegExp("[^0-9\.]", "g"), " "));
@@ -1037,29 +1037,29 @@ function do_cast(value, type) {
 				if (splits.length > 0) {
 					value = splits[0];
 				}
-				
+
 				// return best guess
 				var int = parseInt(value);
 				if (isNaN(int)) {
 					// if it's not an integer, return 0
 					return 0;
 				}
-				
+
 				// too big?
 				if (!(int >= -2147483648 &&
 						int <= 2147483647)) {
 					return 0;
 				}
-			
+
 				return int;
 			}
-			
+
 			// a date/time (PHP class)
 			if (value instanceof Date) {
 				// return timestamp
 				return Math.floor(value.getTime() / 1000);		// convert msec to sec
 			}
-			
+
 			// don't know how to deal with this otherwise
 			return 0;
 
@@ -1067,7 +1067,7 @@ function do_cast(value, type) {
 		case "http://openiaml.org/model/datatypes#iamlBoolean":
 		case "http://www.w3.org/2001/XMLSchema#boolean":
 			return make_into_boolean(value);
-	
+
 		default:
 			throw new IamlJavascriptException("Unknown cast type '" + type + "'");
 	}

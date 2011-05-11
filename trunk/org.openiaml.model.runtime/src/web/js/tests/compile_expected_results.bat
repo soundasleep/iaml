@@ -1,0 +1,1 @@
+php -f create_expected_results.php > expected-results.js

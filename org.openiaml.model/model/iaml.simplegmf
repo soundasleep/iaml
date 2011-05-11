@@ -264,7 +264,7 @@
     </elements>
   </diagramEditors>
   <diagramEditors id="email">
-    <classifier href="iaml.ecore#//scopes/Email"/>
+    <classifier href="iaml.ecore#//messaging/Email"/>
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
@@ -290,8 +290,8 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Event">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//scopes/Email/onSent"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//scopes/Email/onFailure"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//messaging/Email/onSent"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//messaging/Email/onFailure"/>
       <classifier href="iaml.ecore#//Event"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
@@ -381,7 +381,7 @@
       <classifier href="iaml.ecore#//visual/Label"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Email">
-      <classifier href="iaml.ecore#//scopes/Email"/>
+      <classifier href="iaml.ecore#//messaging/Email"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Map">
       <classifier href="iaml.ecore#//visual/Map"/>
@@ -641,7 +641,7 @@
       <classifier href="iaml.ecore#//scopes/Session"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Email">
-      <classifier href="iaml.ecore#//scopes/Email"/>
+      <classifier href="iaml.ecore#//messaging/Email"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="LoginHandler">
       <classifier href="iaml.ecore#//components/LoginHandler"/>
@@ -712,7 +712,7 @@
       <classifier href="iaml.ecore#//visual/Frame"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Email">
-      <classifier href="iaml.ecore#//scopes/Email"/>
+      <classifier href="iaml.ecore#//messaging/Email"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="LoginHandler">
       <classifier href="iaml.ecore#//components/LoginHandler"/>

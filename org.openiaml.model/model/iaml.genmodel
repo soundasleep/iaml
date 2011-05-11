@@ -132,6 +132,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/elements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/onInit"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/scopes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/messages"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Function">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Function/type"/>
@@ -342,19 +343,7 @@
       <genClasses ecoreClass="iaml.ecore#//scopes/Session">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/labels"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//scopes/Email">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/to"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/subject"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/toName"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/from"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/fromName"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/onSent"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/onFailure"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/buttons"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/labels"/>
-      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//scopes/Message"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//components">
@@ -458,6 +447,20 @@
       <genClasses image="false" ecoreClass="iaml.ecore#//users/RequiresEdgeDestination">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//users/RequiresEdgeDestination/inRequiresEdges"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Messaging" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
+        ecorePackage="iaml.ecore#//messaging">
+      <genClasses ecoreClass="iaml.ecore#//messaging/Email">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//messaging/Email/to"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//messaging/Email/subject"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//messaging/Email/toName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//messaging/Email/from"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//messaging/Email/fromName"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//messaging/Email/onSent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//messaging/Email/onFailure"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//messaging/Email/buttons"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//messaging/Email/labels"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

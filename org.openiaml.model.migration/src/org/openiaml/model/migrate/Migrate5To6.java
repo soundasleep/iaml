@@ -127,6 +127,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml:BuiltinOperation";
 		}
 		
+		// issue 256
+		// "iaml.scopes:Email"
+		// --> "iaml.messaging:Email";
+		if (xsiType.equals("iaml.scopes:Email")) {
+			return "iaml.messaging:Email";
+		}
+		
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -192,6 +199,11 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		}
 		if ("actions".equals(element.getNodeName())) {
 			return "ecaRules";
+		}
+		
+		// issue 256
+		if ("scopes".equals(element.getNodeName()) && "iaml.scopes:Email".equals(xsiType)) {
+			return "messages";
 		}
 		
 		return super.getRenamedNode(nodeName, element, errors);
@@ -594,6 +606,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	public Map<String, String> getNewNamespaces() {
 		Map<String, String> map = super.getNewNamespaces();
 		map.put("iaml.domain", "http://openiaml.org/model/domain");
+		map.put("iaml.messaging", "http://openiaml.org/model/messaging");
 		return map;
 	}
 

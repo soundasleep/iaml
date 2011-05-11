@@ -177,19 +177,19 @@
 	throw_new_IamlJavascriptException("Unknown data source: «this»")
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::InputTextField»
-	document.getElementById('«safeName()»').parameterTerm
+	document.getElementById('«safeName()»').value
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Button»
-	document.getElementById('«safeName()»').parameterTerm
+	document.getElementById('«safeName()»').value
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Label»
 	document.getElementById('«safeName()»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::MapPoint»
-	document.getElementById('map_point_«safeNameString(id)»_value').parameterTerm
+	document.getElementById('map_point_«safeNameString(id)»_value').value
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Map»
-	document.getElementById('map_single_«safeNameString(id)»_value').parameterTerm
+	document.getElementById('map_single_«safeNameString(id)»_value').value
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::domain::DomainAttributeInstance»
 	<?php /* DomainAttributeInstances are cached */ echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>
@@ -270,7 +270,7 @@
 			«ELSEIF model::VisibleThing.isInstance(eContainer)»
 				«REM»this is an inline call, thus the ternary operator«ENDREM»
 				(on_current_frame(get_frame_id(), "«safeName()»") ?	
-					«REM»TODO XXX a text field.parameterTerm is always equal to '', even if it hasn't been set!«ENDREM»	
+					«REM»TODO XXX a text field.value is always equal to '', even if it hasn't been set!«ENDREM»	
 					(typeof («EXPAND dataSourceOnFrame FOR eContainer») !== "undefined"
 					&& «EXPAND dataSourceOnFrame FOR eContainer» !== "") 
 					: (

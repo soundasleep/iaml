@@ -65,7 +65,7 @@
 	<div
 		id="<?php echo $id; ?>" 
 		style="display: none;"
-		«EXPAND Render::getVisibilityInlineCode(currentFrame, /* hidden by default */ false)»
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»	
 		> 
 		
@@ -241,14 +241,22 @@
 «DEFINE staticInitialMapPointValue(model::visual::Frame currentFrame) FOR model::Value»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
-		if (get_application_value("«safeNameString(id)»", null) !== null || /* or a default value is set */ "«escapeString(defaultValue)»") {
+		if (get_application_value("«safeNameString(id)»", null) !== null 
+					«IF defaultValue != null»
+					|| /* or a default value is set */ "«escapeString(defaultValue)»"
+					«ENDIF»
+				) {
 			$value = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
 			$point_address = $value;
 			$point_visible = true;
 		}		
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null || /* or a default value is set */ "«escapeString(defaultValue)»") {
+		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null
+					«IF defaultValue != null»
+					|| /* or a default value is set */ "«escapeString(defaultValue)»"
+					«ENDIF»
+				) {
 			$value = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 			$point_address = $value;
 			$point_visible = true;

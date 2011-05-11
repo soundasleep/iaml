@@ -120,10 +120,11 @@ public class VisibleThingVisibility extends MapsCodegenTestCase {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 
-		// in r2815, a Map is always invisible <em>unless</em>
-		// a field value is set
+		// a Map should always be displayed, even if no value is set, as
+		// the Map itself needs to be modifiable
+		// reverts behaviour from r2815
 		{
-			assertHasNoMap("Map visible");
+			assertHasMap("Map visible");
 		}
 		
 		{

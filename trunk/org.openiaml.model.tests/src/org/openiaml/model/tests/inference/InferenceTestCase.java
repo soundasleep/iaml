@@ -55,6 +55,7 @@ import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
+import org.openiaml.model.model.messaging.Email;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
@@ -72,7 +73,6 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.TemporaryVariable;
-import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Permission;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
@@ -574,7 +574,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Label assertHasLabel(Email element, String string) throws JaxenException {
-		return (Label) queryOne(element, "iaml.scopes:labels[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(element.getLabels(), string);
+		assertEquals(1, list.size());
+		return (Label) list.get(0);
 	}
 
 	/**
@@ -754,7 +756,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Email.
 	 */
 	public Email assertHasEmail(InternetApplication scope, String string) throws JaxenException {
-		return (Email) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(scope.getMessages(), Email.class), string);
+		assertEquals(1, list.size());
+		return (Email) list.get(0);
 	}
 
 	/**
@@ -762,7 +766,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Email.
 	 */
 	public Email assertHasEmail(Scope scope, String string) throws JaxenException {
-		return (Email) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(scope.getMessages(), Email.class), string);
+		assertEquals(1, list.size());
+		return (Email) list.get(0);
 	}
 
 	/**

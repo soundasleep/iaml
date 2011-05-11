@@ -51,6 +51,8 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
+import org.openiaml.model.model.messaging.Email;
+import org.openiaml.model.model.messaging.MessagingPackage;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
@@ -69,7 +71,6 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
-import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
@@ -543,7 +544,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public Label generatedLabel(GeneratesElements by, Email container) throws InferenceException {
-		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), ScopesPackage.eINSTANCE.getEmail_Labels() );
+		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), MessagingPackage.eINSTANCE.getEmail_Labels() );
 		setGeneratedBy(field, by);
 		return field;
 	}
@@ -596,7 +597,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public Email createEmail(Scope container) throws InferenceException {
-		Email page = (Email) createElement( container, ScopesPackage.eINSTANCE.getEmail(), ModelPackage.eINSTANCE.getScope_Scopes() );
+		Email page = (Email) createElement( container, MessagingPackage.eINSTANCE.getEmail(), ModelPackage.eINSTANCE.getScope_Messages() );
 		return page;
 	}
 	

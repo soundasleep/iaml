@@ -4,7 +4,7 @@
 package org.openiaml.model.tests.inference.model0_5;
 
 import org.openiaml.model.model.Value;
-import org.openiaml.model.model.scopes.Email;
+import org.openiaml.model.model.messaging.Email;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;

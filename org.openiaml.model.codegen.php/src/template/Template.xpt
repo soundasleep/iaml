@@ -151,9 +151,8 @@ require(ROOT_PATH . "iterator_lists.php");
 	«EXPAND expandSession FOREACH scopes»
 «ENDDEFINE»
 
-«DEFINE expandSession FOR model::scopes::Email»
-	«REM»E-mails do not have any special expansion; expand as Session«ENDREM»
-	«EXPAND expandSession FOREACH scopes»
+«DEFINE expandSession FOR model::messaging::Email»
+	«REM»E-mails do not have any special expansion«ENDREM»
 «ENDDEFINE»
 
 «DEFINE expandSession FOR model::Scope»
@@ -190,14 +189,9 @@ require(ROOT_PATH . "iterator_lists.php");
 </li>
 «ENDDEFINE»
 
-«DEFINE expandSitemapFrame FOR model::scopes::Email»
+«DEFINE expandSitemapFrame FOR model::messaging::Email»
 <li>
 	[Email «name»]
-	«IF !scopes.isEmpty»
-	<ol>
-		«EXPAND expandSitemapFrame FOREACH scopes»
-	</ol>
-	«ENDIF»	
 </li>
 «ENDDEFINE»
 

@@ -93,7 +93,7 @@
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
-	«ELSEIF model::CompositeOperation.isInstance(target) && model::scopes::Email.isInstance(target.eContainer)-»
+	«ELSEIF model::CompositeOperation.isInstance(target) && model::messaging::Email.isInstance(target.eContainer)-»
 		«IF php || availableInCurrentScriptAction(trigger, target)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
 			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
@@ -111,8 +111,8 @@
 		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::domain::DomainIterator) target.eContainer) FOR target»;
 	«ELSEIF model::components::AccessControlHandler.isInstance(target.eContainer)-»
 		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) target.eContainer) FOR target»;
-	«ELSEIF model::scopes::Email.isInstance(target.eContainer)-»
-		«EXPAND template::emails::Email::emailOperationCall(php, this, (model::scopes::Email) target.eContainer) FOR target»;
+	«ELSEIF model::messaging::Email.isInstance(target.eContainer)-»
+		«EXPAND template::emails::Email::emailOperationCall(php, this, (model::messaging::Email) target.eContainer) FOR target»;
 	«ELSE-»
 		alert('unknown target operation type in «target.eContainer.metaType.name»');
 		«throwException("Unknown target operation type in '" + target.eContainer.metaType.name + "' (this=" + this + ")")»

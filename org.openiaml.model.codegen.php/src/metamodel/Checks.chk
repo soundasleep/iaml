@@ -140,7 +140,7 @@ context model::BuiltinOperation WARNING "Unknown builtin operation name '" + nam
 		name == "remove permission" || name == "check permissions" ||
 		(model::VisibleThing.isInstance(eContainer) &&
 			(name == "hide" || name == "show")) || 
-		(model::scopes::Email.isInstance(eContainer) &&
+		(model::messaging::Email.isInstance(eContainer) &&
 			(name == "send")) ||
 		name == "true?" || name == "can cast?") ||
 
@@ -221,8 +221,8 @@ context model::Changeable ERROR "Contained fieldValue property has a default val
 	defaultValue == fieldValue.defaultValue;
 
 context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
-	!model::scopes::Email.isInstance(to) &&
-	!model::scopes::Email.isInstance(from);
+	!model::messaging::Email.isInstance(to) &&
+	!model::messaging::Email.isInstance(from);
 
 context model::domain::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
 	!outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).isEmpty;

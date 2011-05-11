@@ -166,20 +166,24 @@ availableInCurrentScriptAction(model::ActionEdgeSource source, model::Action tar
  */
 List[model::Operation] allContainerOperations(model::Scope this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( messages.allContainerOperations() )
 		.union( elements.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::scopes::Session this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( messages.allContainerOperations() )
 		.union( elements.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.union( labels.allContainerOperations() )
 		.select(o | operationUsed(o));
 		
-List[model::Operation] allContainerOperations(model::scopes::Email this) :
-	operations.toSet().union( scopes.allContainerOperations() )
-		.union( elements.allContainerOperations() )
+List[model::Operation] allContainerOperations(model::scopes::Message this) :
+	{};
+		
+List[model::Operation] allContainerOperations(model::messaging::Email this) :
+	operations.toSet()
 		.union( labels.allContainerOperations() )
 		.union( buttons.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
@@ -187,6 +191,7 @@ List[model::Operation] allContainerOperations(model::scopes::Email this) :
 
 List[model::Operation] allContainerOperations(model::visual::Frame this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( messages.allContainerOperations() )
 		.union( elements.allContainerOperations() )
 		.union( children.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
@@ -297,10 +302,10 @@ model::scopes::Session containingSession(model::scopes::Session this) :
 model::scopes::Session containingSession(model::InternetApplication this) :
 	null;
 
-model::scopes::Email containingEmail(model::scopes::Email this) :
+model::messaging::Email containingEmail(model::messaging::Email this) :
 	this;
 
-model::scopes::Email containingEmail(emf::EObject this) :
+model::messaging::Email containingEmail(emf::EObject this) :
 	if (eContainer == null) then
 		null
 	else
@@ -388,8 +393,8 @@ cached List[model::visual::Frame] getAllFrames(model::InternetApplication this) 
 	eAllContents.typeSelect(model::visual::Frame);
 
 /** get all Emails in the InternetApplication */
-cached List[model::scopes::Email] getAllEmails(model::InternetApplication this) :
-	eAllContents.typeSelect(model::scopes::Email);
+cached List[model::messaging::Email] getAllEmails(model::InternetApplication this) :
+	eAllContents.typeSelect(model::messaging::Email);
 
 /** get all Domain Attribute Instances in the InternetApplication */
 List[domain::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :

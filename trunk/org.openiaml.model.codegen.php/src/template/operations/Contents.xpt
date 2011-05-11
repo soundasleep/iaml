@@ -517,9 +517,9 @@
  *		An {@model Email} has a {@model BuiltinOperation} named 'send'. 
  */
 «DEFINE sendOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
-	«IF model::scopes::Email.isInstance(eContainer)»
+	«IF model::messaging::Email.isInstance(eContainer)»
 		/* send an e-mail: «this» */
-		«LET (model::scopes::Email) eContainer AS email»
+		«LET (model::messaging::Email) eContainer AS email»
 			«EXPAND template::emails::Email::actualEmailOperationCall(php, email)»;
 		«ENDLET»
 	«ELSE»

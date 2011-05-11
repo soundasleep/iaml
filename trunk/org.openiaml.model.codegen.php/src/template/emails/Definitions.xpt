@@ -47,7 +47,7 @@
  *		The <i>storage semantics</i> for an {@model Email} follows the
  *		<i>storage semantics</i> of its parent {@model Scope}.
  */
-«DEFINE emailDefinition FOR model::scopes::Email»
+«DEFINE emailDefinition FOR model::messaging::Email»
 	/**
 	 * Send the given e-mail.
 	 *
@@ -169,7 +169,7 @@
  *		contained {@model Property Properties}, {@model StaticValue}s and
  *		{@model Label} values.
  */
-«DEFINE emailTemplateDefinition FOR model::scopes::Email»
+«DEFINE emailTemplateDefinition FOR model::messaging::Email»
 <?php 
 /**
  * The default generated e-mail template for email '«name»'.
@@ -197,7 +197,7 @@
  *		When selecting a {@model Property} or {@model StaticValue} for an e-mail template, the
  *		{@model Property} has a higher priority.
  */
-«DEFINE getEmailProperty(String name) FOR model::scopes::Email»
+«DEFINE getEmailProperty(String name) FOR model::messaging::Email»
 	«IF !properties.select(e|e.name == name).isEmpty»
 		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(e|e.name == name)»
 	«ELSE»

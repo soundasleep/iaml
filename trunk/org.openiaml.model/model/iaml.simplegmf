@@ -229,9 +229,6 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
-    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
@@ -261,9 +258,6 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Event">
       <classifier href="iaml.ecore#//Event"/>
-    </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
@@ -347,9 +341,6 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
-    </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
@@ -464,9 +455,6 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Role">
       <classifier href="iaml.ecore#//users/Role"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
-    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
@@ -544,9 +532,6 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
-    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
@@ -616,9 +601,6 @@
     <elements xsi:type="sgmf:ReferencedNode" id="" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
-    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
@@ -633,9 +615,6 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
@@ -806,9 +785,6 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
-    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
@@ -911,9 +887,6 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainIterator">
       <classifier href="iaml.ecore#//domain/DomainIterator"/>
-    </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="XQueryPredicate">
-      <classifier href="iaml.ecore#//XQueryPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>

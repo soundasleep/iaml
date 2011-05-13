@@ -259,7 +259,10 @@ context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name 
 */
 
 context model::operations::DataFlowEdge ERROR "Readonly Properties can not be set" :
-	!(to != null && model::Value.isInstance(to) && ((model::Value) to).readOnly);
+	!(to != null 
+		&& model::operations::ExternalValue.isInstance(to)
+		&& ((model::operations::ExternalValue) to).externalValueEdges.value != null
+		&& ((model::operations::ExternalValue) to).externalValueEdges.value.readOnly);
 
 context model::Value ERROR "Readonly Values must have a default value set" :
 	!(readOnly && defaultValue == null);

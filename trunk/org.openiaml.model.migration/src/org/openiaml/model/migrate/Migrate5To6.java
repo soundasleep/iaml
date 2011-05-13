@@ -134,6 +134,14 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.messaging:Email";
 		}
 		
+		// issue 248
+		if (xsiType.equals("iaml:CompositeOperation")) {
+			return "iaml.operations:ActivityOperation";
+		}
+		if (xsiType.equals("iaml:CompositeCondition")) {
+			return "iaml.operations:ActivityFunction";
+		}
+		
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -607,6 +615,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		Map<String, String> map = super.getNewNamespaces();
 		map.put("iaml.domain", "http://openiaml.org/model/domain");
 		map.put("iaml.messaging", "http://openiaml.org/model/messaging");
+		map.put("iaml.operations", "http://openiaml.org/model/operations");
 		return map;
 	}
 

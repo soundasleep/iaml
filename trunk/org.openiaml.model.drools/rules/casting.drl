@@ -75,10 +75,15 @@ rule "Create contents of 'can cast?' condition"
 		FinishNode finish = handler.generatedFinishNode(c, c);
 		queue.add(finish, drools);
 		
+		ExternalValue ev_fieldValue = handler.generatedExternalValue(c, c);
+		queue.add(ev_fieldValue, drools);
+		ExternalValueEdge edge = handler.generatedExternalValueEdge(c, ev_fieldValue, ev_fieldValue, fieldValue);
+		queue.add(edge, drools);
+		
 		DataFlowEdge castIn = handler.generatedDataFlowEdge(c, c, param, cast);
 		queue.add(castIn, drools);
 
-		DataFlowEdge castOut = handler.generatedDataFlowEdge(c, c, cast, fieldValue);
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(c, c, cast, ev_fieldValue);
 		queue.add(castOut, drools);
 
 		DataFlowEdge castCheck = handler.generatedDataFlowEdge(c, c, cast, check);

@@ -402,8 +402,7 @@ rule "Create contents of 'update target' operation"
 		queue.add(start, drools);
 		queue.add(finish, drools);
 		
-		BuiltinOperation setOp = handler.generatedBuiltinOperation(op, op);
-		handler.setName(setOp, "set");
+		SetNode setOp = handler.generatedSetNode(op, op);
 		queue.add(setOp, drools);
 		
 		Value one = handler.generatedValue(op, op);
@@ -417,10 +416,25 @@ rule "Create contents of 'update target' operation"
 		handler.setType(subtract, ArithmeticOperationTypes.SUBTRACT);
 		queue.add(subtract, drools);
 		
-		DataFlowEdge d1 = handler.generatedDataFlowEdge(op, op, results, subtract);
-		DataFlowEdge d2 = handler.generatedDataFlowEdge(op, op, one, subtract);
+		ExternalValue ev_results = handler.generatedExternalValue(op, op);
+		queue.add(ev_results, drools);
+		ExternalValueEdge edge1 = handler.generatedExternalValueEdge(op, ev_results, ev_results, results);
+		queue.add(edge1, drools);
+		
+		ExternalValue ev_target = handler.generatedExternalValue(op, op);
+		queue.add(ev_target, drools);
+		ExternalValueEdge edge2 = handler.generatedExternalValueEdge(op, ev_target, ev_target, target);
+		queue.add(edge2, drools);
+
+		ExternalValue ev_one = handler.generatedExternalValue(op, op);
+		queue.add(ev_one, drools);
+		ExternalValueEdge edge3 = handler.generatedExternalValueEdge(op, ev_one, ev_one, one);
+		queue.add(edge3, drools);
+		
+		DataFlowEdge d1 = handler.generatedDataFlowEdge(op, op, ev_results, subtract);
+		DataFlowEdge d2 = handler.generatedDataFlowEdge(op, op, ev_one, subtract);
 		DataFlowEdge d3 = handler.generatedDataFlowEdge(op, op, subtract, setOp);
-		DataFlowEdge d4 = handler.generatedDataFlowEdge(op, op, setOp, target);
+		DataFlowEdge d4 = handler.generatedDataFlowEdge(op, op, setOp, ev_target);
 		
 		queue.add(d1, drools);
 		queue.add(d2, drools);

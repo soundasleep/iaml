@@ -65,10 +65,13 @@ import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdge;
 import org.openiaml.model.model.operations.ExecutionEdgeDestination;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
+import org.openiaml.model.model.operations.ExternalValue;
+import org.openiaml.model.model.operations.ExternalValueEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.ScopesPackage;
@@ -385,6 +388,32 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 	
+	public SetNode generatedSetNode(GeneratesElements by, ActivityOperation container) throws InferenceException {
+		SetNode node = (SetNode) createElement( container, OperationsPackage.eINSTANCE.getSetNode(), OperationsPackage.eINSTANCE.getActivityOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public ExternalValue generatedExternalValue(GeneratesElements by, ActivityOperation container) throws InferenceException {
+		ExternalValue node = (ExternalValue) createElement( container, OperationsPackage.eINSTANCE.getExternalValue(), OperationsPackage.eINSTANCE.getActivityOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+	
+	public ExternalValue generatedExternalValue(GeneratesElements by, ActivityFunction container) throws InferenceException {
+		ExternalValue node = (ExternalValue) createElement( container, OperationsPackage.eINSTANCE.getExternalValue(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+	
+	public ExternalValueEdge generatedExternalValueEdge(GeneratesElements by, ExternalValue container, ExternalValue from, Value to) throws InferenceException {
+		ExternalValueEdge edge = (ExternalValueEdge) createElement( container, OperationsPackage.eINSTANCE.getExternalValueEdge(), OperationsPackage.eINSTANCE.getExternalValue_ExternalValueEdges() );
+		setGeneratedBy(edge, by);
+		setFrom(edge, from);
+		setTo(edge, to);
+		return edge;
+	}
+
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, ActivityOperation container) throws InferenceException {
 		DataFlowEdge edge = (DataFlowEdge) createElement( container, OperationsPackage.eINSTANCE.getDataFlowEdge(), OperationsPackage.eINSTANCE.getActivityOperation_DataEdges() );
 		setGeneratedBy(edge, by);
@@ -633,19 +662,27 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, EcorePackage.eINSTANCE.getENamedElement_Name(), value);
 	}
 
-	public void setFrom(DataFlowEdge element, EObject value) throws InferenceException {
+	public void setFrom(DataFlowEdge element, DataFlowEdgesSource value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_From(), value);
 	}
-
-	public void setTo(DataFlowEdge element, EObject value) throws InferenceException {
-		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_To(), value);
+	
+	public void setFrom(ExternalValueEdge element, ExternalValue value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getExternalValueEdge_From(), value);
 	}
 
-	public void setFrom(ExecutionEdge element, EObject value) throws InferenceException {
+	public void setTo(DataFlowEdge element, DataFlowEdgeDestination value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_To(), value);
+	}
+	
+	public void setTo(ExternalValueEdge element, Value value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getExternalValueEdge_Value(), value);
+	}
+
+	public void setFrom(ExecutionEdge element, ExecutionEdgesSource value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_From(), value);
 	}
 
-	public void setTo(ExecutionEdge element, EObject value) throws InferenceException {
+	public void setTo(ExecutionEdge element, ExecutionEdgeDestination value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	

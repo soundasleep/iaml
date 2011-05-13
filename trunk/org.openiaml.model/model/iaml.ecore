@@ -978,7 +978,7 @@
         <details key="documentation" value="A virtual {@model Operation} call; the outgoing {@model RunAction} will be executed."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SetNode" eSuperTypes="#//ActivityNode #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="SetNode" eSuperTypes="#//ActivityNode #//NamedElement #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."/>
       </eAnnotations>
@@ -1107,7 +1107,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
           eType="#//operations/ExecutionEdge" eOpposite="#//operations/ExecutionEdge/from"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExternalValue" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="ExternalValue" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination #//wires/ParameterEdgesSource">
       <eStructuralFeatures xsi:type="ecore:EReference" name="externalValueEdges" eType="#//operations/ExternalValueEdge"
           containment="true" eOpposite="#//operations/ExternalValueEdge/from"/>
     </eClassifiers>

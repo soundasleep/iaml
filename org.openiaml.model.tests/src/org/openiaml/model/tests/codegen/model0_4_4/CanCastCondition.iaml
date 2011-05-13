@@ -8,10 +8,10 @@
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f877c61.3b" inExecutions="model.1274f8f028d.33"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.3c" inExecutions="model.1274f8f028d.35"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4b" outFlows="model.1274f8f028d.2d model.1274f8f028d.2e" inFlows="model.1274f8f028d.2b"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1274f8f028d.2b">
+        <externalValueEdges id="eve1" value="model.1274f76bcd9.69"/>
+      </nodes>
       <dataEdges id="model.1274f8f028d.2b" from="ev1" to="operations.127503c4bc5.4b"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1274f8f028d.2b">
-			<externalValueEdges id="eve1" from="ev1" value="model.1274f76bcd9.69" />
-		</nodes>
       <dataEdges id="model.1274f8f028d.2d" from="operations.127503c4bc5.4b" to="model.1274f877ba5.c9"/>
       <dataEdges id="model.1274f8f028d.2e" from="operations.127503c4bc5.4b" to="operations.1274f877c61.62"/>
       <executionEdges id="model.1274f8f028d.33" name="y" from="operations.1274f877c61.62" to="operations.1274f877c61.3b"/>
@@ -26,20 +26,20 @@
       <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4e" outFlows="model.1274f8f028d.3a3 model.1274f8f028d.3a4 model.1274f8f028d.3a7" inFlows="model.1274f8533f5.25"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f8534e0.3" inExecutions="model.1274f8533f5.2b"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.7" inExecutions="model.1274f877ba5.26" exceptionText="unexpectedly had a conversion failure"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.1274f8533f5.25">
+        <externalValueEdges id="eve2" value="model.1274f76bcd9.69"/>
+      </nodes>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.1274f8533f5.2a">
+        <externalValueEdges id="eve3" value="model.1274f76bcd9.95"/>
+      </nodes>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" inFlows="model.1274f8f028d.3a7">
+        <externalValueEdges id="eve4" value="model.1274f76bcd9.95"/>
+      </nodes>
       <dataEdges id="model.1274f8533f5.25" from="ev2" to="operations.127503c4bc5.4e"/>
       <dataEdges id="model.1274f8533f5.2a" from="model.1274f8533f5.28" to="ev3"/>
       <dataEdges id="model.1274f8f028d.3a3" from="operations.127503c4bc5.4e" to="operations.1274f877c61.10"/>
       <dataEdges id="model.1274f8f028d.3a4" from="operations.127503c4bc5.4e" to="model.1274f8533f5.28"/>
       <dataEdges id="model.1274f8f028d.3a7" from="operations.127503c4bc5.4e" to="ev4"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.1274f8533f5.25">
-			<externalValueEdges id="eve2" from="ev2" value="model.1274f76bcd9.69" />
-		</nodes>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.1274f8533f5.2a">
-			<externalValueEdges id="eve3" from="ev3" value="model.1274f76bcd9.95" />
-		</nodes>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev4" inFlows="model.1274f8f028d.3a7">
-			<externalValueEdges id="eve4" from="ev4" value="model.1274f76bcd9.95" />
-		</nodes>
       <executionEdges id="model.1274f8533f5.2b" from="model.1274f8533f5.28" to="operations.1274f8534e0.3"/>
       <executionEdges id="model.1274f877ba5.26" name="n" from="operations.1274f877c61.10" to="operations.1274f877c61.7"/>
       <executionEdges id="model.1274f877ba5.27" name="y" from="operations.1274f877c61.10" to="model.1274f8533f5.28"/>

@@ -14,14 +14,14 @@
         <nodes xsi:type="iaml.operations:SetNode" id="model.1207ff82f9b.1fd" outExecutions="model.1207ff82f9b.1ff" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" inFlows="model.1207ff82f9b.269"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1207ff832b7.64" inExecutions="model.1207ff82f9b.1ff"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.1207ff82f9b.26a">
+          <externalValueEdges id="eve1" value="model.1207ff82f9b.22d"/>
+        </nodes>
         <dataEdges id="model.1207ff82f9b.269" from="model.1207ff82f9b.1f8" to="model.1207ff82f9b.1fd"/>
         <dataEdges id="model.1207ff82f9b.26a" from="model.1207ff82f9b.1fd" to="ev1"/>
         <executionEdges id="model.1207ff82f9b.1fe" from="operations.1207ff832b7.63" to="model.1207ff82f9b.1fd"/>
         <executionEdges id="model.1207ff82f9b.1ff" from="model.1207ff82f9b.1fd" to="operations.1207ff832b7.64"/>
         <parameters id="model.1207ff82f9b.1f8" name="value" outFlows="model.1207ff82f9b.269"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.1207ff82f9b.26a">
-			<externalValueEdges id="eve1" from="ev1" value="model.1207ff82f9b.22d" />
-		</nodes>
       </operations>
       <fieldValue id="model.1207ff82f9b.22d" name="fieldValue"/>
     </children>

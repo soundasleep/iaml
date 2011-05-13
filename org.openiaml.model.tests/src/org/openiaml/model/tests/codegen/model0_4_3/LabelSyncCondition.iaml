@@ -7,10 +7,10 @@
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126c01921cf.1" outExecutions="model.126c0191fac.a2"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.126c01921cf.3" inExecutions="model.126c0191fac.a5"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.126c01921cf.5" inExecutions="model.126c0191fac.a4" exceptionText="don't allow sync"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.126c0191fac.a6">
+        <externalValueEdges id="eve1" value="model.126c0191fac.5d"/>
+      </nodes>
       <dataEdges id="model.126c0191fac.a6" from="ev1" to="operations.126c01921cf.7"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.126c0191fac.a6">
-			<externalValueEdges id="eve1" from="ev1" value="model.126c0191fac.5d" />
-		</nodes>
       <executionEdges id="model.126c0191fac.a2" from="operations.126c01921cf.1" to="operations.126c01921cf.7"/>
       <executionEdges id="model.126c0191fac.a4" name="n" from="operations.126c01921cf.7" to="operations.126c01921cf.5"/>
       <executionEdges id="model.126c0191fac.a5" name="y" from="operations.126c01921cf.7" to="operations.126c01921cf.3"/>

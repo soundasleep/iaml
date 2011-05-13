@@ -8,7 +8,10 @@
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f877c61.3b" inExecutions="model.1274f8f028d.33"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.3c" inExecutions="model.1274f8f028d.35"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4b" outFlows="model.1274f8f028d.2d model.1274f8f028d.2e" inFlows="model.1274f8f028d.2b"/>
-      <dataEdges id="model.1274f8f028d.2b" from="model.1274f76bcd9.69" to="operations.127503c4bc5.4b"/>
+      <dataEdges id="model.1274f8f028d.2b" from="ev1" to="operations.127503c4bc5.4b"/>
+		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1274f8f028d.2b">
+			<externalValueEdges id="eve1" from="ev1" value="model.1274f76bcd9.69" />
+		</nodes>
       <dataEdges id="model.1274f8f028d.2d" from="operations.127503c4bc5.4b" to="model.1274f877ba5.c9"/>
       <dataEdges id="model.1274f8f028d.2e" from="operations.127503c4bc5.4b" to="operations.1274f877c61.62"/>
       <executionEdges id="model.1274f8f028d.33" name="y" from="operations.1274f877c61.62" to="operations.1274f877c61.3b"/>
@@ -17,27 +20,36 @@
       <variables id="model.1274f877ba5.c9" name="target" inFlows="model.1274f8f028d.2d" type="builtin_iamlInteger"/>
     </functions>
     <operations xsi:type="iaml.operations:ActivityOperation" id="model.1274f76bcd9.47" name="convert and insert" rules="wires.1274f76c1da.64">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1274f8533f5.28" name="set" inFlows="model.1274f8f028d.3a4" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" outExecutions="model.1274f8533f5.2b"/>
+      <nodes xsi:type="iaml.operations:SetNode" id="model.1274f8533f5.28" outExecutions="model.1274f8533f5.2b" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" inFlows="model.1274f8f028d.3a4"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.10" name="can cast?" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27" inExecutions="model.1274f8f028d.25a" inFlows="model.1274f8f028d.3a3"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f8534e0.1" outExecutions="model.1274f8f028d.25a"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4e" outFlows="model.1274f8f028d.3a3 model.1274f8f028d.3a4 model.1274f8f028d.3a7" inFlows="model.1274f8533f5.25"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f8534e0.3" inExecutions="model.1274f8533f5.2b"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.7" inExecutions="model.1274f877ba5.26" exceptionText="unexpectedly had a conversion failure"/>
-      <dataEdges id="model.1274f8533f5.25" from="model.1274f76bcd9.69" to="operations.127503c4bc5.4e"/>
-      <dataEdges id="model.1274f8533f5.2a" from="model.1274f8533f5.28" to="model.1274f76bcd9.95"/>
+      <dataEdges id="model.1274f8533f5.25" from="ev2" to="operations.127503c4bc5.4e"/>
+      <dataEdges id="model.1274f8533f5.2a" from="model.1274f8533f5.28" to="ev3"/>
       <dataEdges id="model.1274f8f028d.3a3" from="operations.127503c4bc5.4e" to="operations.1274f877c61.10"/>
       <dataEdges id="model.1274f8f028d.3a4" from="operations.127503c4bc5.4e" to="model.1274f8533f5.28"/>
-      <dataEdges id="model.1274f8f028d.3a7" from="operations.127503c4bc5.4e" to="model.1274f76bcd9.95"/>
+      <dataEdges id="model.1274f8f028d.3a7" from="operations.127503c4bc5.4e" to="ev4"/>
+		<nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.1274f8533f5.25">
+			<externalValueEdges id="eve2" from="ev2" value="model.1274f76bcd9.69" />
+		</nodes>
+		<nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.1274f8533f5.2a">
+			<externalValueEdges id="eve3" from="ev3" value="model.1274f76bcd9.95" />
+		</nodes>
+		<nodes xsi:type="iaml.operations:ExternalValue" id="ev4" inFlows="model.1274f8f028d.3a7">
+			<externalValueEdges id="eve4" from="ev4" value="model.1274f76bcd9.95" />
+		</nodes>
       <executionEdges id="model.1274f8533f5.2b" from="model.1274f8533f5.28" to="operations.1274f8534e0.3"/>
       <executionEdges id="model.1274f877ba5.26" name="n" from="operations.1274f877c61.10" to="operations.1274f877c61.7"/>
       <executionEdges id="model.1274f877ba5.27" name="y" from="operations.1274f877c61.10" to="model.1274f8533f5.28"/>
       <executionEdges id="model.1274f8f028d.25a" from="operations.1274f8534e0.1" to="operations.1274f877c61.10"/>
     </operations>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.123" name="String" type="builtin_iamlString">
-      <fieldValue id="model.1274f76bcd9.69" name="fieldValue" type="builtin_iamlString" outFlows="model.1274f8533f5.25 model.1274f8f028d.2b"/>
+      <fieldValue id="model.1274f76bcd9.69" name="fieldValue" type="builtin_iamlString"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.129" name="Target" type="builtin_iamlInteger">
-      <fieldValue id="model.1274f76bcd9.95" name="fieldValue" type="builtin_iamlInteger" inFlows="model.1274f8533f5.2a model.1274f8f028d.3a7"/>
+      <fieldValue id="model.1274f76bcd9.95" name="fieldValue" type="builtin_iamlInteger"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1274f76c0e0.131" name="Run" listeners="wires.1274f76c1da.64">
       <ecaRules id="wires.1274f76c1da.64" conditions="wires.1274f76c1da.6a" name="onClick" trigger="visual.1274f76c0e0.131" target="model.1274f76bcd9.47"/>

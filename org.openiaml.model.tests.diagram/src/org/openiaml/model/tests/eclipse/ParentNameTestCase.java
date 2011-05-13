@@ -109,7 +109,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEquals(root.getName(), "root element");
 
 		// create a CompositeOperation
-		CompositeOperation cop = gmf.createCompositeOperation(root);
+		CompositeOperation cop = gmf.createActivityOperation(root);
 		assertNotNull(cop);
 
 		// set name
@@ -152,7 +152,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEquals(root.getName(), "root element");
 
 		// create a CompositeOperation
-		CompositeOperation cop = gmf.createCompositeOperation(root);
+		CompositeOperation cop = gmf.createActivityOperation(root);
 		assertNotNull(cop);
 
 		// set name

@@ -4,13 +4,13 @@
 package org.openiaml.model.tests.inference.model0_4_2;
 
 import org.openiaml.model.model.BuiltinOperation;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -107,7 +107,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(access);
 
 		// set operation
-		CompositeOperation set = assertHasCompositeOperation(required, "Set gate flag");
+		ActivityOperation set = assertHasActivityOperation(required, "Set gate flag");
 		assertGenerated(set);
 
 		// run wire
@@ -131,7 +131,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Frame required = assertHasFrame(root, "Required Page");
 
 		// set operation
-		CompositeOperation set = assertHasCompositeOperation(required, "Set gate flag");
+		ActivityOperation set = assertHasActivityOperation(required, "Set gate flag");
 
 		// start node
 		StartNode start = assertHasStartNode(set);
@@ -165,7 +165,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertEquals("requires a page is viewed first", gate.getName());
 
 		// generated condition
-		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");
+		ActivityFunction condition = assertHasActivityFunction(session, "check requires a page is viewed first");
 		assertGenerated(condition);
 
 		SimpleCondition wire = assertHasSimpleCondition(session, condition, gate, "condition");
@@ -185,7 +185,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Value property = assertHasValue(session, "requires a page is viewed first flag");
 
 		// generated condition
-		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");
+		ActivityFunction condition = assertHasActivityFunction(session, "check requires a page is viewed first");
 
 		// start node
 		StartNode start = assertHasStartNode(condition);

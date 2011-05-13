@@ -4,8 +4,6 @@
 package org.openiaml.model.tests.inference.model0_5;
 
 import org.openiaml.model.model.BuiltinOperation;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Function;
@@ -16,6 +14,8 @@ import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -193,7 +193,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation ireset = instance.getReset();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
+		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		Button first = assertHasButton(form, "First");
@@ -221,7 +221,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation ijump = instance.getJump();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
+		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		// we need to convert 'results' into a jump target (results-1)
@@ -257,7 +257,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation ijump = instance.getJump();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
+		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		// we need to convert 'results' into a jump target (results-1)
@@ -265,7 +265,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 
 		Event onClick = last.getOnClick();
 
-		CompositeOperation op = assertHasCompositeOperation(last, "update target");
+		ActivityOperation op = assertHasActivityOperation(last, "update target");
 		assertGenerated(op);
 
 		ECARule update = assertHasRunAction(root, onClick, op);
@@ -287,7 +287,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Value results = instance.getResults();
 
 		Button last = assertHasButton(form, "Last");
-		CompositeOperation op = assertHasCompositeOperation(last, "update target");
+		ActivityOperation op = assertHasActivityOperation(last, "update target");
 		Value target = assertHasValue(last, "target");
 
 		StartNode start = assertHasStartNode(op);
@@ -322,7 +322,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Function empty = instance.getEmpty();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
+		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
 
 		StartNode start = assertHasStartNode(notEmpty);
 		FinishNode finish = assertHasFinishNode(notEmpty);

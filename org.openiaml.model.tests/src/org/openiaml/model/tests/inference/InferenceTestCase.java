@@ -25,8 +25,6 @@ import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.ComplexTerm;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsFunctions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
@@ -56,6 +54,8 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
@@ -231,17 +231,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Operation assertHasOperation(ContainsOperations element, String string) throws JaxenException {
-		return (Operation) queryOne(element, "iaml:operations[iaml:name='" + string + "']");
+		List<Object> results = nameSelect(element.getOperations(), string);
+		assertEquals(1, results.size());
+		return (Operation) results.get(0);
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * CompositeOperation.
+	 * {@link ActivityOperation}.
 	 *
 	 * @return The element found
 	 */
-	public CompositeOperation assertHasCompositeOperation(ContainsOperations element, String string) throws JaxenException {
-		return (CompositeOperation) assertHasOperation(element, string);
+	public ActivityOperation assertHasActivityOperation(ContainsOperations element, String string) throws JaxenException {
+		return (ActivityOperation) assertHasOperation(element, string);
 	}
 
 	/**
@@ -292,22 +294,22 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * CompositeCondition.
+	 * {@link ActivityFunction}.
 	 *
 	 * @return The element found
 	 */
-	public CompositeCondition assertHasCompositeCondition(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), CompositeCondition.class), string);
+	public ActivityFunction assertHasActivityFunction(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityFunction.class), string);
 		assertEquals(1, results.size());
-		return (CompositeCondition) results.get(0);
+		return (ActivityFunction) results.get(0);
 	}
 
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
-	 * CompositeCondition.
+	 * {@link ActivityFunction}.
 	 */
-	public void assertHasNoCompositeCondition(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), CompositeCondition.class), string, false);
+	public void assertHasNoActivityFunction(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityFunction.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -817,7 +819,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DecisionNode assertHasDecisionNode(CompositeOperation element, String name) throws JaxenException {
+	public DecisionNode assertHasDecisionNode(ActivityOperation element, String name) throws JaxenException {
 		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
 		assertEquals(1, results.size());
 		return (DecisionNode) results.get(0);
@@ -829,7 +831,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DecisionNode assertHasDecisionNode(CompositeCondition element, String name) throws JaxenException {
+	public DecisionNode assertHasDecisionNode(ActivityFunction element, String name) throws JaxenException {
 		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
 		assertEquals(1, results.size());
 		return (DecisionNode) results.get(0);
@@ -841,8 +843,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SplitNode assertHasSplitNode(CompositeOperation element) throws JaxenException {
-		return (SplitNode) assertHasOne(element, "iaml:nodes", SplitNode.class);
+	public SplitNode assertHasSplitNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), SplitNode.class);
+		assertEquals(1, results.size());
+		return (SplitNode) results.get(0);
 	}
 
 	/**
@@ -851,8 +855,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public JoinNode assertHasJoinNode(CompositeOperation element) throws JaxenException {
-		return (JoinNode) assertHasOne(element, "iaml:nodes", JoinNode.class);
+	public JoinNode assertHasJoinNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), JoinNode.class);
+		assertEquals(1, results.size());
+		return (JoinNode) results.get(0);
 	}
 
 	/**
@@ -861,8 +867,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public StartNode assertHasStartNode(CompositeOperation element) throws JaxenException {
-		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
+	public StartNode assertHasStartNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), StartNode.class);
+		assertEquals(1, results.size());
+		return (StartNode) results.get(0);
+
 	}
 
 	/**
@@ -871,8 +880,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public StartNode assertHasStartNode(CompositeCondition element) throws JaxenException {
-		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
+	public StartNode assertHasStartNode(ActivityFunction element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), StartNode.class);
+		assertEquals(1, results.size());
+		return (StartNode) results.get(0);
+
 	}
 
 	/**
@@ -881,8 +893,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public FinishNode assertHasFinishNode(CompositeOperation element) throws JaxenException {
-		return (FinishNode) assertHasOne(element, "iaml:nodes", FinishNode.class);
+	public FinishNode assertHasFinishNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), FinishNode.class);
+		assertEquals(1, results.size());
+		return (FinishNode) results.get(0);
+
 	}
 
 	/**
@@ -891,8 +906,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public FinishNode assertHasFinishNode(CompositeCondition element) throws JaxenException {
-		return (FinishNode) assertHasOne(element, "iaml:nodes", FinishNode.class);
+	public FinishNode assertHasFinishNode(ActivityFunction element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), FinishNode.class);
+		assertEquals(1, results.size());
+		return (FinishNode) results.get(0);
+
 	}
 
 	/**
@@ -901,7 +919,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoFinishNode(CompositeOperation element) throws JaxenException {
+	public void assertHasNoFinishNode(ActivityOperation element) throws JaxenException {
 		assertEquals(0, typeSelect(element.getNodes(), FinishNode.class).size());
 	}
 
@@ -911,8 +929,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public CancelNode assertHasCancelNode(CompositeOperation element) throws JaxenException {
-		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
+	public CancelNode assertHasCancelNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), CancelNode.class);
+		assertEquals(1, results.size());
+		return (CancelNode) results.get(0);
+
 	}
 
 	/**
@@ -921,8 +942,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public CancelNode assertHasCancelNode(CompositeCondition element) throws JaxenException {
-		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
+	public CancelNode assertHasCancelNode(ActivityFunction element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), CancelNode.class);
+		assertEquals(1, results.size());
+		return (CancelNode) results.get(0);
+
 	}
 
 
@@ -932,7 +956,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public CancelNode assertHasCancelNode(CompositeCondition element, String exceptionText) throws JaxenException {
+	public CancelNode assertHasCancelNode(ActivityFunction element, String exceptionText) throws JaxenException {
 		CancelNode found = null;
 		for (ActivityNode node : element.getNodes()) {
 			if (node instanceof CancelNode && exceptionText.equals(((CancelNode) node).getExceptionText())) {
@@ -950,7 +974,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoCancelNode(CompositeOperation element) throws JaxenException {
+	public void assertHasNoCancelNode(ActivityOperation element) throws JaxenException {
 		assertEquals(0, typeSelect(element.getNodes(), CancelNode.class).size());
 	}
 
@@ -960,8 +984,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public CastNode assertHasCastNode(CompositeOperation element) throws JaxenException {
-		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
+	public CastNode assertHasCastNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), CastNode.class);
+		assertEquals(1, results.size());
+		return (CastNode) results.get(0);
+
 	}
 
 	/**
@@ -970,8 +997,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public CastNode assertHasCastNode(CompositeCondition element) throws JaxenException {
-		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
+	public CastNode assertHasCastNode(ActivityFunction element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), CastNode.class);
+		assertEquals(1, results.size());
+		return (CastNode) results.get(0);
+
 	}
 
 	/**
@@ -980,8 +1010,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public Arithmetic assertHasArithmetic(CompositeOperation element) throws JaxenException {
-		return (Arithmetic) typeSelect(element.getNodes(), Arithmetic.class).get(0);
+	public Arithmetic assertHasArithmetic(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), Arithmetic.class);
+		assertEquals(1, results.size());
+		return (Arithmetic) results.get(0);
+
 	}
 
 	/**
@@ -990,8 +1023,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public OperationCallNode assertHasOperationCallNode(CompositeOperation element, String string) throws JaxenException {
-		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");
+	public OperationCallNode assertHasOperationCallNode(ActivityOperation element, String string) throws JaxenException {
+		List<?> results = nameSelect(typeSelect(element.getNodes(), OperationCallNode.class), string);
+		assertEquals(1, results.size());
+		return (OperationCallNode) results.get(0);
+
 	}
 
 	/**
@@ -1000,8 +1036,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public OperationCallNode assertHasOperationCallNode(CompositeCondition element, String string) throws JaxenException {
-		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");
+	public OperationCallNode assertHasOperationCallNode(ActivityFunction element, String string) throws JaxenException {
+		List<?> results = nameSelect(typeSelect(element.getNodes(), OperationCallNode.class), string);
+		assertEquals(1, results.size());
+		return (OperationCallNode) results.get(0);
+
 	}
 
 	/**
@@ -1010,8 +1049,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public TemporaryVariable assertHasTemporaryVariable(CompositeOperation element, String string) throws JaxenException {
-		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");
+	public TemporaryVariable assertHasTemporaryVariable(ActivityOperation element, String string) throws JaxenException {
+		List<?> results = nameSelect(element.getVariables(), string);
+		assertEquals(1, results.size());
+		return (TemporaryVariable) results.get(0);
 	}
 
 	/**
@@ -1020,8 +1061,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public TemporaryVariable assertHasTemporaryVariable(CompositeCondition element, String string) throws JaxenException {
-		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");
+	public TemporaryVariable assertHasTemporaryVariable(ActivityFunction element, String string) throws JaxenException {
+		List<?> results = nameSelect(element.getVariables(), string);
+		assertEquals(1, results.size());
+		return (TemporaryVariable) results.get(0);
 	}
 
 	/**
@@ -1030,8 +1073,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public ActivityParameter assertHasActivityParameter(CompositeOperation element, String string) throws JaxenException {
-		return (ActivityParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");
+	public ActivityParameter assertHasActivityParameter(ActivityOperation element, String string) throws JaxenException {
+		List<?> results = nameSelect(element.getParameters(), string);
+		assertEquals(1, results.size());
+		return (ActivityParameter) results.get(0);
 	}
 
 	/**
@@ -1040,8 +1085,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public ActivityParameter assertHasActivityParameter(CompositeCondition element, String string) throws JaxenException {
-		return (ActivityParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");
+	public ActivityParameter assertHasActivityParameter(ActivityFunction element, String string) throws JaxenException {
+		List<?> results = nameSelect(element.getParameters(), string);
+		assertEquals(1, results.size());
+		return (ActivityParameter) results.get(0);
 	}
 
 	/**
@@ -1051,7 +1098,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public QueryParameter assertHasQueryParameter(Frame element, String string) throws JaxenException {
-		return (QueryParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");
+		List<?> results = nameSelect(element.getParameters(), string);
+		assertEquals(1, results.size());
+		return (QueryParameter) results.get(0);
 	}
 
 	/**
@@ -1423,16 +1472,12 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public ExecutionEdge assertHasExecutionEdge(EObject container, ExecutionEdgesSource from, ExecutionEdgeDestination to) throws JaxenException {
 		ExecutionEdge result = null;
-		List<?> wires = query(container, "//iaml:executionEdges");
-		for (Object o : wires) {
-			if (o instanceof ExecutionEdge) {
-				ExecutionEdge e = (ExecutionEdge) o;
-				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
-					if (result != null) {
-						fail("Found more than one execution edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
-					}
-					result = e;
+		for (ExecutionEdge e : from.getOutExecutions()) {
+			if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
+				if (result != null) {
+					fail("Found more than one execution edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
 				}
+				result = e;
 			}
 		}
 		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
@@ -1447,16 +1492,12 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public ExecutionEdge assertHasExecutionEdge(EObject container, ExecutionEdgesSource from, ExecutionEdgeDestination to, String name) throws JaxenException {
 		ExecutionEdge result = null;
-		List<?> wires = query(container, "//iaml:executionEdges");
-		for (Object o : wires) {
-			if (o instanceof ExecutionEdge) {
-				ExecutionEdge e = (ExecutionEdge) o;
-				if (from.equals(e.getFrom()) && to.equals(e.getTo()) && name.equals(e.getName())) {
-					if (result != null) {
-						fail("Found more than one execution edge from '" + from + "' to '" + to + "' with name '" + name + "'. First = '" + result + ", second = '" + e + "'");
-					}
-					result = e;
+		for (ExecutionEdge e : from.getOutExecutions()) {
+			if (from.equals(e.getFrom()) && to.equals(e.getTo()) && name.equals(e.getName())) {
+				if (result != null) {
+					fail("Found more than one execution edge from '" + from + "' to '" + to + "' with name '" + name + "'. First = '" + result + ", second = '" + e + "'");
 				}
+				result = e;
 			}
 		}
 		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
@@ -1471,16 +1512,12 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DataFlowEdge assertHasDataFlowEdge(EObject container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws JaxenException {
 		DataFlowEdge result = null;
-		List<?> edges = query(container, "//iaml:dataEdges");
-		for (Object o : edges) {
-			if (o instanceof DataFlowEdge) {
-				DataFlowEdge e = (DataFlowEdge) o;
-				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
-					if (result != null) {
-						fail("Found more than one data flow edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
-					}
-					result = e;
+		for (DataFlowEdge e : from.getOutFlows()) {
+			if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
+				if (result != null) {
+					fail("Found more than one data flow edge from '" + from + "' to '" + to + "'. First = '" + result + ", second = '" + e + "'");
 				}
+				result = e;
 			}
 		}
 		assertNotNull("Did not find an DataFlowEdge from '" + from + "' to '" + to + "'", result);
@@ -1494,14 +1531,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public boolean hasDataFlowEdge(EObject container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws JaxenException {
 		int count = 0;
-		List<?> wires = query(container, "//iaml:dataEdges");
-		for (Object o : wires) {
-			if (o instanceof DataFlowEdge) {
-				DataFlowEdge e = (DataFlowEdge) o;
-				if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
-					assertEquals("Found more than one data flow edge from '" + from + "' to '" + to + "'. Second = '" + e + "'", 0, count);
-					count++;
-				}
+		for (DataFlowEdge e : from.getOutFlows()) {
+			if (from.equals(e.getFrom()) && to.equals(e.getTo())) {
+				assertEquals("Found more than one data flow edge from '" + from + "' to '" + to + "'. Second = '" + e + "'", 0, count);
+				count++;
 			}
 		}
 		return count == 1;
@@ -1648,17 +1681,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 
 	public static List<Object> nameSelect(List<?> list, String name, boolean checkEmpty) {
+		assertNotNull(name);
 		if (checkEmpty) {
 			assertFalse("List was empty", list.isEmpty());
 		}
 
 		List<Object> results = new ArrayList<Object>();
 		for (Object o : list) {
-			if (o instanceof NamedElement && ((NamedElement) o).getName().equals(name)) {
+			if (o instanceof NamedElement && name.equals(((NamedElement) o).getName())) {
 				results.add(o);
-			} else if (o instanceof DecisionNode && ((DecisionNode) o).getName().equals(name)) {
-				results.add(o);
-			} else if (o instanceof ENamedElement && ((ENamedElement) o).getName().equals(name)) {
+			} else if (o instanceof ENamedElement && name.equals(((ENamedElement) o).getName())) {
 				results.add(o);
 			}
 		}

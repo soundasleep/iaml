@@ -6,7 +6,6 @@ package org.openiaml.model.tests.inference.model0_4_4;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
@@ -14,6 +13,7 @@ import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
@@ -164,13 +164,13 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 		{
-			CompositeOperation validate = assertHasCompositeOperation(email, "validate");
+			ActivityOperation validate = assertHasActivityOperation(email, "validate");
 			assertGenerated(validate);
 		}
 
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		{
-			CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+			ActivityOperation validate = assertHasActivityOperation(integer, "validate");
 			assertGenerated(validate);
 		}
 
@@ -188,7 +188,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		InputTextField def = assertHasInputTextField(home, "Default");
 		{
-			CompositeOperation validate = assertHasCompositeOperation(def, "validate");
+			ActivityOperation validate = assertHasActivityOperation(def, "validate");
 			assertGenerated(validate);
 		}
 	}
@@ -204,7 +204,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// source
 		InputTextField integer = assertHasInputTextField(home, "Integer");
-		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+		ActivityOperation validate = assertHasActivityOperation(integer, "validate");
 
 		Event onEdit = integer.getOnChange();
 		assertGenerated(assertHasRunAction(root, onEdit, validate));
@@ -221,7 +221,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		// source
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		Value fieldValue = assertHasFieldValue(integer);
-		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+		ActivityOperation validate = assertHasActivityOperation(integer, "validate");
 
 		Label annotation = assertHasLabel(integer, "Warning");
 		BuiltinOperation show = assertHasBuiltinOperation(annotation, "show");
@@ -425,7 +425,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		ECARule runInit = assertHasRunAction(root, onAccess, init);
 
 		// validate operation is also called
-		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+		ActivityOperation validate = assertHasActivityOperation(integer, "validate");
 		ECARule runValidate = assertHasRunAction(root, onAccess, validate);
 
 		// it should be a lower priority
@@ -449,7 +449,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Event onAccess = integer.getOnAccess();
 
 		// validate operation is also called
-		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+		ActivityOperation validate = assertHasActivityOperation(integer, "validate");
 		ECARule runValidate = assertHasRunAction(root, onAccess, validate);
 
 		// the 'fieldValue is set' condition

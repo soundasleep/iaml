@@ -11,7 +11,7 @@ isSecure(model::visual::Frame this) :
 isSecureOperation(model::Operation this) :
 	false;
 
-isSecureOperation(model::CompositeOperation this) :
+isSecureOperation(model::operations::ActivityOperation this) :
 	nodes.typeSelect(model::operations::StartNode)
 		.exists(n | goesToCancelNode(n, {}.toSet()));
 

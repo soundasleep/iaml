@@ -226,10 +226,10 @@ possibleParentOperations(emf::EObject this ) :
 	{};
 
 /* get the start node for an operation */
-startNode(model::CompositeOperation this) :
+startNode(model::operations::ActivityOperation this) :
 	nodes.typeSelect(model::operations::StartNode).first();
 
-startNodeCondition(model::CompositeCondition this) :
+startNodeCondition(model::operations::ActivityFunction this) :
 	nodes.typeSelect(model::operations::StartNode).first();
 
 /* get the next execution flow for a Node that has passed */
@@ -265,7 +265,7 @@ getPassFlows(model::operations::ExecutionEdgesSource this):
 	outExecutions.select( e | isPassFlow(e) );
 
 /** does this operation have a "fail" edge? */
-getFailEdge(model::CompositeOperation this) :
+getFailEdge(model::operations::ActivityOperation this) :
 	listeners.selectFirst( e | e.isFailEdge() ) ;
 	
 isFailEdge(model::ECARule this ) :

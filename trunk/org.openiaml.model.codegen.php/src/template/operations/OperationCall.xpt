@@ -93,7 +93,7 @@
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
-	«ELSEIF model::CompositeOperation.isInstance(target) && model::messaging::Email.isInstance(target.eContainer)-»
+	«ELSEIF model::operations::ActivityOperation.isInstance(target) && model::messaging::Email.isInstance(target.eContainer)-»
 		«IF php || availableInCurrentScriptAction(trigger, target)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
 			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);

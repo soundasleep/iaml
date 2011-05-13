@@ -99,7 +99,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE operationDefinition(Boolean php) FOR model::CompositeOperation»
+«DEFINE operationDefinition(Boolean php) FOR model::operations::ActivityOperation»
 	/** composite operation "«name»" */
 	«IF php»
 	$running_«safeName()» = false;

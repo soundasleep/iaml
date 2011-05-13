@@ -65,20 +65,6 @@
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation"/>
     <genClasses ecoreClass="iaml.ecore#//BuiltinOperation"/>
-    <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/nodes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/dataEdges"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/executionEdges"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/parameters"/>
-    </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/nodes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/dataEdges"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/executionEdges"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/parameters"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsOperations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsOperations/operations"/>
     </genClasses>
@@ -286,14 +272,26 @@
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//operations/ArithmeticOperationTypes/MULTIPLY"/>
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//operations/ArithmeticOperationTypes/DIVIDE"/>
       </genEnums>
+      <genClasses ecoreClass="iaml.ecore#//operations/ActivityOperation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/nodes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/dataEdges"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/executionEdges"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/variables"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/ActivityFunction">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/nodes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/dataEdges"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/executionEdges"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/variables"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/parameters"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/StartNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/CancelNode">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/CancelNode/exceptionText"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/FinishNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/DecisionNode/name"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/SplitNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/JoinNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/OperationCallNode"/>
@@ -336,6 +334,14 @@
       <genClasses image="false" ecoreClass="iaml.ecore#//operations/ExecutionEdgesSource">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//operations/ExecutionEdgesSource/outExecutions"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/ExternalValue">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/ExternalValueEdge">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValueEdge/from"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValueEdge/value"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"

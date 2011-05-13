@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.129c46b2e93.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.129c46b2e93.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.129c46b2f1f.9" name="text1">
       <functions xsi:type="iaml:BuiltinProperty" id="model.129c46b2e93.64" name="can cast?"/>
@@ -8,10 +8,10 @@
       <operations xsi:type="iaml:BuiltinOperation" id="model.129c46b2e93.2b" name="update"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.129c46b2f1f.13" name="text2">
-      <functions xsi:type="iaml:CompositeCondition" id="model.129c46b2e93.89" name="can cast?"/>
-      <functions xsi:type="iaml:CompositeCondition" id="model.129c46b2e93.891" name="fieldValue is set"/>
-      <operations xsi:type="iaml:CompositeOperation" id="model.129c46b2e93.44" name="init"/>
-      <operations xsi:type="iaml:CompositeOperation" id="model.129c46b2e93.45" name="update"/>
+      <functions xsi:type="iaml.operations:ActivityFunction" id="model.129c46b2e93.89" name="can cast?"/>
+      <functions xsi:type="iaml.operations:ActivityFunction" id="model.129c46b2e93.891" name="fieldValue is set"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" id="model.129c46b2e93.44" name="init"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" id="model.129c46b2e93.45" name="update"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

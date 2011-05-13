@@ -20,11 +20,7 @@
  */
 «DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	«REM»special primitive operation names«ENDREM»
-	«IF name == "set"»
-		«EXPAND setOperation(start, php) FOR this»
-	«ELSEIF name == "alert"»
-		«EXPAND alert(start, php) FOR this»
-	«ELSEIF name == "hide"»
+	«IF name == "hide"»
 		«EXPAND hideOperation(start, php) FOR this»
 	«ELSEIF name == "show"»
 		«EXPAND showOperation(start, php) FOR this»
@@ -308,7 +304,7 @@
 /**
  * outflowTarget <-- inflowTarget
  */
-«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Value property) FOR model::BuiltinOperation-»
+«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Value property) FOR model::operations::SetNode-»
 	«IF inFlows.isEmpty»
 		«throwException("Trying to call a BuiltinOperation with no incoming flows: " + this)»
 	«ENDIF»
@@ -330,15 +326,6 @@
 		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
 	«ENDFOREACH»
 	
-	«REM»
-		here may be a good place to connect any chained EventTriggers
-	«ENDREM»
-	«IF shouldExpandEventTriggers(this)»
-		// call outgoing event triggers (if any) 
-		«EXPAND chainedEventFlow(php) FOREACH outFlows.to-»
-	«ELSE»
-		// we don't call additional events for «eContainer» 
-	«ENDIF»
 	}
 	«IF !php» else {
 		// we ignored a null parameter: set the operation as completed
@@ -353,7 +340,7 @@
  * @implementation BuiltinOperation
  *		There is a global {@model BuiltinOperation} named 'set'. 
  */
-«DEFINE setOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+«DEFINE setOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::SetNode-»
 	«IF model::operations::TemporaryVariable.isInstance(outFlows.first().to)»
 		«REM»set a temporary variable«ENDREM»
 		«IF php»
@@ -361,9 +348,9 @@
 		«ELSE»
 			temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 		«ENDIF»
-	«ELSEIF model::Value.isInstance(outFlows.first().to)»
+	«ELSEIF model::operations::ExternalValue.isInstance(outFlows.first().to)»
 		«REM»set a property«ENDREM»
-		«EXPAND setPropertyToValueOperation(start, php, (model::Value) outFlows.first().to) FOR this»
+		«EXPAND setPropertyToValueOperation(start, php, ((model::operations::ExternalValue) outFlows.first().to).externalValueEdges.value) FOR this»
 	«ELSE»
 		«throwException("Unexpected target to set: " + this)»
 	«ENDIF»
@@ -407,11 +394,6 @@
 			set_application_value("«safeName(eContainer)»_hidden", true);
 		«ENDIF»
 	«ENDIF»
-
-	«REM»continue«ENDREM»
-	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-	«ENDFOREACH»
 «ENDDEFINE»
 
 /**
@@ -447,67 +429,6 @@
 			set_application_value("«safeName(eContainer)»_hidden", false);
 		«ENDIF»
 	«ENDIF»
-
-	«REM»continue«ENDREM»
-	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-	«ENDFOREACH»
-«ENDDEFINE»
-
-/**
- * Throw a Javascript alert box on the client-side.
- * Fails on the server-side.
- *
- * TODO remove this and replace with a generic 'alert()' method.
- *
- * @implementation BuiltinOperation
- *		There is a global {@model BuiltinOperation} named 'alert'. 
- */
-«DEFINE alert(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
-	«IF php»
-		/*
-		 * Alert: We can only alert on the server-side if we can pass instructions
-		 * onto the client.
-		 */
-		if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
-			$message = «IF inFlows.from.isEmpty»
-				«REM»
-					this BuiltinOperation is being called from an ECA rule, 
-					not within an operation; use the passed parameter as input
-				«ENDREM» 
-				$default_arg
-			«ELSE»
-				«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»
-			«ENDIF»;
-			log_message("[alert] $message");
-			echo "alert " . escape_parameter_string($message) . "\n";
-		} else {
-			«REM»how are we supposed to throw an alert on the client from an entirely server-side call?«ENDREM»
-			throw new IamlRuntimeException("Cannot call a Javascript alert from server-side");
-		}
-	«ELSE»
-		// throw an alert box
-		«REM»
-		// NOTE: alert boxes currently aren't owned by any element; they are a direct
-		// hack to display something immediately. eventually, this should be replaced
-		// with a generic alert(), that will render an alert box in the most appropriate
-		// way for the alert container. 
-		«ENDREM»
-		alert_without_repeat(«IF inFlows.from.isEmpty»
-				«REM»
-					this BuiltinOperation is being called from an ECA rule, 
-					not within an operation; use the passed parameter as input
-				«ENDREM» 
-				default_arg
-			«ELSE»
-				«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»
-			«ENDIF»);
-	«ENDIF»
-
-	«REM»continue«ENDREM»
-	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»	
-	«ENDFOREACH»
 «ENDDEFINE»
 
 /**
@@ -525,11 +446,6 @@
 	«ELSE»
 		«throwException("Send operation " + this + " is not contained within an expected type: " + eContainer)»
 	«ENDIF»
-
-	«REM»continue«ENDREM»
-	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-	«ENDFOREACH»
 «ENDDEFINE»
 
 /**
@@ -567,11 +483,6 @@
 	«ELSE»
 		«throwException("Save operation " + this + " is not contained within an expected type: " + eContainer)»
 	«ENDIF»
-
-	«REM»continue«ENDREM»
-	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-	«ENDFOREACH»
 «ENDDEFINE»
 
 /**
@@ -595,11 +506,6 @@
 	«ELSE»
 		«throwException("New operation " + this + " is not contained within an expected type: " + eContainer)»
 	«ENDIF»
-
-	«REM»continue«ENDREM»
-	«FOREACH outExecutions AS e-»
-		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
-	«ENDFOREACH»
 «ENDDEFINE»
 
 /**

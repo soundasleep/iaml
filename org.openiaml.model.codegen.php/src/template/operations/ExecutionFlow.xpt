@@ -252,6 +252,13 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/* a SetNode */
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::SetNode-»
+	«EXPAND Contents::setOperation(start, php) FOR this»
+	
+	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
+«ENDDEFINE»
+
 /* a primitive operation: carry on */
 «DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
 	// primitive operation "«name-»"

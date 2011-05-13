@@ -89,6 +89,13 @@
 «ENDDEFINE»
 
 /**
+ * An external value.
+ */
+«DEFINE dataSource(Boolean php) FOR model::operations::ExternalValue»
+	«EXPAND dataSource(php) FOR externalValueEdges.value»
+«ENDDEFINE»
+
+/**
  * A data source from an Property.
  *
  * Not sure if this implementation completely works; operations should

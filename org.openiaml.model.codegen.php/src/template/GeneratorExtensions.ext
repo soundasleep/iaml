@@ -674,10 +674,10 @@ boolean isNumeric(model::EXSDDataType this) :
 	isNumericXSD(definition);
 
 operationUsed(model::Operation this) :
-	!(rules.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 
+	!(rules.isEmpty && inWires.isEmpty); 
 
 conditionUsed(model::Function this) :
-	!(conditioned.isEmpty && outFlows.isEmpty && outWires.isEmpty);
+	!(conditioned.isEmpty && outWires.isEmpty);
 
 /**
  * Is the given property the fieldValue property of its containing object?

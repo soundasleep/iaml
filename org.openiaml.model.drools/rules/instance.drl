@@ -263,6 +263,7 @@ rule "Create contents of 'not empty' condition"
 		queue.add(cancel, drools);
 		
 		DecisionNode decision = handler.generatedDecisionNode(condition, condition);
+		handler.setName(decision, "true?");
 		queue.add(decision, drools);
 		
 		SimpleCondition edge = handler.generatedSimpleCondition(condition, condition, isEmpty, decision);

@@ -135,8 +135,8 @@ rule "Create contents of 'set flag' operation"
 	then
 		StartNode start = handler.generatedStartNode(gate, op);
 		FinishNode finish = handler.generatedFinishNode(gate, op);
-		BuiltinOperation set = handler.generatedBuiltinOperation(gate, op);
-		handler.setName(set, "set");
+		SetNode set = handler.generatedSetNode(gate, op);
+
 		Value value = handler.generatedValue(gate, op);
 		handler.setReadOnly(value, true);
 		handler.setName(value, "true");
@@ -146,10 +146,20 @@ rule "Create contents of 'set flag' operation"
 		queue.add(finish, drools);
 		queue.add(set, drools);
 		
+		ExternalValue ev_property = handler.generatedExternalValue(gate, op);
+		queue.add(ev_property, drools);
+		ExternalValueEdge edge1 = handler.generatedExternalValueEdge(gate, ev_property, ev_property, property);
+		queue.add(edge1, drools);
+		
+		ExternalValue ev_value = handler.generatedExternalValue(gate, op);
+		queue.add(ev_value, drools);
+		ExternalValueEdge edge2 = handler.generatedExternalValueEdge(gate, ev_value, ev_value, value);
+		queue.add(edge2, drools);
+		
 		ExecutionEdge e1 = handler.generatedExecutionEdge(gate, op, start, set);
 		ExecutionEdge e2 = handler.generatedExecutionEdge(gate, op, set, finish);
-		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, op, value, set);
-		DataFlowEdge d2 = handler.generatedDataFlowEdge(gate, op, set, property);
+		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, op, ev_value, set);
+		DataFlowEdge d2 = handler.generatedDataFlowEdge(gate, op, set, ev_property);
 		
 		queue.add(e1, drools);
 		queue.add(e2, drools);
@@ -225,7 +235,13 @@ rule "Create contents of 'check (gate)' condition"
 		handler.setName(e2, "y");
 		ExecutionEdge e3 = handler.generatedExecutionEdge(gate, cond, cmp, cancel);
 		handler.setName(e3, "n");
-		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, cond, property, cmp);
+		
+		ExternalValue ev_property = handler.generatedExternalValue(gate, cond);
+		queue.add(ev_property, drools);
+		ExternalValueEdge edge1 = handler.generatedExternalValueEdge(gate, ev_property, ev_property, property);
+		queue.add(edge1, drools);
+		
+		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, cond, ev_property, cmp);
 		
 		queue.add(e1, drools);
 		queue.add(e2, drools);

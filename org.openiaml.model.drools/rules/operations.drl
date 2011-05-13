@@ -126,6 +126,11 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
 		handler.setName(parameter, "setValueTo");
 		queue.add(parameter, drools);
+
+		ExternalValue ev_field = handler.generatedExternalValue(o, o);
+		queue.add(ev_field, drools);
+		ExternalValueEdge edge = handler.generatedExternalValueEdge(o, ev_field, ev_field, field);
+		queue.add(edge, drools);
 		
 		// need to add 'cast' node
 		CastNode cast = handler.generatedCastNode(o, o);
@@ -138,7 +143,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, parameter, cast);
 		queue.add(castIn, drools);
 
-		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, field);
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, ev_field);
 		queue.add(castOut, drools);
 
 		DataFlowEdge castCheck = handler.generatedDataFlowEdge(o, o, cast, check);
@@ -149,8 +154,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		queue.add(cancel, drools);
 		// end add 'cast' node
 		
-		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
-		handler.setName(op, "set");
+		SetNode op = handler.generatedSetNode(o, o);
 		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
@@ -166,7 +170,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		handler.setFrom(data2, op);
-		handler.setTo(data2, field);
+		handler.setTo(data2, ev_field);
 		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o, start, check);
@@ -208,6 +212,11 @@ rule "Create components of 'set value XXX' operations"
 		handler.setName(parameter, "setValueTo");
 		queue.add(parameter, drools);
 		
+		ExternalValue ev_field = handler.generatedExternalValue(o, o);
+		queue.add(ev_field, drools);
+		ExternalValueEdge edge = handler.generatedExternalValueEdge(o, ev_field, ev_field, field);
+		queue.add(edge, drools);
+		
 		// need to add 'cast' node
 		CastNode cast = handler.generatedCastNode(o, o);
 		queue.add(cast, drools);
@@ -219,7 +228,7 @@ rule "Create components of 'set value XXX' operations"
 		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, parameter, cast);
 		queue.add(castIn, drools);
 
-		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, field);
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, ev_field);
 		queue.add(castOut, drools);
 
 		DataFlowEdge castCheck = handler.generatedDataFlowEdge(o, o, cast, check);
@@ -230,8 +239,7 @@ rule "Create components of 'set value XXX' operations"
 		queue.add(cancel, drools);
 		// end add 'cast' node
 		
-		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
-		handler.setName(op, "set");
+		SetNode op = handler.generatedSetNode(o, o);
 		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
@@ -247,7 +255,7 @@ rule "Create components of 'set value XXX' operations"
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		handler.setFrom(data2, op);
-		handler.setTo(data2, field);
+		handler.setTo(data2, ev_field);
 		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o, start, check);
@@ -262,51 +270,6 @@ rule "Create components of 'set value XXX' operations"
 		queue.add(checkPass, drools);
 		
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o, op, finish);
-		queue.add(edge2, drools);
-
-end
-
-/**
- * @inference ActivityOperation
- *		An empty {@model ActivityOperation} named "alert" will automatically be completed 
- *		with {@model ActivityNode}s that will execute the {@model BuiltinOperation} named "alert".
- */
-rule "Create components of 'alert' operation"
-	when
-		o : ActivityOperation(name == "alert")
-
-		not ( StartNode ( eContainer == o ))
-		
-		eval ( handler.veto( o ))
-
-	then
-		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
-		handler.setName(parameter, "alertText");
-		queue.add(parameter, drools);
-		
-		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
-		handler.setName(op, "alert");
-		queue.add(op, drools);
-		
-		StartNode start = handler.generatedStartNode(o, o);
-		queue.add(start, drools);
-		
-		FinishNode finish = handler.generatedFinishNode(o, o);
-		queue.add(finish, drools);
-		
-		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data1, parameter);
-		handler.setTo(data1, op);
-		queue.add(data1, drools);
-
-		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
-		handler.setFrom(edge1, start);
-		handler.setTo(edge1, op);
-		queue.add(edge1, drools);
-
-		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
-		handler.setFrom(edge2, op);
-		handler.setTo(edge2, finish);
 		queue.add(edge2, drools);
 
 end

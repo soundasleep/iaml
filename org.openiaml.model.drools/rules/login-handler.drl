@@ -286,9 +286,14 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		handler.setFrom(data1, parameter);
 		handler.setTo(data1, op);
 		queue.add(data1, drools);
-
+		
+		ExternalValue ev_expected = handler.generatedExternalValue(o, o);
+		queue.add(ev_expected, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(o, ev_expected, ev_expected, expected);
+		queue.add(edge12, drools);
+		
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data2, expected);
+		handler.setFrom(data2, ev_expected);
 		handler.setTo(data2, op);
 		queue.add(data2, drools);
 		
@@ -546,9 +551,14 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		handler.setFrom(data1, parameter);
 		handler.setTo(data1, op);
 		queue.add(data1, drools);
+		
+		ExternalValue ev_expected = handler.generatedExternalValue(loginOperation, loginOperation);
+		queue.add(ev_expected, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(loginOperation, ev_expected, ev_expected, expected);
+		queue.add(edge12, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
-		handler.setFrom(data2, expected);
+		handler.setFrom(data2, ev_expected);
 		handler.setTo(data2, op);
 		queue.add(data2, drools);
 		
@@ -565,18 +575,22 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		queue.add(edge2, drools);
 
 		# ok: set value operation
-		BuiltinOperation setProperty = handler.generatedBuiltinOperation(loginOperation, loginOperation);
-		handler.setName(setProperty, "set");
+		SetNode setProperty = handler.generatedSetNode(loginOperation, loginOperation);
 		queue.add(setProperty, drools);
 		
 		DataFlowEdge data3 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
 		handler.setFrom(data3, parameter);
 		handler.setTo(data3, setProperty);
 		queue.add(data3, drools);
+		
+		ExternalValue ev_value = handler.generatedExternalValue(loginOperation, loginOperation);
+		queue.add(ev_value, drools);
+		ExternalValueEdge edge22 = handler.generatedExternalValueEdge(loginOperation, ev_value, ev_value, value);
+		queue.add(edge22, drools);
 
 		DataFlowEdge data4 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
 		handler.setFrom(data4, setProperty);
-		handler.setTo(data4, value);
+		handler.setTo(data4, ev_value);
 		queue.add(data4, drools);
 
 		# ok
@@ -867,8 +881,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
-		ActivityOperation setValue = handler.generatedActivityOperation(operation, operation);
-		handler.setName(setValue, "set");
+		SetNode setValue = handler.generatedSetNode(operation, operation);
 		queue.add(setValue, drools);
 		
 		// split to set value
@@ -888,10 +901,15 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		handler.setFrom(data1, param);
 		handler.setTo(data1, setValue);
 		queue.add(data1, drools);
+		
+		ExternalValue ev_target = handler.generatedExternalValue(operation, operation);
+		queue.add(ev_target, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(operation, ev_target, ev_target, target);
+		queue.add(edge12, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(operation, operation);
 		handler.setFrom(data2, setValue);
-		handler.setTo(data2, target);
+		handler.setTo(data2, ev_target);
 		queue.add(data2, drools);
 
 end
@@ -996,8 +1014,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
-		ActivityOperation setValue = handler.generatedActivityOperation(operation, operation);
-		handler.setName(setValue, "set");
+		SetNode setValue = handler.generatedSetNode(operation, operation);
 		queue.add(setValue, drools);
 		
 		// split to set value
@@ -1017,10 +1034,15 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		handler.setFrom(data1, param);
 		handler.setTo(data1, setValue);
 		queue.add(data1, drools);
+		
+		ExternalValue ev_target = handler.generatedExternalValue(operation, operation);
+		queue.add(ev_target, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(operation, ev_target, ev_target, target);
+		queue.add(edge12, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(operation, operation);
 		handler.setFrom(data2, setValue);
-		handler.setTo(data2, target);
+		handler.setTo(data2, ev_target);
 		queue.add(data2, drools);
 
 end
@@ -1160,6 +1182,16 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		handler.setName(myNull, "reset value");
 		handler.setDefaultValue(myNull, "null");
 		queue.add(myNull, drools);
+				
+		ExternalValue ev_null = handler.generatedExternalValue(o, o);
+		queue.add(ev_null, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(o, ev_null, ev_null, myNull);
+		queue.add(edge12, drools);
+		
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		queue.add(ev_value, drools);
+		ExternalValueEdge edge22 = handler.generatedExternalValueEdge(o, ev_value, ev_value, value);
+		queue.add(edge22, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
 		queue.add(start, drools);
@@ -1169,18 +1201,17 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		queue.add(finish, drools);
 		
 		# set
-		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
-		handler.setName(op, "set");
+		SetNode op = handler.generatedSetNode(o, o);
 		queue.add(op, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data1, myNull);
+		handler.setFrom(data1, ev_null);
 		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		handler.setFrom(data2, op);
-		handler.setTo(data2, value);
+		handler.setTo(data2, ev_value);
 		queue.add(data2, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
@@ -1214,6 +1245,11 @@ rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 		handler.setDefaultValue(myNull, "null");
 		handler.setName(myNull, "reset value");
 		queue.add(myNull, drools);
+	
+		ExternalValue ev_null = handler.generatedExternalValue(o, o);
+		queue.add(ev_null, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(o, ev_null, ev_null, myNull);
+		queue.add(edge12, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
 		queue.add(start, drools);
@@ -1250,32 +1286,40 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 		attribute : DomainAttribute ( )
 		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
-		key : Value ( eContainer == session, 
-			eval(functions.loginAttributeMatches(key, attribute) ) )
+		value : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(value, attribute) ) )
 
 		myNull : Value ( eContainer == o, name == "reset value" )
 		split : SplitNode ( eContainer == o )
 		join : JoinNode ( eContainer == o )
-			
-		not (DataFlowEdge ( eContainer == o, from == key ))
+		
+		ev_null : ExternalValue ( )
+		ev_null_edge : ExternalValueEdge ( from == ev_null, value == myNull )
+		
+		not ( ev : ExternalValue ( eContainer == o ) and
+			ExternalValueEdge ( from == ev, value == value )) 
 		
 		eval ( handler.veto( o ))
 	
 	then
+
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		queue.add(ev_value, drools);
+		ExternalValueEdge edge22 = handler.generatedExternalValueEdge(o, ev_value, ev_value, value);
+		queue.add(edge22, drools);
 	
 		# set
-		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
-		handler.setName(op, "set");
+		SetNode op = handler.generatedSetNode(o, o);
 		queue.add(op, drools);
 	
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data1, myNull);
+		handler.setFrom(data1, ev_null);
 		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		handler.setFrom(data2, op);
-		handler.setTo(data2, key);
+		handler.setTo(data2, ev_value);
 		queue.add(data2, drools);
 
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
@@ -1300,32 +1344,40 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
 		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
 		
-		key : Value ( eContainer == session, 
-			eval(functions.loginAttributeMatches(key, attribute) ) )
+		value : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(value, attribute) ) )
 
 		myNull : Value ( eContainer == o, name == "reset value" )
 		split : SplitNode ( eContainer == o )
 		join : JoinNode ( eContainer == o )
-			
-		not (DataFlowEdge ( eContainer == o, from == key ))
+
+		ev_null : ExternalValue ( )
+		ev_null_edge : ExternalValueEdge ( from == ev_null, value == myNull )
+
+		not ( ev : ExternalValue ( eContainer == o ) and
+			ExternalValueEdge ( from == ev, value == value )) 
 		
 		eval ( handler.veto( o ))
 	
 	then
+		
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		queue.add(ev_value, drools);
+		ExternalValueEdge edge22 = handler.generatedExternalValueEdge(o, ev_value, ev_value, value);
+		queue.add(edge22, drools);
 	
 		# set
-		BuiltinOperation op = handler.generatedBuiltinOperation(o, o);
-		handler.setName(op, "set");
+		SetNode op = handler.generatedSetNode(o, o);
 		queue.add(op, drools);
 	
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data1, myNull);
+		handler.setFrom(data1, ev_null);
 		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
 		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
 		handler.setFrom(data2, op);
-		handler.setTo(data2, key);
+		handler.setTo(data2, ev_value);
 		queue.add(data2, drools);
 	
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);

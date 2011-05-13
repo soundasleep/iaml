@@ -184,8 +184,13 @@ rule "Create contents of 'X is set' operation"
 		CancelNode cancel = handler.generatedCancelNode(o, o);
 		queue.add(cancel, drools);
 		
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		queue.add(ev_value, drools);
+		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(o, ev_value, ev_value, value);
+		queue.add(edge12, drools);
+		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data1, value);
+		handler.setFrom(data1, ev_value);
 		handler.setTo(data1, decision);
 		queue.add(data1, drools);
 

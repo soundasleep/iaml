@@ -129,10 +129,20 @@ rule "Create contents of 'validate' operation"
 		CastNode cast = handler.generatedCastNode(o, o);
 		queue.add(cast, drools);
 		
-		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, e1_property, cast);
+		ExternalValue ev_e1_property = handler.generatedExternalValue(o, o);
+		queue.add(ev_e1_property, drools);
+		ExternalValueEdge edge2 = handler.generatedExternalValueEdge(o, ev_e1_property, ev_e1_property, e1_property);
+		queue.add(edge2, drools);
+		
+		ExternalValue ev_e2_property = handler.generatedExternalValue(o, o);
+		queue.add(ev_e2_property, drools);
+		ExternalValueEdge edge3 = handler.generatedExternalValueEdge(o, ev_e2_property, ev_e2_property, e2_property);
+		queue.add(edge3, drools);
+		
+		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, ev_e1_property, cast);
 		queue.add(castIn, drools); 
 
-		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, e2_property);
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, ev_e2_property);
 		queue.add(castOut, drools); 
 		
 		DataFlowEdge castCheck = handler.generatedDataFlowEdge(o, o, cast, check);

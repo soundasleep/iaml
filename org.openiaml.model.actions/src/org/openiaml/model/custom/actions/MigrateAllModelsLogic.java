@@ -68,13 +68,13 @@ public class MigrateAllModelsLogic {
 		}
 		
 		m2.done();
+		monitor.done();
 		
 		// any errors?
 		if (status.getChildren().length != 0) {
 			return status;
 		}
 		
-		monitor.done();
 		return Status.OK_STATUS;
 	}
 
@@ -162,7 +162,7 @@ public class MigrateAllModelsLogic {
 	 * @return
 	 * @throws CoreException 
 	 */
-	private Set<IFile> findTargetModels(IResource res) throws CoreException {
+	protected static Set<IFile> findTargetModels(IResource res) throws CoreException {
 		HashSet<IFile> result = new HashSet<IFile>();
 		
 		if (res instanceof IContainer) {

@@ -99,6 +99,13 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
+               class="org.openiaml.model.custom.actions.ReloadAllModelsAction"
+               id="org.openiaml.docs.tools.export2"
+               label="&amp;Load and save all IAML Models in Project"
+               menubarPath="org.openiaml.model.diagram.custom.menu2/group">
+         </action>
+
+         <action
                class="org.openiaml.model.custom.actions.MigrateAllModelsAction"
                id="org.openiaml.docs.tools.export1"
                label="&amp;Migrate and Load all IAML Models in Project"

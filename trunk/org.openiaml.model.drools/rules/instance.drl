@@ -227,7 +227,7 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} will contain a generated {@model CompositeCondition}
+ *		A {@model DomainIterator} will contain a generated {@model ActivityFunction}
  *		named 'not empty' - the inverse of the '{@model Condition#empty}' condition.
  */
 rule "Create 'not empty' composite condition"
@@ -238,7 +238,7 @@ rule "Create 'not empty' composite condition"
 		eval ( handler.veto( instance ))
 	
 	then
-		CompositeCondition condition = handler.generatedCompositeCondition(instance, instance);
+		ActivityFunction condition = handler.generatedActivityFunction(instance, instance);
 		handler.setName(condition, "not empty");
 		queue.add(condition, drools);
 	
@@ -248,7 +248,7 @@ rule "Create contents of 'not empty' condition"
 	when
 		instance : DomainIterator( )
 		isEmpty : Function ( instance.empty == isEmpty )
-		condition : CompositeCondition ( eContainer == instance, name == "not empty" )
+		condition : ActivityFunction ( eContainer == instance, name == "not empty" )
 		
 		not ( StartNode ( eContainer == condition ))
 

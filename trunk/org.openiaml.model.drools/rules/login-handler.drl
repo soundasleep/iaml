@@ -181,7 +181,7 @@ rule "Create 'check key' operation for LoginHandler[type = key]"
 		eval ( handler.veto( login_handler ))
 					
 	then
-		CompositeOperation op = handler.generatedCompositeOperation( login_handler, scope );
+		ActivityOperation op = handler.generatedActivityOperation( login_handler, scope );
 		handler.setName(op, "check key");
 		queue.add(op, drools);
 		
@@ -192,7 +192,7 @@ rule "Connect 'access' event to 'check' operations"
 		scope : Session( )
 		page : Frame( eContainer == scope )
 		access : Event( page.onAccess == access, eContainer == page )
-		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
+		check : ActivityOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (ECARule( trigger == access, target == check ))
 				
 		eval ( handler.veto( scope ))
@@ -210,7 +210,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		scope : Session( )
 		page : Frame( eContainer == scope )
 		access : Event( page.onAccess == access, eContainer == page )
-		check : CompositeOperation( name == "check key", eContainer == scope )
+		check : ActivityOperation( name == "check key", eContainer == scope )
 		
 		login_handler : LoginHandler( eContainer == scope )
 		value : Value( )
@@ -235,7 +235,7 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		login_handler : LoginHandler( eContainer == scope )
 		login : Frame ( )
 		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
-		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
+		check : ActivityOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (ECARule( trigger == check, target == login, name == "fail") )
 			
 		eval ( handler.veto( scope ))
@@ -250,7 +250,7 @@ end
 rule "Create contents of 'check key' operation [type=secret_key]"
 	when
 		scope : Session( )
-		o : CompositeOperation( name == "check key", eContainer == scope )
+		o : ActivityOperation( name == "check key", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		
 		expected : Value( ) 
@@ -324,7 +324,7 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		
 		ex : Function ( instance.empty == ex )
 				
-		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance" )
+		checkOperation : ActivityOperation ( eContainer == scope, name == "check instance" )
 
 		not ( StartNode ( eContainer == checkOperation ))
 		
@@ -379,7 +379,7 @@ rule "Connect expected login key as parameter to check key operation"
 		scope : Session( )
 		page : Frame( eContainer == scope )
 		access : Event( name == "access", eContainer == page )
-		check : CompositeOperation( name == "check key", eContainer == scope )
+		check : ActivityOperation( name == "check key", eContainer == scope )
 		wire : ECARule( trigger == access, to == check )
 		login_handler : LoginHandler( eContainer == scope )
 		
@@ -507,7 +507,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		field : InputTextField ( eContainer == form, name == "login key" )
 		fieldValue : Value( field.fieldValue == fieldValue )
 		
-		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
+		loginOperation : ActivityOperation ( eContainer == login_session, name == "do login" )
 		runClick : ECARule ( trigger == button, target == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
@@ -759,7 +759,7 @@ rule "Create 'do login' operation within all login_handlers"
 		eval ( handler.veto( login_handler ))
 
 	then
-		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login_session);
+		ActivityOperation loginOperation = handler.generatedActivityOperation(login_handler, login_session);
 		handler.setName(loginOperation, "do login");
 		queue.add(loginOperation, drools);
 		
@@ -777,7 +777,7 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		
 		ex : Function ( instance.empty == ex )
 				
-		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
+		loginOperation : ActivityOperation ( eContainer == login_session, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
 		
@@ -852,7 +852,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 
-		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
+		operation : ActivityOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
@@ -867,7 +867,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
-		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
+		ActivityOperation setValue = handler.generatedActivityOperation(operation, operation);
 		handler.setName(setValue, "set");
 		queue.add(setValue, drools);
 		
@@ -908,7 +908,7 @@ rule "Create contents of 'do login' operation [type=user]"
 		
 		ex : Function ( instance.empty == ex )
 				
-		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
+		loginOperation : ActivityOperation ( eContainer == login_session, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
 		
@@ -981,7 +981,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		attribute : DomainAttribute ( eContainer == role )
 		paramWire : Parameter( parameterValue == role, parameterTerm == login_handler )
 		
-		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
+		operation : ActivityOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
@@ -996,7 +996,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
-		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
+		ActivityOperation setValue = handler.generatedActivityOperation(operation, operation);
 		handler.setName(setValue, "set");
 		queue.add(setValue, drools);
 		
@@ -1035,7 +1035,7 @@ rule "Connect successful login operation ('success') to navigate to final 'login
 		login : Frame ( )
 		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
 		
-		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
+		login_operation : ActivityOperation( eContainer == login_session, name == "do login" )		
 		login_target : Frame ( ) 
 		login_wire : ECARule( trigger == login_handler, target == login_target, name == "success" )
 
@@ -1058,7 +1058,7 @@ rule "Connect failed login operation ('fail') to navigate back to 'login'"
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
-		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
+		login_operation : ActivityOperation( eContainer == login_session, name == "do login" )		
 
 		not (ECARule( trigger == login_operation, target == login, name == "fail"))
 		
@@ -1078,12 +1078,12 @@ rule "Create 'do logout' operation in session"
 		login_handler : LoginHandler( eContainer == scope )
 		logout : Frame ( eContainer == scope, name == "logout" )
 	
-		not (CompositeOperation ( eContainer == scope, name == "do logout" ))
+		not (ActivityOperation ( eContainer == scope, name == "do logout" ))
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		CompositeOperation operation = handler.generatedCompositeOperation(login_handler, scope);
+		ActivityOperation operation = handler.generatedActivityOperation(login_handler, scope);
 		handler.setName(operation, "do logout");
 		queue.add(operation, drools); 
 		
@@ -1121,10 +1121,10 @@ rule "Connect new navigate wire from logout to logout destination"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		logout : Frame ( eContainer == scope, name == "logout" )
-		logout_operation : CompositeOperation ( eContainer == scope, name == "do logout" )
+		logout_operation : ActivityOperation ( eContainer == scope, name == "do logout" )
 		# add it at the end of the operation chain (final_operation may == logout_operation)
 		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
-		final_operation : CompositeOperation ( eval(final_operation.equals(functions.lastChainedOperation(logout_operation))) )
+		final_operation : ActivityOperation ( eval(final_operation.equals(functions.lastChainedOperation(logout_operation))) )
 		destination : Frame ( )
 		logout_wire : ECARule( trigger == login_handler, target == destination, name == "logout" )
 		
@@ -1142,7 +1142,7 @@ end
 rule "Create contents of 'do logout' operation [type=secret_key]"
 	when
 		scope : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == scope )
+		o : ActivityOperation( name == "do logout", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 
 		value : Value( )
@@ -1199,7 +1199,7 @@ end
 rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 	when
 		scope : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == scope )
+		o : ActivityOperation( name == "do logout", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 
 		not (StartNode( eContainer == o))
@@ -1244,7 +1244,7 @@ end
 rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 	when
 		session : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == session )
+		o : ActivityOperation( name == "do logout", eContainer == session )
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 
 		attribute : DomainAttribute ( )
@@ -1293,7 +1293,7 @@ end
 rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 	when
 		session : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == session )
+		o : ActivityOperation( name == "do logout", eContainer == session )
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 
 		role : Role ( )
@@ -1703,7 +1703,7 @@ rule "Create 'check instance' operation for LoginHandler[type = object or user]"
 		eval ( handler.veto( login_handler ))
 					
 	then
-		CompositeOperation op = handler.generatedCompositeOperation( login_handler, session );
+		ActivityOperation op = handler.generatedActivityOperation( login_handler, session );
 		handler.setName(op, "check instance");
 		queue.add(op, drools);
 		

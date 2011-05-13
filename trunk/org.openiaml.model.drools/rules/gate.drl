@@ -86,12 +86,12 @@ rule "Create 'set flag' operation for Frames connected with 'first' or 'last' EC
 		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" )
 		button : Button ( eContainer == tf, name == "Continue" )
 		
-		not (CompositeOperation ( eContainer == tf, name == "Set gate flag" ))
+		not (ActivityOperation ( eContainer == tf, name == "Set gate flag" ))
 			
 		eval ( handler.veto( gate ))
 		
 	then
-		CompositeOperation op = handler.generatedCompositeOperation(gate, tf);
+		ActivityOperation op = handler.generatedActivityOperation(gate, tf);
 		handler.setName(op, "Set gate flag");
 		queue.add(op, drools);
 
@@ -103,7 +103,7 @@ rule "Connect 'access' event with 'set flag' operation"
 		tf : Frame ( )
 		nav : ECARule ( trigger == gate, target == tf, name == "first" || name == "last" )
 		button : Button ( eContainer == tf, name == "Continue" )
-		op : CompositeOperation ( eContainer == tf, name == "Set gate flag" )
+		op : ActivityOperation ( eContainer == tf, name == "Set gate flag" )
 		access : Event ( eContainer == tf, tf.onAccess == access )
 		
 		not ( ECARule ( trigger == access, target == op ))
@@ -126,7 +126,7 @@ rule "Create contents of 'set flag' operation"
 		button : Button ( eContainer == tf, name == "Continue" )
 		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
-		op : CompositeOperation ( eContainer == tf, name == "Set gate flag" )
+		op : ActivityOperation ( eContainer == tf, name == "Set gate flag" )
 		
 		not (StartNode ( eContainer == op ))
 			
@@ -169,7 +169,7 @@ rule "Create condition 'check (gate)'"
 		eval ( handler.veto( gate ))
 	
 	then
-		CompositeCondition cond = handler.generatedCompositeCondition(gate, session);
+		ActivityFunction cond = handler.generatedActivityFunction(gate, session);
 		handler.setName(cond, "check " + gate.getName());
 		queue.add(cond, drools);
 
@@ -201,7 +201,7 @@ rule "Create contents of 'check (gate)' condition"
 		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
 		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
-		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
+		cond : ActivityFunction ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		cw : SimpleCondition ( function == cond, conditioned == gate )
 		
 		not ( StartNode ( eContainer == cond ))

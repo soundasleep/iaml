@@ -158,7 +158,7 @@ rule "A page within a session protected by an ACH should have a 'permissions che
 		eval ( handler.veto( ach ))
 	
 	then
-		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
+		ActivityOperation check = handler.generatedActivityOperation(ach, page);
 		handler.setName(check, "permissions check");
 		queue.add(check, drools);	
 
@@ -174,7 +174,7 @@ rule "A page protected by an ACH should have a 'permissions check' operation"
 		eval ( handler.veto( ach ))
 	
 	then
-		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
+		ActivityOperation check = handler.generatedActivityOperation(ach, page);
 		handler.setName(check, "page permissions check");
 		queue.add(check, drools);	
 
@@ -224,7 +224,7 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
 		access : Event ( eContainer == page, page.onAccess == access )
-		check : CompositeOperation ( eContainer == page, name == "permissions check" )
+		check : ActivityOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login : Frame ( name == "login", eContainer == root ) 
 		
@@ -246,7 +246,7 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
 		access : Event ( eContainer == page, page.onAccess == access )
-		check : CompositeOperation ( eContainer == page, name == "permissions check" )
+		check : ActivityOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login_session : Session ( eContainer == root, eval(functions.loginHandlerScopeMatches( login_session, lh )) )
 		login : Frame ( name == "login", eContainer == login_session ) 
@@ -394,7 +394,7 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
 
-		check : CompositeOperation ( eContainer == page, name == "permissions check" )
+		check : ActivityOperation ( eContainer == page, name == "permissions check" )
 		ach_check : Operation ( eContainer == ach, name == "check permissions" )
 		
 		not ( StartNode( eContainer == check ))	
@@ -451,7 +451,7 @@ rule "Create contents of 'permissions check' operation in a Frame (page)"
 		page : Frame ( )
 		ach : AccessControlHandler ( eContainer == page )
 
-		check : CompositeOperation ( eContainer == page, name == "page permissions check" )
+		check : ActivityOperation ( eContainer == page, name == "page permissions check" )
 		ach_check : Operation ( eContainer == ach, name == "check permissions" )
 		
 		not ( StartNode( eContainer == check ))	

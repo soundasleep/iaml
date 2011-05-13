@@ -330,7 +330,7 @@ rule "Connect 'target' property to ECARule in Last button"
 		
 end
 
-rule "'Last' button will have a CompositeOperation named 'update target'"
+rule "'Last' button will have a ActivityOperation named 'update target'"
 	when
 		instance : DomainIterator (  )
 		
@@ -344,7 +344,7 @@ rule "'Last' button will have a CompositeOperation named 'update target'"
 		eval ( handler.veto( last ))
 
 	then
-		CompositeOperation op = handler.generatedCompositeOperation(last, last);
+		ActivityOperation op = handler.generatedActivityOperation(last, last);
 		handler.setName(op, "update target");
 		queue.add(op, drools);
 		
@@ -389,7 +389,7 @@ rule "Create contents of 'update target' operation"
 		last : Button ( eContainer == form, name == "Last" )
 		target : Value ( eContainer == last, name == "target" )
 
-		op : CompositeOperation ( eContainer == last, name == "update target" )
+		op : ActivityOperation ( eContainer == last, name == "update target" )
 
 		type : EXSDDataType( definition != null, 
 			definition.URI == "http://openiaml.org/model/datatypes#iamlInteger" )

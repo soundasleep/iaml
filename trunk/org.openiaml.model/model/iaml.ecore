@@ -131,12 +131,12 @@
       <details key="documentation" value="An abstract element for the functionality contained within {@model CompositeOperation}s."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireDestination #//NamedElement #//operations/DataFlowEdgeDestination #//operations/ExecutionEdgeDestination #//operations/DataFlowEdgesSource #//Action">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireDestination #//NamedElement #//Action">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents some type of executable step, which may contain logic flows, data flows or other operations."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BuiltinOperation" eSuperTypes="#//Operation #//operations/ExecutionEdgesSource #//ActionEdgeSource">
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltinOperation" eSuperTypes="#//Operation #//ActionEdgeSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="renamed from ChainedOperation -> PrimitiveOperation in 0.4"/>
     </eAnnotations>
@@ -175,7 +175,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ParameterValue" abstract="true" eSuperTypes="#//NamedElement #//GeneratesElements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value" eSuperTypes="#//ParameterValue #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination #//wires/ParameterEdgesSource #//Wireable">
+  <eClassifiers xsi:type="ecore:EClass" name="Value" eSuperTypes="#//ParameterValue #//wires/ParameterEdgesSource #//Wireable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents a single value, accessible and modifiable at runtime."/>
     </eAnnotations>
@@ -396,7 +396,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
         eType="#//scopes/Message" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="#//WireSource #//operations/DataFlowEdgesSource #//NamedElement #//wires/ConditionEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="#//WireSource #//NamedElement #//wires/ConditionEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="added in 0.2"/>
     </eAnnotations>
@@ -453,7 +453,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QueryParameter" eSuperTypes="#//NamedElement #//operations/DataFlowEdgesSource #//wires/ParameterEdgesSource #//ContainsWires">
+  <eClassifiers xsi:type="ecore:EClass" name="QueryParameter" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//ContainsWires">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.4"/>
     </eAnnotations>
@@ -977,6 +977,16 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A virtual {@model Operation} call; the outgoing {@model RunAction} will be executed."/>
       </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetNode" eSuperTypes="#//ActivityNode #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This message will be provided as a reason why the {@model CompositeOperation Operation} or {@model CompositeCondition Condition} failed."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgeDestination #//operations/DataFlowEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">

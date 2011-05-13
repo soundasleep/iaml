@@ -15,8 +15,10 @@ import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.CastNode;
+import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
+import org.openiaml.model.model.operations.ExternalValue;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -238,8 +240,29 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		assertHasExecutionEdge(validate, start, check);
 
 		CastNode cast = assertHasCastNode(validate);
-		assertHasDataFlowEdge(validate, fieldValue, cast);
-		assertHasDataFlowEdge(validate, cast, fieldValue2);
+		
+		// cast <- ExternalValue <- fieldValue
+		{
+			assertEquals(1, cast.getInFlows().size());
+			ExternalValue ev = (ExternalValue) cast.getInFlows().get(0).getFrom();
+			assertEquals(fieldValue, ev.getExternalValueEdges().getValue());
+		}
+		
+		// cast -> ExternalValue -> fieldValue2
+		{
+			assertEquals(2 /* two outgoing edges */, cast.getOutFlows().size());
+			// we need to find the correct one
+			ExternalValue ev = null;
+			for (DataFlowEdge edge : cast.getOutFlows()) {
+				if (edge.getTo() instanceof ExternalValue) {
+					ev = (ExternalValue) edge.getTo();
+				}
+			}
+			assertNotNull(ev);
+			assertEquals(fieldValue2, ev.getExternalValueEdges().getValue());
+		}
+		
+		// cast -> check
 		assertHasDataFlowEdge(validate, cast, check);
 
 		// 'y' runs 'hide'

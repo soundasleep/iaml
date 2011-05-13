@@ -67,9 +67,11 @@ import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdge;
 import org.openiaml.model.model.operations.ExecutionEdgeDestination;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
+import org.openiaml.model.model.operations.ExternalValue;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.TemporaryVariable;
@@ -815,12 +817,24 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains only one
+	 * ExternalValue.
+	 *
+	 * @return The element found
+	 */
+	public ExternalValue assertHasExternalValue(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), ExternalValue.class);
+		assertEquals(1, results.size());
+		return (ExternalValue) results.get(0);
+	}
+	
+	/**
+	 * Assert that the given element contains only one
 	 * DecisionNode.
 	 *
 	 * @return The element found
 	 */
 	public DecisionNode assertHasDecisionNode(ActivityOperation element, String name) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
+		List<?> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
 		assertEquals(1, results.size());
 		return (DecisionNode) results.get(0);
 	}
@@ -949,7 +963,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	}
 
-
 	/**
 	 * Assert that the given element contains the given
 	 * CancelNode with the given exception text.
@@ -1041,6 +1054,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, results.size());
 		return (OperationCallNode) results.get(0);
 
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * SetNode.
+	 *
+	 * @return The element found
+	 */
+	public SetNode assertHasSetNode(ActivityOperation element) throws JaxenException {
+		List<?> results = typeSelect(element.getNodes(), SetNode.class);
+		assertEquals(1, results.size());
+		return (SetNode) results.get(0);
 	}
 
 	/**

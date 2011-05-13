@@ -12,7 +12,9 @@ import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.ExternalValue;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
@@ -88,7 +90,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		DecisionNode check = assertHasDecisionNode(update, "can cast?");
 		CastNode cast = assertHasCastNode(update);
 
-		BuiltinOperation set = assertHasBuiltinOperation(update, "set");
+		SetNode set = assertHasSetNode(update);
 
 		assertHasExecutionEdge(update, start, check);
 		assertHasExecutionEdge(update, check, cancel, "no");
@@ -121,7 +123,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		DecisionNode check = assertHasDecisionNode(init, "can cast?");
 		CastNode cast = assertHasCastNode(init);
 
-		BuiltinOperation set = assertHasBuiltinOperation(init, "set");
+		SetNode set = assertHasSetNode(init);
 
 		assertHasExecutionEdge(init, start, check);
 		assertHasExecutionEdge(init, check, cancel, "no");
@@ -171,10 +173,18 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		DecisionNode check = assertHasDecisionNode(canCast, "can cast?");
 
 		CastNode cast = assertHasCastNode(canCast);
+
 		assertHasDataFlowEdge(canCast, param, cast);	// in
-		assertHasDataFlowEdge(canCast, cast, integerValue);	// out
 		assertHasDataFlowEdge(canCast, cast, check);	// check
 
+		// cast -> ExternalValue -> integerValue
+		{
+			assertEquals(1, cast.getOutFlows().size());
+			assertEquals(0, cast.getInFlows().size());
+			ExternalValue ev = (ExternalValue) cast.getOutFlows().get(0).getTo();
+			assertEquals(integerValue, ev.getExternalValueEdges().getValue());
+		}
+		
 		CancelNode cancel = assertHasCancelNode(canCast);
 		FinishNode finish = assertHasFinishNode(canCast);
 
@@ -200,8 +210,14 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		assertHasExecutionEdge(cond, start, check);
 		assertHasExecutionEdge(cond, check, finish);
 		assertHasExecutionEdge(cond, check, cancel);
-
-		assertHasDataFlowEdge(cond, value, check);
+		
+		// check <- ExternalValue <- value
+		{
+			assertEquals(1, check.getInFlows().size());
+			assertEquals(0, check.getOutFlows().size());
+			ExternalValue ev = (ExternalValue) check.getInFlows().get(0).getFrom();
+			assertEquals(value, ev.getExternalValueEdges().getValue());
+		}
 
 	}
 

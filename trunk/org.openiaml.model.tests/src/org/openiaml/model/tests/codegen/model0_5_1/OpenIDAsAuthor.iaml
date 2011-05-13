@@ -16,7 +16,7 @@
       </canSave>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.128240e326e.3f1" id="visual.128240e326e.468" name="Create New">
-      <operations xsi:type="iaml:CompositeOperation" id="model.128240e31d2.173f" name="try save" rules="wires.128240e326e.43a">
+      <operations xsi:type="iaml.operations:ActivityOperation" id="model.128240e31d2.173f" name="try save" rules="wires.128240e326e.43a">
         <nodes xsi:type="iaml.operations:StartNode" id="operations.128240e327e.42c" outExecutions="model.128240e31d2.1818"/>
         <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.128240e327e.430" outExecutions="model.12837b6dd45.1ed" inExecutions="model.12837b6dd45.1eb" listeners="wires.128240e326e.659">
           <ecaRules id="wires.128240e326e.659" name="run" trigger="operations.128240e327e.430" target="model.128240e31d2.10a0"/>

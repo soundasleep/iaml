@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1283d80df01.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <functions xsi:type="iaml:CompositeCondition" id="model.1283d8dbd2d.aa" name="should update result?" conditioned="wires.1283d8dbe46.54">
+    <functions xsi:type="iaml.operations:ActivityFunction" id="model.1283d8dbd2d.aa" name="should update result?" conditioned="wires.1283d8dbe46.54">
       <conditionEdges id="wires.1283d8dbe46.54" name="check" function="model.1283d8dbd2d.aa" conditioned="operations.1283d8dbe46.112"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1283d8dbe46.c3" outExecutions="model.1283d8dbd2d.253"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1283d8dbe46.c4" inExecutions="model.1283d8dbd2d.253"/>
       <executionEdges id="model.1283d8dbd2d.253" from="operations.1283d8dbe46.c3" to="operations.1283d8dbe46.c4"/>
     </functions>
-    <operations xsi:type="iaml:CompositeOperation" id="model.1283d80df01.a" name="Composite Operation" rules="wires.1283d80dfad.1">
+    <operations xsi:type="iaml.operations:ActivityOperation" id="model.1283d80df01.a" name="Composite Operation" rules="wires.1283d80dfad.1">
       <parameterEdges id="wires.1283d98dcaf.b" parameterValue="model.1283d80df01.3b" parameterTerm="wires.1283d80dfad.73"/>
       <operations xsi:type="iaml:BuiltinOperation" id="model.1283d80df01.d5" name="set" inFlows="model.1283d80df01.d7" inExecutions="model.1283d80df01.d6" outFlows="model.1283d80df01.d8" outExecutions="model.1283d80df01.14a"/>
       <operations xsi:type="iaml:BuiltinOperation" id="model.1283d80df01.14d" name="set" inFlows="model.1283d80df01.14e" inExecutions="model.1283d80df01.382" outFlows="model.1283d80df01.150" outExecutions="model.1283d80df01.383"/>
       <properties id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" outFlows="model.1283d80df01.14f" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1283d80dfbd.1" outExecutions="model.1283d80df01.ac"/>
-      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1283d80dfbd.b" outExecutions="model.1283d80df01.ae model.1283d80df01.d6" inExecutions="model.1283d80df01.ac" inFlows="model.1283d80df01.50" name="can cast?"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1283d80dfbd.b" name="can cast?" outExecutions="model.1283d80df01.ae model.1283d80df01.d6" inExecutions="model.1283d80df01.ac" inFlows="model.1283d80df01.50"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.1283d80dfbd.14" outFlows="model.1283d80df01.50 model.1283d80df01.51 model.1283d80df01.d7" inFlows="model.1283d80df01.4e"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1283d80dfbd.2d" inExecutions="model.1283d80df01.ae" exceptionText="Input is not an integer."/>
       <nodes xsi:type="iaml.operations:SplitNode" id="operations.1283d80dfbd.5e" outExecutions="model.1283d80df01.10f model.1283d80df01.382" inExecutions="model.1283d80df01.14a"/>
@@ -54,7 +54,7 @@
       <parameterEdges id="wires.1283d80dfad.3" parameterValue="visual.1283d80dfad.1e" parameterTerm="wires.1283d80dfad.1"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1283d80dfad.af" name="Result" type="builtin_iamlInteger">
-      <operations xsi:type="iaml:CompositeOperation" id="model.1283d80df01.26b" name="update" rules="wires.1283d80dfad.73"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1283d80df01.26b" name="update" rules="wires.1283d80dfad.73"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

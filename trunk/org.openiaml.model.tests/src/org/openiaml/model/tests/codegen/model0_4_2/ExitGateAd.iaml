@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.20" name="External Page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.4" name="Advertising Session">
-    <functions xsi:type="iaml:CompositeCondition" id="model.126b0cb5dec.43" name="need to view ad?" conditioned="wires.126b0cb5e5a.17">
+    <functions xsi:type="iaml.operations:ActivityFunction" id="model.126b0cb5dec.43" name="need to view ad?" conditioned="wires.126b0cb5e5a.17">
       <conditionEdges id="wires.126b0cb5e5a.17" function="model.126b0cb5dec.43" conditioned="components.126b0cb5e69.5"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.126b0cb5e69.15" outExecutions="model.126b0cb5dec.66 model.126b0cb5dec.68" inExecutions="model.126b0cb5dec.69" inFlows="model.126b0cb5dec.8a"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.12" outExecutions="model.126b0cb5dec.69"/>
@@ -22,7 +22,7 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.29" name="Page 2"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.32" name="Page 3"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.4a" name="Advertisement" rules="wires.126b0cb5e5a.e">
-      <operations xsi:type="iaml:CompositeOperation" id="model.126b0cb5dec.d8" name="set flag to true" rules="wires.126b0cb5e5a.4b">
+      <operations xsi:type="iaml.operations:ActivityOperation" id="model.126b0cb5dec.d8" name="set flag to true" rules="wires.126b0cb5e5a.4b">
         <operations xsi:type="iaml:BuiltinOperation" id="model.126b0cb5dec.176" name="set" inFlows="model.126b0cb5dec.180" inExecutions="model.126b0cb5dec.17d" outFlows="model.126b0cb5dec.182" outExecutions="model.126b0cb5dec.17f"/>
         <properties id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" defaultValue="true" readOnly="true"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.8a" outExecutions="model.126b0cb5dec.17d"/>

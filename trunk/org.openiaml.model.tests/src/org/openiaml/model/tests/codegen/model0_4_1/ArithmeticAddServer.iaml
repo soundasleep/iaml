@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.125437f916e.4a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" id="model.125437f916e.a1" name="update result" rules="wires.125437f91eb.5">
+    <operations xsi:type="iaml.operations:ActivityOperation" id="model.125437f916e.a1" name="update result" rules="wires.125437f91eb.5">
       <operations xsi:type="iaml:BuiltinOperation" id="model.125437f916e.145" name="set" inFlows="model.125437f916e.14d" inExecutions="model.125437f916e.147" outFlows="model.125437f916e.14e" outExecutions="model.125437f916e.149"/>
       <properties id="model.125437f916e.146" name="static value" outFlows="model.125437f916e.14c" defaultValue="42" readOnly="true"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.125437f91eb.d" outExecutions="model.125437f916e.147"/>
@@ -29,7 +29,7 @@
       <fieldValue id="model.125437f916e.76" name="fieldValue" outFlows="model.125437f916e.14a"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
-      <operations xsi:type="iaml:CompositeOperation" id="model.1254759b7c1.155" name="make negative" rules="wires.1254759bc84.16">
+      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1254759b7c1.155" name="make negative" rules="wires.1254759bc84.16">
         <operations xsi:type="iaml:BuiltinOperation" id="model.1254759b7c1.20e" name="set" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
         <properties id="model.1254759b7c1.20f" name="negative 1" outFlows="model.1254759b7c1.215" defaultValue="-1" readOnly="true"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>

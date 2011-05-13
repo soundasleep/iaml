@@ -15,8 +15,11 @@ import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.ExternalValue;
+import org.openiaml.model.model.operations.ExternalValueEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -90,26 +93,37 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		ActivityParameter ppassword = assertHasActivityParameter(doLogin, "password");
 
 		// there will be many operations called 'set'
-		List<?> sets = query(doLogin, "iaml:operations[iaml:name='set']");
+		List<?> sets = typeSelect(doLogin.getNodes(), SetNode.class);
 		assertEquals(2, sets.size());
 
 		boolean emailSet = false;
 		boolean passwordSet = false;
 
 		for (Object o : sets) {
-			BuiltinOperation set = (BuiltinOperation) o;
-			assertEquals("set", set.getName());
+			SetNode set = (SetNode) o;
 
 			assertHasExecutionEdge(doLogin, split, set);
 			assertHasExecutionEdge(doLogin, set, join);
 
 			if (hasDataFlowEdge(doLogin, pemail, set)) {
-				assertGenerated(assertHasDataFlowEdge(doLogin, set, email));
 				assertFalse(emailSet);
+
+				// there should be a reference to an ExternalValue target
+				assertEquals(1, set.getOutFlows().size());
+				ExternalValue ev = (ExternalValue) set.getOutFlows().get(0).getTo();
+				
+				assertEquals(ev.getExternalValueEdges().getValue(), email);
+
 				emailSet = true;
 			} else if (hasDataFlowEdge(doLogin, ppassword, set)) {
-				assertGenerated(assertHasDataFlowEdge(doLogin, set, password));
 				assertFalse(passwordSet);
+
+				// there should be a reference to an ExternalValue target
+				assertEquals(1, set.getOutFlows().size());
+				ExternalValue ev = (ExternalValue) set.getOutFlows().get(0).getTo();
+				
+				assertEquals(ev.getExternalValueEdges().getValue(), password);
+
 				passwordSet = true;
 			} else {
 				fail("Operation '" + set + "' did not set any appropriate properties.");
@@ -248,34 +262,57 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Value myNull = assertHasValue(doLogout, "reset value");
 		assertTrue(myNull.isReadOnly());
 		assertEquals("null", myNull.getDefaultValue());
+		
+		// there should be three ExternalValues
+		List<?> evs = typeSelect(doLogout.getNodes(), ExternalValue.class);
+		assertEquals(3, evs.size());
+		
+		boolean set1 = false;
+		boolean set2 = false;
+		boolean set3 = false;
+		for (Object o : evs) {
+			ExternalValue ev = (ExternalValue) o;
+			
+			if (ev.getExternalValueEdges().getValue().equals(myNull)) {
+				// OK; should be the source of two 'set' nodes
+				assertFalse(set1);
+				
+				assertEquals(2, ev.getOutFlows().size());
+				assertEquals(0, ev.getInFlows().size());
+				
+				assertInstanceOf(SetNode.class, ev.getOutFlows().get(0).getTo());
+				assertInstanceOf(SetNode.class, ev.getOutFlows().get(1).getTo());
+				assertNotSame(ev.getOutFlows().get(0).getTo(), ev.getOutFlows().get(1).getTo());
+				set1 = true;
+				
+			} else if (ev.getExternalValueEdges().getValue().equals(email)) {
+				// OK; should be the target of a 'set' node
+				assertFalse(set2);
+				
+				assertEquals(1, ev.getInFlows().size());
+				assertEquals(0, ev.getOutFlows().size());
 
-		// there will be many operations called 'set'
-		List<?> sets = query(doLogout, "iaml:operations[iaml:name='set']");
-		assertEquals(2, sets.size());
+				assertInstanceOf(SetNode.class, ev.getInFlows().get(0).getFrom());
+				set2 = true;
 
-		boolean emailReset = false;
-		boolean passwordReset = false;
+			} else if (ev.getExternalValueEdges().getValue().equals(password)) {
+				// OK; should be the target of a 'set' node
+				assertFalse(set3);
+				
+				assertEquals(1, ev.getInFlows().size());
+				assertEquals(0, ev.getOutFlows().size());
 
-		for (Object o : sets) {
-			Operation set = (Operation) o;
-			assertEquals("set", set.getName());
+				assertInstanceOf(SetNode.class, ev.getInFlows().get(0).getFrom());
+				set3 = true;
 
-			DataFlowEdge data = assertHasDataFlowEdge(doLogout, myNull, set);
-			assertGenerated(data);
-
-			if (hasDataFlowEdge(doLogout, set, email)) {
-				assertFalse(emailReset);
-				emailReset = true;
-			} else if (hasDataFlowEdge(doLogout, set, password)) {
-				assertFalse(passwordReset);
-				passwordReset = true;
 			} else {
-				fail("Data edge '" + data + "' did not go anywhere interesting.");
+				fail("Unknown ExternalValue edge: " + ev.getExternalValueEdges() + " in ExternalValue: " + ev);
 			}
 		}
-
-		assertTrue("'current email' was never reset", emailReset);
-		assertTrue("'current password' was never reset", passwordReset);
+		
+		assertTrue("'null' was never retrieved", set1);
+		assertTrue("'current email' was never reset", set2);
+		assertTrue("'current password' was never reset", set3);
 
 	}
 

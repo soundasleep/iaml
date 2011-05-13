@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.SimpleCondition;
@@ -13,7 +12,9 @@ import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.ExternalValue;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
@@ -143,7 +144,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(start);
 		FinishNode finish = assertHasFinishNode(set);
 		assertGenerated(finish);
-		BuiltinOperation s = assertHasBuiltinOperation(set, "set");
+		SetNode s = assertHasSetNode(set);
 		assertGenerated(s);
 		Value value = assertHasValue(set, "true");
 		assertTrue(value.isReadOnly());
@@ -153,8 +154,20 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		// flow
 		assertGenerated(assertHasExecutionEdge(set, start, s));
 		assertGenerated(assertHasExecutionEdge(set, s, finish));
-		assertGenerated(assertHasDataFlowEdge(set, value, s));
-		assertGenerated(assertHasDataFlowEdge(set, s, property));
+		
+		// set <- externalValue <- value
+		{
+			assertEquals(1, s.getInFlows().size());
+			ExternalValue ev = (ExternalValue) s.getInFlows().get(0).getFrom();
+			assertEquals(value, ev.getExternalValueEdges().getValue());
+		}
+		
+		// setnode -> externalValue -> property
+		{
+			assertEquals(1, s.getOutFlows().size());
+			ExternalValue ev = (ExternalValue) s.getOutFlows().get(0).getTo();
+			assertEquals(property, ev.getExternalValueEdges().getValue());
+		}
 
 	}
 
@@ -206,8 +219,15 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(assertHasExecutionEdge(condition, start, check));
 		assertGenerated(assertHasExecutionEdge(condition, check, finish, "y"));
 		assertGenerated(assertHasExecutionEdge(condition, check, cancel, "n"));
-		assertGenerated(assertHasDataFlowEdge(condition, property, check));
-
+		
+		// property -> ExternalValue -> check
+		{
+			assertEquals(1, check.getInFlows().size());
+			assertEquals(0, check.getOutFlows().size());
+			ExternalValue ev = (ExternalValue) check.getInFlows().get(0).getFrom();
+			assertEquals(property, ev.getExternalValueEdges().getValue());
+		}
+		
 	}
 
 }

@@ -618,7 +618,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param class1 the expected class
 	 * @param object the object to check
 	 */
-	public void assertInstanceOf(Class<?> class1, Object object) {
+	public static void assertInstanceOf(Class<?> class1, Object object) {
 		if (class1.isInstance(object)) {
 			// ok
 		} else {
@@ -632,7 +632,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param class1 the expected class
 	 * @param objects the list of objects to check
 	 */
-	public void assertInstanceOf(Class<?> class1, Collection<?> objects) {
+	public static void assertInstanceOf(Class<?> class1, Collection<?> objects) {
 		for (Object object : objects) {
 			if (class1.isInstance(object)) {
 				// ok

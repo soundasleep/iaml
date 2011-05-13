@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Function;
@@ -19,8 +18,11 @@ import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.ExternalValue;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
@@ -293,7 +295,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		StartNode start = assertHasStartNode(op);
 		FinishNode finish = assertHasFinishNode(op);
 
-		BuiltinOperation set = assertHasBuiltinOperation(op, "set");
+		SetNode set = assertHasSetNode(op);
 
 		assertGenerated(assertHasExecutionEdge(op, start, set));
 		assertGenerated(assertHasExecutionEdge(op, set, finish));
@@ -301,13 +303,46 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Arithmetic arith = assertHasArithmetic(op);
 		Value one = assertHasValue(op, "one");
 		assertTrue(one.isReadOnly());
-		assertGenerated(assertHasDataFlowEdge(op, one, arith));
 		assertEquals(arith.getOperationType(), ArithmeticOperationTypes.SUBTRACT);
 
-		assertGenerated(assertHasDataFlowEdge(op, results, arith));
-		assertGenerated(assertHasDataFlowEdge(op, arith, set));
-		assertGenerated(assertHasDataFlowEdge(op, set, target));
+		// arith <- ExternalValue <- results
+		// arith <- ExternalValue <- one
+		{
+			assertEquals(2, arith.getInFlows().size());
+			boolean fromResults = false;
+			boolean fromOne = false;
+			for (DataFlowEdge ee : arith.getInFlows()) {
+				assertInstanceOf(ExternalValue.class, ee.getFrom());
+				ExternalValue ev = (ExternalValue) ee.getFrom();
+				
+				if (one.equals(ev.getExternalValueEdges().getValue())) {
+					assertFalse(fromOne);
+					fromOne = true;
+				} else if (results.equals(ev.getExternalValueEdges().getValue())) {
+					assertFalse(fromResults);
+					fromResults = true;
+				} else {
+					fail("Unknown source: " + ev.getExternalValueEdges().getValue());
+				}
+			}
+			assertTrue(fromOne);
+			assertTrue(fromResults);
+		}
+		
+		// arith -> ExternalValue -> set
+		{
+			assertEquals(1, arith.getOutFlows().size());
+			assertEquals(set, arith.getOutFlows().get(0).getTo());
+		}
 
+		assertGenerated(assertHasDataFlowEdge(op, arith, set));
+		
+		// set -> ExternalValue -> target
+		{
+			assertEquals(1, set.getOutFlows().size());
+			ExternalValue ev = (ExternalValue) set.getOutFlows().get(0).getTo();
+			assertEquals(target, ev.getExternalValueEdges().getValue());
+		}
 
 	}
 

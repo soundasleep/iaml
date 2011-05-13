@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.inference.model0_5_3;
 
-import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
@@ -15,6 +14,7 @@ import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
+import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -172,7 +172,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		DecisionNode check = assertHasDecisionNode(update, "can cast?");
 		CastNode cast = assertHasCastNode(update);
 
-		BuiltinOperation set = assertHasBuiltinOperation(update, "set");
+		SetNode set = assertHasSetNode(update);
 
 		assertHasExecutionEdge(update, start, check);
 		assertHasExecutionEdge(update, check, cancel, "no");

@@ -9,9 +9,9 @@
     </functions>
     <operations xsi:type="iaml.operations:ActivityOperation" id="model.1283d80df01.a" name="Composite Operation" rules="wires.1283d80dfad.1">
       <parameterEdges id="wires.1283d98dcaf.b" parameterValue="model.1283d80df01.3b" parameterTerm="wires.1283d80dfad.73"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1283d80df01.d5" name="set" inFlows="model.1283d80df01.d7" inExecutions="model.1283d80df01.d6" outFlows="model.1283d80df01.d8" outExecutions="model.1283d80df01.14a"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1283d80df01.14d" name="set" inFlows="model.1283d80df01.14e" inExecutions="model.1283d80df01.382" outFlows="model.1283d80df01.150" outExecutions="model.1283d80df01.383"/>
-      <properties id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" outFlows="model.1283d80df01.14f" defaultValue="1" readOnly="true"/>
+      <properties id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" defaultValue="1" readOnly="true"/>
+      <nodes xsi:type="iaml.operations:SetNode" id="model.1283d80df01.d5" outExecutions="model.1283d80df01.14a" inExecutions="model.1283d80df01.d6" outFlows="model.1283d80df01.d8" inFlows="model.1283d80df01.d7"/>
+      <nodes xsi:type="iaml.operations:SetNode" id="model.1283d80df01.14d" outExecutions="model.1283d80df01.383" inExecutions="model.1283d80df01.382" outFlows="model.1283d80df01.150" inFlows="model.1283d80df01.14e"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1283d80dfbd.1" outExecutions="model.1283d80df01.ac"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1283d80dfbd.b" name="can cast?" outExecutions="model.1283d80df01.ae model.1283d80df01.d6" inExecutions="model.1283d80df01.ac" inFlows="model.1283d80df01.50"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.1283d80dfbd.14" outFlows="model.1283d80df01.50 model.1283d80df01.51 model.1283d80df01.d7" inFlows="model.1283d80df01.4e"/>
@@ -31,8 +31,11 @@
       <dataEdges id="model.1283d80df01.d8" from="model.1283d80df01.d5" to="model.1283d80df01.3b"/>
       <dataEdges id="model.1283d80df01.14c" from="model.1283d80df01.3b" to="operations.1283d80dfbd.78"/>
       <dataEdges id="model.1283d80df01.14e" from="operations.1283d80dfbd.78" to="model.1283d80df01.14d"/>
-      <dataEdges id="model.1283d80df01.14f" from="model.1283d80df01.14b" to="operations.1283d80dfbd.78"/>
+      <dataEdges id="model.1283d80df01.14f" from="ev1" to="operations.1283d80dfbd.78"/>
       <dataEdges id="model.1283d80df01.150" from="model.1283d80df01.14d" to="model.1283d80df01.3b"/>
+		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1283d80df01.14f">
+			<externalValueEdges id="eve1" from="ev1" value="model.1283d80df01.14b" />
+		</nodes>
       <executionEdges id="model.1283d80df01.ac" from="operations.1283d80dfbd.1" to="operations.1283d80dfbd.b"/>
       <executionEdges id="model.1283d80df01.ae" name="n" from="operations.1283d80dfbd.b" to="operations.1283d80dfbd.2d"/>
       <executionEdges id="model.1283d80df01.d6" name="y" from="operations.1283d80dfbd.b" to="model.1283d80df01.d5"/>

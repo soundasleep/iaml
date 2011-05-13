@@ -5,7 +5,6 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.BuiltinProperty;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Event;
@@ -17,6 +16,7 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationCallNode;
@@ -185,7 +185,7 @@ public class UserRoles extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 		assertGenerated(handler);
 
-		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
+		ActivityOperation check = assertHasActivityOperation(session, "check instance");
 		assertGenerated(check);
 	}
 
@@ -213,7 +213,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(event);
 
 		// check permissions operation contained in the session, not the page
-		CompositeOperation pageOp = assertHasCompositeOperation(target, "permissions check");
+		ActivityOperation pageOp = assertHasActivityOperation(target, "permissions check");
 		assertGenerated(pageOp);
 
 		// connected
@@ -245,9 +245,9 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(event);
 
 		// check permissions operation contained in the session, not the page
-		assertHasNone(session, "iaml:operations[iaml:name='permissions check']");
-
-		CompositeOperation sessionOp = assertHasCompositeOperation(target, "permissions check");
+		assertHasNoOperation(session, "permissions check");
+		
+		ActivityOperation sessionOp = assertHasActivityOperation(target, "permissions check");
 		assertGenerated(sessionOp);
 	}
 
@@ -265,7 +265,7 @@ public class UserRoles extends InferenceTestCase {
 		Frame target = assertHasFrame(session, "target");
 
 		// find 'check instance'
-		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
+		ActivityOperation check = assertHasActivityOperation(session, "check instance");
 		assertGenerated(check);
 
 		// access event
@@ -306,7 +306,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(event);
 
 		// check permissions operation contained in the page
-		CompositeOperation op = assertHasCompositeOperation(target, "permissions check");
+		ActivityOperation op = assertHasActivityOperation(target, "permissions check");
 		assertGenerated(op);
 
 		StartNode start = assertHasStartNode(op);

@@ -4,13 +4,13 @@
 package org.openiaml.model.tests.inference.model0_4_2;
 
 import org.openiaml.model.model.BuiltinOperation;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -114,7 +114,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(access);
 
 		// set operation
-		CompositeOperation set = assertHasCompositeOperation(ad, "Set gate flag");
+		ActivityOperation set = assertHasActivityOperation(ad, "Set gate flag");
 		assertGenerated(set);
 
 		// run wire
@@ -136,7 +136,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Value property = assertHasValue(session, "View Ads Exit Gate flag");
 
 		// set operation
-		CompositeOperation set = assertHasCompositeOperation(ad, "Set gate flag");
+		ActivityOperation set = assertHasActivityOperation(ad, "Set gate flag");
 
 		// start node
 		StartNode start = assertHasStartNode(set);
@@ -170,7 +170,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertEquals("View Ads Exit Gate", gate.getName());
 
 		// generated condition
-		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");
+		ActivityFunction condition = assertHasActivityFunction(session, "check View Ads Exit Gate");
 		assertGenerated(condition);
 
 		SimpleCondition wire = assertHasSimpleCondition(session, condition, gate, "condition");
@@ -190,7 +190,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Value property = assertHasValue(session, "View Ads Exit Gate flag");
 
 		// generated condition
-		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");
+		ActivityFunction condition = assertHasActivityFunction(session, "check View Ads Exit Gate");
 
 		// start node
 		StartNode start = assertHasStartNode(condition);

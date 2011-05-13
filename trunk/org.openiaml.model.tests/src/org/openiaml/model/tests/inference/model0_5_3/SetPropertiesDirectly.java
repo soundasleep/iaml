@@ -4,12 +4,12 @@
 package org.openiaml.model.tests.inference.model0_5_3;
 
 import org.openiaml.model.model.BuiltinOperation;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.messaging.Email;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
@@ -99,7 +99,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		Email email = assertHasEmail(home, "Target");
 
-		Operation update1 = assertHasCompositeOperation(email, "set value set directly");
+		Operation update1 = assertHasActivityOperation(email, "set value set directly");
 		assertGenerated(update1);
 
 		// since the other Value does not have an incoming SetWire, no
@@ -123,7 +123,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		Event onChange = label1.getOnChange();
 		assertGenerated(onChange);
 
-		Operation update = assertHasCompositeOperation(email, "set value set directly");
+		Operation update = assertHasActivityOperation(email, "set value set directly");
 		assertGenerated(update);
 
 		ECARule edge = assertHasECARule(root, onChange, update);
@@ -162,7 +162,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		Email email = assertHasEmail(home, "Target");
-		CompositeOperation update = assertHasCompositeOperation(email, "set value set directly");
+		ActivityOperation update = assertHasActivityOperation(email, "set value set directly");
 
 		// -- traverse from start node --
 		StartNode start = assertHasStartNode(update);

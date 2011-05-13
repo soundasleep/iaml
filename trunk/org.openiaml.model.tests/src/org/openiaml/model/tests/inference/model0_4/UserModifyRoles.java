@@ -6,11 +6,11 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 
 import org.openiaml.model.model.BuiltinOperation;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Value;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DataFlowEdge;
@@ -64,7 +64,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		Session loginSession = assertHasSession(root, "current user login");
 		assertGenerated(loginSession);
-		CompositeOperation doLogin = assertHasCompositeOperation(loginSession, "do login");
+		ActivityOperation doLogin = assertHasActivityOperation(loginSession, "do login");
 
 		StartNode start = assertHasStartNode(doLogin);
 		FinishNode finish = assertHasFinishNode(doLogin);
@@ -231,7 +231,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		root = loadAndInfer(UserModifyRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		CompositeOperation doLogout = assertHasCompositeOperation(session, "do logout");
+		ActivityOperation doLogout = assertHasActivityOperation(session, "do logout");
 
 		assertGenerated(assertHasStartNode(doLogout));
 		assertGenerated(assertHasFinishNode(doLogout));

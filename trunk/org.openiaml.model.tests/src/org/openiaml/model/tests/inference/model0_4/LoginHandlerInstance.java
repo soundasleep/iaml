@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.openiaml.model.model.BuiltinProperty;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
@@ -22,6 +21,7 @@ import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
@@ -296,14 +296,13 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
+		ActivityOperation check = assertHasActivityOperation(session, "check instance");
 		assertGenerated(check);
 
-		List<?> nodes = query(check, "iaml:nodes");
-		assertNotEqual("'check instance' operation should have been generated", 0, nodes.size());
+		assertNotEqual("'check instance' operation should have been generated", 0, check.getNodes().size());
 
 		// at least two nodes
-		assertGreaterEq(2, nodes.size());
+		assertGreaterEq(2, check.getNodes().size());
 
 	}
 
@@ -313,7 +312,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	 *
 	 * @throws Exception
 	 */
-	private void checkOperationCallsExists(Session session, CompositeOperation check) throws Exception {
+	private void checkOperationCallsExists(Session session, ActivityOperation check) throws Exception {
 		// find 'empty'
 		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 		assertNotGenerated(instance);
@@ -341,7 +340,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 
 		// find 'check instance'
-		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
+		ActivityOperation check = assertHasActivityOperation(session, "check instance");
 		assertGenerated(check);
 
 		// check
@@ -361,7 +360,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		// find 'do login'
 		Session loginSession = assertHasSession(root, "login handler login");
-		CompositeOperation op = (CompositeOperation) assertHasOperation(loginSession, "do login");
+		ActivityOperation op = (ActivityOperation) assertHasOperation(loginSession, "do login");
 		assertGenerated(op);
 
 		// check
@@ -379,7 +378,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
+		ActivityOperation check = assertHasActivityOperation(session, "check instance");
 		assertGenerated(check);
 
 		// destination page

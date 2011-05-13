@@ -6,7 +6,6 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
@@ -14,6 +13,7 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
@@ -246,7 +246,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		CompositeOperation check = assertHasCompositeOperation(session, "check key");
+		ActivityOperation check = assertHasActivityOperation(session, "check key");
 		assertGenerated(check);
 
 		Session loginSession = assertHasSession(root, "Login Handler login");

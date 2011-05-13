@@ -5,9 +5,9 @@ package org.openiaml.model.tests.inference.model0_5_3;
 
 import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Value;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
@@ -47,10 +47,10 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		BuiltinProperty set1 = assertHasBuiltinProperty(text1, "fieldValue is set");
 
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		CompositeOperation init2 = assertHasCompositeOperation(text2, "init");
-		CompositeOperation update2 = assertHasCompositeOperation(text2, "update");
-		CompositeCondition cast2 = assertHasCompositeCondition(text2, "can cast?");
-		CompositeCondition set2 = assertHasCompositeCondition(text2, "fieldValue is set");
+		ActivityOperation init2 = assertHasActivityOperation(text2, "init");
+		ActivityOperation update2 = assertHasActivityOperation(text2, "update");
+		ActivityFunction cast2 = assertHasActivityFunction(text2, "can cast?");
+		ActivityFunction set2 = assertHasActivityFunction(text2, "fieldValue is set");
 
 		assertNotGenerated(text1, text2, init1, init2, update1, update2, cast1, cast2, set1, set2);
 
@@ -69,8 +69,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		BuiltinOperation init1 = assertHasBuiltinOperation(text1, "init");
 		BuiltinOperation update1 = assertHasBuiltinOperation(text1, "update");
 
-		assertFalse(init1 instanceof CompositeOperation);
-		assertFalse(update1 instanceof CompositeOperation);
+		assertFalse(init1 instanceof ActivityOperation);
+		assertFalse(update1 instanceof ActivityOperation);
 
 	}
 
@@ -78,7 +78,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		CompositeOperation update = assertHasCompositeOperation(text2, "update");
+		ActivityOperation update = assertHasActivityOperation(text2, "update");
 
 		// -- traverse from start node --
 		StartNode start = assertHasStartNode(update);
@@ -111,7 +111,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		CompositeOperation init = assertHasCompositeOperation(text2, "init");
+		ActivityOperation init = assertHasActivityOperation(text2, "init");
 
 		// -- traverse from start node --
 		StartNode start = assertHasStartNode(init);
@@ -152,7 +152,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		InputTextField text1 = assertHasInputTextField(home, "text1");
 		BuiltinProperty cast1 = assertHasBuiltinProperty(text1, "can cast?");
 
-		assertFalse(cast1 instanceof CompositeCondition);
+		assertFalse(cast1 instanceof ActivityFunction);
 
 	}
 
@@ -160,7 +160,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		CompositeCondition canCast = assertHasCompositeCondition(text2, "can cast?");
+		ActivityFunction canCast = assertHasActivityFunction(text2, "can cast?");
 		Value integerValue = assertHasFieldValue(text2);
 
 		StartNode start = assertHasStartNode(canCast);
@@ -188,7 +188,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		CompositeCondition cond = assertHasCompositeCondition(text2, "fieldValue is set");
+		ActivityFunction cond = assertHasActivityFunction(text2, "fieldValue is set");
 		Value value = assertHasFieldValue(text2);
 
 		StartNode start = assertHasStartNode(cond);

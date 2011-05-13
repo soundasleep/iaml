@@ -23,7 +23,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * Similar to issue 210: Create PrimitiveConditions by default, but
- * allow later overriding using the same semantics if it was a CompositeCondition.
+ * allow later overriding using the same semantics if it was a ActivityFunction.
  *
  * <p>Issue 221: Add 'can cast?' Primitive Function to all Changeable elements
  *
@@ -48,7 +48,7 @@ rule "Create contents of 'can cast?' condition"
 	when
 		tf : Changeable( )
 		fieldValue : Value ( tf.fieldValue == fieldValue )
-		c : CompositeCondition ( name == "can cast?", eContainer == tf )
+		c : ActivityFunction ( name == "can cast?", eContainer == tf )
 		
 		not ( start : StartNode ( eContainer == c ))
 		

@@ -56,7 +56,7 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 		eval ( handler.veto( sw ))
 		
 	then
-		CompositeOperation op = handler.generatedCompositeOperation(sw, e1);
+		ActivityOperation op = handler.generatedActivityOperation(sw, e1);
 		handler.setName(op, "validate");
 		queue.add(op, drools);
 
@@ -101,7 +101,7 @@ rule "Create contents of 'validate' operation"
 		
 		eval ( e1.getType() != e2.getType() )
 		
-		o : CompositeOperation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, o)) )
+		o : ActivityOperation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, o)) )
 
 		warning : Label ( name == "Warning", eContainer == e1 )
 

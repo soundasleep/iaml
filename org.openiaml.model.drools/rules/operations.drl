@@ -20,7 +20,7 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * Issue 210: Create BuiltinOperations rather than CompositeOperations.
+ * Issue 210: Create BuiltinOperations rather than ActivityOperations.
  * TODO do not create 'update' operation for {@model Property#readOnly} Properties.
  *
  * @inference VisibleThing,Operation
@@ -61,7 +61,7 @@ rule "Create 'update' operation for domain attribute instance"
 end
 
 /**
- * Issue 210: Create BuiltinOperations rather than CompositeOperations.
+ * Issue 210: Create BuiltinOperations rather than ActivityOperations.
  *
  * @inference VisibleThing
  *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will contain an {@model Operation} named "init".
@@ -100,22 +100,22 @@ rule "Create 'set value XXX' Operation for all Properties, except fieldValue"
 		eval ( handler.veto( gen ))
 		
 	then
-		CompositeOperation op = handler.generatedCompositeOperation(gen, container);
+		ActivityOperation op = handler.generatedActivityOperation(gen, container);
 		handler.setName(op, "set value " + p.getName());
 		queue.add(op, drools); 
 	
 end 
 
 /**
- * @inference Changeable,CompositeOperation
- *		An empty {@model CompositeOperation} named "update", "refresh" or "init", contained within a
+ * @inference Changeable,ActivityOperation
+ *		An empty {@model ActivityOperation} named "update", "refresh" or "init", contained within a
  *		{@model Changeable}, will automatically be completed with {@model ActivityNode}s to implement
  *		the particular operation.
  */
 rule "Create components of 'update', 'refresh', 'init' operations"
 	when
 		c : Changeable ( )
-		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c)
+		o : ActivityOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c)
 		field : Value( c.fieldValue == field )
 		
 		not ( StartNode ( eContainer == o ))
@@ -186,8 +186,8 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 end
 
 /**
- * @inference Changeable,CompositeOperation,Property
- *		An empty {@model CompositeOperation} named "set value XXX", contained within a
+ * @inference Changeable,ActivityOperation,Property
+ *		An empty {@model ActivityOperation} named "set value XXX", contained within a
  *		{@model Changeable}, used to set a {@model Property} other than {@model Changeable#fieldValue},
  *		will automatically be completed with {@model ActivityNode}s to implement
  *		the particular operation.
@@ -197,7 +197,7 @@ rule "Create components of 'set value XXX' operations"
 		container : ContainsOperations ( )
 		field : Value ( eContainer == container, name != "fieldValue" )
 
-		o : CompositeOperation ( eContainer == container, name != null, eval( ("set value " + field.getName()).equals(o.getName()) ) )
+		o : ActivityOperation ( eContainer == container, name != null, eval( ("set value " + field.getName()).equals(o.getName()) ) )
 		
 		not ( StartNode ( eContainer == o ))
 		
@@ -267,13 +267,13 @@ rule "Create components of 'set value XXX' operations"
 end
 
 /**
- * @inference CompositeOperation
- *		An empty {@model CompositeOperation} named "alert" will automatically be completed 
+ * @inference ActivityOperation
+ *		An empty {@model ActivityOperation} named "alert" will automatically be completed 
  *		with {@model ActivityNode}s that will execute the {@model BuiltinOperation} named "alert".
  */
 rule "Create components of 'alert' operation"
 	when
-		o : CompositeOperation(name == "alert")
+		o : ActivityOperation(name == "alert")
 
 		not ( StartNode ( eContainer == o ))
 		

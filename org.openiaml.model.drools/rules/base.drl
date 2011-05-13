@@ -98,7 +98,7 @@ end
 
 /**
  * @inference Condition,Property All {@model Property Properties}
- * 		will have a {@model CompositeCondition} in its container called "is set".
+ * 		will have a {@model ActivityFunction} in its container called "is set".
  */
 rule "Properties will also have a related 'is set' condition (not fieldValue)"
 	when
@@ -111,14 +111,14 @@ rule "Properties will also have a related 'is set' condition (not fieldValue)"
 		eval ( handler.veto( containerGe ))
 	
 	then
-		CompositeCondition cond = handler.generatedCompositeCondition(containerGe, container);
+		ActivityFunction cond = handler.generatedActivityFunction(containerGe, container);
 		handler.setName(cond, value.getName() + " is set");
 		queue.add(cond, drools);
 
 end
 
 /**
- * "fieldValue is set" is generated as a BuiltinProperty, not a CompositeCondition.
+ * "fieldValue is set" is generated as a BuiltinProperty, not a ActivityFunction.
  */
 rule "Properties will also have a related 'is set' BuiltinProperty (fieldValue)"
 	when
@@ -163,7 +163,7 @@ rule "Create contents of 'X is set' operation"
 		container : ContainsFunctions ( )
 		value : Value ( eContainer == container )
 		
-		o : CompositeCondition( eval(name.equals(value.getName() + " is set")), eContainer == container )
+		o : ActivityFunction( eval(name.equals(value.getName() + " is set")), eContainer == container )
 		
 		not ( StartNode ( eContainer == o ))
 		

@@ -13,21 +13,21 @@
         <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.5" outExecutions="model.12542c563bb.e6"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.7" inExecutions="model.12542c563bb.e8"/>
         <nodes xsi:type="iaml.operations:Arithmetic" id="operations.12542c56428.10" inFlows="model.12542c563bb.e1 model.12542c563bb.e3" outFlows="model.12542c563bb.e4" operationType="SUBTRACT"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12542c563bb.e1">
+          <externalValueEdges id="eve1" value="model.12542c563bb.35"/>
+        </nodes>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.12542c563bb.e3">
+          <externalValueEdges id="eve2" value="model.12542c563bb.46"/>
+        </nodes>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.12542c563bb.e5">
+          <externalValueEdges id="eve3" value="model.12542c563bb.5f"/>
+        </nodes>
         <dataEdges id="model.12542c563bb.e1" from="ev1" to="operations.12542c56428.10"/>
         <dataEdges id="model.12542c563bb.e3" from="ev2" to="operations.12542c56428.10"/>
         <dataEdges id="model.12542c563bb.e4" from="operations.12542c56428.10" to="model.12542c563bb.dc"/>
-        <dataEdges id="model.12542c563bb.e5" to="ev3" from="model.12542c563bb.dc"/>
+        <dataEdges id="model.12542c563bb.e5" from="model.12542c563bb.dc" to="ev3"/>
         <executionEdges id="model.12542c563bb.e6" from="operations.12542c56428.5" to="model.12542c563bb.dc"/>
         <executionEdges id="model.12542c563bb.e8" from="model.12542c563bb.dc" to="operations.12542c56428.7"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12542c563bb.e1">
-			<externalValueEdges id="eve1" from="ev1" value="model.12542c563bb.35" />
-		</nodes>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.12542c563bb.e3">
-			<externalValueEdges id="eve2" from="ev2" value="model.12542c563bb.46" />
-		</nodes>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.12542c563bb.e5">
-			<externalValueEdges id="eve3" from="ev3" value="model.12542c563bb.5f" />
-		</nodes>
       </operations>
       <onClick id="model.12542c563bb.80" listeners="wires.12542c56428.3">
         <ecaRules id="wires.12542c56428.3" name="run" trigger="model.12542c563bb.80" target="model.12542c563bb.81"/>

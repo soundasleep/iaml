@@ -7,6 +7,9 @@
         <nodes xsi:type="iaml.operations:SetNode" id="model.120ac60dcea.3a6" outExecutions="model.120ac60dcea.3a8" inExecutions="model.120acfde16a.13a" outFlows="model.120ac60dcea.3aa" inFlows="model.120ac60dcea.3a9"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.120ac60dd48.4d" outExecutions="model.120ac60dcea.32f"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.120ac60dd48.74" inExecutions="model.120ac60dcea.3a8"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.120ac60dcea.3aa">
+          <externalValueEdges id="eve1" value="model.120ac60dcea.17a"/>
+        </nodes>
         <dataEdges id="model.120ac60dcea.331" from="model.120ac60dcea.2a2" to="model.120ac60dcea.2df"/>
         <dataEdges id="model.120ac60dcea.332" from="model.120ac60dcea.2df" to="model.120ac60dcea.2e0"/>
         <dataEdges id="model.120ac60dcea.3a9" from="model.120ac60dcea.2e0" to="model.120ac60dcea.3a6"/>
@@ -16,9 +19,6 @@
         <executionEdges id="model.120acfde16a.13a" from="model.120ac60dcea.2df" to="model.120ac60dcea.3a6"/>
         <variables id="model.120ac60dcea.2e0" name="a temporary variable" outFlows="model.120ac60dcea.3a9" inFlows="model.120ac60dcea.332"/>
         <parameters id="model.120ac60dcea.2a2" name="in value" outFlows="model.120ac60dcea.331"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.120ac60dcea.3aa">
-			<externalValueEdges id="eve1" from="ev1" value="model.120ac60dcea.17a" />
-		</nodes>
       </operations>
       <onChange id="model.120ac60dcea.133" listeners="wires.120ac60dd48.b8">
         <ecaRules id="wires.120ac60dd48.b8" inParameterEdges="wires.120ac60dd48.cc" name="run" trigger="model.120ac60dcea.133" target="model.120ac60dcea.198"/>

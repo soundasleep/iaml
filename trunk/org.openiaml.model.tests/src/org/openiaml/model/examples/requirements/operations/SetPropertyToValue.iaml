@@ -5,14 +5,14 @@
       <nodes xsi:type="iaml.operations:SetNode" id="model.120acfde16a.742" outExecutions="model.120acfde16a.828" inExecutions="model.120acfde16a.827" outFlows="model.120acfde16a.826" inFlows="model.120acfde16a.825"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.120acfde225.1f6" outExecutions="model.120acfde16a.827"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.120acfde225.1f7" inExecutions="model.120acfde16a.828"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.120acfde16a.826">
+        <externalValueEdges id="eve1" value="model.120acfde16a.783"/>
+      </nodes>
       <dataEdges id="model.120acfde16a.825" from="model.120acfde16a.824" to="model.120acfde16a.742"/>
       <dataEdges id="model.120acfde16a.826" from="model.120acfde16a.742" to="ev1"/>
       <executionEdges id="model.120acfde16a.827" from="operations.120acfde225.1f6" to="model.120acfde16a.742"/>
       <executionEdges id="model.120acfde16a.828" from="model.120acfde16a.742" to="operations.120acfde225.1f7"/>
       <parameters id="model.120acfde16a.824" name="param" outFlows="model.120acfde16a.825"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.120acfde16a.826">
-			<externalValueEdges id="eve1" from="ev1" value="model.120acfde16a.783" />
-		</nodes>
     </operations>
     <properties id="model.120acfde16a.783" name="some property"/>
   </scopes>

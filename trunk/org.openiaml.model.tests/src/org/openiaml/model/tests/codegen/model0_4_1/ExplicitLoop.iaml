@@ -4,12 +4,12 @@
     <operations xsi:type="iaml.operations:ActivityOperation" id="model.1254759b7c1.72b" name="fibonacci" rules="wires.1254759bc84.8f">
       <properties id="model.1254759b7c1.797" name="init" defaultValue="1" readOnly="true"/>
       <properties id="model.1254759b7c1.7a0" name="one" defaultValue="1" readOnly="true"/>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1254759b7c1.798 model.1254759b7c1.799">
-			<externalValueEdges id="eve1" from="ev1" value="model.1254759b7c1.797" />
-		</nodes>
-		<nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.1254759b7c1.7a8">
-			<externalValueEdges id="eve2" from="ev2" value="model.1254759b7c1.7a0" />
-		</nodes>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1254759b7c1.798 model.1254759b7c1.799">
+        <externalValueEdges id="eve1" value="model.1254759b7c1.797"/>
+      </nodes>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.1254759b7c1.7a8">
+        <externalValueEdges id="eve2" value="model.1254759b7c1.7a0"/>
+      </nodes>
       <nodes xsi:type="iaml.operations:SetNode" id="model.1254759b7c1.760" outExecutions="model.1254759b7c1.79a" inExecutions="model.1254759b7c1.761" outFlows="model.1254759b7c1.763" inFlows="model.1254759b7c1.798"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.1254759b7c1.764" outExecutions="model.1254759b7c1.79c" inExecutions="model.1254759b7c1.79a" outFlows="model.1254759b7c1.79b" inFlows="model.1254759b7c1.799"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.1254759b7c1.7a1" outExecutions="model.1254759b7c1.7ab" inExecutions="model.1254759b7c1.79c model.1254759b7c1.7ad" outFlows="model.1254759b7c1.7a5" inFlows="model.1254759b7c1.7a4"/>

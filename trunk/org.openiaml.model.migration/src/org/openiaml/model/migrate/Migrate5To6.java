@@ -142,6 +142,14 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.operations:ActivityFunction";
 		}
 		
+		// issue 248
+		// <operations xsi:type="iaml:BuiltinOperation" name="set">
+		// --> <nodes xsi:type="iaml.operations:SetNode">
+		if ("iaml:BuiltinOperation".equals(xsiType) && element.hasAttribute("name") &&
+				"set".equals(element.getAttribute("name"))) {
+			return "iaml.operations:SetNode";
+		}
+		
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -212,6 +220,14 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// issue 256
 		if ("scopes".equals(element.getNodeName()) && "iaml.scopes:Email".equals(xsiType)) {
 			return "messages";
+		}
+		
+		// issue 248
+		// <operations xsi:type="iaml:BuiltinOperation" name="set">
+		// --> <nodes xsi:type="iaml.operations:SetNode">
+		if ("operations".equals(element.getNodeName()) && element.hasAttribute("name") &&
+				"set".equals(element.getAttribute("name"))) {
+			return "nodes";
 		}
 		
 		return super.getRenamedNode(nodeName, element, errors);
@@ -305,8 +321,8 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			}
 			
 			return newValue.toString();
-		}		
-		
+		}
+
 		// otherwise, just return the same value
 		return super.handleAttribute(name, value, element, errors);
 	}
@@ -581,7 +597,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				}
 			}
 		}
-		
+
 	}
 
 	public Map<String, String> getXSDTypeMap() {
@@ -709,6 +725,40 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// otherwise, call super
 		return super.shouldAddType(oldElement, errors);
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#shouldDeleteAttribute(org.w3c.dom.Element, org.w3c.dom.Element, java.lang.String, java.lang.String, java.util.List)
+	 */
+	@Override
+	public boolean shouldDeleteAttribute(Element element, Element target,
+			String name, String value, List<ExpectedMigrationException> errors) {
+
+		// issue 248: many model elements are no longer DataFlowEdgeSource/Destinations
+		if ("inFlows".equals(name) || "outFlows".equals(name) ||
+				"inExecutions".equals(name) || "outExecutions".equals(name)) {
+			String parentNode = target.getParentNode() != null ? target.getParentNode().getNodeName() : null;
+			if (!("nodes".equals(target.getNodeName())
+					|| ("parameters".equals(target.getNodeName()) && !("operations".equals(parentNode) || "functions".equals(parentNode)))
+					|| ("variables".equals(target.getNodeName()) && !("operations".equals(parentNode) || "functions".equals(parentNode))) )) {
+				errors.add(new ExpectedMigrationException(
+						this, element, 
+						target.getNodeName() + " elements can no longer be used directly with DataFlowEdges, and must be migrated manually."));
+				
+				// delete attributes
+				return true;
+			}
+		}
+		
+		
+		// issue 248
+		// <operations xsi:type="iaml:BuiltinOperation" name="set">
+		// --> <nodes xsi:type="iaml.operations:SetNode">
+		if ("operations".equals(element.getNodeName()) && "name".equals(name)
+				&& "set".equals(value)) {
+			return true;
+		}
+		
+		return super.shouldDeleteAttribute(element, target, name, value, errors);
+	}
 	
 }

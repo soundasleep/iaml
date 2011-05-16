@@ -156,16 +156,6 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" abstract="true"
-      eSuperTypes="#//ContainsOperations #//NamedElement #//GeneratesElements #//ContainsFunctions #//CanBeSynced #//ContainsProperties">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="editor" value="org.openiaml.model.diagram.element"/>
-      <details key="comment" value="Scope supertype added in 0.2"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An abstract type representing model elements that {@model ContainsConditions}, {@model ContainsOperations} and {@model ContainsProperties}. This is used primarily to reduce the number of diagram editors in the IAML environment."/>
-    </eAnnotations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComplexTerm" abstract="true" eSuperTypes="#//ParameterValue #//wires/ParameterEdgeDestination">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
         eType="#//wires/ConditionEdgesSource" eOpposite="#//wires/ConditionEdgesSource/conditioned"/>
@@ -376,8 +366,6 @@
         <details key="about" value="ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onInit" eType="#//Event"
         containment="true">
       <eAnnotations source="http://openiaml.org/comment">
@@ -395,6 +383,12 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
         eType="#//scopes/Message" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterators" upperBound="-1"
+        eType="#//domain/DomainIterator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessHandlers" upperBound="-1"
+        eType="#//components/AccessControlHandler" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loginHandlers" upperBound="-1"
+        eType="#//components/LoginHandler" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="#//WireSource #//NamedElement #//wires/ConditionEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
@@ -1149,7 +1143,7 @@
       <eLiterals name="DOMAIN_OBJECT" value="1"/>
       <eLiterals name="USER" value="2"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//ApplicationElement #//ContainsWires #//ActionEdgeSource">
+    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//NamedElement #//GeneratesElements #//wires/ParameterEdgeDestination #//ActionEdgeSource #//ContainsFunctions #//ContainsOperations #//ContainsProperties #//ContainsWires #//Wireable">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When placed into a {@model Frame} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout."/>
       </eAnnotations>
@@ -1160,7 +1154,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ApplicationElement #//ContainsWires #//ActionEdgeSource">
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//NamedElement #//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ActionEdgeSource #//ContainsFunctions #//ContainsOperations #//ContainsProperties #//ContainsWires #//Wireable">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
       </eAnnotations>
@@ -1258,7 +1252,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//domain/DomainSource"
           eOpposite="#//domain/DomainSource/inSelects"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainIterator" eSuperTypes="#//ApplicationElement #//ContainsWires #//users/ProvidesEdgeDestination #//users/ProvidesEdgesSource #//Changeable #//wires/ParameterEdgeDestination #//Wireable">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainIterator" eSuperTypes="#//NamedElement #//ContainsWires #//users/ProvidesEdgeDestination #//users/ProvidesEdgesSource #//Changeable #//wires/ParameterEdgeDestination #//Wireable #//CanBeSynced #//ContainsFunctions #//ContainsOperations #//ContainsProperties #//GeneratesElements">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents an iterator over instances of a {@model DomainObject}. Can be {@model DomainObjectInstance#next navigated}."/>
       </eAnnotations>
@@ -1385,7 +1379,7 @@
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainFeatureInstance" abstract="true"
-        eSuperTypes="#//Changeable #//ContainsOperations #//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//CanBeSynced">
+        eSuperTypes="#//Changeable #//ContainsOperations #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//CanBeSynced">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents an instance of a {@model DomainFeature}; the value of this instance may be temporary - accessible only to its {@model Scope} - and not yet {@model DomainObjectInstance#save stored in the database}."/>
       </eAnnotations>

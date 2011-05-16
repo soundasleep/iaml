@@ -77,6 +77,15 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	public String replaceType(Element element, String xsiType,
 			List<ExpectedMigrationException> errors) {
 		
+		// issue 248
+		// <operations xsi:type="iaml:BuiltinOperation" name="set">
+		// --> <nodes xsi:type="iaml.operations:SetNode">
+		if (("iaml:BuiltinOperation".equals(xsiType) || "iaml:PrimitiveOperation".equals(xsiType)) 
+				&& element.hasAttribute("name") &&
+				"set".equals(element.getAttribute("name"))) {
+			return "iaml.operations:SetNode";
+		}
+		
 		if (xsiType.equals("iaml.operations:DecisionOperation")) {
 			return "iaml.operations:DecisionNode";
 		}
@@ -142,14 +151,6 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.operations:ActivityFunction";
 		}
 		
-		// issue 248
-		// <operations xsi:type="iaml:BuiltinOperation" name="set">
-		// --> <nodes xsi:type="iaml.operations:SetNode">
-		if ("iaml:BuiltinOperation".equals(xsiType) && element.hasAttribute("name") &&
-				"set".equals(element.getAttribute("name"))) {
-			return "iaml.operations:SetNode";
-		}
-		
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -157,7 +158,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	public String getRenamedNode(String nodeName, Element element,
 			List<ExpectedMigrationException> errors) {
 		
-		String xsiType = element.getAttribute("xsi:type");
+		String xsiType = getXsiType(element);
 		
 		// <properties name="fieldValue">
 		// --> <fieldValue name="fieldValue">
@@ -230,6 +231,28 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "nodes";
 		}
 		
+		/* issue 257 */
+		// <elements xsi:type="iaml.domain:DomainIterator">
+		// --> <iterators>
+		if ("elements".equals(element.getNodeName()) && 
+				("iaml.domain:DomainIterator".equals(xsiType) || "iaml:DomainObjectInstance".equals(xsiType))) {
+			return "iterators";
+		}
+
+		// <elements xsi:type="iaml.components:AccessControlHandler">
+		// --> <accessHandlers>
+		if ("elements".equals(element.getNodeName()) && 
+				"iaml.components:AccessControlHandler".equals(xsiType)) {
+			return "accessHandlers";
+		}
+
+		// <elements xsi:type="iaml.components:LoginHandler">
+		// --> <loginHandlers>
+		if ("elements".equals(element.getNodeName()) && 
+				"iaml.components:LoginHandler".equals(xsiType)) {
+			return "loginHandlers";
+		}
+
 		return super.getRenamedNode(nodeName, element, errors);
 	}
 	
@@ -334,7 +357,8 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	public boolean shouldDeleteNode(Element element, Node parent,
 			List<ExpectedMigrationException> errors) {
 
-		String xsiType = element.getAttribute("xsi:type");
+		String xsiType = getXsiType(element);
+		
 		if ("iaml:DomainObject".equals(xsiType)) {
 			errors.add(new ExpectedMigrationException(this, element, "DomainObject has been removed, and needs to be reimplemented as a DomainSchema manually."));
 			return true;
@@ -732,7 +756,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	@Override
 	public boolean shouldDeleteAttribute(Element element, Element target,
 			String name, String value, List<ExpectedMigrationException> errors) {
-
+		
 		// issue 248: many model elements are no longer DataFlowEdgeSource/Destinations
 		if ("inFlows".equals(name) || "outFlows".equals(name) ||
 				"inExecutions".equals(name) || "outExecutions".equals(name)) {
@@ -757,7 +781,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				&& "set".equals(value)) {
 			return true;
 		}
-		
+
 		return super.shouldDeleteAttribute(element, target, name, value, errors);
 	}
 	

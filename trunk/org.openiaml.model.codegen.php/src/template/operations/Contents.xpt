@@ -30,6 +30,8 @@
 		«EXPAND saveOperation(start, php) FOR this» 
 	«ELSEIF name == "new"»
 		«EXPAND newOperation(start, php) FOR this» 
+	«ELSEIF name == "alert"»
+		«EXPAND alertOperation(start, php) FOR this» 
 	«ELSEIF name == "check permissions"»
 		«IF model::components::AccessControlHandler.isInstance(eContainer)»
 			«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, null, (model::components::AccessControlHandler) eContainer)»
@@ -107,7 +109,7 @@
 		«ELSE»
 			is_array_equal(new Array(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
-	«ELSEIF name == "true" || name == "true?"-»
+	«ELSEIF name == "true" || name == "true?" || /* no name is the same as 'true?' */ name == null-»
 		«IF conditions.isEmpty»
 			«IF php»
 				«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
@@ -132,7 +134,7 @@
 		«EXPAND getCastCanCast(php) FOREACH inFlows.from.typeSelect(model::operations::CastNode) SEPARATOR " && "»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
-		«throwException("Unknown Decision to expand '" + name + ": " + this)»
+		«throwException("Unknown Decision to expand '" + name + "': " + this)»
 	«ENDIF»
 	) {
 		// passes
@@ -224,7 +226,9 @@
 		«EXPAND DataFlow::dataSource(php) FOREACH inFlows.from-»,
 
 		«LET outFlows.select(o | isCastDestination(o.to)) AS targets»
-			«IF targets.size != 1»
+			«IF targets.size == 0»
+				«throwException("No cast targets found for castNode " + this + ": " + targets.size)»
+			«ELSEIF targets.size > 1»
 				«throwException("Too many cast targets for castNode " + this + ": " + targets.size)»
 			«ENDIF»
 			«EXPAND DataTypes::getDataType(php) FOREACH targets.to-»
@@ -445,6 +449,50 @@
 		«ENDLET»
 	«ELSE»
 		«throwException("Send operation " + this + " is not contained within an expected type: " + eContainer)»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Throw a Javascript alert box on the client-side.
+ * Fails on the server-side.
+ *
+ * TODO remove this and replace with a generic 'alert()' method.
+ *
+ * @implementation BuiltinOperation
+ *		There is a global {@model BuiltinOperation} named 'alert'. 
+ */
+«DEFINE alertOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	«IF php»
+		/*
+		 * Alert: We can only alert on the server-side if we can pass instructions
+		 * onto the client.
+		 */
+		if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
+			«REM»
+				this BuiltinOperation is being called from an ECA rule, 
+				not within an operation; use the passed parameter as input
+			«ENDREM» 
+			$message = $default_arg;
+			log_message("[alert] $message");
+			echo "alert " . escape_parameter_string($message) . "\n";
+		} else {
+			«REM»how are we supposed to throw an alert on the client from an entirely server-side call?«ENDREM»
+			throw new IamlRuntimeException("Cannot call a Javascript alert from server-side");
+		}
+	«ELSE»
+		// throw an alert box
+		«REM»
+		// NOTE: alert boxes currently aren't owned by any element; they are a direct
+		// hack to display something immediately. eventually, this should be replaced
+		// with a generic alert(), that will render an alert box in the most appropriate
+		// way for the alert container. 
+		«ENDREM»
+		alert_without_repeat(
+				«REM»
+					this BuiltinOperation is being called from an ECA rule, 
+					not within an operation; use the passed parameter as input
+				«ENDREM» 
+				default_arg);
 	«ENDIF»
 «ENDDEFINE»
 

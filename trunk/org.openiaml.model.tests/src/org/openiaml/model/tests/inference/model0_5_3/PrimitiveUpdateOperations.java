@@ -104,7 +104,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		assertHasDataFlowEdge(update, cast, set);
 
 		assertEquals(1, set.getOutFlows().size());
-		Value f2 = (Value) set.getOutFlows().get(0).getTo();
+		ExternalValue ev_f2 = (ExternalValue) set.getOutFlows().get(0).getTo();
+		Value f2 = ev_f2.getExternalValueEdges().getValue();
 		assertEquals("fieldValue", f2.getName());
 
 	}
@@ -137,7 +138,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		assertHasDataFlowEdge(init, cast, set);
 
 		assertEquals(1, set.getOutFlows().size());
-		Value f2 = (Value) set.getOutFlows().get(0).getTo();
+		ExternalValue ev_f2 = (ExternalValue) set.getOutFlows().get(0).getTo();
+		Value f2 = ev_f2.getExternalValueEdges().getValue();
 		assertEquals("fieldValue", f2.getName());
 
 	}
@@ -179,8 +181,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		// cast -> ExternalValue -> integerValue
 		{
-			assertEquals(1, cast.getOutFlows().size());
-			assertEquals(0, cast.getInFlows().size());
+			assertEquals(2, cast.getOutFlows().size());
+			assertEquals(1, cast.getInFlows().size());
 			ExternalValue ev = (ExternalValue) cast.getOutFlows().get(0).getTo();
 			assertEquals(integerValue, ev.getExternalValueEdges().getValue());
 		}

@@ -36,6 +36,7 @@ isAccessibleOnFrame(model::visual::Frame f, emf::EObject element) :
 
 isCastDestination(model::operations::DataFlowEdgeDestination this) :
 	model::Value.isInstance(this) ||
+	model::operations::ExternalValue.isInstance(this) ||
 	model::operations::TemporaryVariable.isInstance(this);
 	
 /**

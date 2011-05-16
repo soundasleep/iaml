@@ -2,9 +2,9 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1281f69878a.14">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1281f698836.14" name="View Remote Feed">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.1083" name="select" outWires="wires.1281f74c998.6" limit="10" orderBy="model.1281f69878a.3b" outSelects="domain.128807fbeba.1087">
+    <iterators id="domain.128807fbeba.1083" name="select" outWires="wires.1281f74c998.6" limit="10" orderBy="model.1281f69878a.3b" outSelects="domain.128807fbeba.1087">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1281f74c998.6" name="set" from="domain.128807fbeba.1083" to="visual.1281f74c998.2d"/>
-    </elements>
+    </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1281f74c998.6" id="visual.1281f74c998.2d" name="navigate"/>
   </scopes>
   <schemas name="Remote Event Listing" id="domain.128807fbeba.1084" inSchemas="domain.128807fbeba.1086">

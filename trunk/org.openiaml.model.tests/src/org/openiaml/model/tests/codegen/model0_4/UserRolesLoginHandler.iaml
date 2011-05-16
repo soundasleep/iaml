@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233b453c1f.69">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233b453c1f.69">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.b3" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233b453efe.5b" name="my session">
-    <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b453e32.5e" id="components.1233b453f6b.39" name="user login handler" type="USER"/>
-    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b453e32.66" id="components.1233b453f6b.41" name="access control">
-      <requiresEdges id="wires.1233b453e32.66" from="components.1233b453f6b.41" to="domain.128807fbeba.de4"/>
-    </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.c2" name="target page"/>
+    <accessHandlers id="components.1233b453f6b.41" name="access control" outRequiresEdges="wires.1233b453e32.66">
+      <requiresEdges id="wires.1233b453e32.66" from="components.1233b453f6b.41" to="domain.128807fbeba.de4"/>
+    </accessHandlers>
+    <loginHandlers id="components.1233b453f6b.39" name="user login handler" inParameterEdges="wires.1233b453e32.5e" type="USER"/>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="Guest" id="domain.128807fbeba.de1" inSchemas="domain.128807fbeba.de3"/>
   <schemas xsi:type="iaml.users:Role" name="Registered User" id="domain.128807fbeba.de4" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.de6" inRequiresEdges="wires.1233b453e32.66">

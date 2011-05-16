@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127e56efe3e.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.10e1" name="select" outWires="wires.127e56eff0a.6" limit="-1" outSelects="domain.128807fbeba.10e5">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.127e5a8fec3.94" name="save" rules="wires.127e5a8ff7e.99"/>
+    <iterators id="domain.128807fbeba.10e1" name="select" outWires="wires.127e56eff0a.6" limit="-1" outSelects="domain.128807fbeba.10e5">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.127e56eff0a.6" name="sync" from="domain.128807fbeba.10e1" to="visual.127e56efefa.1e"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.127e5a8fec3.94" name="save" rules="wires.127e5a8ff7e.99"/>
       <previous xsi:type="iaml:BuiltinOperation" id="model.127e56efe3e.122" name="previous" rules="wires.127e56eff0a.2b wires.127e56eff0a.2d"/>
       <next xsi:type="iaml:BuiltinOperation" id="model.127e56efe3e.128" name="next" rules="wires.127e56eff0a.2a wires.127e56eff0a.2c"/>
       <reset xsi:type="iaml:BuiltinOperation" id="model.127e56efe3e.129" name="reset" rules="wires.127e56eff0a.28"/>
@@ -16,7 +16,7 @@
       <results id="model.127e56efe3e.12a" name="result count" outWires="wires.127e56eff0a.26">
         <wires xsi:type="iaml.wires:SetWire" id="wires.127e56eff0a.26" name="set" from="model.127e56efe3e.12a" to="visual.127e56efefa.40"/>
       </results>
-    </elements>
+    </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.127e56eff0a.6" id="visual.127e56efefa.1e" name="View News"/>
     <children xsi:type="iaml.visual:Button" id="visual.127e56efefa.3a" name="reset" listeners="wires.127e56eff0a.28">
       <ecaRules id="wires.127e56eff0a.28" name="onClick" trigger="visual.127e56efefa.3a" target="model.127e56efe3e.129"/>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.129d3dc57a7.1129">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.129d3dc57a7.1129">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.129d3dc5b9f.1d" name="Session A">
-    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.129d3dc5a28.286" id="components.129d3dc5c5a.b" name="ACH A">
+    <accessHandlers id="components.129d3dc5c5a.b" name="ACH A" outRequiresEdges="wires.129d3dc5a28.286">
       <requiresEdges id="wires.129d3dc5a28.286" from="components.129d3dc5c5a.b" to="users.129d3dc5df1.10"/>
-    </elements>
+    </accessHandlers>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.129d3dc5b9f.1e" name="Session B">
-    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.129d3dc5a28.2a3" id="components.129d3dc5c5a.19" name="ACH B">
+    <accessHandlers id="components.129d3dc5c5a.19" name="ACH B" outRequiresEdges="wires.129d3dc5a28.2a3">
       <requiresEdges id="wires.129d3dc5a28.2a3" from="components.129d3dc5c5a.19" to="users.129d3dc5df1.12"/>
-    </elements>
+    </accessHandlers>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.129d3dc5b9f.1f" name="Session C">
-    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.129d3dc5a28.2bc" id="components.129d3dc5c5a.26" name="ACH C">
+    <accessHandlers id="components.129d3dc5c5a.26" name="ACH C" outRequiresEdges="wires.129d3dc5a28.2bc">
       <requiresEdges id="wires.129d3dc5a28.2bc" from="components.129d3dc5c5a.26" to="users.129d3dc5df1.13"/>
-    </elements>
+    </accessHandlers>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="Role A" id="users.129d3dc5df1.10" inExtendsEdges="wires.129d3dc5a28.27d wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.6f" inRequiresEdges="wires.129d3dc5a28.286"/>
   <schemas xsi:type="iaml.users:Role" name="Role B" id="users.129d3dc5df1.12" outExtendsEdges="wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.72" inRequiresEdges="wires.129d3dc5a28.2a3">

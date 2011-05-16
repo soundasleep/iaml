@@ -2,9 +2,9 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1280b46d146.74">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" render="RSS20">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.dbf" name="select" outWires="wires.1280b46d1f2.5d" query="" limit="10" orderBy="model.1280b46d146.a5" orderAscending="false" outSelects="domain.128807fbeba.dc5">
+    <iterators id="domain.128807fbeba.dbf" name="select" outWires="wires.1280b46d1f2.5d" query="" limit="10" orderBy="model.1280b46d146.a5" orderAscending="false" outSelects="domain.128807fbeba.dc5">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" name="set" from="domain.128807fbeba.dbf" to="visual.1280b46d1e2.6e"/>
-    </elements>
+    </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item">
       <children xsi:type="iaml.visual:Button" id="visual.1280b46d1e2.9f" name="link" listeners="wires.1280b46d1f2.ae">
         <ecaRules id="wires.1280b46d1f2.ae" inParameterEdges="wires.1281e15c5ee.d4" name="onClick" trigger="visual.1280b46d1e2.9f" target="visual.1280b46d1e2.46"/>
@@ -18,9 +18,9 @@
     <parameters id="model.1280b46d146.f5" name="id" outParameterEdges="wires.1280b46d1f2.3a">
       <parameterEdges id="wires.1280b46d1f2.3a" parameterValue="model.1280b46d146.f5" parameterTerm="domain.128807fbeba.dc0"/>
     </parameters>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.dc0" name="select" outWires="wires.1280b46d1f2.3c" inParameterEdges="wires.1280b46d1f2.3a" query="id = ?" outSelects="domain.128807fbeba.dc4">
+    <iterators id="domain.128807fbeba.dc0" name="select" outWires="wires.1280b46d1f2.3c" inParameterEdges="wires.1280b46d1f2.3a" query="id = ?" outSelects="domain.128807fbeba.dc4">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" name="set" from="domain.128807fbeba.dc0" to="visual.1280b46d1e2.58"/>
-    </elements>
+    </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
   </scopes>
   <schemas name="News" id="domain.128807fbeba.dc1" inSchemas="domain.128807fbeba.dc3">

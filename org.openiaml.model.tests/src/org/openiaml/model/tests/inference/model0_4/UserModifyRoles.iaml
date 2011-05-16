@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
     <wires xsi:type="iaml.wires:SyncWire" id="sync" name="sync" from="domain.128807fbeba.e9d" to="new"/>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e9d" name="new instance" outWires="sync" query="new" outSelects="domain.128807fbeba.ea8">
+    <iterators id="domain.128807fbeba.e9d" name="new instance" outWires="sync" query="new" outSelects="domain.128807fbeba.ea8">
       <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.14" name="save" rules="wires.1233b53a3ce.a"/>
-    </elements>
+    </iterators>
     <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" listeners="wires.1233b53a3ce.a">
       <ecaRules id="wires.1233b53a3ce.a" name="onClick" trigger="visual.1233b53a313.1a" target="model.1233b53a1ca.14"/>
     </children>
     <children xsi:type="iaml.visual:InputForm" inWires="sync" id="new" name="create a new user form"/>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
-    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.2d" id="components.1233afe6424.13" name="role-based access">
-      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.e9f"/>
-    </elements>
-    <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b53a3ce.5a" id="components.1233b53a67e.19" name="current user" outWires="wires.1233b53a3ce.5c" type="USER">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" name="set" from="components.1233b53a67e.19" to="domain.128807fbeba.e9e"/>
-    </elements>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e9e" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.71" name="add role" rules="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.72" name="remove role" rules="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.73" name="add permission" rules="wires.1233b53a3ce.a6"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.74" name="remove permission" rules="wires.1233b53a3ce.16c"/>
-    </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.7d" name="add new roles">
       <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ec" name="add role 1" listeners="wires.1233b53a3ce.a8">
@@ -46,20 +34,32 @@
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">
-      <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.23a" id="components.1233b53a67e.9a" name="require role 1">
+      <accessHandlers id="components.1233b53a67e.9a" name="require role 1" outRequiresEdges="wires.1233b53a3ce.23a">
         <requiresEdges id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="domain.128807fbeba.ea2"/>
-      </elements>
+      </accessHandlers>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.361" name="requires permission 1">
-      <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.453" id="components.1233b53a67e.110" name="requires permission 1">
+      <accessHandlers id="components.1233b53a67e.110" name="requires permission 1" outRequiresEdges="wires.1233b53a3ce.453">
         <requiresEdges id="wires.1233b53a3ce.453" from="components.1233b53a67e.110" to="users.1233b53a814.6f"/>
-      </elements>
+      </accessHandlers>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.421" name="requires inherited permission">
-      <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.544" id="components.1233b53a67e.153" name="requires inherited permission">
+      <accessHandlers id="components.1233b53a67e.153" name="requires inherited permission" outRequiresEdges="wires.1233b53a3ce.544">
         <requiresEdges id="wires.1233b53a3ce.544" from="components.1233b53a67e.153" to="users.1233b53a814.70"/>
-      </elements>
+      </accessHandlers>
     </scopes>
+    <iterators id="domain.128807fbeba.e9e" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.71" name="add role" rules="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.72" name="remove role" rules="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.73" name="add permission" rules="wires.1233b53a3ce.a6"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.74" name="remove permission" rules="wires.1233b53a3ce.16c"/>
+    </iterators>
+    <accessHandlers id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.e9f"/>
+    </accessHandlers>
+    <loginHandlers id="components.1233b53a67e.19" name="current user" inParameterEdges="wires.1233b53a3ce.5a" outWires="wires.1233b53a3ce.5c" type="USER">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" name="set" from="components.1233b53a67e.19" to="domain.128807fbeba.e9e"/>
+    </loginHandlers>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.e9f" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.ea1" inRequiresEdges="wires.1233afe62eb.2d">
     <parameterEdges id="wires.1233b53a3ce.5a" parameterValue="domain.128807fbeba.e9f" parameterTerm="components.1233b53a67e.19"/>

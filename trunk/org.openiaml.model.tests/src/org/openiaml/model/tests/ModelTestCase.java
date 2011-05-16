@@ -697,7 +697,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param class1
 	 * @return
 	 */
-	public List<?> typeSelect(List<?> children,
+	public static List<?> typeSelect(List<?> children,
 			Class<?> class1) {
 		List<Object> result = new ArrayList<Object>();
 		for (Object o : children) {

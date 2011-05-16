@@ -34,12 +34,12 @@ import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.diagram.part.Messages;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 
 /**
  * An action which allows the user to move the selected model element
@@ -281,7 +281,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 	 * @return The domain model file extension, or null if none can be found
 	 */
 	protected String getFileExtension(EObject target) {
-		if (target instanceof CompositeCondition) {
+		if (target instanceof ActivityFunction) {
 			return "iaml_condition";
 		}
 		if (target instanceof DomainIterator) {
@@ -293,7 +293,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 		if (target instanceof ApplicationElement) {
 			return "iaml_element";
 		}
-		if (target instanceof CompositeOperation) {
+		if (target instanceof ActivityOperation) {
 			return "iaml_operation";
 		}
 		if (target instanceof VisibleThing) {

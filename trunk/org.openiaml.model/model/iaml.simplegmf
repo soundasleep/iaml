@@ -124,7 +124,7 @@
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//Value"/>
-    <feature xsi:type="ecore:EReference" href="iaml.ecore#//Value/type"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//ParameterValue/type"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//operations/TemporaryVariable"/>
@@ -167,6 +167,10 @@
     <classifiers href="iaml.ecore#//wires/ExtendsEdge"/>
     <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
   </palettes>
+  <palettes name="Activity Modelling">
+    <classifiers href="iaml.ecore#//ActivityNode"/>
+    <classifiers href="iaml.ecore#//operations/ExternalValueEdge"/>
+  </palettes>
   <palettes name="Visual Elements">
     <classifiers href="iaml.ecore#//VisibleThing"/>
     <classifiers href="iaml.ecore#//Scope"/>
@@ -189,7 +193,7 @@
     <classifiers href="iaml.ecore#//Function"/>
   </palettes>
   <diagramEditors id="condition">
-    <classifier href="iaml.ecore#//CompositeCondition"/>
+    <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     <elements xsi:type="sgmf:ContainedNode" name="StartNode">
       <classifier href="iaml.ecore#//operations/StartNode"/>
     </elements>
@@ -202,12 +206,6 @@
     <elements xsi:type="sgmf:ContainedNode" name="DecisionNode">
       <classifier href="iaml.ecore#//operations/DecisionNode"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
-      <classifier href="iaml.ecore#//BuiltinOperation"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
-    </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CastNode">
       <classifier href="iaml.ecore#//operations/CastNode"/>
     </elements>
@@ -216,6 +214,13 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="TemporaryVariable">
       <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="ExternalValue">
+      <classifier href="iaml.ecore#//operations/ExternalValue"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExternalValueEdge">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
+      <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="DataFlowEdge">
       <classifier href="iaml.ecore#//operations/DataFlowEdge"/>
@@ -232,20 +237,26 @@
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="element">
     <classifier href="iaml.ecore#//ApplicationElement"/>
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -268,19 +279,14 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Gate">
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/entryGate"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/exitGate"/>
-      <classifier href="iaml.ecore#//components/Gate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" id="" name="Button">
       <classifier href="iaml.ecore#//visual/Button"/>
@@ -356,11 +362,11 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -464,8 +470,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
@@ -500,13 +506,13 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/canSave"/>
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainInstance">
       <classifier href="iaml.ecore#//domain/DomainInstance"/>
@@ -537,7 +543,7 @@
     </elements>
   </diagramEditors>
   <diagramEditors id="operation">
-    <classifier href="iaml.ecore#//CompositeOperation"/>
+    <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     <elements xsi:type="sgmf:ContainedNode" name="StartNode">
       <classifier href="iaml.ecore#//operations/StartNode"/>
     </elements>
@@ -565,17 +571,18 @@
     <elements xsi:type="sgmf:ContainedNode" name="CastNode">
       <classifier href="iaml.ecore#//operations/CastNode"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
-      <classifier href="iaml.ecore#//BuiltinOperation"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
-    </elements>
     <elements xsi:type="sgmf:ContainedNode" name="ActivityParameter">
       <classifier href="iaml.ecore#//operations/ActivityParameter"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="TemporaryVariable">
       <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="ExternalValue">
+      <classifier href="iaml.ecore#//operations/ExternalValue"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExternalValueEdge">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
+      <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
       <classifier href="iaml.ecore#//ECARule"/>
@@ -595,14 +602,20 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="CompositeCondition">
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="ActivityFunction">
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" id="" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="BuiltinOperation">
+      <classifier href="iaml.ecore#//BuiltinOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="root">
@@ -613,8 +626,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="EXSDDataType">
       <classifier href="iaml.ecore#//EXSDDataType"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
@@ -622,8 +635,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainSchema">
       <classifier href="iaml.ecore#//domain/DomainSchema"/>
@@ -699,11 +712,11 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -801,17 +814,17 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinOperation">
       <classifier href="iaml.ecore#//BuiltinOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
-      <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
+      <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinProperty">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/empty"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/notEmpty"/>
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>
-      <classifier href="iaml.ecore#//CompositeCondition"/>
+      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
@@ -894,7 +907,7 @@
   </diagramEditors>
   <rootElement href="iaml.ecore#//InternetApplication"/>
   <edgeTypes href="iaml.ecore#//ECARule"/>
-  <edgeTypes href="iaml.ecore#//SimpleCondition"/>
+  <edgeTypes href="iaml.ecore#//ComplexTerm"/>
   <edgeTypes href="iaml.ecore#//wires/ConstraintEdge"/>
   <edgeTypes href="iaml.ecore#//operations/DataFlowEdge"/>
   <edgeTypes href="iaml.ecore#//operations/ExecutionEdge"/>
@@ -905,6 +918,7 @@
   <edgeTypes href="iaml.ecore#//domain/SchemaEdge"/>
   <edgeTypes href="iaml.ecore#//domain/SelectEdge"/>
   <edgeTypes href="iaml.ecore#//Wire"/>
+  <edgeTypes href="iaml.ecore#//operations/ExternalValueEdge"/>
   <edgeReferences name="ECARule">
     <classifier href="iaml.ecore#//ECARule"/>
     <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//ECARule/trigger"/>
@@ -919,5 +933,10 @@
     <classifier href="iaml.ecore#//ComplexTerm"/>
     <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//ComplexTerm/function"/>
     <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//ComplexTerm/conditioned"/>
+  </edgeReferences>
+  <edgeReferences id="" name="ExternalValueEdge">
+    <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
+    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValueEdge/from"/>
+    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValueEdge/value"/>
   </edgeReferences>
 </sgmf:GMFConfiguration>

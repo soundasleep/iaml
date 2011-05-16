@@ -12,8 +12,6 @@
 		«throwException("We should be able to catch this exception.")» 
 	«ENDIF»
 
-	«EXPAND Frame::expandFrame FOREACH elements»
-
 	«REM»header/footer includes«ENDREM»
 	«FILE "output/header_default.php"»«EXPAND template::renders::HeaderDefault::headerDefault»«ENDFILE»
 	«FILE "output/footer_default.php"»«EXPAND template::renders::HeaderDefault::footerDefault»«ENDFILE»
@@ -32,8 +30,6 @@
 		<body>
 		<h1>Sitemap</h1>
 		<ol>
-			«EXPAND expandSitemapFrame FOREACH elements»
-
 			«EXPAND expandSitemapFrame FOREACH scopes»
 			
 			<li>[<a href="database_dump.php">database dump</a>]</li>
@@ -161,10 +157,6 @@ require(ROOT_PATH . "iterator_lists.php");
 
 «DEFINE expandSession FOR model::visual::Frame»
 	«EXPAND Frame::expandFrame FOR this»
-«ENDDEFINE»
-
-/* default = nothing */
-«DEFINE expandSitemapFrame FOR model::ApplicationElement»
 «ENDDEFINE»
 
 «DEFINE expandSitemapFrame FOR model::visual::Frame»

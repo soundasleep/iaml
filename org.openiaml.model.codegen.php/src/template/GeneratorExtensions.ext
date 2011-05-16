@@ -167,14 +167,18 @@ availableInCurrentScriptAction(model::ActionEdgeSource source, model::Action tar
 List[model::Operation] allContainerOperations(model::Scope this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( messages.allContainerOperations() )
-		.union( elements.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::scopes::Session this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( messages.allContainerOperations() )
-		.union( elements.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.union( labels.allContainerOperations() )
 		.select(o | operationUsed(o));
@@ -192,7 +196,9 @@ List[model::Operation] allContainerOperations(model::messaging::Email this) :
 List[model::Operation] allContainerOperations(model::visual::Frame this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( messages.allContainerOperations() )
-		.union( elements.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
 		.union( children.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
@@ -201,9 +207,6 @@ List[model::Operation] allContainerOperations(model::VisibleThing this) :
 	operations.toSet().union( children.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
-		
-List[model::Operation] allContainerOperations(model::ApplicationElement this) :
-	operations.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::ContainsOperations this) :
 	operations.select(o | operationUsed(o));
@@ -211,10 +214,12 @@ List[model::Operation] allContainerOperations(model::ContainsOperations this) :
 List[model::Operation] allContainerOperations(model::InternetApplication this) :
 	 operations.toSet()
 		.union( scopes.allContainerOperations() )
-	 	.union( elements.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
 	 	.select(o | operationUsed(o));	 
 		
-/** All of the ApplicationElementProperties stored within this InternetApplication */
+/** All of the Values stored within this InternetApplication */
 List[model::Value] allProperties(model::InternetApplication this) :
 	eAllContents.typeSelect(model::Value);
 

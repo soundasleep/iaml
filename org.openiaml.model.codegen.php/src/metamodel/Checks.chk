@@ -53,7 +53,7 @@ context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects t
 context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
 	from != to;
 
-context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two ApplicationElementProperties":
+context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two Values":
 	!(model::Value.isInstance(from) && 
 	model::Value.isInstance(to));
 	
@@ -106,10 +106,10 @@ context model::domain::DomainIterator ERROR "A DomainIterator has incoming Param
 	inParameterEdges.isEmpty || (query != null && query.length > 0); 
 
 context model::scopes::Session ERROR "A Session can only contain one LoginHandler" :
-	elements.typeSelect(model::components::LoginHandler).size <= 1;
+	loginHandlers.size <= 1;
 
 context model::visual::Frame ERROR "A Frame cannot contain a LoginHandler" :
-	elements.typeSelect(model::components::LoginHandler).size == 0;
+	loginHandlers.size == 0;
 
 context model::operations::ActivityOperation ERROR "An Operation can only contain one StartNode" :
 	nodes.typeSelect(model::operations::StartNode).size <= 1;

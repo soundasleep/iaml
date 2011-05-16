@@ -13,6 +13,7 @@ import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.ExternalValue;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.SetNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -186,7 +187,8 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 		assertHasDataFlowEdge(update, cast, set);
 
 		assertEquals(1, set.getOutFlows().size());
-		Value f2 = (Value) set.getOutFlows().get(0).getTo();
+		ExternalValue ev_f2 = (ExternalValue) set.getOutFlows().get(0).getTo();
+		Value f2 = ev_f2.getExternalValueEdges().getValue();
 		assertEquals("set directly", f2.getName());
 
 	}

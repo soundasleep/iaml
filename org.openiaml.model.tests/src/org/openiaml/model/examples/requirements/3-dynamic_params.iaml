@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="migrated0">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1203bbadbb8.b7d" name="new container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.b9c" name="field to edit">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1203bbadb5b.833" name="alert" rules="wires.1203bbadbb8.207"/>
+      <operations xsi:type="iaml:BuiltinOperation" id="model.1203bbadb5b.833" name="alert" rules="wires.1203bbadbb8.207"/>
       <onChange id="model.1203bbadb5b.832" listeners="wires.1203bbadbb8.207">
         <ecaRules id="wires.1203bbadbb8.207" inParameterEdges="wires.1203bbadbb8.208" name="run" trigger="model.1203bbadb5b.832" target="model.1203bbadb5b.833"/>
       </onChange>

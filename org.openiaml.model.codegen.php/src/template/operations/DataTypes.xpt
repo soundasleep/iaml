@@ -19,3 +19,8 @@
 «DEFINE getDataType(Boolean php) FOR model::operations::TemporaryVariable-»
 	/* xsd type '«type.name»' */ «EXPAND template::operations::Parameters::getTypeURI FOR type»
 «ENDDEFINE»
+
+«DEFINE getDataType(Boolean php) FOR model::operations::ExternalValue-»
+	/* external value */
+	«EXPAND getDataType(php) FOR externalValueEdges.value» 
+«ENDDEFINE»

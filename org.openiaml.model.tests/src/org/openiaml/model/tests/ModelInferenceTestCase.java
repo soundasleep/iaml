@@ -278,7 +278,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return
 	 * @throws JaxenException
 	 */
-	public EObject queryOne(EObject root, String query) throws JaxenException {
+	public static EObject queryOne(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
 		assertEquals("queryOne for '" + query + "' did not return one result", 1, q.size());
 		return (EObject) q.get(0);
@@ -292,7 +292,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param query the query to execute
 	 * @throws JaxenException
 	 */
-	public void assertHasNone(EObject root, String query) throws JaxenException {
+	public static void assertHasNone(EObject root, String query) throws JaxenException {
 		List<?> q = query(root, query);
 		assertEquals("Unexpected query result for '" + query + "' on '" + root + ": " + q, 0, q.size());
 	}
@@ -307,7 +307,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param type the type to check for in the results
 	 * @throws JaxenException
 	 */
-	public void assertHasNone(EObject root, String query, Class<?> type) throws JaxenException {
+	public static void assertHasNone(EObject root, String query, Class<?> type) throws JaxenException {
 		List<?> q = query(root, query);
 		for (Object o : q) {
 			if (type.isInstance(o)) {
@@ -325,7 +325,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param name
 	 * @param isGenerated
 	 */
-	public void assertContainsNamedElement(List<? extends NamedElement> elements, String name, boolean isGenerated) {
+	public static void assertContainsNamedElement(List<? extends NamedElement> elements, String name, boolean isGenerated) {
 		for (NamedElement e : elements) {
 			if (e.getName().equals(name) && e.isIsGenerated() == isGenerated) {
 				// ok
@@ -340,7 +340,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * 
 	 * @param e
 	 */
-	public void assertGenerated(GeneratedElement... elements) {
+	public static void assertGenerated(GeneratedElement... elements) {
 		for (GeneratedElement e : elements) { 
 			assertTrue("Element '" + e + "' should be generated", e.isIsGenerated());
 		}
@@ -351,7 +351,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * 
 	 * @param e
 	 */
-	public void assertNotGenerated(GeneratedElement... elements) {
+	public static void assertNotGenerated(GeneratedElement... elements) {
 		for (GeneratedElement e : elements) {
 			assertFalse("Element '" + e + "' should not be generated", e.isIsGenerated());
 		}
@@ -365,7 +365,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Wire getWireFrom(EObject container, WireSource from,
+	protected static Wire getWireFrom(EObject container, WireSource from,
 			String wire) throws JaxenException {
 		for (Wire w : from.getOutWires()) {
 			if (w instanceof NamedElement && wire.equals(((NamedElement) w).getName())) {
@@ -384,7 +384,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected ECARule getECARuleFrom(ActionEdgeSource from, String name) throws JaxenException {
+	protected static ECARule getECARuleFrom(ActionEdgeSource from, String name) throws JaxenException {
 		for (ECARule w : from.getListeners()) {
 			if (w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
 				return w;
@@ -409,7 +409,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @throws AssertionFailedError if no wire was found
 	 */
-	protected Wire getWireFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
+	protected static Wire getWireFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
 		for (Wire w : fromElement.getOutWires()) {
 			if (toElement.equals(w.getTo())) {
 				return w;
@@ -429,7 +429,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @throws AssertionFailedError if no edge was found, or more than one was found
 	 */
-	protected Parameter getParameterFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+	protected static Parameter getParameterFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
 		List<Parameter> edges = to.getInParameterEdges();
 		Parameter result = null;
 		int count = 0;
@@ -452,7 +452,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ParameterEdges
 	 * @throws JaxenException
 	 */
-	protected Set<Parameter> getParametersFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+	protected static Set<Parameter> getParametersFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
 		Set<Parameter> result = new HashSet<Parameter>();
 		
 		for (Parameter w : from.getOutParameterEdges()) {
@@ -472,7 +472,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ParameterEdges
 	 * @throws JaxenException
 	 */
-	protected Set<Parameter> getParametersFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
+	protected static Set<Parameter> getParametersFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
 		Set<Parameter> result = new HashSet<Parameter>();
 		
 		for (Parameter w : from.getOutParameterEdges()) {
@@ -491,7 +491,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found {@link ComplexTerm}s
 	 * @throws JaxenException
 	 */
-	protected Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+	protected static Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
 		Set<ComplexTerm> result = new HashSet<ComplexTerm>();
 		
 		for (ComplexTerm w : from.getConditioned()) {
@@ -512,7 +512,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found {@link ComplexTerm}s
 	 * @throws JaxenException
 	 */
-	protected Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+	protected static Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
 		Set<ComplexTerm> result = new HashSet<ComplexTerm>();
 		
 		for (ComplexTerm w : from.getConditioned()) {
@@ -531,7 +531,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ExtendsEdges
 	 * @throws JaxenException
 	 */
-	protected Set<ExtendsEdge> getExtendsEdgesFromTo(EObject container, ExtendsEdgesSource from, ExtendsEdgeDestination to) throws JaxenException {
+	protected static Set<ExtendsEdge> getExtendsEdgesFromTo(EObject container, ExtendsEdgesSource from, ExtendsEdgeDestination to) throws JaxenException {
 		Set<ExtendsEdge> result = new HashSet<ExtendsEdge>();
 
 		for (ExtendsEdge w : from.getOutExtendsEdges()) {
@@ -550,7 +550,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found RequiresEdges
 	 * @throws JaxenException
 	 */
-	protected Set<RequiresEdge> getRequiresEdgesFromTo(EObject container, RequiresEdgesSource from, RequiresEdgeDestination to) throws JaxenException {
+	protected static Set<RequiresEdge> getRequiresEdgesFromTo(EObject container, RequiresEdgesSource from, RequiresEdgeDestination to) throws JaxenException {
 		Set<RequiresEdge> result = new HashSet<RequiresEdge>();
 		
 		for (RequiresEdge w : from.getOutRequiresEdges()) {
@@ -573,7 +573,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @see #getWiresFromTo(EObject, WireSource, WireDestination, Class)
 	 */
-	protected Set<Wire> getWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
+	protected static Set<Wire> getWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
 		return getWiresFromTo(container, fromElement, toElement, Wire.class);
 	}
 	
@@ -588,7 +588,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @see #getWiresFromTo(EObject, WireSource, WireDestination, Class)
 	 */
-	protected Set<ECARule> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement) throws JaxenException {
+	protected static Set<ECARule> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement) throws JaxenException {
 		return getECARulesFromTo(container, fromElement, toElement, ECARule.class);
 	}
 	
@@ -602,7 +602,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or throws an exception
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
+	protected static Set<Wire> getWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
 		Set<Wire> results = new HashSet<Wire>();
 		for (Wire w : fromElement.getOutWires()) {
 			if (type.isInstance(w) && w.getTo().equals(toElement)) {
@@ -623,7 +623,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or throws an exception
 	 * @throws JaxenException
 	 */
-	protected Set<ECARule> getECARulesFromTo(EObject container, ActionEdgeSource fromElement, Action toElement, Class<? extends ECARule> type) throws JaxenException {
+	protected static Set<ECARule> getECARulesFromTo(EObject container, ActionEdgeSource fromElement, Action toElement, Class<? extends ECARule> type) throws JaxenException {
 		Set<ECARule> results = new HashSet<ECARule>();
 		for (ECARule w : fromElement.getListeners()) {
 			if (type.isInstance(w) && w.getTarget().equals(toElement)) {
@@ -643,7 +643,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param toElement
 	 * @throws JaxenException
 	 */
-	public void assertHasNoWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
+	public static void assertHasNoWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
 
 		for (Wire w : fromElement.getWires()) {
 			if (toElement.equals(w.getTo()))
@@ -663,7 +663,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param toElement
 	 * @throws JaxenException
 	 */
-	public void assertHasNoWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement, Class<? extends Wire> wireClass) throws JaxenException {
+	public static void assertHasNoWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement, Class<? extends Wire> wireClass) throws JaxenException {
 		for (Wire wire : getWiresFromTo(container, fromElement, toElement)) {
 			if (wireClass.isInstance(wire)) {
 				fail("Found wire '" + wire + "' (" + wireClass + ") from '" + fromElement + "' to '" + toElement + "'");
@@ -686,7 +686,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException 
 	 * @return the found wires
 	 */
-	public Set<Wire> assertHasWiresFromTo(int count, EObject container, 
+	public static Set<Wire> assertHasWiresFromTo(int count, EObject container, 
 			WireSource fromElement, WireDestination toElement) throws JaxenException {
 
 		Set<Wire> wires = getWiresFromTo(container, fromElement, toElement);
@@ -709,7 +709,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected List<Wire> getWiresTo(EObject container, WireDestination toElement) throws JaxenException {
+	protected static List<Wire> getWiresTo(EObject container, WireDestination toElement) throws JaxenException {
 		assertFalse("No wires found to [" + toElement + "]", toElement.getInWires().isEmpty());
 		
 		return toElement.getInWires();
@@ -724,13 +724,13 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected List<Wire> getWiresFrom(EObject container, WireSource fromElement) throws JaxenException {
+	protected static List<Wire> getWiresFrom(EObject container, WireSource fromElement) throws JaxenException {
 		assertFalse("No wires found from [" + fromElement + "]", fromElement.getOutWires().isEmpty());
 		
 		return fromElement.getOutWires();		
 	}
 
-	protected void assertNoWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> cls) throws JaxenException {
+	protected static void assertNoWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> cls) throws JaxenException {
 		for (Wire w : fromElement.getOutWires()) {
 			if (cls.isInstance(w)) {
 				fail("Unexpectedly found wire '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
@@ -738,7 +738,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		}
 	}
 
-	protected void assertNoECARulesFrom(EObject container, ActionEdgeSource fromElement, Class<? extends ECARule> cls) throws JaxenException {
+	protected static void assertNoECARulesFrom(EObject container, ActionEdgeSource fromElement, Class<? extends ECARule> cls) throws JaxenException {
 		for (ECARule w : fromElement.getListeners()) {
 			if (cls.isInstance(w)) {
 				fail("Unexpectedly found action '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
@@ -755,7 +755,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected List<?> getWiresTo(EObject container, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
+	protected static List<?> getWiresTo(EObject container, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
 		return typeSelect(getWiresTo(container, toElement), type);
 	}
 	
@@ -768,7 +768,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected List<?> getWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> type) throws JaxenException {
+	protected static List<?> getWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> type) throws JaxenException {
 		return typeSelect(getWiresFrom(container, fromElement), type);
 	}
 	
@@ -780,7 +780,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param type
 	 * @return
 	 */
-	public Set<Object> typeSelect(Set<? extends Object> collection, Class<? extends Object> type) {
+	public static Set<Object> typeSelect(Set<? extends Object> collection, Class<? extends Object> type) {
 		Set<Object> result = new HashSet<Object>();
 		for (Object o : collection) {
 			if (type.isInstance(o))
@@ -798,7 +798,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Wire getWireBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
+	protected static Wire getWireBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		Set<Wire> wires = getWiresBidirectional(container, element1, element2);
 		assertFalse("No wire found between [" + element1 + "] and [" + element2 + "]", wires.isEmpty());
 		return wires.iterator().next();
@@ -814,7 +814,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param element2
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
+	protected static Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		return getWiresBidirectional(container, element1, element2, Wire.class);
 	}
 
@@ -822,7 +822,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * For bidirectional wires, get all wires connecting the
 	 * two elements, with the given type.
 	 */
-	protected Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireSource element2, Class<? extends Wire> type) throws JaxenException {
+	protected static Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireSource element2, Class<? extends Wire> type) throws JaxenException {
 		Set<Wire> edges = new HashSet<Wire>();
 		for (Wire w : element1.getOutWires()) {
 			if (type.isInstance(w)) {
@@ -857,7 +857,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wires found
 	 * @throws JaxenException
 	 */
-	public Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireSource element2) throws JaxenException {
+	public static Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		return assertHasWiresBidirectional(count, container, element1, element2, Wire.class);
 	}
 	
@@ -867,7 +867,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * 
 	 * @return the wires found
 	 */
-	public Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireSource element2, Class<? extends Wire> type) throws JaxenException {
+	public static Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireSource element2, Class<? extends Wire> type) throws JaxenException {
 		
 		Set<Wire> wires = getWiresBidirectional(container, element1, element2, type);
 		if (wires.size() != count) {
@@ -889,7 +889,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param element2
 	 * @throws JaxenException
 	 */
-	public void assertNoWireBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
+	public static void assertNoWireBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		Set<Wire> wires = getWiresBidirectional(container, element1, element2);
 		assertEquals(0, wires.size());
 	}

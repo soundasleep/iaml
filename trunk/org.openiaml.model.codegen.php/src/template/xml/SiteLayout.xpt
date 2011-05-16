@@ -16,11 +16,13 @@
 	xmlns:iaml.visual="http://openiaml.org/model/visual" 
 	xmlns:iaml.wires="http://openiaml.org/model/wires"
 	id="«id-»">
-«EXPAND siteLayoutChildren FOREACH elements»
+«EXPAND siteLayoutChildren FOREACH iterators»
+«EXPAND siteLayoutChildren FOREACH accessHandlers»
+«EXPAND siteLayoutChildren FOREACH loginHandlers»
 </iaml:InternetApplication>
 «ENDDEFINE»
 
-«DEFINE siteLayoutChildren FOR model::ApplicationElement»
+«DEFINE siteLayoutChildren FOR model::NamedElement»
 <children id="«id-»" name="«name-»">
 	<!-- empty -->
 </children>

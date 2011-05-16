@@ -2,7 +2,7 @@ import iaml;
 
 shouldBeSecure(model::visual::Frame this) :
 	eContainer != null && model::scopes::Session.isInstance(eContainer)	
-		&& !((model::scopes::Session) eContainer).elements.typeSelect(model::components::LoginHandler).isEmpty;	
+		&& !((model::scopes::Session) eContainer).loginHandlers.isEmpty;	
 
 isSecure(model::visual::Frame this) :
 	onAccess.listeners

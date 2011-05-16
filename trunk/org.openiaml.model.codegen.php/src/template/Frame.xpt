@@ -2,10 +2,6 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-/* default = nothing */
-«DEFINE expandFrame FOR model::ApplicationElement-»
-«ENDDEFINE»
-
 /**
  * @implementation Gate,Scope
  *		{@model Gate}s are of a lower priority in execution than {@model EventTrigger}s.

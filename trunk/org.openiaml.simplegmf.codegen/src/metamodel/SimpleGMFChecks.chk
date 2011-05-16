@@ -26,35 +26,39 @@ context simplegmf::DiagramEditor ERROR "A DiagramEditor must have an ID set":
 context simplegmf::ReferencedNode ERROR "A ReferencedNode cannot have a containment feature set":
 	containmentFeatures.isEmpty;
 	
-context simplegmf::ContainedEdge ERROR "Cannot derive the source meta feature for " + toString(classifier.name) + " in editor " + toString(editor.id) :
+context simplegmf::ContainedEdge ERROR "Cannot derive the source meta feature for '" + toString(classifier.name) + "' in editor " + toString(editor.id) :
 	deriveSourceMetaElement(getRoot(this), classifier) != null;
 
-context simplegmf::ReferencedEdge ERROR "Cannot derive the source meta feature for " + toString(classifier.name) + " in editor " + toString(editor.id) :
+context simplegmf::ReferencedEdge ERROR "Cannot derive the source meta feature for '" + toString(classifier.name) + "' in editor " + toString(editor.id) :
 	deriveSourceMetaElement(getRoot(this), classifier) != null;
 
 context simplegmf::GMFConfiguration ERROR "Cannot derive the source meta feature for a referenced Edge Type: Move this edge type into Edge References":
 	edgeTypes.forAll(c|deriveSourceMetaElement(c) != null);
 
-context simplegmf::EdgeReference ERROR "Edge reference " + toString(classifier.name) + " must have a source feature set" :
+context simplegmf::EdgeReference ERROR "Edge reference '" + toString(classifier.name) + "' must have a source feature set" :
 	sourceFeature != null;
 
-context simplegmf::EdgeReference ERROR "Edge reference " + toString(classifier.name) + " must have a target feature set" :
+context simplegmf::EdgeReference ERROR "Edge reference '" + toString(classifier.name) + "' must have a target feature set" :
 	targetFeature != null;
 
-context simplegmf::EdgeReference ERROR "Edge reference " + toString(classifier.name) + " does not possess the source feature " + toString(sourceFeature.name) :
+context simplegmf::EdgeReference ERROR "Edge reference '" + toString(classifier.name) + "' does not possess the source feature " + toString(sourceFeature.name) :
 	classifier.eAllStructuralFeatures.contains(sourceFeature);
 
-context simplegmf::EdgeReference ERROR "Edge reference " + toString(classifier.name) + " does not possess the target feature " + toString(targetFeature.name) :
+context simplegmf::EdgeReference ERROR "Edge reference '" + toString(classifier.name) + "' does not possess the target feature " + toString(targetFeature.name) :
 	classifier.eAllStructuralFeatures.contains(targetFeature);
 
-context simplegmf::DiagramElement ERROR "Containment feature not valid in diagram editor " + toString(editor.id) + ": " + toString(name) :
+context simplegmf::DiagramElement ERROR "Containment feature not valid in diagram editor '" + toString(editor.id) + "': " + toString(name) :
 	containmentFeatures.forAll(f|isValidEObject(f));
 
-context simplegmf::DiagramEditor ERROR "DiagramEditor " + toString(id) + " must have a root classifier set":
+context simplegmf::DiagramEditor ERROR "DiagramEditor '" + toString(id) + "' must have a root classifier set":
 	classifier != null; 
 
-context simplegmf::DiagramEditor ERROR "DiagramEditor " + toString(id) + " has an invalid contained DiagramElement" :
+context simplegmf::DiagramEditor ERROR "DiagramEditor '" + toString(id) + "' has an invalid contained DiagramElement" :
 	elements.forAll(e|isValidEObject(e.classifier));
 	
-context simplegmf::LabelConfiguration ERROR "LabelConfiguration " + toString(name) + " has an invalid classifier":
+context simplegmf::LabelConfiguration ERROR "LabelConfiguration '" + toString(name) + "' has an invalid classifier":
 	classifiers.forAll(c|isValidEObject(c));
+
+context simplegmf::EdgeReference ERROR "Defined EdgeReference '" + toString(name) + "' does not have a corresponding EdgeType defined in the root" :
+	getRoot(this).edgeTypes.exists( e | toBoolean(e.isSuperTypeOf(classifier)) );
+

@@ -140,7 +140,7 @@
     <eLiterals name="END" value="2"/>
     <eLiterals name="FILL" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EdgeReference">
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeReference" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceFeature" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetFeature" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>

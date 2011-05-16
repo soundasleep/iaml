@@ -42,7 +42,9 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		assertEquals("container", page.getName());
 
 		assertEquals(0, page.getChildren().size());
-		assertEquals(1, page.getElements().size());
+		assertEquals(1, page.getIterators().size());
+		assertEquals(0, page.getLoginHandlers().size());
+		assertEquals(0, page.getAccessHandlers().size());
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// the instance should be empty
@@ -66,7 +68,9 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		assertEquals("container", page.getName());
 
 		assertEquals(0, page.getChildren().size());
-		assertEquals(1, page.getElements().size());
+		assertEquals(1, page.getIterators().size());
+		assertEquals(0, page.getLoginHandlers().size());
+		assertEquals(0, page.getAccessHandlers().size());
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// issue 241: there should now be a DomainInstance

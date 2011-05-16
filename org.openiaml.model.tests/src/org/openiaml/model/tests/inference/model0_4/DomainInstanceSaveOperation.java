@@ -30,7 +30,9 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 
 		// page is otherwise empty
 		assertEquals(0, page.getChildren().size());
-		assertEquals(1, page.getElements().size());
+		assertEquals(1, page.getIterators().size());
+		assertEquals(0, page.getLoginHandlers().size());
+		assertEquals(0, page.getAccessHandlers().size());
 
 		// instance is empty
 		assertNull(di.getCurrentInstance());
@@ -46,7 +48,9 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 
 		// page is otherwise empty
 		assertEquals(0, page.getChildren().size());
-		assertEquals(1, page.getElements().size());
+		assertEquals(1, page.getIterators().size());
+		assertEquals(0, page.getLoginHandlers().size());
+		assertEquals(0, page.getAccessHandlers().size());
 
 		// instance now contains a 'save' method
 		assertEquals(1, di.getOperations().size());

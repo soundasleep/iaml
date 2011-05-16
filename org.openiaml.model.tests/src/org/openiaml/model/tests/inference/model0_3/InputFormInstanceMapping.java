@@ -50,7 +50,9 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		assertEquals(0, form.getChildren().size());
 
 		assertEquals(2, page.getChildren().size());	// forms
-		assertEquals(1, page.getElements().size()); // domain object instance
+		assertEquals(1, page.getIterators().size()); // domain object instance
+		assertEquals(0, page.getLoginHandlers().size());
+		assertEquals(0, page.getAccessHandlers().size());
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// the instance should be empty
@@ -82,7 +84,9 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 
 		// the instance should NOT be empty
 		assertEquals(2, page.getChildren().size());	// forms
-		assertEquals(1, page.getElements().size());	// domain object instance
+		assertEquals(1, page.getIterators().size());	// domain object instance
+		assertEquals(0, page.getLoginHandlers().size());
+		assertEquals(0, page.getAccessHandlers().size());
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// issue 241: there should now be a DomainInstance

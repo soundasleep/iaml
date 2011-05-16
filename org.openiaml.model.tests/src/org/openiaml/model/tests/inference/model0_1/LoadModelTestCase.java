@@ -39,7 +39,9 @@ public class LoadModelTestCase extends InferenceTestCase {
 		assertTrue(root.getScopes().get(2) instanceof Frame);
 		
 		// but no visible elements
-		assertEquals(root.getElements().size(), 0);
+		assertEquals(root.getIterators().size(), 0);
+		assertEquals(root.getLoginHandlers().size(), 0);
+		assertEquals(root.getAccessHandlers().size(), 0);
 	}
 
 }

@@ -38,7 +38,6 @@ public class ElementModeldocTestCase extends XmlTestCase {
 	 * cannot be abstract.
 	 */
 	protected List<EClass> IGNORED_CLASSES = Arrays.asList(
-			ModelPackage.eINSTANCE.getApplicationElement(),
 			ModelPackage.eINSTANCE.getVisibleThing(),
 			ModelPackage.eINSTANCE.getWire(),
 			ModelPackage.eINSTANCE.getInternetApplication()

@@ -262,9 +262,6 @@ public class GmfGenTestCase extends XmlTestCase {
 		assertNotNull(meta);
 		assertNotNull(editor);
 		
-		// sanity check
-		assertTrue(ModelPackage.eINSTANCE.getApplicationElement().isSuperTypeOf( DomainPackage.eINSTANCE.getDomainAttributeInstance() ));
-		
 		// the meta element should be a subclass of the editor
 		assertTrue(filename + ": Element '" + metaHref + "' is not a subclass of diagram type '" + modelID + "' [resolved meta = '" + meta + "', editor = '" + editor + "']", 
 				editor.isSuperTypeOf(meta));
@@ -1181,7 +1178,6 @@ public class GmfGenTestCase extends XmlTestCase {
 	public void testGetBestPair() {
 		EClass domain_schema = DomainPackage.eINSTANCE.getDomainSchema(); 
 		EClass role = UsersPackage.eINSTANCE.getRole(); 
-		EClass application_element = ModelPackage.eINSTANCE.getApplicationElement(); 
 		
 		List<RootElementPair> elements = new ArrayList<RootElementPair>();
 		
@@ -1189,25 +1185,19 @@ public class GmfGenTestCase extends XmlTestCase {
 		elements.add(new RootElementPair(domain_schema, null, null));		
 		assertEqualsPair(domain_schema, getBestPair(elements, domain_schema));
 		assertEqualsPair(domain_schema, getBestPair(elements, role));
-		assertEqualsPair(null, getBestPair(elements, application_element));
 		
 		// add Role
 		elements.add(new RootElementPair(role, null, null));		
 		assertEqualsPair(role, getBestPair(elements, role));
 		assertEqualsPair(domain_schema, getBestPair(elements, domain_schema));
-		assertEqualsPair(null, getBestPair(elements, application_element));
 
 		// add Role
-		elements.add(new RootElementPair(application_element, null, null));		
 		assertEqualsPair(role, getBestPair(elements, role));
 		assertEqualsPair(domain_schema, getBestPair(elements, domain_schema));
-		assertEqualsPair(application_element, getBestPair(elements, application_element));
 		
 		elements.clear();
-		elements.add(new RootElementPair(application_element, null, null));		
 		assertEqualsPair(null, getBestPair(elements, role));
 		assertEqualsPair(null, getBestPair(elements, domain_schema));
-		assertEqualsPair(application_element, getBestPair(elements, application_element));
 
 	}
 	

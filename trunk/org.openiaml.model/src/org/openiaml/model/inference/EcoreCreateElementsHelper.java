@@ -219,7 +219,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public DomainIterator generatedDomainIterator(GeneratesElements by, Scope container) throws InferenceException {
-		DomainIterator obj = (DomainIterator) createElement( container, DomainPackage.eINSTANCE.getDomainIterator(), ModelPackage.eINSTANCE.getScope_Elements() );
+		DomainIterator obj = (DomainIterator) createElement( container, DomainPackage.eINSTANCE.getDomainIterator(), ModelPackage.eINSTANCE.getScope_Iterators() );
 		setGeneratedBy(obj, by);
 		return obj;
 	}
@@ -642,7 +642,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public LoginHandler generatedLoginHandler(GeneratesElements by, Session container) throws InferenceException {
-		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ModelPackage.eINSTANCE.getScope_Elements() );
+		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ModelPackage.eINSTANCE.getScope_LoginHandlers() );
 		setGeneratedBy(object, by);
 		return object;
 	}

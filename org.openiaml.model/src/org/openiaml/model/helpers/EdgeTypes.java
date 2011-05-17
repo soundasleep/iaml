@@ -141,11 +141,11 @@ public class EdgeTypes {
 		
 		edgeTypes.add( new EdgeType(
 				ModelPackage.eINSTANCE.getComplexTerm(), /* type */
-				WiresPackage.eINSTANCE.getConditionEdgesSource(), /* source */
+				ModelPackage.eINSTANCE.getFunction(), /* source */
 				WiresPackage.eINSTANCE.getConditionEdgeDestination(), /* destination */
 				ModelPackage.eINSTANCE.getComplexTerm_Function(), /* from ref */
 				ModelPackage.eINSTANCE.getComplexTerm_Conditioned(), /* to ref */
-				WiresPackage.eINSTANCE.getConditionEdgesSource_Conditioned(),
+				ModelPackage.eINSTANCE.getComplexTerm_Conditioned(),
 				WiresPackage.eINSTANCE.getConditionEdgeDestination_Conditions()
 		) );
 		

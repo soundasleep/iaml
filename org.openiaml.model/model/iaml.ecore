@@ -158,7 +158,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComplexTerm" abstract="true" eSuperTypes="#//ParameterValue #//wires/ParameterEdgeDestination">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
-        eType="#//wires/ConditionEdgesSource" eOpposite="#//wires/ConditionEdgesSource/conditioned"/>
+        eType="#//Function" eOpposite="#//Function/conditioned"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditioned" lowerBound="1"
         eType="#//wires/ConditionEdgeDestination" eOpposite="#//wires/ConditionEdgeDestination/conditions"/>
   </eClassifiers>
@@ -390,18 +390,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="loginHandlers" upperBound="-1"
         eType="#//components/LoginHandler" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="#//WireSource #//NamedElement #//wires/ConditionEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="#//WireSource #//NamedElement">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="added in 0.2"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Function allows for conditional execution of {@model Wire wires} when {@model ConditionEdge connected}."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="slotNames" upperBound="-1"
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotTypes" upperBound="-1"
-        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditioned" upperBound="-1"
+        eType="#//ComplexTerm" eOpposite="#//ComplexTerm/function"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Predicate" abstract="true" eSuperTypes="#//Function">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -847,17 +849,6 @@
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inConstraintEdges" upperBound="-1"
           eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/to"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionEdgesSource" abstract="true"
-        interface="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the source of a {@model ConditionEdge}."/>
-      </eAnnotations>
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="added in 0.4.3"/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditioned" upperBound="-1"
-          eType="#//ComplexTerm" eOpposite="#//ComplexTerm/function"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdgeDestination" abstract="true"
         interface="true">

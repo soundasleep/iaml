@@ -105,6 +105,9 @@ rule "Properties will also have a related 'is set' condition (not fieldValue)"
 		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
 		value : Value ( eContainer == container, name != "fieldValue" )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
 		
 		not ( Function ( eval(name.equals(value.getName() + " is set")), eContainer == container ))
 	
@@ -113,6 +116,7 @@ rule "Properties will also have a related 'is set' condition (not fieldValue)"
 	then
 		ActivityFunction cond = handler.generatedActivityFunction(containerGe, container);
 		handler.setName(cond, value.getName() + " is set");
+		handler.setType(cond, type);
 		queue.add(cond, drools);
 
 end
@@ -125,6 +129,9 @@ rule "Properties will also have a related 'is set' BuiltinProperty (fieldValue)"
 		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
 		value : Value ( eContainer == container, name == "fieldValue" )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
 		
 		not ( Function ( name == "fieldValue is set", eContainer == container ))
 	
@@ -133,6 +140,7 @@ rule "Properties will also have a related 'is set' BuiltinProperty (fieldValue)"
 	then
 		BuiltinProperty cond = handler.generatedBuiltinProperty(containerGe, container);
 		handler.setName(cond, "fieldValue is set");
+		handler.setType(cond, type);
 		queue.add(cond, drools);
 
 end

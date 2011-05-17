@@ -690,6 +690,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getParameterValue_Type(), value);
 	}
 
+	public void setType(Function element, EClassifier value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getFunction_Type(), value);
+	}
+
 	public void setType(Arithmetic element, ArithmeticOperationTypes value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getArithmetic_OperationType(), value);
 	}

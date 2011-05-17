@@ -5,6 +5,8 @@ package org.openiaml.model.tests.inference.model0_5_3;
 
 import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
+import org.openiaml.model.model.EXSDDataType;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
@@ -56,6 +58,25 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		assertNotGenerated(text1, text2, init1, init2, update1, update2, cast1, cast2, set1, set2);
 
+	}
+	
+	/**
+	 * Test that the generated functions are typed. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testBuiltinPropertiesAreTyped() throws Exception {
+		Frame home = assertHasFrame(root, "Home");
+
+		InputTextField text1 = assertHasInputTextField(home, "text1");
+		
+		Function f = text1.getEmpty();
+		assertNotNull(f);
+		assertGenerated(f);
+		
+		// it should be typed boolean
+		EXSDDataType type = (EXSDDataType) f.getType();
+		assertEquals("http://www.w3.org/2001/XMLSchema#boolean", type.getDefinition().getURI());
 	}
 
 	/**

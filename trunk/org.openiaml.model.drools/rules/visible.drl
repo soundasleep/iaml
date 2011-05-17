@@ -90,6 +90,10 @@ end
 rule "VisibleThings have a BuiltinProperty 'empty'"
 	when
 		f : VisibleThing( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
 		not (condition : Function( f.empty == condition ))
 				
 		eval ( handler.veto( f ))
@@ -98,6 +102,7 @@ rule "VisibleThings have a BuiltinProperty 'empty'"
 		BuiltinProperty condition = handler.generatedBuiltinProperty(f, f,
 			ModelPackage.eINSTANCE.getVisibleThing_Empty());
 		handler.setName(condition, "empty");
+		handler.setType(condition, type);
 		queue.add(condition, drools);
 		
 end
@@ -109,6 +114,10 @@ end
 rule "VisibleThings have a BuiltinProperty 'not empty'"
 	when
 		f : VisibleThing( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
 		not (condition : Function( f.notEmpty == condition ))
 				
 		eval ( handler.veto( f ))
@@ -117,6 +126,7 @@ rule "VisibleThings have a BuiltinProperty 'not empty'"
 		BuiltinProperty condition = handler.generatedBuiltinProperty(f, f,
 			ModelPackage.eINSTANCE.getVisibleThing_NotEmpty());
 		handler.setName(condition, "not empty");
+		handler.setType(condition, type);
 		queue.add(condition, drools);
 		
 end

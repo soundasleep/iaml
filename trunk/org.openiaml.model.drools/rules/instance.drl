@@ -131,6 +131,10 @@ end
 rule "Create 'hasNext' BuiltinProperty"
 	when
 		instance : DomainIterator( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
 		not ( cond : Function ( instance.hasNext == cond ) )
 
 		eval ( handler.veto( instance ))
@@ -139,6 +143,7 @@ rule "Create 'hasNext' BuiltinProperty"
 		BuiltinProperty cond = handler.generatedBuiltinProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_HasNext());
 		handler.setName(cond, "has next");
+		handler.setType(cond, type);
 		queue.add(cond, drools);
 	
 end
@@ -151,6 +156,10 @@ end
 rule "Create 'hasPrevious' BuiltinProperty"
 	when
 		instance : DomainIterator( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+
 		not ( cond : Function ( instance.hasPrevious == cond ) )
 
 		eval ( handler.veto( instance ))
@@ -159,6 +168,7 @@ rule "Create 'hasPrevious' BuiltinProperty"
 		BuiltinProperty cond = handler.generatedBuiltinProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_HasPrevious());
 		handler.setName(cond, "has previous");
+		handler.setType(cond, type);
 		queue.add(cond, drools);
 	
 end
@@ -171,6 +181,10 @@ end
 rule "Create 'empty' BuiltinProperty"
 	when
 		instance : DomainIterator( )
+		
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
 		not ( cond : Function ( instance.empty == cond ) )
 
 		eval ( handler.veto( instance ))
@@ -179,6 +193,7 @@ rule "Create 'empty' BuiltinProperty"
 		BuiltinProperty cond = handler.generatedBuiltinProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Empty());
 		handler.setName(cond, "empty");
+		handler.setType(cond, type);
 		queue.add(cond, drools);
 	
 end
@@ -233,6 +248,10 @@ end
 rule "Create 'not empty' composite condition"
 	when
 		instance : DomainIterator( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
 		not ( condition : Function ( eContainer == instance, name == "not empty" ) )
 
 		eval ( handler.veto( instance ))
@@ -240,6 +259,7 @@ rule "Create 'not empty' composite condition"
 	then
 		ActivityFunction condition = handler.generatedActivityFunction(instance, instance);
 		handler.setName(condition, "not empty");
+		handler.setType(condition, type);
 		queue.add(condition, drools);
 	
 end

@@ -21,14 +21,14 @@ public class NewWizardsTest extends XmlTestCase {
 	public static final String DIAGRAM_PREFIX = "org.openiaml.model.diagram.";
 	
 	public void testElementWizard() throws Exception {
-		// the 'element' diagram cannot have a new wizard, as it represents an abstract container
-		checkNewWizard("org.openiaml.model.diagram.element");
+		// the 'visual' diagram cannot have a new wizard, as it represents an abstract container
+		checkNewWizard("org.openiaml.model.diagram.visual");
 	}
 
 	protected void checkNewWizard(String plugin) throws Exception {
 		String pluginXml = PluginsTestCase.PLUGIN_ROOT + plugin + "/plugin.xml";
 		File f = new File(pluginXml);
-		assertTrue("plugin " + plugin + ": " + f + " exists", f.exists());
+		assertTrue("plugin " + plugin + ": " + f + " should exist", f.exists());
 		
 		Document doc = loadDocument(f);
 

@@ -33,9 +33,10 @@ import org.openiaml.model.diagram.part.IamlCreationWizardPage;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.diagram.part.Messages;
-import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.components.AccessControlHandler;
+import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.operations.ActivityFunction;
@@ -290,8 +291,11 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 		if (target instanceof DomainSchema) {
 			return "iaml_schema";
 		}
-		if (target instanceof ApplicationElement) {
-			return "iaml_element";
+		if (target instanceof LoginHandler) {
+			return "iaml_login_handler";
+		}
+		if (target instanceof AccessControlHandler) {
+			return "iaml_access_handler";
 		}
 		if (target instanceof ActivityOperation) {
 			return "iaml_operation";

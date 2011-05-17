@@ -1,11 +1,12 @@
 rem we should be in workspace\
 rm -rf "org.openiaml.model.diagram\src\org"
+rm -rf "org.openiaml.model.diagram.access_handler\src\org"
 rm -rf "org.openiaml.model.diagram.condition\src\org"
-rm -rf "org.openiaml.model.diagram.element\src\org"
 rm -rf "org.openiaml.model.diagram.email\src\org"
 rm -rf "org.openiaml.model.diagram.frame\src\org"
 rm -rf "org.openiaml.model.diagram.instance\src\org"
 rm -rf "org.openiaml.model.diagram.iterator\src\org"
+rm -rf "org.openiaml.model.diagram.login_handler\src\org"
 rm -rf "org.openiaml.model.diagram.operation\src\org"
 rm -rf "org.openiaml.model.diagram.root\src\org"
 rm -rf "org.openiaml.model.diagram.schema\src\org"

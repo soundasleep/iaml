@@ -78,7 +78,8 @@ public class PluginsTestCase extends XmlTestCase {
 		return plugins;
 	}
 	
-	private List<String> shortcuts; 
+	private List<String> shortcuts;
+	private String shortcutName;
 	
 	private static SoftCache<String,Properties> manifestCache = new SoftCache<String,Properties>() {
 
@@ -182,6 +183,11 @@ public class PluginsTestCase extends XmlTestCase {
 		
 		// lets find the first one
 		Document doc = firstDocument(GmfGenTestCase.getCache());
+		
+		// find the name of the first document
+		Element root = xpathFirst(doc, "/GenEditorGenerator");
+		shortcutName = root.getAttribute("modelID");
+		
 		IterableElementList nodes = xpath(doc, "//diagram/containsShortcutsTo");
 		for (Element node : nodes) {
 			String value = node.getFirstChild().getNodeValue();
@@ -204,6 +210,7 @@ public class PluginsTestCase extends XmlTestCase {
 	public void tearDown() throws Exception {
 		loadedManifests = null;
 		shortcuts = null;
+		shortcutName = null;
 		
 		super.tearDown();
 	}
@@ -419,7 +426,7 @@ public class PluginsTestCase extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testCorrectNumberOfShortcuts() throws Exception {
-		assertEquals(shortcuts.size(), getAllGmfGens().size());
+		assertEquals(".gmfgen for diagram editor " + shortcutName + " did not contain the correct number of shortcuts", shortcuts.size(), getAllGmfGens().size());
 	}
 	
 	/**

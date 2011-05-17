@@ -896,7 +896,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//operations/ActivityParameter" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ActivityFunction" eSuperTypes="#//ContainsFunctions #//Function #//GeneratesElements #//ContainsOperations #//ContainsProperties">
+    <eClassifiers xsi:type="ecore:EClass" name="ActivityFunction" eSuperTypes="#//Predicate #//ContainsFunctions #//GeneratesElements #//ContainsOperations #//ContainsProperties">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4&#xD;&#xA;ContainsOperations added in 0.4.1"/>
       </eAnnotations>

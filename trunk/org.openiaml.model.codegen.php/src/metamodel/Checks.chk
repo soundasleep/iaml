@@ -288,4 +288,56 @@ context model::ECARule ERROR "A 'login' ECARule for an AccessControlHandler shou
 	!(trigger != null && target != null && model::components::AccessControlHandler.isInstance(trigger) 
 		&& name == "login" && target.eContainer != null && trigger.eContainer != null
 		&& target.eContainer == trigger.eContainer);
-		 
+
+/* --- Metamodel-specific checks, as per issue 235 --- */
+
+context model::Value ERROR "A Value must be of type XSDSimpleTypeDefinition":
+	type != null ||
+	(!model::EXSDDataType.isInstance(type)
+		|| xsd::XSDSimpleTypeDefinition.isInstance(((model::EXSDDataType) type).definition));
+
+context model::ComplexTerm ERROR "A ComplexTerm must define a Function":
+	function != null;
+
+context model::ComplexTerm ERROR "A ComplexTerm must have the same function type as its referenced Function":
+	type == function.type;
+
+context model::ComplexTerm ERROR "Mismatched number of slots and parameters (" + function.slotNames.size + ", " + inParameterEdges.name.size + ")":
+	function.slotNames.size == inParameterEdges.name.size;
+
+context model::ComplexTerm ERROR "Parameter edge defined a named parameter that was not defined in the function":
+	inParameterEdges.forAll(p | p.name == null || function.slotNames.contains(p.name));
+
+context model::ComplexTerm ERROR "Non-unique parameter names provided to ComplexTerm":
+	inParameterEdges.name.toSet().size == inParameterEdges.name.size;
+
+context model::Function ERROR "Non-unique slot names defined in Function":
+	slotNames.size == slotNames.toSet().size;
+
+context model::Function ERROR "Slot names and types mismatch":
+	slotTypes.size == slotNames.size;
+
+context model::Predicate ERROR "Predicate types must be boolean":
+	model::EXSDDataType.isInstance(type) &&
+	(
+		((model::EXSDDataType) type).definition.uRI == "http://www.w3.org/2001/XMLSchema.xsd#//boolean"
+		|| ((model::EXSDDataType) type).definition.uRI == "platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlBoolean"
+		|| ((model::EXSDDataType) type).definition.uRI == "http://www.w3.org/2001/XMLSchema#boolean"
+		|| ((model::EXSDDataType) type).definition.name == "boolean"
+	);
+
+context model::BooleanProperty ERROR "A BooleanProperty must have a defined container":
+	eContainer != null;
+
+context model::BuiltinProperty ERROR "An 'is visible' BuiltinProperty must be contained by a VisibleThing":
+	property.toString() != 'IS_VISIBLE' 
+		|| model::VisibleThing.isInstance(eContainer);
+		
+context model::BuiltinProperty ERROR "A 'can save' BuiltinProperty must be contained by a DomainIterator":
+	property.toString() != 'CAN_SAVE'
+		|| model::domain::DomainIterator.isInstance(eContainer);
+
+// TODO more BuiltinProperties
+
+context model::SimpleCondition ERROR "A SimpleCondition must use a Predicate as a Function, was using: " + function:
+	model::Predicate.isInstance(function);

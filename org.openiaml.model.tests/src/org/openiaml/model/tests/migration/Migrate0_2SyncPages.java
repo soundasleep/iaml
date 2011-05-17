@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.migration;
 
+import java.io.File;
 import java.util.List;
 
 import org.openiaml.model.migrate.IamlModelMigrator;
@@ -20,7 +21,7 @@ import org.openiaml.model.model.visual.InputTextField;
  * @author jmwright
  *
  */
-public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
+public class Migrate0_2SyncPages extends AbstractMigrateTestCaseWithWarnings {
 
 	/**
 	 * Test to see which migrators were actually used.
@@ -65,6 +66,14 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		assertEquals(typeSelect(page2.getChildren(), InputTextField.class).size(), 2);
 		assertHasInputTextField(page2, "text1");
 		assertHasInputTextField(page2, "text3");
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.migration.AbstractMigrateTestCaseWithWarnings#getExpectedWarningsFile()
+	 */
+	@Override
+	public File getExpectedWarningsFile() {
+		return new File("src/org/openiaml/model/tests/migration/Migrate0_2Warnings.txt");
 	}
 	
 }

@@ -442,7 +442,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoDomainIterator(InternetApplication root, String string) throws JaxenException {
-		List<Object> results = nameSelect(root.getIterators(), string);
+		List<Object> results = nameSelect(root.getIterators(), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -751,7 +751,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoLoginHandler(Scope session, String string) throws JaxenException {
-		List<Object> results = nameSelect(session.getLoginHandlers(), string);
+		List<Object> results = nameSelect(session.getLoginHandlers(), string, false);
 		assertEquals(0, results.size());
 	}
 

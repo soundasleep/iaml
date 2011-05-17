@@ -89,7 +89,6 @@ import org.openiaml.model.model.visual.Map;
 import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
-import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
@@ -1390,7 +1389,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert <em>no</em> unidirectional SimpleConditions exists between
 	 * the given elements.
 	 */
-	public static void assertHasNoSimpleConditions(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+	public static void assertHasNoSimpleConditions(EObject container, Function from, ConditionEdgeDestination to, String name) throws JaxenException {
 		for (ComplexTerm ef : from.getConditioned()) {
 			if (ef instanceof SimpleCondition) {
 				SimpleCondition e = (SimpleCondition) ef;
@@ -1407,7 +1406,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static SimpleCondition assertHasSimpleCondition(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+	public static SimpleCondition assertHasSimpleCondition(EObject container, Function from, ConditionEdgeDestination to, String name) throws JaxenException {
 		Set<Object> params = typeSelect(getComplexTermsFromTo(container, from, to, name), SimpleCondition.class);
 		assertEquals("Should be exactly one SimpleCondition edge with the name '" + name + "': " + params, 1, params.size());
 		return (SimpleCondition) params.iterator().next();
@@ -1419,7 +1418,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static SimpleCondition assertHasSimpleCondition(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+	public static SimpleCondition assertHasSimpleCondition(EObject container, Function from, ConditionEdgeDestination to) throws JaxenException {
 		Set<Object> params = typeSelect(getComplexTermsFromTo(container, from, to), SimpleCondition.class);
 		assertEquals("Should be exactly one SimpleCondition edge: " + params, 1, params.size());
 		return (SimpleCondition) params.iterator().next();
@@ -1896,7 +1895,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @throws JaxenException
 	 */
 	protected static void assertNoParamtersToSimpleConditions(InternetApplication container,
-			ConditionEdgesSource from, ConditionEdgeDestination to, ParameterEdgesSource page) throws JaxenException {
+			Function from, ConditionEdgeDestination to, ParameterEdgesSource page) throws JaxenException {
 
 		Set<ComplexTerm> conditions = getComplexTermsFromTo(container, from, to);
 		for (ComplexTerm c : conditions) {

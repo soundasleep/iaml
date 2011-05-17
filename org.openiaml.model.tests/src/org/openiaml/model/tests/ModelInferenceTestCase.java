@@ -33,13 +33,13 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
@@ -49,7 +49,6 @@ import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
-import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -491,7 +490,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found {@link ComplexTerm}s
 	 * @throws JaxenException
 	 */
-	protected static Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+	protected static Set<ComplexTerm> getComplexTermsFromTo(EObject container, Function from, ConditionEdgeDestination to) throws JaxenException {
 		Set<ComplexTerm> result = new HashSet<ComplexTerm>();
 		
 		for (ComplexTerm w : from.getConditioned()) {
@@ -512,7 +511,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found {@link ComplexTerm}s
 	 * @throws JaxenException
 	 */
-	protected static Set<ComplexTerm> getComplexTermsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+	protected static Set<ComplexTerm> getComplexTermsFromTo(EObject container, Function from, ConditionEdgeDestination to, String name) throws JaxenException {
 		Set<ComplexTerm> result = new HashSet<ComplexTerm>();
 		
 		for (ComplexTerm w : from.getConditioned()) {

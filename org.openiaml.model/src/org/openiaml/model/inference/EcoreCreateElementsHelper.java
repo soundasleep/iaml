@@ -23,6 +23,7 @@ import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
@@ -89,7 +90,6 @@ import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
-import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -614,7 +614,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
-	public SimpleCondition generatedSimpleCondition(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
+	public SimpleCondition generatedSimpleCondition(GeneratesElements by, ContainsWires container, Function source, ConditionEdgeDestination target) throws InferenceException {
 		SimpleCondition wire = (SimpleCondition) createRelationship(container, ModelPackage.eINSTANCE.getSimpleCondition(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), ModelPackage.eINSTANCE.getComplexTerm_Function(), ModelPackage.eINSTANCE.getComplexTerm_Conditioned());
 		setGeneratedBy(wire, by);
 		return wire;

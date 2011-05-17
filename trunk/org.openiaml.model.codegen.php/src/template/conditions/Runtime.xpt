@@ -13,10 +13,6 @@
 	«EXPAND functionCall(php, inStoreDb, this) FOR function»
 «ENDDEFINE»
 
-«DEFINE functionCall(Boolean php, Boolean inStoreDb, model::SimpleCondition edge) FOR model::wires::ConditionEdgesSource»
-	«throwException("Unknown function call: " + this)» 
-«ENDDEFINE»
-
 «DEFINE functionCall(Boolean php, Boolean inStoreDb, model::SimpleCondition edge) FOR model::Function»
 	/* '«simpleName()»' */
 	condition_«conditionName()»(

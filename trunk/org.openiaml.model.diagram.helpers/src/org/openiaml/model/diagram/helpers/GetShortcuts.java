@@ -13,6 +13,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Wire;
@@ -34,7 +35,6 @@ import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
-import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ConstraintEdgeDestination;
 import org.openiaml.model.model.wires.ConstraintEdgesSource;
@@ -154,10 +154,10 @@ public class GetShortcuts {
 				elements.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, e,
 						((ConstraintEdgeDestination) e).getInConstraintEdges(), registry, updater));
 			}
-			if (e instanceof ConditionEdgesSource) {
+			if (e instanceof Function) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, e,
-						((ConditionEdgesSource) e).getConditioned(), registry, updater));
+						((Function) e).getConditioned(), registry, updater));
 			}
 			if (e instanceof ConditionEdgeDestination) {
 				// get all incoming edges
@@ -228,10 +228,10 @@ public class GetShortcuts {
 				result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
 			}
 
-			if (wire instanceof ConditionEdgesSource) {
+			if (wire instanceof Function) {
 				// get all incoming edges
 				result.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, wire,
-						((ConditionEdgesSource) wire).getConditioned(), registry, updater));
+						((Function) wire).getConditioned(), registry, updater));
 			}
 			if (wire instanceof ConditionEdgeDestination) {
 				// get all incoming edges
@@ -286,10 +286,10 @@ public class GetShortcuts {
 				result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
 			}
 
-			if (wire instanceof ConditionEdgesSource) {
+			if (wire instanceof Function) {
 				// get all incoming edges
 				result.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, wire,
-						((ConditionEdgesSource) wire).getConditioned(), registry, updater));
+						((Function) wire).getConditioned(), registry, updater));
 			}
 			if (wire instanceof ConditionEdgeDestination) {
 				// get all incoming edges

@@ -254,9 +254,6 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		 * If any of these methods do not exist, make sure dynamic templates
 		 * are enabled for the .gmfgens.
 		 */
-		if (this.editorId.equals(org.openiaml.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.diagram.element.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
 		if (this.editorId.equals(org.openiaml.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.diagram.visual.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
@@ -284,9 +281,6 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		 * If any of these methods do not exist, make sure dynamic templates
 		 * are enabled for the .gmfgens.
 		 */
-		if (this.editorId.equals(org.openiaml.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.diagram.element.providers.IamlElementTypes.getElementType(elementType);
-		}
 		if (this.editorId.equals(org.openiaml.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.diagram.visual.providers.IamlElementTypes.getElementType(elementType);
 		}

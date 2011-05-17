@@ -6,7 +6,6 @@ Bundle-Version: 0.5.3.qualifier
 Require-Bundle: org.eclipse.gmf,
  org.eclipse.gmf.runtime.diagram.ui,
  org.openiaml.model.diagram,
- org.openiaml.model.diagram.element,
  org.openiaml.model.diagram.visual,
  org.openiaml.model.diagram.operation,
  org.openiaml.model.codegen.php,
@@ -24,7 +23,10 @@ Require-Bundle: org.eclipse.gmf,
  org.eclipse.xsd.edit;bundle-version="2.5.0",
  org.openiaml.model.diagram.email;bundle-version="0.5.0",
  org.openiaml.model.diagram.iterator;bundle-version="0.5.0",
- org.openiaml.model.diagram.schema;bundle-version="0.5.0"
+ org.openiaml.model.diagram.schema;bundle-version="0.5.0",
+ org.openiaml.model.diagram.access_handler;bundle-version="0.5.3",
+ org.openiaml.model.diagram.instance;bundle-version="0.5.3",
+ org.openiaml.model.diagram.login_handler;bundle-version="0.5.3"
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions,
  org.openiaml.model.diagram.custom.commands,

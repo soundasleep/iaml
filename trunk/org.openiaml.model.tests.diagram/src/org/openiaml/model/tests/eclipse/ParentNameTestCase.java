@@ -13,15 +13,15 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
-import org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure;
+import org.openiaml.model.diagram.edit.parts.ActivityOperationEditPart.ExtendedActivityOperationFigure;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.messaging.Email;
 import org.openiaml.model.model.messaging.MessagingPackage;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.release.ParentNamesTestCase;
 
@@ -69,7 +69,9 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(1, editor);
 
 		root = (InternetApplication) rendering;
-		assertEquals(0, root.getElements().size());
+		assertEquals(0, root.getIterators().size());
+		assertEquals(0, root.getLoginHandlers().size());
+		assertEquals(0, root.getAccessHandlers().size());
 		assertEquals(1, root.getScopes().size());
 		Frame page = (Frame) root.getScopes().get(0);
 		assertEquals("Home", page.getName());
@@ -109,7 +111,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEquals(root.getName(), "root element");
 
 		// create a CompositeOperation
-		CompositeOperation cop = gmf.createActivityOperation(root);
+		ActivityOperation cop = gmf.createActivityOperation(root);
 		assertNotNull(cop);
 
 		// set name
@@ -123,17 +125,17 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		// what is the content pane?
 		IFigure fig = part.getContentPane();
 		assertTrue("CompositeOperation should be extended: " + fig.getClass(),
-				fig instanceof ExtendedCompositeOperationFigure);
+				fig instanceof ExtendedActivityOperationFigure);
 
-		ExtendedCompositeOperationFigure ext = (ExtendedCompositeOperationFigure) fig;
+		ExtendedActivityOperationFigure ext = (ExtendedActivityOperationFigure) fig;
 		// check to see it has the correct initial parent value
-		assertEquals("Parent: root element", ext.getFigureCompositeOperationParentNameFigure().getText());
+		assertEquals("Parent: root element", ext.getFigureActivityOperationParentNameFigure().getText());
 
 		// change the root name
 		gmf.setName(root, "a new parent name");
 		assertEquals(root.getName(), "a new parent name");
 		// the parent label should have changed
-		assertEquals("Parent: a new parent name", ext.getFigureCompositeOperationParentNameFigure().getText());
+		assertEquals("Parent: a new parent name", ext.getFigureActivityOperationParentNameFigure().getText());
 	}
 
 	/**
@@ -152,7 +154,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEquals(root.getName(), "root element");
 
 		// create a CompositeOperation
-		CompositeOperation cop = gmf.createActivityOperation(root);
+		ActivityOperation cop = gmf.createActivityOperation(root);
 		assertNotNull(cop);
 
 		// set name
@@ -165,18 +167,18 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		// what is the content pane?
 		IFigure fig_o = partOp.getContentPane();
 		assertTrue("CompositeOperation should be extended: " + fig_o.getClass(),
-				fig_o instanceof ExtendedCompositeOperationFigure);
+				fig_o instanceof ExtendedActivityOperationFigure);
 
-		ExtendedCompositeOperationFigure ext_o = (ExtendedCompositeOperationFigure) fig_o;
+		ExtendedActivityOperationFigure ext_o = (ExtendedActivityOperationFigure) fig_o;
 		// check to see it has the correct initial parent value
-		assertEquals("Parent: root element", ext_o.getFigureCompositeOperationParentNameFigure().getText());
+		assertEquals("Parent: root element", ext_o.getFigureActivityOperationParentNameFigure().getText());
 
 		// change the root name
 		gmf.setName(root, "a new parent name");
 		assertEquals(root.getName(), "a new parent name");
 
 		// the parent labels should have changed
-		assertEquals("Parent: a new parent name", ext_o.getFigureCompositeOperationParentNameFigure().getText());
+		assertEquals("Parent: a new parent name", ext_o.getFigureActivityOperationParentNameFigure().getText());
 	}
 	
 	/**

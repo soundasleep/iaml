@@ -10,7 +10,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.openiaml.model.diagram.helpers.IAccessibleTextAwareEditPart;
-import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.visual.Frame;
 
 /**
@@ -85,7 +85,7 @@ public class OverriddenPropertyMarker extends EclipseTestCaseHelper {
 		
 		{
 			ShapeNodeEditPart part = assertHasOperation(frame, "Normal Operation");
-			CompositeOperation e = (CompositeOperation) part.resolveSemanticElement();
+			ActivityOperation e = (ActivityOperation) part.resolveSemanticElement();
 			assertFalse(e.isIsGenerated());
 			assertFalse(e.isOverridden());
 			
@@ -100,7 +100,7 @@ public class OverriddenPropertyMarker extends EclipseTestCaseHelper {
 		
 		{
 			ShapeNodeEditPart part = assertHasOperation(frame, "Overridden Operation");
-			CompositeOperation e = (CompositeOperation) part.resolveSemanticElement();
+			ActivityOperation e = (ActivityOperation) part.resolveSemanticElement();
 			assertFalse(e.isIsGenerated());
 			assertTrue(e.isOverridden());
 			

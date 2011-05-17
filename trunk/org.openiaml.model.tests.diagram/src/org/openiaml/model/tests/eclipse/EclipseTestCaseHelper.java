@@ -25,8 +25,6 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.BuiltinProperty;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Function;
@@ -43,6 +41,8 @@ import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
+import org.openiaml.model.model.operations.ActivityFunction;
+import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdge;
@@ -612,15 +612,15 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Look at the editor's children to see if a CompositeCondition is being displayed.
+	 * Look at the editor's children to see if a {@link ActivityFunction} is being displayed.
 	 *
 	 * @param root
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasCompositeCondition(DiagramDocumentEditor root, String operationName,
+	public ShapeNodeEditPart assertHasActivityFunction(DiagramDocumentEditor root, String operationName,
 			boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, CompositeCondition.class, operationName, checkShortcut, shortcutRequired);
+		return assertHasRenderedNamedObject(root, ActivityFunction.class, operationName, checkShortcut, shortcutRequired);
 	}
 	
 	/**
@@ -972,11 +972,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasCompositeCondition(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasActivityFunction(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasCompositeCondition(
+	public ShapeNodeEditPart assertHasActivityFunction(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, CompositeCondition.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, ActivityFunction.class, name, true, shortcutRequired);
 	}
 	
 	/**
@@ -997,14 +997,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return assertHasRenderedNamedObject(editor, Button.class, name, false, false);
 	}
 	
-	public ShapeNodeEditPart assertHasCompositeOperation(
+	public ShapeNodeEditPart assertHasActivityOperation(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, CompositeOperation.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, ActivityOperation.class, name, true, shortcutRequired);
 	}
 	
-	public ShapeNodeEditPart assertHasCompositeOperation(
+	public ShapeNodeEditPart assertHasActivityOperation(
 			DiagramDocumentEditor editor, String name) {
-		return assertHasRenderedNamedObject(editor, CompositeOperation.class, name, false, false);
+		return assertHasRenderedNamedObject(editor, ActivityOperation.class, name, false, false);
 	}
 	
 	public ShapeNodeEditPart assertHasDomainAttributeInstance(

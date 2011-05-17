@@ -173,6 +173,9 @@ rule "Create condition 'check (gate)'"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
 		
 		not ( Function ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
 		
@@ -181,6 +184,7 @@ rule "Create condition 'check (gate)'"
 	then
 		ActivityFunction cond = handler.generatedActivityFunction(gate, session);
 		handler.setName(cond, "check " + gate.getName());
+		handler.setType(cond, type);
 		queue.add(cond, drools);
 
 end

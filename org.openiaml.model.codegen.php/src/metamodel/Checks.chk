@@ -318,13 +318,14 @@ context model::Function ERROR "Slot names and types mismatch":
 	slotTypes.size == slotNames.size;
 
 context model::Predicate ERROR "Predicate types must be boolean":
-	model::EXSDDataType.isInstance(type) &&
+	type == null ||
+	(model::EXSDDataType.isInstance(type) &&
 	(
 		((model::EXSDDataType) type).definition.uRI == "http://www.w3.org/2001/XMLSchema.xsd#//boolean"
 		|| ((model::EXSDDataType) type).definition.uRI == "platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlBoolean"
 		|| ((model::EXSDDataType) type).definition.uRI == "http://www.w3.org/2001/XMLSchema#boolean"
 		|| ((model::EXSDDataType) type).definition.name == "boolean"
-	);
+	));
 
 context model::BooleanProperty ERROR "A BooleanProperty must have a defined container":
 	eContainer != null;

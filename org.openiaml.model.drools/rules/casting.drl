@@ -33,6 +33,10 @@ global DroolsHelperFunctions functions;
 rule "Create 'can cast?' condition for Changeables"
 	when
 		tf : Changeable( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
 		not ( condition : Function ( name == "can cast?", eContainer == tf ))
 		
 		eval ( handler.veto( tf ))
@@ -40,6 +44,7 @@ rule "Create 'can cast?' condition for Changeables"
 	then
 		BuiltinProperty condition = handler.generatedBuiltinProperty(tf, tf);
 		handler.setName(condition, "can cast?");
+		handler.setType(condition, type);
 		queue.add(condition, drools);
 
 end

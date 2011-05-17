@@ -241,7 +241,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 
 		// model 0.5.1
 		ShapeNodeEditPart currentInput = assertHasValue(editor_text, "currentInput", false);
-		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "currentInput is set", false);
+		ShapeNodeEditPart condition2 = assertHasActivityFunction(editor_text, "currentInput is set", false);
 		ShapeNodeEditPart notEmpty = assertHasPrimitiveCondition(editor_text, "not empty", false);
 		ShapeNodeEditPart empty = assertHasPrimitiveCondition(editor_text, "empty", false);
 		ShapeNodeEditPart show = assertHasBuiltinOperation(editor_text, "show", false);

@@ -45,7 +45,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			ShapeNodeEditPart staticValue = assertHasValue(editor_page, "parameter");
 			
 			// the button runs an external operation, which is a shortcut
-			ShapeNodeEditPart op = assertHasCompositeOperation(editor_page, "some operation", true);
+			ShapeNodeEditPart op = assertHasActivityOperation(editor_page, "some operation", true);
 			
 			// connected by a RunAction
 			ConnectionNodeEditPart run = assertHasECARule(editor_page, button, op, "onClick");
@@ -88,7 +88,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 				ShapeNodeEditPart event = assertHasEvent(editor_button, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
 				
 				// there is a shortcutted operation
-				ShapeNodeEditPart op = assertHasCompositeOperation(editor_button, "some operation", true);
+				ShapeNodeEditPart op = assertHasActivityOperation(editor_button, "some operation", true);
 				
 				// the event is connected to the op by a RunAction
 				ConnectionNodeEditPart run = assertHasECARule(editor_button, event, op, "run");
@@ -128,7 +128,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			assertEditorFrame(editor_page);
 			
 			// we contain the operation directly
-			ShapeNodeEditPart op = assertHasCompositeOperation(editor_page, "some operation", false);
+			ShapeNodeEditPart op = assertHasActivityOperation(editor_page, "some operation", false);
 			
 			// there is a shortcutted button 'direct'
 			ShapeNodeEditPart button = assertHasButton(editor_page, "direct", true);

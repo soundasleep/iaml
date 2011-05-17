@@ -56,7 +56,9 @@ public class RemovePhantomEdges extends EclipseTestCaseHelper {
 		InternetApplication model = (InternetApplication) resource.getContents().get(0);
 		
 		// get the Frame
-		assertEquals(0, model.getElements().size());
+		assertEquals(0, model.getIterators().size());
+		assertEquals(0, model.getLoginHandlers().size());
+		assertEquals(0, model.getAccessHandlers().size());
 		assertEquals(1, model.getScopes().size());
 		Frame page = (Frame) model.getScopes().get(0);
 		
@@ -87,7 +89,9 @@ public class RemovePhantomEdges extends EclipseTestCaseHelper {
 		InternetApplication model = (InternetApplication) resource.getContents().get(0);
 		
 		// get the Frame
-		assertEquals(0, model.getElements().size());
+		assertEquals(0, model.getIterators().size());
+		assertEquals(0, model.getLoginHandlers().size());
+		assertEquals(0, model.getAccessHandlers().size());
 		assertEquals(1, model.getScopes().size());
 		Frame page = (Frame) model.getScopes().get(0);
 

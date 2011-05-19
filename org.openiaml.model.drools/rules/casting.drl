@@ -16,6 +16,8 @@ import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
 
+import org.eclipse.emf.ecore.*;
+
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
@@ -45,6 +47,8 @@ rule "Create 'can cast?' condition for Changeables"
 		BuiltinProperty condition = handler.generatedBuiltinProperty(tf, tf);
 		handler.setName(condition, "can cast?");
 		handler.setType(condition, type);
+		handler.setSlotNames(condition, new String[] { "value" });
+		handler.setSlotTypes(condition, new EClassifier[] { EcorePackage.eINSTANCE.getEClassifier() });
 		queue.add(condition, drools);
 
 end

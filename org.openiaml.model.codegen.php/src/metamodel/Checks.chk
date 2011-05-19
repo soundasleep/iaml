@@ -307,7 +307,7 @@ context model::ComplexTerm ERROR "A ComplexTerm must have the same function type
 context model::ComplexTerm ERROR "Mismatched number of slots and parameters (" + function.slotNames.size + ", " + inParameterEdges.name.size + ")":
 	function.slotNames.size == inParameterEdges.name.size;
 
-context model::ComplexTerm ERROR "Parameter edge defined a named parameter that was not defined in the function":
+context model::ComplexTerm ERROR "Parameter edge defined a named parameter that was not defined in the function, expected: (" + function.slotNames + "), was: (" + inParameterEdges.name + ")":
 	inParameterEdges.forAll(p | p.name == null || function.slotNames.contains(p.name));
 
 context model::ComplexTerm ERROR "Non-unique parameter names provided to ComplexTerm":

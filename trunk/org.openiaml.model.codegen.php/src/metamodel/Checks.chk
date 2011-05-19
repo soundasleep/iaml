@@ -300,7 +300,9 @@ context model::ComplexTerm ERROR "A ComplexTerm must define a Function":
 	function != null;
 
 context model::ComplexTerm ERROR "A ComplexTerm must have the same function type as its referenced Function":
-	type == function.type;
+	type == null
+		|| function.type == null
+		|| type == function.type;
 
 context model::ComplexTerm ERROR "Mismatched number of slots and parameters (" + function.slotNames.size + ", " + inParameterEdges.name.size + ")":
 	function.slotNames.size == inParameterEdges.name.size;

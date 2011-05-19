@@ -3,6 +3,9 @@
  */
 package org.openiaml.model.inference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -760,6 +763,24 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setReadOnly(Value element, boolean value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getValue_ReadOnly(), value);
+	}
+	
+	public void setSlotNames(Function element, String[] value) throws InferenceException {
+		// convert array into list
+		List<String> list = new ArrayList<String>();
+		for (String v : value) {
+			list.add(v);
+		}
+		setValue(element, ModelPackage.eINSTANCE.getFunction_SlotNames(), list);
+	}
+
+	public void setSlotTypes(Function element, EClassifier[] value) throws InferenceException {
+		// convert array into list
+		List<EClassifier> list = new ArrayList<EClassifier>();
+		for (EClassifier v : value) {
+			list.add(v);
+		}
+		setValue(element, ModelPackage.eINSTANCE.getFunction_SlotTypes(), list);
 	}
 
 }

@@ -53,6 +53,11 @@ rule "Create 'can cast?' condition for Changeables"
 
 end
 
+/**
+ * @inference ActivityFunction,Changeable
+ *		An {@model ActivityFunction} named 'can cast?', used to check casting for a {@model Changeable} {@model Changeable#fieldValue},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'can cast?' condition"
 	when
 		tf : Changeable( )
@@ -113,7 +118,7 @@ end
 
 /**
  * @inference InputTextField,SyncWire
- *		A {@model SyncWire} connecting two elements with a {@model Condition} 'can sync?'
+ *		A {@model SyncWire} connecting two elements with a {@model Function} 'can sync?'
  *		will only {@model SimpleCondition permit} synchronisation if the value can be {@model CastNode cast successfully}.
  */
 rule "Add 'can cast?' condition check for onChange connecting to Update"
@@ -186,8 +191,8 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 end
 
 /**
- * @inference SyncWire
- *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model Event} executing the 'init' {@model Operation}
+ * @inference SyncWire,CanBeSynced
+ *		For elements connected by a {@model SyncWire}, the {@model Accessible#onAccess} {@model Event} {@model ECARule executing} the 'init' {@model Operation}
  *		will {@model SimpleCondition only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
  */
 rule "After 'init' has been called on a typed element, call 'validate'"
@@ -218,6 +223,10 @@ end
 
 /**
  * onInit->Validate() is only called if the fieldValue has been set.
+ *
+ * @inference SyncWire,CanBeSynced
+ *		For elements connected by a {@model SyncWire}, the {@model Accessible#onAccess} {@model Event} will only call
+ *		the 'validate' {@model Operation} if the relevant {@model Changeable#fieldValue} {@model Function is set}. 
  */
 rule "Only call 'validate' operation onAccess if fieldValue has been set"
 	when

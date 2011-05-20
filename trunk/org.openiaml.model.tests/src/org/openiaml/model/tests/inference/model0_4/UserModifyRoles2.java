@@ -35,11 +35,11 @@ import org.openiaml.model.tests.inference.ValidInferenceTestCase;
  * @author jmwright
  *
  */
-public class UserModifyRoles extends ValidInferenceTestCase {
+public class UserModifyRoles2 extends ValidInferenceTestCase {
 
 	@Override
 	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
-		return UserModifyRoles.class;
+		return UserModifyRoles2.class;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testInitial() throws Exception {
-		root = loadDirectly(UserModifyRoles.class);
+		root = loadDirectly(UserModifyRoles2.class);
 
 		Session session = assertHasSession(root, "target session");
 		assertNotGenerated(session);
@@ -62,7 +62,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testContentsOfDoLoginOperation() throws Exception {
-		root = loadAndInfer(UserModifyRoles.class);
+		root = loadAndInfer(UserModifyRoles2.class);
 
 		Session session = assertHasSession(root, "target session");
 		Session loginSession = assertHasSession(root, "current user login");
@@ -142,7 +142,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testDoLoginRunIncomingParameters() throws Exception {
-		root = loadAndInfer(UserModifyRoles.class);
+		root = loadAndInfer(UserModifyRoles2.class);
 
 		Session loginSession = assertHasSession(root, "current user login");
 
@@ -178,7 +178,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testRenderOrderOfEmailPassword() throws Exception {
-		root = loadAndInfer(UserModifyRoles.class);
+		root = loadAndInfer(UserModifyRoles2.class);
 
 		Session loginSession = assertHasSession(root, "current user login");
 
@@ -205,7 +205,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testNoSetWireBetweenProperties() throws Exception {
-		root = loadAndInfer(UserModifyRoles.class);
+		root = loadAndInfer(UserModifyRoles2.class);
 
 		Session session = assertHasSession(root, "target session");
 
@@ -242,7 +242,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testContentsOfDoLogoutOperation() throws Exception {
-		root = loadAndInfer(UserModifyRoles.class);
+		root = loadAndInfer(UserModifyRoles2.class);
 
 		Session session = assertHasSession(root, "target session");
 		ActivityOperation doLogout = assertHasActivityOperation(session, "do logout");

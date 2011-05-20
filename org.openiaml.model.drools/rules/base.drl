@@ -60,17 +60,17 @@ end
  * any sense at the moment. Both DomainIterator and InputForm should have this
  * incorrect inheritance of Changeable removed.
  *
- * @inference Changeable,Property 
+ * @inference Changeable,Value 
  *		A {@model Changeable} 
- * 		contains an untyped {@model Value property} named 'fieldValue'.
- * @inference Changeable,Property 
+ * 		contains an untyped {@model Value} named 'fieldValue'.
+ * @inference Changeable,Value 
  *		If set, the {@model Changeable#defaultValue defaultValue}
- *		is used as the default value of the created {@model Changeable#fieldValue } {@model Value property}.
+ *		is used as the default value of the created {@model Changeable#fieldValue } {@model Value}.
  * @inference InputForm
- *		{@model InputForm}s do <em>not</em> have a {@model Value property} 
+ *		{@model InputForm}s do <em>not</em> have a {@model Value} 
  *		named 'fieldValue' created by default.
  * @inference DomainIterator
- *		{@model DomainIterator}s do <em>not</em> have a {@model Value property} 
+ *		{@model DomainIterator}s do <em>not</em> have a {@model Value} 
  *		named 'fieldValue' created by default.
  */
 rule "Create field value for Changeable (untyped)"
@@ -97,10 +97,11 @@ rule "Create field value for Changeable (untyped)"
 end
 
 /**
- * @inference Condition,Property All {@model Property Properties}
- * 		will have a {@model ActivityFunction} in its container called "is set".
+ * @inference Condition,Value 
+ *		All {@model Value}s not {@model Value#name named} 'fieldValue'
+ * 		will have a {@model ActivityFunction} in its container called 'XXX is set'.
  */
-rule "Properties will also have a related 'is set' condition (not fieldValue)"
+rule "Values will also have a related 'is set' condition (not fieldValue)"
 	when
 		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
@@ -122,9 +123,11 @@ rule "Properties will also have a related 'is set' condition (not fieldValue)"
 end
 
 /**
- * "fieldValue is set" is generated as a BuiltinProperty, not a ActivityFunction.
- */
-rule "Properties will also have a related 'is set' BuiltinProperty (fieldValue)"
+ * @inference Condition,Value 
+ *		All {@model Value}s {@model Value#name named} 'fieldValue'
+ * 		will have a {@model BuiltinProperty} in its container called 'fieldValue is set'.
+ */ 
+rule "Values will also have a related 'is set' BuiltinProperty (fieldValue)"
 	when
 		container : ContainsFunctions ( )
 		containerGe : GeneratesElements ( this == container )
@@ -146,8 +149,9 @@ rule "Properties will also have a related 'is set' BuiltinProperty (fieldValue)"
 end
 
 /**
- * @inference Operation,Property All non-{@model Property#readOnly} {@model Property Properties}, other than 'fieldValue',
- * 		will have an {@model BuiltinOperation} in its container called "set XXX".
+ * @inference Operation,Value 
+ *		All non-{@model Value#readOnly} {@model Value}s, other than those {@model Value#name named} 'fieldValue',
+ * 		will have an {@model BuiltinOperation} in its container called 'set XXX'.
  */
 rule "Properties will have a related 'set XXX' operation"
 	when
@@ -166,6 +170,11 @@ rule "Properties will have a related 'set XXX' operation"
 
 end
 
+/**
+ * @inference ActivityFunction
+ *		An {@model ActivityFunction} named 'XXX is set', used to set a {@model Value#name named} {@model Value},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'X is set' operation"
 	when
 		container : ContainsFunctions ( )

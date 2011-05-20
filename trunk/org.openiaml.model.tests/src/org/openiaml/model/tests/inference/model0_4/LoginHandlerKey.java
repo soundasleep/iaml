@@ -221,8 +221,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
-		assertHasWiresFromTo(0, root, button, op);
-		ECARule run = assertHasRunAction(root, button, op);
+		ECARule run = assertHasECARule(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 
@@ -255,7 +254,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(loginSession, "login");
 		{
-			ECARule wire = assertHasNavigateAction(root, check, login, "fail");
+			ECARule wire = assertHasECARule(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 
@@ -272,8 +271,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		List<?> nodes = query(session, "iaml:operations[iaml:name='check instance']");
-		assertEquals(0, nodes.size());
+		assertHasNoOperation(session, "check instance");
 
 	}
 

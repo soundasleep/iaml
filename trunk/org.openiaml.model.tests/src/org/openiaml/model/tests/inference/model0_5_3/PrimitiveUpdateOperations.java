@@ -237,7 +237,6 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		// check <- ExternalValue <- value
 		{
 			assertEquals(1, check.getInFlows().size());
-			assertEquals(0, check.getOutFlows().size());
 			ExternalValue ev = (ExternalValue) check.getInFlows().get(0).getFrom();
 			assertEquals(value, ev.getExternalValueEdges().getValue());
 		}

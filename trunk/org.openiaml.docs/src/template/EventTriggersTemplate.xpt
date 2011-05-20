@@ -20,7 +20,7 @@
 </div>
 
 <ul>
-«FOREACH classes.references.select(r|r.type.name == "EventTrigger").name.toSet().sortBy(e|e) AS eventName»
+«FOREACH classes.references.select(r|r.type.name == "Event").name.toSet().sortBy(e|e) AS eventName»
 	<li><a href="event-«eventName-».html">«eventName»</a></li>
 	«EXPAND eventReference(eventName)»
 «ENDFOREACH»

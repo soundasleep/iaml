@@ -200,7 +200,7 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model Property#readOnly} {@model Property} 
+ *		A {@model DomainIterator} has a {@model Value#readOnly} {@model Value} 
  *		called '{@model DomainIterator#results}'.
  */
 rule "Create 'results' Property"
@@ -242,8 +242,8 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} will contain a generated {@model ActivityFunction}
- *		named 'not empty' - the inverse of the '{@model Condition#empty}' condition.
+ *		A {@model DomainIterator} will contain a generated {@model Function}
+ *		named 'not empty' - the inverse of the '{@model DomainIterator#empty}' condition.
  */
 rule "Create 'not empty' composite condition"
 	when
@@ -264,6 +264,11 @@ rule "Create 'not empty' composite condition"
 	
 end
 
+/**
+ * @inference DomainIterator,ActivityFunction
+ *		The 'not empty' {@model ActivityFunction} for a {@model DomainIterator},
+ *		will be completed with the {@model ActivityNode contents necessary} to check that the iterator is not {@model DomainIterator#empty}.
+ */
 rule "Create contents of 'not empty' condition"
 	when
 		instance : DomainIterator( )

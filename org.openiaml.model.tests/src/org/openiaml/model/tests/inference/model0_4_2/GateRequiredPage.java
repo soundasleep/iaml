@@ -219,7 +219,6 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		// property -> ExternalValue -> check
 		{
 			assertEquals(1, check.getInFlows().size());
-			assertEquals(0, check.getOutFlows().size());
 			ExternalValue ev = (ExternalValue) check.getInFlows().get(0).getFrom();
 			assertEquals(property, ev.getExternalValueEdges().getValue());
 		}

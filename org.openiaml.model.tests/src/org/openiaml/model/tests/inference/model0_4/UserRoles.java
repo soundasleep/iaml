@@ -73,11 +73,12 @@ public class UserRoles extends InferenceTestCase {
 		assertHasNoFrame(root, "login");
 
 		// no operations in the ach or session
-		assertHasNone(ach, "iaml:operations");
-		assertHasNone(session, "iaml:operations");
+		assertEquals(0, ach.getOperations().size());
+		assertEquals(0, session.getOperations().size());
 
 		// or events in the target page
-		assertHasNone(target, "iaml:eventTriggers");
+		assertNull(target.getOnAccess());
+		assertNull(target.getOnInit());
 	}
 
 	/**
@@ -217,13 +218,13 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(pageOp);
 
 		// connected
-		ECARule run = assertHasRunAction(target, event, pageOp, "run");
+		ECARule run = assertHasECARule(target, event, pageOp, "run");
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
 		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
-		ECARule fail = assertHasNavigateAction(root, pageOp, login, "fail");
+		ECARule fail = assertHasECARule(root, pageOp, login, "fail");
 		assertGenerated(fail);
 
 	}
@@ -273,13 +274,13 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(event);
 
 		// connected
-		ECARule run = assertHasRunAction(target, event, check, "run");
+		ECARule run = assertHasECARule(target, event, check, "run");
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
 		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
-		ECARule fail = assertHasNavigateAction(root, check, login, "fail");
+		ECARule fail = assertHasECARule(root, check, login, "fail");
 		assertGenerated(fail);
 
 	}
@@ -317,7 +318,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(cancel);
 		OperationCallNode virtualOp = assertHasOperationCallNode(op, "call permissions operation");
 		assertGenerated(virtualOp);
-		ECARule virtualRun = assertHasRunAction(op, virtualOp, targetOp, "run");
+		ECARule virtualRun = assertHasECARule(op, virtualOp, targetOp, "run");
 		assertGenerated(virtualRun);
 
 		// execution edges between all the operations

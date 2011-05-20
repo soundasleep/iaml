@@ -271,7 +271,6 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
-		assertHasWiresFromTo(0, root, button, op);
 		ECARule run = assertHasRunAction(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
@@ -385,7 +384,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Session loginSession = assertHasSession(root, "login handler login");
 		Frame login = assertHasFrame(loginSession, "login");
 		{
-			ECARule wire = assertHasNavigateAction(root, check, login, "fail");
+			ECARule wire = assertHasECARule(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

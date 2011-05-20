@@ -62,11 +62,10 @@
     </loginHandlers>
   </scopes>
   <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.e9f" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.ea1" inRequiresEdges="wires.1233afe62eb.2d">
+    <parameterEdges id="wires.1233b53a3ce.ab" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.a6"/>
+    <parameterEdges id="wires.1233b53a3ce.16d" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.16c"/>
     <parameterEdges id="wires.1233b53a3ce.5a" parameterValue="domain.128807fbeba.e9f" parameterTerm="components.1233b53a67e.19"/>
-    <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
-      <parameterEdges id="wires.1233b53a3ce.ab" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.a6"/>
-      <parameterEdges id="wires.1233b53a3ce.16d" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.16c"/>
-    </permissions>
+    <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453" />
     <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
   </schemas>
   <schemas xsi:type="iaml.users:Role" name="additional role 1" id="domain.128807fbeba.ea2" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inSchemas="domain.128807fbeba.ea4" inRequiresEdges="wires.1233b53a3ce.23a">

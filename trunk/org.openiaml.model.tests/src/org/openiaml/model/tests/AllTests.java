@@ -45,6 +45,10 @@ public class AllTests {
         suite.addTest(AllMigrationTests.suite());
         suite.addTest(AllModelTests.suite());
 
+        // analyse for unused elements
+        suite.addTestSuite(IdentifyUnusedMetamodelFeatures.class);
+        
+        // commit inferred models
         suite.addTestSuite(CommitInferredModels.class);
 
         return suite; 

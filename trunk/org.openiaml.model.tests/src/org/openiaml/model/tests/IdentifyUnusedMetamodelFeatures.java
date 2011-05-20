@@ -6,6 +6,7 @@ package org.openiaml.model.tests;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -179,30 +180,36 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 		
 	}
 	
-	public void testIdentifyUnusedMetamodelFeatures() throws Exception {
+	private class IdentifyState {
 		
 		// each class has a collection of local & inherited
 		// features; count the number of class instances that
 		// possess non-default values for these features
-		FeatureCountMap featureCount =
+		public FeatureCountMap featureCount =
 			new FeatureCountMap();
 		
 		// keep track of how many direct supertype references are actually used
-		SupertypeUsageMap supertypeUsageMap =
+		public SupertypeUsageMap supertypeUsageMap =
 			new SupertypeUsageMap();
 		
 		// a count of the number of unique instances of this class,
 		// ignoring subtypes
-		UniqueClassMap uniqueClasses =
+		public UniqueClassMap uniqueClasses =
 			new UniqueClassMap();
 		
 		// a count of the number of unique instances of
 		// attributes for a particular class, ignoring subtypes
-		UniqueAttributeMap uniqueAttributes =
+		public UniqueAttributeMap uniqueAttributes =
 			new UniqueAttributeMap();
 
 		// a count of all object instances
-		int allInstancesCount = 0;
+		public int allInstancesCount = 0;
+		
+	}
+	
+	public void testIdentifyUnusedMetamodelFeatures() throws Exception {
+		
+		IdentifyState state = new IdentifyState();
 		
 		// now go through all model instances in /infer-output
 		// File dir = new File("src/org/openiaml/model/tests/codegen/functions/");
@@ -224,68 +231,30 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 			// load the model
 			EObject model = ModelLoader.load(f);
 			
+			// handle root object
+			handleEObject(state, model);
+			
 			// iterate through its contents
 			Iterator<EObject> it = model.eAllContents();
 			while (it.hasNext()) {
 				EObject obj = it.next();
 				
-				// this is a unique instance of this class type
-				EClass cls = obj.eClass();
-				uniqueClasses.uniqueInstance(cls);
-				allInstancesCount++;
-				
-				// keep track of how many supertype references are actually used
-				Set<EClass> usedSupertypeReferences = new HashSet<EClass>();
-				
-				// get all attribute instances
-				for (EAttribute attr : cls.getEAllAttributes()) {
-					// is it set?
-					if (obj.eIsSet(attr)) {
-						Object value = obj.eGet(attr);
-						
-						// is it default?
-						if (value != null && !value.equals(attr.getDefaultValue())) {
-							// put the value
-							uniqueAttributes.attributeValue(cls, attr, value);
-							
-							// keep track of direct container
-							usedSupertypeReferences.add(attr.getEContainingClass());
-							// and all supertypes
-							for (EClass supertype : attr.getEContainingClass().getEAllSuperTypes()) {
-								usedSupertypeReferences.add(supertype);
-							}
-							
-						}
-					}
-				}
-				
-				// get all EStructuralFeatures
-				for (EStructuralFeature ft : cls.getEAllStructuralFeatures()) {
-					// is it set?
-					if (obj.eIsSet(ft)) {
-						// register an instance
-						featureCount.featureInstance(cls, ft);
-
-						// keep track of direct container
-						usedSupertypeReferences.add(ft.getEContainingClass());
-						// and all supertypes
-						for (EClass supertype : ft.getEContainingClass().getEAllSuperTypes()) {
-							usedSupertypeReferences.add(supertype);
-						}
-
-					}
-				}
-				
-				// now mark supertype usage
-				supertypeUsageMap.usedClasses(cls, usedSupertypeReferences);
+				handleEObject(state, obj);
 			}
 		}
 		
-		// get all classes in the package and subpackage
-		Set<EClass> allClasses = getAllClasses(ModelPackage.eINSTANCE);
-		
 		// now output everything, based on the metamodel description
 		System.out.println("Generating output...");
+		generateOutput(state, ModelPackage.eINSTANCE);
+	}
+	
+	/**
+	 * Actually generates 
+	 * 
+	 * @param state
+	 * @throws IOException 
+	 */
+	private void generateOutput(IdentifyState state, EPackage pkg) throws IOException {
 
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>");
@@ -298,9 +267,17 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 		buf.append("<td class=\"unique\">unique values</td>");
 		buf.append("</tr>\n");
 		buf.append("</table>\n");
+		
+		// get all classes in the package and subpackage
+		Set<EClass> allClasses = getAllClasses(pkg);
+		
 		for (EClass cls : sortedClasses(allClasses)) {
-			int c3 = uniqueClasses.getCount(cls);
-			String pct3 = getPercent(c3, allInstancesCount);
+			// ignore interface, abstract classes
+			if (cls.isInterface() || cls.isAbstract())
+				continue;
+			
+			int c3 = state.uniqueClasses.getCount(cls);
+			String pct3 = getPercent(c3, state.allInstancesCount);
 			
 			buf.append("<table class=\"class\">\n");
 			buf.append("<tr class=\"main class\"><th class=\"name\">");
@@ -316,7 +293,7 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 			
 			// for every local structural feature
 			for (EStructuralFeature ft : sortedFeatures(cls.getEStructuralFeatures())) {
-				int count = featureCount.getFeatureInstanceCount(cls, ft);
+				int count = state.featureCount.getFeatureInstanceCount(cls, ft);
 				String pct = getPercent(count, c3);
 				
 				buf.append("<tr class=\"feature\">");
@@ -329,7 +306,7 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 				// if it's an attribute
 				if (ft instanceof EAttribute) {
 					EAttribute attr = (EAttribute) ft;
-					int counta = uniqueAttributes.getUniqueAttributes(cls, attr);
+					int counta = state.uniqueAttributes.getUniqueAttributes(cls, attr);
 					buf.append("</td><td class=\"unique uniq").append(counta).append("\">");
 					buf.append(counta);
 				} else {
@@ -341,7 +318,7 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 
 			// get all the defined supertypes first
 			for (EClass supertype : sortedClasses(cls.getEAllSuperTypes())) {
-				int c2 = supertypeUsageMap.getUsage(cls, supertype);
+				int c2 = state.supertypeUsageMap.getUsage(cls, supertype);
 				String pct2 = getPercent(c2, c3);
 				
 				buf.append("<tr class=\"super class\"><th class=\"name\">");
@@ -357,7 +334,7 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 				
 				// for every local structural feature
 				for (EStructuralFeature ft : sortedFeatures(supertype.getEStructuralFeatures())) {
-					int count = featureCount.getFeatureInstanceCount(cls, ft);
+					int count = state.featureCount.getFeatureInstanceCount(cls, ft);
 					String pct = getPercent(count, c2);
 					
 					buf.append("<tr class=\"feature\">");
@@ -370,7 +347,7 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 					// if it's an attribute
 					if (ft instanceof EAttribute) {
 						EAttribute attr = (EAttribute) ft;
-						int counta = uniqueAttributes.getUniqueAttributes(cls, attr);
+						int counta = state.uniqueAttributes.getUniqueAttributes(cls, attr);
 						buf.append("</td><td class=\"unique uniq").append(counta).append("\">");
 						buf.append(counta);
 					} else {
@@ -395,6 +372,66 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 		fw.write(buf.toString());
 		fw.close();
 
+	}
+
+	/**
+	 * Actually analyses a given EObject, and stores
+	 * the results in the given state.
+	 * 
+	 * @param state
+	 * @param model
+	 */
+	private void handleEObject(IdentifyState state, EObject obj) {
+
+		// this is a unique instance of this class type
+		EClass cls = obj.eClass();
+		state.uniqueClasses.uniqueInstance(cls);
+		state.allInstancesCount++;
+		
+		// keep track of how many supertype references are actually used
+		Set<EClass> usedSupertypeReferences = new HashSet<EClass>();
+		
+		// get all attribute instances
+		for (EAttribute attr : cls.getEAllAttributes()) {
+			// is it set?
+			if (obj.eIsSet(attr)) {
+				Object value = obj.eGet(attr);
+				
+				// is it default?
+				if (value != null && !value.equals(attr.getDefaultValue())) {
+					// put the value
+					state.uniqueAttributes.attributeValue(cls, attr, value);
+					
+					// keep track of direct container
+					usedSupertypeReferences.add(attr.getEContainingClass());
+					// and all supertypes
+					for (EClass supertype : attr.getEContainingClass().getEAllSuperTypes()) {
+						usedSupertypeReferences.add(supertype);
+					}
+					
+				}
+			}
+		}
+		
+		// get all EStructuralFeatures
+		for (EStructuralFeature ft : cls.getEAllStructuralFeatures()) {
+			// is it set?
+			if (obj.eIsSet(ft)) {
+				// register an instance
+				state.featureCount.featureInstance(cls, ft);
+
+				// keep track of direct container
+				usedSupertypeReferences.add(ft.getEContainingClass());
+				// and all supertypes
+				for (EClass supertype : ft.getEContainingClass().getEAllSuperTypes()) {
+					usedSupertypeReferences.add(supertype);
+				}
+
+			}
+		}
+		
+		// now mark supertype usage
+		state.supertypeUsageMap.usedClasses(cls, usedSupertypeReferences);
 	}
 
 	/**

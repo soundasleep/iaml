@@ -679,7 +679,7 @@ boolean isNumeric(model::EXSDDataType this) :
 	isNumericXSD(definition);
 
 operationUsed(model::Operation this) :
-	!(rules.isEmpty && inWires.isEmpty); 
+	!(rules.isEmpty); 
 
 conditionUsed(model::Function this) :
 	!(conditioned.isEmpty && outWires.isEmpty);

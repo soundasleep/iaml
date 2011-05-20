@@ -131,7 +131,7 @@
       <details key="documentation" value="An abstract element for the functionality contained within {@model CompositeOperation}s."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireDestination #//NamedElement #//Action">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//Action #//NamedElement #//ContainsWires">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents some type of executable step, which may contain logic flows, data flows or other operations."/>
     </eAnnotations>
@@ -934,7 +934,7 @@
         <details key="documentation" value="The successful completion of an {@model Operation}, or the {@model Condition} passed."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//NamedElement #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//wires/ConditionEdgeDestination #//operations/DataFlowEdgeDestination #//operations/DataFlowEdgesSource">
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//NamedElement #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//wires/ConditionEdgeDestination #//operations/DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Based on its {@model DecisionNode#name}, considers the incoming {@model ConditionEdge}s or {@model DataFlowEdge}s, and follows passing or failing {@model ExecutionEdge}s as appropriate."/>
       </eAnnotations>
@@ -1145,7 +1145,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//NamedElement #//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ActionEdgeSource #//ContainsFunctions #//ContainsOperations #//ContainsProperties #//ContainsWires #//Wireable">
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//NamedElement #//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ActionEdgeSource #//ContainsFunctions #//ContainsOperations #//ContainsProperties #//ContainsWires">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
       </eAnnotations>
@@ -1153,7 +1153,7 @@
         <details key="documentation" value="When placed into a {@model Frame} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresEdge}."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Gate" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//GeneratedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//ActionEdgeSource #//Action #//users/RequiresEdgesSource">
+    <eClassifiers xsi:type="ecore:EClass" name="Gate" eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//ActionEdgeSource #//Action #//users/RequiresEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Restricts access into, or out of, a {@model Scope}. When placed into a {@model Scope} (including {@model Session}), all {@model Frame} accesses within that Scope must first -- or finally -- execute this {@model Gate}. If all incoming {@model ConditionEdge}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionEdge}s becomes false."/>
       </eAnnotations>
@@ -1392,7 +1392,7 @@
         <details key="documentation" value="A particular Role that a user may have; may be {@model ExtendsEdge inherited} from other Roles."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single Permission that a user may have; may also be {@model ProvidesEdge provided} by a {@model Role}."/>
       </eAnnotations>

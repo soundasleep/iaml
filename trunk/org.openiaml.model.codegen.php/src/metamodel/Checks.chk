@@ -164,18 +164,18 @@ context model::BuiltinProperty WARNING "Unknown builtin property name '" + name 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;
 
-context model::components::Gate ERROR "An entry Gate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' wire, or it will never permit access" :
+context model::components::Gate ERROR "An entry Gate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' rule, or it will never permit access" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).entryGate != this
 	|| (conditions.size >= 1
 		|| outRequiresEdges.size >= 1
-		|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first"));
+		|| listeners.exists(w | w.name == "first"));
 
-context model::components::Gate ERROR "An exit Gate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :
+context model::components::Gate ERROR "An exit Gate needs to have at least one incoming Condition, or one outgoing 'last' rule, or it will never permit access" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).exitGate != this
 	|| (conditions.size >= 1
-		|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last"));
+		|| listeners.exists(w | w.name == "last"));
 
 context model::components::Gate ERROR "An entry Gate nneeds to have at least one outgoing ActionEdge" :
 	!model::Scope.isInstance(eContainer)

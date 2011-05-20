@@ -1,5 +1,5 @@
 /**
- * Creates default {@model Operation}s for {@model Property}s, and their contents.
+ * Creates default {@model Operation}s for {@model Value}s, and their contents.
  */
 package org.openiaml.model.drools.rules.operations
 
@@ -21,7 +21,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * Issue 210: Create BuiltinOperations rather than ActivityOperations.
- * TODO do not create 'update' operation for {@model Property#readOnly} Properties.
+ * TODO do not create 'update' operation for {@model Value#readOnly} Properties.
  *
  * @inference VisibleThing,Operation
  *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will contain an {@model Operation} named "update".
@@ -83,8 +83,8 @@ rule "Create 'init' operation for VisibleThings"
 end
 
 /**
- * @inference SetWire,Property,Operation
- *		An {@model Operation} 'set value XXX' is created in the container of all {@model Property Properties}
+ * @inference SetWire,Value,Operation
+ *		An {@model Operation} 'set value XXX' is created in the container of all {@model Value}s
  *		that are the target of {@model SetWire}s.
  */
 rule "Create 'set value XXX' Operation for all Properties, except fieldValue"
@@ -190,9 +190,9 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 end
 
 /**
- * @inference Changeable,ActivityOperation,Property
+ * @inference Changeable,ActivityOperation,Value
  *		An empty {@model ActivityOperation} named "set value XXX", contained within a
- *		{@model Changeable}, used to set a {@model Property} other than {@model Changeable#fieldValue},
+ *		{@model Changeable}, used to set a {@model Value} other than {@model Changeable#fieldValue},
  *		will automatically be completed with {@model ActivityNode}s to implement
  *		the particular operation.
  */

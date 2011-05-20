@@ -47,9 +47,9 @@ end
  * simplify the completed model; i.e. only text fields.
  *
  * @inference InputTextField
- *		{@model InputTextField}s have an {@model Property} 'currentInput'.
+ *		{@model InputTextField}s have an {@model Value} 'currentInput'.
  */
-rule "InputTextFields have a Property currentInput"
+rule "InputTextFields have a Value currentInput"
 	when
 		field : InputTextField ( )
 		type : EXSDDataType( definition != null, 

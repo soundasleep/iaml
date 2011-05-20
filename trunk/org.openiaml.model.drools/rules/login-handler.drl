@@ -756,9 +756,9 @@ end
  *		within {@model Scope}s are first evaluated for any
  * 		{@model Scope#onAccess} {@model Event events}.
  * @implementation LoginHandler
- *		The generated {@model Property} containing the current password
+ *		The generated {@model Value} containing the current password
  *		for a {@model LoginHandler} is set before it is evaluated whether
- *		the instance actually exists, thus the Property may not be
+ *		the instance actually exists, thus the Value may not be
  *		valid.
  */
 rule "Create 'do login' operation within all login_handlers"

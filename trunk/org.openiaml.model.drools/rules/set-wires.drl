@@ -143,11 +143,11 @@ end
  * Solves issue 209: Allow Properties to be set directly by SetWires or SyncWires.
  *
  * @inference Changeable,SetWire
- *		A {@model SetWire} connecting a {@model Changeable} to a {@model Property}
- *		directly will update the target {@model Property} when the
+ *		A {@model SetWire} connecting a {@model Changeable} to a {@model Value}
+ *		directly will update the target {@model Value} when the
  *		source element is {@model Changeable#onChange changed}.
  */
-rule "Run instance wire from edit to Property update (onChange)"
+rule "Run instance wire from edit to Value update (onChange)"
 	when
 		source : Changeable( )
 		
@@ -236,7 +236,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
-rule "Connect parameter wire to: Run instance wire from edit to Property update (onChange)"
+rule "Connect parameter wire to: Run instance wire from edit to Value update (onChange)"
 	when
 		source : Changeable( )
 		

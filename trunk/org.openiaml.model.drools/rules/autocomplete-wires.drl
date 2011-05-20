@@ -249,10 +249,10 @@ end
 
 /**
  * @inference InternetApplication,EXSDDataType
- *		An {@model InternetApplication} will contain a {@model Property#readOnly}
- *		{@model Property}, named 'blank', which represents an empty string.
+ *		An {@model InternetApplication} will contain a {@model Value#readOnly}
+ *		{@model Value}, named 'blank', which represents an empty string.
  */
-rule "InternetApplication has a readonly Property 'blank' created"
+rule "InternetApplication has a readonly Value 'blank' created"
 	when
 		container : InternetApplication ( )
 		type : EXSDDataType( definition != null,

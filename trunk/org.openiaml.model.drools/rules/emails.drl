@@ -1,5 +1,5 @@
 /**
- * Completes the default {@model Property}s of {@model Email}s.
+ * Completes the default {@model Value}s of {@model Email}s.
  */
 package org.openiaml.model.drools.rules.email
 

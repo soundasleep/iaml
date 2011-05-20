@@ -203,7 +203,7 @@ end
  *		A {@model DomainIterator} has a {@model Value#readOnly} {@model Value} 
  *		called '{@model DomainIterator#results}'.
  */
-rule "Create 'results' Property"
+rule "Create 'results' Value"
 	when
 		instance : DomainIterator( )
 		not ( property : Value ( instance.results == property ) )

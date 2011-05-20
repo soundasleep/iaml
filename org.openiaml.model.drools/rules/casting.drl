@@ -155,7 +155,7 @@ end
 /**
  * @inference SyncWire
  *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model Event} executing the 'init' {@model Operation}
- *		will {@model SimpleCondition only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
+ *		will {@model SimpleCondition only execute} if the source {@model Value fieldValue} can be {@model CastNode cast successfully}.  
  */
 rule "Add 'can cast?' condition check for onAccess connecting to Init"
 	when
@@ -193,7 +193,7 @@ end
 /**
  * @inference SyncWire,CanBeSynced
  *		For elements connected by a {@model SyncWire}, the {@model Accessible#onAccess} {@model Event} {@model ECARule executing} the 'init' {@model Operation}
- *		will {@model SimpleCondition only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
+ *		will {@model SimpleCondition only execute} if the source {@model Value fieldValue} can be {@model CastNode cast successfully}.  
  */
 rule "After 'init' has been called on a typed element, call 'validate'"
 	when

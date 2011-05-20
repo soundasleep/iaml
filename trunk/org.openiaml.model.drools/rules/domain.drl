@@ -22,6 +22,11 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference DomainAttribute,DomainSchema
+ *		A {@model DomainSchema} which does not contain a {@model DomainAttribute#primaryKey primary key}
+ *		{@model DomainAttribute} will contain one named 'generated primary key'.
+ */
 rule "Create a default primary key for DomainObjects which do not have one"
 
 	when
@@ -42,6 +47,12 @@ rule "Create a default primary key for DomainObjects which do not have one"
 
 end 
 
+/**
+ * @inference DomainSchema,DomainAttribute,ExtendsEdge
+ *		A non-{@model DomainAttribute#primaryKey} {@model DomainAttribute} in a {@model DomainSchema}, 
+ *		represented as {@model ExtendsEdge a supertype} of another {@model DomainSchema},
+ *		will be copied into the subtype schema and marked as a {@model ExtendsEdge subattribute}.
+ */
 rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsEdges"
 	when
 		sourceObject : DomainSchema( )
@@ -69,6 +80,12 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 
 end
 
+/**
+ * @inference DomainSchema,DomainAttribute,ExtendsEdge
+ *		A {@model DomainAttribute#primaryKey} {@model DomainAttribute} in a {@model DomainSchema}, 
+ *		represented as {@model ExtendsEdge a supertype} of another {@model DomainSchema},
+ *		will be copied into a new 'ID' {@model DomainAttribute} and marked as a {@model ExtendsEdge foreign key}.
+ */
 rule "Domain objects that extend each other should include an indexable reference to the source primary key"
 	when
 		sourceObject : DomainSchema( )

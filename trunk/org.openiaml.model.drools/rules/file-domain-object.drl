@@ -18,6 +18,11 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference DomainSource
+ *		A {@model DomainSource} of {@model DomainSource#type} <code>PROPERTIES_FILE</code>
+ *		will generate a {@model DomainSchema} named 'properties'. 
+ */
 rule "Create the Properties file DomainSchema"
 		
 	when
@@ -48,6 +53,12 @@ end
 // unfortunately $p.stringPropertyNames() cannot be iterated over.
 // this is either because Drools expects getFieldName(), or it cannot
 // iterate over Set or Collection
+/**
+ * @inference DomainSource,DomainSchema
+ *		A {@model DomainSource} of {@model DomainSource#type} <code>PROPERTIES_FILE</code>
+ *		will populate the 'properties' {@model DomainSchema} with string-{@model DomainAttribute#type typed} 
+ *		{@model DomainAttributes} for each value in the source properties file.
+ */
 rule "Create DomainAttributes for Properties File DomainSchema"
 		
 	when

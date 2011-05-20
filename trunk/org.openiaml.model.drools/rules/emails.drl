@@ -22,8 +22,9 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference Email An {@model Email} contains a {@model Value property} named
- *		'to', if no existing {@model Property} exists.
+ * @inference Email 
+ *		An {@model Email} contains a {@model Value} named
+ *		'to', if no such named {@model Value} exists.
  */
 rule "Create 'to' property for Email"
 	when
@@ -43,8 +44,9 @@ rule "Create 'to' property for Email"
 end
 
 /**
- * @inference Email An {@model Email} contains a {@model Value property} named
- *		'toName', if no existing {@model Property} exists.
+ * @inference Email 
+ *		An {@model Email} contains a {@model Value} named
+ *		'toName', if no such named {@model Value} exists.
  */
 rule "Create 'toName' property for Email"
 	when
@@ -64,8 +66,9 @@ rule "Create 'toName' property for Email"
 end
 
 /**
- * @inference Email An {@model Email} contains a {@model Value property} named
- *		'from', if no existing {@model Property} exists.
+ * @inference Email 
+ *		An {@model Email} contains a {@model Value} named
+ *		'from', if no such named {@model Value} exists.
  */
 rule "Create 'from' property for Email"
 	when
@@ -85,8 +88,9 @@ rule "Create 'from' property for Email"
 end
 
 /**
- * @inference Email An {@model Email} contains a {@model Value property} named
- *		'fromName', if no existing {@model Property} exists.
+ * @inference Email 
+ *		An {@model Email} contains a {@model Value} named
+ *		'fromName', if no such named {@model Value} exists.
  */
 rule "Create 'fromName' property for Email"
 	when
@@ -106,8 +110,9 @@ rule "Create 'fromName' property for Email"
 end
 
 /**
- * @inference Email An {@model Email} contains a {@model Value property} named
- *		'subject', if no existing {@model Property} exists.
+ * @inference Email 
+ *		An {@model Email} contains a {@model Value} named
+ *		'subject', if no such named {@model Value} exists.
  */
 rule "Create 'subject' property for Email"
 	when

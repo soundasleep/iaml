@@ -368,7 +368,7 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 
 		// write to file
 		System.out.println("Writing to file...");
-		FileWriter fw = new FileWriter(new File("unused-metamodel-features.html"));
+		FileWriter fw = new FileWriter(new File("unused/unused-metamodel-features.html"));
 		fw.write(buf.toString());
 		fw.close();
 

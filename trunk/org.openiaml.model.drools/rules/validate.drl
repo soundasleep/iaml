@@ -39,6 +39,12 @@ rule "Create 'Warning' Label for InputTextFields"
 	
 end
 
+/**
+ * @inference SyncWire,ActivityOperation
+ *		Two differently-{@model InputTextField#type typed} {@model InputTextField}s
+ *		will define an {@model Operation} within the first field
+ *		named 'validate'.
+ */
 rule "When two TextFields of different types are under a SyncWire, add a 'validate' operation"
 	when
 		e1 : InputTextField( )
@@ -62,6 +68,12 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 
 end
 
+/**
+ * @inference SyncWire,ECARule
+ *		The 'validate' {@model Operation} defined to validate the type instances of
+ *		two differently-{@model InputTextField#type typed} {@model InputTextField}s
+ *		will be {@model ECARule executed} when one of the fields {@model InputTextField#onChange changes}.
+ */
 rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onChange"
 	when
 		e1 : InputTextField( )
@@ -89,6 +101,12 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 
 end
 
+/**
+ * @inference ActivityOperation,Changeable
+ *		An {@model ActivityOperation} named 'validate', used to check the validity of two
+ *		type instances of two {@model InputTextField}s,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'validate' operation"
 	when
 		e1 : InputTextField( )

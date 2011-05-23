@@ -446,8 +446,8 @@ rule "Create 'check permissions' operation in AccessControlHandler"
 end
 
 /**
- * @inference ActivityFunction,Changeable
- *		An {@model ActivityFunction} named 'permissions check' within an {@model AccessControlHandler} 
+ * @inference ActivityOperation,Changeable
+ *		An {@model ActivityOperation} named 'permissions check' within an {@model AccessControlHandler} 
  *		protecting a {@model Session}-contained {@model Frame}, used to check the status of the
  *		'check permissions' {@model Operation} within the same handler, 
  *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.

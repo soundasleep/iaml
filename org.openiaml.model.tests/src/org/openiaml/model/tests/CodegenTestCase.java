@@ -60,12 +60,13 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * 
 	 * @see ModelSourceResolver#getModelFileForClass(Class)
 	 * @see #loadAndInfer(String)
+	 * @see #DEFAULT_LOG_RULE_SOURCES
 	 * @param modelFile
 	 * @return The loaded InternetApplication
 	 * @throws Exception
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> modelFile) throws Exception {
-		return loadAndCodegen(modelFile, false);
+		return loadAndCodegen(modelFile, DEFAULT_LOG_RULE_SOURCES);
 	}
 	
 	/**
@@ -87,13 +88,14 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Load a model and perform code generation.
 	 * 
 	 * @see #loadAndInfer(String)
+	 * @see #DEFAULT_LOG_RULE_SOURCES
 	 * @param modelFile
 	 * @param logRuleSource should the source of rules be logged?
 	 * @return The loaded InternetApplication
 	 * @throws Exception
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> modelFile, IProgressMonitor monitor) throws Exception {
-		InternetApplication root = loadAndInfer(modelFile, false, monitor);
+		InternetApplication root = loadAndInfer(modelFile, DEFAULT_LOG_RULE_SOURCES, monitor);
 		doCodegen(modelFile, root);
 		return root;
 	}
@@ -102,12 +104,13 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Load a model and perform code generation.
 	 * 
 	 * @see #loadAndInfer(String)
+	 * @see #DEFAULT_LOG_RULE_SOURCES
 	 * @param modelFile
 	 * @return The loaded InternetApplication
 	 * @throws Exception
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> testClass, String modelFile) throws Exception {
-		return loadAndCodegen(testClass, modelFile, false);
+		return loadAndCodegen(testClass, modelFile, DEFAULT_LOG_RULE_SOURCES);
 	}
 	
 	/**

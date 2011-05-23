@@ -67,6 +67,11 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  * @author jmwright
  */
 public abstract class ModelInferenceTestCase extends ModelTestCase implements IProvidesInferenceEngine {
+	
+	/**
+	 * Should inference rule sources be logged by default?
+	 */
+	public static final boolean DEFAULT_LOG_RULE_SOURCES = false;
 
 	protected InternetApplication root;
 	
@@ -95,12 +100,13 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 *
 	 * @see ModelSourceResolver#getModelFileForClass(Class)
 	 * @see #loadAndCodegen(String)
+	 * @see #DEFAULT_LOG_RULE_SOURCES
 	 * @param class1 The test class to load a model for.
 	 * @return the loaded and inferred InternetApplication
 	 */
 	protected InternetApplication loadAndInfer(
 			Class<?> class1) throws Exception {
-		return loadAndInfer(class1, false);
+		return loadAndInfer(class1, DEFAULT_LOG_RULE_SOURCES);
 	}
 	
 	/**

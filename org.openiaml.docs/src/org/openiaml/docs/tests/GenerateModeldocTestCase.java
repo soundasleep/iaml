@@ -413,6 +413,12 @@ public class GenerateModeldocTestCase extends TestCase {
 				// (we need to ignore tags such as @implementation)
 				int inferenceTags = getInferenceTags(pkg.getRules());
 				
+				// count the unique number of all rules
+				Set<String> allRules = new HashSet<String>();
+				for (DroolsRule r : pkg.getRules()) {
+					allRules.add(r.getName());
+				}
+				
 				// ModelDoc does not load all rules, but only
 				// those with Javadoc tags. therefore, we can't
 				// check that each rule has documentation; but rather,
@@ -428,7 +434,9 @@ public class GenerateModeldocTestCase extends TestCase {
 						.append(pkg.getName())
 						.append(".drl: Expected ")
 						.append(pkg.getUniqueRules())
-						.append(" tags, found ")
+						.append(" tags for ")
+						.append(allRules.size())
+						.append(" rules, found ")
 						.append(inferenceTags)
 						.append(" @inference tags out of ")
 						.append(pkg.getRules().size())

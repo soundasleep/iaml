@@ -360,7 +360,7 @@ rule "Create 'target' property in Last button"
 end
 
 /**
- * @inference DomainIterator,SetWire
+ * @inference DomainIterator,SetWire,Parameter
  *		The 'target' {@model Value} defined in a 'last' {@model Button} defined for navigating a {@model DomainIterator},
  *		as defined by a {@model SetWire}, will be used as a {@model Parameter} for executing
  *		the {@model DomainIterator#jump} {@model Operation} on that iterator.
@@ -555,7 +555,7 @@ rule "Connect Instance.onChange to Results.update"
 end
 
 /**
- * @inference DomainIterator,SetWire,Event
+ * @inference DomainIterator,SetWire,Event,Parameter
  *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
  *		will be used as a {@model Parameter} to update the 'results' {@model Label}
  *		defined for navigating a {@model DomainIterator} with a {@model SetWire}
@@ -614,7 +614,7 @@ rule "Connect Instance.onAccess to Results.update"
 end
 
 /**
- * @inference DomainIterator,SetWire,Event
+ * @inference DomainIterator,SetWire,Event,Parameter
  *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
  *		will be used as a {@model Parameter} to update the 'results' {@model Label}
  *		defined for navigating a {@model DomainIterator} with a {@model SetWire}

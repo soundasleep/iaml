@@ -77,7 +77,7 @@ rule "Create an input field for Autocomplete"
 end
 
 /**
- * @inference AutocompleteWire
+ * @inference AutocompleteWire,Parameter
  *		The <em>query {@model InputTextField}</em> created by an {@model AutocompleteWire} will be connected
  *		as a {@model Parameter} to the connected {@model DomainIterator}.
  */
@@ -132,7 +132,7 @@ rule "Update DomainIterator query if it is not set"
 end
 
 /**
- * @inference AutocompleteWire
+ * @inference AutocompleteWire,Parameter
  *		The <em>query {@model InputTextField}</em> created by an {@model AutocompleteWire}
  *		will {@model InputTextField#update} the field whenever {@model InputTextField#onInput it receives input}.
  */
@@ -202,7 +202,7 @@ rule "Create IteratorList"
 end
 
 /**
- * @inference AutocompleteWire,IteratorList
+ * @inference AutocompleteWire,IteratorList,Parameter
  *		Every {@model Label} within the <em>results {@model IteratorList}</em> of a {@model AutocompleteWire}
  *		search will be provided an {@model ECARule} to {@model VisibleThing#update} the {@model Autocomplete#to target}
  *		of the wire with the {@model AutocompleteWire#match matching attribute} instance value, when the {@model Label} 
@@ -275,7 +275,7 @@ rule "InternetApplication has a readonly Value 'blank' created"
 end
 
 /**
- * @inference AutocompleteWire
+ * @inference AutocompleteWire,Parameter
  *		When a matching {@model Label} result is clicked from an {@model AutocompleteWire} search, the
  *		<em>query {@model InputTextField}</em> will be cleared to a blank {@model Value}.
  */

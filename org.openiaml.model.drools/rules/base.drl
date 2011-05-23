@@ -99,7 +99,7 @@ end
 /**
  * @inference Condition,Value 
  *		All {@model Value}s not {@model Value#name named} 'fieldValue'
- * 		will have a {@model ActivityFunction} in its container called 'XXX is set'.
+ * 		will have a {@model ActivityFunction} in its container named 'XXX is set'.
  */
 rule "Values will also have a related 'is set' condition (not fieldValue)"
 	when
@@ -125,7 +125,7 @@ end
 /**
  * @inference Condition,Value 
  *		All {@model Value}s {@model Value#name named} 'fieldValue'
- * 		will have a {@model BuiltinProperty} in its container called 'fieldValue is set'.
+ * 		will have a {@model BuiltinProperty} in its container named 'fieldValue is set'.
  */ 
 rule "Values will also have a related 'is set' BuiltinProperty (fieldValue)"
 	when
@@ -151,7 +151,7 @@ end
 /**
  * @inference Operation,Value 
  *		All non-{@model Value#readOnly} {@model Value}s, other than those {@model Value#name named} 'fieldValue',
- * 		will have an {@model BuiltinOperation} in its container called 'set XXX'.
+ * 		will have an {@model BuiltinOperation} in its container named 'set XXX'.
  */
 rule "Properties will have a related 'set XXX' operation"
 	when

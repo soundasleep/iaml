@@ -23,6 +23,11 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference SetWire,CanBeSynced
+ *		A {@model SetWire} connecting two objects will create sub-{@model SetWire}s between
+ *		every contained object within these parent objects which have matching {@model CanBeSynced#name names}.
+ */
 rule "Set wires between objects should create set wires between all elements inside each object that matches [set]"
 	when
 		p1 : CanBeSynced( )
@@ -44,6 +49,12 @@ rule "Set wires between objects should create set wires between all elements ins
 		
 end
 
+/**
+ * @inference SetWire,CanBeSynced
+ *		A {@model SetWire} connecting an {@model DomainIterator} to a {@model CanBeSynced} object
+ *		will create sub-{@model SetWire}s between every contained object within the contained {@model DomainInstance}
+ *		to every contained {@model CanBeSynced} object which have matching {@model CanBeSynced#name names}.
+ */
 rule "Copy set wires: Domain Instances (source)"
 	when
 		p1_container : DomainIterator ( )
@@ -66,7 +77,13 @@ rule "Copy set wires: Domain Instances (source)"
 		
 end
 
-
+/**
+ * @inference SetWire,CanBeSynced
+ *		A {@model SetWire} connecting an {@model CanBeSynced} object to a {@model DomainIterator}
+ *		will create sub-{@model SetWire}s between every contained {@model CanBeSynced} object to 
+ *		every contained object within the contained {@model DomainInstance} 
+ *		which have matching {@model CanBeSynced#name names}.
+ */
 rule "Copy set wires: Domain Instances (target)"
 	when
 		p1 : CanBeSynced( )
@@ -89,6 +106,7 @@ rule "Copy set wires: Domain Instances (target)"
 		
 end
 
+// TODO is this rule necessary any more?
 rule "Set wires from DomainSchema to CanBeSynced"
 	when
 		# we put in these to prevent multiple wires being generated for two connects
@@ -119,6 +137,12 @@ rule "Set wires from DomainSchema to CanBeSynced"
 		
 end
 
+/**
+ * @inference SetWire
+ *		When a {@model Changeable} is connected to an {@model ContainsOperations} by a
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
+ *		target when the source {@model Changeable#onChange changes}.
+ */
 rule "Run instance wire from edit to update (onChange)"
 	when
 		source : Changeable( )
@@ -141,11 +165,11 @@ end
 
 /**
  * Solves issue 209: Allow Properties to be set directly by SetWires or SyncWires.
- *
- * @inference Changeable,SetWire
- *		A {@model SetWire} connecting a {@model Changeable} to a {@model Value}
- *		directly will update the target {@model Value} when the
- *		source element is {@model Changeable#onChange changed}.
+ * 
+ * @inference SetWire,Value
+ *		When a {@model Changeable} is connected to a {@model Value} by a
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'set value XXX' {@model Operation} on the 
+ *		target when the source {@model Changeable#onChange changes}.
  */
 rule "Run instance wire from edit to Value update (onChange)"
 	when
@@ -171,6 +195,12 @@ rule "Run instance wire from edit to Value update (onChange)"
 
 end
 
+/**
+ * @inference SetWire
+ *		When a {@model InputTextField} is connected to an {@model ContainsOperations} by an {@model SetWire#executeOnInput instant}
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
+ *		target when the source {@model InputTextField#onInput input changes}.
+ */
 rule "Run instance wire from edit to update, instant SetWire (onInput)"
 	when
 		source : InputTextField( )
@@ -191,7 +221,14 @@ rule "Run instance wire from edit to update, instant SetWire (onInput)"
 
 end
 
-# Ideally, these two commands would be joined together into one
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SetWire,CanBeSynced,Parameter
+ *		When a {@model CanBeSynced} element is connected to an {@model CanBeSynced} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set]"
 	when
 		source : CanBeSynced( )
@@ -214,6 +251,14 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SetWire,CanBeSynced,Changeable,Parameter
+ *		When a {@model Changeable} element is connected to an {@model CanBeSynced} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onChange)"
 	when
 		source : Changeable( )
@@ -236,6 +281,12 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
+/**
+ * @inference SetWire,Changeable,Value,Parameter
+ *		When a {@model Changeable} element is connected to a {@model Value} by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
 rule "Connect parameter wire to: Run instance wire from edit to Value update (onChange)"
 	when
 		source : Changeable( )
@@ -264,11 +315,17 @@ rule "Connect parameter wire to: Run instance wire from edit to Value update (on
 
 end
 
+/**
+ * @inference SetWire,Changeable,Value,Parameter
+ *		When an {@model InputTextField} is connected to a {@model CanBeSynced} element by an {@model SetWire#executeOnInput instant}
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set], instant SetWire (onInput)"
 	when
 		source : InputTextField( )
 		target : CanBeSynced( )
-		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter, instant SetWire (source.edit)" )
+		sw : SetWire( executeOnInput == true, from == source, to == target, overriddenNames not contains "[set] run instance parameter, instant SetWire (source.edit)" )
 	
 		event : Event( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
@@ -286,7 +343,14 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
-# Ideally, these two commands would be joined together into one
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SetWire
+ *		When a {@model ContainsOperations} element is connected to an {@model Accessible} element by a
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'init' {@model Operation} on the 
+ *		target when the target {@model Accessible#onAccess is accessed}.
+ */
 rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set] (onAccess)"
 	when
 		source : ContainsOperations( )
@@ -308,6 +372,11 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 
 end
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		When a {@model ContainsOperations} element is connected to an {@model Accessible} element by a
+ *		{@model SetWire}, the target element will {@model SimpleCondition only} be initialised if the source value is set.
+ */
 rule "Run instance wire from target.access to target.init, adding SimpleCondition to check it is set [set] (onAccess)"
 	when
 		source : ContainsOperations( )
@@ -334,7 +403,15 @@ rule "Run instance wire from target.access to target.init, adding SimpleConditio
 		
 end	
 
-# Ideally, these two commands would be joined together into one
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ * TODO Can probably remove this rule, since events are no longer named?
+ *
+ * @inference SetWire,Parameter
+ *		When a {@model CanBeSynced} element is connected to a {@model CanBeSynced} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue} of the source element will be used as a 
+ *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
+ */
 rule "Connect parameter wire to: run instance wire from target.access to target.init [set]"
 	when
 		source : CanBeSynced( )
@@ -357,6 +434,12 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 
 end
 
+/**
+ * @inference SetWire,Parameter
+ *		When a {@model CanBeSynced} element is connected to an {@model Accessible} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue} of the source element will be used as a 
+ *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
+ */
 rule "Connect parameter wire to: run instance wire from target.access to target.init [set] (onAccess)"
 	when
 		source : CanBeSynced( )
@@ -379,6 +462,14 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 
 end
 
+/**
+ * TODO can probably remove this rule
+ *
+ * @inference SetWire,DomainIterator,Parameter
+ *		When a {@model DomainIterator} is connected to a {@model CanBeSynced} element by a
+ *		{@model SetWire}, the {@model DomainIterator#fieldValue} of the source element will be used as a 
+ *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
+ */
 rule "Connect parameter wire: Domain Instance (source)"
 	when
 		source_container : DomainIterator( )
@@ -402,6 +493,14 @@ rule "Connect parameter wire: Domain Instance (source)"
 
 end
 
+/**
+ * TODO can probably remove this rule
+ *
+ * @inference SetWire,DomainIterator,Parameter
+ *		When a {@model CanBeSynced} element is connected to a {@model DomainIterator} by a
+ *		{@model SetWire}, the value of the source element will be used as a 
+ *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
+ */
 rule "Connect parameter wire: Domain Instance (target)"
 	when
 		source : CanBeSynced( )
@@ -451,6 +550,11 @@ end
  * be handled by the code generation instead.
  */
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		A sub-{@model SetWire} generated for a parent {@model SetWire}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
 rule "Cascaded SetWires: Conditions from parent to child [set]"
 	when
 
@@ -480,6 +584,11 @@ rule "Cascaded SetWires: Conditions from parent to child [set]"
 
 end
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		A sub-{@model SetWire} generated for a parent {@model SetWire} connected from a {@model DomainIterator}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
 rule "Cascaded SetWires: Conditions: Domain Iterator (source)"
 	when
 
@@ -510,6 +619,11 @@ rule "Cascaded SetWires: Conditions: Domain Iterator (source)"
 
 end
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		A sub-{@model SetWire} generated for a parent {@model SetWire} connected to a {@model DomainIterator}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
 rule "Cascaded SetWires: Conditions: Domain Iterator (target)"
 	when
 
@@ -540,6 +654,11 @@ rule "Cascaded SetWires: Conditions: Domain Iterator (target)"
 
 end
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SetWire}s
+ *		to their sub-{@model SetWire}s will also be provided with the same {@model Parameter}s.
+ */
 rule "Cascaded SetWires: Parameters from parent to child [set]"
 	when
 
@@ -577,6 +696,11 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 
 end
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SetWire}s from a {@model DomainIterator}
+ *		to their sub-{@model SetWire}s will also be provided with the same {@model Parameter}s.
+ */
 rule "Cascaded SetWires: Parameters: Domain Iterator (source)"
 	when
 
@@ -615,6 +739,11 @@ rule "Cascaded SetWires: Parameters: Domain Iterator (source)"
 
 end
 
+/**
+ * @inference SetWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SetWire}s to a {@model DomainIterator}
+ *		to their sub-{@model SetWire}s will also be provided with the same {@model Parameter}s.
+ */
 rule "Cascaded SetWires: Parameters: Domain Iterator (target)"
 	when
 
@@ -653,8 +782,15 @@ rule "Cascaded SetWires: Parameters: Domain Iterator (target)"
 
 end
 
-# SetWires do not connect the fields together; they can _also_
-# connect the Frames together.
+/**
+ * SetWires do not just connect the fields together; they can _also_
+ * connect the Frames together.
+ *
+ * @inference SetWire,Session
+ *		A parent {@model SetWire} connecting a {@model Session}-contained {@model VisibleThing} to a {@model ContainsOperations} element
+ *		outside of that {@model Session}, will {@model ECARule call} the 'init' {@model Operation} generated by each sub-{@model SetWire}
+ *		when the {@model Session} is {@model Session#onInit initialised}.
+ */
 rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
 	when
 		session : Session (  )
@@ -683,6 +819,14 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		
 end
 
+/**
+ * VisibleThing != Frame
+ *
+ * @inference SetWire,Session
+ *		A parent {@model SetWire} connecting a {@model Session}-contained {@model Frame} to a {@model ContainsOperations} element
+ *		outside of that {@model Session}, will {@model ECARule call} the 'init' {@model Operation} generated by each sub-{@model SetWire}
+ *		when the {@model Session} is {@model Session#onInit initialised}.
+ */
 rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
 	when
 		session : Session (  )
@@ -711,6 +855,12 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		
 end
 
+/**
+ * @inference SetWire,Session,Parameter
+ *		Every 'init' {@model Operation} executed when a {@model Session} is {@model Session#onInit initialised} due to
+ *		a {@model SetWire} between a {@model VisibleThing} within that session, to {@model ContainsOperations another element}
+ *		outside of that session, will be provided the {@model Changeable#fieldValue} of the source element as a {@model Parameter}.
+ */
 rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
 	when
 		session : Session (  )
@@ -742,6 +892,12 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		queue.add(pw2, drools);		
 end
 
+/**
+ * @inference SetWire,Session,Parameter
+ *		Every 'init' {@model Operation} executed when a {@model Session} is {@model Session#onInit initialised} due to
+ *		a {@model SetWire} between a {@model Frame} within that session, to {@model ContainsOperations another element}
+ *		outside of that session, will be provided the {@model Changeable#fieldValue} of the source element as a {@model Parameter}.
+ */
 rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
 	when
 		session : Session (  )
@@ -773,6 +929,12 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		queue.add(pw2, drools);		
 end
 
+/**
+ * @inference SetWire,DomainInstance
+ *		An empty {@model InputForm} connected to a {@model DomainIterator} with a {@model SetWire}
+ *		will create a {@model InputTextField} in that form for every {@model DomainAttributeInstance}
+ *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model DomainAttribute#isGenerated generated}.
+ */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
 	when
 		form : InputForm (  )
@@ -798,6 +960,14 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 
 end
 
+/**
+ * TODO can probably remove this rule
+ *
+ * @inference SetWire,DomainSchema
+ *		An empty {@model InputForm} connected to a {@model DomainSchema} with a {@model SetWire}
+ *		will create a {@model InputTextField} in that form for every {@model DomainAttribute}
+ *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model DomainAttribute#isGenerated generated}.
+ */
 rule "Refresh Domain Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
 	when
 		form : InputForm (  )
@@ -821,10 +991,10 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when Fo
 end
 
 /**
- * @inference InputForm,SetWire
- *		When two {@model InputForm}s are connected by a {@model SetWire} and the
- *		source {@model InputForm} contains a {@model InputTextField}, a <em>{@model Label}</em>
- *		with the same name is created in the target {@model InputForm}.
+ * @inference SetWire,InputForm,Label
+ *		An {@model InputForm} connected to another {@model InputForm} with a {@model SetWire}
+ *		will create a {@model Label} in the target form for every {@model InputTextField} in the
+ *		source form with the same {@model Label#name}.
  */
 rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"
 	when
@@ -848,10 +1018,10 @@ rule "Refresh mappings between InputForms connected to InputForms containing Inp
 end
 
 /**
- * @inference InputForm,SetWire
- *		When two {@model InputForm}s are connected by a {@model SetWire} and the
- *		source {@model InputForm} contains a {@model Label}, another label
- *		with the same name is created in the target {@model InputForm}.
+ * @inference SetWire,InputForm,Label
+ *		An {@model InputForm} connected to another {@model InputForm} with a {@model SetWire}
+ *		will create a {@model Label} in the target form for every {@model Label} in the
+ *		source form with the same {@model Label#name}.
  */
 rule "Refresh mappings between InputForms connected to InputForms containing Labels"
 	when
@@ -875,10 +1045,10 @@ rule "Refresh mappings between InputForms connected to InputForms containing Lab
 end
 
 /**
- * @inference InputForm,SetWire
- *		When an {@model InputForm} is connected by a {@model SetWire} to an
- *		{@model Email}, all contained {@model InputTextField}s in the form will
- *		be copied to the Email as {@model Label}s.
+ * @inference SetWire,InputForm,Email
+ *		A {@model InputForm} connected to an {@model Email} with a {@model SetWire}
+ *		will create a {@model Label} in the target Email for every {@model InputTextField} in the
+ *		source form with the same {@model Label#name}.
  */
 rule "Refresh mappings between InputForms connected to Emails containing InputTextFields"
 	when
@@ -902,10 +1072,10 @@ rule "Refresh mappings between InputForms connected to Emails containing InputTe
 end
 
 /**
- * @inference InputForm,SetWire
- *		When an {@model InputForm} is connected by a {@model SetWire} to an
- *		{@model Email}, all contained {@model Label}s in the form will
- *		be copied to the Email as {@model Label}s.
+ * @inference SetWire,InputForm,Email
+ *		A {@model InputForm} connected to an {@model Email} with a {@model SetWire}
+ *		will create a {@model Label} in the target Email for every {@model Label} in the
+ *		source form with the same {@model Label#name}.
  */
 rule "Refresh mappings between InputForms connected to Emails containing Labels"
 	when
@@ -929,10 +1099,10 @@ rule "Refresh mappings between InputForms connected to Emails containing Labels"
 end
 
 /**
- * @inference InputForm,SetWire
- *		When an {@model InputForm} is connected by a {@model SetWire} to a
- *		{@model Map}, all contained {@model InputTextField}s in the form will
- *		be copied to the Email as {@model MapPoint}s.
+ * @inference SetWire,InputForm,Email
+ *		A {@model InputForm} connected to a {@model Map} with a {@model SetWire}
+ *		will create a {@model MapPoint} in the target map for every {@model InputTextField} in the
+ *		source form with the same {@model Label#name}.
  */
 rule "Refresh mappings between InputForms connected to Maps containing InputTextFields"
 	when
@@ -962,8 +1132,8 @@ end
  * be edited.
  *
  * @inference SetWire,Label
- *		When a {@model DomainIterator} is connected to a {@model InputForm} by a {@model SetWire},
- *		{@model Label}s will be generated for its non-generated, non-primary key attributes.
+ *		When a {@model DomainIterator} is connected to an {@model InputForm} by a {@model SetWire},
+ *		{@model Label}s will be generated for its non-generated, non-primary key {@model DomainAttributeInstance}s.
  */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when
@@ -991,7 +1161,9 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 
 end
 
-# TODO is this rule even used anymore? consider removing.
+/**
+ * TODO is this rule even used anymore? consider removing.
+ */
 rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when
 		form : InputForm (  )
@@ -1015,6 +1187,15 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 
 end
 
+/**
+ * <strong>Depending on the orientation of a SetWire</strong>,
+ * SyncWires create InputTextFields; SetWires should create Labels, because they cannot
+ * be edited.
+ *
+ * @inference SetWire,DomainIterator
+ *		When a {@model DomainIterator} is connected to an {@model IteratorList} by a {@model SetWire},
+ *		{@model Label}s will be generated for its non-generated, non-primary key {@model DomainAttributeInstance}s.
+ */
 rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a IteratorList: create labels"
 	when
 		form : IteratorList (  )
@@ -1044,6 +1225,12 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 
 end
 
+/**
+ * @inference SetWire,DomainIterator
+ *		When a {@model DomainIterator} is connected to an {@model IteratorList} by a {@model SetWire},
+ *		a {@model Label#visible hidden} {@model Label} will be generated for the {@model DomainAttribute#primaryKey primary key}
+ *		{@model DomainAttributeInstance}.
+ */
 rule "Refresh Domain Object mappings (primary keys) when Instance sets a IteratorList: create hiddens"
 	when
 		form : IteratorList (  )
@@ -1072,6 +1259,12 @@ rule "Refresh Domain Object mappings (primary keys) when Instance sets a Iterato
 
 end
 
+/**
+ * @inference SetWire,DomainIterator
+ *		A {@model SetWire} connecting a {@model DomainIterator} to an {@model InputForm} should only
+ *		execute the 'init' {@model Operation} on the created {@model Label}s when the label is {@model Label#onAccess accessed}
+ *		if the {@model DomainInstance} is {@model Function not empty}. 
+ */
 rule "A SetWire between Attributes passed to a DomainIterator need to check that the attribute exists before initialising (onAccess)"
 	when
 		form : VisibleThing ( )		# InputForm, IteratorList
@@ -1120,6 +1313,12 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 
 end
 
+/**
+ * @inference SetWire,DomainIterator
+ *		A {@model SetWire} connecting a {@model DomainIterator} to an {@model InputForm} should only
+ *		execute the 'update' {@model Operation} on the created {@model Label}s when the label is {@model Label#onChange changed}
+ *		if the {@model DomainInstance} is {@model Function not empty}. 
+ */
 rule "A SetWire between Attributes selected from a DomainIterator need to check that the attribute exists before initialising (onChange)"
 	when
 		form : VisibleThing ( )		# InputForm, IteratorList

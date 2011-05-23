@@ -117,7 +117,7 @@ rule "Create contents of 'can cast?' condition"
 end
 
 /**
- * @inference InputTextField,SyncWire
+ * @inference InputTextField,SyncWire,Parameter
  *		A {@model SyncWire} connecting two elements with a {@model Function} 'can sync?'
  *		will only {@model SimpleCondition permit} synchronisation if the value can be {@model CastNode cast successfully}.
  */
@@ -153,7 +153,7 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 end
 
 /**
- * @inference SyncWire
+ * @inference SyncWire,Parameter
  *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model Event} executing the 'init' {@model Operation}
  *		will {@model SimpleCondition only execute} if the source {@model Value fieldValue} can be {@model CastNode cast successfully}.  
  */

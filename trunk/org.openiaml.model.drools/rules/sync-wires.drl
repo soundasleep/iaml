@@ -22,6 +22,11 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference SyncWire,CanBeSynced
+ *		A {@model SyncWire} connecting two objects will create sub-{@model SyncWire}s between
+ *		every contained object within these parent objects which have matching {@model CanBeSynced#name names}.
+ */
 rule "Sync wires between objects should create sync wires between all elements inside each object that matches"
 	when
 		# source : SyncWire(, eval(connects(source, p1, p2)) )
@@ -51,6 +56,12 @@ rule "Sync wires between objects should create sync wires between all elements i
 		
 end
 
+/**
+ * @inference SyncWire,CanBeSynced
+ *		A {@model SyncWire} connecting an {@model DomainIterator} to a {@model CanBeSynced} object
+ *		will create sub-{@model SyncWire}s between every contained object within the contained {@model DomainInstance}
+ *		to every contained {@model CanBeSynced} object which have matching {@model CanBeSynced#name names}.
+ */
 rule "Sync wires to Domain Iterators should be copied to the contents of the Domain Iterator"
 	when
 		# source : SyncWire(, eval(connects(source, p1, p2)) )
@@ -81,6 +92,14 @@ rule "Sync wires to Domain Iterators should be copied to the contents of the Dom
 		
 end
 
+/**
+ * TODO can probably remove this rule
+ *
+ * @inference SyncWire,CanBeSynced
+ *		A {@model SyncWire} connecting an {@model DomainSource} to a {@model CanBeSynced} object
+ *		will create sub-{@model SyncWire}s between every {@model DomainSchema} of the source
+ *		to every contained {@model CanBeSynced} object which have matching {@model CanBeSynced#name names}.
+ */
 rule "Sync wires from DomainSchema to CanBeSynced"
 	when
 		# source : SyncWire(, eval(connects(source, p1, p2)) )
@@ -113,6 +132,12 @@ rule "Sync wires from DomainSchema to CanBeSynced"
 		
 end
 
+/**
+ * @inference SyncWire
+ *		When a {@model Changeable} is connected to an {@model ContainsOperations} by a
+ *		{@model SyncWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
+ *		target when the source {@model Changeable#onChange changes}.
+ */
 rule "Run instance wire from edit to update (onChange)"
 	when
 		sw : SyncWire( overriddenNames not contains "run" )
@@ -134,6 +159,12 @@ rule "Run instance wire from edit to update (onChange)"
 
 end
 
+/**
+ * @inference SyncWire
+ *		When a {@model InputTextField} is connected to an {@model ContainsOperations} by an {@model SyncWire#executeOnInput instant}
+ *		{@model SyncWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
+ *		target when the source {@model InputTextField#onInput input changes}.
+ */
 rule "Run instance wire from edit to update, instant SyncWire (onInput)"
 	when
 		sw : SyncWire( executeOnInput == true, overriddenNames not contains "run" )
@@ -155,6 +186,14 @@ rule "Run instance wire from edit to update, instant SyncWire (onInput)"
 
 end
 
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SyncWire,CanBeSynced,Parameter
+ *		When a {@model CanBeSynced} element is connected to an {@model CanBeSynced} element by a
+ *		{@model SyncWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
 rule "Connect parameter wire to: run instance wire from source.edit to target.update (onChange)"
 	when
 		sw : SyncWire( overriddenNames not contains "[sync] run instance parameter (source.edit)" )
@@ -178,6 +217,12 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
+/**
+ * @inference SyncWire,Changeable,Value,Parameter
+ *		When an {@model InputTextField} is connected to a {@model CanBeSynced} element by an {@model SyncWire#executeOnInput instant}
+ *		{@model SyncWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
 rule "Connect parameter wire to: run instance wire from source.edit to target.update, instant SyncWire (onInput)"
 	when
 		sw : SyncWire( executeOnInput == true, overriddenNames not contains "[sync] run instance parameter instant (source.edit)" )
@@ -201,7 +246,14 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
-# Ideally, these two commands would be joined together into one
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SyncWire
+ *		When a {@model ContainsOperations} element is connected to an {@model Accessible} element by a
+ *		{@model SyncWire}, the source element will {@model ECARule call} the 'init' {@model Operation} on the 
+ *		target when the target {@model Accessible#onAccess is accessed}.
+ */
 rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter (onAccess)"
 	when
 		sw : SyncWire( overriddenNames not contains "run" )
@@ -224,6 +276,11 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 
 end
 
+/**
+ * @inference SyncWire,SimpleCondition
+ *		When a {@model ContainsOperations} element is connected to an {@model Accessible} element by a
+ *		{@model SyncWire}, the target element will {@model SimpleCondition only} be initialised if the source value is set.
+ */
 rule "Run instance wire from source.access to source.init, adding SimpleCondition to check it is set (onAccess)"
 	when
 		sw : SyncWire()
@@ -250,7 +307,14 @@ rule "Run instance wire from source.access to source.init, adding SimpleConditio
 		
 end	
 
-# Ideally, these two commands would be joined together into one
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SyncWire,Parameter
+ *		When a {@model CanBeSynced} element is connected to a {@model CanBeSynced} element by a
+ *		{@model SyncWire}, the {@model CanBeSynced#fieldValue} of the source element will be used as a 
+ *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
+ */
 rule "Connect parameter wire to: run instance wire from source.access to source.init"
 	when
 		sw : SyncWire( overriddenNames not contains "[sync] run instance parameter (source.access)" )
@@ -299,11 +363,16 @@ end
  * be handled by the code generation instead.
  */
 
+/**
+ * @inference SyncWire,SimpleCondition
+ *		A sub-{@model SyncWire} generated for a parent {@model SyncWire}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
 rule "Cascaded SyncWires: Conditions from parent to child"
 	when
 
 		# the containing elements	
-		sw : SyncWire (  )
+		sw : SyncWire ( )
 		source : CanBeSynced( )  
 		// cannot use 'sw.to == target, target != source'
 		// can NOT use 'sw.to == target, this != source'
@@ -334,11 +403,16 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 
 end
 
+/**
+ * @inference SyncWire,SimpleCondition
+ *		A sub-{@model SyncWire} generated for a parent {@model SyncWire} connected to a {@model DomainIterator}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
 rule "Cascaded SyncWires: Conditions from parent to child (Domain Instances)"
 	when
 
 		# the containing elements	
-		sw : SyncWire (  )
+		sw : SyncWire ( )
 		source : CanBeSynced( )  
 		// cannot use 'sw.to == target, target != source'
 		// can NOT use 'sw.to == target, this != source'
@@ -371,11 +445,16 @@ rule "Cascaded SyncWires: Conditions from parent to child (Domain Instances)"
 
 end
 
+/**
+ * @inference SyncWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SyncWire}s
+ *		to their sub-{@model SyncWire}s will also be provided with the same {@model Parameter}s.
+ */
 rule "Cascaded SyncWires: Parameters from parent to child"
 	when
 
 		# the containing elements
-		sw : SyncWire (  )
+		sw : SyncWire ( )
 		source : CanBeSynced( )  
 		target : CanBeSynced( )
 		eval ( target != source )
@@ -411,11 +490,16 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 
 end
 
+/**
+ * @inference SyncWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SyncWire}s involving a {@model DomainIterator}
+ *		to their sub-{@model SyncWire}s will also be provided with the same {@model Parameter}s.
+ */
 rule "Cascaded SyncWires: Parameters from parent to child (Domain Instances)"
 	when
 
 		# the containing elements	
-		sw : SyncWire (  )
+		sw : SyncWire ( )
 		source : CanBeSynced( )  
 		// cannot use 'sw.to == target, target != source'
 		// can NOT use 'sw.to == target, this != source'
@@ -456,8 +540,15 @@ rule "Cascaded SyncWires: Parameters from parent to child (Domain Instances)"
 
 end
 
-# SyncWires do not connect the fields together; they can _also_
-# connect the Frames together.
+/**
+ * SyncWires do not just connect the fields together; they can _also_
+ * connect the Frames together.
+ *
+ * @inference SyncWire,Session
+ *		A parent {@model SyncWire} connecting a {@model Session}-contained {@model VisibleThing} to a {@model ContainsOperations} element
+ *		outside of that {@model Session}, will {@model ECARule call} the 'init' {@model Operation} generated by each sub-{@model SyncWire}
+ *		when the {@model Session} is {@model Session#onInit initialised}.
+ */
 rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange 2)"
 	when
 		session : Session (  )
@@ -488,10 +579,18 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange
 		
 end
 
+/**
+ * VisibleThing != Frame
+ *
+ * @inference SyncWire,Session
+ *		A parent {@model SyncWire} connecting a {@model Session}-contained {@model Frame} to a {@model ContainsOperations} element
+ *		outside of that {@model Session}, will {@model ECARule call} the 'init' {@model Operation} generated by each sub-{@model SyncWire}
+ *		when the {@model Session} is {@model Session#onInit initialised}.
+ */
 rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange 3)"
 	when
 		session : Session (  )
-		sw : SyncWire(  )
+		sw : SyncWire( )
 		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
@@ -518,10 +617,16 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange
 		
 end
 
+/**
+ * @inference SyncWire,Session,Parameter
+ *		Every 'init' {@model Operation} executed when a {@model Session} is {@model Session#onInit initialised} due to
+ *		a {@model SyncWire} between a {@model VisibleThing} within that session, to {@model ContainsOperations another element}
+ *		outside of that session, will be provided the {@model Changeable#fieldValue} of the source element as a {@model Parameter}.
+ */
 rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onChange) (2)"
 	when
 		session : Session (  )
-		sw : SyncWire(  )
+		sw : SyncWire ( )
 		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
@@ -551,6 +656,12 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		queue.add(pw2, drools);		
 end
 
+/**
+ * @inference SyncWire,Session,Parameter
+ *		Every 'init' {@model Operation} executed when a {@model Session} is {@model Session#onInit initialised} due to
+ *		a {@model SyncWire} between a {@model Frame} within that session, to {@model ContainsOperations another element}
+ *		outside of that session, will be provided the {@model Changeable#fieldValue} of the source element as a {@model Parameter}.
+ */
 rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onChange) (3)"
 	when
 		session : Session (  )
@@ -585,9 +696,10 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 end
 
 /**
- * @inference DomainAttributeInstance,SyncWire
- *		A {@model DomainAttributeInstance} which eventually {@model ExtendsEdge extends} a {@model DomainAttribute#primaryKey primary key}
- *		will not generate a {@model InputTextField} to edit it.
+ * @inference SyncWire,DomainInstance
+ *		An empty {@model InputForm} connected to a {@model DomainIterator} with a {@model SyncWire}
+ *		will create a {@model InputTextField} in that form for every {@model DomainAttributeInstance}
+ *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model ExtendsEdge foreign key}.
  * @implementation DomainAttributeInstance
  *		Currently, it is not possible to modify a {@model DomainAttributeInstance}
  *		that is {@model ExtendsEdge derived} or directly a {@model DomainAttribute#primaryKey primary key}.
@@ -627,11 +739,19 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 
 end
 
+/**
+ * TODO can probably get rid of this rule
+ *
+ * @inference SyncWire,DomainSource
+ *		An empty {@model InputForm} connected to a {@model DomainSource} with a {@model SyncWire}
+ *		will create a {@model InputTextField} in that form for every {@model DomainAttribute}
+ *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model ExtendsEdge foreign key}.
+ */
 rule "Refresh Domain Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
 	when
-		sync : SyncWire(  )
-		form : InputForm (  )
-		domainSource : DomainSource (  )
+		sync : SyncWire( )
+		form : InputForm ( )
+		domainSource : DomainSource ( )
 		
 		eval(functions.connects(sync, form, domainSource))
 
@@ -661,16 +781,16 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 end
 
 /**
- * @inference InputForm,SyncWire
- *		When two {@model InputForm}s are connected by a {@model SyncWire} and the
- *		source {@model InputForm} contains a {@model InputTextField}, another text field
- *		with the same name is created in the target {@model InputForm}.
+ * @inference SyncWire,InputForm,InputTextField
+ *		An {@model InputForm} connected to another {@model InputForm} with a {@model SyncWire}
+ *		will create a {@model InputTextField} in the target form for every {@model InputTextField} in the
+ *		source form with the same {@model InputTextField#name}.
  */
 rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"
 	when
-		sync : SyncWire(  )
-		source : InputForm (  )
-		target : InputForm (  )
+		sync : SyncWire( )
+		source : InputForm ( )
+		target : InputForm ( )
 		
 		eval(functions.connects(sync, source, target))
 		
@@ -690,16 +810,16 @@ rule "Refresh mappings between InputForms connected to InputForms containing Inp
 end
 
 /**
- * @inference InputForm,SyncWire
- *		When two {@model InputForm}s are connected by a {@model SyncWire} and the
- *		source {@model InputForm} contains a {@model Label}, another label
- *		with the same name is created in the target {@model InputForm}.
+ * @inference SyncWire,InputForm,Label
+ *		An {@model InputForm} connected to another {@model InputForm} with a {@model SyncWire}
+ *		will create a {@model Label} in the target form for every {@model Label} in the
+ *		source form with the same {@model Label#name}.
  */
 rule "Refresh mappings between InputForms connected to InputForms containing Labels"
 	when
-		sync : SyncWire(  )
-		source : InputForm (  )
-		target : InputForm (  )
+		sync : SyncWire( )
+		source : InputForm ( )
+		target : InputForm ( )
 		
 		eval(functions.connects(sync, source, target))
 		
@@ -718,10 +838,16 @@ rule "Refresh mappings between InputForms connected to InputForms containing Lab
 
 end
 
+/**
+ * @inference SyncWire,DomainIterator
+ *		A {@model SyncWire} connecting a {@model DomainIterator#query 'new'} {@model DomainIterator} to an {@model InputForm} should only
+ *		execute the 'init' {@model Operation} on the created {@model Label}s when the label is {@model Label#onAccess accessed}
+ *		if the {@model DomainInstance} is {@model Function not empty}. 
+ */
 rule "A SyncWire between Attributes selected from a NewInstanceWire need to check that the attribute exists before initialising"
 	when
-		sync : SyncWire(  )
-		form : InputForm (  )
+		sync : SyncWire( )
+		form : InputForm ( )
 		iterator : DomainIterator ( query == "new" )
 		instance : DomainInstance ( iterator.currentInstance == instance )
 		

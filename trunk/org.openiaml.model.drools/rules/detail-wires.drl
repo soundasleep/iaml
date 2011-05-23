@@ -60,7 +60,7 @@ rule "Create QueryParameter for target container of DetailWire"
 end
 
 /**
- * @inference DetailWire
+ * @inference DetailWire,Parameter
  *		When a {@model DetailWire} is connected from a {@model Frame} that contains a
  *		{@model DomainIterator} to a <em>target {@model Frame}</em>,
  *		a new <em>selected {@model DomainIterator}</em> will be used to select content based on primary key.
@@ -248,7 +248,7 @@ rule "Create a Link Button for the source of a DetailWire: Connect ECARule"
 end
 
 /**
- * @inference DetailWire
+ * @inference DetailWire,Parameter
  *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
  *		not contained by an {@model IteratorList},
  *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},
@@ -295,7 +295,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 end
 
 /**
- * @inference DetailWire
+ * @inference DetailWire,Parameter
  *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
  *		as contained by a {@model Iteratorlist},
  *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},

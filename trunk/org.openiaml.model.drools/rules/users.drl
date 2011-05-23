@@ -25,6 +25,11 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference AccessControlHandler,Session,LoginHandler
+ *		A {@model LoginHandler} is generated for a {@model Session} that contains an
+ *		{@model AccessControlHandler}.
+ */
 rule "When a session is protected by an AccessControlHandler with no login handler[type=user], add it"
 	when
 		session : Session ( )
@@ -42,6 +47,11 @@ rule "When a session is protected by an AccessControlHandler with no login handl
 
 end
 
+/**
+ * @inference AccessControlHandler,Frame,LoginHandler
+ *		A {@model LoginHandler} is generated for a {@model Frame} contained within a {@model Session} that contains an
+ *		{@model AccessControlHandler}.
+ */
 rule "When a Frame is protected by an AccessControlHandler with no login handler[type=user], add it"
 	when
 		session : Session ( )
@@ -96,7 +106,7 @@ end
  *
  * @inference AccessControlHandler
  *		If a {@model AccessControlHandler} specifies a 'logout' {@model ECARule}
- *		that goes to a {@model Frame}, the same Frame will be used as the logout Frame
+ *		that navigates to a {@model Frame}, the same Frame will be used as the logout Frame
  *		for the generated {@model LoginHandler}.
  */
 rule "If an AccessControlHandler specifies a Logout page, connect this to the generated LoginHandler"
@@ -124,7 +134,7 @@ end
  *
  * @inference AccessControlHandler
  *		If a {@model AccessControlHandler} specifies a 'success' {@model ECARule}
- *		that goes to a {@model Frame}, the same Frame will be used as the successful login Frame
+ *		that navigates to a {@model Frame}, the same Frame will be used as the successful login Frame
  *		for the generated {@model LoginHandler}.
  */
 rule "If an AccessControlHandler specifies a Success page, connect this to the generated LoginHandler"
@@ -147,6 +157,11 @@ rule "If an AccessControlHandler specifies a Success page, connect this to the g
 
 end
 
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} within a {@model Session} protected by a {@model AccessControlHandler}
+ *		will have an {@model Operation} named 'permissions check'.
+ */
 rule "A page within a session protected by an ACH should have a 'permissions check' operation"
 	when
 		session : Session ( )
@@ -164,6 +179,11 @@ rule "A page within a session protected by an ACH should have a 'permissions che
 
 end
 
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} protected by a {@model AccessControlHandler}
+ *		will have an {@model Operation} named 'page permissions check'.
+ */
 rule "A page protected by an ACH should have a 'permissions check' operation"
 	when
 		page : Frame ( )
@@ -180,6 +200,12 @@ rule "A page protected by an ACH should have a 'permissions check' operation"
 
 end
 
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} within a {@model Session} protected by a {@model AccessControlHandler}
+ *		will {@model ECARule execute} the 'permissions check' {@model Operation}
+ *		when the frame is {@model Frame#onAccess accessed}.
+ */
 rule "Connect 'permissions check' up to the 'access' event of the session (ACH in session)"
 	when
 		session : Session ( )
@@ -199,6 +225,12 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 
 end 
 
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} protected by a {@model AccessControlHandler}
+ *		will {@model ECARule execute} the 'page permissions check' {@model Operation}
+ *		when the frame is {@model Frame#onAccess accessed}.
+ */
 rule "Connect 'permissions check' up to the 'access' event of the page (ACH in page)"
 	when
 		page : Frame ( )
@@ -217,6 +249,12 @@ rule "Connect 'permissions check' up to the 'access' event of the page (ACH in p
 
 end 
 
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		The 'permissions check' {@model Operation} defined by a {@model AccessControlHandler} protecting
+ *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
+ *		defined login {@model Frame} in the same {@model Session} if the check fails.
+ */
 rule "Connect fail wire from 'permissions check' to 'login page'"
 	when
 		root : InternetApplication ( )
@@ -239,6 +277,12 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 
 end
 
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		The 'permissions check' {@model Operation} defined by a {@model AccessControlHandler} protecting
+ *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
+ *		defined login {@model Frame} in a <em>separate</em> login {@model Session} if the check fails.
+ */
 rule "Connect fail wire from 'permissions check' to 'login page' (in separate login session)"
 	when
 		root : InternetApplication ( )
@@ -262,6 +306,10 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 
 end
 
+/**
+ * @inference Role
+ *		A <em>default {@model Role}</em> named 'User' is defined for all {@model InternetApplication}s.
+ */
 rule "If a Role is defined, a default role User is also defined"
 	when
 		root : InternetApplication ( )
@@ -280,7 +328,7 @@ end
 
 /**
  * @inference Role
- *		The <i>default {@model Role}</i> will contain a default
+ *		The <em>default {@model Role}</em> will contain an
  *		{@model DomainAttribute} {@model DomainAttribute#name named} 'email'.
  */
 rule "'User' role contains a default attribute 'email'"
@@ -305,7 +353,7 @@ end
 
 /**
  * @inference Role
- *		The <i>default {@model Role}</i> will contain a default
+ *		The <em>default {@model Role}</em> will contain an
  *		{@model DomainAttribute} {@model DomainAttribute#name named} 'password'.
  */
 rule "'User' role contains a default attribute 'password'"
@@ -331,6 +379,11 @@ end
  * the LoginHandler will always have the same input class (User role),
  * as the actual check logic is handled by the 'permissions check'
  * method.
+ *
+ * @inference AccessControlHandler,Parameter,LoginHandler
+ *		A {@model AccessControlHandler} protecting a {@model Session} with a defined
+ *		{@model Role}-based {@model RequiresEdge access requirement} will provide
+ *		the <em>default {@model Role}</em> as a {@model Parameter} to the created {@model LoginHandler}.  
  */
 rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User"
 	when
@@ -373,6 +426,10 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 
 end
 
+/**
+ * @inference AccessControlHandler,BuiltinOperation
+ *		An {@model AccessControlHandler} has a {@model BuiltinOperation} named 'check permissions'.
+ */ 
 rule "Create 'check permissions' operation in AccessControlHandler"
 	when
 		ach : AccessControlHandler( )
@@ -388,6 +445,13 @@ rule "Create 'check permissions' operation in AccessControlHandler"
 
 end
 
+/**
+ * @inference ActivityFunction,Changeable
+ *		An {@model ActivityFunction} named 'permissions check' within an {@model AccessControlHandler} 
+ *		protecting a {@model Session}-contained {@model Frame}, used to check the status of the
+ *		'check permissions' {@model Operation} within the same handler, 
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'permissions check' operation in a Frame (session)"
 	when
 		session : Session ( )
@@ -446,6 +510,13 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 
 end
 
+/**
+ * @inference ActivityFunction,Changeable
+ *		An {@model ActivityFunction} named 'permissions check' within an {@model AccessControlHandler} 
+ *		protecting a {@model Frame}, used to check the status of the
+ *		'check permissions' {@model Operation} within the same handler, 
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'permissions check' operation in a Frame (page)"
 	when
 		page : Frame ( )
@@ -503,6 +574,12 @@ rule "Create contents of 'permissions check' operation in a Frame (page)"
 
 end
 
+/**
+ * @inference AccessControlHandler,Parameter,LoginHandler
+ *		The {@model DomainIterator} representing the current instance of a {@model AccessControlHandler} check,
+ *		protecting a {@model Session},
+ *		will be provided as a {@model Parameter} to the generated {@model LoginHandler}.
+ */
 rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (session)"
 	when
 		session : Session ( )
@@ -522,6 +599,12 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 
 end
 
+/**
+ * @inference AccessControlHandler,Parameter,LoginHandler
+ *		The {@model DomainIterator} representing the current instance of a {@model AccessControlHandler} check,
+ *		protecting a {@model Frame} within a {@model Session},
+ *		will be provided as a {@model Parameter} to the generated {@model LoginHandler}.
+ */
 rule "A separate AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (page within a session)"
 	when
 		session : Session ( )
@@ -543,9 +626,9 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 end
 
 /**
- * @inference Role
+ * @inference Role,ExtendsEdge
  *		All {@model Role}s that do not {@model ExtendsEdge extend} another {@model Role}
- *		will {@model ExtendsEdge extend} the <i>default {@model Role}</i>.
+ *		will {@model ExtendsEdge extend} the <em>default {@model Role}</em>.
  */
 rule "Any role should extend the default User role"
 	when
@@ -564,6 +647,11 @@ rule "Any role should extend the default User role"
 
 end
 
+/**
+ * @inference Role,ExtendsEdge,DomainSource
+ *		A {@model Role} {@model ExtendsEdge extending} the <em>default {@model Role}</em>
+ *		will be provided the same {@model DomainSource}.
+ */
 rule "The generated default User has an identical DomainSource as the extended Role"
 	when
 		root : InternetApplication ( )

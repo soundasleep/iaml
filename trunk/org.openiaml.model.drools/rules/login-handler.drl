@@ -135,7 +135,7 @@ rule "Create 'key attribute' property for LoginHandler[type = key]s"
 		not (Value (eContainer == scope, 
 			name=="current login key" ) )
 
-		# the value may not be called "current login key"
+		# the value may not be named "current login key"
 		not (
 			exists ( actual_key : Value ( )
 				and SetWire ( name == "set", from == login_handler, to == actual_key )

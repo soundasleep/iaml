@@ -23,11 +23,12 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-// issue 118
 /**
+ * See: Issue 118.
+ *
  * @inference LoginHandler
- *		A {@model LoginHandler} contained within a {@model InternetApplication} will
- *		generate a {@model Session new login session} for the new {@model Frame login page}.
+ *		A {@model Scope} protected by a {@model LoginHandler} will define a separate
+ *		<em>login {@model Session}</em>, allowing session-unique authentication.
  */
 rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
 	when
@@ -46,6 +47,11 @@ rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
 	
 end
 
+/**
+ * @inference LoginHandler,Frame
+ *		A {@model Scope} protected by a {@model LoginHandler} will create a
+ *		<em>login {@model Frame}</em> named 'login' within the <em>login {@model Session}</em>.
+ */
 rule "Create default 'login' page for LoginHandlers"
 	when
 		container : InternetApplication( )
@@ -67,6 +73,11 @@ rule "Create default 'login' page for LoginHandlers"
 		
 end
 
+/**
+ * @inference LoginHandler,Frame
+ *		The <em>login {@model Frame}</em> created for a {@model LoginHandler} protecting a {@model Scope} 
+ *		will be provided as the {@model ECARule login rule} for the {@model LoginHandler} if none is specified.
+ */
 rule "Connect default 'login' page to LoginHandler"
 	when
 		container : InternetApplication( )
@@ -88,6 +99,11 @@ rule "Connect default 'login' page to LoginHandler"
 		
 end
 
+/**
+ * @inference LoginHandler,Frame
+ *		A {@model Scope} protected by a {@model LoginHandler} will create a
+ *		<em>logout {@model Frame}</em> named 'logout' within the same {@model Scope}.
+ */
 rule "Create 'logout' page for LoginHandlers"
 	when
 		scope : Session( ) 
@@ -105,6 +121,12 @@ rule "Create 'logout' page for LoginHandlers"
 		
 end
 
+/**
+ * @inference LoginHandler,ECARule
+ *		If a {@model LoginHandler} has an outgoing {@model ECARule navigation rule} named 'logout',
+ *		then this navigation rule will be {@model ECARule executed} when the <em>logout {@model Frame}</em>
+ *		is {@model Frame#onAccess accessed}.
+ */
 rule "Instruct 'logout' page to follow to the actual logout destination if set"
 	when
 		scope : Session( ) 
@@ -127,6 +149,12 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 
 end
 
+/**
+ * @inference LoginHandler,Value
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will define a {@model Value}
+ *		named 'current login key' in the protected {@model Session} as the <em>stored key</em>, if no 
+ *		outgoing {@model SetWire} named 'set' from the {@model LoginHandler} is defined.
+ */
 rule "Create 'key attribute' property for LoginHandler[type = key]s"
 	when
 		scope : Session( ) 
@@ -154,6 +182,11 @@ rule "Create 'key attribute' property for LoginHandler[type = key]s"
 		
 end
 
+/**
+ * @inference LoginHandler
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will connect to a
+ *		{@model Value} named 'current login key' as the <em>stored key</em> using a {@model SetWire} named 'set'.
+ */
 rule "Connect 'key' property to LoginHandler"
 	when
 		scope : Session( ) 
@@ -172,6 +205,11 @@ rule "Connect 'key' property to LoginHandler"
 		
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will create an
+ *		{@model ActivityOperation} 'check key' within the protected {@model Session}.
+ */
 rule "Create 'check key' operation for LoginHandler[type = key]"
 	when
 		scope : Session( ) 
@@ -187,6 +225,12 @@ rule "Create 'check key' operation for LoginHandler[type = key]"
 		
 end
 
+/**
+ * @inference LoginHandler,ECARule
+ *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
+ *		will {@model ECARule execute} the 'check key' {@model Operation} with a high {@model ECARule#priority}
+ *		when the frame is {@model Frame#onAccess accessed}.
+ */
 rule "Connect 'access' event to 'check' operations"
 	when
 		scope : Session( )
@@ -205,6 +249,11 @@ rule "Connect 'access' event to 'check' operations"
 	
 end
 
+/**
+ * @inference LoginHandler,Parameter
+ *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
+ *		will provide the <em>stored key</em> as a {@model Parameter} to the executed 'check key' {@model Operation}.
+ */
 rule "Connect 'login key' parameter to 'check key' operation run wire"
 	when
 		scope : Session( )
@@ -228,6 +277,11 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 
 end
 
+/**
+ * @inference LoginHandler,Parameter
+ *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
+ *		will {@model ECARule navigate} to the <em>login {@model Frame}</em> if the 'check key'  {@model Operation} fails.
+ */
 rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Frame"
 	when
 		container : ContainsWires( )
@@ -247,6 +301,12 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'check key', used to check the status
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> against an incoming {@model Parameter} to the handler,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'check key' operation [type=secret_key]"
 	when
 		scope : Session( )
@@ -318,6 +378,16 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'check instance', used to check the status
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> that a {@model DomainIterator} is not {@model DomainIterator#empty},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'check instance', used to check the status
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> that a {@model DomainIterator} is not {@model DomainIterator#empty},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'check instance' operation [type=domain_object or user]"
 	when
 		container : InternetApplication( )
@@ -400,6 +470,11 @@ rule "Connect expected login key as parameter to check key operation"
 end
 */
 
+/**
+ * @inference LoginHandler,InputForm
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		contain an {@model InputForm} named 'login form'.
+ */
 rule "Create login form for 'login' pages"
 	when
 		container : InternetApplication( )
@@ -420,6 +495,11 @@ rule "Create login form for 'login' pages"
 		
 end
 
+/**
+ * @inference LoginHandler,Button
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		contain an {@model Button} named 'login'.
+ */
 rule "Create 'Login' button for login form"
 	when
 		container : InternetApplication( )
@@ -443,6 +523,12 @@ rule "Create 'Login' button for login form"
 		
 end
 
+/**
+ * @inference LoginHandler,Button
+ *		The 'login' {@model Button} in the <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		{@model ECARule execute} the 'do login' {@model Operation} within the {@model LoginHandler}
+ *		when the button is {@model Button#onClick clicked}.
+ */
 rule "Connect 'Login' button to 'do login' operation"
 	when
 		container : InternetApplication( )
@@ -468,6 +554,11 @@ rule "Connect 'Login' button to 'do login' operation"
 
 end
 
+/**
+ * @inference LoginHandler,Button
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will
+ *		contain an {@model InputTextField} named 'login key'.
+ */
 rule "Create text fields for login form of 'login' pages [type=secret_key]"
 	when
 		container : InternetApplication( )
@@ -491,6 +582,12 @@ rule "Create text fields for login form of 'login' pages [type=secret_key]"
 
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do login', used to actually implement the login operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'do login' operation [type=secret_key]"
 	when
 		container : InternetApplication( )
@@ -608,6 +705,11 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 				
 end
 
+/**
+ * @inference LoginHandler,InputTextField,Parameter,DomainAttribute
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will
+ *		contain an {@model InputTextField} for every {@model DomainAttribute} defined as a {@model Parameter} to that {@model LoginHandler}. 
+ */
 rule "Create text fields for login form of 'login' pages [type=domain_object]"
 	when
 		container : InternetApplication( )
@@ -639,6 +741,11 @@ end
  * A LoginHandler[user] uses all of the fields from the given
  * DomainObject parameter as input fields, except for 
  * any generated primary keys.
+ *
+ * @inference LoginHandler,InputTextField,Parameter,DomainAttribute,Role
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will
+ *		contain an {@model InputTextField} for every non-{@model DomainAttribute#primaryKey primary key}
+ *		{@model DomainAttribute} within the {@model Role} defined as a {@model Parameter} to that {@model LoginHandler}.  
  */
 rule "Create text fields for login form of 'login' pages [type=user]"
 	when
@@ -676,6 +783,12 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		
 end
 
+/**
+ * @inference LoginHandler,Parameter
+ *		Every {@model InputTextField} defined in the login form for the
+ *		<em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be provided as a named {@model Parameter} to the 'do login' {@model Operation} of the handler. 
+ */
 rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
 	when
 		container : InternetApplication( )
@@ -710,6 +823,12 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 end
 
+/**
+ * @inference LoginHandler,Parameter
+ *		Every {@model InputTextField} defined in the login form for the
+ *		<em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be provided as a named {@model Parameter} to the 'do login' {@model Operation} of the handler. 
+ */
 rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=user]"
 	when
 		container : InternetApplication( )
@@ -760,6 +879,8 @@ end
  *		for a {@model LoginHandler} is set before it is evaluated whether
  *		the instance actually exists, thus the Value may not be
  *		valid.
+ * @inference LoginHandler
+ *		A {@model LoginHandler} will have an {@model Operation} named 'do login'.
  */
 rule "Create 'do login' operation within all login_handlers"
 	when
@@ -779,6 +900,12 @@ rule "Create 'do login' operation within all login_handlers"
 		
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do login', used to actually implement the login operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_KEY</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'do login' operation [type=domain_object]"
 	when
 		container : InternetApplication( )
@@ -853,6 +980,12 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation,ActivityParameter
+ *		Every {@model DomainAttribute} provided as a {@model Parameter} to
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be available as a named {@model ActivityParameter} of the 'do login' {@model ActivityOperation}. 
+ */
 rule "Create parameter for 'do login' operation inside login handler[type=domain_object]"
 	when
 		container : InternetApplication( )
@@ -914,6 +1047,12 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do login', used to actually implement the login operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'do login' operation [type=user]"
 	when
 		container : InternetApplication( )
@@ -988,6 +1127,12 @@ rule "Create contents of 'do login' operation [type=user]"
 
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation,ActivityParameter
+ *		Every {@model DomainAttribute} of the {@model Role} provided as a {@model Parameter} to
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be available as a named {@model ActivityParameter} of the 'do login' {@model ActivityOperation}. 
+ */
 rule "Create parameter for 'do login' operation inside login handler[type=user]"
 	when
 		container : InternetApplication( )
@@ -1047,7 +1192,13 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 
 end
 
-/* it's possible in the future that this method should be split up. */
+/**
+ * it's possible in the future that this method should be split up.
+ *
+ * @inference LoginHandler
+ *		If a {@model LoginHandler} has a defined outgoing {@model ECARule} named 'success',
+ *		then this rule should be executed after a successful 'do login' {@model ActivityOperation}.
+ */
 rule "Connect successful login operation ('success') to navigate to final 'login' page"
 	when
 		container : InternetApplication( )
@@ -1072,6 +1223,11 @@ rule "Connect successful login operation ('success') to navigate to final 'login
 				
 end
 
+/**
+ * @inference LoginHandler
+ *		If a {@model LoginHandler} has a defined outgoing {@model ECARule} named 'fail',
+ *		then this rule should be executed after a failed 'do login' {@model ActivityOperation}.
+ */
 rule "Connect failed login operation ('fail') to navigate back to 'login'"
 	when
 		container : InternetApplication( )
@@ -1093,6 +1249,10 @@ rule "Connect failed login operation ('fail') to navigate back to 'login'"
 		
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} will define an {@model Operation} named 'do logout' within the protected {@model Scope}.
+ */
 rule "Create 'do logout' operation in session"
 	when
 		container : InternetApplication( )
@@ -1111,6 +1271,11 @@ rule "Create 'do logout' operation in session"
 		
 end 
 
+/**
+ * @inference LoginHandler,ECARule
+ *		When the <em>logout {@model Frame}</em> for a {@model LoginHandler} is {@model Frame#onAccess accessed},
+ *		the 'do logout' {@model Operation} will be {@model ECARule called}.
+ */
 rule "Connect 'access' operation for logout page to 'do logout' operation"
 	when
 		container : InternetApplication( )
@@ -1137,6 +1302,11 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 
 end 
 
+/**
+ * @inference LoginHandler,ECARule
+ *		If a {@model LoginHandler} has a defined outgoing {@model ECARule} named 'logout',
+ *		then this rule should be executed after a successful 'do logout' {@model ActivityOperation}.
+ */
 rule "Connect new navigate wire from logout to logout destination"
 	when
 		container : InternetApplication( )
@@ -1161,6 +1331,12 @@ rule "Connect new navigate wire from logout to logout destination"
 		
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout', used to actually implement the logout operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents of 'do logout' operation [type=secret_key]"
 	when
 		scope : Session( )
@@ -1227,6 +1403,16 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout', used to actually implement the logout operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout', used to actually implement the logout operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
 rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 	when
 		scope : Session( )
@@ -1277,6 +1463,12 @@ rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 
 end
 
+/*
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout' of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will reset all of the stored keys for each {@model DomainAttribute} used as a {@model Parameter} to the handler
+ *		to an empty {@model Value}.
+ */
 rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 	when
 		session : Session( )
@@ -1334,6 +1526,12 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 
 end
 
+/*
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout' of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will reset all of the stored keys for each {@model DomainAttribute} of the {@model Role} used as a {@model Parameter} to the handler
+ *		to an empty {@model Value}.
+ */
 rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 	when
 		session : Session( )
@@ -1392,6 +1590,11 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 
 end
 
+/**
+ * @inference LoginHandler,Frame
+ *		If no 'success' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		a default 'login successful' {@model Frame} will be created.
+ */
 rule "Create default login successful page"
 	when
 		scope : Session ( )
@@ -1409,6 +1612,11 @@ rule "Create default login successful page"
 
 end
 
+/**
+ * @inference LoginHandler,ECARule
+ *		If no 'success' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		the 'login successful' {@model Frame} will be defined as the 'success' {@model ECARule}.
+ */
 rule "Connect default login successful page to LoginHandler"
 	when
 		scope : Session ( )
@@ -1427,6 +1635,11 @@ rule "Connect default login successful page to LoginHandler"
 
 end
 
+/**
+ * @inference LoginHandler,Frame
+ *		If no 'logout' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		a default 'logout successful' {@model Frame} will be created.
+ */
 rule "Create default logout successful page"
 	when
 		container : InternetApplication( )
@@ -1445,6 +1658,11 @@ rule "Create default logout successful page"
 
 end
 
+/**
+ * @inference LoginHandler,ECARule
+ *		If no 'logout' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		the 'logout successful' {@model Frame} will be defined as the 'logout' {@model ECARule}.
+ */
 rule "Connect default logout successful page to LoginHandler"
 	when
 		container : InternetApplication( )
@@ -1471,6 +1689,12 @@ end
  * Essentially, we create only SelectWire for each DomainObject
  * linked by a ParameterEdge, and then use Java to generate the
  * actual query from the Attributes.
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> 
+ *		will be updated according to the {@model DomainSchema} of the handler.
  */
 rule "Update query parameters for LoginHandler [object]"
 	when
@@ -1500,6 +1724,13 @@ rule "Update query parameters for LoginHandler [object]"
 
 end
 
+/**
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be set according to the {@model DomainAttributes} provided as {@model Parameter}s to the handler.
+ */
 rule "Create Query from a DomainAttribute [user]"
 	when
 		scope : Session ( )
@@ -1527,8 +1758,16 @@ rule "Create Query from a DomainAttribute [user]"
 
 end
 
-# if the attributes have changed, we need to update the
-# query string
+/**
+ * If the attributes have changed, we need to update the
+ * query string.
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be <em>updated</em> according to the {@model DomainAttributes} provided as {@model Parameter}s to the handler.
+ */
 rule "Update Query from a DomainAttribute [user]"
 	when
 		scope : Session ( )
@@ -1556,6 +1795,15 @@ rule "Update Query from a DomainAttribute [user]"
 
 end
 
+/**
+ * the Role is the incoming parameter, not just a DomainAttribute
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be <em>updated</em> according to the {@model Role} of the handler.
+ */
 rule "Create Query from a DomainSchema [user]"
 	when
 		scope : Session ( )
@@ -1585,8 +1833,16 @@ rule "Create Query from a DomainSchema [user]"
 
 end
 
-# if the attributes have changed, we need to update the
-# query string
+/**
+ * If the attributes have changed, we need to update the
+ * query string.
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be <em>updated</em> according to the {@model Role} of the handler.
+ */
 rule "Update Query from a DomainSchema [user]"
 	when
 		scope : Session ( )
@@ -1616,6 +1872,12 @@ rule "Update Query from a DomainSchema [user]"
 
 end
 
+/**
+ * @inference LoginHandler,Value
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will define a {@model Value}
+ *		named 'current XXX' in the protected {@model Session} for each {@model DomainAttribute} used as a
+ *		{@model Parameter} to the handler.
+ */
 rule "Create 'key attribute' property for LoginHandler[type = object]s"
 	when
 		session : Session( ) 
@@ -1638,6 +1900,12 @@ rule "Create 'key attribute' property for LoginHandler[type = object]s"
 		
 end
 
+/**
+ * @inference LoginHandler,Value
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will define a {@model Value}
+ *		named 'current XXX' in the protected {@model Session} for each {@model DomainAttribute} used as a
+ *		{@model Parameter} to the handler.
+ */
 rule "Create 'key attribute' property for LoginHandler[type = user]s"
 	when
 		session : Session( ) 
@@ -1661,6 +1929,11 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		
 end
 
+/**
+ * @inference LoginHandler,SetWire
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will connect each
+ *		{@model Value} named 'current XXX' using {@model SetWire}s named 'set'.
+ */
 rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 	when
 		session : Session( ) 
@@ -1689,6 +1962,11 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 	
 end
 
+/**
+ * @inference LoginHandler,Parameter
+ *		Each {@model Value} 'current XXX' {@model SetWire set} by a a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be provided as a {@model Parameter} to the handler.
+ */
 rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 	when
 		session : Session( ) 
@@ -1717,6 +1995,11 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 	
 end
 
+/**
+ * @inference LoginHandler,SetWire
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will connect each
+ *		{@model Value} named 'current XXX' using {@model SetWire}s named 'set'.
+ */
 rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 	when
 		session : Session( ) 
@@ -1745,6 +2028,14 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 	
 end
 
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will create an
+ *		{@model ActivityOperation} 'check instance' within the protected {@model Session}.
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will create an
+ *		{@model ActivityOperation} 'check instance' within the protected {@model Session}.
+ */
 rule "Create 'check instance' operation for LoginHandler[type = object or user]"
 	when
 		session : Session( ) 
@@ -1761,7 +2052,13 @@ rule "Create 'check instance' operation for LoginHandler[type = object or user]"
 		
 end
 
-# TODO merge these two rules (object, user) together
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,DomainIterator
+ *		A {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will contain a {@model DomainIterator} 'current instance' to represent the current domain object instance.
+ */ 
 rule "Create 'current instance' for LoginHandler[type=object]"
 	when
 		session : Session( ) 
@@ -1778,6 +2075,13 @@ rule "Create 'current instance' for LoginHandler[type=object]"
 
 end
 
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,SetWire
+ *		A {@model DomainIterator} 'current instance' created for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be provided as the {@model SetWire set target} of the handler.
+ */ 
 rule "Create 'current instance' for LoginHandler[type=object] - connect SetWire"
 	when
 		session : Session( ) 
@@ -1796,6 +2100,13 @@ rule "Create 'current instance' for LoginHandler[type=object] - connect SetWire"
 
 end
 
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,DomainIterator
+ *		A {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will contain a {@model DomainIterator} 'current instance' to represent the current domain object instance.
+ */ 
 rule "Create 'current instance' for LoginHandler[type=user]"
 	when
 		session : Session( ) 
@@ -1812,6 +2123,13 @@ rule "Create 'current instance' for LoginHandler[type=user]"
 
 end
 
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,SetWire
+ *		A {@model DomainIterator} 'current instance' created for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be provided as the {@model SetWire set target} of the handler.
+ */ 
 rule "Create 'current instance' for LoginHandler[type=user] - connect SetWire"
 	when
 		session : Session( ) 
@@ -1831,6 +2149,18 @@ rule "Create 'current instance' for LoginHandler[type=user] - connect SetWire"
 
 end
 
+/**
+ * @inference LoginHandler,SelectEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by a 
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
+ *		as the {@model DomainSchema} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
+ * @inference LoginHandler,SelectEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by a 
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
+ *		as the {@model DomainSchema} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
+ */
 rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainAttribute)"
 	when
 		root : InternetApplication ( )
@@ -1865,6 +2195,13 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 	
 end	
 
+/**
+ * @inference LoginHandler,SelectEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by a 
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code> 
+ *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
+ *		as the {@model DomainSchema} used as a {@model Parameter} to that handler.
+ */
 rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainSchema)"
 	when
 		root : InternetApplication ( )
@@ -1907,6 +2244,13 @@ end
  * the LoginHandler has an incoming parameter from the root User, because the permission check is actually
  * handled by the method call. But the 'current instance' is expected to be of type '[role]'; thus, we 
  * use this as the expected schema.
+ *
+ * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the handlers
+ *		both use different {@model DomainSchema}s (for example, with {@model ExtendsEdge inheritance}), and
+ *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
+ *		as the {@model DomainSchema} used as a {@model Parameter} to the {@model AccessControlHandler}.
  */
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (inherited)"
 	when
@@ -1925,7 +2269,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 	
 		# this will also cover if there is a Role and a Permission
 
-		# but a <em>different</em> schema is connected		
+		# but a <em>different</em> schema is connected to the login handler
 		other_schema : DomainSchema ( )
 		param : Parameter ( parameterValue == other_schema, parameterTerm == login_handler )
 		eval ( other_schema != expected_schema )
@@ -1944,6 +2288,14 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 	
 end	
 
+/**
+ * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the handlers
+ *		both use the same {@model DomainSchema}s, and
+ *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
+ *		as the {@model DomainSchema} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ */
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (direct)"
 	when
 		root : InternetApplication ( )
@@ -1978,6 +2330,14 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 	
 end
 
+/**
+ * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the {@model AccessControlHandler}
+ *		{@model RequiresEdge requires} a {@model Permission} without a {@model Role}, and
+ *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
+ *		as the {@model DomainSchema} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ */
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (Permission)"
 	when
 		root : InternetApplication ( )

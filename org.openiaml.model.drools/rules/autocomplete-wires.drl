@@ -320,7 +320,7 @@ rule "IteratorList labels clear the input onClick"
 end
 
 /**
- * @model AutocompleteWire
+ * @inference AutocompleteWire
  *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#empty}, 
  *		{@model Frame#onAccess accessing} the containing {@model Frame} will {@model IteratorList#hide} the
  *		<em>results {@model IteratorList}</em>.
@@ -366,7 +366,7 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 end
 
 /**
- * @model AutocompleteWire
+ * @inference AutocompleteWire
  *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#notEmpty}, 
  *		{@model Frame#onAccess accessing} the containing {@model Frame} will {@model IteratorList#show} the
  *		<em>results {@model IteratorList}</em>.
@@ -412,7 +412,7 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 end
 
 /**
- * @model AutocompleteWire
+ * @inference AutocompleteWire
  *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#onChange changed}
  *		and {@model InputTextField#empty}, the <em>results {@model IteratorList}</em> will {@model IteratorList#hide be hidden}.
  */
@@ -457,7 +457,7 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 end
 
 /**
- * @model AutocompleteWire
+ * @inference AutocompleteWire
  *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#onChange changed}
  *		and {@model InputTextField#notEmpty}, the <em>results {@model IteratorList}</em> will {@model IteratorList#show be shown}.
  */

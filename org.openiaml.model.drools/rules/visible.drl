@@ -26,7 +26,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model Event} 'onInput'.
+ *		{@model VisibleThing}s have an {@model Event} '{@model VisibleThing#onInput}'.
  */
 rule "VisibleThings have an event onInput"
 	when
@@ -47,7 +47,7 @@ end
  * simplify the completed model; i.e. only text fields.
  *
  * @inference InputTextField
- *		{@model InputTextField}s have an {@model Value} 'currentInput'.
+ *		{@model InputTextField}s have an {@model Value} '{@model InputTextField#currentInput}'.
  */
 rule "InputTextFields have a Value currentInput"
 	when
@@ -68,7 +68,7 @@ end
 
 /**
  * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model Event} 'onClick'.
+ *		{@model VisibleThing}s have an {@model Event} '{@model VisibleThing#onClick}'.
  */
 rule "VisibleThings have an event onClick"
 	when
@@ -85,7 +85,7 @@ end
 
 /**
  * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model BuiltinProperty} 'empty'.
+ *		{@model VisibleThing}s have an {@model BuiltinProperty} '{@model VisibleThing#empty}'.
  */
 rule "VisibleThings have a BuiltinProperty 'empty'"
 	when
@@ -109,7 +109,7 @@ end
 
 /**
  * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model BuiltinProperty} 'not empty'.
+ *		{@model VisibleThing}s have an {@model BuiltinProperty} '{@model VisibleThing#notEmpty}'.
  */
 rule "VisibleThings have a BuiltinProperty 'not empty'"
 	when
@@ -133,7 +133,7 @@ end
 
 /**
  * @inference VisibleThing
- *		A {@model VisibleThing} has a {@model BuiltinOperation} 'hide'.
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'hide'.
  */
 rule "Create 'hide' BuiltinOperation for VisibleThing"
 	when
@@ -151,7 +151,7 @@ end
 
 /**
  * @inference VisibleThing
- *		A {@model VisibleThing} has a {@model BuiltinOperation} 'show'.
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'show'.
  */
 rule "Create 'show' BuiltinOperation for VisibleThing"
 	when

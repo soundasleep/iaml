@@ -21,7 +21,7 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference Scope
+ * @inference Scope,Event
  *    A {@model Scope} contains an 'onInit' {@model Event}.
  */
 rule "Create 'init' event for Sessions"
@@ -44,6 +44,9 @@ end
  *
  * <p>TODO This should NOT be put as part of the inference rules, but rather the
  * code generation logic - however, this is a quicker hack ;)
+ *
+ * @inference Session
+ *		A {@model Session} will contain at least a single {@model Frame}.
  */
 rule "Create an empty Frame for an empty Session, for Operation callbacks"
 	when

@@ -449,7 +449,7 @@ end
 /*
 We don't want the expected login key to connect to the operation: it is already
 explicitly defined in the Operation itself.
-rule "Connect expected login key as parameter to check key operation"
+disabled-rule "Connect expected login key as parameter to check key operation"
 	when 
 		scope : Session( )
 		page : Frame( eContainer == scope )
@@ -1463,7 +1463,7 @@ rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 
 end
 
-/*
+/**
  * @inference LoginHandler,ActivityOperation
  *		An {@model ActivityOperation} named 'do logout' of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
  *		will reset all of the stored keys for each {@model DomainAttribute} used as a {@model Parameter} to the handler
@@ -1526,7 +1526,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 
 end
 
-/*
+/**
  * @inference LoginHandler,ActivityOperation
  *		An {@model ActivityOperation} named 'do logout' of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
  *		will reset all of the stored keys for each {@model DomainAttribute} of the {@model Role} used as a {@model Parameter} to the handler

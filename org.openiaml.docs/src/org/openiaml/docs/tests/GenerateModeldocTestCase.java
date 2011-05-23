@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -407,12 +409,16 @@ public class GenerateModeldocTestCase extends TestCase {
 			if (ref instanceof DroolsPackage) {
 				DroolsPackage pkg = (DroolsPackage) ref;
 				
+				// get the count of all @inference tags
+				// (we need to ignore tags such as @implementation)
+				int inferenceTags = getInferenceTags(pkg.getRules());
+				
 				// ModelDoc does not load all rules, but only
 				// those with Javadoc tags. therefore, we can't
 				// check that each rule has documentation; but rather,
 				// check that the number of rules saved == the number
 				// of unique rules in the package
-				if (pkg.getUniqueRules() != pkg.getRules().size()) {
+				if (pkg.getUniqueRules() != inferenceTags) {
 					violations++;
 					buf.append("Package ")
 						.append(pkg.getPlugin())
@@ -423,7 +429,10 @@ public class GenerateModeldocTestCase extends TestCase {
 						.append(".drl: Expected ")
 						.append(pkg.getUniqueRules())
 						.append(" tags, found ")
+						.append(inferenceTags)
+						.append(" @inference tags out of ")
 						.append(pkg.getRules().size())
+						.append(" total tags")
 						.append("\n");
 				}
 				
@@ -439,6 +448,27 @@ public class GenerateModeldocTestCase extends TestCase {
 	
 		assertEquals("Not all inference rules had documentation, written to " + f, 0, violations);
 				
+	}
+
+	/**
+	 * Get a count of all tags that are of type @inference, 
+	 * restricted to unique rule names.
+	 * 
+	 * @param rules
+	 * @return
+	 */
+	private int getInferenceTags(EList<DroolsRule> rules) {
+		Set<String> rulesWithInferenceTags = new HashSet<String>();
+		
+		for (DroolsRule r : rules) {
+			for (JavadocTagElement j : r.getJavadocs()) {
+				if ("@inference".equals(j.getName())) {
+					rulesWithInferenceTags.add(r.getName());
+				}
+			}
+		}
+		
+		return rulesWithInferenceTags.size();
 	}
 
 	/**
@@ -459,6 +489,39 @@ public class GenerateModeldocTestCase extends TestCase {
 		}
 		
 		return buf.toString().trim().isEmpty();
+	}
+	
+	/**
+	 * Check that all inference rules have expected @modeldoc
+	 * tags.
+	 * 
+	 * @throws IOException 
+	 */
+	public void testAlInferenceRulesUseExpectedModeldocTags() throws ModelLoadException, IOException {
+		
+		// expected tags
+		List<String> expectedTags = Arrays.asList(
+				"@inference", 
+				"@implementation", 
+				"@notModelCompletion");
+		
+		EObject root = ModelLoader.load("test.modeldoc");
+		ModelDocumentation doc = (ModelDocumentation) root;
+
+		for (Reference ref : doc.getReferences()) {
+			if (ref instanceof DroolsPackage) {
+				DroolsPackage pkg = (DroolsPackage) ref;
+				
+				for (DroolsRule r : pkg.getRules()) {
+					for (JavadocTagElement j : r.getJavadocs()) {
+						assertTrue("Expected tags did not contain " + j.getName(), 
+								expectedTags.contains(j.getName()));
+					}
+				}
+
+			}
+		}
+		
 	}
 	
 }

@@ -64,7 +64,7 @@ public class BasicJavadocParser {
 				
 				int next2 = line.indexOf('}', next);
 				String tag = line.substring(next + 1, next2);
-				if (tag.startsWith("@")) {
+				if (tag.startsWith("@") && tag.indexOf(" ") != -1) {
 					String tagName = tag.substring(0, tag.indexOf(" "));
 					String tagText = tag.substring(tag.indexOf(" ") + 1);
 					

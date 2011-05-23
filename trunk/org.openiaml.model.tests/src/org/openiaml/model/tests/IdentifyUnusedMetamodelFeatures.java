@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.openiaml.model.ModelLoader;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.ModelPackage;
 
 /**
@@ -180,6 +181,17 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 		
 	}
 	
+	private class InferenceRuleUsage extends HashMap<String,Integer> {
+		private static final long serialVersionUID = 1L;
+
+		public void addRule(String r) {
+			if (!containsKey(r))
+				put(r, 0);
+			put(r, get(r) + 1);
+		}
+		
+	}
+	
 	private class IdentifyState {
 		
 		// each class has a collection of local & inherited
@@ -204,6 +216,9 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 
 		// a count of all object instances
 		public int allInstancesCount = 0;
+
+		// a set of all the inference rules used
+		public InferenceRuleUsage inferenceRules = new InferenceRuleUsage();
 		
 	}
 	
@@ -245,16 +260,43 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 		
 		// now output everything, based on the metamodel description
 		System.out.println("Generating output...");
-		generateOutput(state, ModelPackage.eINSTANCE);
+		generateUsageOutput(state, ModelPackage.eINSTANCE);
+		generateInferenceOutput(state);
 	}
 	
 	/**
-	 * Actually generates 
+	 * Actually generates the usage statistics for the inference rules into
+	 * a file.
 	 * 
 	 * @param state
 	 * @throws IOException 
 	 */
-	private void generateOutput(IdentifyState state, EPackage pkg) throws IOException {
+	private void generateInferenceOutput(IdentifyState state) throws IOException {
+		
+		// creates tab-delimited output of (rule, usage)
+		StringBuffer buf = new StringBuffer();
+		for (String rule : state.inferenceRules.keySet()) {
+			int count = state.inferenceRules.get(rule);
+			buf.append(rule).append("\t").append(count).append("\n");
+		}
+		
+		// write to file
+		System.out.println("Writing to file...");
+		FileWriter fw = new FileWriter(new File("unused/inference-rules.txt"));
+		fw.write(buf.toString());
+		fw.close();
+		
+	}
+
+	
+	/**
+	 * Actually generates the usage statistics for the metamodel into
+	 * a file.
+	 * 
+	 * @param state
+	 * @throws IOException 
+	 */
+	private void generateUsageOutput(IdentifyState state, EPackage pkg) throws IOException {
 
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>");
@@ -387,6 +429,14 @@ public class IdentifyUnusedMetamodelFeatures extends TestCase {
 		EClass cls = obj.eClass();
 		state.uniqueClasses.uniqueInstance(cls);
 		state.allInstancesCount++;
+		
+		// keep track of inference rule usage
+		if (obj instanceof GeneratedElement) {
+			String r = ((GeneratedElement) obj).getGeneratedRule();
+			if (r != null) {
+				state.inferenceRules.addRule(r);
+			}
+		}
 		
 		// keep track of how many supertype references are actually used
 		Set<EClass> usedSupertypeReferences = new HashSet<EClass>();

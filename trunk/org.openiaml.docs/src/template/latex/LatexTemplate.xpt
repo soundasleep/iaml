@@ -144,7 +144,7 @@
 				
 		\begin{modeldocList}
 		«FOREACH attributes.sortBy(a|a.name) AS attribute»
-		  \item \modeldocName{«attribute.name»} : «EXPAND bounds(attribute.lowerBound, attribute.upperBound)» \code{«attribute.type»}
+		  \item \modeldocName{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(attribute.lowerBound, attribute.upperBound)» \code{«convertHTMLIntoLatex(attribute.type)»}
 			«IF attribute.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»
@@ -159,7 +159,7 @@
 	«IF !getInheritedAttributes(this).isEmpty»
 
 		«EXPAND ifThenOpen("AttributesInherited")»
-		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\inheritedElement{\modeldocName{«attribute.name»}}{«EXPAND modelLink FOR attribute.containingType»}«ENDFOREACH»
+		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\inheritedElement{\modeldocName{«convertHTMLIntoLatex(attribute.name)»}}{«EXPAND modelLink FOR attribute.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("AttributesInherited")»
 	«ENDIF»
 

@@ -26,7 +26,7 @@ global DroolsHelperFunctions functions;
 /**
  * @inference DomainIterator,InputForm,SetWire
  *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
- *		with a {@model DomainIterator#limit} set (not 1), will be completed with
+ *		with a {@model DomainIterator#limit} set (not 1), will contain
  * 		{@model Button}s named 'Next', 'Previous', 'First' and 'Last', in order
  *		to support navigation through the {@model DomainIterator}.
  */
@@ -71,7 +71,7 @@ end
 /**
  * @inference DomainIterator,InputForm,SetWire
  *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
- *		with a {@model DomainIterator#limit} set (not 1), will be completed with
+ *		with a {@model DomainIterator#limit} set (not 1), will contain
  * 		a {@model Label} named 'Results'.
  */
 rule "Create 'Results' Label for InputForms when connected to DomainIterators with many results"
@@ -97,6 +97,12 @@ rule "Create 'Results' Label for InputForms when connected to DomainIterators wi
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'next' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#next} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
 rule "Connect Next button to 'next' operation on DomainIterator"
 	when
 		instance : DomainIterator (  )
@@ -120,6 +126,12 @@ rule "Connect Next button to 'next' operation on DomainIterator"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'next' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#hasNext} {@model Function} returns <code>true</code>. 
+ */
 rule "Connect 'hasNext' condition to Next button action"
 	when
 		instance : DomainIterator (  )
@@ -144,6 +156,12 @@ rule "Connect 'hasNext' condition to Next button action"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'previous' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#previous} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
 rule "Connect Previous button to 'previous' operation on DomainIterator"
 	when
 		instance : DomainIterator (  )
@@ -167,6 +185,12 @@ rule "Connect Previous button to 'previous' operation on DomainIterator"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'previous' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#hasPrevious} {@model Function} returns <code>true</code>. 
+ */
 rule "Connect 'hasPrevious' condition to Previous button action"
 	when
 		instance : DomainIterator (  )
@@ -191,6 +215,12 @@ rule "Connect 'hasPrevious' condition to Previous button action"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'first' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#reset} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
 rule "Connect First button to 'reset' operation on DomainIterator"
 	when
 		instance : DomainIterator (  )
@@ -214,6 +244,12 @@ rule "Connect First button to 'reset' operation on DomainIterator"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'first' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#notEmpty} {@model Function} returns <code>true</code>. 
+ */
 rule "Connect 'not empty' condition to First button action"
 	when
 		instance : DomainIterator (  )
@@ -238,6 +274,12 @@ rule "Connect 'not empty' condition to First button action"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#jump} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
 rule "Connect Last button to 'jump' operation on DomainIterator"
 	when
 		instance : DomainIterator (  )
@@ -261,6 +303,12 @@ rule "Connect Last button to 'jump' operation on DomainIterator"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#notEmpty} {@model Function} returns <code>true</code>. 
+ */
 rule "Connect 'not empty' condition to Last button action"
 	when
 		instance : DomainIterator (  )
@@ -285,6 +333,11 @@ rule "Connect 'not empty' condition to Last button action"
 
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will contain a {@model Value} named 'target'.
+ */
 rule "Create 'target' property in Last button"
 	when
 		instance : DomainIterator (  )
@@ -306,6 +359,12 @@ rule "Create 'target' property in Last button"
 		
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'target' {@model Value} defined in a 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be used as a {@model Parameter} for executing
+ *		the {@model DomainIterator#jump} {@model Operation} on that iterator.
+ */
 rule "Connect 'target' property to ECARule in Last button"
 	when
 		instance : DomainIterator (  )
@@ -330,6 +389,11 @@ rule "Connect 'target' property to ECARule in Last button"
 		
 end
 
+/**
+ * @inference DomainIterator,SetWire,ActivityOperation
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will contain an {@model ActivityOperation} named 'update target'.
+ */
 rule "'Last' button will have a ActivityOperation named 'update target'"
 	when
 		instance : DomainIterator (  )
@@ -350,6 +414,12 @@ rule "'Last' button will have a ActivityOperation named 'update target'"
 		
 end
 
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, needs to {@model ECARule execute} the 'update target' {@model Operation}
+ *		within that {@model Button} {@model ECARule#priority before} calling {@model DomainIterator#jump} on the iterator.
+ */
 rule "'Last' button needs to call 'update target' before calling 'reset'"
 	when
 		instance : DomainIterator (  )
@@ -378,6 +448,13 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		
 end
 
+/**
+ * @inference ActivityFunction
+ *		An {@model ActivityFunction} named 'update target', used to set the 'target' {@model Value} 
+ *		within the 'last' {@model Button} generated by a {@model DomainIterator},
+ *		will be completed with the necessary {@model ActivityNode}s to update the {@model Value}
+ *		with the current {@model DomainIterator#results results count} of that iterator.
+ */
 rule "Create contents of 'update target' operation"
 	when
 		instance : DomainIterator (  )
@@ -450,9 +527,10 @@ rule "Create contents of 'update target' operation"
 end
 
 /**
- * @implementation Event,DomainIterator
- *		The '{@model Changeable#onChange}' event for a {@model DomainIterator}
- *		is executed when the results, that the {@model DomainIterator} represent, change.
+ * @inference DomainIterator,SetWire,Event
+ *		The 'results' {@model Label} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model ECARule updated} whenever
+ *		the iterator {@model DomainIterator#onChange changes}.
  */
 rule "Connect Instance.onChange to Results.update"
 	when
@@ -476,6 +554,13 @@ rule "Connect Instance.onChange to Results.update"
 		
 end
 
+/**
+ * @inference DomainIterator,SetWire,Event
+ *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
+ *		will be used as a {@model Parameter} to update the 'results' {@model Label}
+ *		defined for navigating a {@model DomainIterator} with a {@model SetWire}
+ *		when the iterator {@model DomainIterator#onChange changes}.
+ */
 rule "Connect results parameter to Results label update (onChange)"
 	when
 		instance : DomainIterator (  )
@@ -501,9 +586,10 @@ rule "Connect results parameter to Results label update (onChange)"
 end
 
 /**
- * @implementation InputForm,DomainIterator
- *		The '{@model Accessible#onAccess}' event for a paginated {@model InputForm}
- *		is executed when the {@model DomainIterator} is accessed for the first time.
+ * @inference DomainIterator,SetWire,Event
+ *		The 'results' {@model Label} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model ECARule updated} whenever
+ *		the containing {@model InputForm} is {@model InputForm#onAccess accessed}.
  */
 rule "Connect Instance.onAccess to Results.update"
 	when
@@ -527,6 +613,13 @@ rule "Connect Instance.onAccess to Results.update"
 		
 end
 
+/**
+ * @inference DomainIterator,SetWire,Event
+ *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
+ *		will be used as a {@model Parameter} to update the 'results' {@model Label}
+ *		defined for navigating a {@model DomainIterator} with a {@model SetWire}
+ *		when the containing {@model InputForm} is {@model InputForm#onAccess accessed}.
+ */
 rule "Connect results parameter to Results label update (onAccess)"
 	when
 		instance : DomainIterator (  )

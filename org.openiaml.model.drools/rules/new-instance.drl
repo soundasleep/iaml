@@ -43,6 +43,12 @@ rule "Create Current Instance for all Domain Iterators"
 
 end
 
+/**
+ * @inference DomainInstance,DomainAttribute,DomainAttributeInstance
+ *		An {@model DomainInstance} will be populated with {@model DomainAttributeInstance}s
+ *		for every {@model DomainAttribute} in the defining
+ *		{@model DomainSchema} of the instance's containing {@model DomainIterator}.
+ */
 rule "Refresh Iterator Object mappings"
 	when
 		schema : DomainSchema ( )
@@ -72,6 +78,12 @@ rule "Refresh Iterator Object mappings"
 
 end
 
+/**
+ * @inference DomainAttributeInstance,ExtendsEdge
+ *		A {@model DomainAttributeInstance} created within a {@model DomainInstance}
+ *		referencing a particular {@model DomainAttribute} will be marked
+ *		as an extension of that attribute through an {@model ExtendsEdge}.  
+ */
 rule "Mark AttributeInstances as extensions of the identically-named Attributes (NewInstanceWire)"
 	when
 		schema : DomainSchema ( )
@@ -96,6 +108,11 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 	
 end
 
+/**
+ * @inference DomainIterator,BuiltinOperation
+ *		A {@DomainIterator} contains a {@model Operation}
+ *		named 'save'.
+ */
 rule "Create 'save' operation for DomainIterators"
 	when
 		instance : DomainIterator ( )

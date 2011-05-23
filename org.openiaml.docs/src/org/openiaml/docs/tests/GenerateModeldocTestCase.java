@@ -18,6 +18,7 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -110,7 +111,8 @@ public class GenerateModeldocTestCase extends TestCase {
       
 		// generate code
 		ModeldocCodeGenerator codegen = new ModeldocCodeGenerator();
-		codegen.generateCode(modelFile);
+		IStatus status = codegen.generateCode(modelFile);
+		assertTrue("Status was not OK: " + status, status.isOK());
 		
 	}
 	

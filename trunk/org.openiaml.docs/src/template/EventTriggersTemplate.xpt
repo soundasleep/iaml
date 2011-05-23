@@ -43,13 +43,13 @@
 </div>
 
 <ul>
-«FOREACH classes.select(e|!e.references.select(r|r.type.name == "EventTrigger").select(r|r.name == eventName).isEmpty).sortBy(c|c.name) AS cls»
+«FOREACH classes.select(e|!e.references.select(r|r.type.name == "Event").select(r|r.name == eventName).isEmpty).sortBy(c|c.name) AS cls»
 	<li class="class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
 	<a href="«fileName(cls)»" class="icon_image">«EXPAND ModeldocTemplate::getIcon FOR cls»</a>
 	<a href="«fileName(cls)»">«cls.name»</a>
 	
 	<ul>
-		«EXPAND ClassTemplate::reference(false) FOREACH cls.references.select(r|r.type.name == "EventTrigger").select(r|r.name == eventName).sortBy(r|r.name)»
+		«EXPAND ClassTemplate::reference(false) FOREACH cls.references.select(r|r.type.name == "Event").select(r|r.name == eventName).sortBy(r|r.name)»
 	</ul>
 «ENDFOREACH»
 </ul>

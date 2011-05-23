@@ -169,22 +169,22 @@
 
 «DEFINE latexChildren FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this)).select(r|r.containment)
-		.reject(r|r.type.name == "EventTrigger")
-		.reject(r|r.type.name.endsWith("Condition"))
+		.reject(r|r.type.name == "Event")
+		.reject(r|r.type.name.endsWith("Function"))
 		.reject(r|r.type.name.endsWith("Operation"))
 		.isEmpty»
 	«EXPAND ifThenOpen("Children")»
 
 	«IF !references.select(r|r.containment)
-			.reject(r|r.type.name == "EventTrigger")
-			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name == "Event")
+			.reject(r|r.type.name.endsWith("Function"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
 		«EXPAND ifThenOpen("ChildrenDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.containment)
-				.reject(r|r.type.name == "EventTrigger")
-				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name == "Event")
+				.reject(r|r.type.name.endsWith("Function"))
 				.reject(r|r.type.name.endsWith("Operation"))
 				.sortBy(a|a.name) AS ref»
 		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
@@ -199,14 +199,14 @@
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.containment)
-			.reject(r|r.type.name == "EventTrigger")
-			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name == "Event")
+			.reject(r|r.type.name.endsWith("Function"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
 		«EXPAND ifThenOpen("ChildrenInherited")»
 		«FOREACH getInheritedReferences(this).select(r|r.containment)
-				.reject(r|r.type.name == "EventTrigger")
-				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name == "Event")
+				.reject(r|r.type.name.endsWith("Function"))
 				.reject(r|r.type.name.endsWith("Operation"))
 				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("ChildrenInherited")»
@@ -217,22 +217,22 @@
 
 «DEFINE latexReferences FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this)).select(r|!r.containment)
-		.reject(r|r.type.name == "EventTrigger")
-		.reject(r|r.type.name.endsWith("Condition"))
+		.reject(r|r.type.name == "Event")
+		.reject(r|r.type.name.endsWith("Function"))
 		.reject(r|r.type.name.endsWith("Operation"))
 		.isEmpty»
 	«EXPAND ifThenOpen("References")»
 
 	«IF !references.select(r|!r.containment)
-			.reject(r|r.type.name == "EventTrigger")
-			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name == "Event")
+			.reject(r|r.type.name.endsWith("Function"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
 		«EXPAND ifThenOpen("ReferencesDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|!r.containment)
-				.reject(r|r.type.name == "EventTrigger")
-				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name == "Event")
+				.reject(r|r.type.name.endsWith("Function"))
 				.reject(r|r.type.name.endsWith("Operation"))
 				.sortBy(a|a.name) AS ref»
 		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
@@ -247,14 +247,14 @@
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|!r.containment)
-			.reject(r|r.type.name == "EventTrigger")
-			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name == "Event")
+			.reject(r|r.type.name.endsWith("Function"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
 		«EXPAND ifThenOpen("ReferencesInherited")»
 		«FOREACH getInheritedReferences(this).select(r|!r.containment)
-				.reject(r|r.type.name == "EventTrigger")
-				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name == "Event")
+				.reject(r|r.type.name.endsWith("Function"))
 				.reject(r|r.type.name.endsWith("Operation"))
 				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("ReferencesInherited")»
@@ -265,14 +265,14 @@
 
 «DEFINE latexEvents FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this))
-		.select(r|r.type.name == "EventTrigger")
+		.select(r|r.type.name == "Event")
 		.isEmpty»
 	«EXPAND ifThenOpen("Events")»
 
-	«IF !references.select(r|r.type.name == "EventTrigger").isEmpty»
+	«IF !references.select(r|r.type.name == "Event").isEmpty»
 		«EXPAND ifThenOpen("EventsDirect")»
 		\begin{modeldocList}
-		«FOREACH references.select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref»
+		«FOREACH references.select(r|r.type.name == "Event").sortBy(a|a.name) AS ref»
 		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
@@ -284,9 +284,9 @@
 		«EXPAND ifThenClose("EventsDirect")»
 	«ENDIF»
 	
-	«IF !getInheritedReferences(this).select(r|r.type.name == "EventTrigger").isEmpty»
+	«IF !getInheritedReferences(this).select(r|r.type.name == "Event").isEmpty»
 		«EXPAND ifThenOpen("EventsInherited")»
-		«FOREACH getInheritedReferences(this).select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«FOREACH getInheritedReferences(this).select(r|r.type.name == "Event").sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("EventsInherited")»
 	«ENDIF»
 	«EXPAND ifThenClose("Events")»

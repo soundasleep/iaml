@@ -93,46 +93,6 @@ rule "Sync wires to Domain Iterators should be copied to the contents of the Dom
 end
 
 /**
- * TODO can probably remove this rule
- *
- * @inference SyncWire,CanBeSynced
- *		A {@model SyncWire} connecting an {@model DomainSource} to a {@model CanBeSynced} object
- *		will create sub-{@model SyncWire}s between every {@model DomainSchema} of the source
- *		to every contained {@model CanBeSynced} object which have matching {@model CanBeSynced#name names}.
- */
-rule "Sync wires from DomainSchema to CanBeSynced"
-	when
-		# source : SyncWire(, eval(connects(source, p1, p2)) )
-		source : SyncWire( overriddenNames not contains "sync" )
-		
-		# we put in these to prevent multiple wires being generated for two connects
-		domainSource : DomainSource ( )
-		p2 : CanBeSynced ( )
-		eval ( functions.connects( source, domainSource, p2 ))
-
-		eval ( domainSource != p2)
-		
-		domainSchema : DomainSchema ( )
-		schemaEdge : SchemaEdge ( from == domainSource, to == domainSchema )
-		
-		e1 : CanBeSynced ( eContainer == domainSchema )
-		e2 : CanBeSynced( eContainer == p2 )
-
-		eval(functions.nameMatches(e1, e2))
-	
-		not (sw : SyncWire( eContainer == source, eval(functions.connects( sw, e1, e2)) ))
-		
-		eval ( handler.veto( source ))
-						
-	then
-		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
-		handler.setName(sw, "sync");
-		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
-		queue.add(sw, drools);
-		
-end
-
-/**
  * @inference SyncWire
  *		When a {@model Changeable} is connected to an {@model ContainsOperations} by a
  *		{@model SyncWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
@@ -735,47 +695,6 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		InputTextField text = handler.generatedInputTextField(sync, form);
 		handler.setName(text, attribute.getName());
 		handler.setType(text, attribute.getType());
-		queue.add(text, drools);
-
-end
-
-/**
- * TODO can probably get rid of this rule
- *
- * @inference SyncWire,DomainSource
- *		An empty {@model InputForm} connected to a {@model DomainSource} with a {@model SyncWire}
- *		will create a {@model InputTextField} in that form for every {@model DomainAttribute}
- *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model ExtendsEdge foreign key}.
- */
-rule "Refresh Domain Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
-	when
-		sync : SyncWire( )
-		form : InputForm ( )
-		domainSource : DomainSource ( )
-		
-		eval(functions.connects(sync, form, domainSource))
-
-		# traverse the connections
-		domainSchema : DomainSchema ( )		
-		schemaEdge : SchemaEdge ( from == domainSource, to == domainSchema )  
-				
-		attribute : DomainAttribute( eContainer == domainSchema )
-		
-		# at the top of the attribute inheritance heirarchy, not
-		# a generated primary key
-		eval( functions.notExtendingGeneratedPrimaryKey( attribute ) )
-		
-		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
-
-		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
-						
-		eval ( handler.veto( sync ))
-		
-	then
-		# create a new one
-		InputTextField text = handler.generatedInputTextField(sync, form);
-		handler.setName(text, attribute.getName());
-		handler.setType(text, (EDataType) attribute.getEType());
 		queue.add(text, drools);
 
 end

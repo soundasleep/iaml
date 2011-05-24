@@ -136,7 +136,7 @@
 		«ENDIF»
 		
 		<div id="inference" class="semantic_block">
-			<h2>Inference Semantics</h2>
+			<h2>Inference Rules</h2>
 			
 			«IF inferenceSemantics.union(getInheritedInferenceSemantics(this)).isEmpty»
 				<div class="none">(none)</div>

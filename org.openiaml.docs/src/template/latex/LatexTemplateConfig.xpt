@@ -219,7 +219,7 @@
 }
 
 \newenvironment{modeldocInference}{
-  \subsection{Inference Semantics}
+  \subsection{Inference Rules}
 }{
   % empty
 }

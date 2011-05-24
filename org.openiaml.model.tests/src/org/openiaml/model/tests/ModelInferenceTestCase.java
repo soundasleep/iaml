@@ -76,6 +76,13 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected InternetApplication root;
 	
 	/**
+	 * Forcibly clear the entire inference cache.
+	 */
+	public void resetInferenceCache() {
+		inferer.getCache().clear();
+	}
+	
+	/**
 	 * Remove the given class from the inference cache. Returns the
 	 * original result for the given key, or <code>null</code> if the
 	 * key was not present.

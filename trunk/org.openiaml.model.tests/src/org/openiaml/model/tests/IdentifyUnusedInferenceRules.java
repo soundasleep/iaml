@@ -53,7 +53,7 @@ public class IdentifyUnusedInferenceRules extends ModelInferenceTestCase  {
 		for (String rule : rc.keySet()) {
 			fw.write(rule);
 			fw.write("\t");
-			fw.write(rc.get(rule));
+			fw.write(Integer.toString(rc.get(rule)));
 			fw.write("\n");
 		}
 		fw.close();

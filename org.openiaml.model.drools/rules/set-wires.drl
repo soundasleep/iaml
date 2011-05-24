@@ -106,44 +106,13 @@ rule "Copy set wires: Domain Instances (target)"
 		
 end
 
-// TODO is this rule necessary any more?
-rule "Set wires from DomainSchema to CanBeSynced"
-	when
-		# we put in these to prevent multiple wires being generated for two connects
-		domainSource : DomainSource ( )
-		p2 : CanBeSynced ( )
-
-		source : SetWire( from == domainSource, to == p2, overriddenNames not contains "set" )
-
-		eval ( domainSource != p2)
-		
-		domainSchema : DomainSchema ( )
-		schemaEdge : SchemaEdge ( from == domainSource, to == domainSchema )
-		
-		e1 : CanBeSynced ( eContainer == domainSchema )
-		e2 : CanBeSynced( eContainer == p2 )
-
-		eval(functions.nameMatches(e1, e2))
-	
-		not (sw : SetWire( eContainer == source, from == e1, to == e2 ))
-		
-		eval ( handler.veto( source ))
-						
-	then
-		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
-		handler.setName(sw, "set");
-		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
-		queue.add(sw, drools);
-		
-end
-
 /**
  * @inference SetWire
  *		When a {@model Changeable} is connected to an {@model ContainsOperations} by a
  *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
  *		target when the source {@model Changeable#onChange changes}.
  */
-rule "Run instance wire from edit to update (onChange)"
+rule "Run instance wire from edit to update (onChange) [set]"
 	when
 		source : Changeable( )
 		target : ContainsOperations( )
@@ -171,7 +140,7 @@ end
  *		{@model SetWire}, the source element will {@model ECARule call} the 'set value XXX' {@model Operation} on the 
  *		target when the source {@model Changeable#onChange changes}.
  */
-rule "Run instance wire from edit to Value update (onChange)"
+rule "Run instance wire from edit to Value update (onChange) [set]"
 	when
 		source : Changeable( )
 		
@@ -404,37 +373,6 @@ rule "Run instance wire from target.access to target.init, adding SimpleConditio
 end	
 
 /**
- * TODO Ideally, these two commands would be joined together into one
- * TODO Can probably remove this rule, since events are no longer named?
- *
- * @inference SetWire,Parameter
- *		When a {@model CanBeSynced} element is connected to a {@model CanBeSynced} element by a
- *		{@model SetWire}, the {@model CanBeSynced#fieldValue} of the source element will be used as a 
- *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
- */
-rule "Connect parameter wire to: run instance wire from target.access to target.init [set]"
-	when
-		source : CanBeSynced( )
-		target : CanBeSynced( )
-		sw : SetWire( from == source, to == target, overriddenNames not contains "[sync] run instance parameter (source.access)" )
-	
-		event : Event( eContainer == target, name=="access" )
-		operation : Operation( eContainer == target, name=="init" )
-		field : Value( source.fieldValue == field )
-		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
-		
-		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
-						
-		eval ( handler.veto( sw ))
-		
-	then
-		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
-		queue.add(pw, drools);
-
-end
-
-/**
  * @inference SetWire,Parameter
  *		When a {@model CanBeSynced} element is connected to an {@model Accessible} element by a
  *		{@model SetWire}, the {@model CanBeSynced#fieldValue} of the source element will be used as a 
@@ -461,69 +399,6 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		queue.add(pw, drools);
 
 end
-
-/**
- * TODO can probably remove this rule
- *
- * @inference SetWire,DomainIterator,Parameter
- *		When a {@model DomainIterator} is connected to a {@model CanBeSynced} element by a
- *		{@model SetWire}, the {@model DomainIterator#fieldValue} of the source element will be used as a 
- *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
- */
-rule "Connect parameter wire: Domain Instance (source)"
-	when
-		source_container : DomainIterator( )
-		source : DomainInstance ( eContainer == source_container )
-		target : CanBeSynced( )
-		sw : SetWire( from == source_container, to == target, overriddenNames not contains "[sync] run instance parameter (source.access)" )
-	
-		event : Event( eContainer == target, name=="access" )
-		operation : Operation( eContainer == target, name=="init" )
-		field : Value( source.fieldValue == field )
-		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
-		
-		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
-						
-		eval ( handler.veto( sw ))
-		
-	then
-		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
-		queue.add(pw, drools);
-
-end
-
-/**
- * TODO can probably remove this rule
- *
- * @inference SetWire,DomainIterator,Parameter
- *		When a {@model CanBeSynced} element is connected to a {@model DomainIterator} by a
- *		{@model SetWire}, the value of the source element will be used as a 
- *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
- */
-rule "Connect parameter wire: Domain Instance (target)"
-	when
-		source : CanBeSynced( )
-		target_container : DomainIterator( )
-		target : DomainInstance ( eContainer == target_container )
-		sw : SetWire( from == source, to == target_container, overriddenNames not contains "[sync] run instance parameter (source.access)" )
-	
-		event : Event( eContainer == target, name=="access" )
-		operation : Operation( eContainer == target, name=="init" )
-		field : Value( source.fieldValue == field )
-		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
-		
-		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
-						
-		eval ( handler.veto( sw ))
-		
-	then
-		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
-		queue.add(pw, drools);
-
-end
-
 
 /**
  * I think that chained SetWires are generally impossible. Consider:
@@ -961,36 +836,6 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 end
 
 /**
- * TODO can probably remove this rule
- *
- * @inference SetWire,DomainSchema
- *		An empty {@model InputForm} connected to a {@model DomainSchema} with a {@model SetWire}
- *		will create a {@model InputTextField} in that form for every {@model DomainAttribute}
- *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model DomainAttribute#isGenerated generated}.
- */
-rule "Refresh Domain Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
-	when
-		form : InputForm (  )
-		object : DomainSchema (  )		
-		sync : SetWire( from == form, to == object )
-		
-		attribute : DomainAttribute( eContainer == object, primaryKey == false || isGenerated == false )
-		
-		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
-
-		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
-						
-		eval ( handler.veto( sync ))
-		
-	then
-		# create a new one
-		InputTextField text = handler.generatedInputTextField(sync, form);
-		handler.setName(text, attribute.getName());
-		queue.add(text, drools);
-
-end
-
-/**
  * @inference SetWire,InputForm,Label
  *		An {@model InputForm} connected to another {@model InputForm} with a {@model SetWire}
  *		will create a {@model Label} in the target form for every {@model InputTextField} in the
@@ -1023,7 +868,7 @@ end
  *		will create a {@model Label} in the target form for every {@model Label} in the
  *		source form with the same {@model Label#name}.
  */
-rule "Refresh mappings between InputForms connected to InputForms containing Labels"
+rule "Refresh mappings between InputForms connected to InputForms containing Labels [set]"
 	when
 		source : InputForm (  )
 		target : InputForm (  )
@@ -1050,7 +895,7 @@ end
  *		will create a {@model Label} in the target Email for every {@model InputTextField} in the
  *		source form with the same {@model Label#name}.
  */
-rule "Refresh mappings between InputForms connected to Emails containing InputTextFields"
+rule "Refresh mappings between InputForms connected to Emails containing InputTextFields [set]"
 	when
 		source : InputForm (  )
 		target : Email (  )
@@ -1077,7 +922,7 @@ end
  *		will create a {@model Label} in the target Email for every {@model Label} in the
  *		source form with the same {@model Label#name}.
  */
-rule "Refresh mappings between InputForms connected to Emails containing Labels"
+rule "Refresh mappings between InputForms connected to Emails containing Labels [set]"
 	when
 		source : InputForm (  )
 		target : Email (  )
@@ -1104,7 +949,7 @@ end
  *		will create a {@model MapPoint} in the target map for every {@model InputTextField} in the
  *		source form with the same {@model Label#name}.
  */
-rule "Refresh mappings between InputForms connected to Maps containing InputTextFields"
+rule "Refresh mappings between InputForms connected to Maps containing InputTextFields [set]"
 	when
 		source : InputForm (  )
 		target : Map (  )
@@ -1157,32 +1002,6 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		Label text = handler.generatedLabel(sync, form);
 		handler.setName(text, attribute.getName());
 		handler.setType(text, attribute.getType());
-		queue.add(text, drools);
-
-end
-
-/**
- * TODO is this rule even used anymore? consider removing.
- */
-rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
-	when
-		form : InputForm (  )
-		object : DomainSchema (  )
-		sync : SetWire( from == object, to == form )	// backwards
-
-		attribute : DomainAttribute( eContainer == object, primaryKey == false || isGenerated == false )
-		
-		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
-
-		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
-						
-		eval ( handler.veto( sync ))
-		
-	then
-		# create a new one
-		Label text = handler.generatedLabel(sync, form);
-		handler.setName(text, attribute.getName());
-		handler.setType(text, (EDataType) attribute.getEType());
 		queue.add(text, drools);
 
 end

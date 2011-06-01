@@ -1,0 +1,20 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small]{webdsl}
+define page editUser (u : User) {
+  title { "Edit User: " output(u.name) }
+  section {
+    header { "Edit User: " output(u.name) }
+    form {
+      par { "Name: " input(u.name) }
+      par { "Password: " input(u.password) }
+      par { action("Save Changes", saveUser()) }
+    }
+    action saveUser() {
+      u.persist(); return viewUser(u);
+    }
+    navigate(home()) { "return to home page" }
+  }
+}
+/**\end{minted}

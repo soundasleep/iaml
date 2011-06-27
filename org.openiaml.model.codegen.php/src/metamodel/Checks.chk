@@ -31,9 +31,9 @@ context model::components::LoginHandler ERROR "A login handler of type SECRET_KE
 	type != model::components::LoginHandlerTypes::SECRET_KEY ||
 	inParameterEdges.size == 1;
 
-context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainSchema":
+context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainType":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
-	inParameterEdges.parameterValue.eContainer.typeSelect(model::domain::DomainSchema).toSet().size == 1;
+	inParameterEdges.parameterValue.eContainer.typeSelect(model::domain::DomainType).toSet().size == 1;
 
 context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
 	(name == "equal?" && inFlows.size >= 2) 
@@ -57,7 +57,7 @@ context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two 
 	!(model::Value.isInstance(from) && 
 	model::Value.isInstance(to));
 	
-context model::domain::DomainSchema ERROR "You cannot have a DomainSchema called single_values (reserved word)" :
+context model::domain::DomainType ERROR "You cannot have a DomainType called single_values (reserved word)" :
 	toString(name) != "single_values";
 	
 /**
@@ -233,7 +233,7 @@ context model::domain::DomainSource ERROR "A DomainSource can only have one Sche
 context model::domain::DomainIterator ERROR "A DomainIterator can only have one Source" :
 	outSelects.size <= 1;
 
-context model::domain::DomainSchema WARNING "A DomainSchema should have at least one DomainSource specified" :
+context model::domain::DomainType WARNING "A DomainType should have at least one DomainSource specified" :
 	inSchemas.size >= 1;
 
 // TODO should this become an Error?

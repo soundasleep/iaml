@@ -332,13 +332,13 @@ model::Scope containingScope(model::Scope this) :
 model::Scope containingScope(model::InternetApplication this) :
 	null;
 
-model::domain::DomainSchema getDomainSchema(model::domain::DomainSchema this) :
+model::domain::DomainType getDomainType(model::domain::DomainType this) :
 	this;
-model::domain::DomainSchema getDomainSchema(model::domain::DomainAttribute this) :
+model::domain::DomainType getDomainType(model::domain::DomainAttribute this) :
 	if eContainer == null
 		then null
-		else getDomainSchema(eContainer);
-model::domain::DomainSchema getDomainSchema(emf::EObject this) :
+		else getDomainType(eContainer);
+model::domain::DomainType getDomainType(emf::EObject this) :
 	null;
 	
 /**
@@ -409,8 +409,8 @@ List[domain::DomainAttributeInstance] getAllDomainAttributeInstances(model::Inte
 List[model::domain::DomainIterator] getAllDomainIterators(model::InternetApplication this) :
 	eAllContents.typeSelect(model::domain::DomainIterator);
 
-getAllDomainSchemas(emf::EObject this) :
-	eAllContents.typeSelect(model::domain::DomainSchema);
+getAllDomainTypes(emf::EObject this) :
+	eAllContents.typeSelect(model::domain::DomainType);
 
 getFailHandler(model::ActionEdgeSource this) :
 	listeners.select( w | w.isFailEdge()).first();
@@ -432,7 +432,7 @@ model::domain::DomainAttribute getPrimaryKey(model::domain::DomainAttributeInsta
 		then getPrimaryKey((model::domain::DomainIterator) eContainer)
 		else null;
 
-model::domain::DomainAttribute getPrimaryKey(model::domain::DomainSchema this) :
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainType this) :
 	eStructuralFeatures.typeSelect(model::domain::DomainAttribute).selectFirst( e | e.primaryKey );
 
 model::domain::DomainAttribute getPrimaryKey(model::domain::DomainAttribute this) :
@@ -458,15 +458,15 @@ model::domain::DomainIterator getDomainIterator(model::domain::DomainAttributeIn
 isGeneratedPrimaryKey(domain::DomainAttributeInstance this) :
 	isGenerated && !outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|a.primaryKey).isEmpty ;
 
-List[model::domain::DomainSchema] allSubtypes(model::domain::DomainSchema this):
-	inExtendsEdges.from.typeSelect(model::domain::DomainSchema).collect(e|allSubtypes(e)).flatten().add(this);
+List[model::domain::DomainType] allSubtypes(model::domain::DomainType this):
+	inExtendsEdges.from.typeSelect(model::domain::DomainType).collect(e|allSubtypes(e)).flatten().add(this);
 
 model::operations::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
 	(model::operations::ExecutionEdgesSource) this;
 
 /**
  * If this extension fails, then you are trying to find the defining attribute for an AttributeInstance
- * which isn't actually defined as an extension in the system, so we can't find the containing DomainSchema
+ * which isn't actually defined as an extension in the system, so we can't find the containing DomainType
  * for it.
  */
 model::domain::DomainAttribute getAttributeForAttributeInstance(domain::DomainAttributeInstance this) :

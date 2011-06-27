@@ -10,13 +10,13 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.128240e326e.3ca" name="Create New Post">
     <iterators id="domain.128807fbeba.f75" name="new" outWires="wires.128240e326e.3f1" query="new" outSelects="domain.128807fbeba.f7a">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.128240e326e.3f1" name="sync" from="domain.128807fbeba.f75" to="visual.128240e326e.468"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.128240e31d2.10a0" name="save" rules="wires.128240e326e.659"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.128240e326e.659" id="model.128240e31d2.10a0" name="save"/>
       <canSave xsi:type="iaml:BuiltinProperty" id="model.1283779cdf7.c0" name="can save?" conditioned="wires.12837b6de10.f">
         <conditionEdges id="wires.12837b6de10.f" name="condition" function="model.1283779cdf7.c0" conditioned="operations.12837813716.23"/>
       </canSave>
     </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.128240e326e.3f1" id="visual.128240e326e.468" name="Create New">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.128240e31d2.173f" name="try save" rules="wires.128240e326e.43a">
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.128240e326e.43a" id="model.128240e31d2.173f" name="try save">
         <nodes xsi:type="iaml.operations:StartNode" id="operations.128240e327e.42c" outExecutions="model.128240e31d2.1818"/>
         <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.128240e327e.430" outExecutions="model.12837b6dd45.1ed" inExecutions="model.12837b6dd45.1eb" listeners="wires.128240e326e.659">
           <ecaRules id="wires.128240e326e.659" name="run" trigger="operations.128240e327e.430" target="model.128240e31d2.10a0"/>
@@ -43,15 +43,15 @@
         <ecaRules id="wires.128240e326e.43a" name="onClick" trigger="visual.128240e326e.4ba" target="model.128240e31d2.173f"/>
       </children>
       <children xsi:type="iaml.visual:Label" id="visual.12837b6de01.45" name="Warning" defaultValue="Error: Could not save instance successfully.">
-        <operations xsi:type="iaml:BuiltinOperation" id="model.12837b6dd45.118" name="hide" rules="wires.12837b6de10.87 wires.12837b6de10.b4"/>
-        <operations xsi:type="iaml:BuiltinOperation" id="model.12837b6dd45.119" name="show" rules="wires.12837b6de10.b5"/>
+        <operations xsi:type="iaml:BuiltinOperation" rules="wires.12837b6de10.87 wires.12837b6de10.b4" id="model.12837b6dd45.118" name="hide"/>
+        <operations xsi:type="iaml:BuiltinOperation" rules="wires.12837b6de10.b5" id="model.12837b6dd45.119" name="show"/>
       </children>
     </children>
   </scopes>
-  <schemas name="Post" id="domain.128807fbeba.f76" inSchemas="domain.128807fbeba.f78">
+  <types name="Post" id="domain.128807fbeba.f76" inSchemas="domain.128807fbeba.f78">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.128240e31d2.f53"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="author" eType="builtin_iamlOpenIDURL" id="model.128240e31d2.f55"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.f77" outSchemas="domain.128807fbeba.f78" inSelects="domain.128807fbeba.f79 domain.128807fbeba.f7a">
     <schemaEdges id="domain.128807fbeba.f78" from="domain.128807fbeba.f77" to="domain.128807fbeba.f76"/>
     <selectEdges id="domain.128807fbeba.f79" from="domain.128807fbeba.f74" to="domain.128807fbeba.f77"/>

@@ -48,7 +48,7 @@
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.ae" name="create a new student without autosave">
     <iterators id="domain.128807fbeba.e18" name="new" inWires="wires.12392019286.17c" query="new" outSelects="domain.128807fbeba.e37">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.12392019209.2aa" name="save" rules="wires.12392019286.22b"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.12392019286.22b" id="model.12392019209.2aa" name="save"/>
     </iterators>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.17c" id="visual.12392019277.e7" name="new student form">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.17c" name="sync" from="visual.12392019277.e7" to="domain.128807fbeba.e18"/>
@@ -65,38 +65,38 @@
       </children>
     </scopes>
   </scopes>
-  <schemas name="Person" id="domain.128807fbeba.e1a" inExtendsEdges="wires.12364143556.1 wires.12364143556.3" inSchemas="domain.128807fbeba.e1c">
+  <types name="Person" id="domain.128807fbeba.e1a" inExtendsEdges="wires.12364143556.1 wires.12364143556.3" inSchemas="domain.128807fbeba.e1c">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.123641434e9.8a"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="builtin_iamlInteger" id="model.123641434e9.29a8" primaryKey="true"/>
-  </schemas>
-  <schemas name="Student" id="domain.128807fbeba.e1d" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6" inSchemas="domain.128807fbeba.e1f">
+  </types>
+  <types name="Student" id="domain.128807fbeba.e1d" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6" inSchemas="domain.128807fbeba.e1f">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="enrolled" id="model.123641434e9.f3"/>
     <extendsEdges id="wires.12364143556.1" from="domain.128807fbeba.e1d" to="domain.128807fbeba.e1a"/>
-  </schemas>
-  <schemas name="Teacher" id="domain.128807fbeba.e20" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8" inSchemas="domain.128807fbeba.e22">
+  </types>
+  <types name="Teacher" id="domain.128807fbeba.e20" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8" inSchemas="domain.128807fbeba.e22">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.123641434e9.163"/>
     <extendsEdges id="wires.12364143556.3" from="domain.128807fbeba.e20" to="domain.128807fbeba.e1a"/>
     <extendsEdges id="wires.12364143556.4" from="domain.128807fbeba.e20" to="domain.128807fbeba.e23"/>
-  </schemas>
-  <schemas name="Qualified" id="domain.128807fbeba.e23" inExtendsEdges="wires.12364143556.4" inSchemas="domain.128807fbeba.e25">
+  </types>
+  <types name="Qualified" id="domain.128807fbeba.e23" inExtendsEdges="wires.12364143556.4" inSchemas="domain.128807fbeba.e25">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="qualification" id="model.123641434e9.1bb"/>
-  </schemas>
-  <schemas name="Postgraduate" id="domain.128807fbeba.e26" outExtendsEdges="wires.12364143556.5" inExtendsEdges="wires.12364143556.7" inSchemas="domain.128807fbeba.e28">
+  </types>
+  <types name="Postgraduate" id="domain.128807fbeba.e26" outExtendsEdges="wires.12364143556.5" inExtendsEdges="wires.12364143556.7" inSchemas="domain.128807fbeba.e28">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="degree" id="model.123641434e9.2d2"/>
     <extendsEdges id="wires.12364143556.5" from="domain.128807fbeba.e26" to="domain.128807fbeba.e1d"/>
-  </schemas>
-  <schemas name="Undergraduate" id="domain.128807fbeba.e29" outExtendsEdges="wires.12364143556.6" inExtendsEdges="wires.12364143556.3f5" inSchemas="domain.128807fbeba.e2b">
+  </types>
+  <types name="Undergraduate" id="domain.128807fbeba.e29" outExtendsEdges="wires.12364143556.6" inExtendsEdges="wires.12364143556.3f5" inSchemas="domain.128807fbeba.e2b">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="degree" id="model.123641434e9.240"/>
     <extendsEdges id="wires.12364143556.6" from="domain.128807fbeba.e29" to="domain.128807fbeba.e1d"/>
-  </schemas>
-  <schemas name="Doctoral" id="domain.128807fbeba.e2c" outExtendsEdges="wires.12364143556.7 wires.12364143556.8" inSchemas="domain.128807fbeba.e2e">
+  </types>
+  <types name="Doctoral" id="domain.128807fbeba.e2c" outExtendsEdges="wires.12364143556.7 wires.12364143556.8" inSchemas="domain.128807fbeba.e2e">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="thesis title" id="model.123641434e9.371"/>
     <extendsEdges id="wires.12364143556.7" from="domain.128807fbeba.e2c" to="domain.128807fbeba.e26"/>
     <extendsEdges id="wires.12364143556.8" from="domain.128807fbeba.e2c" to="domain.128807fbeba.e20"/>
-  </schemas>
-  <schemas name="Completed Undergrad" id="domain.128807fbeba.e2f" outExtendsEdges="wires.12364143556.3f5" inSchemas="domain.128807fbeba.e31">
+  </types>
+  <types name="Completed Undergrad" id="domain.128807fbeba.e2f" outExtendsEdges="wires.12364143556.3f5" inSchemas="domain.128807fbeba.e31">
     <extendsEdges id="wires.12364143556.3f5" from="domain.128807fbeba.e2f" to="domain.128807fbeba.e29"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.e1b" outSchemas="domain.128807fbeba.e1c" inSelects="domain.128807fbeba.e32 domain.128807fbeba.e36">
     <schemaEdges id="domain.128807fbeba.e1c" from="domain.128807fbeba.e1b" to="domain.128807fbeba.e1a"/>
     <selectEdges id="domain.128807fbeba.e32" from="domain.128807fbeba.e13" to="domain.128807fbeba.e1b"/>

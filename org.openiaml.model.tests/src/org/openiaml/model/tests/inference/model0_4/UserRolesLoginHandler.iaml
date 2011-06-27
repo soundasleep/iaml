@@ -8,10 +8,10 @@
     </accessHandlers>
     <loginHandlers id="components.1233b453f6b.39" name="user login handler" inParameterEdges="wires.1233b453e32.5e" type="USER"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" name="Guest" id="domain.128807fbeba.fc4" inSchemas="domain.128807fbeba.fc6"/>
-  <schemas xsi:type="iaml.users:Role" name="Registered User" id="domain.128807fbeba.fc7" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.fc9" inRequiresEdges="wires.1233b453e32.66">
+  <types xsi:type="iaml.users:Role" name="Guest" id="domain.128807fbeba.fc4" inSchemas="domain.128807fbeba.fc6"/>
+  <types xsi:type="iaml.users:Role" name="Registered User" id="domain.128807fbeba.fc7" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.fc9" inRequiresEdges="wires.1233b453e32.66">
     <parameterEdges id="wires.1233b453e32.5e" parameterValue="domain.128807fbeba.fc7" parameterTerm="components.1233b453f6b.39"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.fc5" name="domain store" outSchemas="domain.128807fbeba.fc6">
     <schemaEdges id="domain.128807fbeba.fc6" from="domain.128807fbeba.fc5" to="domain.128807fbeba.fc4"/>
   </sources>

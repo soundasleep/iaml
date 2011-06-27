@@ -16,13 +16,13 @@
       <requiresEdges id="wires.129d3dc5a28.2bc" from="components.129d3dc5c5a.26" to="users.129d3dc5df1.13"/>
     </accessHandlers>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" name="Role A" id="users.129d3dc5df1.10" inExtendsEdges="wires.129d3dc5a28.27d wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.6f" inRequiresEdges="wires.129d3dc5a28.286"/>
-  <schemas xsi:type="iaml.users:Role" name="Role B" id="users.129d3dc5df1.12" outExtendsEdges="wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.72" inRequiresEdges="wires.129d3dc5a28.2a3">
+  <types xsi:type="iaml.users:Role" name="Role A" id="users.129d3dc5df1.10" inExtendsEdges="wires.129d3dc5a28.27d wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.6f" inRequiresEdges="wires.129d3dc5a28.286"/>
+  <types xsi:type="iaml.users:Role" name="Role B" id="users.129d3dc5df1.12" outExtendsEdges="wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.72" inRequiresEdges="wires.129d3dc5a28.2a3">
     <extendsEdges id="wires.129d3dc5a28.27f" from="users.129d3dc5df1.12" to="users.129d3dc5df1.10"/>
-  </schemas>
-  <schemas xsi:type="iaml.users:Role" name="Role C" id="users.129d3dc5df1.13" outExtendsEdges="wires.129d3dc5a28.27d" inSchemas="domain.129d3dc5d26.71" inRequiresEdges="wires.129d3dc5a28.2bc">
+  </types>
+  <types xsi:type="iaml.users:Role" name="Role C" id="users.129d3dc5df1.13" outExtendsEdges="wires.129d3dc5a28.27d" inSchemas="domain.129d3dc5d26.71" inRequiresEdges="wires.129d3dc5a28.2bc">
     <extendsEdges id="wires.129d3dc5a28.27d" from="users.129d3dc5df1.13" to="users.129d3dc5df1.10"/>
-  </schemas>
+  </types>
   <sources id="domain.129d3dc5d26.6c" name="source a" outSchemas="domain.129d3dc5d26.6f">
     <schemaEdges id="domain.129d3dc5d26.6f" from="domain.129d3dc5d26.6c" to="users.129d3dc5df1.10"/>
   </sources>

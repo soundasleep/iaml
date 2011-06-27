@@ -3,10 +3,10 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <iterators id="domain.128807fbeba.10e1" name="select" outWires="wires.127e56eff0a.6" limit="-1" outSelects="domain.128807fbeba.10e5">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.127e56eff0a.6" name="sync" from="domain.128807fbeba.10e1" to="visual.127e56efefa.1e"/>
-      <operations xsi:type="iaml:BuiltinOperation" id="model.127e5a8fec3.94" name="save" rules="wires.127e5a8ff7e.99"/>
-      <previous xsi:type="iaml:BuiltinOperation" id="model.127e56efe3e.122" name="previous" rules="wires.127e56eff0a.2b wires.127e56eff0a.2d"/>
-      <next xsi:type="iaml:BuiltinOperation" id="model.127e56efe3e.128" name="next" rules="wires.127e56eff0a.2a wires.127e56eff0a.2c"/>
-      <reset xsi:type="iaml:BuiltinOperation" id="model.127e56efe3e.129" name="reset" rules="wires.127e56eff0a.28"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.127e5a8ff7e.99" id="model.127e5a8fec3.94" name="save"/>
+      <previous xsi:type="iaml:BuiltinOperation" rules="wires.127e56eff0a.2b wires.127e56eff0a.2d" id="model.127e56efe3e.122" name="previous"/>
+      <next xsi:type="iaml:BuiltinOperation" rules="wires.127e56eff0a.2a wires.127e56eff0a.2c" id="model.127e56efe3e.128" name="next"/>
+      <reset xsi:type="iaml:BuiltinOperation" rules="wires.127e56eff0a.28" id="model.127e56efe3e.129" name="reset"/>
       <hasPrevious xsi:type="iaml:BuiltinProperty" id="operations.127e56eff0a.3" name="has previous" conditioned="wires.127e5a8ff7e.20">
         <conditionEdges id="wires.127e5a8ff7e.20" function="operations.127e56eff0a.3" conditioned="wires.127e56eff0a.2d"/>
       </hasPrevious>
@@ -38,11 +38,11 @@
       <ecaRules id="wires.127e5a8ff7e.99" name="onClick" trigger="visual.127e5a8ff6f.aa" target="model.127e5a8fec3.94"/>
     </children>
   </scopes>
-  <schemas name="News" id="domain.128807fbeba.10e2" inSchemas="domain.128807fbeba.10e4">
+  <types name="News" id="domain.128807fbeba.10e2" inSchemas="domain.128807fbeba.10e4">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.127e56efe3e.2f"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="content" id="model.127e56efe3e.35"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="posted" eType="builtin_iamlDateTime" id="model.127e56efe3e.36"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.10e3" outSchemas="domain.128807fbeba.10e4" inSelects="domain.128807fbeba.10e5">
     <schemaEdges id="domain.128807fbeba.10e4" from="domain.128807fbeba.10e3" to="domain.128807fbeba.10e2"/>
     <selectEdges id="domain.128807fbeba.10e5" from="domain.128807fbeba.10e1" to="domain.128807fbeba.10e3"/>

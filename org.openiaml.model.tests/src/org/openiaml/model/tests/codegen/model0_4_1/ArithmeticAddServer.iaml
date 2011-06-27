@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.125437f916e.4a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml.operations:ActivityOperation" id="model.125437f916e.a1" name="update result" rules="wires.125437f91eb.5">
+    <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.125437f91eb.5" id="model.125437f916e.a1" name="update result">
       <properties id="model.125437f916e.146" name="static value" defaultValue="42" readOnly="true"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.125437f916e.145" outExecutions="model.125437f916e.149" inExecutions="model.125437f916e.147" outFlows="model.125437f916e.14e" inFlows="model.125437f916e.14d"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.125437f91eb.d" outExecutions="model.125437f916e.147"/>
@@ -38,7 +38,7 @@
       <fieldValue id="model.125437f916e.76" name="fieldValue"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1254759b7c1.155" name="make negative" rules="wires.1254759bc84.16">
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
         <properties id="model.1254759b7c1.20f" name="negative 1" defaultValue="-1" readOnly="true"/>
         <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" outFlows="model.1254759b7c1.213">
           <externalValueEdges id="eve4" value="model.125437f916e.11b"/>

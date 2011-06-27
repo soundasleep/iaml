@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12eeb3f61e6.11">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:Button" id="visual.12eeb3f62a1.40" name="target">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.12eeb49d2c8.3d" name="set visible" rules="model.12eeb49d2c8.53"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12eeb49d2c8.53" id="model.12eeb49d2c8.3d" name="set visible"/>
       <properties id="model.12eeb3f61e6.1c" name="visible" type="xsd_boolean"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12eeb3f62a1.41" name="set visibility" listeners="model.12eeb49d2c8.53">

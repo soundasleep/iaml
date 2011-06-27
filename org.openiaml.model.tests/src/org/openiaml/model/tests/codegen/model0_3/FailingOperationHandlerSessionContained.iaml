@@ -5,7 +5,7 @@
   <scopes xsi:type="iaml.scopes:Session" id="scopes.121370d7b50.1" name="containing session" listeners="wires.121370d7b40.23">
     <ecaRules id="wires.121370d7b40.23" name="fail" trigger="scopes.121370d7b50.1" target="visual.12109dbdd39.37"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.18" name="session page">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.121370d7af2.117" name="instant failure in the page itself" rules="wires.121370d7b40.73">
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.121370d7b40.73" id="model.121370d7af2.117" name="instant failure in the page itself">
         <nodes xsi:type="iaml.operations:StartNode" id="operations.121370d7b50.5a" outExecutions="model.121370d7af2.1cc"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.121370d7b50.5b"/>
         <nodes xsi:type="iaml.operations:CancelNode" id="operations.121370d7b50.5c" inExecutions="model.121370d7af2.1cc" exceptionText="this failure occured in the page"/>

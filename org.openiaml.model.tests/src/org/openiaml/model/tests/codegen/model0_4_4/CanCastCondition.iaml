@@ -19,7 +19,7 @@
       <executionEdges id="model.1274f8f028d.36" from="operations.1274f877c61.31" to="operations.1274f877c61.62"/>
       <variables id="model.1274f877ba5.c9" name="target" inFlows="model.1274f8f028d.2d" type="builtin_iamlInteger"/>
     </functions>
-    <operations xsi:type="iaml.operations:ActivityOperation" id="model.1274f76bcd9.47" name="convert and insert" rules="wires.1274f76c1da.64">
+    <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1274f76c1da.64" id="model.1274f76bcd9.47" name="convert and insert">
       <nodes xsi:type="iaml.operations:SetNode" id="model.1274f8533f5.28" outExecutions="model.1274f8533f5.2b" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" inFlows="model.1274f8f028d.3a4"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.10" name="can cast?" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27" inExecutions="model.1274f8f028d.25a" inFlows="model.1274f8f028d.3a3"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f8534e0.1" outExecutions="model.1274f8f028d.25a"/>

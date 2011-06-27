@@ -6,9 +6,9 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.122ed49bb43.b" name="sync" from="visual.122ed49bb14.2b" to="domain.128807fbeba.e93"/>
     </children>
   </scopes>
-  <schemas name="domain object" id="domain.128807fbeba.e94" inSchemas="domain.128807fbeba.e96">
+  <types name="domain object" id="domain.128807fbeba.e94" inSchemas="domain.128807fbeba.e96">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.122ed49ba78.44"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.e95" outSchemas="domain.128807fbeba.e96" inSelects="domain.128807fbeba.e97">
     <schemaEdges id="domain.128807fbeba.e96" from="domain.128807fbeba.e95" to="domain.128807fbeba.e94"/>
     <selectEdges id="domain.128807fbeba.e97" from="domain.128807fbeba.e93" to="domain.128807fbeba.e95"/>

@@ -7,7 +7,7 @@
       </fieldValue>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e8" name="target one">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.12109331eea.b2" name="update" rules="wires.12109331f38.1c wires.12109331f38.3c"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.12109331f38.1c wires.12109331f38.3c" id="model.12109331eea.b2" name="update"/>
       <fieldValue id="model.12109331eea.70" name="fieldValue"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.f0" name="copy value over to target">
@@ -29,7 +29,7 @@
       <parameterEdges id="wires.12109331f38.5a5" parameterValue="visual.12109331f38.346" parameterTerm="wires.12109331f38.5a4"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.347" name="target two">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.12109331eea.d95" name="update" rules="wires.12109331f38.5a4"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.12109331f38.5a4" id="model.12109331eea.d95" name="update"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.348" name="copy over implicitly" listeners="wires.12109331f38.5a4">
       <ecaRules id="wires.12109331f38.5a4" inParameterEdges="wires.12109331f38.5a5" name="click" trigger="visual.12109331f38.348" target="model.12109331eea.d95"/>

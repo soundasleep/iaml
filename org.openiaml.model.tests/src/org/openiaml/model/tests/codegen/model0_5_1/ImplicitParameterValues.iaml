@@ -6,11 +6,11 @@
       <parameterEdges id="wires.1281e15c5ee.67" parameterValue="visual.1281e15c5ee.b5" parameterTerm="wires.1281e15c5ee.65"/>
     </children>
     <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.b6" name="label value" outParameterEdges="wires.1281e15c5ee.69">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1281e15c552.103" name="update" rules="wires.1281e15c5ee.65"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1281e15c5ee.65" id="model.1281e15c552.103" name="update"/>
       <parameterEdges id="wires.1281e15c5ee.69" parameterValue="visual.1281e15c5ee.b6" parameterTerm="wires.1281e15c5ee.66"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b7" name="target field">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1281e15c552.12e" name="update" rules="wires.1281e15c5ee.66"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1281e15c5ee.66" id="model.1281e15c552.12e" name="update"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.141" name="update label" listeners="wires.1281e15c5ee.65">
       <ecaRules id="wires.1281e15c5ee.65" inParameterEdges="wires.1281e15c5ee.67" name="onClick" trigger="visual.1281e15c5ee.141" target="model.1281e15c552.103"/>

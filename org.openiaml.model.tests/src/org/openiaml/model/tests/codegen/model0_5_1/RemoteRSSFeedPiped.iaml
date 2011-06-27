@@ -10,11 +10,11 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.128236bedbd.20" name="Details" inWires="wires.128236bedbd.2e"/>
-  <schemas name="Remote Event Listing" id="domain.128807fbeba.f13" inSchemas="domain.128807fbeba.f15">
+  <types name="Remote Event Listing" id="domain.128807fbeba.f13" inSchemas="domain.128807fbeba.f15">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1281f69878a.3b"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1281f69878a.3d"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="pubDate" eType="builtin_iamlDateTime" id="model.1281f74c8dd.df"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.f14" type="RSS2_0" outSchemas="domain.128807fbeba.f15" inSelects="domain.128807fbeba.f16" url="http://openiaml.org/publications/rss_sample.xml" cache="3600">
     <schemaEdges id="domain.128807fbeba.f15" from="domain.128807fbeba.f14" to="domain.128807fbeba.f13"/>
     <selectEdges id="domain.128807fbeba.f16" from="domain.128807fbeba.f12" to="domain.128807fbeba.f14"/>

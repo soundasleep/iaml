@@ -8,7 +8,7 @@
     </children>
     <children xsi:type="iaml.visual:Map" id="visual.127b84b628d.29" name="containing map">
       <children xsi:type="iaml.visual:MapPoint" id="visual.127b84b628d.2a" name="target point">
-        <operations xsi:type="iaml.operations:ActivityOperation" id="model.127b83e573d.76" name="update" rules="wires.127b83e57f8.8"/>
+        <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.127b83e57f8.8" id="model.127b83e573d.76" name="update"/>
         <fieldValue id="model.127b83e573d.32" name="fieldValue" type="builtin_iamlAddress"/>
       </children>
     </children>

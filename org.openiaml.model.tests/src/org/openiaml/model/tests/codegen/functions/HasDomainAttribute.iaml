@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126f8149d3d.2b">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
-  <schemas name="Not Empty" id="model.126f8149d3d.2e">
+  <types name="Not Empty" id="model.126f8149d3d.2e">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="attr1" id="model.126f8149d3d.37"/>
-  </schemas>
-  <schemas name="Empty" id="model.126f8149d3d.44"/>
-  <schemas name="Generated Primary Key" id="model.126f8149d3d.45">
+  </types>
+  <types name="Empty" id="model.126f8149d3d.44"/>
+  <types name="Generated Primary Key" id="model.126f8149d3d.45">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="generated primary key" id="model.126f8149d3d.59"/>
-  </schemas>
+  </types>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">
     <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
   </xsdDataTypes>

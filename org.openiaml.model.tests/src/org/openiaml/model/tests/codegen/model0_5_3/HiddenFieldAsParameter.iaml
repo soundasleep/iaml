@@ -13,7 +13,7 @@
         <ecaRules id="model.12982b34bf8.42" inParameterEdges="wires.12982b34d8e.1b" name="onClick" trigger="visual.12982b34d11.45" target="model.12982b34bf8.31"/>
       </children>
       <children xsi:type="iaml.visual:InputTextField" id="visual.12982b34d11.46" name="target">
-        <operations xsi:type="iaml.operations:ActivityOperation" id="model.12982b34bf8.31" name="update" rules="model.12982b34bf8.42"/>
+        <operations xsi:type="iaml.operations:ActivityOperation" rules="model.12982b34bf8.42" id="model.12982b34bf8.31" name="update"/>
       </children>
     </scopes>
   </scopes>

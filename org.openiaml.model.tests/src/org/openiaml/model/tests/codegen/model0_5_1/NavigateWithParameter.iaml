@@ -31,7 +31,7 @@
       <parameterEdges id="wires.12fc42b52ff.34" parameterValue="model.12813a548f4.2e" parameterTerm="model.12fc42b4f75.1fc"/>
     </parameters>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12813a54a8b.20" name="parameter:">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.12fc42b4f75.1c4" name="update" rules="model.12fc42b4f75.1fc"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fc42b4f75.1fc" id="model.12fc42b4f75.1c4" name="update"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

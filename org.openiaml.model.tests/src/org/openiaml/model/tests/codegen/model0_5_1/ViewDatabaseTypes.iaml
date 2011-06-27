@@ -7,13 +7,13 @@
     </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12814d6dc27.1f" id="visual.12814d6dbf8.49" name="View"/>
   </scopes>
-  <schemas name="Container" id="domain.128807fbeba.d48" inSchemas="domain.128807fbeba.d4a">
+  <types name="Container" id="domain.128807fbeba.d48" inSchemas="domain.128807fbeba.d4a">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="integer" eType="builtin_iamlInteger" id="model.12814d6da04.6d"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="string" eType="builtin_iamlString" id="model.12814d6da04.73"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="date" eType="builtin_iamlDateTime" id="model.12814d6da04.8c"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="address" eType="builtin_iamlAddress" id="model.12814d6da04.8d"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" eType="builtin_iamlEmail" id="model.12814d6da04.8e"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.d49" outSchemas="domain.128807fbeba.d4a" inSelects="domain.128807fbeba.d4b">
     <schemaEdges id="domain.128807fbeba.d4a" from="domain.128807fbeba.d49" to="domain.128807fbeba.d48"/>
     <selectEdges id="domain.128807fbeba.d4b" from="domain.128807fbeba.d47" to="domain.128807fbeba.d49"/>

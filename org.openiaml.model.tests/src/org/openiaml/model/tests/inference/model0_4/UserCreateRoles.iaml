@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
     <iterators id="domain.128807fbeba.fda" name="new instance" inWires="wires.1233b53a3ce.5e8" query="new" outSelects="domain.128807fbeba.fde">
-      <operations xsi:type="iaml:BuiltinOperation" id="model.1233b53a1ca.14" name="save" rules="wires.1233b53a3ce.a"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.1233b53a3ce.a" id="model.1233b53a1ca.14" name="save"/>
     </iterators>
     <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" listeners="wires.1233b53a3ce.a">
       <ecaRules id="wires.1233b53a3ce.a" name="onClick" trigger="visual.1233b53a313.1a" target="model.1233b53a1ca.14"/>
@@ -18,7 +18,7 @@
       <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.fdb"/>
     </accessHandlers>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.fdb" inSchemas="domain.128807fbeba.fdd" inRequiresEdges="wires.1233afe62eb.2d"/>
+  <types xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.fdb" inSchemas="domain.128807fbeba.fdd" inRequiresEdges="wires.1233afe62eb.2d"/>
   <sources id="domain.128807fbeba.fdc" outSchemas="domain.128807fbeba.fdd" inSelects="domain.128807fbeba.fde">
     <schemaEdges id="domain.128807fbeba.fdd" from="domain.128807fbeba.fdc" to="domain.128807fbeba.fdb"/>
     <selectEdges id="domain.128807fbeba.fde" from="domain.128807fbeba.fda" to="domain.128807fbeba.fdc"/>

@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
  *   <li>NavigateAction and RunAction merged into {@model ActionEdge}
  *   <li>Hidden is now a {@model Label}[visible=false] ({@issue 224})
  *   <li>StaticValue is merged into {@model Property}[readOnly=true] ({@issue 179})
+ *   <li>DomainSchema is now {@model DomiainType} ({@issue 263})
  *   <li>Others...
  * </ol>
  * 
@@ -194,6 +195,17 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			}
 		}
 		
+		// issue 263
+		// <InternetApplication><schemas>
+		// --> <InternetApplication><types>
+		if (nodeName.equals("schemas") && element.getParentNode() != null && element.getParentNode() instanceof Element) {
+			Element parent = (Element) element.getParentNode();
+			if ("InternetApplication".equals(parent.getNodeName()) ||
+					"iaml:InternetApplication".equals(parent.getNodeName())) {
+				return "types";
+			}
+		}
+
 		// <attributes>
 		// --> <featureInstances xsi:type="iaml.domain:DomainAttributeInstance">
 		if ("attributes".equals(element.getNodeName())

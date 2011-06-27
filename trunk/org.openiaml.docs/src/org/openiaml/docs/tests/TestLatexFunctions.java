@@ -39,6 +39,8 @@ public class TestLatexFunctions extends TestCase {
 		assertEquals("test \\& test", LatexCodegenFunctions.convertHTMLIntoLatex("test &amp; test"));
 		assertEquals("<hello>", LatexCodegenFunctions.convertHTMLIntoLatex("&lt;hello&gt;"));
 		assertEquals("hello \\code{world} world", LatexCodegenFunctions.convertHTMLIntoLatex("hello <code>world</code> world"));
+		assertEquals("hello \\textit{world} world", LatexCodegenFunctions.convertHTMLIntoLatex("hello <em>world</em> world"));
+		assertEquals("hello \\textit{world} world", LatexCodegenFunctions.convertHTMLIntoLatex("hello <EM>world</EM> world"));
 	}
 	
 }

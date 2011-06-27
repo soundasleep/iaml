@@ -89,6 +89,8 @@ public class LatexCodegenFunctions {
 	public static String convertHTMLIntoLatex(String s) {
 		return s.replaceAll("(?i)<code>", "\\\\code{")
 			.replaceAll("(?i)</code>", "}")
+			.replaceAll("(?i)<em>", "\\\\textit{")
+			.replaceAll("(?i)</em>", "}")
 			.replace("&lt;", "<")
 			.replace("&gt;", ">")
 			.replace("&amp;", "\\&")

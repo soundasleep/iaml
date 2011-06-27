@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.domain:DomainIterator xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.130cf3ba739.f" name="Container">
+  <currentInstance id="domain.130cf3ba739.13" name="Instance name"/>
+</iaml.domain:DomainIterator>

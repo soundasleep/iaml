@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.domain:DomainInstance xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.130cf3ba739.30" name="Container">
+  <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="domain.130cf3ba739.34" name="Attribute instance name"/>
+</iaml.domain:DomainInstance>

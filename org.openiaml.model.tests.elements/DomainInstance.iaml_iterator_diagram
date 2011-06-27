@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://openiaml.org/model/domain http://openiaml.org/model0.5#//domain" xmi:id="_n7lPwKBzEeCpXsHYtVJ-rg" type="Iaml_Iterator" name="DomainInstance.iaml_iterator_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_owVGcKBzEeCpXsHYtVJ-rg" type="2067">
+    <children xmi:type="notation:DecorationNode" xmi:id="_owVGdaBzEeCpXsHYtVJ-rg" type="5185"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_owVGdqBzEeCpXsHYtVJ-rg" type="5186"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_owVGcaBzEeCpXsHYtVJ-rg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_owVGcqBzEeCpXsHYtVJ-rg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_owVGc6BzEeCpXsHYtVJ-rg" hint="Iaml_Instance"/>
+    <element xmi:type="iaml.domain:DomainInstance" href="DomainInstance.iaml_iterator#domain.130cf3ba739.13"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_owVGdKBzEeCpXsHYtVJ-rg" x="240" y="156"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_n7lPwaBzEeCpXsHYtVJ-rg"/>
+  <element xmi:type="iaml.domain:DomainIterator" href="DomainInstance.iaml_iterator#domain.130cf3ba739.f"/>
+</notation:Diagram>

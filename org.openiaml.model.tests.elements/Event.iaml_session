@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.130cf3ba351.6" name="Container">
+  <onAccess id="model.130cf3b9806.96" name="Event name"/>
+</iaml.scopes:Session>

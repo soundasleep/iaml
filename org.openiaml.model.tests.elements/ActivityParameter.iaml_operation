@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.operations:ActivityOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.operations="http://openiaml.org/model/operations" id="operations.130cf3ba276.d" name="Container">
+  <parameters id="operations.130cf3ba276.10" name="Parameter name"/>
+</iaml.operations:ActivityOperation>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml.domain:DomainSchema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.128a8ccc934.c">
-  <attributes id="model.128a8ccc888.30" name="Attribute Name" defaultValue="42">
-    <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
-  </attributes>
+<iaml.domain:DomainSchema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:iaml.domain="http://openiaml.org/model/domain" name="Container" id="domain.130cf3ba739.43">
+  <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="Attribute name" id="domain.130cf3ba739.46">
+    <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eStructuralFeatures>
 </iaml.domain:DomainSchema>

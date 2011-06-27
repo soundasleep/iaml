@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://openiaml.org/model/domain http://openiaml.org/model0.5#//domain" xmi:id="_3LtVcKB0EeCpXsHYtVJ-rg" type="Iaml_Instance" name="DomainAttributeInstance.iaml_instance_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_3lfHYKB0EeCpXsHYtVJ-rg" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_3lfHZKB0EeCpXsHYtVJ-rg" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_3lfHZaB0EeCpXsHYtVJ-rg" type="5002"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_3lfHZqB0EeCpXsHYtVJ-rg" type="5009"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_3lfHZ6B0EeCpXsHYtVJ-rg" type="5010"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_3lfHYaB0EeCpXsHYtVJ-rg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3lfHYqB0EeCpXsHYtVJ-rg"/>
+    <element xmi:type="iaml.domain:DomainAttributeInstance" href="DomainAttributeInstance.iaml_instance#domain.130cf3ba739.34"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3lfHY6B0EeCpXsHYtVJ-rg" x="216" y="118"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_3LtVcaB0EeCpXsHYtVJ-rg"/>
+  <element xmi:type="iaml.domain:DomainInstance" href="DomainAttributeInstance.iaml_instance#domain.130cf3ba739.30"/>
+</notation:Diagram>

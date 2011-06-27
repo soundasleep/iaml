@@ -26,6 +26,9 @@ public class DynamicTemplatesTest extends XmlTestCase {
 	File output = new File(TEMPLATE_DIR + "aspects/impl/diagram/editparts/NodeEditPart.xpt");
 	File template = new File(TEMPLATE_DIR + "aspects/impl/diagram/editparts/NodeEditPart.template.xpt");
 
+	File output2 = new File(TEMPLATE_DIR + "aspects/impl/diagram/editparts/LinkEditPart.xpt");
+	File template2 = new File(TEMPLATE_DIR + "aspects/impl/diagram/editparts/LinkEditPart.template.xpt");
+
 	/**
 	 * Check the NodeEditPart.xpt template.
 	 * @throws IOException 
@@ -34,6 +37,32 @@ public class DynamicTemplatesTest extends XmlTestCase {
 	 */
 	public void testNodeEditPartTest() throws IOException {
 		
+		File template = this.template;
+		File output = this.output;
+		
+		String expected = getExpectedContent(readFile(template), template);
+		
+		if (!output.exists() || !readFile(output).equals(expected)) {
+			System.out.println("Writing '" + output + "'...");
+			
+			FileWriter fw = new FileWriter(output);
+			fw.write(expected);
+			fw.close();
+		}
+		
+	}
+	
+	/**
+	 * Check the LinkEditPart.xpt template.
+	 * @throws IOException 
+	 * 
+	 * @see #getExpectedContent(String)
+	 */
+	public void testLinkEditPartTest() throws IOException {
+		
+		File template = this.template2;
+		File output = this.output2;
+
 		String expected = getExpectedContent(readFile(template), template);
 		
 		if (!output.exists() || !readFile(output).equals(expected)) {
@@ -52,6 +81,15 @@ public class DynamicTemplatesTest extends XmlTestCase {
 	public void testNodeEditPartExists() {
 		assertTrue(output.exists());
 		assertTrue(template.exists());
+	}
+
+	
+	/**
+	 * Make sure that the files actually exist.
+	 */
+	public void testLinkEditPartExists() {
+		assertTrue(output2.exists());
+		assertTrue(template2.exists());
 	}
 
 	/**

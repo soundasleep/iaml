@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.1263fd37982.bd0">
-  <nodes xsi:type="iaml.operations:StartNode" id="operations.1263fd37a0f.a1" outExecutions="model.1263fd37982.bd3"/>
-  <nodes xsi:type="iaml.operations:FinishNode" id="operations.1263fd37a0f.a2" inExecutions="model.1263fd37982.bd3"/>
-  <executionEdges id="model.1263fd37982.bd3" name="optional edge name" from="operations.1263fd37a0f.a1" to="operations.1263fd37a0f.a2"/>
-</iaml:CompositeOperation>
+<iaml.operations:ActivityOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.operations="http://openiaml.org/model/operations" id="operations.130cf3ba276.36">
+  <nodes xsi:type="iaml.operations:StartNode" id="operations.130cf3ba276.39" outExecutions="operations.130cf3ba276.3b"/>
+  <nodes xsi:type="iaml.operations:FinishNode" id="operations.130cf3ba276.3a" inExecutions="operations.130cf3ba276.3b"/>
+  <executionEdges id="operations.130cf3ba276.3b" name="edge" from="operations.130cf3ba276.39" to="operations.130cf3ba276.3a"/>
+</iaml.operations:ActivityOperation>

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.5" id="model.1263fd37982.bcc">
-  <variables id="model.1263fd37982.bcf" name="variable name"/>
-</iaml:CompositeOperation>
+<iaml.operations:ActivityOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.operations="http://openiaml.org/model/operations" id="operations.130cf3ba276.45" name="Container">
+  <variables id="operations.130cf3ba276.48" name="Variable name"/>
+</iaml.operations:ActivityOperation>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" id="model.1263fd37982.bae">
-  <operations xsi:type="iaml:PrimitiveOperation" id="model.1263fd37982.bb1" name="primitive operation name"/>
-</iaml:InternetApplication>

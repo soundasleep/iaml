@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.130cf3ba351.2a">
+  <iterators id="domain.130cf3ba739.39" name="iterator" outSelects="domain.130cf3ba739.3e">
+    <selectEdges id="domain.130cf3ba739.3e" from="domain.130cf3ba739.39">
+      <to href="DomainSource.iaml#domain.128a8ccc934.25"/>
+    </selectEdges>
+  </iterators>
+</iaml.scopes:Session>

@@ -17,12 +17,12 @@
 <path d="M12 33 L139 33 L139 49 L12 49 L12 33 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(248,172,170)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(248,172,170)" stroke-width="0" stroke-miterlimit="0">
+<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="131" height="41" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="130" height="40"/>
-<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABy0lEQVR42qVTr08j&#13;&#10;QRT+BhCzyYldQbIjW9e6VpCwsrJ1nKN/AhZxyZ2gSU+QUAeCBCQIEurAUYFYHIhL&#13;&#10;qFxDsnW7boeEZO+bnf6mkBAmM/vevh/f+2beDPDNsf6ZMwl38187Pw4OL186H8UI&#13;&#10;G9jIjXRrx4COOR+4biBVC1ob0zWk14D0A8oaRoM2MjrK7SexMUGSfhPpU5eK4qzD&#13;&#10;LfWpS0jjrOxCpwSNQqTROWTpJ7LhRZG3Zj5eMBB6dEsGPbiVPUi3xrIhbHnDoE8s&#13;&#10;l742/HoXOgmhGicFwJQBssx8WKlvhGWlAowROB8pU1bvIhtF8IPKEsAUCDapEOFY&#13;&#10;1wUbzSWNLj3+J7MtFLFaTzRMKUx1PQNdGmtYTWEsuaQFsQWyGe5qAHqcqj28edtc&#13;&#10;hnWRvnQWAaRqIx2e2w6YPRbGdCwtI7fSYytvTN8gHCUWALz6vtDRgCBsmdohkwlI&#13;&#10;QjzJZLYvfkbCmFLzbPUW/OagqJAOb3mxCCJLtJKFu89Djwq72v4D4ZXFyrfQ+XvY&#13;&#10;OTq9P4gfuhBvr6y8xUYH0MN7xP+usFnbg1NuiXdvYXnkWZKb80geL+BVG0ieefNa&#13;&#10;PTgqEF96qgYovvudfxbzH1wXwfdpFNQqAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
+<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3klEQVR42qWTIWzb&#13;&#10;QBSG/+sG7spig0muYQKzMpdMSmgGClJWjW2lgw1cAwYCRlLYoHarNGnpYMCIy9qS&#13;&#10;KS1MoVNmh/mOTN5/tpusWVZp6il37+Xdu+/e83sHPHE8e2wzOW9lnW1x0PuadP/l&#13;&#10;IwrHzczKSnAC6ClMdE4xhNrYgTY0RZ+h3BaU14R0A9yNXiPVGrV3kXh+T1JeG7Or&#13;&#10;DhWfB7dQqYWAVJAWXH8LkxB6GyK5PYSqvUF6fZSfW7OL0xgLfXfGCAZ03od0Al5L&#13;&#10;gNGc/EWnZDnc24O31YeOQ/itLzlgHgHS1C686dSKfEi/yVXbHAi5IGkGWe0jnU7g&#13;&#10;NetLgDkIxaFchKVuIzHQzFtaXbk0xYsUcl+t7zXMQ5jregFdGmtYHUIpOVUBKS5I&#13;&#10;F9zVAO6sv7Th/GEz5Sz/5VsMX60/BCh/D7Obw6ICNsfcOCtlEVGlPmAph9RdCLUh&#13;&#10;HgCc4IPQkxEhLJm/y0hKiIzZPJKH+6zEGDF9qu1vq1Pw2tfQkyEh3yE9QmTV9ik7&#13;&#10;qQsTT5DQ7jd6EE5NrHwL3Y+97qfB5cE07ED8MszkFQvdgLn5gejnMV4E++zCtvjr&#13;&#10;LSyPTCeZ/R7xxRHczRbiMTtvZ8AWb4j/eqoWNB29zx7z+Q1vOsJ7WbaEHAAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Handler name</text>
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: AccessControlHandler</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="13" x2="138" y1="47" y2="47" stroke-width="0.1"/>

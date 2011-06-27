@@ -26,12 +26,15 @@
 <path d="M-1 -1 L185 -1 L185 161 L-1 161 L-1 -1 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath8">
-<path d="M33 72 L144 72 L144 88 L33 88 L33 72 Z"/>
+<path d="M64 71 L113 71 L113 89 L64 89 L64 71 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath9">
-<path d="M22 72 L114 72 L114 88 L22 88 L22 72 Z"/>
+<path d="M83 72 L113 72 L113 88 L83 88 L83 72 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath10">
+<path d="M22 72 L114 72 L114 88 L22 88 L22 72 Z"/>
+</clipPath>
+<clipPath clipPathUnits="userSpaceOnUse" id="clipPath11">
 <path d="M124 102 L133 102 L133 112 L124 112 L124 102 Z"/>
 </clipPath>
 </defs>
@@ -49,11 +52,12 @@
 <text xml:space="preserve" x="105" y="126" clip-path="url(#clipPath6)" stroke="none">: FinishNode</text>
 <line clip-path="url(#clipPath6)" fill="none" x1="105" x2="171" y1="127" y2="127" stroke-width="0.1"/>
 <line clip-path="url(#clipPath7)" fill="none" x1="128" x2="128" y1="50" y2="110"/>
-<text xml:space="preserve" x="34" y="85" clip-path="url(#clipPath8)" stroke="none">optional edge name</text>
-<text xml:space="preserve" x="23" y="85" clip-path="url(#clipPath9)" stroke="none">: ExecutionEdge</text>
-<line clip-path="url(#clipPath9)" fill="none" x1="23" x2="113" y1="86" y2="86" stroke-width="0.1"/>
-<line clip-path="url(#clipPath10)" fill="none" x1="125" x2="128" y1="103" y2="110"/>
-<line clip-path="url(#clipPath10)" fill="none" x1="128" x2="131" y1="110" y2="103"/>
+<image x="65" y="72" clip-path="url(#clipPath8)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACP0lEQVR42sVTS2sT&#13;&#10;URg9yTyaV/NOMyHNq8HYJoIJbkKDiFChLvRHuC3dCkXQum13BbsURFx0J3VRxSLd&#13;&#10;1FAki1RKSdJg44wxD1I7jYl5drwzkNqIdiV44MLMd+c793zn3AH+N1R/KuZygmS3&#13;&#10;m1CvN5DNCqBpCiwLTE/HVBcSnJw0pUyGh06nQbvdhST14XTawHE2rK29Qjx+FRRF&#13;&#10;w+93n/WpzxOUyzXwfAUm0ygmJ33KkpspCkgkrqHZ7EAUG9jdzUqDHmrwIIp1KZn8&#13;&#10;CL1eD4dDblKjVDpGsfhNUeN220ndTtTpkEymsLq6sri8vPSYHhBsbLxHMDgBl8uB&#13;&#10;kREGOztp7O+nCaGBLAui0SsIhz0oFHjyzii+yDgjqFaPYDTayAaDsTELGo3vmJ29&#13;&#10;Qca4jFQqrTSGQh54vZyyt739YdiDWCyESkWQR0Gr1YHP58XhYRH5fAFarQYPij7c&#13;&#10;flFCT63D1FSYpJMbVhCJBImBJTAMjW63C7PZQqJjibEiqTFgTsnHrAp3n37BnKcI&#13;&#10;g0E7rKDX65MYG4oC+WRB+AqNRkMi82N83I0n17UoVzvQGmk8ynHouG4NpyA7Oj8/&#13;&#10;tygIPCGpkTF6sFptJLofODj4BKndRMTE4GW+j0s2Bq+zHRxtrfxKQUY8HkMgUCZG&#13;&#10;slhf3yKecCTKz4RMBF+T8Pw4Cs5pRqbQwsOEBff+dpVlbG6+k/b2MkqkMzM3cefZ&#13;&#10;KUbNLPq1Nt7cD8BuZlS4iOB3TCxkJSux7O2CHxYjrfpnf+NPf8/a9UTA4sYAAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
+<text xml:space="preserve" x="84" y="85" clip-path="url(#clipPath9)" stroke="none">edge</text>
+<text xml:space="preserve" x="23" y="85" clip-path="url(#clipPath10)" stroke="none">: ExecutionEdge</text>
+<line clip-path="url(#clipPath10)" fill="none" x1="23" x2="113" y1="86" y2="86" stroke-width="0.1"/>
+<line clip-path="url(#clipPath11)" fill="none" x1="125" x2="128" y1="103" y2="110"/>
+<line clip-path="url(#clipPath11)" fill="none" x1="128" x2="131" y1="110" y2="103"/>
 </g>
 </g>
 </svg>

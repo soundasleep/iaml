@@ -8,10 +8,10 @@
 <path d="M9 9 L126 9 L126 71 L9 71 L9 9 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath2">
-<path d="M12 12 L107 12 L107 30 L12 30 L12 12 Z"/>
+<path d="M12 12 L109 12 L109 30 L12 30 L12 12 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath3">
-<path d="M31 13 L107 13 L107 29 L31 29 L31 13 Z"/>
+<path d="M31 13 L109 13 L109 29 L31 29 L31 13 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath4">
 <path d="M12 33 L123 33 L123 49 L12 49 L12 33 Z"/>
@@ -26,7 +26,7 @@
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="114" height="59"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA+0lEQVR42u1TwWrC&#13;&#10;QBB9u2wOuaVINgdpAoLHXooUPBg8Sa/iDwckCEGE2lOheDAUrF5yEySu7Uxco2JP&#13;&#10;vfpg583Mzr5ldljgDkGmKIpDmqZot0NOjscZc6/3cjOezz8QxzG01kJZpTAM0Gh4&#13;&#10;7A+HA6sNKQVGo1eOpZSnm5MkYWaB9TqH7z9gsfjCbrc/HpQQQlwwLaUUosjHdjur&#13;&#10;6shMp+98A21SkeM47BOf+8RVjUK3+1wL/AfcQqfz9GsPKMsSxhhe1y3YHMGYEpPJ&#13;&#10;rBbQ+hF5/olWq1mNRuDiEe3ArMBqtYHrurUAYbn8Rpa9/Tm689jzAvT7wf0THPED&#13;&#10;uB5JuhrzBKsAAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">variable name</text>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Variable name</text>
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: TemporaryVariable</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="13" x2="122" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" stroke="none" stroke-width="0.1" xml:space="preserve">Type: Any</text>

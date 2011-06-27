@@ -56,7 +56,7 @@
 <path d="M103 160 L112 160 L112 170 L103 170 L103 160 Z"/>
 </clipPath>
 </defs>
-<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(228,223,214)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(228,223,214)" stroke-width="0" stroke-miterlimit="0">
 <rect x="59" y="10" clip-path="url(#clipPath1)" width="96" height="98" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
@@ -68,7 +68,7 @@
 <text x="62" y="65" clip-path="url(#clipPath5)" font-style="italic" stroke="none" stroke-width="0.1" xml:space="preserve">&lt;...&gt;</text>
 <text x="62" y="84" clip-path="url(#clipPath6)" stroke="none" stroke-width="0.1" xml:space="preserve">limit: 1</text>
 <text x="62" y="103" clip-path="url(#clipPath7)" stroke="none" stroke-width="0.1" xml:space="preserve">autosave: false</text>
-<rect x="40" y="168" clip-path="url(#clipPath8)" fill="white" width="135" height="60" stroke="none" stroke-width="0.1"/>
+<rect x="40" y="168" clip-path="url(#clipPath8)" fill="rgb(228,223,214)" width="135" height="60" stroke="none" stroke-width="0.1"/>
 <rect x="40" y="168" clip-path="url(#clipPath8)" fill="none" width="134" height="59"/>
 <image x="43" y="171" clip-path="url(#clipPath9)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhklEQVR42q1Tu4oC&#13;&#10;QRCs2V01EFEUEVMVxMB/MDEzNBI/5u5TNhfBTDDQ3MBEwVgE8YEgim8drxpmQVa9&#13;&#10;4K5h2H5UV/XM7AB/NPUq2ev19HK5xHq9ljgejyMWi6FcLquPBK1WS0ejUeTzeSQS&#13;&#10;CQQCAclvNhssFgsMBgPcbjfUajXlI2i32zqXyyGbzX4cudvtYr/fo1KpSK9lCqvV&#13;&#10;6tdmWrFYxHA49GKPgKPRZrMZdrvdUxMVx+MxGo0GTqeTh6U5xrler/INBoOYTqfY&#13;&#10;bre43+84n8+Yz+dCGgqFoLWWvI+ABRoPLhKJCJhkx+NRVE0ThS6Xi5+AY7FIRdOk&#13;&#10;lBIwfeZs2xahl1ugAoumgUSchjGbuRzHEdzbCVg0YIIMAckOh4NsixgKvDxEkhh1&#13;&#10;xgQbYqPKmLfiu0YCJpOJ/AvhcPjpGi3LQqFQQLVaxWg0EgFjtnE6nc53Mpn8ok9w&#13;&#10;JpNBOp1GKpXySH8wslzXVW8fU7PZ1P1+X1T4gPjlZDyPUqmEer2u8J/2APPlDgCV&#13;&#10;+Ez4AAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="62" y="184" clip-path="url(#clipPath10)" stroke="none">Source Name</text>

@@ -44,7 +44,7 @@
 <path d="M109 103 L118 103 L118 113 L109 113 L109 103 Z"/>
 </clipPath>
 </defs>
-<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(250,188,188)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(250,188,188)" stroke-width="0" stroke-miterlimit="0">
 <rect x="48" y="10" clip-path="url(#clipPath1)" width="131" height="41" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
@@ -53,7 +53,7 @@
 <text xml:space="preserve" x="70" y="26" clip-path="url(#clipPath3)" stroke="none">handler</text>
 <text xml:space="preserve" x="51" y="46" clip-path="url(#clipPath4)" stroke="none">: AccessControlHandler</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="51" x2="176" y1="47" y2="47" stroke-width="0.1"/>
-<rect x="72" y="111" clip-path="url(#clipPath5)" fill="white" width="83" height="41" stroke="none" stroke-width="0.1"/>
+<rect x="72" y="111" clip-path="url(#clipPath5)" fill="rgb(228,223,214)" width="83" height="41" stroke="none" stroke-width="0.1"/>
 <rect x="72" y="111" clip-path="url(#clipPath5)" fill="none" width="82" height="40"/>
 <image x="75" y="114" clip-path="url(#clipPath6)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB+UlEQVR42q1TMYjU&#13;&#10;QBR9pyI76XanEDYps42QtdstXcsgCJ6lAZtYaHGNRewu27mW2giJXWIhXAotYnFg&#13;&#10;UmbLpLDYFBaJoJBdOGETUIiTWQ/uEr1GBz6Zeby8+e/NDPCPY+9PoGvbdbTQ+bz8&#13;&#10;XRN9gQPD6PAvtQHPc+vINkApdiUAhOGh/ZQLt/mX28C1b0uT/vyKrABO2Nbljx3O&#13;&#10;llgev8PnE8zP8q+0Bcosg6IfQB9RpKsYz14eQSCnnXca6AooY4qZqgJVDoX2MacD&#13;&#10;9AcUVJ7Af/4QH53iYgFhNOM/N84JaQSnLEQ2qdaANGG4f3GIAdmHZbnoN657hBdh&#13;&#10;Eo7jwica/hpiWdb11eu3zXC1xuzOA7z68Anr4C1y7xhGPsUNVcf79DseP3piBp41&#13;&#10;73TgBgm8KGMeCLZsz4SMIaomJGGIjTBAyhwM+5RxVli4y/qcgO3H9VG8waE25eDr&#13;&#10;MOFnL1oGeqh4Hn6UYlNtcXM8QpAWeOHtRHiIY/8W9mf3YcYaVEXGtqywyjMsN0As&#13;&#10;yPwuDkWKignk2xKu4iMN3FaIRECSF+zICF9KooTo7iFCUYU8lBpnmMoi8i8F556z&#13;&#10;IOsOUt/iwBvWvkB6oKyIJHKuRHsYsTvhRwmKokQaOpA1q/uY8nxd3zM9lKQJ8uz1&#13;&#10;PP0WCBYaRHGwh/81fgEng78x9DRnawAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="94" y="127" clip-path="url(#clipPath7)" stroke="none">Role Name</text>

@@ -44,7 +44,7 @@
 <path d="M109 103 L118 103 L118 113 L109 113 L109 103 Z"/>
 </clipPath>
 </defs>
-<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(228,223,214)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(228,223,214)" stroke-width="0" stroke-miterlimit="0">
 <rect x="89" y="10" clip-path="url(#clipPath1)" width="48" height="41" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">

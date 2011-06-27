@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.visual="http://openiaml.org/model/visual" id="visual.130cf7a0649.49">
-  <children xsi:type="iaml.visual:InputForm" id="visual.130cf7a0649.4f" name="Source element"/>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.130cf7a0649.49">
+  <children xsi:type="iaml.visual:InputForm" outWires="wires.130cfc5254e.1" id="visual.130cf7a0649.4f" name="Source element">
+    <wires xsi:type="iaml.wires:DetailWire" id="wires.130cfc5254e.1" name="Wire name" from="visual.130cf7a0649.4f">
+      <to xsi:type="iaml.visual:Frame" href="DetailWireTarget.iaml#visual.130cf7a0649.4e"/>
+    </wires>
+  </children>
 </iaml.visual:Frame>

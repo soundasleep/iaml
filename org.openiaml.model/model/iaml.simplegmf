@@ -81,6 +81,10 @@
     <classifier href="iaml.ecore#//Wire"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
+  <edgeConfigurations name="ConstraintEdge">
+    <classifier href="iaml.ecore#//wires/ConstraintEdge"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+  </edgeConfigurations>
   <customShapes id="id1" name="Event">
     <points/>
     <points x="60"/>
@@ -600,6 +604,9 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CastNode">
       <classifier href="iaml.ecore#//operations/CastNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="SetNode">
+      <classifier href="iaml.ecore#//operations/SetNode"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="ActivityParameter">
       <classifier href="iaml.ecore#//operations/ActivityParameter"/>

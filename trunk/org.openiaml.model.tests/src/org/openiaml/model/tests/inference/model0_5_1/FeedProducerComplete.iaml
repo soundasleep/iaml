@@ -23,12 +23,12 @@
     </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
   </scopes>
-  <schemas name="News" id="domain.128807fbeba.e87" inSchemas="domain.128807fbeba.e89">
+  <types name="News" id="domain.128807fbeba.e87" inSchemas="domain.128807fbeba.e89">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1280b46d146.a2"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1280b46d146.a4"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="updated" eType="builtin_iamlDateTime" id="model.1280b46d146.a5"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="builtin_iamlInteger" id="model.1280b46d146.a6" primaryKey="true"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.e88" outSchemas="domain.128807fbeba.e89" inSelects="domain.128807fbeba.e8a domain.128807fbeba.e8b">
     <schemaEdges id="domain.128807fbeba.e89" from="domain.128807fbeba.e88" to="domain.128807fbeba.e87"/>
     <selectEdges id="domain.128807fbeba.e8a" from="domain.128807fbeba.e86" to="domain.128807fbeba.e88"/>

@@ -4,10 +4,10 @@
     <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.6e" name="o1" listeners="wires.126f8149daa.19">
       <ecaRules id="wires.126f8149daa.19" name="r1" trigger="model.126f8149d3d.6e" target="model.126f8149d3d.73"/>
     </operations>
-    <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.73" name="o2" rules="wires.126f8149daa.19" listeners="wires.126f8149daa.1b">
+    <operations xsi:type="iaml:BuiltinOperation" rules="wires.126f8149daa.19" id="model.126f8149d3d.73" name="o2" listeners="wires.126f8149daa.1b">
       <ecaRules id="wires.126f8149daa.1b" name="r2" trigger="model.126f8149d3d.73" target="model.126f8149d3d.74"/>
     </operations>
-    <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.74" name="o3" rules="wires.126f8149daa.1b"/>
+    <operations xsi:type="iaml:BuiltinOperation" rules="wires.126f8149daa.1b" id="model.126f8149d3d.74" name="o3"/>
     <operations xsi:type="iaml:BuiltinOperation" id="model.126f8149d3d.75" name="o4"/>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

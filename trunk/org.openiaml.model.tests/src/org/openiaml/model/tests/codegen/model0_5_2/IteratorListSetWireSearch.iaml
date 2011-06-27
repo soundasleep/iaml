@@ -10,11 +10,11 @@
       <parameterEdges id="wires.128ae917be0.19" parameterValue="visual.128ae917bd0.4a" parameterTerm="domain.128a9b17dce.34"/>
     </children>
   </scopes>
-  <schemas name="News" id="domain.128a9b17dce.1" inSchemas="domain.128a9b17dce.5">
+  <types name="News" id="domain.128a9b17dce.1" inSchemas="domain.128a9b17dce.5">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="builtin_iamlInteger" id="model.128a9b17d03.12" primaryKey="true"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" eType="builtin_iamlString" id="model.128a9b17d03.14"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="content" eType="builtin_iamlString" id="model.128a9b17d03.15"/>
-  </schemas>
+  </types>
   <sources id="domain.128a9b17dce.3" name="Database" outSchemas="domain.128a9b17dce.5" inSelects="domain.128a9b17dce.42">
     <schemaEdges id="domain.128a9b17dce.5" from="domain.128a9b17dce.3" to="domain.128a9b17dce.1"/>
   </sources>

@@ -16,12 +16,12 @@
       <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" name="set" from="components.122f7c6a40e.1" to="domain.128807fbeba.10f7"/>
     </loginHandlers>
   </scopes>
-  <schemas name="User" id="domain.128807fbeba.10f8" inSchemas="domain.128807fbeba.10fa">
+  <types name="User" id="domain.128807fbeba.10f8" inSchemas="domain.128807fbeba.10fa">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.122f7c69efd.37" outParameterEdges="wires.122f7c6a100.1">
       <parameterEdges id="wires.122f7c6a100.1" parameterValue="model.122f7c69efd.37" parameterTerm="components.122f7c6a40e.1"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.122f7c69efd.38"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.10f9" outSchemas="domain.128807fbeba.10fa">
     <schemaEdges id="domain.128807fbeba.10fa" from="domain.128807fbeba.10f9" to="domain.128807fbeba.10f8"/>
   </sources>

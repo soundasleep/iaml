@@ -9,7 +9,7 @@
     </onInit>
     <scopes xsi:type="iaml.visual:Frame" id="visual.120a748ebb7.3bb" name="container">
       <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.3c5" name="value">
-        <operations xsi:type="iaml.operations:ActivityOperation" id="model.120a748ea9e.ec" name="update" rules="wires.120a748ec72.9b"/>
+        <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.120a748ec72.9b" id="model.120a748ea9e.ec" name="update"/>
       </children>
     </scopes>
   </scopes>

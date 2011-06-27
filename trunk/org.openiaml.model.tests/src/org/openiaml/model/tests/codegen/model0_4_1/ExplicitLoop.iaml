@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1254759b7c1.724">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml.operations:ActivityOperation" id="model.1254759b7c1.72b" name="fibonacci" rules="wires.1254759bc84.8f">
+    <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1254759bc84.8f" id="model.1254759b7c1.72b" name="fibonacci">
       <properties id="model.1254759b7c1.797" name="init" defaultValue="1" readOnly="true"/>
       <properties id="model.1254759b7c1.7a0" name="one" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1254759b7c1.798 model.1254759b7c1.799">

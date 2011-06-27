@@ -8,18 +8,18 @@
       <requiresEdges id="wires.1233afe62eb.82" from="components.1233afe6424.13" to="users.1233afe655c.74"/>
     </accessHandlers>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.d51" inSchemas="domain.128807fbeba.d53" outProvidesEdges="wires.1233afe62eb.36">
+  <types xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.d51" inSchemas="domain.128807fbeba.d53" outProvidesEdges="wires.1233afe62eb.36">
     <providesEdges id="wires.1233afe62eb.36" from="domain.128807fbeba.d51" to="users.1233afe655c.72"/>
     <permissions id="users.1233afe655c.72" name="a permission" inRequiresEdges="wires.1233afe62eb.4a" inProvidesEdges="wires.1233afe62eb.36 wires.1233afe62eb.66"/>
     <permissions id="users.1233afe655c.74" name="a different permission" inRequiresEdges="wires.1233afe62eb.82" inProvidesEdges="wires.1233afe62eb.38 wires.1233afe62eb.65"/>
-  </schemas>
-  <schemas xsi:type="iaml.users:Role" name="another role" id="domain.128807fbeba.d54" inSchemas="domain.128807fbeba.d56" outProvidesEdges="wires.1233afe62eb.38">
+  </types>
+  <types xsi:type="iaml.users:Role" name="another role" id="domain.128807fbeba.d54" inSchemas="domain.128807fbeba.d56" outProvidesEdges="wires.1233afe62eb.38">
     <providesEdges id="wires.1233afe62eb.38" from="domain.128807fbeba.d54" to="users.1233afe655c.74"/>
-  </schemas>
-  <schemas xsi:type="iaml.users:Role" name="both roles" id="domain.128807fbeba.d57" inSchemas="domain.128807fbeba.d59" outProvidesEdges="wires.1233afe62eb.65 wires.1233afe62eb.66">
+  </types>
+  <types xsi:type="iaml.users:Role" name="both roles" id="domain.128807fbeba.d57" inSchemas="domain.128807fbeba.d59" outProvidesEdges="wires.1233afe62eb.65 wires.1233afe62eb.66">
     <providesEdges id="wires.1233afe62eb.65" from="domain.128807fbeba.d57" to="users.1233afe655c.74"/>
     <providesEdges id="wires.1233afe62eb.66" from="domain.128807fbeba.d57" to="users.1233afe655c.72"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.d52" outSchemas="domain.128807fbeba.d53">
     <schemaEdges id="domain.128807fbeba.d53" from="domain.128807fbeba.d52" to="domain.128807fbeba.d51"/>
   </sources>

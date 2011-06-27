@@ -19,7 +19,7 @@
       <ecaRules id="wires.122f7c6a100.8f" name="logout" trigger="components.122f7c6a40e.1" target="visual.122f7c6a006.a8"/>
     </loginHandlers>
   </scopes>
-  <schemas name="User" id="domain.128807fbeba.fa1" inSchemas="domain.128807fbeba.fa3">
+  <types name="User" id="domain.128807fbeba.fa1" inSchemas="domain.128807fbeba.fa3">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.122f7c69efd.37" outParameterEdges="wires.122f7c6a100.1">
       <parameterEdges id="wires.122f7c6a100.1" parameterValue="model.122f7c69efd.37" parameterTerm="components.122f7c6a40e.1"/>
     </eStructuralFeatures>
@@ -27,7 +27,7 @@
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.122f7c69efd.1ed" outParameterEdges="wires.122f7c6a100.63">
       <parameterEdges id="wires.122f7c6a100.63" parameterValue="model.122f7c69efd.1ed" parameterTerm="components.122f7c6a40e.1"/>
     </eStructuralFeatures>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.fa2" outSchemas="domain.128807fbeba.fa3">
     <schemaEdges id="domain.128807fbeba.fa3" from="domain.128807fbeba.fa2" to="domain.128807fbeba.fa1"/>
   </sources>

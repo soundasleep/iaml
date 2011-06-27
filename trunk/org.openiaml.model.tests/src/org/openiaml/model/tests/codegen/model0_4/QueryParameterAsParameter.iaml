@@ -9,11 +9,11 @@
     </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.123172cef6c.17" id="visual.123172cef6c.3f" name="current user"/>
   </scopes>
-  <schemas name="User" id="domain.128807fbeba.e00" inSchemas="domain.128807fbeba.e02">
+  <types name="User" id="domain.128807fbeba.e00" inSchemas="domain.128807fbeba.e02">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.123172ceeef.57" primaryKey="true"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.123172ceeef.59"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.123172ceeef.5f"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.e01" outSchemas="domain.128807fbeba.e02" inSelects="domain.128807fbeba.e03">
     <schemaEdges id="domain.128807fbeba.e02" from="domain.128807fbeba.e01" to="domain.128807fbeba.e00"/>
     <selectEdges id="domain.128807fbeba.e03" from="domain.128807fbeba.dff" to="domain.128807fbeba.e01"/>

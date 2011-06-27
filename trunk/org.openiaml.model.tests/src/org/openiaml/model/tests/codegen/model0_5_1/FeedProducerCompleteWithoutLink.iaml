@@ -7,10 +7,10 @@
     </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item"/>
   </scopes>
-  <schemas name="News" id="domain.128807fbeba.dce" inSchemas="domain.128807fbeba.dd0">
+  <types name="News" id="domain.128807fbeba.dce" inSchemas="domain.128807fbeba.dd0">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1280b46d146.a2"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1280b46d146.a4"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.dcf" outSchemas="domain.128807fbeba.dd0" inSelects="domain.128807fbeba.dd1">
     <schemaEdges id="domain.128807fbeba.dd0" from="domain.128807fbeba.dcf" to="domain.128807fbeba.dce"/>
     <selectEdges id="domain.128807fbeba.dd1" from="domain.128807fbeba.dcd" to="domain.128807fbeba.dcf"/>

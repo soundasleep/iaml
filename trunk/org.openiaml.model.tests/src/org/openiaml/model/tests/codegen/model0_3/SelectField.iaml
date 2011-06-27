@@ -11,12 +11,12 @@
     </iterators>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109331f38.5c9" id="visual.12109331f38.d99" name="editname"/>
   </scopes>
-  <schemas name="User" id="domain.128807fbeba.fe4" inSchemas="domain.128807fbeba.fe6">
+  <types name="User" id="domain.128807fbeba.fe4" inSchemas="domain.128807fbeba.fe6">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.12109331eea.e62" inExtendsEdges="wires.128665d425c.13"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.12109331eea.e64"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.12109331eea.e6a"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.12109331eea.e8c" primaryKey="true"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.fe5" outSchemas="domain.128807fbeba.fe6" inSelects="domain.128807fbeba.fe8">
     <schemaEdges id="domain.128807fbeba.fe6" from="domain.128807fbeba.fe5" to="domain.128807fbeba.fe4"/>
     <selectEdges id="domain.128807fbeba.fe8" from="domain.128807fbeba.fe7" to="domain.128807fbeba.fe5"/>

@@ -7,7 +7,7 @@
       <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.d93"/>
     </accessHandlers>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.d93" inSchemas="domain.128807fbeba.d95" inRequiresEdges="wires.1233afe62eb.2d"/>
+  <types xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.d93" inSchemas="domain.128807fbeba.d95" inRequiresEdges="wires.1233afe62eb.2d"/>
   <sources id="domain.128807fbeba.d94" outSchemas="domain.128807fbeba.d95">
     <schemaEdges id="domain.128807fbeba.d95" from="domain.128807fbeba.d94" to="domain.128807fbeba.d93"/>
   </sources>

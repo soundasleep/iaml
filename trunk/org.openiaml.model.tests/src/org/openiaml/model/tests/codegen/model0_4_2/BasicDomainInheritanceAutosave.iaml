@@ -7,13 +7,13 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" name="sync" from="visual.1268cdc3e5e.149" to="domain.128807fbeba.e6b"/>
     </children>
   </scopes>
-  <schemas name="Person" id="domain.128807fbeba.e6c" inExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e6e">
+  <types name="Person" id="domain.128807fbeba.e6c" inExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e6e">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.1268cdc3de1.14f"/>
-  </schemas>
-  <schemas name="Student" id="domain.128807fbeba.e6f" outExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e71">
+  </types>
+  <types name="Student" id="domain.128807fbeba.e6f" outExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e71">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.1268cdc3de1.186"/>
     <extendsEdges id="wires.1268cdc3e5e.7e" from="domain.128807fbeba.e6f" to="domain.128807fbeba.e6c"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.e6d" outSchemas="domain.128807fbeba.e6e">
     <schemaEdges id="domain.128807fbeba.e6e" from="domain.128807fbeba.e6d" to="domain.128807fbeba.e6c"/>
   </sources>

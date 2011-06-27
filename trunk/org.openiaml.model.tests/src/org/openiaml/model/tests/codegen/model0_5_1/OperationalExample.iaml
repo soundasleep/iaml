@@ -7,7 +7,7 @@
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1283d8dbe46.c4" inExecutions="model.1283d8dbd2d.253"/>
       <executionEdges id="model.1283d8dbd2d.253" from="operations.1283d8dbe46.c3" to="operations.1283d8dbe46.c4"/>
     </functions>
-    <operations xsi:type="iaml.operations:ActivityOperation" id="model.1283d80df01.a" name="Composite Operation" rules="wires.1283d80dfad.1">
+    <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1283d80dfad.1" id="model.1283d80df01.a" name="Composite Operation">
       <parameterEdges id="wires.1283d98dcaf.b" parameterValue="model.1283d80df01.3b" parameterTerm="wires.1283d80dfad.73"/>
       <properties id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.1283d80df01.d5" outExecutions="model.1283d80df01.14a" inExecutions="model.1283d80df01.d6" outFlows="model.1283d80df01.d8" inFlows="model.1283d80df01.d7"/>
@@ -57,7 +57,7 @@
       <parameterEdges id="wires.1283d80dfad.3" parameterValue="visual.1283d80dfad.1e" parameterTerm="wires.1283d80dfad.1"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1283d80dfad.af" name="Result" type="builtin_iamlInteger">
-      <operations xsi:type="iaml.operations:ActivityOperation" id="model.1283d80df01.26b" name="update" rules="wires.1283d80dfad.73"/>
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1283d80dfad.73" id="model.1283d80df01.26b" name="update"/>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

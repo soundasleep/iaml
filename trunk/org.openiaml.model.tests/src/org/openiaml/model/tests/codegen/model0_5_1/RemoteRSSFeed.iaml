@@ -7,11 +7,11 @@
     </iterators>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1281f74c998.6" id="visual.1281f74c998.2d" name="navigate"/>
   </scopes>
-  <schemas name="Remote Event Listing" id="domain.128807fbeba.1084" inSchemas="domain.128807fbeba.1086">
+  <types name="Remote Event Listing" id="domain.128807fbeba.1084" inSchemas="domain.128807fbeba.1086">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1281f69878a.3b"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1281f69878a.3d"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="pubDate" eType="builtin_iamlDateTime" id="model.1281f74c8dd.df"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.1085" type="RSS2_0" outSchemas="domain.128807fbeba.1086" inSelects="domain.128807fbeba.1087" url="http://openiaml.org/publications/rss_sample.xml" cache="3600">
     <schemaEdges id="domain.128807fbeba.1086" from="domain.128807fbeba.1085" to="domain.128807fbeba.1084"/>
     <selectEdges id="domain.128807fbeba.1087" from="domain.128807fbeba.1083" to="domain.128807fbeba.1085"/>

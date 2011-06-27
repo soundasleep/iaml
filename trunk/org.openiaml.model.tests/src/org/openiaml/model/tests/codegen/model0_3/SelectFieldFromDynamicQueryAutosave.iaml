@@ -16,17 +16,17 @@
         <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.12109c6242e.1dc" outWires="wires.12109c6249b.5e" outExtendsEdges="wires.128665d425c.85" name="name">
           <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" name="sync" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac"/>
           <extendsEdges id="wires.128665d425c.85" from="model.12109c6242e.1dc" to="model.12109331eea.10ac"/>
-          <operations xsi:type="iaml:BuiltinOperation" id="model.1213cee9b4f.415" name="save" rules="wires.1213cee9bad.f4"/>
+          <operations xsi:type="iaml:BuiltinOperation" rules="wires.1213cee9bad.f4" id="model.1213cee9b4f.415" name="save"/>
         </featureInstances>
       </currentInstance>
     </iterators>
   </scopes>
-  <schemas name="User" id="domain.128807fbeba.f1c" inSchemas="domain.128807fbeba.f1e">
+  <types name="User" id="domain.128807fbeba.f1c" inSchemas="domain.128807fbeba.f1e">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.12109331eea.10ac" inExtendsEdges="wires.128665d425c.85"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.12109331eea.10ad"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.12109331eea.10ae"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.12109331eea.10d3" primaryKey="true"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.f1d" outSchemas="domain.128807fbeba.f1e" inSelects="domain.128807fbeba.f20">
     <schemaEdges id="domain.128807fbeba.f1e" from="domain.128807fbeba.f1d" to="domain.128807fbeba.f1c"/>
     <selectEdges id="domain.128807fbeba.f20" from="domain.128807fbeba.f1f" to="domain.128807fbeba.f1d"/>

@@ -8,10 +8,10 @@
     </accessHandlers>
     <loginHandlers id="components.1233b453f6b.39" name="user login handler" inParameterEdges="wires.1233b453e32.5e" type="USER"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" name="Guest" id="domain.128807fbeba.de1" inSchemas="domain.128807fbeba.de3"/>
-  <schemas xsi:type="iaml.users:Role" name="Registered User" id="domain.128807fbeba.de4" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.de6" inRequiresEdges="wires.1233b453e32.66">
+  <types xsi:type="iaml.users:Role" name="Guest" id="domain.128807fbeba.de1" inSchemas="domain.128807fbeba.de3"/>
+  <types xsi:type="iaml.users:Role" name="Registered User" id="domain.128807fbeba.de4" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.de6" inRequiresEdges="wires.1233b453e32.66">
     <parameterEdges id="wires.1233b453e32.5e" parameterValue="domain.128807fbeba.de4" parameterTerm="components.1233b453f6b.39"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.de2" outSchemas="domain.128807fbeba.de3">
     <schemaEdges id="domain.128807fbeba.de3" from="domain.128807fbeba.de2" to="domain.128807fbeba.de1"/>
   </sources>

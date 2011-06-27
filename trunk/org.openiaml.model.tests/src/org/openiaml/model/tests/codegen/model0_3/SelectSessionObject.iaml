@@ -16,12 +16,12 @@
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.112" id="visual.12109c6248b.1a3" name="edit email"/>
     </scopes>
   </scopes>
-  <schemas name="User" id="domain.128807fbeba.10d8" inSchemas="domain.128807fbeba.10da">
+  <types name="User" id="domain.128807fbeba.10d8" inSchemas="domain.128807fbeba.10da">
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.12109331eea.10ac"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.12109331eea.10ad"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.12109331eea.10ae"/>
     <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.12109331eea.10d3"/>
-  </schemas>
+  </types>
   <sources id="domain.128807fbeba.10d9" outSchemas="domain.128807fbeba.10da" inSelects="domain.128807fbeba.10db">
     <schemaEdges id="domain.128807fbeba.10da" from="domain.128807fbeba.10d9" to="domain.128807fbeba.10d8"/>
     <selectEdges id="domain.128807fbeba.10db" from="domain.128807fbeba.10d7" to="domain.128807fbeba.10d9"/>

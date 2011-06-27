@@ -123,6 +123,9 @@
     <genClasses ecoreClass="simplegmf.ecore#//LabelUnderline">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelUnderline/value"/>
     </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//LabelItalic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelItalic/value"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="simplegmf.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//NamedElement/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//NamedElement/name"/>

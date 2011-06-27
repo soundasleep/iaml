@@ -201,6 +201,11 @@
 	              xsi:type="gmfgraph:BasicFont"
 	              style="BOLD"/>
 	        «ENDIF»
+			«IF !label.properties.typeSelect(simplegmf::LabelItalic).isEmpty»
+	          <font
+	              xsi:type="gmfgraph:BasicFont"
+	              style="ITALIC"/>
+	        «ENDIF»
 	    </children>
 	«ENDFOREACH»
 

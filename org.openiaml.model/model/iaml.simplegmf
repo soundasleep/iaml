@@ -48,21 +48,38 @@
     <classifier href="iaml.ecore#//ActivityNode"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(177,190,237)"/>
   </figureConfigurations>
-  <figureConfigurations name="DomainAttributeInstance">
-    <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+  <figureConfigurations name="DomainFeatureInstance">
+    <classifier href="iaml.ecore#//domain/DomainFeatureInstance"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </figureConfigurations>
   <figureConfigurations name="DomainIterator">
     <classifier href="iaml.ecore#//domain/DomainIterator"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
-  </figureConfigurations>
-  <figureConfigurations name="ApplicationElement">
-    <classifier href="iaml.ecore#//ApplicationElement"/>
-    <properties xsi:type="sgmf:BackgroundColor" color="(248,172,170)"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
   </figureConfigurations>
   <figureConfigurations name="Permission" shape="ELLIPSE">
     <classifier href="iaml.ecore#//users/Permission"/>
     <properties xsi:type="sgmf:FlowLayout" flowLayout="true" majorAlignment="CENTER" minorAlignment="CENTER"/>
+  </figureConfigurations>
+  <figureConfigurations name="LoginHandler">
+    <classifier href="iaml.ecore#//components/LoginHandler"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(250,188,188)"/>
+  </figureConfigurations>
+  <figureConfigurations name="AccessControlHandler">
+    <classifier href="iaml.ecore#//components/AccessControlHandler"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(250,188,188)"/>
+  </figureConfigurations>
+  <figureConfigurations name="DomainInstance">
+    <classifier href="iaml.ecore#//domain/DomainInstance"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
+  </figureConfigurations>
+  <figureConfigurations name="DomainSchema">
+    <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
+  </figureConfigurations>
+  <figureConfigurations name="DomainSource">
+    <classifier href="iaml.ecore#//domain/DomainSource"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
   </figureConfigurations>
   <edgeConfigurations id="" name="&lt;default>" isDefault="true" targetArrow="true">
     <properties xsi:type="sgmf:LineWidth" width="1"/>

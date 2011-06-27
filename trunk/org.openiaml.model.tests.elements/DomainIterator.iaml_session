@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.130cf3ba351.25" name="Container">
-  <iterators id="domain.130cf3ba739.36" name="Iterator name"/>
+  <iterators id="domain.130cf3ba739.36" name="Iterator name" query="name = ?" limit="4" autosave="true"/>
 </iaml.scopes:Session>

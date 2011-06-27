@@ -47,7 +47,6 @@ public class AllTests {
 
         // analyse for unused elements
         suite.addTestSuite(IdentifyUnusedMetamodelFeatures.class);
-        suite.addTestSuite(IdentifyUnusedInferenceRules.class);
         
         // commit inferred models
         suite.addTestSuite(CommitInferredModels.class);

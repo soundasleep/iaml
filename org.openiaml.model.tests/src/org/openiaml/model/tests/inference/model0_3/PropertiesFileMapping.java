@@ -6,9 +6,9 @@ package org.openiaml.model.tests.inference.model0_3;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.domain.DomainAttribute;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
@@ -36,7 +36,7 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		assertEquals(ds.getType(), DomainStoreTypes.PROPERTIES_FILE);
 		
 		// we don't have any DomainSchemas
-		assertEquals(0, root.getSchemas().size());
+		assertEquals(0, root.getTypes().size());
 
 	}
 
@@ -48,7 +48,7 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 			throws Exception {
 		
 		// generated
-		DomainSchema schema = assertHasDomainSchema(root, "properties");
+		DomainType schema = assertHasDomainType(root, "properties");
 		assertGenerated(schema);
 
 		assertEquals(4, schema.getEStructuralFeatures().size());	// four attributes (one is a generated primary key)

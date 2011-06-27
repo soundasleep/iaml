@@ -17,7 +17,7 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -40,7 +40,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(DomainInheritanceEditing.class);
 
-		DomainSchema student = assertHasDomainSchema(root, "Student");
+		DomainType student = assertHasDomainType(root, "Student");
 		assertNotGenerated(student);
 
 	}

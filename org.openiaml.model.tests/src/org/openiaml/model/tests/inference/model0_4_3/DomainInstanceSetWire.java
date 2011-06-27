@@ -8,7 +8,7 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -49,7 +49,7 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		InputForm edit = assertHasInputForm(add, "Edit Form");
 		Button save = assertHasButton(add, "save");
 
-		DomainSchema product = assertHasDomainSchema(root, "Product");
+		DomainType product = assertHasDomainType(root, "Product");
 		DomainAttribute id = assertHasDomainAttribute(product, "id");
 		DomainAttribute name = assertHasDomainAttribute(product, "name");
 		DomainAttribute price = assertHasDomainAttribute(product, "price");

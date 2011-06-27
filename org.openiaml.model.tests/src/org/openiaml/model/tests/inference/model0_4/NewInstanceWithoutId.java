@@ -8,7 +8,7 @@ import junit.framework.AssertionFailedError;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.domain.DomainAttribute;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -32,7 +32,7 @@ public class NewInstanceWithoutId extends ValidInferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(NewInstanceWithoutId.class);
 		
-		DomainSchema schema = assertHasDomainSchema(root, "domain object");
+		DomainType schema = assertHasDomainType(root, "domain object");
 		assertNotGenerated(schema);
 		DomainAttribute name = assertHasDomainAttribute(schema, "name");
 		assertNotGenerated(name);
@@ -51,7 +51,7 @@ public class NewInstanceWithoutId extends ValidInferenceTestCase {
 	public void testGeneratedPKIsInteger() throws Exception {
 		root = loadAndInfer(NewInstanceWithoutId.class);
 		
-		DomainSchema schema = assertHasDomainSchema(root, "domain object");
+		DomainType schema = assertHasDomainType(root, "domain object");
 		
 		DomainAttribute pk = assertHasDomainAttribute(schema, "generated primary key");
 		assertTrue(pk.isPrimaryKey());

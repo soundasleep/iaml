@@ -12,7 +12,7 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.Arithmetic;
@@ -53,7 +53,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		InputForm form = assertHasInputForm(home, "view news");
 		assertNotGenerated(form);
 
-		DomainSchema object = assertHasDomainSchema(root, "News Item");
+		DomainType object = assertHasDomainType(root, "News Item");
 		assertNotGenerated(object);
 
 		assertEquals(5, instance.getLimit());

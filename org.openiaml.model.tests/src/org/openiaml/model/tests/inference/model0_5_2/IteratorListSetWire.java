@@ -14,8 +14,8 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
@@ -44,7 +44,7 @@ public class IteratorListSetWire extends InferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 
-		DomainSchema news = assertHasDomainSchema(root, "News");
+		DomainType news = assertHasDomainType(root, "News");
 		DomainSource db = assertHasDomainSource(root, "Database");
 		assertHasSchemaEdge(db, news);
 
@@ -75,7 +75,7 @@ public class IteratorListSetWire extends InferenceTestCase {
 	 */
 	public void testDomainIteratorHasDomainAttributes() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainSchema news = assertHasDomainSchema(root, "News");
+		DomainType news = assertHasDomainType(root, "News");
 		DomainIterator iterator = assertHasDomainIterator(home, "select three news");
 		DomainInstance instance = iterator.getCurrentInstance();
 		assertGenerated(instance);
@@ -106,7 +106,7 @@ public class IteratorListSetWire extends InferenceTestCase {
 	 */
 	public void testLabelsCreatedInList() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainSchema news = assertHasDomainSchema(root, "News");
+		DomainType news = assertHasDomainType(root, "News");
 		IteratorList list = assertHasIteratorList(home, "List");
 
 		Label lid = assertHasLabel(list, "id");

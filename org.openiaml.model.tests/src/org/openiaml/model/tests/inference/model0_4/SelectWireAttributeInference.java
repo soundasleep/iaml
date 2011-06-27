@@ -8,7 +8,7 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
@@ -30,7 +30,7 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
 		Frame page = assertHasFrame(root, "container");
-		DomainSchema dobj = assertHasDomainSchema(root, "a domain object");
+		DomainType dobj = assertHasDomainType(root, "a domain object");
 		DomainIterator di = assertHasDomainIterator(page, "select");
 		InputForm form = assertHasInputForm(page, "form");
 
@@ -50,7 +50,7 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		Frame page = assertHasFrame(root, "container");
-		DomainSchema dobj = assertHasDomainSchema(root, "a domain object");
+		DomainType dobj = assertHasDomainType(root, "a domain object");
 		DomainIterator di = assertHasDomainIterator(page, "select");
 		InputForm form = assertHasInputForm(page, "form");
 

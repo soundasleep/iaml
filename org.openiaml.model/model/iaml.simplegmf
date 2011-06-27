@@ -158,6 +158,19 @@
     <classifiers href="iaml.ecore#//Value"/>
     <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
   </labelConfigurations>
+  <labelConfigurations name="Query">
+    <classifiers href="iaml.ecore#//domain/DomainIterator"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//domain/DomainIterator/query"/>
+    <properties xsi:type="sgmf:LabelItalic" value="true"/>
+  </labelConfigurations>
+  <labelConfigurations name="Limit" prefix="" viewPattern="limit: {0}" editorPattern="">
+    <classifiers href="iaml.ecore#//domain/DomainIterator"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//domain/DomainIterator/limit"/>
+  </labelConfigurations>
+  <labelConfigurations name="Autosave" prefix="" viewPattern="autosave: {0}">
+    <classifiers href="iaml.ecore#//domain/DomainIterator"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//domain/DomainIterator/autosave"/>
+  </labelConfigurations>
   <palettes name="Domain Modelling">
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//domain/DomainFeatureInstance"/>
@@ -449,6 +462,9 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Event">
       <classifier href="iaml.ecore#//Event"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Frame">
+      <classifier href="iaml.ecore#//visual/Frame"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>

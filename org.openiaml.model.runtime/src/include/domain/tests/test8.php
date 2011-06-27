@@ -3,7 +3,7 @@
 // here we define some inheritance structures, and new schemas
 
 // Student extends User
-class DomainSchema_Students extends DomainSchema {
+class DomainType_Students extends DomainType {
 
   private function __construct() {
 	$this->addAttribute(DomainAttribute_Student_Id::getInstance());
@@ -17,7 +17,7 @@ class DomainSchema_Students extends DomainSchema {
   static $instance = null;
   public static function getInstance() {
     if (self::$instance == null) {
-      self::$instance = new DomainSchema_Students();
+      self::$instance = new DomainType_Students();
     }
     return self::$instance;
   }
@@ -25,7 +25,7 @@ class DomainSchema_Students extends DomainSchema {
 }
 
 // StudentAdmin extends both Student and Admin (multiple inheritance)
-class DomainSchema_StudentAdmins extends DomainSchema {
+class DomainType_StudentAdmins extends DomainType {
 
   private function __construct() {
     $this->addAttribute(DomainAttribute_StudentAdmin_Id::getInstance());
@@ -39,7 +39,7 @@ class DomainSchema_StudentAdmins extends DomainSchema {
   static $instance = null;
   public static function getInstance() {
     if (self::$instance == null) {
-      self::$instance = new DomainSchema_StudentAdmins();
+      self::$instance = new DomainType_StudentAdmins();
     }
     return self::$instance;
   }
@@ -166,11 +166,11 @@ class DomainSource_AdminsDBWithStudents extends DomainSource {
 
   private function __construct() {
     $this->schemas = array(
-      DomainSchema_Users::getInstance(),
-      DomainSchema_Admins::getInstance(),
-      DomainSchema_SuperAdmins::getInstance(),
-      DomainSchema_Students::getInstance(),
-      DomainSchema_StudentAdmins::getInstance(),
+      DomainType_Users::getInstance(),
+      DomainType_Admins::getInstance(),
+      DomainType_SuperAdmins::getInstance(),
+      DomainType_Students::getInstance(),
+      DomainType_StudentAdmins::getInstance(),
     );
     $this->type = 'RELATIONAL_DB';
     $this->file = 'sqlite:admins.db';
@@ -191,7 +191,7 @@ class DomainSource_AdminsDBWithStudents extends DomainSource {
 class DomainIterator_StudentAdminNewIterator extends DefaultDomainIterator {
 
   private function __construct() {
-    $this->schema = DomainSchema_StudentAdmins::getInstance();
+    $this->schema = DomainType_StudentAdmins::getInstance();
     $this->source = DomainSource_AdminsDBWithStudents::getInstance();
     $this->order_by = null;
     $this->order_ascending = true;

@@ -6,7 +6,7 @@
 class DomainIterator_AdminNewIteratorPersists extends DefaultDomainIterator {
 
 	private function __construct() {
-		$this->schema = DomainSchema_Admins::getInstance();
+		$this->schema = DomainType_Admins::getInstance();
 		$this->source = DomainSource_AdminsDB::getInstance();
 		$this->order_by = null;
 		$this->order_ascending = true;

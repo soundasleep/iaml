@@ -5,7 +5,7 @@
 class DomainIterator_Select14 extends DefaultDomainIterator {
 
   private function __construct() {
-    $this->schema = DomainSchema_Users13::getInstance();
+    $this->schema = DomainType_Users13::getInstance();
     $this->source = DomainSource_UsersDB13::getInstance();
     $this->order_by = null;
     $this->order_ascending = true;

@@ -1,7 +1,7 @@
 <?php
 
-// define a DomainSchema for RSS news items
-class RSSNews extends DomainSchema {
+// define a DomainType for RSS news items
+class RSSNews extends DomainType {
 
 	private function __construct() {
 		$this->attributes = array(

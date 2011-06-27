@@ -3,7 +3,7 @@
 // here we define one new schema, that isn't manually created
 // and a new source for this schema
 
-class DomainSchema_Posts extends DomainSchema {
+class DomainType_Posts extends DomainType {
 
 	private function __construct() {
 		$this->attributes = array(
@@ -18,7 +18,7 @@ class DomainSchema_Posts extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_Posts();
+			self::$instance = new DomainType_Posts();
 		}
 		return self::$instance;
 	}
@@ -64,7 +64,7 @@ class DomainAttribute_Post_Content extends DomainAttribute {
 class DomainSource_PostsDB extends DomainSource {
 
 	private function __construct() {
-		$this->schemas = array(DomainSchema_Posts::getInstance());
+		$this->schemas = array(DomainType_Posts::getInstance());
 		$this->type = 'RELATIONAL_DB';
 		$this->file = 'sqlite:1kg992k6t4.db';		// it can be in the same DB
 	}
@@ -84,7 +84,7 @@ class DomainSource_PostsDB extends DomainSource {
 class DomainIterator_Posts_1mkm131xzz extends DefaultDomainIterator {
 
 	private function __construct() {
-		$this->schema = DomainSchema_Posts::getInstance();
+		$this->schema = DomainType_Posts::getInstance();
 		$this->source = DomainSource_PostsDB::getInstance();
 		$this->order_by = null;
 		$this->order_ascending = true;

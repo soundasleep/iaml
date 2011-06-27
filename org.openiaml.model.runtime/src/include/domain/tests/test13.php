@@ -3,7 +3,7 @@
 // here we define two schemas with the same attribute name
 
 // Student extends User
-class DomainSchema_Users13 extends DomainSchema {
+class DomainType_Users13 extends DomainType {
 
   private function __construct() {
 	$this->addAttribute(DomainAttribute_User_Id13::getInstance());
@@ -16,14 +16,14 @@ class DomainSchema_Users13 extends DomainSchema {
   static $instance = null;
   public static function getInstance() {
     if (self::$instance == null) {
-      self::$instance = new DomainSchema_Users13();
+      self::$instance = new DomainType_Users13();
     }
     return self::$instance;
   }
 
 }
 
-class DomainSchema_DefaultRoles13 extends DomainSchema {
+class DomainType_DefaultRoles13 extends DomainType {
 
   private function __construct() {
 	$this->addAttribute(DomainAttribute_DefaultRole_Id13::getInstance());
@@ -36,7 +36,7 @@ class DomainSchema_DefaultRoles13 extends DomainSchema {
   static $instance = null;
   public static function getInstance() {
     if (self::$instance == null) {
-      self::$instance = new DomainSchema_DefaultRoles13();
+      self::$instance = new DomainType_DefaultRoles13();
     }
     return self::$instance;
   }
@@ -122,8 +122,8 @@ class DomainSource_UsersDB13 extends DomainSource {
 
   private function __construct() {
     $this->schemas = array(
-      DomainSchema_Users13::getInstance(),
-      DomainSchema_DefaultRoles13::getInstance(),
+      DomainType_Users13::getInstance(),
+      DomainType_DefaultRoles13::getInstance(),
     );
     $this->type = 'RELATIONAL_DB';
     $this->file = 'sqlite:users.db';
@@ -144,7 +144,7 @@ class DomainSource_UsersDB13 extends DomainSource {
 class DomainIterator_New13 extends DefaultDomainIterator {
 
   private function __construct() {
-    $this->schema = DomainSchema_DefaultRoles13::getInstance();
+    $this->schema = DomainType_DefaultRoles13::getInstance();
     $this->source = DomainSource_UsersDB13::getInstance();
     $this->order_by = null;
     $this->order_ascending = true;

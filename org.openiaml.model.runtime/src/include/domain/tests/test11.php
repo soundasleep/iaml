@@ -4,7 +4,7 @@
 class DomainIterator_News_LimitedSorted extends DefaultDomainIterator {
 
   private function __construct() {
-    $this->schema = DomainSchema_News::getInstance();
+    $this->schema = DomainType_News::getInstance();
     $this->source = DomainSource_NewsDB::getInstance();
     $this->order_by = DomainAttribute_News_Title::getInstance();
     $this->order_ascending = false;

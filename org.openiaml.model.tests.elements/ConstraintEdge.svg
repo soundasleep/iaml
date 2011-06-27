@@ -74,7 +74,7 @@
 <path d="M114 113 L207 113 L207 129 L114 129 L114 113 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath24">
-<path d="M117 133 L185 133 L185 149 L117 149 L117 133 Z"/>
+<path d="M124 133 L178 133 L178 149 L124 149 L124 133 Z"/>
 </clipPath>
 </defs>
 <g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
@@ -116,7 +116,7 @@
 <image width="16" xlink:show="embed" xlink:type="simple" clip-path="url(#clipPath22)" preserveAspectRatio="none" stroke-dasharray="6.6,3.3" height="16" x="96" y="113" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABU0lEQVR42u2Sv45B&#13;&#10;URDGf/dakRAFDSq5hUaCRiEhoZHQaEiuRuMJ1B5A4h1EPIJeo5FQSERJK0EQhRCJ&#13;&#10;P2f3TGF3s+2WvuJMZs7MN9/MOfCG8dMZDAZqPp/j8/k4HA5UKhX8fj+dTkdix+OR&#13;&#10;eDxOPp83/hB0u111Op2wbZvz+cxqtWI2m+F2u8lmszgcDtbrNdPpFK/XS71eN14E&#13;&#10;w+FQfXWnVqvR7/cZjUYEg0FisZgU7fd7NpsN6XSaaDTKZDLRKsjlcoapCXQnj8fD&#13;&#10;7Xaj0WiIrVarZDIZisUihULhdWdZluTqGo0PfYRCIcbjMff7nXa7zePxEKsTNfRI&#13;&#10;SimJlUoldrsdqVTqmyCZTOoxRHoikRDp2+2WxWKBy+UiHA4TCAQwTVNyrter1Pxa&#13;&#10;4nK5VK1WS5bmdDp5Pp+Uy2V5hV6vJ6r0GJfLhWazSSQSMd6f+J/wCXf4kz0wFhyI&#13;&#10;AAAAAElFTkSuQmCC" xlink:actuate="onLoad"/>
 <text x="115" y="126" clip-path="url(#clipPath23)" stroke-dasharray="6.6,3.3" stroke="none" xml:space="preserve">: ConstraintEdge</text>
 <line clip-path="url(#clipPath23)" fill="none" x1="115" x2="206" y1="127" y2="127" stroke-width="0.1"/>
-<text x="118" y="146" clip-path="url(#clipPath24)" stroke="none" stroke-width="0.1" xml:space="preserve">Type: &lt;...&gt;</text>
+<text x="125" y="146" clip-path="url(#clipPath24)" stroke="none" stroke-width="0.1" xml:space="preserve">Type: OR</text>
 </g>
 </g>
 </svg>

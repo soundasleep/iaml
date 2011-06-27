@@ -21,16 +21,16 @@ global DroolsHelperFunctions functions;
 /**
  * @inference DomainSource
  *		A {@model DomainSource} of {@model DomainSource#type} <code>PROPERTIES_FILE</code>
- *		will generate a {@model DomainSchema} named 'properties'. 
+ *		will generate a {@model DomainType} named 'properties'. 
  */
-rule "Create the Properties file DomainSchema"
+rule "Create the Properties file DomainType"
 		
 	when
 		root : InternetApplication ( )
 		$fds : DomainSource ( type == DomainStoreTypes.PROPERTIES_FILE )
 		
 		p : ExtendedProperties ( ) from $fds.propertiesFile
-		not ( schema : DomainSchema ( name == "properties" )
+		not ( schema : DomainType ( name == "properties" )
 			and exists ( 
 				edge : SchemaEdge ( from == $fds, to == schema )
 			)
@@ -39,7 +39,7 @@ rule "Create the Properties file DomainSchema"
 		eval ( handler.veto( $fds ))
 
 	then
-		DomainSchema fdo = handler.generatedDomainSchema($fds, root);
+		DomainType fdo = handler.generatedDomainType($fds, root);
 		//handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
 		handler.setName(fdo, "properties");
 		queue.add(fdo, drools);
@@ -54,19 +54,19 @@ end
 // this is either because Drools expects getFieldName(), or it cannot
 // iterate over Set or Collection
 /**
- * @inference DomainSource,DomainSchema
+ * @inference DomainSource,DomainType
  *		A {@model DomainSource} of {@model DomainSource#type} <code>PROPERTIES_FILE</code>
- *		will populate the 'properties' {@model DomainSchema} with string-{@model DomainAttribute#type typed} 
+ *		will populate the 'properties' {@model DomainType} with string-{@model DomainAttribute#type typed} 
  *		{@model DomainAttributes} for each value in the source properties file.
  */
-rule "Create DomainAttributes for Properties File DomainSchema"
+rule "Create DomainAttributes for Properties File DomainType"
 		
 	when
 		$fds : DomainSource ( type == DomainStoreTypes.PROPERTIES_FILE )
 		$p : ExtendedProperties ( ) from $fds.propertiesFile
 		$key : String ( ) from $p.propertyNames
 		
-		schema : DomainSchema ( name == "properties" )
+		schema : DomainType ( name == "properties" )
 		schemaEdge : SchemaEdge ( from == $fds, to == schema )
 		
 		type : EXSDDataType( definition != null, 

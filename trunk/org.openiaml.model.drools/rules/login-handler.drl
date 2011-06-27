@@ -1694,12 +1694,12 @@ end
  * @inference LoginHandler,DomainIterator
  *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
  *		a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> 
- *		will be updated according to the {@model DomainSchema} of the handler.
+ *		will be updated according to the {@model DomainType} of the handler.
  */
 rule "Update query parameters for LoginHandler [object]"
 	when
 		scope : Session ( )
-		dobj : DomainSchema ( )
+		dobj : DomainType ( )
 		
 		# with at least one attribute
 		exists ( DomainAttribute ( eContainer == dobj ))
@@ -1804,7 +1804,7 @@ end
  *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
  *		will be <em>updated</em> according to the {@model Role} of the handler.
  */
-rule "Create Query from a DomainSchema [user]"
+rule "Create Query from a DomainType [user]"
 	when
 		scope : Session ( )
 		role : Role ( )
@@ -1843,7 +1843,7 @@ end
  *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
  *		will be <em>updated</em> according to the {@model Role} of the handler.
  */
-rule "Update Query from a DomainSchema [user]"
+rule "Update Query from a DomainType [user]"
 	when
 		scope : Session ( )
 		dobj : Role ( )
@@ -1939,7 +1939,7 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
-		object : DomainSchema ( )
+		object : DomainType ( )
 		attribute : DomainAttribute ( eContainer == object )
 		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
@@ -1972,7 +1972,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
-		object : DomainSchema ( )
+		object : DomainType ( )
 		attribute : DomainAttribute ( eContainer == object )
 		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
 		
@@ -2154,12 +2154,12 @@ end
  *		A {@model DomainIterator} within a {@model Session} protected by a 
  *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
  *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
- *		as the {@model DomainSchema} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
+ *		as the {@model DomainType} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
  * @inference LoginHandler,SelectEdge
  *		A {@model DomainIterator} within a {@model Session} protected by a 
  *		{@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
  *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
- *		as the {@model DomainSchema} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
+ *		as the {@model DomainType} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
  */
 rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainAttribute)"
 	when
@@ -2171,7 +2171,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		iterator : DomainIterator ( eContainer == session )
 		set : SetWire ( from == login_handler, to == iterator )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		
 		# LoginHandler selecting from a DomainAttribute
 		exists (
@@ -2200,9 +2200,9 @@ end
  *		A {@model DomainIterator} within a {@model Session} protected by a 
  *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code> 
  *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
- *		as the {@model DomainSchema} used as a {@model Parameter} to that handler.
+ *		as the {@model DomainType} used as a {@model Parameter} to that handler.
  */
-rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainSchema)"
+rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainType)"
 	when
 		root : InternetApplication ( )
 	
@@ -2212,9 +2212,9 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		iterator : DomainIterator ( eContainer == session )
 		set : SetWire ( from == login_handler, to == iterator )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		
-		# LoginHandler selecting from a DomainSchema
+		# LoginHandler selecting from a DomainType
 		param : Parameter ( parameterValue == schema, parameterTerm == login_handler )
 		
 		source : DomainSource ( )
@@ -2248,9 +2248,9 @@ end
  * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
  *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
  *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the handlers
- *		both use different {@model DomainSchema}s (for example, with {@model ExtendsEdge inheritance}), and
+ *		both use different {@model DomainType}s (for example, with {@model ExtendsEdge inheritance}), and
  *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
- *		as the {@model DomainSchema} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ *		as the {@model DomainType} used as a {@model Parameter} to the {@model AccessControlHandler}.
  */
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (inherited)"
 	when
@@ -2261,7 +2261,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		
 		ach : AccessControlHandler ( eContainer == session )
 		
-		expected_schema : DomainSchema ( )
+		expected_schema : DomainType ( )
 		requires : RequiresEdge ( from == ach, to == expected_schema )
 		
 		iterator : DomainIterator ( eContainer == session )
@@ -2270,7 +2270,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		# this will also cover if there is a Role and a Permission
 
 		# but a <em>different</em> schema is connected to the login handler
-		other_schema : DomainSchema ( )
+		other_schema : DomainType ( )
 		param : Parameter ( parameterValue == other_schema, parameterTerm == login_handler )
 		eval ( other_schema != expected_schema )
 		
@@ -2292,9 +2292,9 @@ end
  * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
  *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
  *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the handlers
- *		both use the same {@model DomainSchema}s, and
+ *		both use the same {@model DomainType}s, and
  *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
- *		as the {@model DomainSchema} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ *		as the {@model DomainType} used as a {@model Parameter} to the {@model AccessControlHandler}.
  */
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (direct)"
 	when
@@ -2305,7 +2305,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		
 		ach : AccessControlHandler ( eContainer == session )
 		
-		expected_schema : DomainSchema ( )
+		expected_schema : DomainType ( )
 		requires : RequiresEdge ( from == ach, to == expected_schema )
 		
 		iterator : DomainIterator ( eContainer == session )
@@ -2336,7 +2336,7 @@ end
  *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the {@model AccessControlHandler}
  *		{@model RequiresEdge requires} a {@model Permission} without a {@model Role}, and
  *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
- *		as the {@model DomainSchema} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ *		as the {@model DomainType} used as a {@model Parameter} to the {@model AccessControlHandler}.
  */
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (Permission)"
 	when
@@ -2353,9 +2353,9 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 			requires : RequiresEdge ( from == ach, to == permission )
 		)
 		
-		# and this isn't using a DomainSchema
+		# and this isn't using a DomainType
 		not ( exists (
-			role : DomainSchema ( ) and
+			role : DomainType ( ) and
 			requires : RequiresEdge ( from == ach, to == role )
 		) )
 		

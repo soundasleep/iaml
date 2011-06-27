@@ -32,7 +32,7 @@ global DroolsHelperFunctions functions;
  */
 rule "Create navigation buttons for InputForms when connected to DomainIterators with many results"
 	when
-		object : DomainSchema ( )
+		object : DomainType ( )
 		instance : DomainIterator ( limit != 1 )
 		
 		domainSource : DomainSource ( )
@@ -76,7 +76,7 @@ end
  */
 rule "Create 'Results' Label for InputForms when connected to DomainIterators with many results"
 	when
-		object : DomainSchema ( )
+		object : DomainType ( )
 		instance : DomainIterator ( limit != 1 )
 		
 		domainSource : DomainSource ( )

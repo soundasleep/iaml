@@ -22,6 +22,10 @@ public class TestLatexFunctions extends TestCase {
 	 */
 	public void testHumanise() throws Exception {
 		assertEquals("Input Text Field", LatexCodegenFunctions.humanise("InputTextField"));
+		assertEquals("EObject", LatexCodegenFunctions.humanise("EObject"));
+		assertEquals("XQuery Function", LatexCodegenFunctions.humanise("XQueryFunction"));
+		assertEquals("ECA Rule", LatexCodegenFunctions.humanise("ECARule"));
+		assertEquals("EXSD Data Type", LatexCodegenFunctions.humanise("EXSDDataType"));
 	}
 	
 	/**

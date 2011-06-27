@@ -18,11 +18,23 @@ public class LatexCodegenFunctions {
 	 */
 	public static String humanise(String s) {		
 		StringBuffer buf = new StringBuffer();
-		for (char c : s.trim().toCharArray()) {
+		char prev = 0;
+		int pos = 0;
+		char[] data = s.trim().toCharArray();
+		for (char c : data) {
 			if (Character.isUpperCase(c) && buf.length() != 0) {
-				buf.append(' ');
+				if (prev == 0 || !Character.isUpperCase(prev)) {
+					buf.append(' ');
+				}
+			
+				// is the next character uppercase too?
+				else if (pos > 1 && data.length > pos && !Character.isUpperCase(data[pos + 1])) {
+					buf.append(' ');
+				}
 			}
 			buf.append(c);
+			prev = c;
+			pos++;
 		}
 		
 		return buf.toString();

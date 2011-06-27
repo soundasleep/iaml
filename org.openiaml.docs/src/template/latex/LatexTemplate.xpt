@@ -91,6 +91,9 @@
 % no visual representation: class is abstract, or an interface 
 «ELSE»
 «EXPAND ifThenOpen("Visual")»
+	«IF gmfEditor==null»
+		«EXPAND ifThenOpen("VisualMissing")»
+	«ENDIF»
 	\begin{figure}[htb]
 	\centering
 	% TODO this should be using SVG images, not PNG
@@ -104,6 +107,9 @@
 	\end{figure}
 
 	\modeldocVisualReference{fig:reference-«name»}
+	«IF gmfEditor==null»
+		«EXPAND ifThenClose("VisualMissing")»
+	«ENDIF»
 	
 	«EXPAND ifThenOpen("VisualRationale")»
 		% Rationale behind the visual representation; still has to be implemented.

@@ -16,6 +16,7 @@
 \newcommand{\includeStructureSubtypes}{yes}
 \newcommand{\includeStructureAllSubtypes}{yes}
 \newcommand{\includeVisual}{yes}
+\newcommand{\includeVisualMissing}{yes}
 \newcommand{\includeVisualRationale}{yes}
 \newcommand{\includeAttributes}{yes}
 \newcommand{\includeAttributesDirect}{yes}

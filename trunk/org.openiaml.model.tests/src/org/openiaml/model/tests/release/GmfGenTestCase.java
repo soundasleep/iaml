@@ -1176,7 +1176,7 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * Tests {@link #getBestPair(List, EClass)}.
 	 */
 	public void testGetBestPair() {
-		EClass domain_schema = DomainPackage.eINSTANCE.getDomainSchema(); 
+		EClass domain_schema = DomainPackage.eINSTANCE.getDomainType(); 
 		EClass role = UsersPackage.eINSTANCE.getRole(); 
 		
 		List<RootElementPair> elements = new ArrayList<RootElementPair>();

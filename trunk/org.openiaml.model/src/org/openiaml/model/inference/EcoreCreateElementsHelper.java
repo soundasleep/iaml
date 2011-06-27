@@ -48,9 +48,9 @@ import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainPackage;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
@@ -197,20 +197,20 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
-	public DomainSchema generatedDomainSchema(GeneratesElements by, InternetApplication container) throws InferenceException {
-		DomainSchema obj = createDomainSchema(container);
+	public DomainType generatedDomainType(GeneratesElements by, InternetApplication container) throws InferenceException {
+		DomainType obj = createDomainType(container);
 		setGeneratedBy(obj, by);
 		return obj;
 	}
 
 	// used by tests.diagram
-	public DomainSchema createDomainSchema(InternetApplication container) throws InferenceException {
-		DomainSchema obj = (DomainSchema) createElement( container, DomainPackage.eINSTANCE.getDomainSchema(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
+	public DomainType createDomainType(InternetApplication container) throws InferenceException {
+		DomainType obj = (DomainType) createElement( container, DomainPackage.eINSTANCE.getDomainType(), ModelPackage.eINSTANCE.getInternetApplication_Types() );
 		return obj;
 	}
 
 	public Role generatedRole(GeneratesElements by, InternetApplication container) throws InferenceException {
-		Role obj = (Role) createElement( container, UsersPackage.eINSTANCE.getRole(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
+		Role obj = (Role) createElement( container, UsersPackage.eINSTANCE.getRole(), ModelPackage.eINSTANCE.getInternetApplication_Types() );
 		setGeneratedBy(obj, by);
 		return obj;
 	}
@@ -233,7 +233,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return obj;
 	}
 
-	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainSchema container) throws InferenceException {
+	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainType container) throws InferenceException {
 		DomainAttribute obj = (DomainAttribute) createElement( container, DomainPackage.eINSTANCE.getDomainAttribute(), EcorePackage.eINSTANCE.getEClass_EStructuralFeatures() );
 		setGeneratedBy(obj, by);
 		return obj;
@@ -469,7 +469,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 
-	public SchemaEdge generatedSchemaEdge(GeneratesElements by, ContainsWires container, DomainSource from, DomainSchema to) throws InferenceException {
+	public SchemaEdge generatedSchemaEdge(GeneratesElements by, ContainsWires container, DomainSource from, DomainType to) throws InferenceException {
 		SchemaEdge edge = (SchemaEdge) createElement( container, DomainPackage.eINSTANCE.getSchemaEdge(), ModelPackage.eINSTANCE.getContainsWires_SchemaEdges() );
 		setGeneratedBy(edge, by);
 		setValue(edge, DomainPackage.eINSTANCE.getSchemaEdge_From(), from);

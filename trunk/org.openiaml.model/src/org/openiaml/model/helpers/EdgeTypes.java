@@ -222,11 +222,11 @@ public class EdgeTypes {
 		edgeTypes.add( new EdgeType(
 				DomainPackage.eINSTANCE.getSchemaEdge(), /* type */
 				DomainPackage.eINSTANCE.getDomainSource(), /* source */
-				DomainPackage.eINSTANCE.getDomainSchema(), /* destination */
+				DomainPackage.eINSTANCE.getDomainType(), /* destination */
 				DomainPackage.eINSTANCE.getSchemaEdge_From(), /* from ref */
 				DomainPackage.eINSTANCE.getSchemaEdge_To(), /* to ref */
 				DomainPackage.eINSTANCE.getDomainSource_OutSchemas(),
-				DomainPackage.eINSTANCE.getDomainSchema_InSchemas()
+				DomainPackage.eINSTANCE.getDomainType_InSchemas()
 		) );
 
 	}

@@ -6,7 +6,7 @@
 class DomainIterator_News_Test16 extends DefaultDomainIterator {
 
 	private function __construct() {
-		$this->schema = DomainSchema_News::getInstance();
+		$this->schema = DomainType_News::getInstance();
 		$this->source = DomainSource_NewsDB::getInstance();
 		$this->order_by = null;
 		$this->order_ascending = true;

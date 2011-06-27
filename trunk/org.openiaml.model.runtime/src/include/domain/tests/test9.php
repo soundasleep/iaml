@@ -6,7 +6,7 @@
 class DomainIterator_StudentAdminNewEditor extends DefaultDomainIterator {
 
 	private function __construct() {
-		$this->schema = DomainSchema_StudentAdmins::getInstance();
+		$this->schema = DomainType_StudentAdmins::getInstance();
 		$this->source = DomainSource_AdminsDBWithStudents::getInstance();	// uses the same source
 		$this->order_by = null;
 		$this->order_ascending = true;

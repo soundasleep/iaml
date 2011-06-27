@@ -8,7 +8,7 @@
 /**
  * The structure of a collection of attributes.
  */
-abstract class DomainSchema {
+abstract class DomainType {
 	// the list of DomainAttributes
 	var $attributes = array();
 
@@ -123,7 +123,7 @@ abstract class DomainAttribute {
 }
 
 abstract class DomainSource {
-	// the DomainSchemas this provides
+	// the DomainTypes this provides
 	var $schemas;
 
 	// the type of database
@@ -222,7 +222,7 @@ abstract class DomainSource {
  */
 abstract class DomainIterator {
 
-	// the DomainSchema of the [main] instance
+	// the DomainType of the [main] instance
 	var $schema;
 
 	// the source of the data

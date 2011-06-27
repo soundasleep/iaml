@@ -3,7 +3,7 @@
 // a test to check that if we define a schema with no primary key,
 // we get a warning in the log
 
-class DomainSchema_Users17 extends DomainSchema {
+class DomainType_Users17 extends DomainType {
 
   private function __construct() {
 	//$this->addAttribute(DomainAttribute_User_Id13::getInstance());
@@ -16,7 +16,7 @@ class DomainSchema_Users17 extends DomainSchema {
   static $instance = null;
   public static function getInstance() {
     if (self::$instance == null) {
-      self::$instance = new DomainSchema_Users17();
+      self::$instance = new DomainType_Users17();
     }
     return self::$instance;
   }
@@ -27,7 +27,7 @@ class DomainSource_UsersDB17 extends DomainSource {
 
   private function __construct() {
     $this->schemas = array(
-      DomainSchema_Users17::getInstance(),
+      DomainType_Users17::getInstance(),
     );
     $this->type = 'RELATIONAL_DB';
     $this->file = 'sqlite:users_2.db';
@@ -48,7 +48,7 @@ class DomainSource_UsersDB17 extends DomainSource {
 class DomainIterator_New17 extends DefaultDomainIterator {
 
   private function __construct() {
-    $this->schema = DomainSchema_Users17::getInstance();
+    $this->schema = DomainType_Users17::getInstance();
     $this->source = DomainSource_UsersDB17::getInstance();
     $this->order_by = null;
     $this->order_ascending = true;

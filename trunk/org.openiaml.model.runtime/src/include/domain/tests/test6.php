@@ -2,7 +2,7 @@
 
 // here we define some inheritance structures, and new schemas
 
-class DomainSchema_Users extends DomainSchema {
+class DomainType_Users extends DomainType {
 
 	private function __construct() {
 		$this->attributes = array(
@@ -17,7 +17,7 @@ class DomainSchema_Users extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_Users();
+			self::$instance = new DomainType_Users();
 		}
 		return self::$instance;
 	}
@@ -25,7 +25,7 @@ class DomainSchema_Users extends DomainSchema {
 }
 
 // Admin extends User
-class DomainSchema_Admins extends DomainSchema {
+class DomainType_Admins extends DomainType {
 
 	private function __construct() {
 		$this->attributes = array(
@@ -41,7 +41,7 @@ class DomainSchema_Admins extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_Admins();
+			self::$instance = new DomainType_Admins();
 		}
 		return self::$instance;
 	}
@@ -49,7 +49,7 @@ class DomainSchema_Admins extends DomainSchema {
 }
 
 // and SuperAdmin extends Admin, but adds no new data
-class DomainSchema_SuperAdmins extends DomainSchema {
+class DomainType_SuperAdmins extends DomainType {
 
 	private function __construct() {
 		$this->attributes = array(
@@ -63,7 +63,7 @@ class DomainSchema_SuperAdmins extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_SuperAdmins();
+			self::$instance = new DomainType_SuperAdmins();
 		}
 		return self::$instance;
 	}
@@ -184,9 +184,9 @@ class DomainSource_AdminsDB extends DomainSource {
 
 	private function __construct() {
 		$this->schemas = array(
-			DomainSchema_Users::getInstance(),
-			DomainSchema_Admins::getInstance(),
-			DomainSchema_SuperAdmins::getInstance(),
+			DomainType_Users::getInstance(),
+			DomainType_Admins::getInstance(),
+			DomainType_SuperAdmins::getInstance(),
 		);
 		$this->type = 'RELATIONAL_DB';
 		$this->file = 'sqlite:admins.db';
@@ -207,7 +207,7 @@ class DomainSource_AdminsDB extends DomainSource {
 class DomainIterator_AdminNewIterator extends DefaultDomainIterator {
 
 	private function __construct() {
-		$this->schema = DomainSchema_Admins::getInstance();
+		$this->schema = DomainType_Admins::getInstance();
 		$this->source = DomainSource_AdminsDB::getInstance();
 		$this->order_by = null;
 		$this->order_ascending = true;

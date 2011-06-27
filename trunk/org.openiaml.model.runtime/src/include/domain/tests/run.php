@@ -28,7 +28,7 @@ abstract class DefaultDomainIterator extends DomainIterator {
 
 }
 
-class DomainSchema_News extends DomainSchema {
+class DomainType_News extends DomainType {
 
 	private function __construct() {
 		$this->attributes = array(
@@ -43,7 +43,7 @@ class DomainSchema_News extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_News();
+			self::$instance = new DomainType_News();
 		}
 		return self::$instance;
 	}
@@ -88,7 +88,7 @@ class DomainAttribute_News_Title extends DomainAttribute {
 class DomainSource_NewsDB extends DomainSource {
 
 	private function __construct() {
-		$this->schemas = array(DomainSchema_News::getInstance());
+		$this->schemas = array(DomainType_News::getInstance());
 		$this->type = 'RELATIONAL_DB';
 		$this->file = 'sqlite:1kg992k6t4.db';
 	}

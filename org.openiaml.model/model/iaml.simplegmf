@@ -19,8 +19,8 @@
     <classifier href="iaml.ecore#//operations/ActivityParameter"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
   </figureConfigurations>
-  <figureConfigurations name="Property">
-    <classifier href="iaml.ecore#//Property"/>
+  <figureConfigurations name="Value">
+    <classifier href="iaml.ecore#//Value"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
   </figureConfigurations>
   <figureConfigurations name="TemporaryVariable">
@@ -40,17 +40,26 @@
     <classifier href="iaml.ecore#//components/Gate"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(202,225,173)"/>
   </figureConfigurations>
-  <figureConfigurations name="CastNode" shape="ROUNDED_RECTANGLE">
-    <classifier href="iaml.ecore#//operations/CastNode"/>
-    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
-  </figureConfigurations>
   <figureConfigurations name="ActivityNode">
     <classifier href="iaml.ecore#//ActivityNode"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(177,190,237)"/>
   </figureConfigurations>
+  <figureConfigurations name="LoginHandler">
+    <classifier href="iaml.ecore#//components/LoginHandler"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(250,188,188)"/>
+  </figureConfigurations>
+  <figureConfigurations name="AccessControlHandler">
+    <classifier href="iaml.ecore#//components/AccessControlHandler"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(250,188,188)"/>
+  </figureConfigurations>
+  <figureConfigurations name="DomainFeature">
+    <classifier href="iaml.ecore#//domain/DomainInstance"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
+  </figureConfigurations>
   <figureConfigurations name="DomainFeatureInstance">
     <classifier href="iaml.ecore#//domain/DomainFeatureInstance"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
   </figureConfigurations>
   <figureConfigurations name="DomainIterator">
     <classifier href="iaml.ecore#//domain/DomainIterator"/>
@@ -60,14 +69,7 @@
   <figureConfigurations name="Permission" shape="ELLIPSE">
     <classifier href="iaml.ecore#//users/Permission"/>
     <properties xsi:type="sgmf:FlowLayout" flowLayout="true" majorAlignment="CENTER" minorAlignment="CENTER"/>
-  </figureConfigurations>
-  <figureConfigurations name="LoginHandler">
-    <classifier href="iaml.ecore#//components/LoginHandler"/>
-    <properties xsi:type="sgmf:BackgroundColor" color="(250,188,188)"/>
-  </figureConfigurations>
-  <figureConfigurations name="AccessControlHandler">
-    <classifier href="iaml.ecore#//components/AccessControlHandler"/>
-    <properties xsi:type="sgmf:BackgroundColor" color="(250,188,188)"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
   </figureConfigurations>
   <figureConfigurations name="DomainInstance">
     <classifier href="iaml.ecore#//domain/DomainInstance"/>

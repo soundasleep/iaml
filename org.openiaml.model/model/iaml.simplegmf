@@ -73,8 +73,8 @@
     <classifier href="iaml.ecore#//domain/DomainInstance"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
   </figureConfigurations>
-  <figureConfigurations name="DomainSchema">
-    <classifier href="iaml.ecore#//domain/DomainSchema"/>
+  <figureConfigurations name="DomainType">
+    <classifier href="iaml.ecore#//domain/DomainType"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(228,223,214)"/>
   </figureConfigurations>
   <figureConfigurations name="DomainSource">
@@ -193,13 +193,13 @@
     <classifiers href="iaml.ecore#//domain/DomainFeatureInstance"/>
     <classifiers href="iaml.ecore#//domain/DomainInstance"/>
     <classifiers href="iaml.ecore#//domain/DomainIterator"/>
-    <classifiers href="iaml.ecore#//domain/DomainSchema"/>
     <classifiers href="iaml.ecore#//domain/DomainSource"/>
     <classifiers href="iaml.ecore#//wires/ProvidesEdge"/>
     <classifiers href="iaml.ecore#//domain/SchemaEdge"/>
     <classifiers href="iaml.ecore#//domain/SelectEdge"/>
     <classifiers href="iaml.ecore#//wires/ExtendsEdge"/>
     <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
+    <classifiers href="iaml.ecore#//domain/DomainType"/>
   </palettes>
   <palettes name="Activity Modelling">
     <classifiers href="iaml.ecore#//ActivityNode"/>
@@ -489,8 +489,8 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="DomainSchema">
-      <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainType">
+      <classifier href="iaml.ecore#//domain/DomainType"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Permission">
       <classifier href="iaml.ecore#//users/Permission"/>
@@ -708,8 +708,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
       <classifier href="iaml.ecore#//operations/ActivityFunction"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="DomainSchema">
-      <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    <elements xsi:type="sgmf:ContainedNode" name="DomainType">
+      <classifier href="iaml.ecore#//domain/DomainType"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainSource">
       <classifier href="iaml.ecore#//domain/DomainSource"/>
@@ -761,7 +761,7 @@
     </elements>
   </diagramEditors>
   <diagramEditors id="schema">
-    <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    <classifier href="iaml.ecore#//domain/DomainType"/>
     <elements xsi:type="sgmf:ContainedNode" name="DomainAttribute">
       <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
@@ -950,8 +950,8 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="DomainSchema">
-      <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainType">
+      <classifier href="iaml.ecore#//domain/DomainType"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="Permission">
       <classifier href="iaml.ecore#//users/Permission"/>

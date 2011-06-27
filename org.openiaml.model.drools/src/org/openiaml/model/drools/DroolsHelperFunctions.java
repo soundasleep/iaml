@@ -18,8 +18,8 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttribute;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
@@ -91,7 +91,7 @@ public class DroolsHelperFunctions {
 	 * @param dobj
 	 * @return
 	 */
-	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainSchema dobj) {
+	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainType dobj) {
 		for (Parameter edge : handler.getInParameterEdges()) {
 			if (edge.getParameterValue() instanceof DomainAttribute) {
 				if (dobj.equals(((DomainAttribute) edge.getParameterValue()).eContainer())) {
@@ -174,7 +174,7 @@ public class DroolsHelperFunctions {
 		return q;
 	}
 	
-	public String getQueryString(LoginHandler login_handler, DomainSchema dobj) {
+	public String getQueryString(LoginHandler login_handler, DomainType dobj) {
 		String q = "";
 		for (Parameter wire : login_handler.getInParameterEdges()) {
 			if (wire.getParameterValue() instanceof DomainAttribute &&
@@ -325,8 +325,8 @@ public class DroolsHelperFunctions {
 	public DomainSource getOriginalDomainSource(Role root_role) {
 	
 		for (ExtendsEdge ex : root_role.getInExtendsEdges()) {
-			if (ex.getFrom() instanceof DomainSchema) {
-				DomainSchema schema = (DomainSchema) ex.getFrom();
+			if (ex.getFrom() instanceof DomainType) {
+				DomainType schema = (DomainType) ex.getFrom();
 				
 				for (SchemaEdge se : schema.getInSchemas()) {
 					// return the first one found

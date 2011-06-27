@@ -36,7 +36,7 @@
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainIterators()»
 		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().getAllDomainIterators()»
 
-		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainSchemas()»
+		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainTypes()»
 		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainAttribute)»
 		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource)»
 		«FOREACH sources AS source»
@@ -64,7 +64,7 @@
  * Root User Role for Internet Application '«escapeString(name)»'
  * TODO Currently we can only have one root User Role in a system
  */
-class DomainSchema_UserRoot extends DomainSchema {
+class DomainType_UserRoot extends DomainType {
 	private function __construct() {
 		$this->addAttribute(DomainAttribute_UserRoot_ID::getInstance());
 		
@@ -81,7 +81,7 @@ class DomainSchema_UserRoot extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_UserRoot();
+			self::$instance = new DomainType_UserRoot();
 		}
 		return self::$instance;
 	}
@@ -157,11 +157,11 @@ class Permission_«safeName(p)» extends DomainAttribute {
 «EXPAND template::users::Permissions::permissionChecks»
 «ENDDEFINE»
 
-«DEFINE domainSchemaDefinition FOR model::domain::DomainSchema»
+«DEFINE domainSchemaDefinition FOR model::domain::DomainType»
 /**
  * Domain Schema '«escapeString(name)»'
  */
-class DomainSchema_«safeName()» extends DomainSchema {
+class DomainType_«safeName()» extends DomainType {
 	private function __construct() {
 		«FOREACH eStructuralFeatures.typeSelect(model::domain::DomainAttribute).select(a2|a2.outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|!a.primaryKey).isEmpty) AS a»
 			$this->addAttribute(DomainAttribute_«safeName(a)»::getInstance());
@@ -181,7 +181,7 @@ class DomainSchema_«safeName()» extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_«safeName()»();
+			self::$instance = new DomainType_«safeName()»();
 		}
 		return self::$instance;
 	}
@@ -197,7 +197,7 @@ class HasRole_«safeName()»_«safeName(source)» extends DomainIterator {
 	var $root_user_id;
 
 	private function __construct($root_user_id) {
-		$this->schema = DomainSchema_«safeName()»::getInstance();
+		$this->schema = DomainType_«safeName()»::getInstance();
 		$this->source = DomainSource_«safeName(source)»::getInstance();
 
 		$this->order_by = null;
@@ -300,8 +300,8 @@ class DomainSource_«safeName()» extends DomainSource {
 		«REM»
 			The DomainSource API was written with the idea that multiple
 			DomainIterators can connect to one DomainSource which has one
-			DomainSchema; however, without adding an explicit link between
-			DomainSchema and DomainIterator in the metamodel, we can't automatically
+			DomainType; however, without adding an explicit link between
+			DomainType and DomainIterator in the metamodel, we can't automatically
 			work out the Schema type of a given DomainIterator.
 			
 			Thus, we hack DomainSource to always include ALL possible
@@ -311,12 +311,12 @@ class DomainSource_«safeName()» extends DomainSource {
 		«LET getRoot().eAllContents.typeSelect(model::domain::DomainSource)
 			.select(s|resolveFileReference(s) == resolveFileReference(this) && s.type == type).outSchemas.to AS allSchemas»
 			«FOREACH allSchemas AS obj»
-				DomainSchema_«safeName(obj)»::getInstance(),
+				DomainType_«safeName(obj)»::getInstance(),
 			«ENDFOREACH»
 		«ENDLET»
 		«IF !outSchemas.to.typeSelect(model::users::Role).isEmpty»
 			/* the root user schema */
-			DomainSchema_UserRoot::getInstance(),
+			DomainType_UserRoot::getInstance(),
 		«ENDIF»
 		);
 		$this->type = '«escapePhpString(type.toString())»';
@@ -337,7 +337,7 @@ class DomainSource_«safeName()» extends DomainSource {
 }
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefinition(model::domain::DomainSchema schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainIteratorDefinition(model::domain::DomainType schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
 /**
  * Domain Iterator for Domain Iterator '«escapeString(name)»'
  */
@@ -371,12 +371,12 @@ class DomainIterator_«safeName()» extends DomainIterator {
 }
 «ENDDEFINE»
 
-«DEFINE domainIteratorSchemas(model::domain::DomainSource source) FOR model::domain::DomainSchema»
-	$this->schema = DomainSchema_«safeName()»::getInstance();
+«DEFINE domainIteratorSchemas(model::domain::DomainSource source) FOR model::domain::DomainType»
+	$this->schema = DomainType_«safeName()»::getInstance();
 	$this->source = DomainSource_«safeName(source)»::getInstance();
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefSelect(model::domain::DomainSchema schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainIteratorDefSelect(model::domain::DomainType schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
 	// a SelectWire
 
 	private function __construct() {
@@ -418,7 +418,7 @@ class DomainIterator_«safeName()» extends DomainIterator {
 	}
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefNew(model::domain::DomainSchema schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainIteratorDefNew(model::domain::DomainType schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
 	// a NewInstanceWire
 
 	private function __construct() {

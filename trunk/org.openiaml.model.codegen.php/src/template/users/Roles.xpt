@@ -26,7 +26,7 @@
 
 /**
  * Add the role '«name»' to the given instance in the iterator $iterator;
- * this $iterator can be pointing towards any DomainSchema, as long as both 
+ * this $iterator can be pointing towards any DomainType, as long as both 
  * the given role and the schema eventually extend <code>iaml_user_root</code> table.
  */
 function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
@@ -47,7 +47,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 	}
 	
 	// this schema
-	$this_schema = DomainSchema_«safeName()»::getInstance();
+	$this_schema = DomainType_«safeName()»::getInstance();
 	
 	// we need to get all the PKs of all parent roles of '«name»'
 	$fk_names = array();
@@ -58,7 +58,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 		// make sure it exists first (recursive)
 		add_role_«safeName(superType)»_«safeName(userStore)»($iterator);
 		
-		// $schema = DomainSchema_«safeName(superType)»::getInstance();
+		// $schema = DomainType_«safeName(superType)»::getInstance();
 		$role_instance = HasRole_«safeName(superType)»_«safeName(userStore)»::getInstance($root_user_id);
 		
 		if ($role_instance->isEmpty()) {
@@ -100,7 +100,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 
 /**
  * Remove the role '«name»' to the given instance in the iterator $iterator;
- * this $iterator can be pointing towards any DomainSchema, as long as both 
+ * this $iterator can be pointing towards any DomainType, as long as both 
  * the given role and the schema eventually extend <code>iaml_user_root</code> table.
  *
  * @implementation UserInstance
@@ -130,7 +130,7 @@ function remove_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator
 	$target_iterator = HasRole_«safeName()»_«safeName(userStore)»::getInstance($root_user_id);
 	
 	// this schema
-	$this_schema = DomainSchema_«safeName()»::getInstance();
+	$this_schema = DomainType_«safeName()»::getInstance();
 	
 	/*
 	 * We don't worry about removing subtype roles; because we would have to worry

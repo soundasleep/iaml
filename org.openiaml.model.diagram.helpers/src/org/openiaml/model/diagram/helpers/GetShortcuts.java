@@ -20,8 +20,8 @@ import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.DataFlowEdge;
@@ -164,10 +164,10 @@ public class GetShortcuts {
 				elements.addAll(getAllShortcutsFromComplexTerms(doneAlready, edges, view, e,
 						((ConditionEdgeDestination) e).getConditions(), registry, updater));
 			}
-			if (e instanceof DomainSchema) {
+			if (e instanceof DomainType) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromSchemaEdges(doneAlready, edges, view, e,
-						((DomainSchema) e).getInSchemas(), registry, updater));
+						((DomainType) e).getInSchemas(), registry, updater));
 			}
 			if (e instanceof DomainSource) {
 				// get all outgoing edges

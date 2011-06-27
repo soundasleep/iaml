@@ -33,7 +33,7 @@ rule "Create QueryParameter for target container of DetailWire"
 	when
 		container : Frame( )
 
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( )
 		
@@ -69,7 +69,7 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 	when
 		container : Frame( )
 
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
@@ -116,7 +116,7 @@ rule "Create a View Instance Form for target of DetailWire"
 	when
 		container : Frame( )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
@@ -152,7 +152,7 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 	when
 		container : Frame( )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
@@ -189,7 +189,7 @@ rule "Create a Link Button for the source of a DetailWire"
 	when
 		container : Frame( )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
@@ -221,7 +221,7 @@ rule "Create a Link Button for the source of a DetailWire: Connect ECARule"
 	when
 		container : Frame( )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
@@ -252,13 +252,13 @@ end
  *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
  *		not contained by an {@model IteratorList},
  *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},
- *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainSchema}.
+ *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainType}.
  */
 rule "Create a Link Button for the source of a DetailWire (not IteratorList): Add Parameter from AttributeInstance"
 	when
 		container : Frame( )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator ( eContainer == container )
 		inst2 : DomainInstance ( instance.currentInstance == inst2 )
@@ -299,13 +299,13 @@ end
  *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
  *		as contained by a {@model Iteratorlist},
  *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},
- *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainSchema}.
+ *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainType}.
  */
 rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Parameter from AttributeInstance"
 	when
 		container : Frame( )
 		
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator ( eContainer == container )
 		inst2 : DomainInstance ( instance.currentInstance == inst2 )
@@ -353,7 +353,7 @@ rule "The view one DomainIterator is connected to the same DomainSource as the v
 	when
 		container : Frame( )
 
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 

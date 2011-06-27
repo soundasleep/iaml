@@ -24,7 +24,7 @@ global DroolsHelperFunctions functions;
 rule "Create empty domain schema for 'test' InternetApplication"
 	when
 		a : InternetApplication ( name == "test" )
-		not (DomainSchema ( name=="test domain schema", eContainer == a ) )
+		not (DomainType ( name=="test domain schema", eContainer == a ) )
 
 		eval ( handler.veto( a ))
 
@@ -34,7 +34,7 @@ rule "Create empty domain schema for 'test' InternetApplication"
 		// ds.setIsGenerated(true);
 		// ds.setGeneratedBy(a);
 		
-		DomainSchema ds = handler.generatedDomainSchema( a, a );
+		DomainType ds = handler.generatedDomainType( a, a );
 		handler.setName(ds, "test domain schema");
 		
 		queue.add(ds, drools); // possibly infer new knowledge (this is necessary)

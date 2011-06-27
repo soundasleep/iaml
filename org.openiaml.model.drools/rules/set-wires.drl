@@ -1094,7 +1094,7 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		sync : SetWire( from == form, to == iterator )
 		
 		# the instance is created through a NewInstanceWire
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
@@ -1148,7 +1148,7 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		sync : SetWire( from == iterator, to == form )
 		
 		# the instance is created through a NewInstanceWire
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		

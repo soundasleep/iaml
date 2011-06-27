@@ -38,7 +38,7 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
 
@@ -288,7 +288,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 		if (target instanceof DomainIterator) {
 			return "iaml_iterator";
 		}
-		if (target instanceof DomainSchema) {
+		if (target instanceof DomainType) {
 			return "iaml_schema";
 		}
 		if (target instanceof LoginHandler) {

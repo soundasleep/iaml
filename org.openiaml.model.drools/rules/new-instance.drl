@@ -47,11 +47,11 @@ end
  * @inference DomainInstance,DomainAttribute,DomainAttributeInstance
  *		An {@model DomainInstance} will be populated with {@model DomainAttributeInstance}s
  *		for every {@model DomainAttribute} in the defining
- *		{@model DomainSchema} of the instance's containing {@model DomainIterator}.
+ *		{@model DomainType} of the instance's containing {@model DomainIterator}.
  */
 rule "Refresh Iterator Object mappings"
 	when
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
 		instance : DomainInstance ( iterator.currentInstance == instance )
@@ -86,7 +86,7 @@ end
  */
 rule "Mark AttributeInstances as extensions of the identically-named Attributes (NewInstanceWire)"
 	when
-		schema : DomainSchema ( )
+		schema : DomainType ( )
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
 		instance : DomainInstance ( iterator.currentInstance == instance )

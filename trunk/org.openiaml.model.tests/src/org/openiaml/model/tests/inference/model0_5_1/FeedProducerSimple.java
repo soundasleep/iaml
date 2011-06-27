@@ -12,8 +12,8 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -199,7 +199,7 @@ public class FeedProducerSimple extends InferenceTestCase {
 		DomainSource source = iterator10.getOutSelects().get(0).getTo();
 
 		// connected to a DomainSchema
-		DomainSchema schema = assertHasDomainSchema(root, "News");
+		DomainType schema = assertHasDomainType(root, "News");
 		assertNotGenerated(schema);
 
 		assertHasSelectEdge(iterator10, source);

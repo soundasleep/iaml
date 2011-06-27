@@ -36,7 +36,7 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 		
 		// get contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "container");
-		assertHasDomainSchema(editor, "domain schema");
+		assertHasDomainType(editor, "domain schema");
 		assertHasDomainSource(editor, "domain source");
 		
 		// open page

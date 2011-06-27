@@ -9,8 +9,8 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -42,7 +42,7 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		DomainSchema obj = assertHasDomainSchema(root, "User");
+		DomainType obj = assertHasDomainType(root, "User");
 		assertNotGenerated(obj);
 
 		DomainAttribute password = assertHasDomainAttribute(obj, "password");
@@ -94,7 +94,7 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		root = loadAndInfer(LoginHandlerInstanceMultiple.class);
 		
 		Session session = assertHasSession(root, "my session");
-		DomainSchema object = assertHasDomainSchema(root, "User");
+		DomainType object = assertHasDomainType(root, "User");
 		DomainIterator iterator = assertHasDomainIterator(session, "logged in user");
 		DomainInstance instance = iterator.getCurrentInstance();
 		

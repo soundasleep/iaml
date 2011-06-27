@@ -48,8 +48,8 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
@@ -334,7 +334,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static DomainAttribute assertHasDomainAttribute(DomainSchema obj,
+	public static DomainAttribute assertHasDomainAttribute(DomainType obj,
 			String string) throws JaxenException {
 		List<Object> list = nameSelect(typeSelect(obj.getEStructuralFeatures(), DomainAttribute.class), string);
 		assertEquals(1, list.size());
@@ -345,7 +345,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element does <em>not</em> contain the given
 	 * DomainAttribute.
 	 */
-	public static void assertHasNoDomainAttribute(DomainSchema element, String string) throws JaxenException {
+	public static void assertHasNoDomainAttribute(DomainType element, String string) throws JaxenException {
 		List<Object> results = nameSelect(typeSelect(element.getEStructuralFeatures(), DomainAttribute.class), string, false);
 		assertEquals(0, results.size());
 	}
@@ -380,10 +380,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static DomainSchema assertHasDomainSchema(InternetApplication store, String string) throws JaxenException {
-		List<Object> list = nameSelect(store.getSchemas(), string);
+	public static DomainType assertHasDomainType(InternetApplication store, String string) throws JaxenException {
+		List<Object> list = nameSelect(store.getTypes(), string);
 		assertEquals(1, list.size());
-		return (DomainSchema) list.get(0);
+		return (DomainType) list.get(0);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Role assertHasRole(InternetApplication store, String string) throws JaxenException {
-		List<Object> list = nameSelect(typeSelect(store.getSchemas(), Role.class), string);
+		List<Object> list = nameSelect(typeSelect(store.getTypes(), Role.class), string);
 		assertEquals(1, list.size());
 		return (Role) list.get(0);
 	}
@@ -1191,7 +1191,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static SchemaEdge assertHasSchemaEdge(DomainSource from, DomainSchema to) throws JaxenException {
+	public static SchemaEdge assertHasSchemaEdge(DomainSource from, DomainType to) throws JaxenException {
 		SchemaEdge result = null;
 		for (SchemaEdge edge : from.getOutSchemas()) {
 			if (to.equals(edge.getTo())) {
@@ -1209,7 +1209,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static void assertHasNoSchemaEdge(DomainSource from, DomainSchema to) throws JaxenException {
+	public static void assertHasNoSchemaEdge(DomainSource from, DomainType to) throws JaxenException {
 		for (SchemaEdge edge : from.getOutSchemas()) {
 			if (to.equals(edge.getTo())) {
 				fail("Found a SchemaEdge: " + edge);

@@ -15,7 +15,7 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -46,7 +46,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		assertNotGenerated(home);
 
-		DomainSchema schema = assertHasDomainSchema(root, "Contacts");
+		DomainType schema = assertHasDomainType(root, "Contacts");
 		assertNotGenerated(schema);
 
 		DomainAttribute aemail = assertHasDomainAttribute(schema, "email");
@@ -135,7 +135,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	 */
 	public void testIteratorListCreated() throws Exception {
 
-		DomainSchema schema = assertHasDomainSchema(root, "Contacts");
+		DomainType schema = assertHasDomainType(root, "Contacts");
 		DomainAttribute aemail = assertHasDomainAttribute(schema, "email");
 		DomainAttribute aname = assertHasDomainAttribute(schema, "name");
 
@@ -180,7 +180,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	 */
 	public void testCreatedLabelOnclickPopulatesTarget_Name() throws Exception {
 
-		DomainSchema schema = assertHasDomainSchema(root, "Contacts");
+		DomainType schema = assertHasDomainType(root, "Contacts");
 		DomainAttribute aemail = assertHasDomainAttribute(schema, "email");
 		Frame home = assertHasFrame(root, "Home");
 		InputForm containerForm = assertHasInputForm(home, "Select Contact");
@@ -219,7 +219,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	 */
 	public void testCreatedLabelOnclickPopulatesTarget_Email() throws Exception {
 
-		DomainSchema schema = assertHasDomainSchema(root, "Contacts");
+		DomainType schema = assertHasDomainType(root, "Contacts");
 		DomainAttribute aemail = assertHasDomainAttribute(schema, "email");
 		Frame home = assertHasFrame(root, "Home");
 		InputForm containerForm = assertHasInputForm(home, "Select Contact");

@@ -9,7 +9,7 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
@@ -33,7 +33,7 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testDatabaseTypes() throws Exception {
-		DomainSchema obj = assertHasDomainSchema(root, "Container");
+		DomainType obj = assertHasDomainType(root, "Container");
 
 		DomainAttribute aString = assertHasDomainAttribute(obj, "string");
 		DomainAttribute aInteger = assertHasDomainAttribute(obj, "integer");
@@ -62,7 +62,7 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testAttributeInstancesHaveCorrectTypes() throws Exception {
-		DomainSchema obj = assertHasDomainSchema(root, "Container");
+		DomainType obj = assertHasDomainType(root, "Container");
 
 		DomainAttribute aString = assertHasDomainAttribute(obj, "string");
 		DomainAttribute aInteger = assertHasDomainAttribute(obj, "integer");

@@ -6,8 +6,8 @@ package org.openiaml.model.tests.inference.model0_4;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Permission;
 import org.openiaml.model.model.users.Role;
@@ -126,7 +126,7 @@ public class UserMultiplePermissions extends ValidInferenceTestCase {
 		DomainSource source = iterator.getOutSelects().get(0).getTo();
 		assertGenerated(source);
 		
-		DomainSchema targetSchema = default_user;
+		DomainType targetSchema = default_user;
 		
 		assertGenerated(assertHasSchemaEdge(source, targetSchema));
 		assertGenerated(assertHasSelectEdge(iterator, source));

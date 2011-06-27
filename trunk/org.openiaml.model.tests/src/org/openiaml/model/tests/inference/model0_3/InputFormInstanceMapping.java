@@ -7,8 +7,8 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -39,7 +39,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 
 		DomainSource ds = assertHasDomainSource(root, "domain source");
 		assertNotGenerated(ds);
-		DomainSchema user = assertHasDomainSchema(root, "User");
+		DomainType user = assertHasDomainType(root, "User");
 		assertNotGenerated(user);
 
 		Frame page = assertHasFrame(root, "container");
@@ -76,7 +76,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 
 		DomainSource ds = assertHasDomainSource(root, "domain source");
 		assertNotGenerated(ds);
-		DomainSchema user = assertHasDomainSchema(root, "User");
+		DomainType user = assertHasDomainType(root, "User");
 		assertNotGenerated(user);
 
 		Frame page = assertHasFrame(root, "container");

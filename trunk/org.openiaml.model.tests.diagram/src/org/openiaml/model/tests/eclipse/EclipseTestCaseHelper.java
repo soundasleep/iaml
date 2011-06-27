@@ -37,8 +37,8 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
 import org.openiaml.model.model.operations.ActivityFunction;
@@ -488,8 +488,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainSchema(DiagramDocumentEditor root, String storeName) {
-		return assertHasRenderedENamedObject(root, DomainSchema.class, storeName, false, false);
+	public ShapeNodeEditPart assertHasDomainType(DiagramDocumentEditor root, String storeName) {
+		return assertHasRenderedENamedObject(root, DomainType.class, storeName, false, false);
 	}
 
 	/**
@@ -536,8 +536,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainSchema(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedENamedObject(root, DomainSchema.class, objectName, checkShortcut, shortcutRequired);
+	public ShapeNodeEditPart assertHasDomainType(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedENamedObject(root, DomainType.class, objectName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -887,11 +887,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasDomainObject(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasDomainType(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasDomainSchema(
+	public ShapeNodeEditPart assertHasDomainType(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedENamedObject(editor, DomainSchema.class, name, true, shortcutRequired);
+		return assertHasRenderedENamedObject(editor, DomainType.class, name, true, shortcutRequired);
 	}
 
 	/**

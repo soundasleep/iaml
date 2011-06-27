@@ -10,7 +10,7 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.IteratorList;
@@ -39,7 +39,7 @@ public class DetailWireOnSetIteratorList extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 
-		DomainSchema schema = assertHasDomainSchema(root, "schema");
+		DomainType schema = assertHasDomainType(root, "schema");
 		DomainAttribute attr = assertHasDomainAttribute(schema, "attribute");
 
 		Frame target = assertHasFrame(root, "Target Frame");
@@ -66,7 +66,7 @@ public class DetailWireOnSetIteratorList extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		IteratorList list = assertHasIteratorList(home, "List");
 
-		DomainSchema schema = assertHasDomainSchema(root, "schema");
+		DomainType schema = assertHasDomainType(root, "schema");
 
 		// a generated primary key
 		assertHasDomainAttribute(schema, "generated primary key");

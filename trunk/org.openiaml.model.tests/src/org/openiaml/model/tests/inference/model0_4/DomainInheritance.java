@@ -9,7 +9,7 @@ import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
-import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -64,19 +64,19 @@ public class DomainInheritance extends InferenceTestCase {
 			assertNotGenerated(form);
 		}
 		
-		DomainSchema person = assertHasDomainSchema(root, "Person");
+		DomainType person = assertHasDomainType(root, "Person");
 		assertNotGenerated(person);
-		DomainSchema q = assertHasDomainSchema(root, "Qualified");
+		DomainType q = assertHasDomainType(root, "Qualified");
 		assertNotGenerated(q);
-		DomainSchema t = assertHasDomainSchema(root, "Teacher");
+		DomainType t = assertHasDomainType(root, "Teacher");
 		assertNotGenerated(t);
-		DomainSchema s = assertHasDomainSchema(root, "Student");
+		DomainType s = assertHasDomainType(root, "Student");
 		assertNotGenerated(s);
-		DomainSchema pg = assertHasDomainSchema(root, "Postgraduate");
+		DomainType pg = assertHasDomainType(root, "Postgraduate");
 		assertNotGenerated(pg);
-		DomainSchema d = assertHasDomainSchema(root, "Doctoral");
+		DomainType d = assertHasDomainType(root, "Doctoral");
 		assertNotGenerated(d);
-		DomainSchema cu = assertHasDomainSchema(root, "Completed Undergrad");
+		DomainType cu = assertHasDomainType(root, "Completed Undergrad");
 		assertNotGenerated(cu);
 
 	}
@@ -368,7 +368,7 @@ public class DomainInheritance extends InferenceTestCase {
 		DomainAttribute targetAttr = (DomainAttribute) ext.getTo();
 		assertNotNull(targetAttr);
 		
-		DomainSchema targetObj = (DomainSchema) targetAttr.eContainer();
+		DomainType targetObj = (DomainType) targetAttr.eContainer();
 		assertNotNull(targetObj);		
 		assertEquals(name, targetObj.getName());
 	}

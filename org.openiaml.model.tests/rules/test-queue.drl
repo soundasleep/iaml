@@ -21,10 +21,10 @@ global DroolsHelperFunctions functions;
 rule "Create conflicting elements (a)"
 	when
 		a : InternetApplication ( )
-		not ( ds : DomainSchema ( eContainer == a ))
+		not ( ds : DomainType ( eContainer == a ))
 		
 	then
-		DomainSchema ds = handler.generatedDomainSchema( a, a );
+		DomainType ds = handler.generatedDomainType( a, a );
 		queue.add(ds, drools);
 end
 
@@ -42,7 +42,7 @@ end
 rule "Check queue order (a)"
 	when
 		s : Session ( )
-		not ( ds : DomainSchema ( ))
+		not ( ds : DomainType ( ))
 	
 	then
 		throw new RuntimeException("The order of queued elements should not matter to Drools (a).");
@@ -52,7 +52,7 @@ end
 # throw an exception if Session and DomainStore are added separately
 rule "Check queue order (b)"
 	when
-		ds : DomainSchema ( )
+		ds : DomainType ( )
 		not ( s : Session ( ))
 	
 	then
@@ -64,7 +64,7 @@ end
 rule "Check both elements are created successfully"
 	when
 		a : InternetApplication ( )
-		ds : DomainSchema ( eContainer == a )
+		ds : DomainType ( eContainer == a )
 		s : Session ( eContainer == a )
 	
 	then

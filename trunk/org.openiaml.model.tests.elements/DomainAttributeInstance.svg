@@ -23,7 +23,7 @@
 <path d="M12 71 L110 71 L110 87 L12 87 L12 71 Z"/>
 </clipPath>
 </defs>
-<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(228,223,214)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(228,223,214)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="158" height="79" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">

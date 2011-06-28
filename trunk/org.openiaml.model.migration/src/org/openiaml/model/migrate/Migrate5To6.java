@@ -679,7 +679,11 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		if ("overriddenNames".equals(oldElement.getNodeName())) {
 			return true;
 		}
-		
+
+		if ("slotNames".equals(oldElement.getNodeName())) {
+			return true;
+		}
+
 		// call super
 		return super.shouldCopyTextContent(oldElement, newElement);
 	}

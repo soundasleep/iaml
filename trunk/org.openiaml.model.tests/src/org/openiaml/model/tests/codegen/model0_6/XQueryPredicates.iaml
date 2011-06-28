@@ -2,36 +2,36 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12fdcc0ca07.1">
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.1a" name="fn:contains" slotTypes="xsd_string xsd_string" conditioned="model.12fdcc0ca07.212" func="FN_CONTAINS">
     <conditionEdges id="model.12fdcc0ca07.212" name="check" inParameterEdges="model.12fdcc0ca07.217 model.12fdcc0ca07.21a" function="model.12fdcc0ca07.1a" conditioned="model.12fdcc0ca07.20e"/>
-    <slotNames></slotNames>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
   </functions>
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.85" name="fn:codepoint-equal" slotTypes="xsd_string xsd_string" conditioned="model.12fdcc0ca07.3c8" func="FN_CODEPOINT_EQUAL">
     <conditionEdges id="model.12fdcc0ca07.3c8" name="check" inParameterEdges="model.12fdcc0ca07.613 model.12fdcc0ca07.615" function="model.12fdcc0ca07.85" conditioned="model.12fdcc0ca07.3c4"/>
-    <slotNames></slotNames>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
   </functions>
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.87" name="op:numeric-equal" slotTypes="xsd_integer xsd_integer" conditioned="model.12fdcc0ca07.bed" func="OP_NUMERIC_EQUAL">
     <conditionEdges id="model.12fdcc0ca07.bed" name="check" inParameterEdges="model.12fdcc0ca07.bf6 model.12fdcc0ca07.bf8" function="model.12fdcc0ca07.87" conditioned="model.12fdcc0ca07.be9"/>
-    <slotNames></slotNames>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
   </functions>
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.89" name="op:numeric-less-than" slotTypes="xsd_integer xsd_integer" conditioned="model.12fdcc0ca07.bee" func="OP_NUMERIC_LESS_THAN">
     <conditionEdges id="model.12fdcc0ca07.bee" name="check" inParameterEdges="model.12fdcc0ca07.bfa model.12fdcc0ca07.bfc" function="model.12fdcc0ca07.89" conditioned="model.12fdcc0ca07.beb"/>
-    <slotNames></slotNames>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
   </functions>
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.8b" name="op:numeric-greater-than" slotTypes="xsd_integer xsd_integer" conditioned="model.12fdcc0ca07.bf1" func="OP_NUMERIC_GREATER_THAN">
     <conditionEdges id="model.12fdcc0ca07.bf1" name="check" inParameterEdges="model.12fdcc0ca07.bfe model.12fdcc0ca07.c00" function="model.12fdcc0ca07.8b" conditioned="model.12fdcc0ca07.bec"/>
-    <slotNames></slotNames>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
   </functions>
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.e28" name="fn:not (integer)" slotTypes="xsd_integer" conditioned="model.12fdcc0ca07.1c3d" func="FN_NOT">
     <conditionEdges id="model.12fdcc0ca07.1c3d" name="check" inParameterEdges="model.12fdcc0ca07.1c3f" function="model.12fdcc0ca07.e28" conditioned="model.12fdcc0ca07.1c3b"/>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
   </functions>
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.e28b" name="fn:not (string)" slotTypes="xsd_string" conditioned="model.12fdcc0ca07.15e4" func="FN_NOT">
     <conditionEdges id="model.12fdcc0ca07.15e4" name="check" inParameterEdges="model.12fdcc0ca07.15e6" function="model.12fdcc0ca07.e28b" conditioned="model.12fdcc0ca07.142a"/>
-    <slotNames></slotNames>
+    <slotNames>a</slotNames>
   </functions>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12fdcc0cca7.4" name="String Predicates">

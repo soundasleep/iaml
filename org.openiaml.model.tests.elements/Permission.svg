@@ -17,7 +17,7 @@
 <path d="M34 33 L100 33 L100 49 L34 49 L34 33 Z"/>
 </clipPath>
 </defs>
-<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(228,223,214)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(228,223,214)" stroke-width="0" stroke-miterlimit="0">
 <ellipse clip-path="url(#clipPath1)" rx="57" cx="67" ry="20" cy="30" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">

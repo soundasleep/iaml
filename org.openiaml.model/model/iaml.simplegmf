@@ -491,6 +491,9 @@
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainSource">
+      <classifier href="iaml.ecore#//domain/DomainSource"/>
+    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainType">
       <classifier href="iaml.ecore#//domain/DomainType"/>
     </elements>

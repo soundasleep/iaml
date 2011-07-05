@@ -25,7 +25,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * Similar to issue 210: Create PrimitiveConditions by default, but
- * allow later overriding using the same semantics if it was a ActivityFunction.
+ * allow later overriding using the same semantics if it was a ActivityPredicate.
  *
  * <p>Issue 221: Add 'can cast?' Primitive Function to all Changeable elements
  *
@@ -54,15 +54,15 @@ rule "Create 'can cast?' condition for Changeables"
 end
 
 /**
- * @inference ActivityFunction,Changeable
- *		An {@model ActivityFunction} named 'can cast?', used to check casting for a {@model Changeable} {@model Changeable#fieldValue},
+ * @inference ActivityPredicate,Changeable
+ *		An {@model ActivityPredicate} named 'can cast?', used to check casting for a {@model Changeable} {@model Changeable#fieldValue},
  *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
  */
 rule "Create contents of 'can cast?' condition"
 	when
 		tf : Changeable( )
 		fieldValue : Value ( tf.fieldValue == fieldValue )
-		c : ActivityFunction ( name == "can cast?", eContainer == tf )
+		c : ActivityPredicate ( name == "can cast?", eContainer == tf )
 		
 		not ( start : StartNode ( eContainer == c ))
 		

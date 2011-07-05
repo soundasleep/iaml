@@ -511,8 +511,8 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 end
 
 /**
- * @inference ActivityFunction,Changeable
- *		An {@model ActivityFunction} named 'permissions check' within an {@model AccessControlHandler} 
+ * @inference ActivityPredicate,Changeable
+ *		An {@model ActivityPredicate} named 'permissions check' within an {@model AccessControlHandler} 
  *		protecting a {@model Frame}, used to check the status of the
  *		'check permissions' {@model Operation} within the same handler, 
  *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.

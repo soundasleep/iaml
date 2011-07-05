@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126c0191fac.3f">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <functions xsi:type="iaml.operations:ActivityFunction" id="model.126c0191fac.4f" name="allow sync?" conditioned="wires.126c01921cf.39">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.126c0191fac.4f" name="allow sync?" conditioned="wires.126c01921cf.39">
       <conditionEdges id="wires.126c01921cf.39" name="conditional" function="model.126c0191fac.4f" conditioned="wires.126c01921cf.1a"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.126c01921cf.7" outExecutions="model.126c0191fac.a4 model.126c0191fac.a5" inExecutions="model.126c0191fac.a2" inFlows="model.126c0191fac.a6"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126c01921cf.1" outExecutions="model.126c0191fac.a2"/>

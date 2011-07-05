@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.20" name="External Page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.4" name="Advertising Session">
-    <functions xsi:type="iaml.operations:ActivityFunction" id="model.126b0cb5dec.43" name="need to view ad?" conditioned="wires.126b0cb5e5a.17">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.126b0cb5dec.43" name="need to view ad?" conditioned="wires.126b0cb5e5a.17">
       <conditionEdges id="wires.126b0cb5e5a.17" function="model.126b0cb5dec.43" conditioned="components.126b0cb5e69.5"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.126b0cb5e69.15" outExecutions="model.126b0cb5dec.66 model.126b0cb5dec.68" inExecutions="model.126b0cb5dec.69" inFlows="model.126b0cb5dec.8a"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.12" outExecutions="model.126b0cb5dec.69"/>

@@ -896,12 +896,12 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//operations/ActivityParameter" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ActivityFunction" eSuperTypes="#//Predicate #//ContainsFunctions #//GeneratesElements #//ContainsOperations #//ContainsProperties">
+    <eClassifiers xsi:type="ecore:EClass" name="ActivityPredicate" eSuperTypes="#//Predicate #//ContainsFunctions #//GeneratesElements #//ContainsOperations #//ContainsProperties">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4&#xD;&#xA;ContainsOperations added in 0.4.1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A custom condition, composed in the same way as {@model CompositeOperation operations}."/>
+        <details key="documentation" value="A custom {@model Predicate}, composed of sub-predicates in the same way as {@model ActivityOperation}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
           eType="#//ActivityNode" containment="true"/>

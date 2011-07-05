@@ -277,12 +277,12 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/variables"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityOperation/parameters"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//operations/ActivityFunction">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/nodes"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/dataEdges"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/executionEdges"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/variables"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityFunction/parameters"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/ActivityPredicate">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityPredicate/nodes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityPredicate/dataEdges"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityPredicate/executionEdges"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityPredicate/variables"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ActivityPredicate/parameters"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/StartNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/CancelNode">

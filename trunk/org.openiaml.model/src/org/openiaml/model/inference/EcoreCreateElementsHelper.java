@@ -55,9 +55,9 @@ import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
 import org.openiaml.model.model.messaging.MessagingPackage;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -257,8 +257,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return parameter;
 	}	
 	
-	public ActivityParameter generatedActivityParameter(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		ActivityParameter parameter = (ActivityParameter) createElement( container, OperationsPackage.eINSTANCE.getActivityParameter(), OperationsPackage.eINSTANCE.getActivityFunction_Parameters() );
+	public ActivityParameter generatedActivityParameter(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		ActivityParameter parameter = (ActivityParameter) createElement( container, OperationsPackage.eINSTANCE.getActivityParameter(), OperationsPackage.eINSTANCE.getActivityPredicate_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
 	}
@@ -289,8 +289,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 
-	public DecisionNode generatedDecisionNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		DecisionNode operation = (DecisionNode) createElement( container, OperationsPackage.eINSTANCE.getDecisionNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public DecisionNode generatedDecisionNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		DecisionNode operation = (DecisionNode) createElement( container, OperationsPackage.eINSTANCE.getDecisionNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(operation, by);
 		return operation;
 	}
@@ -331,8 +331,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 	
-	public CastNode generatedCastNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		CastNode node = (CastNode) createElement( container, OperationsPackage.eINSTANCE.getCastNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public CastNode generatedCastNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		CastNode node = (CastNode) createElement( container, OperationsPackage.eINSTANCE.getCastNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
@@ -343,38 +343,38 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 
-	public OperationCallNode generatedOperationCallNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		OperationCallNode node = (OperationCallNode) createElement( container, OperationsPackage.eINSTANCE.getOperationCallNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public OperationCallNode generatedOperationCallNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		OperationCallNode node = (OperationCallNode) createElement( container, OperationsPackage.eINSTANCE.getOperationCallNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
 	
-	public StartNode generatedStartNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public StartNode generatedStartNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
 
-	public CancelNode generatedCancelNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		CancelNode node = (CancelNode) createElement( container, OperationsPackage.eINSTANCE.getCancelNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public CancelNode generatedCancelNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		CancelNode node = (CancelNode) createElement( container, OperationsPackage.eINSTANCE.getCancelNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
 
-	public FinishNode generatedFinishNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		FinishNode node = (FinishNode) createElement( container, OperationsPackage.eINSTANCE.getFinishNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public FinishNode generatedFinishNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		FinishNode node = (FinishNode) createElement( container, OperationsPackage.eINSTANCE.getFinishNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
 
-	public SplitNode generatedSplitNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		SplitNode node = (SplitNode) createElement( container, OperationsPackage.eINSTANCE.getSplitNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public SplitNode generatedSplitNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		SplitNode node = (SplitNode) createElement( container, OperationsPackage.eINSTANCE.getSplitNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
 
-	public JoinNode generatedJoinNode(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		JoinNode node = (JoinNode) createElement( container, OperationsPackage.eINSTANCE.getJoinNode(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public JoinNode generatedJoinNode(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		JoinNode node = (JoinNode) createElement( container, OperationsPackage.eINSTANCE.getJoinNode(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
@@ -385,8 +385,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 	
-	public Arithmetic generatedArithmetic(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		Arithmetic node = (Arithmetic) createElement( container, OperationsPackage.eINSTANCE.getArithmetic(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public Arithmetic generatedArithmetic(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		Arithmetic node = (Arithmetic) createElement( container, OperationsPackage.eINSTANCE.getArithmetic(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
@@ -403,8 +403,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return node;
 	}
 	
-	public ExternalValue generatedExternalValue(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		ExternalValue node = (ExternalValue) createElement( container, OperationsPackage.eINSTANCE.getExternalValue(), OperationsPackage.eINSTANCE.getActivityFunction_Nodes() );
+	public ExternalValue generatedExternalValue(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		ExternalValue node = (ExternalValue) createElement( container, OperationsPackage.eINSTANCE.getExternalValue(), OperationsPackage.eINSTANCE.getActivityPredicate_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
@@ -443,26 +443,26 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		DataFlowEdge edge = (DataFlowEdge) createElement( container, OperationsPackage.eINSTANCE.getDataFlowEdge(), OperationsPackage.eINSTANCE.getActivityFunction_DataEdges() );
+	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		DataFlowEdge edge = (DataFlowEdge) createElement( container, OperationsPackage.eINSTANCE.getDataFlowEdge(), OperationsPackage.eINSTANCE.getActivityPredicate_DataEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
 
-	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, ActivityFunction container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws InferenceException {
+	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, ActivityPredicate container, DataFlowEdgesSource from, DataFlowEdgeDestination to) throws InferenceException {
 		DataFlowEdge edge = generatedDataFlowEdge(by, container);
 		setFrom(edge, from);
 		setTo(edge, to);
 		return edge;
 	}
 
-	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, ActivityFunction container) throws InferenceException {
-		ExecutionEdge edge = (ExecutionEdge) createElement( container, OperationsPackage.eINSTANCE.getExecutionEdge(), OperationsPackage.eINSTANCE.getActivityFunction_ExecutionEdges() );
+	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, ActivityPredicate container) throws InferenceException {
+		ExecutionEdge edge = (ExecutionEdge) createElement( container, OperationsPackage.eINSTANCE.getExecutionEdge(), OperationsPackage.eINSTANCE.getActivityPredicate_ExecutionEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
 
-	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, ActivityFunction container, ExecutionEdgesSource from, ExecutionEdgeDestination to) throws InferenceException {
+	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, ActivityPredicate container, ExecutionEdgesSource from, ExecutionEdgeDestination to) throws InferenceException {
 		ExecutionEdge edge = generatedExecutionEdge(by, container);
 		setFrom(edge, from);
 		setTo(edge, to);
@@ -611,8 +611,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return field;
 	}
 	
-	public ActivityFunction generatedActivityFunction(GeneratesElements by, ContainsFunctions container) throws InferenceException {
-		ActivityFunction object = (ActivityFunction) createElement( container, OperationsPackage.eINSTANCE.getActivityFunction(), ModelPackage.eINSTANCE.getContainsFunctions_Functions() );
+	public ActivityPredicate generatedActivityPredicate(GeneratesElements by, ContainsFunctions container) throws InferenceException {
+		ActivityPredicate object = (ActivityPredicate) createElement( container, OperationsPackage.eINSTANCE.getActivityPredicate(), ModelPackage.eINSTANCE.getContainsFunctions_Functions() );
 		setGeneratedBy(object, by);
 		return object;
 	}

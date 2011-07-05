@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1274f76bcd9.36">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <functions xsi:type="iaml.operations:ActivityFunction" id="model.1274f76bcd9.50" name="can cast?" conditioned="wires.1274f76c1da.6a">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.1274f76bcd9.50" name="can cast?" conditioned="wires.1274f76c1da.6a">
       <conditionEdges id="wires.1274f76c1da.6a" name="bar" function="model.1274f76bcd9.50" conditioned="wires.1274f76c1da.64"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.62" name="can cast?" outExecutions="model.1274f8f028d.33 model.1274f8f028d.35" inExecutions="model.1274f8f028d.36" inFlows="model.1274f8f028d.2e"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f877c61.31" outExecutions="model.1274f8f028d.36"/>

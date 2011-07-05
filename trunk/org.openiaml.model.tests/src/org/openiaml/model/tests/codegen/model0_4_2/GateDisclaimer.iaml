@@ -37,7 +37,7 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1268c90cae0.1" name="Disclaimed Section">
-    <functions xsi:type="iaml.operations:ActivityFunction" id="model.1268c991b90.12" name="disclaimer viewed?" conditioned="wires.1268c991bee.a">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.1268c991b90.12" name="disclaimer viewed?" conditioned="wires.1268c991bee.a">
       <conditionEdges id="wires.1268c991bee.a" name="condition" function="model.1268c991b90.12" conditioned="gate"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1268cdc3e6e.13" name="true?" outExecutions="model.1268cdc3de1.84 model.1268cdc3de1.85" inExecutions="model.1268cdc3de1.82" inFlows="model.1268cdc3de1.80"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1268cdc3e6e.11" outExecutions="model.1268cdc3de1.82"/>

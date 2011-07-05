@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1283d80df01.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <functions xsi:type="iaml.operations:ActivityFunction" id="model.1283d8dbd2d.aa" name="should update result?" conditioned="wires.1283d8dbe46.54">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.1283d8dbd2d.aa" name="should update result?" conditioned="wires.1283d8dbe46.54">
       <conditionEdges id="wires.1283d8dbe46.54" name="check" function="model.1283d8dbd2d.aa" conditioned="operations.1283d8dbe46.112"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1283d8dbe46.c3" outExecutions="model.1283d8dbd2d.253"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1283d8dbe46.c4" inExecutions="model.1283d8dbd2d.253"/>

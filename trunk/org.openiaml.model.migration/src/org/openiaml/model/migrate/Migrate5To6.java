@@ -26,7 +26,8 @@ import org.w3c.dom.NodeList;
  *   <li>NavigateAction and RunAction merged into {@model ActionEdge}
  *   <li>Hidden is now a {@model Label}[visible=false] ({@issue 224})
  *   <li>StaticValue is merged into {@model Property}[readOnly=true] ({@issue 179})
- *   <li>DomainSchema is now {@model DomiainType} ({@issue 263})
+ *   <li>DomainSchema is now {@model DomainType} ({@issue 263})
+ *   <li>ActivityFunction is now {@model ActivityPredicate} ({@issue 268})
  *   <li>Others...
  * </ol>
  * 
@@ -149,9 +150,14 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.operations:ActivityOperation";
 		}
 		if (xsiType.equals("iaml:CompositeCondition")) {
-			return "iaml.operations:ActivityFunction";
+			return "iaml.operations:ActivityPredicate";
 		}
-		
+
+		// issue 268
+		if (xsiType.equals("iaml.operations:ActivityFunction")) {
+			return "iaml.operations:ActivityPredicate";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 

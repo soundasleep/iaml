@@ -8,9 +8,9 @@ import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Function;
 import org.openiaml.model.model.Value;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -53,8 +53,8 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		InputTextField text2 = assertHasInputTextField(home, "text2");
 		ActivityOperation init2 = assertHasActivityOperation(text2, "init");
 		ActivityOperation update2 = assertHasActivityOperation(text2, "update");
-		ActivityFunction cast2 = assertHasActivityFunction(text2, "can cast?");
-		ActivityFunction set2 = assertHasActivityFunction(text2, "fieldValue is set");
+		ActivityPredicate cast2 = assertHasActivityPredicate(text2, "can cast?");
+		ActivityPredicate set2 = assertHasActivityPredicate(text2, "fieldValue is set");
 
 		assertNotGenerated(text1, text2, init1, init2, update1, update2, cast1, cast2, set1, set2);
 
@@ -177,7 +177,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		InputTextField text1 = assertHasInputTextField(home, "text1");
 		BuiltinProperty cast1 = assertHasBuiltinProperty(text1, "can cast?");
 
-		assertFalse(cast1 instanceof ActivityFunction);
+		assertFalse(cast1 instanceof ActivityPredicate);
 
 	}
 
@@ -185,7 +185,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		ActivityFunction canCast = assertHasActivityFunction(text2, "can cast?");
+		ActivityPredicate canCast = assertHasActivityPredicate(text2, "can cast?");
 		Value integerValue = assertHasFieldValue(text2);
 
 		StartNode start = assertHasStartNode(canCast);
@@ -221,7 +221,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
-		ActivityFunction cond = assertHasActivityFunction(text2, "fieldValue is set");
+		ActivityPredicate cond = assertHasActivityPredicate(text2, "fieldValue is set");
 		Value value = assertHasFieldValue(text2);
 
 		StartNode start = assertHasStartNode(cond);

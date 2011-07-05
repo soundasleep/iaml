@@ -39,8 +39,8 @@ import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainType;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
+import org.openiaml.model.model.operations.ActivityPredicate;
 
 /**
  * An action which allows the user to move the selected model element
@@ -282,7 +282,7 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 	 * @return The domain model file extension, or null if none can be found
 	 */
 	protected String getFileExtension(EObject target) {
-		if (target instanceof ActivityFunction) {
+		if (target instanceof ActivityPredicate) {
 			return "iaml_condition";
 		}
 		if (target instanceof DomainIterator) {

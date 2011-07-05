@@ -8,8 +8,8 @@ import org.openiaml.model.model.Event;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExternalValue;
@@ -183,7 +183,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertEquals("View Ads Exit Gate", gate.getName());
 
 		// generated condition
-		ActivityFunction condition = assertHasActivityFunction(session, "check View Ads Exit Gate");
+		ActivityPredicate condition = assertHasActivityPredicate(session, "check View Ads Exit Gate");
 		assertGenerated(condition);
 
 		SimpleCondition wire = assertHasSimpleCondition(session, condition, gate, "condition");
@@ -203,7 +203,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Value property = assertHasValue(session, "View Ads Exit Gate flag");
 
 		// generated condition
-		ActivityFunction condition = assertHasActivityFunction(session, "check View Ads Exit Gate");
+		ActivityPredicate condition = assertHasActivityPredicate(session, "check View Ads Exit Gate");
 
 		// start node
 		StartNode start = assertHasStartNode(condition);

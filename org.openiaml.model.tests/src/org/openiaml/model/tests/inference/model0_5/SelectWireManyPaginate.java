@@ -13,8 +13,8 @@ import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainType;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -195,7 +195,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation ireset = instance.getReset();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
+		ActivityPredicate notEmpty = assertHasActivityPredicate(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		Button first = assertHasButton(form, "First");
@@ -223,7 +223,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation ijump = instance.getJump();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
+		ActivityPredicate notEmpty = assertHasActivityPredicate(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		// we need to convert 'results' into a jump target (results-1)
@@ -259,7 +259,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation ijump = instance.getJump();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
+		ActivityPredicate notEmpty = assertHasActivityPredicate(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		// we need to convert 'results' into a jump target (results-1)
@@ -357,7 +357,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Function empty = instance.getEmpty();
 
 		// we need to reverse 'empty' into Function 'not empty'
-		ActivityFunction notEmpty = assertHasActivityFunction(instance, "not empty");
+		ActivityPredicate notEmpty = assertHasActivityPredicate(instance, "not empty");
 
 		StartNode start = assertHasStartNode(notEmpty);
 		FinishNode finish = assertHasFinishNode(notEmpty);

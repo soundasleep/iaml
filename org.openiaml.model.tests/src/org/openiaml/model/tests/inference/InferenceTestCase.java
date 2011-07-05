@@ -53,9 +53,9 @@ import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
@@ -282,22 +282,22 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * {@link ActivityFunction}.
+	 * {@link ActivityPredicate}.
 	 *
 	 * @return The element found
 	 */
-	public static ActivityFunction assertHasActivityFunction(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityFunction.class), string);
+	public static ActivityPredicate assertHasActivityPredicate(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityPredicate.class), string);
 		assertEquals(1, results.size());
-		return (ActivityFunction) results.get(0);
+		return (ActivityPredicate) results.get(0);
 	}
 
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
-	 * {@link ActivityFunction}.
+	 * {@link ActivityPredicate}.
 	 */
-	public static void assertHasNoActivityFunction(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityFunction.class), string, false);
+	public static void assertHasNoActivityPredicate(ContainsFunctions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityPredicate.class), string, false);
 		assertEquals(0, results.size());
 	}
 
@@ -804,7 +804,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static DecisionNode assertHasDecisionNode(ActivityFunction element, String name) throws JaxenException {
+	public static DecisionNode assertHasDecisionNode(ActivityPredicate element, String name) throws JaxenException {
 		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
 		assertEquals(1, results.size());
 		return (DecisionNode) results.get(0);
@@ -853,7 +853,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static StartNode assertHasStartNode(ActivityFunction element) throws JaxenException {
+	public static StartNode assertHasStartNode(ActivityPredicate element) throws JaxenException {
 		List<?> results = typeSelect(element.getNodes(), StartNode.class);
 		assertEquals(1, results.size());
 		return (StartNode) results.get(0);
@@ -879,7 +879,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static FinishNode assertHasFinishNode(ActivityFunction element) throws JaxenException {
+	public static FinishNode assertHasFinishNode(ActivityPredicate element) throws JaxenException {
 		List<?> results = typeSelect(element.getNodes(), FinishNode.class);
 		assertEquals(1, results.size());
 		return (FinishNode) results.get(0);
@@ -915,7 +915,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static CancelNode assertHasCancelNode(ActivityFunction element) throws JaxenException {
+	public static CancelNode assertHasCancelNode(ActivityPredicate element) throws JaxenException {
 		List<?> results = typeSelect(element.getNodes(), CancelNode.class);
 		assertEquals(1, results.size());
 		return (CancelNode) results.get(0);
@@ -928,7 +928,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static CancelNode assertHasCancelNode(ActivityFunction element, String exceptionText) throws JaxenException {
+	public static CancelNode assertHasCancelNode(ActivityPredicate element, String exceptionText) throws JaxenException {
 		CancelNode found = null;
 		for (ActivityNode node : element.getNodes()) {
 			if (node instanceof CancelNode && exceptionText.equals(((CancelNode) node).getExceptionText())) {
@@ -969,7 +969,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static CastNode assertHasCastNode(ActivityFunction element) throws JaxenException {
+	public static CastNode assertHasCastNode(ActivityPredicate element) throws JaxenException {
 		List<?> results = typeSelect(element.getNodes(), CastNode.class);
 		assertEquals(1, results.size());
 		return (CastNode) results.get(0);
@@ -1008,7 +1008,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static OperationCallNode assertHasOperationCallNode(ActivityFunction element, String string) throws JaxenException {
+	public static OperationCallNode assertHasOperationCallNode(ActivityPredicate element, String string) throws JaxenException {
 		List<?> results = nameSelect(typeSelect(element.getNodes(), OperationCallNode.class), string);
 		assertEquals(1, results.size());
 		return (OperationCallNode) results.get(0);
@@ -1045,7 +1045,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static TemporaryVariable assertHasTemporaryVariable(ActivityFunction element, String string) throws JaxenException {
+	public static TemporaryVariable assertHasTemporaryVariable(ActivityPredicate element, String string) throws JaxenException {
 		List<?> results = nameSelect(element.getVariables(), string);
 		assertEquals(1, results.size());
 		return (TemporaryVariable) results.get(0);
@@ -1069,7 +1069,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static ActivityParameter assertHasActivityParameter(ActivityFunction element, String string) throws JaxenException {
+	public static ActivityParameter assertHasActivityParameter(ActivityPredicate element, String string) throws JaxenException {
 		List<?> results = nameSelect(element.getParameters(), string);
 		assertEquals(1, results.size());
 		return (ActivityParameter) results.get(0);

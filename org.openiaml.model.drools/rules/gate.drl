@@ -215,7 +215,7 @@ end
  * @inference Gate,Scope
  *		A {@model Scope} protected by a {@model Gate} named 'XXX',
  *		with an outgoing {@model ECARule} named 'first' or 'last',
- *		will contain an {@model ActivityFunction}
+ *		will contain an {@model ActivityPredicate}
  *		named 'check XXX' to check that the {@model Gate} has been satisfied.
  */
 rule "Create condition 'check (gate)'"
@@ -232,7 +232,7 @@ rule "Create condition 'check (gate)'"
 		eval ( handler.veto( gate ))
 	
 	then
-		ActivityFunction cond = handler.generatedActivityFunction(gate, session);
+		ActivityPredicate cond = handler.generatedActivityPredicate(gate, session);
 		handler.setName(cond, "check " + gate.getName());
 		handler.setType(cond, type);
 		queue.add(cond, drools);
@@ -266,8 +266,8 @@ rule "Connect condition 'check (gate)' with gate"
 end
 
 /**
- * @inference Gate,Scope,ActivityFunction
- *		The 'check XXX' {@model ActivityFunction} for a {@model Gate},
+ * @inference Gate,Scope,ActivityPredicate
+ *		The 'check XXX' {@model ActivityPredicate} for a {@model Gate},
  *		with an outgoing {@model ECARule} named 'first' or 'last',
  *		will be completed with the {@model ActivityNode contents necessary} to evaluate the <em>flag {@model Value}</em>.
  */
@@ -278,7 +278,7 @@ rule "Create contents of 'check (gate)' condition"
 		wire : ECARule ( trigger == gate, name == "first" || name == "last" )
 		property : Value ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
-		cond : ActivityFunction ( eContainer == session, eval( name.equals("check " + gate.getName())) )
+		cond : ActivityPredicate ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		cw : SimpleCondition ( function == cond, conditioned == gate )
 		
 		not ( StartNode ( eContainer == cond ))

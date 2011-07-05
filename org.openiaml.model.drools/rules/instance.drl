@@ -257,7 +257,7 @@ rule "Create 'not empty' composite condition"
 		eval ( handler.veto( instance ))
 	
 	then
-		ActivityFunction condition = handler.generatedActivityFunction(instance, instance);
+		ActivityPredicate condition = handler.generatedActivityPredicate(instance, instance);
 		handler.setName(condition, "not empty");
 		handler.setType(condition, type);
 		queue.add(condition, drools);
@@ -265,15 +265,15 @@ rule "Create 'not empty' composite condition"
 end
 
 /**
- * @inference DomainIterator,ActivityFunction
- *		The 'not empty' {@model ActivityFunction} for a {@model DomainIterator},
+ * @inference DomainIterator,ActivityPredicate
+ *		The 'not empty' {@model ActivityPredicate} for a {@model DomainIterator},
  *		will be completed with the {@model ActivityNode contents necessary} to check that the iterator is not {@model DomainIterator#empty}.
  */
 rule "Create contents of 'not empty' condition"
 	when
 		instance : DomainIterator( )
 		isEmpty : Function ( instance.empty == isEmpty )
-		condition : ActivityFunction ( eContainer == instance, name == "not empty" )
+		condition : ActivityPredicate ( eContainer == instance, name == "not empty" )
 		
 		not ( StartNode ( eContainer == condition ))
 

@@ -99,7 +99,7 @@ end
 /**
  * @inference Condition,Value 
  *		All {@model Value}s not {@model Value#name named} 'fieldValue'
- * 		will have a {@model ActivityFunction} in its container named 'XXX is set'.
+ * 		will have a {@model ActivityPredicate} in its container named 'XXX is set'.
  */
 rule "Values will also have a related 'is set' condition (not fieldValue)"
 	when
@@ -115,7 +115,7 @@ rule "Values will also have a related 'is set' condition (not fieldValue)"
 		eval ( handler.veto( containerGe ))
 	
 	then
-		ActivityFunction cond = handler.generatedActivityFunction(containerGe, container);
+		ActivityPredicate cond = handler.generatedActivityPredicate(containerGe, container);
 		handler.setName(cond, value.getName() + " is set");
 		handler.setType(cond, type);
 		queue.add(cond, drools);
@@ -171,8 +171,8 @@ rule "Properties will have a related 'set XXX' operation"
 end
 
 /**
- * @inference ActivityFunction
- *		An {@model ActivityFunction} named 'XXX is set', used to set a {@model Value#name named} {@model Value},
+ * @inference ActivityPredicate
+ *		An {@model ActivityPredicate} named 'XXX is set', used to set a {@model Value#name named} {@model Value},
  *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
  */
 rule "Create contents of 'X is set' operation"
@@ -180,7 +180,7 @@ rule "Create contents of 'X is set' operation"
 		container : ContainsFunctions ( )
 		value : Value ( eContainer == container )
 		
-		o : ActivityFunction( eval(name.equals(value.getName() + " is set")), eContainer == container )
+		o : ActivityPredicate( eval(name.equals(value.getName() + " is set")), eContainer == container )
 		
 		not ( StartNode ( eContainer == o ))
 		

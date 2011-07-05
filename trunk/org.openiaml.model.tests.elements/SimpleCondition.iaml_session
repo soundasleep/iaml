@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.130cf3ba351.d">
   <operations xsi:type="iaml:BuiltinOperation" rules="model.130cf3b9806.10f" id="model.130cf3b9806.10e" name="operation"/>
-  <functions xsi:type="iaml.operations:ActivityFunction" id="operations.130cf3ba276.6" name="condition" conditioned="model.130cf3b9806.110">
+  <functions xsi:type="iaml.operations:ActivityPredicate" id="operations.130cf3ba276.6" name="condition" conditioned="model.130cf3b9806.110">
     <conditionEdges id="model.130cf3b9806.110" name="Condition name" function="operations.130cf3ba276.6" conditioned="model.130cf3b9806.10f"/>
   </functions>
   <onAccess id="model.130cf3b9806.10d" name="event" listeners="model.130cf3b9806.10f">

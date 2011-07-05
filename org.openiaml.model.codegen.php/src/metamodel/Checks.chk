@@ -111,10 +111,10 @@ context model::scopes::Session ERROR "A Session can only contain one LoginHandle
 context model::visual::Frame ERROR "A Frame cannot contain a LoginHandler" :
 	loginHandlers.size == 0;
 
-context model::operations::ActivityOperation ERROR "An Operation can only contain one StartNode" :
+context model::operations::ActivityOperation ERROR "An ActivityOperation can only contain one StartNode" :
 	nodes.typeSelect(model::operations::StartNode).size <= 1;
 
-context model::operations::ActivityFunction ERROR "A Function can only contain one StartNode" :
+context model::operations::ActivityPredicate ERROR "An ActivityPredicate can only contain one StartNode" :
 	nodes.typeSelect(model::operations::StartNode).size <= 1;
 
 // issue 98: unused BuiltinOperation names should issue a warning

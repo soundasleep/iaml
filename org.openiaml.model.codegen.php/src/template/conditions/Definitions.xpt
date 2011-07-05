@@ -139,7 +139,7 @@
 	}
 «ENDDEFINE»
 
-«DEFINE conditionDefinition(Boolean php) FOR model::operations::ActivityFunction»
+«DEFINE conditionDefinition(Boolean php) FOR model::operations::ActivityPredicate»
 	/** composite condition "«name»" */
 	function condition_«safeName()»(«EXPAND template::operations::Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
 		«REM»here we would expand out the data flow of the condition, etc«ENDREM»

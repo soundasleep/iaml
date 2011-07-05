@@ -234,7 +234,7 @@ possibleParentOperations(emf::EObject this ) :
 startNode(model::operations::ActivityOperation this) :
 	nodes.typeSelect(model::operations::StartNode).first();
 
-startNodeCondition(model::operations::ActivityFunction this) :
+startNodeCondition(model::operations::ActivityPredicate this) :
 	nodes.typeSelect(model::operations::StartNode).first();
 
 /* get the next execution flow for a Node that has passed */

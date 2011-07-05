@@ -239,8 +239,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -259,7 +259,7 @@
     </elements>
   </diagramEditors>
   <diagramEditors id="condition">
-    <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     <elements xsi:type="sgmf:ContainedNode" name="StartNode">
       <classifier href="iaml.ecore#//operations/StartNode"/>
     </elements>
@@ -318,8 +318,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
       <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -401,8 +401,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
       <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -552,9 +552,9 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
       <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainInstance">
       <classifier href="iaml.ecore#//domain/DomainInstance"/>
@@ -595,8 +595,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -677,8 +677,8 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" id="" name="BuiltinProperty">
       <classifier href="iaml.ecore#//BuiltinProperty"/>
@@ -710,8 +710,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="DomainType">
       <classifier href="iaml.ecore#//domain/DomainType"/>
@@ -790,8 +790,8 @@
     <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
       <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
@@ -897,9 +897,9 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/notEmpty"/>
       <classifier href="iaml.ecore#//BuiltinProperty"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ActivityFunction">
+    <elements xsi:type="sgmf:ContainedNode" name="ActivityPredicate">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsFunctions/functions"/>
-      <classifier href="iaml.ecore#//operations/ActivityFunction"/>
+      <classifier href="iaml.ecore#//operations/ActivityPredicate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>

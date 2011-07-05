@@ -41,8 +41,8 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.DomainType;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.messaging.Email;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdge;
@@ -612,15 +612,15 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Look at the editor's children to see if a {@link ActivityFunction} is being displayed.
+	 * Look at the editor's children to see if a {@link ActivityPredicate} is being displayed.
 	 *
 	 * @param root
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasActivityFunction(DiagramDocumentEditor root, String operationName,
+	public ShapeNodeEditPart assertHasActivityPredicate(DiagramDocumentEditor root, String operationName,
 			boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, ActivityFunction.class, operationName, checkShortcut, shortcutRequired);
+		return assertHasRenderedNamedObject(root, ActivityPredicate.class, operationName, checkShortcut, shortcutRequired);
 	}
 	
 	/**
@@ -972,11 +972,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasActivityFunction(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasActivityPredicate(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasActivityFunction(
+	public ShapeNodeEditPart assertHasActivityPredicate(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, ActivityFunction.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, ActivityPredicate.class, name, true, shortcutRequired);
 	}
 	
 	/**

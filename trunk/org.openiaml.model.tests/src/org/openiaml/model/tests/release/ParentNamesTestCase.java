@@ -67,7 +67,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		OperationsPackage.eINSTANCE.getActivityOperation(),
 		// Function
 		ModelPackage.eINSTANCE.getBuiltinProperty(),
-		OperationsPackage.eINSTANCE.getActivityFunction(),
+		OperationsPackage.eINSTANCE.getActivityPredicate(),
 		ModelPackage.eINSTANCE.getXQueryFunction(),
 		ModelPackage.eINSTANCE.getXQueryPredicate(),
 		// Value

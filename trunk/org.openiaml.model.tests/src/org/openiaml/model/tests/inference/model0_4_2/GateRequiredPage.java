@@ -3,14 +3,13 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
 import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
-import org.openiaml.model.model.operations.ActivityFunction;
 import org.openiaml.model.model.operations.ActivityOperation;
+import org.openiaml.model.model.operations.ActivityPredicate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExternalValue;
@@ -179,7 +178,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertEquals("requires a page is viewed first", gate.getName());
 
 		// generated condition
-		ActivityFunction condition = assertHasActivityFunction(session, "check requires a page is viewed first");
+		ActivityPredicate condition = assertHasActivityPredicate(session, "check requires a page is viewed first");
 		assertGenerated(condition);
 
 		SimpleCondition wire = assertHasSimpleCondition(session, condition, gate, "condition");
@@ -199,7 +198,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Value property = assertHasValue(session, "requires a page is viewed first flag");
 
 		// generated condition
-		ActivityFunction condition = assertHasActivityFunction(session, "check requires a page is viewed first");
+		ActivityPredicate condition = assertHasActivityPredicate(session, "check requires a page is viewed first");
 
 		// start node
 		StartNode start = assertHasStartNode(condition);

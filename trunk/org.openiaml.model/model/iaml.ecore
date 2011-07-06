@@ -967,11 +967,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This message will be provided as a reason why the {@model CompositeOperation Operation} or {@model CompositeCondition Condition} failed."/>
-        </eAnnotations>
-      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgeDestination #//operations/DataFlowEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">

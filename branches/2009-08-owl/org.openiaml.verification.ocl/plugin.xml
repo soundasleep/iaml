@@ -59,11 +59,12 @@
         <package namespaceUri="http://openiaml.org/model0.5"/>
         <constraints categories="emf-validation-example/adapter">
            <constraint statusCode="1" severity="ERROR" lang="OCL" name="Value constraint 1" id="ocl1">
-                <message>Values can only be of type XSDSimpleType</message>
+                <message>Values can only be of type XSDSimpleType or EXSDDataType</message>
                 <target class="Value"/>
                 <!-- the OCL expression -->
                 <![CDATA[
                      self.type->isEmpty() or self.type.oclIsKindOf(xsd::XSDSimpleTypeDefinition)
+                     	or self.type.oclIsKindOf(model::EXSDDataType)
                 ]]>
            </constraint>
 

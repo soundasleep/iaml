@@ -284,6 +284,9 @@
     <elements xsi:type="sgmf:ContainedNode" name="ExternalValue">
       <classifier href="iaml.ecore#//operations/ExternalValue"/>
     </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
+    </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="ExternalValueEdge">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
       <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
@@ -296,9 +299,6 @@
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SimpleCondition">
       <classifier href="iaml.ecore#//SimpleCondition"/>
-    </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="Value">
-      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
@@ -654,6 +654,9 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="ExternalValue">
       <classifier href="iaml.ecore#//operations/ExternalValue"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Value">
+      <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="ExternalValueEdge">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValue/externalValueEdges"/>

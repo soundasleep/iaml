@@ -104,6 +104,10 @@
     <classifier href="iaml.ecore#//wires/ConstraintEdge"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
+  <edgeConfigurations name="DataFlowEdge" targetArrow="true">
+    <classifier href="iaml.ecore#//operations/DataFlowEdge"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+  </edgeConfigurations>
   <customShapes id="id1" name="Event">
     <points/>
     <points x="60"/>
@@ -189,6 +193,10 @@
   <labelConfigurations name="Autosave" prefix="" viewPattern="autosave: {0}">
     <classifiers href="iaml.ecore#//domain/DomainIterator"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//domain/DomainIterator/autosave"/>
+  </labelConfigurations>
+  <labelConfigurations name="ExceptionText" defaultText="">
+    <classifiers href="iaml.ecore#//operations/CancelNode"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//operations/CancelNode/exceptionText"/>
   </labelConfigurations>
   <palettes name="Domain Modelling">
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>

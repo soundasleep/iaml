@@ -293,9 +293,7 @@
       <genClasses ecoreClass="iaml.ecore#//operations/SplitNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/JoinNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/OperationCallNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/SetNode">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/SetNode/exceptionText"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/SetNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/Arithmetic">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/Arithmetic/operationType"/>
       </genClasses>

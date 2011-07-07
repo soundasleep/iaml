@@ -1,0 +1,6 @@
+A \modelLink{Access Control Handler} has an associated \textit{user instance} \modelLink{Domain Iterator}, which will only be populated when the current user satisfies the \textit{access requirements} of the handler.
+
+A \modelLink{Access Control Handler} may have an outgoing \modelLink{Action Edge} \modelProperty{Action Edge}{named} ``login''. If the current user does not satisfy the \textit{access requirements} of this \modelLink{Access Control Handler}, the \modelLink{Action Edge} is executed (\sectionref{section:model-actions}).
+
+% 'logout' is for the Login Handler
+% 'success' is for the Login Handler

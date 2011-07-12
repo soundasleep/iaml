@@ -56,7 +56,7 @@ class OclLexer(RegexLexer):
         'keywords': [
         	# TODO not yet populated
             (r'(context|inv|if|else|library|metamodel|require|public|definitions|'
-             r'init|derive|pre|body|and|or|implies|'
+             r'init|derive|pre|body|and|or|implies|endif|'
              r'enddefinitions|endlibrary)\b', Keyword),
             (r'(Sequence|Set|Bag|OrderedSet)\b', Keyword.Type),
             (r'(true|false|null)\b', Keyword.Constant),

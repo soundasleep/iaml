@@ -1,0 +1,47 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small]{owl}
+// namespaces omitted
+Ontology(<http://openiaml.org/verification/2009/infiniteRedirect.owl>
+Import(<http://openiaml.org/model0.5>)
+
+// some classes omitted
+
+EquivalentClasses(InfiniteRedirectFrame ObjectIntersectionOf(
+  ObjectExistsSelf(instantRedirectTo) visual:Frame))
+SubClassOf(InfiniteRedirectFrame iaml:Scope)
+SubClassOf(InfiniteRedirectFrame iaml:VisibleThing)
+SubClassOf(InfiniteRedirectFrame visual:Frame)
+
+EquivalentClasses(AccessEventTrigger ObjectIntersectionOf(DataHasValue(
+  iaml:name "access") iaml:EventTrigger))
+  
+// some properties omitted
+
+TransitiveObjectProperty(instantRedirectTo)
+ObjectPropertyDomain(instantRedirectTo visual:Frame)
+ObjectPropertyRange(instantRedirectTo visual:Frame)
+
+ObjectPropertyDomain(navigatesToFrame iaml:ActionEdge)
+ObjectPropertyRange(navigatesToFrame visual:Frame)
+
+SubObjectPropertyOf(SubObjectPropertyChain(iaml:outEdges isActionEdge 
+  InverseObjectProperty(isActionEdge)) onAccessNavigate)
+  
+SubObjectPropertyOf(SubObjectPropertyChain(iaml:to isFrame 
+  InverseObjectProperty(isFrame)) navigatesToFrame)
+  
+SubObjectPropertyOf(SubObjectPropertyChain(iaml:outActions toFrame) 
+  eventToFrame)
+
+SubObjectPropertyOf(SubObjectPropertyChain(iaml:to isFrame 
+  InverseObjectProperty(isFrame)) toFrame)
+
+// defines the verification constraint
+SubObjectPropertyOf(SubObjectPropertyChain(iaml:eventTriggers 
+  isAccessEventTrigger InverseObjectProperty(isAccessEventTrigger) 
+  onAccessNavigate navigatesToFrame) instantRedirectTo)
+
+)
+\end{minted}

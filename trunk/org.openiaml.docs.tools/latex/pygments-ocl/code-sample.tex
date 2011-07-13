@@ -1,0 +1,36 @@
+\chapter{OCL Code Sample}
+
+\begin{oclcode}
+library mine
+  metamodel uml
+  require ocl_library_imports
+  
+  public definitions
+  context Edge
+    inv: self.from <> self.to
+    inv: self.oclIsTypeOf(from)
+    inv: self->includes(from)
+    inv: self.allInstances
+    inv: self.isUnique(self)
+    inv: from or to.name = "hello"
+    inv: from and to
+    inv: self->isEmpty()
+    inv: self->exists(from | a)
+    inv: self->forAll(from | a)
+    inv: self.size() = 1
+
+  context Frame::allRedirectsTo() : Set(Frame) body: 
+    allRedirectsTo = self.redirectsTo()->union(
+      self.redirectsTo()->collect(p | p.allRedirectsTo())
+
+  context Frame::redirectsTo() : Set(Frame) body: 
+    redirectsTo = if self.onAccess->oclIsUndefined() then OrderedSet{}
+      else self.onAccess.listeners.to->collect(p | p.oclIsKindOf(Frame))
+      endif
+
+  context Frame inv:
+    not self.allRedirectsTo()->includes(self)
+  
+  enddefinitions
+endlibrary
+\end{oclcode}

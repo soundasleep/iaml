@@ -77,7 +77,7 @@
 						
 					// get the parent
 					org.openiaml.model.model.NamedElement parent = (org.openiaml.model.model.NamedElement) resolvedObject.eContainer();
-					String parentName = "Parent: " + parent.getName();
+					String parentName = "Container: " + parent.getName();
 					
 					String containmentName = resolvedObject.eContainingFeature() == null ? "" : resolvedObject.eContainingFeature().getName();
 

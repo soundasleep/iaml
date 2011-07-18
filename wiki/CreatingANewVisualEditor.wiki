@@ -5,6 +5,8 @@
 
 =Introduction=
 
+*NOTE:* This page is outdated, as now all of the visual editors are generated through the [SimpleGMF] framework.
+
 This is a brief technical guideline on how to add a new visual editor in the IAML framework. A more comprehensive guide will appear eventually. This assumes you are well versed in both EMF and GMF; this is just the steps required to integrate your new plugin with the rest of the framework.
 
 Ideally most of this will be integrated into an automated script or an abstraction.

@@ -1,7 +1,6 @@
 #summary How to set up a development environment.
 #labels Featured,Development,Phase-Implementation
 
-
 This document will briefly summarise the steps required to create your own development environment from the source code, in order to understand and contribute to the project. If you only want to check out a copy of the plugin in order to create web application models, check out the [Installation installation instructions] instead.
 
 <wiki:toc max_depth="2" />
@@ -139,6 +138,7 @@ In the future this guide will also contain information on topics such as:
   # Building
     # Reloading the meta-model
     # [GeneratingDiagramEditors]
+    # [SimpleGMF]
   # Testing
   # Deploying
   # Contributing

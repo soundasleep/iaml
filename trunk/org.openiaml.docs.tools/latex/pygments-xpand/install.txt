@@ -1,0 +1,13 @@
+How to install the Xpand mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mapping.py
+
+You should then see 'xpand, xpt' listed:
+
+  $ pygmentize -L lexers
+
+You might have problems rendering guillemots in Xpand. For more information, see http://www.jevon.org/wiki/Adding_UML_Guillemots_in_Latex

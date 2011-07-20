@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EObjectValidator;
-
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.model.IConstraintStatus;
 import org.eclipse.emf.validation.service.IBatchValidator;
@@ -70,6 +69,8 @@ public class EValidatorAdapter
 
 	/**
 	 * Implements validation by delegation to the EMF validation framework.
+	 * 
+	 * <p>{@inheritDoc}
 	 */
 	@Override
 	public boolean validate(EClass eClass, EObject eObject,
@@ -93,7 +94,7 @@ public class EValidatorAdapter
 				
 				processed(eObject, context, status);
 				
-				appendDiagnostics(status, diagnostics);
+				appendDiagnostics(status, diagnostics);			 
 			}
 		}
 		
@@ -137,6 +138,12 @@ public class EValidatorAdapter
 	 *     validated;  <code>false</code>, otherwise
 	 */
 	private boolean hasProcessed(EObject eObject, Map<Object, Object> context) {
+		// for some reason, the default adapter was returning "true"
+		// for children objects of a given object. as a hack, this method
+		// now <em>always</em> returns false regardless.
+		return false;
+		
+		/*
 		boolean result = false;
 		
 		if (context != null) {
@@ -152,6 +159,7 @@ public class EValidatorAdapter
 		}
 		
 		return result;
+		*/
 	}
 	
 	/**

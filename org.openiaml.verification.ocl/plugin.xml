@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2005 IBM Corporation and others.
+ * All rights reserved.   This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   IBM - Initial API and implementation
+ *
+ * </copyright>
+ *
+ * $Id$
+ */
+-->
+<plugin>
+
+     <extension point="org.eclipse.ui.startup">
+      <startup class="org.openiaml.validation.ocl.adapter.Startup"/>
+   </extension>
+   
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+         id="org.eclipse.emf.validation.examples.adapter.expressions.EObjectPropertyTester"
+         type="org.eclipse.emf.ecore.EObject"
+         namespace="org.eclipse.emf.validation.examples.adapter"
+         properties="ePackage"
+         class="org.openiaml.validation.ocl.adapter.expressions.EObjectPropertyTester">
+      </propertyTester>
+   </extension>
+   
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext id="org.eclipse.emf.validation.examples.adapter">
+         <enablement>
+            <and>
+               <instanceof value="org.eclipse.emf.ecore.EObject"/>
+               <test
+                  property="org.eclipse.emf.validation.examples.adapter.ePackage"
+                  value="http://openiaml.org/model0.5"/>
+            </and>
+         </enablement>
+      </clientContext>
+      
+      <binding
+         context="org.eclipse.emf.validation.examples.adapter"
+         category="emf-validation-example"/>
+   </extension>
+
+  <extension point="org.eclipse.emf.validation.constraintProviders">
+        <category name="OCL constraints for IAML" id="emf-validation-example/adapter">
+           Basic EMF constraint in OCL for IAML
+        </category>
+        <constraintProvider cache="true">
+            <package namespaceUri="http://openiaml.org/model0.5"/>
+            <constraints categories="emf-validation-example/adapter">
+                <constraint statusCode="12" severity="ERROR" lang="OCL" mode="Batch" name="Test constraint" id="test1">
+                    <description>Application name must be bar</description>
+                    <message>The Application is not named bar</message>
+                    <target class="InternetApplication"/>
+                    <!-- the OCL expression -->
+                    <![CDATA[
+                         name = 'bar'
+                    ]]>
+               </constraint>
+            </constraints>
+        </constraintProvider>
+    </extension>
+   
+</plugin>

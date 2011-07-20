@@ -52,23 +52,139 @@
    </extension>
 
   <extension point="org.eclipse.emf.validation.constraintProviders">
-        <category name="OCL constraints for IAML" id="emf-validation-example/adapter">
-           Basic EMF constraint in OCL for IAML
-        </category>
-        <constraintProvider cache="true">
-            <package namespaceUri="http://openiaml.org/model0.5"/>
-            <constraints categories="emf-validation-example/adapter">
-                <constraint statusCode="12" severity="ERROR" lang="OCL" mode="Batch" name="Test constraint" id="test1">
-                    <description>Application name must be bar</description>
-                    <message>The Application is not named bar</message>
-                    <target class="InternetApplication"/>
-                    <!-- the OCL expression -->
-                    <![CDATA[
-                         name = 'bar'
-                    ]]>
-               </constraint>
-            </constraints>
-        </constraintProvider>
+    <category name="OCL constraints for IAML" id="emf-validation-example/adapter">
+       Basic EMF constraint in OCL for IAML
+    </category>
+    <constraintProvider cache="true">
+        <package namespaceUri="http://openiaml.org/model0.5"/>
+        <constraints categories="emf-validation-example/adapter">
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="Value constraint 1" id="ocl1">
+                <message>Values can only be of type XSDSimpleType or EXSDDataType</message>
+                <target class="Value"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     self.type->isEmpty() or self.type.oclIsKindOf(xsd::XSDSimpleTypeDefinition)
+                     	or self.type.oclIsKindOf(model::EXSDDataType)
+                ]]>
+           </constraint>
+
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="ComplexTerm constraint 1" id="ocl2">
+                <message>ComplexTerm type must be the same as the referenced Function type</message>
+                <target class="ComplexTerm"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     type = function.type
+                ]]>
+           </constraint>
+           
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="ComplexTerm constraint 2" id="ocl3">
+                <message>Complex term had unexpected term name with regards to referenced Function</message>
+                <target class="ComplexTerm"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     self.function.slotNames->asSet()->symmetricDifference(self.inParameterEdges->collect(t|t.name)->asSet())->isEmpty()
+                ]]>
+           </constraint>
+
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="ComplexTerm constraint 3" id="ocl4">
+                <message>A parameter for this ComplexTerm was not of the correct type as defined by the Function</message>
+                <target class="ComplexTerm"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     function.slotTypes->forAll(tt | self.inParameterEdges->exists(t | 
+                     	t.parameterValue.oclIsKindOf(Value) implies t.parameterValue.oclAsType(Value).type = tt ) )
+                ]]>
+           </constraint>
+
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="ComplexTerm constraint 4" id="ocl5">
+                <message>A duplicate term was provided to a ComplexTerm</message>
+                <target class="ComplexTerm"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     self.inParameterEdges->collect(p|p.name)->asSet()->size() = self.inParameterEdges->collect(p|p.name)->size()
+                ]]>
+           </constraint>
+           
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="Function constraint 1" id="ocl6">
+                <message>Function term name mismatch</message>
+                <target class="Function"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                 	slotNames->size() = slotNames->asSet()->size()
+                ]]>
+           </constraint>
+
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="Function constraint 2" id="ocl7">
+                <message>Function term types mismatch</message>
+                <target class="Function"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     slotNames->size() = slotTypes->size()
+                ]]>
+           </constraint>
+
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="Function constraint 3" id="ocl8">
+                <message>Term type must be either an XSDSimpleType or a DomainSchema</message>
+                <target class="Function"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     slotTypes->forAll( t | t.oclIsKindOf(xsd::XSDSimpleTypeDefinition) or t.oclIsKindOf(domain::DomainSchema) )
+                ]]>
+           </constraint>
+           
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="SimpleCondition constraint 1" id="ocl9">
+                <message>A SimpleCondition Function must be a Predicate</message>
+                <target class="SimpleCondition"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     function.oclIsKindOf(Predicate)
+                ]]>
+           </constraint>
+           
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="Predicate constraint 1" id="ocl10">
+                <message>The return type of a Predicate must be boolean</message>
+                <target class="Predicate"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     type.oclIsKindOf(EXSDDataType) and type.oclAsType(EXSDDataType).definition.uRI = 'http://www.w3.org/2001/XMLSchema.xsd#//boolean'
+                ]]>
+           </constraint>
+           
+           <!-- I don't have access to the eContainer() of the object, so this constraint can not be evaulated. -->
+           <!--
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="BooleanProperty constraint 1" id="ocl11">
+                <message>A BooleanProperty must be contained</message>
+                <target class="ContainsFunctions"/>
+                <![CDATA[
+                     self.eContainer()->notEmpty()
+                ]]>
+           </constraint>
+           -->
+
+			<!-- 
+				I am having difficulty accessing Enum properties:
+				java.lang.RuntimeException: org.eclipse.ocl.SemanticException: Unknown type ([model, BUILTIN_PROPERITES, IS_VISIBLE])
+			-->
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="BuiltinProperty constraint 1" id="ocl12">
+                <message>A BuiltinProperty 'is visible' must be contained by a VisibleThing</message>
+                <target class="BooleanProperty"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     property = model::BUILTIN_PROPERITES::IS_VISIBLE implies self.eContainer().oclIsKindOf(VisibleThing)
+                ]]>
+           </constraint>
+           
+           <constraint statusCode="1" severity="ERROR" lang="OCL" name="BuiltinProperty constraint 2" id="ocl13">
+                <message>A BuiltinProperty 'can save' must be contained by a DomainIterator</message>
+                <target class="BooleanProperty"/>
+                <!-- the OCL expression -->
+                <![CDATA[
+                     property = model::BUILTIN_PROPERITES::CAN_SAVE implies self.eContainer().oclIsKindOf(domain::DomainIterator)
+                ]]>
+           </constraint>
+          
+        </constraints>
+    </constraintProvider>
     </extension>
    
 </plugin>

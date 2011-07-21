@@ -289,6 +289,13 @@ context model::ECARule ERROR "A 'login' ECARule for an AccessControlHandler shou
 		&& name == "login" && target.eContainer != null && trigger.eContainer != null
 		&& target.eContainer == trigger.eContainer);
 
+context model::ActionEdgeSource ERROR "Some of the ECARules defined for this trigger may not be executed, as an unconditional navigation will occur due to the priority order, halting ECARule execution" :
+	!listeners.exists( r |
+		model::visual::Frame.isInstance(r.target) /* navigates */
+			&& r.conditions.isEmpty /* and is unconditional */
+			&& listeners.exists(r2 | r != r2 && r2.priority <= r.priority) /* and another rule will not be executed */ 
+	);
+
 /* --- Metamodel-specific checks, as per issue 235 --- */
 
 context model::Value ERROR "A Value must be of type XSDSimpleTypeDefinition":

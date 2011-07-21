@@ -511,6 +511,9 @@
     <elements xsi:type="sgmf:ReferencedNode" name="Role">
       <classifier href="iaml.ecore#//users/Role"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="BuiltinProperty">
+      <classifier href="iaml.ecore#//BuiltinProperty"/>
+    </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>

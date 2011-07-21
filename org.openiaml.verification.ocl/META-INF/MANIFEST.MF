@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Verification with OCL
 Bundle-SymbolicName: org.openiaml.verification.ocl;singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 0.5.3.qualifier
 Bundle-Activator: org.openiaml.validation.ocl.adapter.ValidationExamplePlugin
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin

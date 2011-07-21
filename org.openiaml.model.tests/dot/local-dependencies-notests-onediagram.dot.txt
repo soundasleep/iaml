@@ -20,6 +20,7 @@ digraph {
 "org.openiaml.simplegmf.edit";
 "org.openiaml.simplegmf.editor";
 "org.openiaml.simplegmf.ui";
+"org.openiaml.verification.ocl";
   node [style=filled, fillcolor="#cc7766"];
 "org.openiaml.model.diagram";
   node [style=filled, fillcolor="#ffffff"];
@@ -55,4 +56,5 @@ digraph {
   "org.openiaml.simplegmf.editor" -> "org.openiaml.simplegmf.edit";
   "org.openiaml.simplegmf.ui" -> "org.openiaml.simplegmf";
   "org.openiaml.simplegmf.ui" -> "org.openiaml.simplegmf.codegen";
+  "org.openiaml.verification.ocl" -> "org.openiaml.model";
 }

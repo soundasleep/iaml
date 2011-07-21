@@ -373,7 +373,8 @@ abstract class DomainIterator {
 				$key = $value->getName();
 				if ($value->isPrimaryKey() && (
 						$value->getType() === "iamlInteger" ||
-						$value->getType() === "http://openiaml.org/model/datatypes#iamlInteger")) {
+						$value->getType() === "http://openiaml.org/model/datatypes#iamlInteger" ||
+						$value->getType() === "http://www.w3.org/2001/XMLSchema#integer")) {
 					// this needs to be auto increment
 					$bits[] = "$key INTEGER PRIMARY KEY AUTOINCREMENT";
 				} else {
@@ -387,6 +388,7 @@ abstract class DomainIterator {
 						case "http://openiaml.org/model/datatypes#iamlURL":
 						case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 						case "http://openiaml.org/model/datatypes#iamlEmail":
+						case "http://www.w3.org/2001/XMLSchema#string":
 							$rowtype = "VARCHAR(255)";
 							break;
 
@@ -397,8 +399,15 @@ abstract class DomainIterator {
 
 						case "iamlInteger":
 						case "http://openiaml.org/model/datatypes#iamlInteger":
+						case "http://www.w3.org/2001/XMLSchema#integer":
 							$rowtype = "INTEGER";
 							break;
+						
+						case "iamlBoolean":
+						case "http://openiaml.org/model/datatypes#iamlBoolean":
+						case "http://www.w3.org/2001/XMLSchema#boolean":
+							// SQlite does not have a Boolean row type, but uses integers
+							$rowtype = "INTEGER";
 
 						default:
 							throw new IamlDomainException("Unknown attribute type " . $value->getType());

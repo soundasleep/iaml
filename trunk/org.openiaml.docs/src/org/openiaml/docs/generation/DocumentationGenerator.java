@@ -173,58 +173,116 @@ public class DocumentationGenerator {
 		}
 		
 		// file metrics
-		FileMetricAccumulator acc = new FileMetricAccumulator();
 		{
-			LoadFileMetrics loader = new LoadFileMetrics(
-					new File("../org.openiaml.model/") /* file root */,
-					"org.openiaml.model" /* plugin name */
-			);
-			loader.load(factory, root);
-			acc.add(loader);
-		}
-		{
-			LoadFileMetrics loader = new LoadFileMetrics(
-					new File("../org.openiaml.model.codegen.php/") /* file root */,
-					"org.openiaml.model.codegen.php" /* plugin name */
-			);
-			loader.load(factory, root);
-			acc.add(loader);
-		}
-		{
-			LoadFileMetrics loader = new LoadFileMetrics(
-					new File("../org.openiaml.model.drools/") /* file root */,
-					"org.openiaml.model.drools" /* plugin name */
-			);
-			loader.load(factory, root);
-			acc.add(loader);
-		}
-		{
-			LoadFileMetrics loader = new LoadFileMetrics(
-					new File("../org.openiaml.model.runtime/") /* file root */,
-					"org.openiaml.model.runtime" /* plugin name */
-			);
-			loader.load(factory, root);
-			acc.add(loader);
-		}
-		{
-			LoadFileMetrics loader = new LoadFileMetrics(
-					new File("../org.openiaml.model.tests/") /* file root */,
-					"org.openiaml.model.tests" /* plugin name */
-			);
-			loader.load(factory, root);
-			acc.add(loader);
-		}
-		{
-			LoadFileMetrics loader = new LoadFileMetrics(
-					new File("../org.openiaml.model.tests.diagram/") /* file root */,
-					"org.openiaml.model.tests.diagram" /* plugin name */
-			);
-			loader.load(factory, root);
-			acc.add(loader);
+			FileMetricAccumulator acc = new FileMetricAccumulator();
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model/") /* file root */,
+						"org.openiaml.model" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.codegen.php/") /* file root */,
+						"org.openiaml.model.codegen.php" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.drools/") /* file root */,
+						"org.openiaml.model.drools" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.runtime/") /* file root */,
+						"org.openiaml.model.runtime" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.tests/") /* file root */,
+						"org.openiaml.model.tests" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.tests.diagram/") /* file root */,
+						"org.openiaml.model.tests.diagram" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			
+			// publish total metrics
+			acc.publish(factory, root);
 		}
 		
-		// publish total metrics
-		acc.publish(factory, root);
+		// file metrics of just /src folders in tests
+		{
+			FileMetricAccumulator acc = new FileMetricAccumulator(".src");
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model/src/") /* file root */,
+						"org.openiaml.model.src" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.codegen.php/src/") /* file root */,
+						"org.openiaml.model.codegen.php.src" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.drools/src/") /* file root */,
+						"org.openiaml.model.drools.src" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.runtime/src/") /* file root */,
+						"org.openiaml.model.runtime.src" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.tests/src/") /* file root */,
+						"org.openiaml.model.tests.src" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			{
+				LoadFileMetrics loader = new LoadFileMetrics(
+						new File("../org.openiaml.model.tests.diagram/src/") /* file root */,
+						"org.openiaml.model.tests.diagram.src" /* plugin name */
+				);
+				loader.load(factory, root);
+				acc.add(loader);
+			}
+			
+			// publish total metrics
+			acc.publish(factory, root);
+		}
 
 		return root;
 	}

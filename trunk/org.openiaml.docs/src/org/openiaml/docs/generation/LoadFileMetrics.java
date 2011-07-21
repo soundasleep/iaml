@@ -31,6 +31,20 @@ public class LoadFileMetrics extends DocumentationHelper implements ILoader {
 	 */
 	public static class FileMetricAccumulator {
 		
+		private final String prefix;
+		
+		/**
+		 * 
+		 * @param prefix a prefix to append to accumulated metrics; can be the empty string.
+		 */
+		public FileMetricAccumulator(String prefix) {
+			this.prefix = prefix;
+		}
+
+		public FileMetricAccumulator() {
+			this("");
+		}
+		
 		/**
 		 * The loaded map of total file counts.
 		 */
@@ -71,7 +85,7 @@ public class LoadFileMetrics extends DocumentationHelper implements ILoader {
 			for (String extension : totalCountMap.keySet()) {
 				Metric metric = factory.createMetric();
 				// e.g. file.java.count.org.openiaml.model
-				metric.setName("fileCount." + extension + ".total");
+				metric.setName("fileCount." + extension + prefix + ".total");
 				metric.setValue(totalCountMap.get(extension).toString());
 				root.getMetrics().add(metric);
 			}
@@ -80,7 +94,7 @@ public class LoadFileMetrics extends DocumentationHelper implements ILoader {
 			for (String extension : totalSizeMap.keySet()) {
 				Metric metric = factory.createMetric();
 				// e.g. file.java.size.org.openiaml.model
-				metric.setName("fileSize." + extension + ".total");
+				metric.setName("fileSize." + extension + prefix + ".total");
 				metric.setValue(totalSizeMap.get(extension).toString());
 				root.getMetrics().add(metric);
 			}

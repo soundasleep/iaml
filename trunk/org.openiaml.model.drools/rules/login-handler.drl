@@ -145,6 +145,7 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 	then
 		ECARule wire = handler.generatedECARule(login_handler, logout, access, destination);
 		handler.setName(wire, "redirect to intended logout page");
+		handler.setPriority(wire, -100);
 		queue.add(wire, drools);
 
 end

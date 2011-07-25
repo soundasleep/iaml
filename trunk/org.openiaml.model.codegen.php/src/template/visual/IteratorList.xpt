@@ -38,7 +38,7 @@
 		>
 		<!-- print out the list of columns -->
 		<thead>
-		«FOREACH children AS child»
+		«FOREACH children.sortBy(c|c.renderOrder) AS child»
 			<th id="«safeNameString(child.id)»_heading" class="list_heading_«safeNameString(child.name)»">«escapeString(child.name)»</th>
 		«ENDFOREACH»
 		</thead>

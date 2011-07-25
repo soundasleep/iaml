@@ -529,6 +529,12 @@
     <elements xsi:type="sgmf:ContainedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExtendsEdge">
+      <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="iterator">
     <classifier href="iaml.ecore#//domain/DomainIterator"/>

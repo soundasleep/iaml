@@ -1648,7 +1648,7 @@ rule "Create default logout successful page"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		not ( wire : ECARule ( trigger == login_handler, name == "logout" ))
-		not ( Frame ( eContainer == container, name == "Logout Successful" ) )
+		not ( Frame ( eContainer == container, name == "Logout Successful", generatedBy == login_handler ) )
 				
 		eval ( handler.veto( login_handler ))
 
@@ -1670,7 +1670,7 @@ rule "Connect default logout successful page to LoginHandler"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		logout : Frame ( eContainer == container, name == "Logout Successful" )
+		logout : Frame ( eContainer == container, name == "Logout Successful", generatedBy == login_handler )
 		
 		not ( wire : ECARule ( trigger == login_handler, name == "logout" ))
 		

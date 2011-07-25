@@ -993,6 +993,9 @@
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Frame">
+      <classifier href="iaml.ecore#//visual/Frame"/>
+    </elements>
   </diagramEditors>
   <rootElement href="iaml.ecore#//InternetApplication"/>
   <edgeTypes href="iaml.ecore#//ECARule"/>

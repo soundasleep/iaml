@@ -1526,6 +1526,9 @@ function translate_query_to_sqlite($query, $args) {
 	// replace matches()
 	$query = preg_replace('#matches\\s*\\(\\s*(.+?),\\s*(.+?)\\s*\\)#im', '\\1 like (\'%\' || \\2 || \'%\')', $query);
 
+	// issue 203: replace now() with datetime()
+	$query = preg_replace("#now\\(\\)#im", "datetime()", $query);
+
 	// replace empty queries
 	if (!trim($query)) {
 		$query = "1";

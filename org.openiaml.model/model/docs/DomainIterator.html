@@ -12,7 +12,7 @@ that are provided in the {@model DomainIterator}, and connecting a
 </p>
 
 <p>
-A variety of query functions are provided:
+A variety of database-independent query functions are provided:
 
 <table>
 <tr>
@@ -22,6 +22,10 @@ A variety of query functions are provided:
 <tr>
   <td><code>matches(a,b)</code></td>
   <td>Performs a case-insensitive text search of <code>a</code> against the query <code>b</code>. Every word in <code>b</code> is matched, usually using a SQL keyword or function <code>LIKE</code>, against <code>a</code>.</td>
+</tr>
+<tr>
+  <td><code>now()</code></td>
+  <td>Returns the current date and time.</td>
 </tr>
 </table>
 </p>

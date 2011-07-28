@@ -12,7 +12,7 @@ import org.openiaml.emf.properties.IEMFElementSelector.DefaultElementSelector;
 import org.openiaml.emf.properties.library.metamodel.AllMetamodelPropertiesLibrary;
 
 /**
- * Calculates metamodel metrics.
+ * Calculates metamodel metrics for a particular {@link EPackage}.
  * 
  * @author jmwright
  *
@@ -20,11 +20,20 @@ import org.openiaml.emf.properties.library.metamodel.AllMetamodelPropertiesLibra
 public class LoadMetamodelMetrics extends DocumentationHelper implements ILoader {
 
 	private EPackage rootPackage;
-
+	private String prefix;
+	
+	/**
+	 * Uses an empty prefix, for example the default metamodel.
+	 */
 	public LoadMetamodelMetrics(EPackage root) {
+		this(root, "");
+	}
+
+	public LoadMetamodelMetrics(EPackage root, String prefix) {
 		super();
 		
 		this.rootPackage = root;
+		this.prefix = prefix;
 	}
 
 	/**
@@ -41,7 +50,7 @@ public class LoadMetamodelMetrics extends DocumentationHelper implements ILoader
 			
 			// insert a new metric
 			Metric metric = factory.createMetric();
-			metric.setName(m.getName());
+			metric.setName(prefix + m.getName());
 			metric.setValue(result.toString());
 			root.getMetrics().add(metric);
 			

@@ -15,6 +15,7 @@ import org.openiaml.docs.generation.semantics.HandleOperationalTag;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
+import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.model.ModelPackage;
 
@@ -168,6 +169,15 @@ public class DocumentationGenerator {
 		{
 			ILoader loader = new LoadMetamodelMetrics(
 					ModelPackage.eINSTANCE /* root package */
+			);
+			loader.load(factory, root);
+		}
+		
+		// get all metrics of the Modeldoc package
+		{
+			ILoader loader = new LoadMetamodelMetrics(
+					ModeldocPackage.eINSTANCE, /* modeldoc package */
+					"Modeldoc"
 			);
 			loader.load(factory, root);
 		}

@@ -237,6 +237,11 @@
   % empty
 }
 
+\newenvironment{modeldocVisualMissing}{
+  % empty
+}{
+  % empty
+}
 
 % a general list environment
 \newenvironment{modeldocList}{

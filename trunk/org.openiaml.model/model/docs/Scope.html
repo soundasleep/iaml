@@ -1,0 +1,17 @@
+<p>
+When a {@model Scope} is rendered, the lifecycle events for that {@model Scope} must be executed in the following order. If a failure occurs during this process, the current lifecycle execution process is cancelled and the <i>failure handler</i> for the current {@model Scope} is executed. If an {@model ECARule} is executed which must redirect the user to another {@model Frame}, the current lifecycle execution process is cancelled.
+</p>
+
+<ol>
+  <li>If this {@model Scope} is contained by a parent {@model Scope}, then the pre-render lifecycle events for that parent {@model Scope} must be triggered.
+
+  <li>If this {@model Scope} has not yet been <i>initialised</i> according to the storage semantics of that {@model Scope}, then the {@event onInit} {@model Event} is triggered.
+
+  <li>The {@event onAccess} {@model Event} is triggered.
+
+  <li>All \modelLink{Entry Gates} contained within this {@model Scope} are sorted according to their {@model EntryGate#name}. The <i>access semantics</i> of each {@model EntryGate} are then executed.
+
+  <li>All \modelLink{Exit Gates} contained within this {@model Scope} are sorted according to their {@model ExitGate#name}. The <i>access semantics</i> of each {@model ExitGate} are then executed.
+
+  <li>The {@model Scope} is then rendered.
+</ol>

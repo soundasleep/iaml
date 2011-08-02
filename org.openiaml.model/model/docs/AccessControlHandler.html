@@ -1,0 +1,13 @@
+<p>
+A {@model AccessControlHandler} has an associated <i>user instance</i> {@model DomainIterator}, which will only be populated when the current user satisfies the <i>access requirements</i> of the handler.
+</p>
+
+<p>
+A {@model AccessControlHandler} may have an outgoing {@model ActionEdge} {@model ActionEdge#name}d ``login''. If the current user does not satisfy the <i>access requirements</i> of this {@model AccessControlHandler}, the {@model ActionEdge} is executed.
+</p>
+
+<!-- (\sectionref{section:model-actions}).
+
+% 'logout' is for the Login Handler
+% 'success' is for the Login Handler
+-->

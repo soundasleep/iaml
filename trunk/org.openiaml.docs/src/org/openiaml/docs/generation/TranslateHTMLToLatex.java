@@ -75,6 +75,12 @@ public class TranslateHTMLToLatex {
 		// double newlines are ignored
 		f = f.replaceAll("\n+", "\n");
 		
+		// remove any [noLaTeX] sections
+		f = f.replaceAll("(?s)<\\!--\\s*noLaTeX\\s*-->(.+)<\\!--\\s*/noLaTeX\\s*-->", "% ignored section\n\n");
+		
+		// specifically enable LaTex sections
+		f = f.replaceAll("(?s)<\\!--\\s*LaTeX(.+)-->", "$1");
+
 		// replace <p> with two newlines
 		f = f.replace("<p>", "\n\n");
 		f = f.replace("</p>", "");
@@ -127,6 +133,7 @@ public class TranslateHTMLToLatex {
 		// other inline tag references are much more straightforward
 		f = f.replaceAll("\\{@issue ([^}]+)\\}", "\\\\issue{$1}");
 		f = f.replaceAll("\\{@uml ([^}]+)\\}", "\\\\uml{$1}");
+		f = f.replaceAll("\\{@type ([^}]+)\\}", "\\\\type{$1}");
 		
 		// magic translations for tables
 		if (f.contains("<table>"))
@@ -157,7 +164,7 @@ public class TranslateHTMLToLatex {
 		
 		// additional functions provided by convertHTMLIntoLatex
 		f = LatexCodegenFunctions.convertHTMLIntoLatex(f);
-		
+
 		// remove any excess newlines and trim
 		f = f.replaceAll("\n\n+", "\n\n");
 		f = f.trim();

@@ -76,10 +76,13 @@ public class TranslateHTMLToLatex {
 		f = f.replaceAll("\n+", "\n");
 		
 		// remove any [noLaTeX] sections
-		f = f.replaceAll("(?s)<\\!--\\s*noLaTeX\\s*-->(.+)<\\!--\\s*/noLaTeX\\s*-->", "% ignored section\n\n");
-		
+		f = f.replaceAll("(?s) *<\\!--\\s*noLaTeX\\s*-->(.+)<\\!--\\s*/noLaTeX\\s*--> *", "% ignored section\n\n");
+
 		// specifically enable LaTex sections
-		f = f.replaceAll("(?s)<\\!--\\s*LaTeX(.+)-->", "$1");
+		f = f.replaceAll("(?s) *<\\!--\\s*LaTeX(.+)--> *", "$1");
+
+		// remove any other HTML comments
+		f = f.replaceAll("(?s) *<\\!--([^>]+)--> *", "");
 
 		// replace <p> with two newlines
 		f = f.replace("<p>", "\n\n");
@@ -134,6 +137,7 @@ public class TranslateHTMLToLatex {
 		f = f.replaceAll("\\{@issue ([^}]+)\\}", "\\\\issue{$1}");
 		f = f.replaceAll("\\{@uml ([^}]+)\\}", "\\\\uml{$1}");
 		f = f.replaceAll("\\{@type ([^}]+)\\}", "\\\\type{$1}");
+		f = f.replaceAll("\\{@event ([^}]+)\\}", "\\\\event{$1}");
 		
 		// magic translations for tables
 		if (f.contains("<table>"))
@@ -154,6 +158,20 @@ public class TranslateHTMLToLatex {
 		f = f.replace("</td>", "&");
 		f = f.replace("<th>", "\\textbf{");
 		f = f.replace("</th>", "}&");
+		
+		// headings
+		f = f.replace("<h1>", "\\section{");
+		f = f.replace("</h1>", "}");
+		f = f.replace("<h2>", "\\subsection{");
+		f = f.replace("</h2>", "}");
+		f = f.replace("<h3>", "\\subsubsection{");
+		f = f.replace("</h3>", "}");
+		
+		// lists
+		f = f.replace("<ol>", "\n\\begin{enumerate}");
+		f = f.replace("</ol>", "\\end{enumerate}");
+		f = f.replace("<li>", "\\item ");
+		f = f.replace("</li>", "");
 				
 		// get rid of right-most cells
 		// assumes that there are no empty <td>s in the table

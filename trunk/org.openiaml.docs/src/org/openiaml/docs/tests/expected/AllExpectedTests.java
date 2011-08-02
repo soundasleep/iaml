@@ -25,6 +25,7 @@ public class AllExpectedTests {
 		suite.addTestSuite(Inline.class);
 		suite.addTestSuite(DomainIterator.class);
 		suite.addTestSuite(NoLaTeX.class);
+		suite.addTestSuite(Lists.class);
 		//$JUnit-END$
 		return suite;
 	}

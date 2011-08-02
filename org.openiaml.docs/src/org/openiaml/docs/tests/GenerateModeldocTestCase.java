@@ -5,6 +5,7 @@ package org.openiaml.docs.tests;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,7 @@ import org.openiaml.docs.generation.DocumentationGenerationException;
 import org.openiaml.docs.generation.DocumentationGenerator;
 import org.openiaml.docs.generation.DocumentationHelper;
 import org.openiaml.docs.generation.LoadFileMetrics;
+import org.openiaml.docs.generation.TranslateHTMLToLatex;
 import org.openiaml.docs.generation.codegen.ModeldocCodeGenerator;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
@@ -99,6 +101,9 @@ public class GenerateModeldocTestCase extends TestCase {
 	 * @throws Exception
 	 */
 	public void testDump() throws Exception {
+		// first, translate HTML to LaTeX
+		testTranslateHTMLToLaTeX();
+		
 		EObject root = createDocumentation();
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -114,6 +119,43 @@ public class GenerateModeldocTestCase extends TestCase {
 		IStatus status = codegen.generateCode(modelFile);
 		assertTrue("Status was not OK: " + status, status.isOK());
 		
+	}
+	
+	/**
+	 * Translates all of the HTML additional documentation into
+	 * LaTeX format, overwriting the contents if necessary. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testTranslateHTMLToLaTeX() throws Exception {
+		File root = new File("../org.openiaml.model/model/docs/");
+		assertTrue(root + " should exist", root.exists());
+		assertTrue(root + " should be a directory", root.isDirectory());
+		
+		TranslateHTMLToLatex converter = new TranslateHTMLToLatex();
+		
+		// for each .html file
+		for (File html : root.listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(".html");
+			}} )) {
+
+			// translate it
+			System.out.println("Reading in " + html.getName() + "...");
+			try {
+				String output = converter.convertToTex(html);
+			
+				// write it out
+				File tex = new File(html.getAbsolutePath().replace(".html", ".tex"));
+				System.out.println("Writing to " + tex.getName() + "...");
+				
+				FileWriter writer = new FileWriter(tex);
+				writer.write(output);
+				writer.close();
+			} catch (Exception e) {
+				throw new Exception("Could not translate " + html.getName() + ": " + e.getMessage(), e);
+			}
+		}
 	}
 	
 	/*

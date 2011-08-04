@@ -1,10 +1,11 @@
+A {@model ActivityOperation} may contain any number of {@model CastNode} data flow nodes. A {@model CastNode} must have exactly one incoming {@model DataFlowEdge}, representing the <i>source</i> value and type. A {@model CastNode} must also have exactly one outgoing {@model DataFlowEdge} to another <i>data flow node</i>, representing the <i>target</i> value and type.
+
+A {@model CastNode} may have additional outgoing {@model DataFlowEdge}s. If an outgoing {@model DataFlowEdge} is connected to a {@model DecisionNode} {@model DecisionNode#name}d "can cast?", then the value of this {@model DataFlowEdge} represents whether the incoming <i>source</i> value to the {@model CastNode} can be successfully cast to the <i>target</i> type. All other outgoing {@model DataFlowEdge}s represent the forcibly cast value of the incoming <i>source</i> value to the <i>target</i> type; a forcibly cast value will not display an error message if the cast was not possible.
+
 <p>
 A "successful" cast is one where the source can be converted successfully
 <em>with no loss of information</em>. So, for example, the String "123" can
 be successfully cast to an Integer, but "123.4" cannot.
-</p>
-
-<p>
 However, this failure can be discarded if loss of information <em>is</em> acceptable;
 for example, "123.4" forcibly cast to an Integer will return "123".
 </p>

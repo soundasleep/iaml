@@ -1,18 +1,8 @@
-<p>
-When the results of a {@model SelectWire} are evaluated, the resulting result set
-is not stored in memory. That is, if the underlying view changes (objects are inserted
-or removed), the users' view will be updated accordingly. For example,
-{@model DomainObjectInstance#next} will skip over deleted results, possibly undesirably.
-</p>
+{@model DomainIterator}s allow for the access, and modification, of sources of data according to a particular schema. The access is permitted through a {@model DomainIterator#query}, with parameters for the query provided through {@model Parameter}s. A limit of the number of results is defined in the \textit{limit} integer attribute.
 
-<p>
-You are therefore advised to use the "hasNext" and "hasPrevious" {@model PrimitiveCondition}s
-that are provided in the {@model DomainIterator}, and connecting a
-{@model NavigateAction} as a fail wire if necessary.
-</p>
+<h3>query</h3>
 
-<p>
-A variety of database-independent query functions are provided:
+The {@model DomainIterator#query} attribute of the {@model DomainIterator} specifies the query that will be used to select {@model DomainInstance}s from the connected {@model DomainSource}. Parameters to this {@model DomainIterator#query} may be specified through {@model Parameters}, and referenced within the {@model DomainIterator#query} as <i>named parameters</i> (for example, a query of "<code>:id = 1</code>" will use the incoming {@model Parameter} {@model Parameter#name}d "id"). A variety of database-independent query functions are provided:
 
 <table latexAlign="|l|X|">
 <tr>
@@ -28,6 +18,61 @@ A variety of database-independent query functions are provided:
   <td>Returns the current date and time.</td>
 </tr>
 </table>
-</p>
 
+If the {@model DomainIterator#query} is set to the value "new", then this {@model DomainIterator} will instead create new instances of the given {@model DomainType}, which will be saved within the connected {@model DomainSource} if necessary.
 
+<h3>Containing Scope</h3>
+
+Each {@model DomainIterator} has an associated <i>containing scope</i> that represents the scope that a particular instance can be accessed:
+
+<ul>
+  <li>If the iterator is stored within a {@model Scope}, then the iterator instance is unique to a given {@model Scope} instance. For example, a {@model DomainIterator} contained within a {@model Session} can have one instance of that {@model DomainIterator} per {@model Session} instance, and instances of that {@model DomainIterator} cannot be accessed by other instances of the same {@model Session} scope.
+
+  <li>If the iterator is not stored within a {@model Scope}, then the iterator instance is available globally according to the root \modelLink{Internet Application}. That is, only one instance of the {@model DomainIterator} can ever exist.
+</ul>
+
+<h3>Failure Handlers</h3>
+
+An outgoing {@model ECARule} from a particular {@model DomainIterator} with the {@model ECARule#name} "\code{fail}" is defined as a <i>failure handler</i> for the given iterator. If a {@model DomainIterator} does not have such a handler, then the failure handler semantics of the containing {@model Scope} are used instead throughout the scope containment hierarchy.
+
+<h3>Attributes</h3>
+
+A {@model DomainIterator} is composed of a set of {@model DomainAttributeInstance}s, and this set is derived from the set of {@model DomainAttribute}s defined by the \model{DomainIterator#classifier} {@model DomainType} of that {@model DomainIterator}.
+
+<h3>Operations</h3>
+
+<b>reload</b>
+
+The {@model DomainIterator#reload} {@model Operation} of a {@model DomainIterator} reloads the current {@model DomainInstance} from the specified {@model DomainSource}. When the {@model DomainIterator#reload} operation is called upon a given {@model DomainIterator} runtime instance, all current {@model DomainAttributeInstance} values are cleared, and reloaded from the specified {@model DomainSource}. If the {@model DomainSource} can no longer provide the requested instance information, an error will occur.
+
+When a {@model DomainIterator} is accessed for the first time, or the current <i>instance pointer</i> is changed (for example, through calling the {@model DomainIterator#next}, {@model DomainIterator#previous} or {@model DomainIterator#reset} {@model PrimitiveOperation}s, the {@model DomainIterator#reload} operation is also executed.
+
+<b>save</b>
+
+The {@model DomainIterator#save} {@model Operation} of a {@model DomainIterator} forces the current {@model DomainInstance} to be saved to the specified {@model DomainSource} of that iterator. Saving the current {@model DomainInstance} will not modify the current <i>instance pointer</i>. If the save is unsuccessful, an exception will be thrown and handled through the associated <i>failure handler</i> of the iterator.
+
+<b>canSave</b>
+
+The {@model DomainIterator#canSave} {@model Predicate} of a {@model DomainIterator} is <code>false</code> if the current {@model DomainSource} for the iterator is read-only (e.g. an external RSS feed), or a contained {@model DomainAttributeInstance} currently has an invalid value instance.
+
+<b>autosave</b>
+
+If the {@model DomainIterator#autosave} attribute of this {@model DomainIterator} is <code>true</code>, it will ensure all contained {@model DomainAttributeInstance}s will automatically save the current {@model DomainInstance} (as pointed to by the cursor) whenever the attribute instance value is changed. The default value of this attribute is <code>false</code>.
+
+If the {@model DomainIterator#query} of this {@model DomainIterator} is set to "new", and the {@model DomainIterator#autosave} attribute is set to <code>true</code>, then a new {@model DomainInstance} will be created in the {@model DomainSource} immediately. If {@model DomainIterator#autosave} is set to <code>false</code>, then a new {@model DomainInstance} will only be created in the {@model DomainSource} once the {@model DomainIterator#save} {@model Operation} is called.
+
+<b>new</b>
+
+The {@model DomainIterator#new} {@model Operation} of a {@model DomainIterator} forces a new result {@model DomainInstance} to be created, regardless of the current state of the contained {@model DomainInstance}. If the {@model DomainInstance} has not been {@model DomainIterator#save}d, then the changes will be lost.
+
+<b>limit</b>
+
+By default, a {@model DomainIterator} will select at most one matching result to the given {@model DomainIterator#query}. If the {@model DomainIterator#limit} of a {@model DomainIterator} is specified to a non-negative positive integer, then a {@model DomainIterator} will select at most that many results. If the {@model DomainIterator#limit} of a {@model DomainIterator} is specified to zero, then the {@model DomainIterator} will select all possible results.
+
+<b>orderBy</b>
+
+The {@model DomainIterator#orderBy} reference of a {@model DomainIterator} describes the order in which multiple instances will be returned with respect to a single {@model DomainAttribute}. If this reference is not set, then instances may be returned in any order. The direction of this order is specified by the {@model DomainIterator#orderAscending} attribute of the {@model DomainIterator}.
+
+<b>Role and Permission-based operations</b>
+
+A {@model DomainIterator} which selects instances of a {@model Role} will have four {@model Operation}s defined, in oder to modify the current \modelLink{Roles} and {@model Permission}s of the selected <i>user instance</i>: {@model DomainIterator#addRole}, {@model DomainIterator#removeRole}, {@model DomainIterator#addPermission}, and {@model DomainIterator#removePermission}. These are discussed in further detail as {@model PrimitiveOperation}s.

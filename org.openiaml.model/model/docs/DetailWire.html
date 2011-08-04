@@ -1,0 +1,5 @@
+A {@model DetailWire} is a unidirectional {@model Wire}, that connects an {@model InputForm} or {@model IteratorList} (the <i>source view</i>) to a {@model Frame} (the <i>target view</i>). When the intended model is completed through <i>model completion</i>, a {@model DetailWire} will complete functionality to allow a user to "zoom in" to a particular {@model DomainType} instance.
+
+The <i>source view</i> element must be connected via a {@model SetWire} or a {@model SyncWire} from a {@model DomainIterator}. The {@model DomainType} connected to this {@model DomainIterator} must have a {@model DomainAttribute#primaryKey} defined, which will be passed as a {@model QueryParameter} to the <i>target view</i> {@model Frame}.
+
+<!-- model completion semantics ignored -->

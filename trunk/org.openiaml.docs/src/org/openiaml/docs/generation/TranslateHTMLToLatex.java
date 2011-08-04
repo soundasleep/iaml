@@ -160,16 +160,20 @@ public class TranslateHTMLToLatex {
 		f = f.replace("</th>", "}&");
 		
 		// headings
-		f = f.replace("<h1>", "\\section{");
+		f = f.replace("<h1>", "\n\n\\section{");
 		f = f.replace("</h1>", "}");
-		f = f.replace("<h2>", "\\subsection{");
+		f = f.replace("<h2>", "\n\n\\subsection{");
 		f = f.replace("</h2>", "}");
-		f = f.replace("<h3>", "\\subsubsection{");
+		f = f.replace("<h3>", "\n\n\\subsubsection{");
 		f = f.replace("</h3>", "}");
+		f = f.replace("<h4>", "\n\n\\subsubsubsection{");
+		f = f.replace("</h4>", "}");
 		
 		// lists
 		f = f.replace("<ol>", "\n\\begin{enumerate}");
-		f = f.replace("</ol>", "\\end{enumerate}");
+		f = f.replace("</ol>", "\\end{enumerate}\n");
+		f = f.replace("<ul>", "\n\\begin{itemize}");
+		f = f.replace("</ul>", "\\end{itemize}\n");
 		f = f.replace("<li>", "\\item ");
 		f = f.replace("</li>", "");
 				

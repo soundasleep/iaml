@@ -1,1 +1,5 @@
-This model element may be removed from the IAML metamodel in the future{@issue 220}.
+An {@model Arithmetic} must have at least one incoming {@model DataFlowEdge}, representing the source values. When a {@model DataFlowEdge} sourced from a {@model Arithmetic} is evaluated, the value provided represents the arithmetic combination of the source values according to the {@model Arithmetic#operationType} of the {@model Arithmetic}.
+
+Four {@model Arithmetic#operationTypes are defined for {@model Arithmetic}: <code>AND</code>, <code>SUBTRACT</code>, <code>MULTIPLY</code> and <code>DIVIDE</code>; each of these operations correspond to addition, subtraction, multiplication and division, respectively. For <code>DIVIDE</code> arithmetic, the divisor used in the arithmetic is the first incoming {@model DataFlowEdge} with the {@model DataFlowEdge#name} "divisor".  If the \textit{divisor} used in a <code>DIVIDE</code> arithmetic is equal to zero, the value of the subsequent {@model Arithmetic} node will not be numeric ("not-a-number", or <code>NaN</code>).
+
+This model element may be removed from the IAML metamodel in the future{@issue 220}, as these arithmetic operations can be replaced with {@model XQueryFunction}s.

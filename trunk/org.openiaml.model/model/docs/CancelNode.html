@@ -1,1 +1,3 @@
+A {@model ActivityOperation} may contain any number of {@model CancelNode}s. When the <i>execution flow</i> arrives at a {@model CancelNode}, the execution of the operation will finish, however the execution will be marked as a failure. The <i>failure handler</i> of the {@model ECARule} that executed the {@model Operation} will be called to handle this failure.
+
 The {@model CancelNode} element is based on the UML {@uml FinalNode} (flow final) model element.

@@ -1,5 +1,11 @@
+<p>
 An {@model ECARule} specifies that a triggered {@model Event} will execute a specific {@model Action} if permitted to by any incoming {@model Condition}s. This {@model ECARule} may have incoming {@model Parameter}s, which are passed by value at the time that the {@model Event} is triggered. This {@model ECARule} may also have incoming {@model COnditions}s, which are evaluated at the time of the triggered {@model Event}; if these conditions are not true, then the {@model Action} will not be executed.
+</p>
 
+<p>
 When an {@model Event} is triggered, all outgoing {@model ECARule}s are sorted in descending order according to their integer property {@model ECARule#priority}, and then evaluated in a sequential manner according to their incoming {@model Predicate}s; this set is known as the <i>current execution set</i>. All <i>executable</i> {@model ECARule}s are then followed sequentially in this order, and the type of action specified by the target {@model Action} are executed, until all {@model ECARule}s are executed or an {@model Action} <i>fails</i>.
+</p>
 
+<p>
 For an {@model ECARule} to be <i>executable</i>, all incoming {@model Condition}s must evaluate to <code>true</code> according to logical conjunction (<code>AND</code>). {@model Condition}s may be connected{@issue 134} with a {@model ConstraintEdge} to change this behaviour to logical disjunction (<code>OR</code>) or exclusive disjunction (<code>XOR</code>). Any incoming {@model Parameter}s to that {@model ECARule} are then calculated, and passed as named parameter values to the target {@model Action}.
+</p>

@@ -1,3 +1,7 @@
+<p>
 An {@model ActivityOperation} may contain any number of {@model OperationCallNode}s. Each {@model OperationCallNode} must have at least one outgoing {@model ECARule}. When the <i>execution flow</i> arrives at an {@model OperationCallNode}, each outgoing {@model ECARule} will be executed sequentially, according to the {@model ECARule#priority} of each edge.
+</p>
 
+<p>
 If the last {@model ECARule} executed from the {@model OperationCallNode} <i>fails</i>, the execution flow will follow all outgoing <i>failure edges</i> sequentially. Otherwise, the execution flow will follow all outgoing <i>success edges</i> sequentially.
+</p>

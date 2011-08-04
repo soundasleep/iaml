@@ -1,3 +1,7 @@
+A {@model Scope} may contain at most one {@model AccessControlHandler}. All access to elements within this {@model Scope}, or its children {@model Scope}s, must first <i>satisfy</i> the {@model AccessControlHandler}. A {@model AccessControlHandler} must have at least one outgoing {@model RequiresEdge}, and each {@model RequiresEdge} must connect to either a {@model Role} or {@model Permission}.
+
+A {@model RequiresEdge} may be connected to another {@model RequiresEdge} with a {@model ConstraintEdge} in order to support the composition of complex conditions. The composition of these outgoing \modelLink{Requires Edges} with any connecting {@model ConstraintEdge}s represent the <i>access requirements</i> of the {@model AccessControlHandler}.
+
 <p>
 A {@model AccessControlHandler} has an associated <i>user instance</i> {@model DomainIterator}, which will only be populated when the current user satisfies the <i>access requirements</i> of the handler.
 </p>

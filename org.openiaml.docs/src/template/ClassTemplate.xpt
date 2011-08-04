@@ -36,14 +36,14 @@
 		
 		«IF tagline != null»
 		<div id="tagline">
-		«EXPAND ClassTemplate::javadocElement FOR tagline»
+		«EXPAND ClassTemplate::javadocElement(true) FOR tagline»
 		</div>
 		«ENDIF»
 		
 		«IF !additionalDocumentation.isEmpty»
 			<div id="description">
 			«FOREACH additionalDocumentation AS description»
-				«EXPAND javadocElement FOR description.description» «EXPAND linkReference FOR description.reference»
+				«EXPAND javadocElement(true) FOR description.description» «EXPAND linkReference FOR description.reference»
 			«ENDFOREACH»
 			</div>
 		«ENDIF»
@@ -51,7 +51,7 @@
 		«IF rationale != null»
 		<div id="rationale">
 			<h3>Rationale</h3>
-			«EXPAND ClassTemplate::javadocElement FOR rationale»
+			«EXPAND ClassTemplate::javadocElement(true) FOR rationale»
 		</div>
 		«ENDIF»
 		
@@ -268,7 +268,7 @@
 
 «DEFINE example(Boolean local) FOR modeldoc::Example»
 	<li>
-		«EXPAND javadocElement FOR description»
+		«EXPAND javadocElement(true) FOR description»
 
 		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
 		
@@ -280,7 +280,7 @@
 
 «DEFINE operationalSemantics(Boolean local) FOR modeldoc::OperationalSemantic»
 	<li>
-		«EXPAND javadocElement FOR description»
+		«EXPAND javadocElement(true) FOR description»
 		
 		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
 		
@@ -292,7 +292,7 @@
 
 «DEFINE inferenceSemantics(Boolean local) FOR modeldoc::InferenceSemantic»
 	<li>
-		«EXPAND javadocElement FOR description»
+		«EXPAND javadocElement(true) FOR description»
 		
 		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
 		
@@ -304,7 +304,7 @@
 
 «DEFINE implementationNote FOR modeldoc::ImplementationNote»
 	<li>
-		«EXPAND javadocElement FOR description»
+		«EXPAND javadocElement(true) FOR description»
 		
 		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
 	</li>
@@ -347,7 +347,7 @@
 		
 		«IF tagline != null»
 		<div class="tagline">
-		«EXPAND ClassTemplate::javadocElement FOR tagline»
+		«EXPAND ClassTemplate::javadocElement(true) FOR tagline»
 		</div>
 		«ENDIF»
 		
@@ -388,7 +388,7 @@
 		
 		«IF tagline != null»
 		<div class="tagline">
-		«EXPAND ClassTemplate::javadocElement FOR tagline»
+		«EXPAND ClassTemplate::javadocElement(true) FOR tagline»
 		</div>
 		«ENDIF»
 	</li>
@@ -406,22 +406,26 @@
 	</li>
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::Reference»
+«DEFINE javadocElement(boolean allowSpace) FOR modeldoc::Reference»
 	<span class="error">Unknown javadoc '«this»'</span>
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag «getCssTagName(name)»">«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
+«DEFINE javadocElement(boolean allowSpace) FOR modeldoc::JavadocTagElement»<span class="javadocTag «getCssTagName(name)»">«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «EXPAND javadocSemanticsElement FOR fragments.first()-»
-«EXPAND javadocElement FOREACH fragments.withoutFirst()-»
+«EXPAND javadocElement(true) FOREACH fragments.withoutFirst()-»
+«ELSEIF name == "@issue"-»
+<span class="issue"><a href="http://code.google.com/p/iaml/issues/detail?id=«EXPAND javadocElement(false) FOREACH fragments-»">issue «EXPAND javadocElement(false) FOREACH fragments-»</a></span>
+«ELSEIF name == "@type"-»
+<code class="type">«EXPAND javadocElement(false) FOREACH fragments-»</code>
 «ELSEIF name == "@model" || name == "@link"-»
 «EXPAND javadocModelElement FOREACH fragments-»
 «ELSE-»
-«EXPAND javadocElement FOREACH fragments-»
+«EXPAND javadocElement(true) FOREACH fragments-»
 «ENDIF-»</span>«ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTextElement-»
-«IF !(value.startsWith(",") || value.startsWith(".")
+«DEFINE javadocElement(boolean allowSpace) FOR modeldoc::JavadocTextElement-»
+«IF !allowSpace && !(value.startsWith(",") || value.startsWith(".")
 	|| value.startsWith("-")
 	|| value.startsWith("?") || value.startsWith(")"))»«" "»«ENDIF»«value-»
 «ENDDEFINE»
@@ -459,7 +463,7 @@
 
 /* no special meaning; just render it like normal */
 «DEFINE javadocModelElement FOR modeldoc::JavadocFragment»
-	«EXPAND javadocElement» 
+	«EXPAND javadocElement(true)» 
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::Reference»

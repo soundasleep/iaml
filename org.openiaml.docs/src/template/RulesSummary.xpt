@@ -28,7 +28,7 @@
 		<ul>
 			«FOREACH pkg.javadocs AS fragment»
 			<li>
-				«EXPAND ClassTemplate::javadocElement FOR fragment»
+				«EXPAND ClassTemplate::javadocElement(true) FOR fragment»
 			</li>
 			«ENDFOREACH»
 		</ul>

@@ -72,16 +72,27 @@ public class BasicJavadocParser {
 					// a plural) then modify appropriately
 					// e.g. {@model Foo}s -> {@model Foo Foos}
 					// but not if there is a space within the tag
-					if (line.length() > next2 + 2) {
-						if (!tagText.contains(" ")) {
-							String s2 = line.substring( next2 + 1, next2 + 3 );
-							if (s2 != null && s2.length() == 2 && s2.charAt(0) == 's' && isWordSeperator(s2.charAt(1))) {
-								next2++;	// keep whitespace
-								tagText += " " + tagText + "s";
+					
+					// '...s ', '...d '
+					for (char pluralChar : new char[]{'s', 'd'}) {
+						if (line.length() > next2 + 2) {
+							if (!tagText.contains(" ")) {
+								String s2 = line.substring( next2 + 1, next2 + 3 );
+								if (s2 != null && s2.length() == 2 && s2.charAt(0) == pluralChar && isWordSeperator(s2.charAt(1))) {
+									next2++;	// keep whitespace
+									
+									// {@foo x#y}s should be considered {@foo x#y ys}, not {@foo x#y x#ys}
+									String newTagText = tagText;
+									if (newTagText.contains("#")) {
+										newTagText = newTagText.substring(newTagText.indexOf("#") + 1);
+									}
+									
+									tagText += " " + newTagText + pluralChar;
+								}
 							}
 						}
 					}
-					
+
 					inline.handleTag(tagName, tagText);
 				} else {
 					inline.handleText("{" + tag + "}"); 

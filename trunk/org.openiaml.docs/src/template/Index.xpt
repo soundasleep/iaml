@@ -35,7 +35,7 @@
 	<a href="«fileName(cls)»" class="icon_image">«EXPAND ModeldocTemplate::getIcon FOR cls»</a>
 	<a href="«fileName(cls)»">«cls.name»</a>
 	«IF cls.tagline != null»
-	<small>«EXPAND ClassTemplate::javadocElement FOR cls.tagline»</small>
+	<small>«EXPAND ClassTemplate::javadocElement(true) FOR cls.tagline»</small>
 	«ENDIF»
 	</li>
 «ENDFOREACH»

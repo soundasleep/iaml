@@ -175,5 +175,9 @@ body#metrics th { text-align: left; }
 body#metrics td { text-align: right; }
 body#metrics tbody th { font-weight: normal; }
 
+span.issue { font-size: xx-small; vertical-align: super; }
+span.issue:before { content: "["; }
+span.issue:after { content: "]"; }
+
 «ENDFILE»
 «ENDDEFINE»

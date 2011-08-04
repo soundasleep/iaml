@@ -1,0 +1,41 @@
+<h3>onChange</h3>
+
+The {@event onChange} event is defined for all {@model Changeable} model elements. If the element is a {@model VisibleThing}, then {@event onChange} is triggered when a control loses the input focus <i>and</i> its contained {@model Changeable#fieldValue} has been modified since it gained focus. For visual elements, {@event onChange} will <i>not</i> be triggered while the element still has the
+
+<h3>onInput</h3>
+
+The {@event onInput} event is defined for all {@model VisibleThing} model elements. The event is triggered whenever its contained {@model Changeable#fieldValue} is modified.
+
+It is not guaranteed that {@event onInput} will ever fire; nor that it will fire upon every character keystroke. For performance reasons and to prevent excessive network requests, this event may be buffered during periods of intense input.
+
+<h3>onAccess</h3>
+
+The {@event onAccess} event is defined for all {@model Accessible} model elements, which includes all {@model VisibleThing}s, {@model Scope}s and {@model Email}s. The {@event onAccess} event may be triggered multiple times within the same request.
+
+<ul>
+  <li>The {@event onAccess} {@model Event} is triggered on a {@model VisibleThing} when the element is \textit{about to be} rendered to the client.
+  <li>The {@event onAccess} {@model Event} is triggered on a {@model Scope} when the scope is \textit{about to be} accessed.
+  <li>The {@event onAccess} {@model Event} is triggered on an {@model Email} when the email is \textit{about to be} rendered into a static form for delivery.
+</ul>
+
+<h3>onInit</h3>
+
+The {@event onInit} event is defined for all {@model Scope} model elements, and it is fired whenever an instance of that {@model Scope} is initialised. A {@model Frame} is initialised whenever the {@model Frame} is about to be rendered to the client; and a {@model Session} is initialised when it is accessed for the first time by a <i>user</i>.
+
+The {@event onInit} event is guaranteed to be triggered once before {@event onAccess} is triggered. It is not guaranteed that {@event onAccess} will be fired immediately after {@event onInit}, and it may never be fired (for example, within a {@model Session} that is referenced, but never accessed).
+
+<h3>onClick</h3>
+
+The {@event onClick} event is defined for all {@model VisibleThing} model elements, and is triggered when the element is clicked by a pointer, or otherwise activated in a manner which simulates such a click. For composite visual elements, a <i>click</i> is <i>textit{bubbled up</i> the containment hierarchy of {@model VisibleThing}s.
+
+<h3>onSent</h3>
+
+The {@event onSent} event is defined for all {@model Email} model elements, and is triggered when an {@model Email} has been successfully delivered to an outgoing email host. Once an {@event onSent} event has been triggered, the {@event onFailure} event may still be triggered.
+
+<h3>onFailure</h3>
+
+The {@event onFailure} event is defined for all {@model Email} model elements, and is triggered when an {@model Email} could not be successfully delivered to an outgoing email host, according to the local e-mail delivery configuration. Once an {@event onFailure} event has been triggered, the {@event onSent} event cannot be triggered.
+
+<h3>onIterate</h3>
+
+The {@event onIterate} event is defined for all {@model DomainIterator} model elements, and is triggered immediately after the current <i>instance pointer</i> of a given {@model DomainIterator} changes, or the current instance is reloaded through the {@model DomainIterator#reload} operation.

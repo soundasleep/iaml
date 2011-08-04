@@ -13,4 +13,4 @@ An {@model Email} contains the {@model Operation} {@model Email#send}, which wil
 An {@model Email} contains the {@model Event}s {@event onSent} and {@event onFailure}. These events are triggered once an {@model Email} has been successfully delivered and when an {@model Email} is unsuccessfully received, as discussed by {@model Event}.
 
 <!-- TODO Email.onInit is never actually defined in the code templates -->
-An IAML model instance may contain any number of {@model Email}s. The {@event onInit} {@model Event} for an {@model Email} is executed when the {@model Email} is first accessed. The <i>storage semantics</i> for a {@model Email} follow the storage semantics for its <i>containing scope</i>, similar to the <i>storage semantics</i> for the {@model Frame} element.
+An IAML model instance may contain any number of {@model Email}s. The <i>storage semantics</i> for a {@model Email} follow the storage semantics for its <i>containing scope</i>, similar to the <i>storage semantics</i> for the {@model Frame} element.

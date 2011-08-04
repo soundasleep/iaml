@@ -1,9 +1,5 @@
 <p>
-An IAML model instance may contain any number of {@model Session}s. The {@event onInit} {@model Event} for a {@model Session} is executed when a {@model Session} is accessed for the first time by a user, in the following way.
-</p>
-
-<p>
-Every <i>visitor</i> to a web application is assigned a unique identifier in order to promote them to a <i>user</i>. If a {@model Session} is accessed by a user and no association exists between the users' unique identifier and the given {@model Session}, then a new relationship is created and stored as part of the {@model InternetApplication}. The current user now <i>owns</i> that {@model Session}. When this occurs, the \event{onInit} event for that {@model Session} is triggered.
+Every <i>visitor</i> to a web application is assigned a unique identifier in order to promote them to a <i>user</i>. If a {@model Session} is accessed by a user and no association exists between the users' unique identifier and the given {@model Session}, then a new relationship is created and stored as part of the {@model InternetApplication}. The current user now <i>owns</i> that {@model Session}. When this occurs, the {@event onInit} event for that {@model Session} is triggered.
 </p>
 
 <p>
@@ -11,5 +7,5 @@ If the current <i>user</i> restarts their web browser, the <i>user</i> will lose
 </p>
 
 <p>
-The <i>storage semantics</i> for a {@model Session} are as follows: For a {@model Value} directly contained within a {@model Session}, any stored value is only accessible to the user that <i>owns</i> the containing {@model Session}. Once the {@model Session} ownership has been lost, any stored value is no longer accessible. Similarly, the values stored within a {@model DomainIterator} (including the current <i>instance pointer</i>) are only accessible to the current <i>user</i>.
+An IAML model instance may contain any number of {@model Session}s. The <i>storage semantics</i> for a {@model Session} are as follows: For a {@model Value} directly contained within a {@model Session}, any stored value is only accessible to the user that <i>owns</i> the containing {@model Session}. Once the {@model Session} ownership has been lost, any stored value is no longer accessible. Similarly, the values stored within a {@model DomainIterator} (including the current <i>instance pointer</i>) are only accessible to the current <i>user</i>.
 </p>

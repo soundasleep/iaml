@@ -1,3 +1,5 @@
+All scopes in IAML are instances of {@model Scope}, and a {@model Scope} may contain another {@model Scope} through a hierarchy of containment. A {@model Scope} may directly contain any number of {@model Scope}s. Every {@model Scope} will contain the pre-render lifecycle {@model Event}s {@event onAccess} (through {@model Accessible}) and {@event onInit}.
+
 <p>
 When a {@model Scope} is rendered, the lifecycle events for that {@model Scope} must be executed in the following order. If a failure occurs during this process, the current lifecycle execution process is cancelled and the <i>failure handler</i> for the current {@model Scope} is executed. If an {@model ECARule} is executed which must redirect the user to another {@model Frame}, the current lifecycle execution process is cancelled.
 </p>
@@ -9,9 +11,15 @@ When a {@model Scope} is rendered, the lifecycle events for that {@model Scope} 
 
   <li>The {@event onAccess} {@model Event} is triggered.
 
-  <li>All \modelLink{Entry Gates} contained within this {@model Scope} are sorted according to their {@model EntryGate#name}. The <i>access semantics</i> of each {@model EntryGate} are then executed.
+  <li>All entry {@model Gate}s contained within this {@model Scope} are sorted according to their {@model EntryGate#name}. The <i>access semantics</i> of each {@model EntryGate} are then executed.
 
-  <li>All \modelLink{Exit Gates} contained within this {@model Scope} are sorted according to their {@model ExitGate#name}. The <i>access semantics</i> of each {@model ExitGate} are then executed.
+  <li>All exit {@model Gate}s contained within this {@model Scope} are sorted according to their {@model ExitGate#name}. The <i>access semantics</i> of each {@model ExitGate} are then executed.
 
   <li>The {@model Scope} is then rendered.
 </ol>
+
+<h3>Failure Handler</h3>
+
+An outgoing {@model ECARule} from a particular {@model Scope} with the {@model ECARule#name} "<code>fail</code>" is defined as a <i>failure handler</i> for the given scope. If an error occurs during the execution of the given {@model Scope} -- for example, an {@model Operation} fails -- then the failure handler for that {@model Scope} is executed according to the execution semantics of the {@model ECARule}.
+
+If the current {@model Scope} does not define a <i>failure handler</i>, then the <i>failure handler</i> of the containing {@model Scope} is used as the failure handler. If an exception is not caught through the containment hierarchy of {@model Scope}s, then the exception is caught by the runtime environment and the web application will display a runtime error.

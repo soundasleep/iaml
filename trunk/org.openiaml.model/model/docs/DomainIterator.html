@@ -33,7 +33,7 @@ Each {@model DomainIterator} has an associated <i>containing scope</i> that repr
 
 <h3>Failure Handlers</h3>
 
-An outgoing {@model ECARule} from a particular {@model DomainIterator} with the {@model ECARule#name} "\code{fail}" is defined as a <i>failure handler</i> for the given iterator. If a {@model DomainIterator} does not have such a handler, then the failure handler semantics of the containing {@model Scope} are used instead throughout the scope containment hierarchy.
+An outgoing {@model ECARule} from a particular {@model DomainIterator} with the {@model ECARule#name} "<code>fail</code>" is defined as a <i>failure handler</i> for the given iterator. If a {@model DomainIterator} does not have such a handler, then the failure handler semantics of the containing {@model Scope} are used instead throughout the scope containment hierarchy.
 
 <h3>Attributes</h3>
 
@@ -75,4 +75,4 @@ The {@model DomainIterator#orderBy} reference of a {@model DomainIterator} descr
 
 <b>Role and Permission-based operations</b>
 
-A {@model DomainIterator} which selects instances of a {@model Role} will have four {@model Operation}s defined, in oder to modify the current \modelLink{Roles} and {@model Permission}s of the selected <i>user instance</i>: {@model DomainIterator#addRole}, {@model DomainIterator#removeRole}, {@model DomainIterator#addPermission}, and {@model DomainIterator#removePermission}. These are discussed in further detail as {@model PrimitiveOperation}s.
+A {@model DomainIterator} which selects instances of a {@model Role} will have four {@model Operation}s defined, in oder to modify the current {@model Role}s and {@model Permission}s of the selected <i>user instance</i>: {@model DomainIterator#addRole}, {@model DomainIterator#removeRole}, {@model DomainIterator#addPermission}, and {@model DomainIterator#removePermission}. These are discussed in further detail as {@model PrimitiveOperation}s.

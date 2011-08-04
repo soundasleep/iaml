@@ -2,7 +2,7 @@
 The {@model VisibleThing#hide} and {@model VisibleThing#show} {@model BuiltinOperation}s are defined for all {@model VisibleThing}s. When executed, the {@model Operation} hides or shows its parent element respectively. The current visibility is stored within a {@model Value} contained within the field{@issue 223}, and thus persists according to the containing {@model Scope}.
 
 <h3>init, update</h3>
-The {@model VisibleThing#init} and {@model VisibleThing#update} {@model BuiltinOperation}s are defined for all {@model DomainAttributeInstance}s and {@model VisibleThing}s. The {@model Operation} accepts one {@model ActivityParameter}, <i>value</i>. When executed, the operation updates the {@model Changeable}{field value} of the parent element to the provided <i>value</i>.
+The {@model VisibleThing#init} and {@model VisibleThing#update} {@model BuiltinOperation}s are defined for all {@model DomainAttributeInstance}s and {@model VisibleThing}s. The {@model Operation} accepts one {@model ActivityParameter}, <i>value</i>. When executed, the operation updates the {@model Changeable#fieldValue} of the parent element to the provided <i>value</i>.
 
 <h3>send</h3>
 The {@model Email#send} {@model BuiltinOperation} is defined for all {@model Email}s. When executed, the {@model Operation} attempts to \textit{send} the current {@model Email}. If the e-mail can successfully be delivered, the {@event onSuccess} event is triggered; if the e-mail cannot be successfully received, the {@event onFailure} event is triggered.

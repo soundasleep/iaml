@@ -28,7 +28,7 @@ Each {@model DomainIterator} has an associated <i>containing scope</i> that repr
 <ul>
   <li>If the iterator is stored within a {@model Scope}, then the iterator instance is unique to a given {@model Scope} instance. For example, a {@model DomainIterator} contained within a {@model Session} can have one instance of that {@model DomainIterator} per {@model Session} instance, and instances of that {@model DomainIterator} cannot be accessed by other instances of the same {@model Session} scope.
 
-  <li>If the iterator is not stored within a {@model Scope}, then the iterator instance is available globally according to the root \modelLink{Internet Application}. That is, only one instance of the {@model DomainIterator} can ever exist.
+  <li>If the iterator is not stored within a {@model Scope}, then the iterator instance is available globally according to the root {@model InternetApplication}. That is, only one instance of the {@model DomainIterator} can ever exist.
 </ul>
 
 <h3>Failure Handlers</h3>

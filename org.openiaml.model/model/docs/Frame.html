@@ -1,7 +1,5 @@
-<p>
-A {@model Frame} may contain any number of {@model VisibleThings}, and this set of elements defines the <i>user interface</i> for that {@model Frame}.
-</p>
+An IAML model instance may contain any number of {@model Frame}s. The {@event onInit} {@model Event} for an {@model InternetApplication} is triggered every time the {@model Frame} is rendered to a client.
 
-<p>
-The <i>storage semantics</i> for a {@model Frame} follow the storage semantics for its <i>containing scope</i>.
-</p>
+The <i>storage semantics</i> for a {@model Frame} follow the storage semantics for its <i>containing scope</i>. For example, if the {@model Frame} is directly contained by a {@model Session}, then the storage semantics of the parent {@model Session} will be used; likewise, if the {@model Frame} is directly contained by an {@model InternetApplication}, then the storage semantics of the parent {@model InternetApplication} will be used.
+
+A {@model Frame} may contain any number of {@model VisibleThing}s, and this set of elements defines the <i>user interface</i> for that {@model Frame}. All {@model VisibleThing}s may be <i>rendered</i> to a user. When a {@model VisibleThing} is rendered to a user, all children {@model VisibleThing}s must also be rendered in order according to their {@model VisibleThing#renderOrder}. A {@model VisibleThing} that is currently <i>hidden</i> must not be rendered until that {@model VisibleThing} is subsequently <i>shown</i> through the {@model VisibleThing#show} {@model Operation}. The {@model VisibleThing#name} propery of the {@model VisibleThing} may be used as a label for the rendered element.

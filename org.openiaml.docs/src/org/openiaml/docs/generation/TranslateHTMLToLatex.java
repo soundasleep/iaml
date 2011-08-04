@@ -146,8 +146,8 @@ public class TranslateHTMLToLatex {
 			throw new LatexTranslationException("A table cannot contain an empty table cell, i.e. <td></td>");
 		if (f.contains("<th></th>"))
 			throw new LatexTranslationException("A table cannot contain an empty table cell, i.e. <th></th>");
-		f = f.replaceAll("<table latexAlign=\"([^\"]+)\">", "\n\\\\begin{tabularx}{\\\\modeldocTableWidth}{$1}");
-		f = f.replace("</table>", "\\hline\n\\end{tabularx}");
+		f = f.replaceAll("<table latexAlign=\"([^\"]+)\">", "\n\\\\begin{modeldocTable}\n\\\\begin{tabularx}{\\\\modeldocTableWidth}{$1}");
+		f = f.replace("</table>", "\\hline\n\\end{tabularx}\n\\end{modeldocTable}");
 		f = f.replace("<thead>", "");
 		f = f.replace("</thead>", "\\hline");
 		f = f.replace("<tbody>", "");
@@ -174,6 +174,12 @@ public class TranslateHTMLToLatex {
 		f = f.replace("</ol>", "\\end{enumerate}\n");
 		f = f.replace("<ul>", "\n\\begin{itemize}");
 		f = f.replace("</ul>", "\\end{itemize}\n");
+		f = f.replace("<dl>", "\n\\begin{description}");
+		f = f.replace("</dl>", "\\end{description}\n");
+		f = f.replace("<dt>", "\\item[");
+		f = f.replace("</dt>", "]");
+		f = f.replace("<dd>", "");
+		f = f.replace("</dd>", "");
 		f = f.replace("<li>", "\\item ");
 		f = f.replace("</li>", "");
 				

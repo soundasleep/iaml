@@ -54,6 +54,7 @@
 \newcommand{\modeldocNoInferenceSemantics}{} % empty
 \newcommand{\modeldocNoDirectConstraints}{} % empty
 \newcommand{\modeldocNoDirectImplementationNotes}{} % empty
+\newcommand{\modeldocAttributeType}[1]{\code{#1}}
 
 % #1 - property name, e.g. name
 % #2 - property parent, e.g. NamedElement

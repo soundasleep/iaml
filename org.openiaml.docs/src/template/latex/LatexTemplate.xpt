@@ -150,7 +150,7 @@
 				
 		\begin{modeldocList}
 		«FOREACH attributes.sortBy(a|a.name) AS attribute»
-		  \item \modeldocName{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(attribute.lowerBound, attribute.upperBound)» \code{«convertHTMLIntoLatex(attribute.type)»}
+		  \item \modeldocName{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(attribute.lowerBound, attribute.upperBound)» \modeldocAttributeType{«convertHTMLIntoLatex(attribute.type)»}
 			«IF attribute.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»

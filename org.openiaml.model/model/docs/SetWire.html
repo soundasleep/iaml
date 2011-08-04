@@ -1,4 +1,11 @@
-<p>
-Similar in concept and implementation to a {@model SyncWire}, except this is unidirectional. 
-If the target value changes, the source value will not change.
-</p>
+A {@model SetWire} will synchronise the {@model CanBeSynced} elements contained within each of the synchronised elements in a manner similar to a {@model SyncWire}, except that this {@model Wire} is unidirectional; if the target value changes, the source value will not change. For a {@model SetWire}, the <i>default element</i> created depends instead on the following semantics:
+
+<ul>
+  <li>If both the <i>source container</i> and the <i>target container</i> are {@model InputForm}s, then the type of the <i>default element</i> will be a {@model Label}.
+
+  <li>If the <i>source container</i> is a {@model DomainIterator} and the <i>target container</i> is a {@model InputForm}, {@model Email} or {@model IteratorList}, then the type of the <i>default element</i> will be a {@model Label}.
+
+  <li>If the <i>source container</i> is a {@model VisibleThing} and the <i>target container</i> is a {@model Map}, then the type of the <i>default element</i> will be a {@model MapPoint}.
+\end{itemize}
+
+If a {@model DomainIterator} iterating over multiple results is connected to a {@model InputForm} with a {@model SyncWire} or {@model SetWire}, then the form will be populated in such a way to provide navigation over the data set. That is, {@model Button}s will be created within the form to control the cursor over the iterator.

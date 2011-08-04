@@ -1,9 +1,15 @@
 <h3>Frame</h3>
 
+<p>
 If a {@model Frame} is executed as an {@model Action}, then the browser is redirected to the selected {@model Frame}. Any incoming {@model Parameter}s to the connecting {@model ECARule} are passed as {@model QueryParameter}s to the {@model Frame}.
+</p>
 
 <h3>Operation</h3>
 
+<p>
 If an {@model Operation} is executed as an {@model Action}, then the given {@model Operation} is executed. Any incoming {@model Parameter}s to the connecting {@model ECARule} are passed as {@model ActivityParameter}s to the {@model Operation}.
+</p>
 
+<p>
 If an {@model Operation} executed by a {@model ECARule} <i>fails</i>, all subsequent {@model ECARule}s in the <i>current execution set</i> are cancelled, and the <i>failure handler</i> for the {@model Scope} containing the source of the {@model ECARule} is executed, as described by {@model Scope}.
+</p>

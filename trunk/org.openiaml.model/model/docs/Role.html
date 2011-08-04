@@ -1,6 +1,10 @@
+<p>
 A {@model Role} represents a specific role of a user within a web application using Role-Based Access Control, with a particular {@model Role} also providing a set of {@model Permission}s. Similarly to the inheritance hierarchy of {@model DomainType}, a {@model Role} may inherit another {@model Role} in order to define a <i>role hierarchy</i>; this is provided by making a {@model Role} a subtype of {@model DomainType}. That is, a child {@model Role} that extends a parent {@model Role} through an {@model ExtendsEdge} therefore will provide all {@model Permission}s that the parent {@model Role} provides.
+</p>
 
+<p>
 A {@model Role} may also define role-specific attributes by defining {@model DomainAttribute}s according to the semantics of {@model DomainType}. These {@model DomainAttribute}s subsequently become the <i>profile attributes</i> of the given {@model Role}.
+</p>
 
 <p>
 An IAML model instance will have one {@model Role} with the {@model Role#name} of "User", representing the root {@model Role} type in an application, and this constraint may be satisfied through model completion. All {@model Role} instances in a model instance must inherit this {@model Role}. By default, this "User" role instance will contain a {@model DomainAttribute} with a {@model DomainAttribute#name} of "email" and a {@model DomainAttribute} with a {@model DomainAttribute#name} of "password", representing the e-mail address and user password of a user's profile respectively.

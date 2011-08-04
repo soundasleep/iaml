@@ -1,5 +1,9 @@
+<p>
 An {@model AutocompleteWire} is a unidirectional {@model Wire}, that connects a {@model DomainIterator} to a {@model VisibleThing} (the <i>target element</i>). An {@model AutocompleteWire} has an additional reference, {@model AutocompleteWire#match}, which references a {@model DomainAttribute} from which to search by. The connected {@model DomainType} for that iterator must have a {@model DomainAttribute} matching the name of the <i>target element</i>, as this will be the value used for a successful autocomplete interaction.
+</p>
 
 <!-- semantics of AutocompleteWire implementation have been removed; refer to @inference documentation -->
 
+<p>
 IAML does not specify whether the search should be performed on the client or the server. For small data sets, the database could be prefetched and cached by the client, in order to perform quick searches; for larger data sets, the database should remain on the server, and the search performed asynchronously.
+</p>

@@ -1,11 +1,13 @@
+<p>
 {@model Value}s have an associated {@model Value#name} and XSD {@model Value#type}, and may also have a {@model Value#defaultValue}. The {@model Value#defaultValue} of a {@model Value} is serialised as a {@type string}, and this {@type string} instance is deserialised into a valid {@model Value#type} instance defined by that {@model Value}. Each {@model Value} has an associated <i>containing scope</i> that represents the storage method for the {@model Value}:
+</p>
 
 <ul>
   <li>If the {@model Value} is stored within an {@model ActivityOperation} or {@model ActivityPredicate}, then the containing scope of that value is the containing scope of the {@model ActivityOperation}'s or {@model ActivityPredicate}'s container.
-
   <li>If the {@model Value} is stored within a {@model Scope}, then the value instance is unique to a given {@model Scope}. For example, a {@model Value} contained within a {@model Session} can only have one instance of that {@model Value} per {@model Session} instance, and instances of that {@model Value} cannot be accessed by other instances of the same {@model Session} scope.
-
   <li>If the {@model Value} is not stored within a {@model Scope}, then the value instance is available globally accorindg to the root {@model InternetApplication}. That is, only one instance of the {@model Value} can ever exist.
 </ul>
 
+<p>
 If a particular {@model Value} has a defined {@model Value#defaultValue}, then the {@model Value} will initially be considered as <i>unset</i>. However, if a {@model Value} is subsequently updated -- for example, through the {@model Changeable#update} {@model PrimitiveOperation} -- the {@model Value} will now be considered <i>set</i>.
+</p>

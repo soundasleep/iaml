@@ -24,6 +24,18 @@ List[modeldoc::InferenceSemantic] getInheritedInferenceSemantics(modeldoc::EMFCl
 List[modeldoc::Example] getInheritedExamples(modeldoc::EMFClass this) :
 	supertypes.examples.union( supertypes.getInheritedExamples() ); 
 
+boolean isEvent(modeldoc::EMFReference this) :
+	type.name.endsWith("Event");
+
+boolean isOperation(modeldoc::EMFReference this) :
+	type.name.endsWith("Operation");
+
+boolean isCondition(modeldoc::EMFReference this) :
+	type.name.endsWith("Condition") ||
+		type.name.endsWith("Predicate") ||
+		type.name.endsWith("Property");
+
+
 /**
  * Get a unique model reference ID that is consistent across multiple
  * model references.

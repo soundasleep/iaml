@@ -48,7 +48,7 @@
 \newcommand{\modeldocVisualReference}[1]{
   A visual representation of this element is provided in Figure~\ref{#1}.
 }
-\newcommand{\modeldocName}[1]{\code{#1}}
+\newcommand{\modeldocName}[2]{\code{#2}}
 \newcommand{\constraintWarning}{\textbf{W:} } % for constraints that give a warning
 \newcommand{\constraintError}{\textbf{E:} } % for constraints that give an error
 \newcommand{\modeldocNoInferenceSemantics}{} % empty

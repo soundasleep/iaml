@@ -150,8 +150,9 @@
 				
 		\begin{modeldocList}
 		«FOREACH attributes.sortBy(a|a.name) AS attribute»
+		  \item
 		  \hypertarget{model reference:«humanise(name)»:«attribute.name»}{}
-		  \item \modeldocName{«name»}{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(true, attribute.lowerBound, attribute.upperBound)»\modeldocAttributeType{«convertHTMLIntoLatex(attribute.type)»}
+		  \modeldocName{«name»}{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(true, attribute.lowerBound, attribute.upperBound)»\modeldocAttributeType{«convertHTMLIntoLatex(attribute.type)»}
 			«IF attribute.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»
@@ -188,8 +189,9 @@
 		«FOREACH references.select(r|r.containment)
 				.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 				.sortBy(a|a.name) AS ref»
+		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -227,8 +229,9 @@
 		«FOREACH references.select(r|!r.containment)
 				.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 				.sortBy(a|a.name) AS ref»
+		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -262,8 +265,9 @@
 		«EXPAND ifThenOpen("EventsDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.isEvent()).sortBy(a|a.name) AS ref»
+		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -293,8 +297,9 @@
 		«EXPAND ifThenOpen("ConditionsDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.isCondition()).sortBy(a|a.name) AS ref»
+		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -324,8 +329,9 @@
 		«EXPAND ifThenOpen("OperationsDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.isOperation()).sortBy(a|a.name) AS ref»
+		  \item 
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»

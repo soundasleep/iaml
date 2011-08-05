@@ -150,7 +150,8 @@
 				
 		\begin{modeldocList}
 		«FOREACH attributes.sortBy(a|a.name) AS attribute»
-		  \item \modeldocName{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(attribute.lowerBound, attribute.upperBound)» \modeldocAttributeType{«convertHTMLIntoLatex(attribute.type)»}
+		  \hypertarget{model reference:«humanise(name)»:«attribute.name»}{}
+		  \item \modeldocName{«name»}{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(true, attribute.lowerBound, attribute.upperBound)»\modeldocAttributeType{«convertHTMLIntoLatex(attribute.type)»}
 			«IF attribute.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»
@@ -165,7 +166,7 @@
 	«IF !getInheritedAttributes(this).isEmpty»
 
 		«EXPAND ifThenOpen("AttributesInherited")»
-		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\inheritedElement{\modeldocName{«convertHTMLIntoLatex(attribute.name)»}}{«EXPAND modelLink FOR attribute.containingType»}«ENDFOREACH»
+		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\inheritedElement{\hypertarget{model reference:«humanise(name)»:«attribute.name»}{}\modeldocName{«name»}{«convertHTMLIntoLatex(attribute.name)»}}{«EXPAND modelLink FOR attribute.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("AttributesInherited")»
 	«ENDIF»
 
@@ -175,25 +176,20 @@
 
 «DEFINE latexChildren FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this)).select(r|r.containment)
-		.reject(r|r.type.name == "Event")
-		.reject(r|r.type.name.endsWith("Function"))
-		.reject(r|r.type.name.endsWith("Operation"))
+		.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 		.isEmpty»
 	«EXPAND ifThenOpen("Children")»
 
 	«IF !references.select(r|r.containment)
-			.reject(r|r.type.name == "Event")
-			.reject(r|r.type.name.endsWith("Function"))
-			.reject(r|r.type.name.endsWith("Operation"))
+			.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 			.isEmpty»
 		«EXPAND ifThenOpen("ChildrenDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.containment)
-				.reject(r|r.type.name == "Event")
-				.reject(r|r.type.name.endsWith("Function"))
-				.reject(r|r.type.name.endsWith("Operation"))
+				.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 				.sortBy(a|a.name) AS ref»
-		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
+		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -205,16 +201,12 @@
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.containment)
-			.reject(r|r.type.name == "Event")
-			.reject(r|r.type.name.endsWith("Function"))
-			.reject(r|r.type.name.endsWith("Operation"))
+			.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 			.isEmpty»
 		«EXPAND ifThenOpen("ChildrenInherited")»
 		«FOREACH getInheritedReferences(this).select(r|r.containment)
-				.reject(r|r.type.name == "Event")
-				.reject(r|r.type.name.endsWith("Function"))
-				.reject(r|r.type.name.endsWith("Operation"))
-				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+				.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
+				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\hypertarget{model reference:«humanise(name)»:«ref.name»}{}\modeldocName{«name»}{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("ChildrenInherited")»
 	«ENDIF»
 	«EXPAND ifThenClose("Children")»
@@ -223,25 +215,20 @@
 
 «DEFINE latexReferences FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this)).select(r|!r.containment)
-		.reject(r|r.type.name == "Event")
-		.reject(r|r.type.name.endsWith("Function"))
-		.reject(r|r.type.name.endsWith("Operation"))
+		.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 		.isEmpty»
 	«EXPAND ifThenOpen("References")»
 
 	«IF !references.select(r|!r.containment)
-			.reject(r|r.type.name == "Event")
-			.reject(r|r.type.name.endsWith("Function"))
-			.reject(r|r.type.name.endsWith("Operation"))
+			.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 			.isEmpty»
 		«EXPAND ifThenOpen("ReferencesDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|!r.containment)
-				.reject(r|r.type.name == "Event")
-				.reject(r|r.type.name.endsWith("Function"))
-				.reject(r|r.type.name.endsWith("Operation"))
+				.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 				.sortBy(a|a.name) AS ref»
-		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
+		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -253,16 +240,12 @@
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|!r.containment)
-			.reject(r|r.type.name == "Event")
-			.reject(r|r.type.name.endsWith("Function"))
-			.reject(r|r.type.name.endsWith("Operation"))
+			.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
 			.isEmpty»
 		«EXPAND ifThenOpen("ReferencesInherited")»
 		«FOREACH getInheritedReferences(this).select(r|!r.containment)
-				.reject(r|r.type.name == "Event")
-				.reject(r|r.type.name.endsWith("Function"))
-				.reject(r|r.type.name.endsWith("Operation"))
-				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+				.reject(r|r.isCondition() || r.isOperation() || r.isEvent())
+				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\hypertarget{model reference:«humanise(name)»:«ref.name»}{}\modeldocName{«name»}{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("ReferencesInherited")»
 	«ENDIF»
 	«EXPAND ifThenClose("References")»
@@ -271,15 +254,16 @@
 
 «DEFINE latexEvents FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this))
-		.select(r|r.type.name == "Event")
+		.select(r|r.isEvent())
 		.isEmpty»
 	«EXPAND ifThenOpen("Events")»
 
-	«IF !references.select(r|r.type.name == "Event").isEmpty»
+	«IF !references.select(r|r.isEvent()).isEmpty»
 		«EXPAND ifThenOpen("EventsDirect")»
 		\begin{modeldocList}
-		«FOREACH references.select(r|r.type.name == "Event").sortBy(a|a.name) AS ref»
-		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+		«FOREACH references.select(r|r.isEvent()).sortBy(a|a.name) AS ref»
+		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
+		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -290,9 +274,9 @@
 		«EXPAND ifThenClose("EventsDirect")»
 	«ENDIF»
 	
-	«IF !getInheritedReferences(this).select(r|r.type.name == "Event").isEmpty»
+	«IF !getInheritedReferences(this).select(r|r.isEvent()).isEmpty»
 		«EXPAND ifThenOpen("EventsInherited")»
-		«FOREACH getInheritedReferences(this).select(r|r.type.name == "Event").sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«FOREACH getInheritedReferences(this).select(r|r.isEvent()).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\hypertarget{model reference:«humanise(name)»:«ref.name»}{}\modeldocName{«name»}{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("EventsInherited")»
 	«ENDIF»
 	«EXPAND ifThenClose("Events")»
@@ -301,15 +285,16 @@
 
 «DEFINE latexConditions FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this))
-		.select(r|r.type.name.endsWith("Condition"))
+		.select(r|r.isCondition())
 		.isEmpty»
 	«EXPAND ifThenOpen("Conditions")»
 
-	«IF !references.select(r|r.type.name.endsWith("Condition")).isEmpty»
+	«IF !references.select(r|r.isCondition()).isEmpty»
 		«EXPAND ifThenOpen("ConditionsDirect")»
 		\begin{modeldocList}
-		«FOREACH references.select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref»
-		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+		«FOREACH references.select(r|r.isCondition()).sortBy(a|a.name) AS ref»
+		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
+		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -320,9 +305,9 @@
 		«EXPAND ifThenClose("ConditionsDirect")»
 	«ENDIF»
 	
-	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).isEmpty»
+	«IF !getInheritedReferences(this).select(r|r.isCondition()).isEmpty»
 		«EXPAND ifThenOpen("ConditionsInherited")»
-		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«FOREACH getInheritedReferences(this).select(r|r.isCondition()).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\hypertarget{model reference:«humanise(name)»:«ref.name»}{}\modeldocName{«name»}{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("ConditionsInherited")»
 	«ENDIF»
 	«EXPAND ifThenClose("Conditions")»
@@ -331,15 +316,16 @@
 
 «DEFINE latexOperations FOR modeldoc::EMFClass»
 «IF !references.union(getInheritedReferences(this))
-		.select(r|r.type.name.endsWith("Operation"))
+		.select(r|r.isOperation())
 		.isEmpty»
 	«EXPAND ifThenOpen("Operations")»
 
-	«IF !references.select(r|r.type.name.endsWith("Operation")).isEmpty»
+	«IF !references.select(r|r.isOperation()).isEmpty»
 		«EXPAND ifThenOpen("OperationsDirect")»
 		\begin{modeldocList}
-		«FOREACH references.select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref»
-		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+		«FOREACH references.select(r|r.isOperation()).sortBy(a|a.name) AS ref»
+		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
+		  \item \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -350,22 +336,25 @@
 		«EXPAND ifThenClose("OperationsDirect")»
 	«ENDIF»
 	
-	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).isEmpty»
+	«IF !getInheritedReferences(this).select(r|r.isOperation()).isEmpty»
 		«EXPAND ifThenOpen("OperationsInherited")»
-		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«FOREACH getInheritedReferences(this).select(r|r.isOperation()).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\hypertarget{model reference:«humanise(name)»:«ref.name»}{}\modeldocName{«name»}{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("OperationsInherited")»
 	«ENDIF»
 	«EXPAND ifThenClose("Operations")»
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE bounds(int lowerBound, int upperBound) FOR emf::EObject-»
+«DEFINE bounds(boolean attribute, int lowerBound, int upperBound) FOR emf::EObject-»
+«IF attribute && lowerBound == 0 && upperBound == 1-»«REM»ignore attributes that can only ever have 0 or 1 values«ENDREM-»
+«ELSE-»
 «IF upperBound != 0 || lowerBound != 1-»
 «IF lowerBound == 1 && upperBound == 1-»«REM»ignore 1..1«ENDREM»«ELSEIF upperBound == lowerBound-»
-«lowerBound-»
+«lowerBound-»«" "-»
 «ELSEIF upperBound == -1-»
-[«lowerBound»..*]«ELSE-»
-[«lowerBound»..«upperBound»]«ENDIF-»
+[«lowerBound»..*] «ELSE-»
+[«lowerBound»..«upperBound»] «ENDIF-»
+«ENDIF-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -449,7 +438,7 @@
 «ELSE-»
 «IF value.trim().contains("#")-»
 «LET value.trim().split("#") AS hashBits-»
-\modeldocName{«hashBits.withoutFirst().first()»}«ENDLET-» 
+\modeldocName{«hashBits.first()»}{«hashBits.withoutFirst().first()»}«ENDLET-» 
 «ELSE-»
 \modelLink{«humanise(value)»}«ENDIF-»
 «ENDIF-»

@@ -3,7 +3,7 @@ An {@model ActivityOperation} may contain any number of {@model SplitNode}s. Eac
 </p>
 
 <p>
-When the <i>execution flow</i> arrives at a {@model SplitNode}, each outgoing thread will be executed according to some multithreaded policy, with each of these executed threads inserted into a <i>thread set</i> associated with the {@model SplitNode}. Every thread has an associated <i>execution flow</i>. No guarantee is given as to the order in which each thread is executed, nor that any number of threads will execute simultaneously.
+When the <i>execution flow</i> arrives at a {@model SplitNode}, each outgoing thread will be executed according to some multithreaded policy, with each of these executed threads inserted into a <i>thread set</i> associated with the {@model SplitNode}. Every thread has an associated <i>execution flow</i>. No guarantee is given as to the order in which each thread is executed, nor that any number of threads will execute simultaneously or that the implementation is actually within a multithreaded environment.
 </p>
 
 <p>

@@ -41,10 +41,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/isGenerated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/generatedRule"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/overriddenNames"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//GeneratesElements">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratesElements/generatedElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratesElements/overriddenNames"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratesElements/overridden"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//NamedElement">

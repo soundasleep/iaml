@@ -95,6 +95,11 @@ public class LatexCodegenFunctions {
 			.replaceAll("(?i)</i>", "}")
 			.replaceAll("(?i)<b>", "\\\\textbf{")
 			.replaceAll("(?i)</b>", "}")
+			
+			// latexise quotes
+			.replaceAll("\"([a-zA-Z0-9 ]+)\"", "``$1''")
+			.replaceAll("'([a-zA-Z0-9 ]+)'", "`$1'")
+			
 			.replace("&lt;", "<")
 			.replace("&gt;", ">")
 			.replace("&amp;", "\\&")

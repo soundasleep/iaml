@@ -824,7 +824,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="executeOnInput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="If this {@model SyncWire} is connected to a {@model InputTextField}, then it will try and synchronise with the {@model InputTextField#currentInput} of the field, as opposed to the final commited {@model InputTextField#fieldValue}."/>
+          <details key="documentation" value="If true, then this {@model SyncWire} will &lt;i>also&lt;/i> try to synchronise these two elements when the {@model VisibleThing#onInput} event is triggered."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -838,7 +838,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="executeOnInput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="If this {@model SetWire} is connected to a {@model InputTextField}, then it will try and synchronise with the {@model InputTextField#currentInput} of the field, as opposed to the final commited {@model InputTextField#fieldValue}."/>
+          <details key="documentation" value="If true, then this {@model SetWire} will &lt;i>also&lt;/i> try to synchronise these two elements when the {@model VisibleThing#onInput} event is triggered."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -848,12 +848,20 @@
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ExtendsEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents the inheritance of all target elements by the source element."/>
+        <details key="documentation" value="A simple inheritance or subtyping relationship from the source element to the target element."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
-          eType="#//wires/ExtendsEdgesSource" eOpposite="#//wires/ExtendsEdgesSource/outExtendsEdges"/>
+          eType="#//wires/ExtendsEdgesSource" eOpposite="#//wires/ExtendsEdgesSource/outExtendsEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source, or subtype, of this {@model RequiresEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ExtendsEdgeDestination"
-          eOpposite="#//wires/ExtendsEdgeDestination/inExtendsEdges"/>
+          eOpposite="#//wires/ExtendsEdgeDestination/inExtendsEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target, or supertype, of this {@model RequiresEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RequiresEdge" eSuperTypes="#//GeneratedElement #//wires/ConstraintEdgesSource #//wires/ConstraintEdgeDestination #//ContainsWires">
       <eAnnotations source="http://openiaml.org/comment">
@@ -861,12 +869,20 @@
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to RequiresEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents the requirements for a {@model LoginHandler}, such as {@model Role Roles} and {@model Permission Permissions}."/>
+        <details key="documentation" value="An access requirement for an {@model AccessControlHandler}, or a permission requirement for a {@model Role}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
-          eType="#//users/RequiresEdgesSource" eOpposite="#//users/RequiresEdgesSource/outRequiresEdges"/>
+          eType="#//users/RequiresEdgesSource" eOpposite="#//users/RequiresEdgesSource/outRequiresEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source, or requiring party, of this {@model RequiresEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//users/RequiresEdgeDestination"
-          eOpposite="#//users/RequiresEdgeDestination/inRequiresEdges"/>
+          eOpposite="#//users/RequiresEdgeDestination/inRequiresEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target, or required element, of this {@model RequiresEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdge" eSuperTypes="#//GeneratedElement">
       <eAnnotations source="http://openiaml.org/comment">
@@ -874,18 +890,33 @@
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ConstraintEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows for the definition of complex {@model RequiresEdge requirements}."/>
+        <details key="documentation" value="Allows for the definition of complex requirements of {@model RequiresEdge}s through logical operators."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
-          eType="#//wires/ConstraintEdgesSource" eOpposite="#//wires/ConstraintEdgesSource/outConstraintEdges"/>
+          eType="#//wires/ConstraintEdgesSource" eOpposite="#//wires/ConstraintEdgesSource/outConstraintEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The first element in this {@model ConstraintEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ConstraintEdgeDestination"
-          eOpposite="#//wires/ConstraintEdgeDestination/inConstraintEdges"/>
+          eOpposite="#//wires/ConstraintEdgeDestination/inConstraintEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The second element in this {@model ConstraintEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
-          eType="#//wires/ConstraintTypes"/>
+          eType="#//wires/ConstraintTypes">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The type of logical operator used in this {@model ConstraintEdge}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ConstraintTypes">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of possible logical operators supported by a {@model ConstraintEdge}."/>
       </eAnnotations>
       <eLiterals name="AND"/>
       <eLiterals name="OR" value="1"/>
@@ -897,102 +928,138 @@
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ProvidesEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Indicates that the source {@model Role} provides the target {@model Permission}."/>
+        <details key="documentation" value="Indicates that the source {@model Role} or {@model DomainIterator} provides the target {@model Permission}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
-          eType="#//users/ProvidesEdgesSource" eOpposite="#//users/ProvidesEdgesSource/outProvidesEdges"/>
+          eType="#//users/ProvidesEdgesSource" eOpposite="#//users/ProvidesEdgesSource/outProvidesEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source of this {@model ProvidesEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//users/ProvidesEdgeDestination"
-          eOpposite="#//users/ProvidesEdgeDestination/inProvidesEdges"/>
+          eOpposite="#//users/ProvidesEdgeDestination/inProvidesEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target of this {@model ProvidesEdge} relationship."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterEdgesSource" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the source of a {@model ParameterEdge}."/>
+        <details key="documentation" value="An element which may be used as the source of a {@model Parameter}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outParameterEdges" upperBound="-1"
-          eType="#//Parameter" eOpposite="#//Parameter/parameterValue"/>
+          eType="#//Parameter" eOpposite="#//Parameter/parameterValue">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of outgoing {@model Parameter}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterEdgeDestination" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the destination of a {@model ParameterEdge}."/>
+        <details key="documentation" value="An element which may be used as the target of a {@model Parameter}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inParameterEdges" upperBound="-1"
-          eType="#//Parameter" eOpposite="#//Parameter/parameterTerm"/>
+          eType="#//Parameter" eOpposite="#//Parameter/parameterTerm">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model Parameter}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdgesSource" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the source of a {@model ExtendsEdge}."/>
+        <details key="documentation" value="An element which may define an outgoing subtype relationship through {@model ExtendsEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outExtendsEdges" upperBound="-1"
-          eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/from"/>
+          eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/from">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of outgoing {@model ExtendsEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdgeDestination" abstract="true"
         interface="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the destination of a {@model ExtendsEdge}."/>
-      </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An element which may define an incoming supertype relationship through {@model ExtendsEdge}."/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inExtendsEdges" upperBound="-1"
-          eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/to"/>
+          eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/to">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model ExtendsEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdgesSource" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the source of a {@model ConstraintEdge}."/>
+        <details key="documentation" value="An element which may be used as the source of a {@model ConstraintEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outConstraintEdges" upperBound="-1"
-          eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/from"/>
+          eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/from">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model ConstraintEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdgeDestination" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the destination of a {@model ConstraintEdge}."/>
+        <details key="documentation" value="An element which may be used as the target of a {@model ConstraintEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inConstraintEdges" upperBound="-1"
-          eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/to"/>
+          eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/to">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of outgoing {@model ConstraintEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdgeDestination" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the destination of a {@model ConditionEdge}."/>
+        <details key="documentation" value="An element which may be restricted by incoming {@model Condition}s."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
-          eType="#//ComplexTerm" eOpposite="#//ComplexTerm/conditioned"/>
+          eType="#//ComplexTerm" eOpposite="#//ComplexTerm/conditioned">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model Condition}s that may restrict the behaviour of this element."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DetailWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="If both the source and target of this wire refer to the same {@model DomainObject}, the source of this wire will create a {@model Button link} to view the individual element on the target page."/>
+        <details key="documentation" value="A {@model DetailWire} specifies that an {@model DomainInstance} represented within a {@model VisibleThing} should be independently viewable on a separate {@model Frame}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AutocompleteWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows a target {@model VisibleThing} to be populated by matching a created {@model InputTextField} to the source {@model DomainIterator} value, specified by the {@model AutocompleteWire#match}."/>
+        <details key="documentation" value="An {@model AutocompleteWire} specifies that a target {@model VisibleThing} should support data entry through autocompletion from the source {@model DomainIterator}, as specified by a {@model AutocompleteWire#match matching} {@model DomainAttribute}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="#//domain/DomainAttribute">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The attribute to match the autocompleted text to. In the future this may support a list of potential attributes."/>
+          <details key="documentation" value="This {@model AutocompleteWire} will match user input against the {@type string} representation of {@model DomainAttributeInstance instances} of this {@model DomainAttribute}."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

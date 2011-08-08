@@ -49,6 +49,7 @@
   A visual representation of this element is provided in Figure~\ref{#1}.
 }
 \newcommand{\modeldocName}[2]{\code{#2}}
+\newcommand{\modeldocSection}[1]{\section{#1}}
 \newcommand{\constraintWarning}{\textbf{W:} } % for constraints that give a warning
 \newcommand{\constraintError}{\textbf{E:} } % for constraints that give an error
 \newcommand{\modeldocNoInferenceSemantics}{} % empty

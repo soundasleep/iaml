@@ -187,9 +187,6 @@ public class TranslateHTMLToLatex {
 		// assumes that there are no empty <td>s in the table
 		f = f.replaceAll("&[\\s*]\\\\", "\\\\");
 		
-		// latex-ise quotes
-		f = f.replaceAll("\"([^\"]+)\"", "``$1''");
-		
 		// additional functions provided by convertHTMLIntoLatex
 		f = LatexCodegenFunctions.convertHTMLIntoLatex(f);
 

@@ -600,6 +600,9 @@
     <elements xsi:type="sgmf:ReferencedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="QueryParameter">
+      <classifier href="iaml.ecore#//QueryParameter"/>
+    </elements>
   </diagramEditors>
   <diagramEditors id="login_handler">
     <classifier href="iaml.ecore#//components/LoginHandler"/>
@@ -711,6 +714,9 @@
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="ActivityOperation">
       <classifier href="iaml.ecore#//operations/ActivityOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
+      <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="root">

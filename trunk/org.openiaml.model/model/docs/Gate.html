@@ -16,7 +16,7 @@ When a {@model Frame} directly contained within this {@model Scope} is accessed 
 If an entry {@model Gate} is executed as an {@model Action}, and the entry {@model Gate} has been <i>satisfied</i>, the browser is redirected to the {@model Frame} which triggered the entry {@model Gate} (the <i>resume location</i>). If the satisfied entry {@model Gate} was not triggered by a {@model Frame}, or the entry {@model Gate} is not satisfied, then the browser is redirected to the <i>incoming gate</i>.
 </p>
 
-<h4>"first" Entry Gate</h4>
+<!-- "first" Entry Gate -->
 
 <p>
 An entry {@model Gate} may have an outgoing {@model ECARule} to a {@model Frame} with an {@model ECARule#name} "first". This {@model Frame} must reside outside of the containing {@model Scope} of that {@model Gate}. When this model is completed through <i>model completion</i>, this entry {@model Gate} will be extended to first check that the current user has successfully visited this {@model Frame}.
@@ -36,7 +36,7 @@ When a {@model Frame} within the model, but not contained (directly or indirectl
 If an exit {@model Gate} is executed as an {@model Action}, and the exit {@model Gate} has been <i>satisfied</i>, the browser is redirected to the {@model Frame} which triggered the exit {@model Gate} (the <i>resume location</i>). If the satisfied exit {@model Gate} was not triggered by a {@model Frame}, or the exit {@model Gate} is not satisfied, then the browser is redirected to the <i>outgoing gate</i>.
 </p>
 
-<h4>"last" Exit Gate</h4>
+<!-- "last" Exit Gate -->
 
 <p>
 A exit {@model Gate} may have an outgoing {@model ECARule} to a {@model Frame} with a {@model ECARule#name} "last". This {@model Frame} must reside within the containing {@model Scope} of that exit {@model Gate}. When this model is completed through <i>model completion</i>, the exit {@model Gate} will be extended to first check that the current user has successfully visited this {@model Frame}.

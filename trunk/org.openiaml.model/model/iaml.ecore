@@ -1070,55 +1070,95 @@
         <details key="changed" value="0.2 added Scope supertype&#xD;&#xA;0.4 removed '_shouldnt_properties'&#xD;&#xA;0.4.2 removed Scope supertype"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Operations which are composed of logic flows, data flows, and other operations."/>
+        <details key="documentation" value="A user-defined {@model Operation} consisting of {@model ActivityNode} connected by {@model ExecutionEdge}s and {@model DataFlowEdge}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-          eType="#//ActivityNode" containment="true"/>
+          eType="#//ActivityNode" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model ActivityNode}s necessary to define this {@model ActivityOperation}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="dataEdges" upperBound="-1"
-          eType="#//operations/DataFlowEdge" containment="true"/>
+          eType="#//operations/DataFlowEdge" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model DataFlowEdge}s necessary to define this {@model ActivityOperation}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="executionEdges" upperBound="-1"
-          eType="#//operations/ExecutionEdge" containment="true"/>
+          eType="#//operations/ExecutionEdge" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model ExecutionEdge}s necessary to define this {@model ActivityOperation}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-          eType="#//operations/TemporaryVariable" containment="true"/>
+          eType="#//operations/TemporaryVariable" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model TemporaryVariable}s necessary to define this {@model ActivityOperation}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-          eType="#//operations/ActivityParameter" containment="true"/>
+          eType="#//operations/ActivityParameter" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityOperation} as named {@model ActivityParameters}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ActivityPredicate" eSuperTypes="#//Predicate #//ContainsFunctions #//GeneratesElements #//ContainsOperations #//ContainsValues">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4&#xD;&#xA;ContainsOperations added in 0.4.1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A custom {@model Predicate}, composed of sub-predicates in the same way as {@model ActivityOperation}s."/>
+        <details key="documentation" value="A user-defined {@model Predicate} consisting of {@model ActivityNode} connected by {@model ExecutionEdge}s and {@model DataFlowEdge}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-          eType="#//ActivityNode" containment="true"/>
+          eType="#//ActivityNode" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model ActivityNode}s necessary to define this {@model ActivityPredicate}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="dataEdges" upperBound="-1"
-          eType="#//operations/DataFlowEdge" containment="true"/>
+          eType="#//operations/DataFlowEdge" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model DataFlowEdge}s necessary to define this {@model ActivityPredicate}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="executionEdges" upperBound="-1"
-          eType="#//operations/ExecutionEdge" containment="true"/>
+          eType="#//operations/ExecutionEdge" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model ExecutionEdge}s necessary to define this {@model ActivityPredicate}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-          eType="#//operations/TemporaryVariable" containment="true"/>
+          eType="#//operations/TemporaryVariable" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model TemporaryVariable}s necessary to define this {@model ActivityPredicate}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-          eType="#//operations/ActivityParameter" containment="true"/>
+          eType="#//operations/ActivityParameter" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityPredicate} as named {@model ActivityParameters}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//operations/ExecutionEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Start of an {@model CompositeOperation Operation} or {@model CompositeCondition Condition}."/>
+        <details key="documentation" value="An {@model ActivityOperation} or {@model ActivityPredicate} may contain a single {@model StartNode} as the starting point of its {@model ExecutionEdge execution flow}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CancelNode" eSuperTypes="#//ActivityNode #//operations/ExecutionEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."/>
+        <details key="documentation" value="Specifies that the current {@model ActivityOperation} did not execute successfully, or the {@model ActivityPredicate} must return false."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This message will be provided as a reason why the {@model CompositeOperation Operation} or {@model CompositeCondition Condition} failed."/>
+          <details key="documentation" value="Within an {@model ActivityOperation}, this message will be provided to the developer as a failure reason if this exception is not caught by a &lt;i>failure handler&lt;/i>."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//ActivityNode #//operations/ExecutionEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The successful completion of an {@model Operation}, or the {@model Condition} passed."/>
+        <details key="documentation" value="Specifies that the current {@model ActivityOperation} executed successfully, or the {@model ActivityPredicate} must return true."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//NamedElement #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//wires/ConditionEdgeDestination #//operations/DataFlowEdgeDestination">
@@ -1147,12 +1187,12 @@
         <details key="comment" value="added in 0.4"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A virtual {@model Operation} call; the outgoing {@model RunAction} will be executed."/>
+        <details key="documentation" value="A virtual {@model Event}, which permits an outgoing {@model ECARule} to be triggered."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SetNode" eSuperTypes="#//ActivityNode #//NamedElement #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."/>
+        <details key="documentation" value="Sets the value of all outgoing {@model DataFlowEdge}s to the value of the first incoming {@model DataFlowEdge}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgeDestination #//operations/DataFlowEdgesSource">
@@ -1160,11 +1200,11 @@
         <details key="comment" value="added in 0.4.1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="An inline expression of arithmetic. Can be used as part of a {@model PrimitiveOperation set operation}, for example."/>
+        <details key="documentation" value="An inline expression of arithmetic, operating upon all incoming {@model DataFlowEdge} values."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="#//operations/ArithmeticOperationTypes">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The operation to perform."/>
+          <details key="documentation" value="The builtin arithmetic operation to perform."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1173,7 +1213,7 @@
         <details key="comment" value="added in 0.4.1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents the range of possible {@model ArithmeticOperation arithmetic operations}."/>
+        <details key="documentation" value="The range of supported {@model Arithmetic arithmetic operations}."/>
       </eAnnotations>
       <eLiterals name="ADD"/>
       <eLiterals name="SUBTRACT" value="1"/>
@@ -1182,26 +1222,26 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CastNode" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows one {@model DataFlowEdgesSource data type} to be cast to another {@model DataFlowEdgeDestination data type}. Has an outgoing &quot;check&quot; {@model DataFlowEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent)."/>
+        <details key="documentation" value="Allows one {@model DataFlowEdgesSource data type} to be cast to another {@model DataFlowEdgeDestination data type}. Has an outgoing &quot;check&quot; {@model DataFlowEdge} which can be used to check for invalid casts, otherwise a failing conversion is silent."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ActivityParameter" eSuperTypes="#//NamedElement #//operations/DataFlowEdgesSource #//wires/ParameterEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunAction} can be accessed via Parameters."/>
+        <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityOperation} or {@model ActivityPredicate} as named {@model ActivityParameters}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EXSDDataType">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The datatype of the {@model Parameter}."/>
+          <details key="documentation" value="The type of this {@model ActivityParameter}."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TemporaryVariable" eSuperTypes="#//NamedElement #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination #//wires/ParameterEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Temporary storage of values contained within an {@model Operation} which will be lost once the operation is completed."/>
+        <details key="documentation" value="A temporary {@model Value} instance, whose value will be lost once this {@model ActivityOperation} or {@model ActivityPredicate} is completed."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EXSDDataType">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The datatype of the {@model TemporaryVariable}."/>
+          <details key="documentation" value="The type of the {@model TemporaryVariable}."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1212,13 +1252,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
           eType="#//operations/DataFlowEdgesSource" eOpposite="#//operations/DataFlowEdgesSource/outFlows">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The source element of the {@model DataFlowEdge}."/>
+          <details key="documentation" value="The source of this {@model DataFlowEdge}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//operations/DataFlowEdgeDestination"
           eOpposite="#//operations/DataFlowEdgeDestination/inFlows">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The target element of the {@model DataFlowEdge}."/>
+          <details key="documentation" value="The target of this {@model DataFlowEdge}."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1248,40 +1288,74 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge" eSuperTypes="#//GeneratedElement #//NamedElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents the execution flow within an {@model Operation}."/>
+        <details key="documentation" value="Represents the execution flow within an {@model ActivityOperation} or {@model ActivityPredicate}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="0.4.1 to add NamedElement supertype"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
-          eType="#//operations/ExecutionEdgesSource" eOpposite="#//operations/ExecutionEdgesSource/outExecutions"/>
+          eType="#//operations/ExecutionEdgesSource" eOpposite="#//operations/ExecutionEdgesSource/outExecutions">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source of this {@model ExecutionEdge}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//operations/ExecutionEdgeDestination"
-          eOpposite="#//operations/ExecutionEdgeDestination/inExecutions"/>
+          eOpposite="#//operations/ExecutionEdgeDestination/inExecutions">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target of this {@model ExecutionEdge}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdgeDestination" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A possible destination for a {@model ExecutionEdge}."/>
+        <details key="documentation" value="A possible destination for an {@model ExecutionEdge}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inExecutions" upperBound="-1"
-          eType="#//operations/ExecutionEdge" eOpposite="#//operations/ExecutionEdge/to"/>
+          eType="#//operations/ExecutionEdge" eOpposite="#//operations/ExecutionEdge/to">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model ExecutionEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdgesSource" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A possible source for a {@model ExecutionEdge}."/>
+        <details key="documentation" value="A possible source for an {@model ExecutionEdge}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
-          eType="#//operations/ExecutionEdge" eOpposite="#//operations/ExecutionEdge/from"/>
+          eType="#//operations/ExecutionEdge" eOpposite="#//operations/ExecutionEdge/from">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of outgoing {@model ExecutionEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExternalValue" eSuperTypes="#//ActivityNode #//operations/DataFlowEdgesSource #//operations/DataFlowEdgeDestination #//wires/ParameterEdgesSource">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Acts as a bridge between {@model ActivityNode}s to external {@model Value}s."/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="externalValueEdges" eType="#//operations/ExternalValueEdge"
-          containment="true" eOpposite="#//operations/ExternalValueEdge/from"/>
+          containment="true" eOpposite="#//operations/ExternalValueEdge/from">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Defines the target {@model Value} of this {@model ExternalValue}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExternalValueEdge" eSuperTypes="#//GeneratedElement #//GeneratesElements">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The relationship from an {@model ExternalValue} to a particular {@model Value}."/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//operations/ExternalValue"
-          eOpposite="#//operations/ExternalValue/externalValueEdges"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"/>
+          eOpposite="#//operations/ExternalValue/externalValueEdges">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source of this {@model ExternalValueEdge}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target of this {@model ExternalValueEdge}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="scopes" nsURI="http://openiaml.org/model/scopes" nsPrefix="iaml.scopes">

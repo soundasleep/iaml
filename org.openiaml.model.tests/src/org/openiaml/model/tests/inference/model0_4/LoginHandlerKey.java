@@ -183,7 +183,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertHasNoValue(session, "current login key");
 
 		// there should only be one
-		assertEquals("Properties found: " + session.getProperties().toString(), 2, session.getProperties().size());
+		assertEquals("Values found: " + session.getValues().toString(), 2, session.getValues().size());
 
 		// there should be a SetWire from the LoginHandler to this
 		LoginHandler loginHandler = assertHasLoginHandler(session, "Login Handler");

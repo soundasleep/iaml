@@ -173,10 +173,10 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "fieldValue";
 		}
 		
-		// <values name="static">
-		// --> <properties name="static" readOnly="true">
-		if (nodeName.equals("values")) {
-			return "properties";
+		// <value name="static">
+		// --> <values name="static" readOnly="true">
+		if (nodeName.equals("values") || nodeName.equals("properties")) {
+			return "values";
 		}
 		
 		// <conditions xsi:type="iaml.operations:DecisionCondition">

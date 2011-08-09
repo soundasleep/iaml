@@ -38,14 +38,6 @@
 	«ENDIF»
 «EXPAND ifThenClose("Tagline")»
 
-«IF !additionalLatex.isEmpty»
-% additional latex documentation
-«FOREACH additionalLatex.description AS latex»
-«latex.value-»
-
-«ENDFOREACH»
-«ENDIF»
-
 «EXPAND ifThenOpen("Rationale")»
 	% Rationale
 	«IF rationale != null»
@@ -94,9 +86,7 @@
 	«IF gmfEditor==null»
 		«EXPAND ifThenOpen("VisualMissing")»
 	«ENDIF»
-	\begin{figure}[htb]
-	\centering
-	% TODO this should be using SVG images, not PNG
+	\begin{modeldocVisualFigure}
 	«IF gmfEditor == null»
 	\textbf{TODO} No visual representation found for «EXPAND modelLink»
 	«ELSE»
@@ -104,7 +94,7 @@
 	«ENDIF»
 	\modeldocVisualCaption{«humanise(name)»}
 	\label{fig:reference-«name»}
-	\end{figure}
+	\end{modeldocVisualFigure}
 
 	\modeldocVisualReference{fig:reference-«name»}
 	«IF gmfEditor==null»
@@ -117,6 +107,14 @@
 		% It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
 	«EXPAND ifThenClose("VisualRationale")»
 «EXPAND ifThenClose("Visual")»
+«ENDIF»
+
+«IF !additionalLatex.isEmpty»
+% additional latex documentation
+«FOREACH additionalLatex.description AS latex»
+«latex.value-»
+
+«ENDFOREACH»
 «ENDIF»
 
 «EXPAND latexAttributes»

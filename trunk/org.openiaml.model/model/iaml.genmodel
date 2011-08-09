@@ -345,9 +345,7 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">
-      <genClasses ecoreClass="iaml.ecore#//scopes/Session">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/labels"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//scopes/Session"/>
       <genClasses image="false" ecoreClass="iaml.ecore#//scopes/Message"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"

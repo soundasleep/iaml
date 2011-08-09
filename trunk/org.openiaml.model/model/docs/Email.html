@@ -1,5 +1,5 @@
 <p>
-An {@model Email} is designed to be used in the composition and delivery of mail messages<!-- , according to RFC 2821 \cite{rfc2821}-->. An {@model Email} has five directly contained {@model Value}s, all of which must be {@model Value#type} {@type string}:
+An {@model Email} is designed to be used in the composition and delivery of mail messages<!-- , according to RFC 2821 \cite{rfc2821}-->. An {@model Email} may specify five directly contained {@model Value}s, all of which must be {@model Value#type} {@type string}. If these values are specified, they may be set at runtime to programatically control the {@model Email#from sender}, {@model Email#to recipient} or {@model Email#subject} of the {@model Email}:
 </p>
 
 <ul>

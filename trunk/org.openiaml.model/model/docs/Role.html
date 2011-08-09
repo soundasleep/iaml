@@ -1,5 +1,5 @@
 <p>
-A {@model Role} represents a specific role of a user within a web application using Role-Based Access Control, with a particular {@model Role} also providing a set of {@model Permission}s. Similarly to the inheritance hierarchy of {@model DomainType}, a {@model Role} may inherit another {@model Role} in order to define a <i>role hierarchy</i>; this is provided by making a {@model Role} a subtype of {@model DomainType}. That is, a child {@model Role} that extends a parent {@model Role} through an {@model ExtendsEdge} therefore will provide all {@model Permission}s that the parent {@model Role} provides.
+Similarly to the inheritance hierarchy of {@model DomainType}, a {@model Role} may inherit another {@model Role} in order to define a <i>role hierarchy</i>; this is provided by making a {@model Role} a subtype of {@model DomainType}. That is, a child {@model Role} that extends a parent {@model Role} through an {@model ExtendsEdge} therefore will provide all {@model Permission}s that the parent {@model Role} provides.
 </p>
 
 <p>

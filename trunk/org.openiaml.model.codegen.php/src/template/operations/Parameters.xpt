@@ -51,8 +51,8 @@
 
 /**
  * @implementation Changeable,ParameterEdge
- *		If a {@model Changeable} is used as the {@model ParameterEdgeSource} of a {@model ParameterEdge},
- *		the 'fieldValue' of the {@model Changeable} is used as the value. 
+ *		If a {@model Changeable} is used as the {@model ParameterEdgesSource} of a {@model ParameterEdge},
+ *		the {@model Changeable#fieldValue} of the {@model Changeable} is used as the value. 
  */
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Changeable»
 	«IF fieldValue == null»
@@ -85,10 +85,10 @@
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
 			«ELSEIF isDomainIteratorResults()»
-				/* from the DomainObjectInstance */
+				/* from the DomainIterator */
 				get_instance_count_«safeName(eContainer)»()
 			«ELSEIF isDomainIteratorCurrentPointer()»
-				/* from the DomainObjectInstance */
+				/* from the DomainIterator */
 				get_instance_current_pointer_«safeName(eContainer)»()
 			«ELSEIF containingSession(this) != null»
 				/* a property from our session */
@@ -250,7 +250,7 @@
 			«REM»from a DomainAttributeInstance«ENDREM»
 			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::domain::DomainAttributeInstance) eContainer-»
 		«ELSEIF isDomainIteratorResults()»
-			/* DomainObjectInstance count is always available */
+			/* DomainIterator results count is always available */
 			true			
 		«ELSEIF containingSession(this) != null»
 			/* a property from our session */

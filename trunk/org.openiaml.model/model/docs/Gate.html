@@ -9,7 +9,7 @@ An entry {@model Gate} must have at least one outgoing {@model ECARule} which ha
 </p>
 
 <p>
-When a {@model Frame} directly contained within this {@model Scope} is accessed or rendered, this entry {@model Gate} must first be satisfied; that is, all incoming {@model Conditions}s must be considered <i>successful</i>. If the entry {@model Gate} is not satisfied, , then the <i>failure rules</i> of that exit {@model Gate} are executed in descending {@model ECARule#priority} order according to the execution semantics of {@model ECARule}.
+When a {@model Frame} directly contained within this {@model Scope} is accessed or rendered, this entry {@model Gate} must first be satisfied; that is, all incoming {@model Condition}s must be considered <i>successful</i>. If the entry {@model Gate} is not satisfied, , then the <i>failure rules</i> of that exit {@model Gate} are executed in descending {@model ECARule#priority} order according to the execution semantics of {@model ECARule}.
 </p>
 
 <p>
@@ -29,7 +29,7 @@ An exit {@model Gate} must have at least one outgoing {@model ECARule} which has
 </p>
 
 <p>
-When a {@model Frame} within the model, but not contained (directly or indirectly) within that {@model Scope} is accessed or rendered, this exit {@model Gate} must first be satisfied; that is, all incoming {@model Conditions}s must be considered <i>successful</i>. If the exit {@model Gate} is not satisfied, then the <i>failure rules</i> of that exit {@model Gate} are executed in descending {@model ECARule#priority} order according to the execution semantics of {@model ECARule}.
+When a {@model Frame} within the model, but not contained (directly or indirectly) within that {@model Scope} is accessed or rendered, this exit {@model Gate} must first be satisfied; that is, all incoming {@model Condition}s must be considered <i>successful</i>. If the exit {@model Gate} is not satisfied, then the <i>failure rules</i> of that exit {@model Gate} are executed in descending {@model ECARule#priority} order according to the execution semantics of {@model ECARule}.
 </p>
 
 <p>

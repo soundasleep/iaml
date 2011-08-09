@@ -11,11 +11,11 @@ import org.openiaml.model.tests.CodegenTestCase;
  * Model Completion.
  *
  * @author jmwright
- * @example ExitGate
- * 		If a {@model ExitGate} is connected by a {@model NavigateAction} called "last",
+ * @example Gate
+ * 		If an exit {@model Gate} is connected by an {@model ECARule} called "last",
  * 		then the target {@model Frame} must be viewed at least once before proceeding.
- * @implementation ExitGate,NavigateAction
- * 		If a {@model ExitGate} is connected by a {@model NavigateAction} called "last",
+ * @implementation Gate,ECARule
+ * 		If an exit {@model ExitGate} is connected by an {@model ECARule} called "last",
  * 		then the target {@model Frame} must be viewed at least once before proceeding.
  */
 public class ExitGateAdSimple extends CodegenTestCase {

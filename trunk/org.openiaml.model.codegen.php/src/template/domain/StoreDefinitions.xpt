@@ -101,8 +101,8 @@
 «ENDDEFINE»
 
 /**
- * @implementation DomainObjectInstance
- *		The current offset of browsing {@model DomainObjectInstance instances} is stored
+ * @implementation DomainIterator
+ *		The current offset of browsing {@model DomainIterator instances} is stored
  *		in the containing {@model Session} if there is one, otherwise globally.
  */
 «DEFINE storeDomainObject FOR model::domain::DomainIterator-»

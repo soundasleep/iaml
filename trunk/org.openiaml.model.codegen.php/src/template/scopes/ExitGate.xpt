@@ -3,9 +3,9 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
- * @implementation ExitGate
- *    When all incoming {@model Condition Conditions} to an activated {@model ExitGate} fail,
- *    that ExitGate is disabled.
+ * @implementation Gate
+ *    When all incoming {@model Condition Conditions} to an activated exit {@model Gate} fail,
+ *    that exit {@model Gate} is disabled.
  */    
 «DEFINE runExitGate FOR model::components::Gate-»
 /* exit gate '«safeName()»' */

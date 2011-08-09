@@ -297,7 +297,7 @@ end
 /**
  * @inference DetailWire,Parameter
  *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
- *		as contained by a {@model Iteratorlist},
+ *		as contained by a {@model IteratorList},
  *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},
  *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainType}.
  */

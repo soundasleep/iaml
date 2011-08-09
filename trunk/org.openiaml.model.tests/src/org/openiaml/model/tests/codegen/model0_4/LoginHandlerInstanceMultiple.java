@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
@@ -13,22 +13,22 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 /**
  * Test a Login Handler in a Session, where the login handler
  * is authenticating against a domain object instance.
- * 
+ *
  * @example Session,LoginHandler
  * 		Restricting access to a {@model Session} with a
- * 		{@model LoginHandler} (based on selecting a {@model DomainObject} instance)
- * 		that requires two valid {@model ParameterEdge parameters}.
- * 
- * @implementation LoginHandler,DomainObjectInstance
- * 		A LoginHandler (selecting a DomainObject) needs incoming
- * 		{@model DomainAttribute DomainAttributes} as {@model ParameterEdge parameters} in order 
- * 		to select the valid {@model DomainObjectInstance instance}.
- * 
+ * 		{@model LoginHandler} (based on selecting a {@model DomainType} instance)
+ * 		that requires two valid {@model Parameter}s.
+ *
+ * @implementation LoginHandler,DomainIterator
+ * 		A {@model LoginHandler} (selecting a {@model DomainType}) needs incoming
+ * 		{@model DomainAttribute}s as {@model Parameter}s in order
+ * 		to select the valid {@model DomainIterator instance}.
+ *
  * @author jmwright
  *
  */
 public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -46,7 +46,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
 		return s;
 	}
-	
+
 	/**
 	 * The site should have a login page.
 	 */
@@ -78,7 +78,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		assertNoProblem();
 
 	}
-	
+
 	/**
 	 * The site should have a current user page, that presents a problem (since
 	 * we're not yet authenticated).
@@ -94,7 +94,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		assertProblem();	// who knows where we are?
 
 	}
-	
+
 	/**
 	 * The site should have a login successful page [generated], that presents a problem (since
 	 * we're not yet authenticated).
@@ -114,14 +114,14 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 	/**
 	 * The site should have a logout page, that presents a problem (since
 	 * we're not yet authenticated).
-	 * 
+	 *
 	 * Normally the user wouldn't see the "logout" link, but we should
 	 * check that if they access it manually without being authenticated,
 	 * that an error is thrown.
 	 */
 	public void testHasLogoutPage() {
 		try {
-			
+
 		IFile sitemap = getProject().getFile("output/sitemap.html");
 		assertTrue("sitemap " + sitemap + " exists", sitemap.exists());
 
@@ -130,7 +130,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 
 		clickLinkWithText("logout");
 		assertProblem();	// who knows where we are?
-		
+
 		} catch (Error e) {
 			System.out.println(getPageSource());
 			throw e;
@@ -148,7 +148,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
-	
+
 		// try and view the key without having a valid session
 		// it should go to the login page
 		clickLinkWithText("current user");
@@ -157,42 +157,42 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		assertProblem();		// we should have been warned
 
 	}
-	
+
 	/**
 	 * We can login; and then we can logout by going through the
 	 * sitemap (since our model doesn't have a link to logout yet.)
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void testCanLoginLogoutFromSitemap() throws Exception {
 		try {
 		IFile sitemap = beginAtSitemapThenPage("login");
 		assertNoProblem();
-		
+
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test2");
-		
+
 		String emailId = getLabelIDForText("email");
 		setLabeledFormElementField(emailId, "target@jevon.org");
-		
+
 		submit();		// submit the form
-		
+
 		// we should now be on the viewkey page
 		assertEquals("Login Successful", getPageTitle());
 		assertTitleMatch("Login Successful");
 		assertNoProblem();
-		
+
 		// now we just quickly go logout, we should now be on the
 		// "logout successful" page
 		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
-		
+
 		} catch (Error e) {
 			System.out.println( getPageSource() );		// let us debug the page source
 			throw e;		// continue throwing
 		}
 
 	}
-	
+
 	/**
 	 * We login;
 	 * We check the page to make sure we are the right user;
@@ -214,32 +214,32 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
 		assertNoProblem();
-		
+
 		// lets now go to the "current user" page
 		gotoSitemapThenPage(sitemap, "current user");
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, "User Two");
 		}
-		
+
 		// the password should _not_ be present
 		assertNoMatch("test2");
-		
+
 		// reload the page
 		gotoSitemapThenPage(sitemap, "current user");
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, "User Two");
 		}
-		
+
 		// now we logout, we should now be on the logout page
 		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 	}
-	
+
 	/**
 	 * We login;
 	 * We check the page to make sure we are the right user;
@@ -261,32 +261,32 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test3@jevon.org");
 
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
 		assertNoProblem();
-		
+
 		// lets now go to the "current user" page
 		gotoSitemapThenPage(sitemap, "current user");
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, "User Three");
 		}
-		
+
 		// the password should _not_ be present
 		assertNoMatch("test3");
-		
+
 		// reload the page
 		gotoSitemapThenPage(sitemap, "current user");
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, "User Three");
 		}
-		
+
 		// now we logout, we should now be on the logout page
 		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 	}
-	
+
 	/**
 	 * Once we can login, we can change our name.
 	 */
@@ -305,32 +305,32 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test4@jevon.org");
 
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
 		assertNoProblem();
-		
+
 		// lets now go to the "current user" page
 		gotoSitemapThenPage(sitemap, "current user");
 		String newUsername = "my new username " + new Date();
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, "User Four");
-			
+
 			// lets set it
 			setLabeledFormElementField(username, newUsername);
 		}
-		
+
 		// reload the page, it should remain
 		gotoSitemapThenPage(sitemap, "current user");
 		{
 			String username = getLabelIDForText("current user name");
 			assertLabeledFieldEquals(username, newUsername);
 		}
-		
+
 		// now we logout, we should now be on the logout page
 		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
-		
+
 		// re-login to make sure the change was successful
 		beginAtSitemapThenPage(sitemap, "login", "login");
 		String loginId2 = getLabelIDForText("password");
@@ -340,11 +340,11 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId2, "test4@jevon.org");
 
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
 		assertNoProblem();
-		
+
 		// lets now go to the "current user" page
 		gotoSitemapThenPage(sitemap, "current user");
 		{
@@ -352,7 +352,7 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 			assertLabeledFieldEquals(username, newUsername);
 		}
 	}
-	
+
 	/**
 	 * Test that we are actually comparing against the database
 	 */
@@ -366,19 +366,19 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		clickLinkWithText("login");
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test6"); // INVALID password
-		
+
 		String emailId = getLabelIDForText("email");
 		setLabeledFormElementField(emailId, "target@jevon.org");
-		
+
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
 		assertProblem();
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Test that we are actually comparing against the database
 	 */
@@ -394,13 +394,13 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(loginId, "test2");
 
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
 		assertProblem();
-		
+
 	}
-	
+
 	/**
 	 * Test that we are actually comparing against the database
 	 */
@@ -415,13 +415,13 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 
 		String emailId = getLabelIDForText("email");
 		setLabeledFormElementField(emailId, "target@jevon.org");
-		
+
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
 		assertProblem();
-		
+
 	}
 
 	/**
@@ -436,20 +436,20 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 
 		clickLinkWithText("login");
 
-		// 'test3' and 'target@jevon.org' are valid values, 
+		// 'test3' and 'target@jevon.org' are valid values,
 		// but not valid together
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test3");
 
 		String emailId = getLabelIDForText("email");
 		setLabeledFormElementField(emailId, "target@jevon.org");
-		
+
 		submit();		// submit the form
-		
+
 		// we should not be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
 		assertProblem();
-		
+
 	}
 
 	/**
@@ -465,20 +465,20 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 
 		clickLinkWithText("login");
 
-		// 'test3' and 'target@jevon.org' are valid values, 
+		// 'test3' and 'target@jevon.org' are valid values,
 		// but not valid together
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "target@jevon.org");
 
 		String emailId = getLabelIDForText("email");
 		setLabeledFormElementField(emailId, "test2");
-		
+
 		submit();		// submit the form
-		
+
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
 		assertProblem();
-		
+
 	}
-	
+
 }

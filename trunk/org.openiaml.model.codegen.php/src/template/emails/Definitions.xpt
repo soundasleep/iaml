@@ -166,8 +166,7 @@
  *
  * @implementation Email
  *		The default template for a sent {@model Email} contains a list of all of its
- *		contained {@model Property Properties}, {@model StaticValue}s and
- *		{@model Label} values.
+ *		contained {@model Value}s and {@model Label} values.
  */
 «DEFINE emailTemplateDefinition FOR model::messaging::Email»
 <?php 
@@ -192,10 +191,6 @@
 /**
  * Get the runtime value of the given e-mail property, or <code>null</code>
  * if it is not set.
- *
- * @implementation Email
- *		When selecting a {@model Property} or {@model StaticValue} for an e-mail template, the
- *		{@model Property} has a higher priority.
  */
 «DEFINE getEmailProperty(String name) FOR model::messaging::Email»
 	«IF !values.select(e|e.name == name).isEmpty»

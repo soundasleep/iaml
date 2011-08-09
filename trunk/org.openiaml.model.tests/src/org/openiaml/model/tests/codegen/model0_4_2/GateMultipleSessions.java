@@ -10,14 +10,14 @@ import org.openiaml.model.tests.CodegenTestCase;
  * Demonstrates EntryGates and ExitGates across multiple Scopes.
  *
  * @author jmwright
- * @example EntryGate,ExitGate
- * 		Using {@model EntryGate}s and {@model ExitGate}s across
+ * @example Gate
+ * 		Using entry and exit {@model Gate}s across
  * 		multiple {@model Scope}s.
- * @implementation EntryGate
- * 		A hierarchy of {@model EntryGate}s are applied in the order from
+ * @implementation Gate
+ * 		A hierarchy of entry {@model Gate}s are applied in the order from
  * 		the {@model InternetApplication root}.
- * @implementation ExitGate
- * 		A hierarchy of {@model ExitGate}s are applied in the reverse order from
+ * @implementation Gate
+ * 		A hierarchy of exit {@model Gate}s are applied in the reverse order from
  * 		the {@model InternetApplication root}.
  */
 public class GateMultipleSessions extends CodegenTestCase {
@@ -178,9 +178,9 @@ public class GateMultipleSessions extends CodegenTestCase {
 	 * to only execute once, we do not have to go through the inner exit
 	 * page again.
 	 *
-	 * @inference ExitGate
-	 * 		For {@model ExitGate}s protected by a 'last' {@model NavigateAction}, the completed
-	 * 		model only requires the target of the {@model NavigateAction} to be
+	 * @inference Gate
+	 * 		For exit {@model Gate}s protected by a 'last' {@model ECARule}, the completed
+	 * 		model only requires the target of the {@model ECARule} to be
 	 * 		visited once.
 	 * @throws Exception
 	 */

@@ -3,15 +3,15 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
- * @implementation Gate,Scope
- *		{@model Gate}s are of a lower priority in execution than {@model EventTrigger}s.
+ * @implementation Gate,Scope,Event
+ *		{@model Gate}s are of a lower priority in execution than {@model Event}s.
  *		That is, {@model Scope#onAccess} will execute before any {@model Gate}s are executed.
- * @implementation Frame,EntryGate
- *		When a {@model Frame} is accessed, all {@model EntryGate}s will be checked in order
- *		of the {@model EntryGate#name} of each gate.
- * @implementation Frame,ExitGate
- *		When a {@model Frame} is accessed, all {@model ExitGate}s will be checked in order
- *		of the {@model ExitGate#name} of each gate.
+ * @implementation Frame,Gate
+ *		When a {@model Frame} is accessed, all entry {@model Gate}s will be checked in order
+ *		of the {@model Gate#name} of each gate.
+ * @implementation Frame,Gate
+ *		When a {@model Frame} is accessed, all exit {@model Gate}s will be checked in order
+ *		of the {@model Gate#name} of each gate.
  */
 «DEFINE expandFrame FOR model::visual::Frame-»
 	«FILE "output/"+safeNameString(id)+".php"-»
@@ -166,7 +166,7 @@ log_message("«name».php: User browsing finished");
 /**
  * Execute all 'onAccess' events for this frame and all children.
  * @implementation Frame
- *		When a {@model Frame} is loaded, all {@model Accessible#onAccess} {@model EventTrigger events}
+ *		When a {@model Frame} is loaded, all {@model Accessible#onAccess} {@model Event}s
  *		for the frame and its {@model Frame#children}, recursively, are executed.
  */
 «DEFINE getAllOnAccessEvents FOR model::VisibleThing»

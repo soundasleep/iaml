@@ -27,7 +27,7 @@ global DroolsHelperFunctions functions;
  *		A {@model DomainType} which does not contain a {@model DomainAttribute#primaryKey primary key}
  *		{@model DomainAttribute} will contain one named 'generated primary key'.
  */
-rule "Create a default primary key for DomainObjects which do not have one"
+rule "Create a default primary key for DomainTypes which do not have one"
 
 	when
 		object : DomainType ( )

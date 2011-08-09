@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_4;
 
@@ -9,17 +9,18 @@ import java.util.List;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
- * We can use a QueryParameter as a Parameter to a SelectWire, in order
+ * We can use a QueryParameter as a Parameter to a DomainIterator, in order
  * to select an instance from a domain store.
- * 
- * @example QueryParameter,SelectWire,DomainObjectInstance Using a {@model QueryParameter} from
- * 		the current request URI to {@model SelectWire select}
- * 		an {@model DomainObjectInstance object instance}.
+ *
+ * @example QueryParameter,DomainIterator
+ *		Using a {@model QueryParameter} from
+ * 		the current request URI to select
+ * 		an {@model DomainIterator object instance}.
  * @author jmwright
  *
  */
 public class QueryParameterAsParameter extends DatabaseCodegenTestCase {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -37,70 +38,70 @@ public class QueryParameterAsParameter extends DatabaseCodegenTestCase {
 		s.add("INSERT INTO User (id, name, email, password) VALUES (8, 'User Four', 'test4@jevon.org', 'test4')");
 		return s;
 	}
-	
+
 	/**
 	 * By default, it will select ID = 1.
 	 */
 	public void testDefault() throws Exception {
 		beginAtSitemapThenPage("Home");
-		
+
 		{
 			String field = getLabelIDForText("name");
 			assertLabeledFieldEquals(field, "User Default");
 		}
-		
+
 		{
 			String field = getLabelIDForText("email");
 			assertLabeledFieldEquals(field, "default@jevon.org");
 		}
 	}
-	
+
 	/**
 	 * Select a particular user.
 	 */
 	public void testSelect() throws Exception {
 		beginAtSitemapThenPageQuery("Home", "user_id=4");
-		
+
 		{
 			String field = getLabelIDForText("name");
 			assertLabeledFieldEquals(field, "User Three");
 		}
-		
+
 		{
 			String field = getLabelIDForText("email");
 			assertLabeledFieldEquals(field, "test3@jevon.org");
 		}
 	}
-	
+
 	/**
 	 * We can select a user, edit the fields, and reload
 	 * with the same parameter, and the database object will not
 	 * have changed (because autosave is false)
-	 * 
-	 * @implementation If a {@model InputForm} representing a {@model SelectWire selected}
-	 * 		{@model DomainObjectInstance} changes, the changes will be saved. 
+	 *
+	 * @implementation If a {@model InputForm} representing a selected
+	 * 		{@model DomainInstance} changes, the changes will be saved.
 	 */
 	public void testChangable() throws Exception {
 		beginAtSitemapThenPageQuery("Home", "user_id=8");
-		
+
 		{
 			String field = getLabelIDForText("name");
 			assertLabeledFieldEquals(field, "User Four");
-			
+
 			// change it
 			setLabeledFormElementField(field, "a changed value");
 			assertLabeledFieldEquals(field, "a changed value");
 		}
-		
+
 		// reload
 		beginAtSitemapThenPageQuery("Home", "user_id=8");
-		
+
 		// hasn't changed
 		{
 			String field = getLabelIDForText("name");
 			assertLabeledFieldEquals(field, "User Four");
 		}
-		
+
 	}
-	
+
 }

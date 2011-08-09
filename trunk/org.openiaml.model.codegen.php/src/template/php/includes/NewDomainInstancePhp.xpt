@@ -46,7 +46,7 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialDomainObjectInstanceUpdatesRequired FOR model::domain::DomainIterator»
 	if ($id == "«safeName()-»") {
-		/* DomainObjectInstance "«name-»" («id-») */
+		/* DomainIterator "«name-»" («id-») */
 		
 		/* expand all attributes */
 		«IF currentInstance == null»

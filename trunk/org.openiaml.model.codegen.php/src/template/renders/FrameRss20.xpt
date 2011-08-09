@@ -137,12 +137,12 @@ header("Content-Type: application/xml");
  * @param frame the current frame
  * @param direct the direct attribute, or <code>null</code>
  * @param propertyName the name of the property to select; this will first search for
- *			contained {@model Property Properties}, then contained {@model VisibleThing}s.
+ *			contained {@model Value}s, then contained {@model VisibleThing}s.
  * @param argName the variable to save the result into; this must not be modified
  *			if there is no value
  * @implementation Frame
- *		An RSS 2.0 {@model Frame} will search for <code>&lt;title&gt;</code>, ... properties
- *		with the following precedence: direct attribute; contained named {@model Property}; then value
+ *		An RSS 2.0 {@model Frame} will search for <code>&lt;title&gt;</code>, ... values
+ *		with the following precedence: direct attribute; contained named {@model Value}; then value
  *		of contained named {@model VisibleThing}, all case insensitive.
  */
 «DEFINE getProperty(model::visual::Frame frame, String direct, String propertyName, String argName) FOR model::VisibleThing-»

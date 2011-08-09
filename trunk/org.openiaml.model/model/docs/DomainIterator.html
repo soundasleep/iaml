@@ -9,7 +9,7 @@ A {@model DomainIterator} is composed of a set of {@model DomainAttributeInstanc
 <h3>query</h3>
 
 <p>
-The {@model DomainIterator#query} attribute of the {@model DomainIterator} specifies the query that will be used to select {@model DomainInstance}s from the connected {@model DomainSource}. Parameters to this {@model DomainIterator#query} may be specified through {@model Parameters}, and referenced within the {@model DomainIterator#query} as <i>named parameters</i> (for example, a query of "<code>:id = 1</code>" will use the incoming {@model Parameter} {@model Parameter#name}d "id"). A variety of database-independent query functions are provided:
+The {@model DomainIterator#query} attribute of the {@model DomainIterator} specifies the query that will be used to select {@model DomainInstance}s from the connected {@model DomainSource}. Parameters to this {@model DomainIterator#query} may be specified through {@model Parameter}s, and referenced within the {@model DomainIterator#query} as <i>named parameters</i> (for example, a query of "<code>:id = 1</code>" will use the incoming {@model Parameter} {@model Parameter#name}d "id"). A variety of database-independent query functions are provided:
 </p>
 
 <p>
@@ -105,7 +105,7 @@ An outgoing {@model ECARule} from a particular {@model DomainIterator} with the 
     </p>
 
     <p>
-    When a {@model DomainIterator} is accessed for the first time, or the current <i>instance pointer</i> is changed (for example, through calling the {@model DomainIterator#next}, {@model DomainIterator#previous} or {@model DomainIterator#reset} {@model PrimitiveOperation}s), the {@model DomainIterator#reload} operation is also executed.
+    When a {@model DomainIterator} is accessed for the first time, or the current <i>instance pointer</i> is changed (for example, through calling the {@model DomainIterator#next}, {@model DomainIterator#previous} or {@model DomainIterator#reset} {@model BuiltinOperation}s), the {@model DomainIterator#reload} operation is also executed.
     </p>
   </dd>
 
@@ -128,7 +128,7 @@ An outgoing {@model ECARule} from a particular {@model DomainIterator} with the 
 
   <dd>
     <p>
-    A {@model DomainIterator} which selects instances of a {@model Role} will have four {@model Operation}s defined, in oder to modify the current {@model Role}s and {@model Permission}s of the selected <i>user instance</i>: {@model DomainIterator#addRole}, {@model DomainIterator#removeRole}, {@model DomainIterator#addPermission}, and {@model DomainIterator#removePermission}. These are discussed in further detail as {@model PrimitiveOperation}s.
+    A {@model DomainIterator} which selects instances of a {@model Role} will have four {@model Operation}s defined, in oder to modify the current {@model Role}s and {@model Permission}s of the selected <i>user instance</i>: {@model DomainIterator#addRole}, {@model DomainIterator#removeRole}, {@model DomainIterator#addPermission}, and {@model DomainIterator#removePermission}. These are discussed in further detail as {@model BuiltinOperation}s.
     </p>
   </dd>
 

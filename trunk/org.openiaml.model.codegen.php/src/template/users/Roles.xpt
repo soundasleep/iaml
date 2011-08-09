@@ -11,15 +11,15 @@
  * should be removed from the current user instance.
  *
  * @implementation Role,Permission
- *		When a {@model UserInstance} has a {@model Role} removed, all inherited
+ *		When a {@model DomainIterator user instance} has a {@model Role} removed, all inherited
  *		{@model Permission}s with that {@model Role} are also removed.
  *
  * @implementation Role,Permission
- *		When a {@model UserInstance} has a {@model Role} added, all inherited
+ *		When a {@model DomainIterator user instance} has a {@model Role} added, all inherited
  *		{@model Permission}s with that {@model Role} are also added.
  *
  * @implementation Role
- *		When a {@model Role} is removed from a {@model UserInstance}, all
+ *		When a {@model Role} is removed from a {@model DomainIterator user instance}, all
  *		subtype {@model Role}s are not also automatically removed. This is probably inconsistent.
  */
 «DEFINE roleFunctions(model::domain::DomainSource userStore) FOR model::users::Role»
@@ -104,7 +104,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
  * the given role and the schema eventually extend <code>iaml_user_root</code> table.
  *
  * @implementation UserInstance
- *		When a {@model Role} is removed from a {@model UserInstance}, the {@model UserInstance}
+ *		When a {@model Role} is removed from a {@model DomainIterator user instance}, the {@model DomainIterator user instance}
  *		is reloaded explicitly.
  */
 function remove_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {

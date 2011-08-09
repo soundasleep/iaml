@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_5;
 
@@ -10,14 +10,14 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
- * If we select multiple results and connect the resulting 
- * {@model DomainObjectInstance} to a {@model InputForm} with a
+ * If we select multiple results and connect the resulting
+ * {@model DomainIterator} to a {@model InputForm} with a
  * {@model SetWire}, the InputForm will be populated with buttons
  * and conditions necessary for navigating over the result set.
- * 
- * @example SelectWire
- * 		Using a {@model SelectWire} that selects {@model SelectWire#limit many results}
- * 		to transform an {@model InputForm} into a paginated browser over a {@model DomainObjectInstance}.
+ *
+ * @example DomainIterator
+ * 		Using a {@model DomainIterator} that selects {@model DomainIterator#limit many results}
+ * 		to transform an {@model InputForm} into a paginated browser over that iterator.
  */
 public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 
@@ -30,53 +30,53 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 
 	/**
 	 * The home page can be accessed.
-	 * 
-	 * @throws Exception 
+	 *
+	 * @throws Exception
 	 */
 	public void testHome() throws Exception {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 	}
-	
+
 	/**
 	 * Test the initial contents of the form.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testContentsOfForm() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
-		
+
 		assertContent("Title 1", "Content 1");
-		
+
 		assertButtonPresentWithText("Next");
 		assertButtonPresentWithText("Previous");
 		assertButtonPresentWithText("First");
 		assertButtonPresentWithText("Last");
-		
+
 		assertNoResults("10");	// we do not get the full 10 results
 		assertResults("5");
-		
+
 	}
-	
+
 	/**
 	 * We can navigate through it.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testNavigateThrough() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
 
 		// initial
 		assertContent("Title 1", "Content 1");
-		
+
 		// navigate
 		for (int i = 2; i <= 5; i++) {
 			clickButtonWithText("Next");
 			assertContent("Title " + i, "Content " + i);
 		}
-		
+
 		// if we click 'next', we won't fail
 		assertNoProblem();
 		clickButtonWithText("Next");
@@ -88,33 +88,33 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 			clickButtonWithText("Previous");
 			assertContent("Title " + i, "Content " + i);
 		}
-		
+
 		// if we click 'previous', we won't fail
 		assertNoProblem();
 		clickButtonWithText("Previous");
 		assertNoProblem();
 		assertContent("Title 1", "Content 1");
-		
+
 	}
-	
+
 	/**
 	 * We can navigate through it, then press reset.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testNavigateThroughThenReset() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
 
 		// initial
 		assertContent("Title 1", "Content 1");
-		
+
 		// navigate
 		for (int i = 2; i <= 5; i++) {
 			clickButtonWithText("Next");
 			assertContent("Title " + i, "Content " + i);
 		}
-		
+
 		// click reset
 		assertNoProblem();
 		clickButtonWithText("First");
@@ -125,34 +125,34 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		clickButtonWithText("Previous");
 		assertNoProblem();
 		assertContent("Title 1", "Content 1");
-		
+
 	}
-	
+
 	/**
 	 * We can navigate through it, then reload the page; the
 	 * results will remain.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testNavigateThroughThenReload() throws Exception {
-		
+
 		IFile sitemap = beginAtSitemapThenPage("Home");
 
 		// initial
 		assertContent("Title 1", "Content 1");
-		
+
 		// navigate
 		for (int i = 2; i <= 5; i++) {
 			clickButtonWithText("Next");
 			assertContent("Title " + i, "Content " + i);
 		}
-	
+
 		// reload the page
 		reloadPage(sitemap, "Home");
-		
+
 		// still on the same page
 		assertContent("Title 5", "Content 5");
-	
+
 		// restart the session
 		restartSession(sitemap, "Home");
 
@@ -160,19 +160,19 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		assertContent("Title 5", "Content 5");
 
 	}
-	
+
 	/**
 	 * Test 'Last' then 'First'
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testLastFirst() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
 
 		// initial
 		assertContent("Title 1", "Content 1");
-		
+
 		// last
 		clickButtonWithText("Last");
 		assertNoProblem();
@@ -189,10 +189,10 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		assertContent("Title 1", "Content 1");
 
 	}
-	
+
 	/**
 	 * Check the given content on the page.
-	 * 
+	 *
 	 * <p>Because we are using a SetWire, we cannot select by TextField;
 	 * we can only search for labels containing the given text.
 	 */
@@ -200,18 +200,18 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		assertLabelTextPresent(title);
 		assertLabelTextPresent(content);
 	}
-	
+
 	private void assertResults(String results) {
 		assertLabelTextPresent(results);
 	}
 	private void assertNoResults(String results) {
 		assertLabelTextNotPresent(results);
 	}
-	
+
 	/**
 	 * Populate the database with ten news items. The SelectWire
 	 * only selects the first 5.
-	 * 
+	 *
 	 * @param size
 	 * @return
 	 */
@@ -224,5 +224,5 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		}
 		return s;
 	}
-	
+
 }

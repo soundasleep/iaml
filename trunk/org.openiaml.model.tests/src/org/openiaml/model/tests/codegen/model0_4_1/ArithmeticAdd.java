@@ -1,14 +1,14 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_4_1;
 
 
 /**
  * Try the 'ADD' arithmetic.
- * 
+ *
  * @author jmwright
- * @example Arithmetic,PrimitiveOperation Using {@model Arithmetic} to add
+ * @example Arithmetic Using {@model Arithmetic} to add
  * 		two {@model InputTextField input values} together.
  * @implementation Arithmetic
  * 		{@model Arithmetic} can be used inline to add together its
@@ -20,7 +20,7 @@ public class ArithmeticAdd extends AbstractArithmeticTestCase {
 	public Class<? extends AbstractArithmeticTestCase> getTestcaseClass() {
 		return ArithmeticAdd.class;
 	}
-	
+
 	@Override
 	public String get0_3Calculation() {
 		return "3";

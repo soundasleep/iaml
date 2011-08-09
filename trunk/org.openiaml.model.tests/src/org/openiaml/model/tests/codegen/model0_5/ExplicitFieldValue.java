@@ -1,19 +1,19 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_5;
 
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * 		
+ *
  * @implementation VisibleThing
- * 		If a {@model Property} named 'fieldValue' is not initially contained within a
- * 		{@model VisibleThing}, the attribute {@model VisibleThing#fieldValue fieldValue} will be 
+ * 		If a {@model Value} named 'fieldValue' is not initially contained within a
+ * 		{@model VisibleThing}, the attribute {@model VisibleThing#fieldValue fieldValue} will be
  * 		used instead.
  */
 public class ExplicitFieldValue extends CodegenTestCase {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -22,36 +22,36 @@ public class ExplicitFieldValue extends CodegenTestCase {
 
 	/**
 	 * The home page can be accessed.
-	 * 
-	 * @throws Exception 
+	 *
+	 * @throws Exception
 	 */
 	public void testHome() throws Exception {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 	}
-	
+
 	/**
 	 * The text field 'target' exists, and is set to 'initial value'.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testHomeInitial() throws Exception {
-	
+
 		beginAtSitemapThenPage("Home");
 		{
 			String target = getLabelIDForText("source target");
 			assertLabeledFieldEquals(target, "initial value");
 		}
-		
+
 	}
-	
+
 	/**
 	 * 'change target' is told to set 'target'.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testHomeChange() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
 		{
 			String target = getLabelIDForText("source target");
@@ -62,13 +62,13 @@ public class ExplicitFieldValue extends CodegenTestCase {
 			assertLabeledFieldEquals(target, "");	// empty
 			setLabeledFormElementField(target, "new value");
 		}
-		
+
 		// it should change 'target'
 		{
 			String target = getLabelIDForText("source target");
 			assertLabeledFieldEquals(target, "new value");	// empty
 		}
-		
+
 	}
 
 }

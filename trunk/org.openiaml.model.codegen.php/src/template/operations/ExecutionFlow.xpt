@@ -271,7 +271,7 @@
 «ENDDEFINE»
 
 /**
- * A decision node: consult the incoming ConditionEdges.
+ * A decision node: consult the incoming Conditions.
  * TODO can we remove this template? It doesn't seem to do anything useful.
  */
 «DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»

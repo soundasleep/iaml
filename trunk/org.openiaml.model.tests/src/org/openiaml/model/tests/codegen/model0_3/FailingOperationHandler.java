@@ -22,7 +22,9 @@ public class FailingOperationHandler extends CodegenTestCase {
 	}
 
 	/**
-	 * @implementation CancelNode,NavigateAction A {@model CancelNode failing operation} wrapped with a {@model NavigateAction navigation wire} named 'fail' will redirect to the destination {@model Frame frame} instead.
+	 * @implementation CancelNode,ECARule,ActivityOperation
+	 *		A {@model CancelNode failing operation} within an {@model ActivityOperation} wrapped with a {@model ECARule}
+	 *		named 'fail' will redirect to the destination {@model Frame} instead.
 	 * @throws Exception
 	 */
 	public void testFailingOperation() throws Exception {

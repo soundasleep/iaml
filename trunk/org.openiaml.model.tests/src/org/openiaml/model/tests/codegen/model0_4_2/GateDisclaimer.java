@@ -14,7 +14,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @example Gate
  * 		Using an entry {@model Gate} to prevent access to a {@model Scope} without
  * 		first viewing a disclaimer {@model Frame}.
- * @implementation EntryGate
+ * @implementation Gate
  * 		If a {@model Frame} is contained within a {@model Session} that contains
  * 		an entry {@model Gate}, any incoming {@model Condition}s on that Gate
  * 		must first be satisfied in order to proceed.

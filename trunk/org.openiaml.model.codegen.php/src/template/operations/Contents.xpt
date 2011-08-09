@@ -88,11 +88,11 @@
  *		are considered empty when converted to <code>iamlString</code>s.
  * @implementation DecisionNode
  *		For a {@model DecisionNode} named 'true?',
- *		if more than one {@model ConditionEdge} is incoming to an executed {@model DecisionNode},
+ *		if more than one {@model Condition} is incoming to an executed {@model DecisionNode},
  *		then all incoming {@model Condition}s must be <code>true</code> for execution to pass.
  * @implementation DecisionNode
  *		For a {@model DecisionNode} named 'true?',
- *		if no {@model ConditionEdge}s are incoming to a {@model DecisionNode},
+ *		if no {@model Condition}s are incoming to a {@model DecisionNode},
  *		then execution will ignore the pass/fail outgoing edges.
  */
 «DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»

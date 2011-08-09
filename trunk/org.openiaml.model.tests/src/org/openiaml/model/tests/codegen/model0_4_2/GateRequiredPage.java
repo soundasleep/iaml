@@ -72,7 +72,7 @@ public class GateRequiredPage extends CodegenTestCase {
 	 * If we get interrupted, we can resume from where the gate threw us off.
 	 *
 	 * @inference Gate
-	 * 		If a {@model Gate} is protected by a "first" {@model NavigateAction},
+	 * 		If a {@model Gate} is protected by a "first" {@model ECARule},
 	 * 		then the destination {@model Frame} will have a new {@model Button} created
 	 * 		called "Continue"
 	 * @throws Exception

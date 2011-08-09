@@ -45,11 +45,11 @@
  * using this as a parameter source,
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
- * @implementation RunAction
- *		When {@model RunAction running} an {@model Operation}, the {@model ParameterEdge}s are
- *		provided in alphabetical order according to their {@model ParameterEdge#name}.
- * @generation Action,ActionEdge
- *		When a {@model Action} is executed through a {@model ActionEdge},
+ * @implementation ECARule
+ *		When {@model ECARule running} an {@model Operation}, the {@model Parameter}s are
+ *		provided in alphabetical order according to their {@model Parameter#name}.
+ * @implementation Action,ECARule
+ *		When a {@model Action} is executed through a {@model ECARule},
  *		the type of activity executed is dependent on the subtype of the given {@model Action}.
  */
 «DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
@@ -282,8 +282,8 @@
 /**
  * Add any named parameters to the given URL (in $argName).
  *
- * @implementation NavigateAction,ParameterEdge
- * 		Any incoming named {@model ParameterEdge}s to a {@model NavigateAction} will be
+ * @implementation ECARule,Parameter
+ * 		Any incoming named {@model Parameter}s to a {@model ECARule} to a {@model Frame} will be
  * 		passed along as named <code>GET</code> parameters to the destination.
  */
 «DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::ECARule»

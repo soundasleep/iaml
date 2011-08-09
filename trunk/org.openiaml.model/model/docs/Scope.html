@@ -10,8 +10,8 @@ When a {@model Scope} is rendered, the lifecycle events for that {@model Scope} 
   <li>If this {@model Scope} is contained by a parent {@model Scope}, then the pre-render lifecycle events for that parent {@model Scope} must be triggered.
   <li>If this {@model Scope} has not yet been <i>initialised</i> according to the storage semantics of that {@model Scope}, then the {@event onInit} {@model Event} is triggered.
   <li>The {@event onAccess} {@model Event} is triggered.
-  <li>All entry {@model Gate}s contained within this {@model Scope} are sorted according to their {@model EntryGate#name}. The <i>access semantics</i> of each {@model EntryGate} are then executed.
-  <li>All exit {@model Gate}s contained within this {@model Scope} are sorted according to their {@model ExitGate#name}. The <i>access semantics</i> of each {@model ExitGate} are then executed.
+  <li>All entry {@model Gate}s contained within this {@model Scope} are sorted according to their {@model Gate#name}. The <i>access semantics</i> of each entry {@model Gate} are then executed.
+  <li>All exit {@model Gate}s contained within this {@model Scope} are sorted according to their {@model Gate#name}. The <i>access semantics</i> of each exit {@model Gate} are then executed.
   <li>The {@model Scope} is then rendered.
 </ol>
 

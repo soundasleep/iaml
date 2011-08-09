@@ -11,7 +11,7 @@ A {@model AccessControlHandler} has an associated <i>user instance</i> {@model D
 </p>
 
 <p>
-A {@model AccessControlHandler} may have an outgoing {@model ActionEdge} {@model ActionEdge#name}d ``login''. If the current user does not satisfy the <i>access requirements</i> of this {@model AccessControlHandler}, the {@model ActionEdge} is executed.
+A {@model AccessControlHandler} may have an outgoing {@model ECARule} {@model ECARule#name}d ``login''. If the current user does not satisfy the <i>access requirements</i> of this {@model AccessControlHandler}, the {@model ECARule} is executed.
 </p>
 
 <!-- (\sectionref{section:model-actions}).

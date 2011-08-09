@@ -174,7 +174,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertNotGenerated(my);
 		assertFalse(my.isReadOnly());
 
-		// in r2677, StaticValue was merged into Property[readOnly]
+		// in r2677, StaticValue was merged into Value[readOnly]
 		Value key = assertHasValue(session, "login key");
 		assertNotGenerated(key);
 		assertTrue(key.isReadOnly());

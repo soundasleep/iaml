@@ -50,8 +50,8 @@
 «ENDDEFINE»
 
 /**
- * @implementation Changeable,ParameterEdge
- *		If a {@model Changeable} is used as the {@model ParameterEdgesSource} of a {@model ParameterEdge},
+ * @implementation Changeable,Parameter
+ *		If a {@model Changeable} is used as the {@model ParameterEdgesSource source} of a {@model Parameter},
  *		the {@model Changeable#fieldValue} of the {@model Changeable} is used as the value. 
  */
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Changeable»

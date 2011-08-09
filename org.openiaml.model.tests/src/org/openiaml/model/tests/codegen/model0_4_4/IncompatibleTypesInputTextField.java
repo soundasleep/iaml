@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_4_4;
 
@@ -8,13 +8,13 @@ import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * Checks that if we have an {@model InputTextField} with a different type
- * to its contained {@model Property} fieldValue, an exception is thrown.
- * 
+ * to its contained {@model Value} fieldValue, an exception is thrown.
+ *
  * @author jmwright
  *
  */
 public class IncompatibleTypesInputTextField extends CodegenTestCase {
-	
+
 	public void testExceptionInvestgation() throws Exception {
 		TransformationException ex = null;
 		try {
@@ -36,7 +36,7 @@ public class IncompatibleTypesInputTextField extends CodegenTestCase {
 			errorBuffer.append(s.getMessage()).append("\n");
 		}
 		assertTrue("Could not find expected status message in:\n" + errorBuffer.toString(), found);
-		
+
 	}
 
 }

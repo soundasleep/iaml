@@ -15,7 +15,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * 		If an exit {@model Gate} is connected by an {@model ECARule} called "last",
  * 		then the target {@model Frame} must be viewed at least once before proceeding.
  * @implementation Gate,ECARule
- * 		If an exit {@model ExitGate} is connected by an {@model ECARule} called "last",
+ * 		If an exit {@model Gate} is connected by an {@model ECARule} called "last",
  * 		then the target {@model Frame} must be viewed at least once before proceeding.
  */
 public class ExitGateAdSimple extends CodegenTestCase {

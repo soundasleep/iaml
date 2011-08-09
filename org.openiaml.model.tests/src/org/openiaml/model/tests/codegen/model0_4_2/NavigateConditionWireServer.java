@@ -7,7 +7,7 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Check that NavigateActions can be controlled by incoming ConditionWires,
+ * Check that ECARules can be controlled by incoming Conditions,
  * making sure it works on the server too.
  *
  * @author jmwright

@@ -19,29 +19,29 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * 		{@model DomainType}s can {@model ExtendsEdge extend} other
  * 		{@model DomainType}s to inherit their {@model DomainAttribute attributes}.
  *
- * @example ExtendsEdge,DomainIterator,SelectWire
- * 		{@model SelectWire Selecting} an {@model DomainIterator instance} of a
+ * @example ExtendsEdge,DomainIterator
+ * 		Selecting an {@model DomainIterator instance} of a
  * 		{@model DomainType} which has been {@model ExtendsEdge extended}.
  *
- * @implementation SelectWire,DomainObject
- * 		If a {@model SelectWire} is selecting from a {@model DomainType} which extends
+ * @implementation DomainIteratorDomainObject
+ * 		If a {@model DomainIterator} is selecting from a {@model DomainType} which extends
  * 		another {@model DomainType}, the {@model DomainIterator} will contain
  * 		the inherited {@model DomainAttributeInstance attribute instances}.
  *
- * @example SelectWire,DomainIterator
- * 		{@model SelectWire Selecting} a {@model DomainIterator} with more than one query
+ * @example DomainIterator
+ * 		Selecting a {@model DomainIterator} with more than one query
  * 		parameter (<code>qualification = :qualification and degree = :degree</code>)
  *
- * @example SelectWire,DomainIterator
- * 		{@model SelectWire Selecting} a {@model DomainIterator} with attributes across inherited
+ * @example DomainIterator
+ * 		Selecting a {@model DomainIterator} with attributes across inherited
  * 		{@model DomainType}s.
  *
- * @implementation SelectEdge,Parameter
- * 		If a {@model SelectEdge} is using a query with more than one parameter,
+ * @implementation DomainIterator,Parameter
+ * 		If a {@model DomainIterator} is using a query with more than one parameter,
  * 		and the {@model Parameter}s are not named, the {@model NamedElement name} of the
  * 		data source will be used to match up a query.
  *
- * @implementation SelectWire,DomainIterator
+ * @implementation DomainIterator
  * 		A {@model DomainType} which inherits another can be {@model DomainIterator instantiated} by
  * 		the combination of all inherited attributes.
  *

@@ -6,14 +6,14 @@ package org.openiaml.model.tests.codegen.model0_4_2;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Check that NavigateActions can be controlled by incoming ConditionEdges.
+ * Check that ECARules can be controlled by incoming SimpleConditions.
  *
  * @author jmwright
- * @example ConditionEdge,NavigateAction
- * 		Using a {@model ConditionEdge} to control redirection access on a {@model NavigateAction}.
- * @implementation NavigateAction
- * 		If a {@model NavigateAction} is restricted by an incoming
- * 		{@model ConditionEdge}, the redirection will be prevented if the
+ * @example SimpleCondition,ECARule
+ * 		Using a {@model SimpleCondition} to control redirection access on a {@model ECARule}.
+ * @implementation ECARule,Condition
+ * 		If a {@model ECARule} is restricted by an incoming
+ * 		{@model Condition}, the redirection will be prevented if the
  * 		source {@model Condition} fails.
  */
 public class NavigateConditionWire extends CodegenTestCase {

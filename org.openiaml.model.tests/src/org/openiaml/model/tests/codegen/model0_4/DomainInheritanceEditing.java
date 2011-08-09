@@ -13,15 +13,15 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * when editing. In particular, this test case does
  * not set up an initial database.
  *
- * @example NewInstanceWire,DomainType
- * 		Creating a {@model NewInstanceWire new instance} of an inherited {@model DomainType}.
+ * @example DomainType
+ * 		Creating a new {@model DomainInstance instance} of an inherited {@model DomainType}.
  *
- * @implementation DomainIterator,DomainAttribute
- * 		New {@model DomainIterator instances} of {@model DomainType}s which {@model ExtendsEdge extend others} can be created;
- * 		all of their {@model DomainAttribute attributes} are accessible.
+ * @implementation DomainInstance,DomainIterator,DomainAttribute
+ * 		New {@model DomainInstance instance}s of {@model DomainType}s which {@model ExtendsEdge extend others} can be created;
+ * 		all of their inherited {@model DomainAttribute attributes} are accessible.
  *
- * @implementation DomainIterator
- * 		A new {@model DomainIterator instance} of an {@model ExtendsEdge inherited} {@model DomainType} with {@model DomainIterator#autosave}=false
+ * @implementation DomainInstance,DomainIterator
+ * 		A new {@model DomainInstance instance} of an {@model ExtendsEdge inherited} {@model DomainType} with {@model DomainIterator#autosave}=false
  * 		can have its {@model DomainAttribute attributes} modified before being saved.
  *
  * @implementation SyncWire,InputForm,ExtendsEdge
@@ -31,8 +31,8 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * 		{@model InputTextField}
  * 		for all inherited {@model DomainAttribute}s.
  *
- * @example	DomainIterator,DomainType,Session
- * 		Creating a new {@model DomainIterator instance} of an inherited {@model DomainType},
+ * @example	DomainInstance,DomainIterator,DomainType,Session
+ * 		Creating a new {@model DomainInstance instance} of an inherited {@model DomainType},
  * 		accessible only within a {@model Session}.
  *
  * @implementation Session,DomainIterator

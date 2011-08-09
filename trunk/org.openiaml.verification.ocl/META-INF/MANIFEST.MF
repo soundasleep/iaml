@@ -4,7 +4,7 @@ Bundle-Name: Verification with OCL
 Bundle-SymbolicName: org.openiaml.verification.ocl;singleton:=true
 Bundle-Version: 0.5.3.qualifier
 Bundle-Activator: org.openiaml.validation.ocl.adapter.ValidationExamplePlugin
-Bundle-Vendor: %Plugin.providerName
+Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Export-Package: org.openiaml.validation.ocl.adapter,
  org.openiaml.validation.ocl.adapter.constraints,

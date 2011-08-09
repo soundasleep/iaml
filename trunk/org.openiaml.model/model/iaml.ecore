@@ -700,7 +700,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Provides an interface to a predefined set of XQuery Functions as {@model Function}s."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="func" lowerBound="1" eType="#//XQUERY_FUNCTIONS"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="func" lowerBound="1" eType="#//XQUERY_FUNCTIONS">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The XQuery function referenced by this {@model XQueryFunction}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XQueryPredicate" eSuperTypes="#//XQueryFunction #//Predicate">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

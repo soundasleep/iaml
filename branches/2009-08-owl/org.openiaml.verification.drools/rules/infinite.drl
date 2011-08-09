@@ -14,10 +14,10 @@ global org.openiaml.verification.drools.VerifyHandler verify;
 
 rule "Frame navigating to another Frame on access"
 	when
-		access : EventTrigger ( )
+		access : Event ( )
 		p : Frame ( onAccess == access )
 		p2 : Frame ( eval(p != p2) )
-		navigate : ActionEdge ( from == access, to == p2 )
+		navigate : ECARule ( trigger == access, target == p2 )
 		not ( NavigatesTo ( from == p, to == p2 ))
 	
 	then

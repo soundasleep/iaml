@@ -17,7 +17,7 @@ rule "Frame has a path (1)"
 		p : Frame ( )
 		b : Button ( eContainer == p )
 		p2 : Frame ( )
-		n : ActionEdge ( from == b, to == p2, name == "onClick")
+		n : ECARule ( trigger == b, target == p2, name == "onClick")
 		not ( PathTo ( from == p, to == p2 ))
 	
 	then
@@ -32,9 +32,9 @@ rule "Frame has a path (2)"
 	when
 		p : Frame ( )
 		b : Button ( eContainer == p )
-		e : EventTrigger ( eContainer == b, name == "click" )
+		e : Event ( eContainer == b, name == "click" )
 		p2 : Frame ( )
-		n : ActionEdge ( from == e, to == p2 )
+		n : ECARule ( trigger == e, target == p2 )
 		not ( PathTo ( from == p, to == p2 ))
 	
 	then

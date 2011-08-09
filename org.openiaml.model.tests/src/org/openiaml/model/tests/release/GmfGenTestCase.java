@@ -96,11 +96,7 @@ public class GmfGenTestCase extends XmlTestCase {
 			}
 
 			IterableElementList links = xpath(doc, "/GenEditorGenerator/diagram/links");
-			if (filename.endsWith("/instance.gmfgen")) {
-				assertTrue(filename + ": Links found", links.isEmpty());
-			} else {
-				assertFalse(filename + ": No links found", links.isEmpty());
-			}
+			assertFalse(filename + ": No links found", links.isEmpty());
 			for (Element link : links) {
 				// directly contained OpenDiagramPolicies
 				IterableElementList opens = xpath(link, "behaviour");

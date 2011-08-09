@@ -48,10 +48,10 @@ end
 rule "Page is secure"
 	when
 		page1 : Frame ( )
-		event : EventTrigger ( eContainer == page1, name == "access" )
+		event : Event ( eContainer == page1, name == "access" )
 		op : Operation ( )
 		SecureOperation ( operation == op )
-		run : ActionEdge ( from == event, to == op )
+		run : ECARule ( trigger == event, target == op )
 		not ( SecurePage ( page == page1 ))
 		
 	then
@@ -62,7 +62,7 @@ end
 
 rule "Operation is secure"
 	when
-		op : CompositeOperation ( )
+		op : ActivityOperation ( )
 		s : StartNode ( eContainer == op )
 		c : CancelNode ( eContainer == op )
 		SecurePath ( from == s, to == c )

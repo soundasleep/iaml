@@ -20,7 +20,7 @@
 <path d="M12 52 L71 52 L71 68 L12 68 L12 52 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath6">
-<path d="M12 71 L110 71 L110 87 L12 87 L12 71 Z"/>
+<path d="M12 71 L126 71 L126 87 L12 87 L12 71 Z"/>
 </clipPath>
 </defs>
 <g fill="rgb(228,223,214)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(228,223,214)" stroke-width="0" stroke-miterlimit="0">
@@ -33,7 +33,7 @@
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: DomainAttributeInstance</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="13" x2="158" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" stroke="none" stroke-width="0.1" xml:space="preserve">Type: Any</text>
-<text x="13" y="84" clip-path="url(#clipPath6)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: Container</text>
+<text x="13" y="84" clip-path="url(#clipPath6)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Container: Container</text>
 </g>
 </g>
 </svg>

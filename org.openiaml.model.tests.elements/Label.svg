@@ -20,7 +20,7 @@
 <path d="M12 52 L71 52 L71 68 L12 68 L12 52 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath6">
-<path d="M12 71 L76 71 L76 87 L12 87 L12 71 Z"/>
+<path d="M12 71 L92 71 L92 87 L12 87 L12 71 Z"/>
 </clipPath>
 </defs>
 <g fill="rgb(255,255,192)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,255,192)" stroke-width="0" stroke-miterlimit="0">
@@ -33,7 +33,7 @@
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: Label</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="13" x2="49" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" stroke="none" stroke-width="0.1" xml:space="preserve">Type: Any</text>
-<text x="13" y="84" clip-path="url(#clipPath6)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
+<text x="13" y="84" clip-path="url(#clipPath6)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Container: null</text>
 </g>
 </g>
 </svg>

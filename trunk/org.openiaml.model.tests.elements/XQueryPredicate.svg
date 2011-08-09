@@ -8,13 +8,13 @@
 <path d="M9 9 L129 9 L129 71 L9 71 L9 9 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath2">
-<path d="M18 12 L120 12 L120 30 L18 30 L18 12 Z"/>
+<path d="M16 12 L122 12 L122 30 L16 30 L16 12 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath3">
-<path d="M37 13 L120 13 L120 29 L37 29 L37 13 Z"/>
+<path d="M35 13 L122 13 L122 29 L35 29 L35 13 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath4">
-<path d="M20 33 L117 33 L117 49 L20 49 L20 33 Z"/>
+<path d="M18 33 L119 33 L119 49 L18 49 L18 33 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath5">
 <path d="M12 52 L126 52 L126 68 L12 68 L12 52 Z"/>
@@ -25,10 +25,10 @@
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <ellipse clip-path="url(#clipPath1)" fill="none" rx="58.5" cx="68.5" ry="29.5" cy="39.5"/>
-<image x="19" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABu0lEQVR42mNgGGjA&#13;&#10;CCJK5+78f/n1f5I06ooyMnQnuzOygDi7b39mWFXgRpIBYRN2gWkWZEFVcV6iNN9+&#13;&#10;+RnOZqI0DFiwCbbNPgCm//37x/D333+Gv39A9D8wv73Qk7ABVakOcPbZszcYPn58&#13;&#10;w/DkyUsGaWkFwi7omHsQavt/BmW+jwxGRlYMnJzsDPr6egz8/NwMCxeuBdI8uA2o&#13;&#10;SLaHszs7ZzKYmjIxCAtLMrx//4WBlZWdIT4+mOHRo5cMFT+PMUTg8gII1Na2MSQm&#13;&#10;ZjNwcTEzTJs2g+HChVMMhoZWDNXVOQxPnz5nePnyOWYsgKIHhv//5wBqusLw9esP&#13;&#10;Bm5uLgZPT2egpjtA298yWFoaMIiKyjIcPXr0P9gFrqq8DHYN69DcIMygDAy837+V&#13;&#10;GJyd3RlOnz7OYGZmx8DDw8Vw5cojhgcP7gPZ0KSMC/T3L/ovJibJICMjzqCqqsjA&#13;&#10;xMTMwMHByjBjxgygy14xNDc3M7LgM+DduzfAEGdjuHPnK8OXL18YDh8+wGBgYMrw&#13;&#10;8OEtBisrM7AaZnwGHDq0s7GpqbPh48eXDG/fvma4dOkkw/Pnd4GazRni4uLArgcA&#13;&#10;40Oiv+IAFcMAAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text xml:space="preserve" x="38" y="26" clip-path="url(#clipPath3)" stroke="none">Function name</text>
-<text xml:space="preserve" x="21" y="46" clip-path="url(#clipPath4)" stroke="none">: XQueryFunction</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="21" x2="116" y1="47" y2="47" stroke-width="0.1"/>
+<image x="17" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABxklEQVR42mNgGGjA&#13;&#10;CCJK5+78f/n1f5I06ooyMnQnuzOygDi7b39mWFXgRpIBYRN2gWkWZEFVcV6iNN9+&#13;&#10;+RnOZqI0DFiwCbbNPgCm//37x/Ds6SOGFsfHDHe3dTH8/MPAIOVcxnBTOh6/AVWp&#13;&#10;DnD2tWYpho9nvjOo+RSC+W8O1DF82zSdgUF4MnYDOuYeBNOPHt5nSGOqZlD2LGb4&#13;&#10;eGkJw6crK8Di7GKaDB6u8QwvJ+Yx5GEzoCLZHkw/23WQ4efZd2DN/399Zfj/5zsD&#13;&#10;w/9/DIL2tQwfTk5hsJB+xnBgQeN/nIF4bk0Hg5BNBVDzJwYB0yyGf3//MAjZNzDw&#13;&#10;GKYysIlqMqh4FTFsnNmB6gLk6Pn4DRSKfxmYOIQYePXjGHh1QhkYuKQZXq7yZ/h6&#13;&#10;ZyeDoFk2w59/SClx8ennKC7gfHiUYYvebAYeCSmGf0DnS4evZ3h3YgLDlxsbGRiZ&#13;&#10;2Riu3fnJ8N+sEWIALjApTOp/XE4aWOP/n18Y/v//y8DIyMwgaF3K0NC4kKF68WH8&#13;&#10;BoBArafkfxvp5wzGgRlg/r7lMxj23ZdkmHH0OSNRKbF5+3PGf+ZNDNX1SxjKapYw&#13;&#10;sFk1MTQsOwyXBwBQOKahil4r8gAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
+<text xml:space="preserve" x="36" y="26" clip-path="url(#clipPath3)" stroke="none">Predicate name</text>
+<text xml:space="preserve" x="19" y="46" clip-path="url(#clipPath4)" stroke="none">: XQueryPredicate</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="19" x2="118" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Container: Container</text>
 </g>
 </g>

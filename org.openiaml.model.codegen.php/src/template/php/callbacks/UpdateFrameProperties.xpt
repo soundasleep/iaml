@@ -164,7 +164,7 @@ if (!require_get("ignore_updates", 0)) {
 			«ENDIF»
 		}
 		
-		«FOREACH properties.select(p|p.name=="visible") AS p»
+		«FOREACH values.select(p|p.name=="visible") AS p»
 		if («EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
 			$value = make_into_boolean(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p») ? "true" : "false";
 			$visibility_set = true;

@@ -205,8 +205,8 @@ context model::operations::CastNode ERROR "A CastNode needs exactly one incoming
 /**
  * To quickly identify problems related to issue 170: making an explicit Property called 'fieldValue'
  */
-context model::ContainsProperties WARNING "You should not have a contained Property named 'fieldValue', unless it is contained within the fieldValue containment feature" :
-	properties.select(e | e.name == "fieldValue").isEmpty; 
+context model::ContainsValues WARNING "You should not have a contained Property named 'fieldValue', unless it is contained within the fieldValue containment feature" :
+	values.select(e | e.name == "fieldValue").isEmpty; 
 
 /**
  * Two types are specified to be incompatible if they are different.

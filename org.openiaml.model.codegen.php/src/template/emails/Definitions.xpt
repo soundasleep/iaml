@@ -123,7 +123,7 @@
 				$value = array();
 				$label = array();
 				
-				«FOREACH properties.sortBy(e|e.name) AS p»
+				«FOREACH values.sortBy(e|e.name) AS p»
 					$property["«escapePhpString(p.name)»"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»;
 				«ENDFOREACH»
 				«FOREACH labels.sortBy(e|e.name) AS label»
@@ -179,7 +179,7 @@
  * this template will be used instead.
  */
 ?>
-	«FOREACH properties.sortBy(e|e.name) AS p»
+	«FOREACH values.sortBy(e|e.name) AS p»
 		«p.name»: <?php echo $property["«escapePhpString(p.name)»"]; echo "\n"; ?>
 	«ENDFOREACH»
 	«FOREACH labels.sortBy(e|e.name) AS label»
@@ -198,8 +198,8 @@
  *		{@model Property} has a higher priority.
  */
 «DEFINE getEmailProperty(String name) FOR model::messaging::Email»
-	«IF !properties.select(e|e.name == name).isEmpty»
-		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(e|e.name == name)»
+	«IF !values.select(e|e.name == name).isEmpty»
+		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR values.selectFirst(e|e.name == name)»
 	«ELSE»
 	  	null
 	«ENDIF» 

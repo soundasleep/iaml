@@ -71,7 +71,7 @@
 	$visible_value = null;
 	 
 	«REM»first, go through all properties«ENDREM»	
-	«FOREACH properties.select(p|p.name == "visible") AS p»
+	«FOREACH values.select(p|p.name == "visible") AS p»
 		if (!$found_visible_value && «EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
 			$visible_value = make_into_boolean(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»);
 			$found_visible_value = true;

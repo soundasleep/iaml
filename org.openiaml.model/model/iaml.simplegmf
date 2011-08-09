@@ -730,6 +730,9 @@
     <elements xsi:type="sgmf:ContainedNode" name="ActivityOperation">
       <classifier href="iaml.ecore#//operations/ActivityOperation"/>
     </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="XQueryPredicate">
+      <classifier href="iaml.ecore#//XQueryPredicate"/>
+    </elements>
     <elements xsi:type="sgmf:ContainedNode" name="XQueryFunction">
       <classifier href="iaml.ecore#//XQueryFunction"/>
     </elements>

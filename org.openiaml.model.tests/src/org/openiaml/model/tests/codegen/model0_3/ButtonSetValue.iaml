@@ -16,9 +16,9 @@
       </onClick>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.fa" name="reset target">
-      <properties id="model.12109331eea.121" name="empty value" outParameterEdges="wires.12109331f38.3d" defaultValue="empty" readOnly="true">
+      <values id="model.12109331eea.121" name="empty value" outParameterEdges="wires.12109331f38.3d" defaultValue="empty" readOnly="true">
         <parameterEdges id="wires.12109331f38.3d" parameterValue="model.12109331eea.121" parameterTerm="wires.12109331f38.3c"/>
-      </properties>
+      </values>
       <onClick id="model.12109331eea.146" listeners="wires.12109331f38.3c">
         <ecaRules id="wires.12109331f38.3c" inParameterEdges="wires.12109331f38.3d" name="run" trigger="model.12109331eea.146" target="model.12109331eea.b2"/>
       </onClick>

@@ -11,7 +11,7 @@
       <executionEdges id="model.1242348c6d7.2a" from="operations.1242348c744.b" to="operations.124233df428.30"/>
     </operations>
     <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1242348c735.4" id="model.124233df234.94" name="target operation">
-      <properties id="model.124233df234.ea" name="static value" defaultValue="new value" readOnly="true"/>
+      <values id="model.124233df234.ea" name="static value" defaultValue="new value" readOnly="true"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.124233df234.eb" outExecutions="model.124233df234.f1" inExecutions="model.124233df234.ef" outFlows="model.124233df234.ee" inFlows="model.124233df234.ec"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.124233df428.14" outExecutions="model.124233df234.ef"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.124233df428.16" inExecutions="model.124233df234.f1"/>

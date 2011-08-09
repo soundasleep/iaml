@@ -2,39 +2,39 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1236407970c.1">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364079826.1" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.bc" name="get person">
-    <properties id="model.123641434e9.2ad3" name="person name" outParameterEdges="wires.12364143556.6c8" defaultValue="Test Name" readOnly="true">
+    <values id="model.123641434e9.2ad3" name="person name" outParameterEdges="wires.12364143556.6c8" defaultValue="Test Name" readOnly="true">
       <parameterEdges id="wires.12364143556.6c8" parameterValue="model.123641434e9.2ad3" parameterTerm="domain.128807fbeba.ff6"/>
-    </properties>
+    </values>
     <iterators id="domain.128807fbeba.ff6" name="selected person" inWires="wires.12364143556.6ca" inParameterEdges="wires.12364143556.6c8" query="name = ?" outSelects="domain.128807fbeba.1015" autosave="true"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.6ca" id="visual.12364143556.d2" name="view person">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" name="sync" from="visual.12364143556.d2" to="domain.128807fbeba.ff6"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.e4" name="get student">
-    <properties id="model.123641434e9.2c35" name="enrolled param" outParameterEdges="wires.12364143556.752" defaultValue="yesterday" readOnly="true">
+    <values id="model.123641434e9.2c35" name="enrolled param" outParameterEdges="wires.12364143556.752" defaultValue="yesterday" readOnly="true">
       <parameterEdges id="wires.12364143556.752" parameterValue="model.123641434e9.2c35" parameterTerm="domain.128807fbeba.ff7"/>
-    </properties>
+    </values>
     <iterators id="domain.128807fbeba.ff7" name="current student" inWires="wires.12364143556.750" inParameterEdges="wires.12364143556.752" query="enrolled = ?" outSelects="domain.128807fbeba.1016" autosave="true"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.750" id="visual.12364143556.108" name="view student">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" name="sync" from="visual.12364143556.108" to="domain.128807fbeba.ff7"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.132" name="get teacher by id">
-    <properties id="model.123641434e9.2de9" name="teacher id" outParameterEdges="wires.12364143556.819" defaultValue="24" readOnly="true">
+    <values id="model.123641434e9.2de9" name="teacher id" outParameterEdges="wires.12364143556.819" defaultValue="24" readOnly="true">
       <parameterEdges id="wires.12364143556.819" parameterValue="model.123641434e9.2de9" parameterTerm="domain.128807fbeba.ff8"/>
-    </properties>
+    </values>
     <iterators id="domain.128807fbeba.ff8" name="selected teacher" inWires="wires.12364143556.817" inParameterEdges="wires.12364143556.819" query="id = ?" outSelects="domain.128807fbeba.1017" autosave="true"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.817" id="visual.12364143556.168" name="view teacher">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" name="sync" from="visual.12364143556.168" to="domain.128807fbeba.ff8"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.192" name="get doctoral">
-    <properties id="model.123641434e9.2f0f" name="qualification" outParameterEdges="wires.12364143556.93c" defaultValue="bsc" readOnly="true">
+    <values id="model.123641434e9.2f0f" name="qualification" outParameterEdges="wires.12364143556.93c" defaultValue="bsc" readOnly="true">
       <parameterEdges id="wires.12364143556.93c" parameterValue="model.123641434e9.2f0f" parameterTerm="domain.128807fbeba.ff9"/>
-    </properties>
-    <properties id="model.123641434e9.2f10" name="degree" outParameterEdges="wires.12364143556.93d" defaultValue="science" readOnly="true">
+    </values>
+    <values id="model.123641434e9.2f10" name="degree" outParameterEdges="wires.12364143556.93d" defaultValue="science" readOnly="true">
       <parameterEdges id="wires.12364143556.93d" parameterValue="model.123641434e9.2f10" parameterTerm="domain.128807fbeba.ff9"/>
-    </properties>
+    </values>
     <iterators id="domain.128807fbeba.ff9" name="current doctoral" inWires="wires.12364143556.a92" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" query="qualification = :qualification and degree = :degree" outSelects="domain.128807fbeba.1018" autosave="true"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.a92" id="visual.12364143556.2a7" name="current doctoral">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" name="sync" from="visual.12364143556.2a7" to="domain.128807fbeba.ff9"/>

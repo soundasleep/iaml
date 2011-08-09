@@ -2,9 +2,9 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="migrated0">
   <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
-      <properties id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" defaultValue="hello" readOnly="true">
+      <values id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" defaultValue="hello" readOnly="true">
         <parameterEdges id="wires.1207ff8322b.4e" parameterValue="model.1207ff82f9b.319" parameterTerm="wires.1207ff8322b.4d"/>
-      </properties>
+      </values>
       <onChange id="model.1207ff82f9b.1ae" listeners="wires.1207ff8322b.4d">
         <ecaRules id="wires.1207ff8322b.4d" inParameterEdges="wires.1207ff8322b.4e" name="run" trigger="model.1207ff82f9b.1ae" target="model.1207ff82f9b.1bf"/>
       </onChange>
@@ -26,9 +26,9 @@
       <fieldValue id="model.1207ff82f9b.22d" name="fieldValue"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.251" name="setToWorld">
-      <properties id="model.1207ff82f9b.38d" name="value" outParameterEdges="wires.1207ff8322b.62" defaultValue="world!" readOnly="true">
+      <values id="model.1207ff82f9b.38d" name="value" outParameterEdges="wires.1207ff8322b.62" defaultValue="world!" readOnly="true">
         <parameterEdges id="wires.1207ff8322b.62" parameterValue="model.1207ff82f9b.38d" parameterTerm="wires.1207ff8322b.61"/>
-      </properties>
+      </values>
       <onChange id="model.1207ff82f9b.38c" listeners="wires.1207ff8322b.61">
         <ecaRules id="wires.1207ff8322b.61" inParameterEdges="wires.1207ff8322b.62" name="run2" trigger="model.1207ff82f9b.38c" target="model.1207ff82f9b.1bf"/>
       </onChange>

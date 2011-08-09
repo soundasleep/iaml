@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12813a548f4.11">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <properties id="model.12813a548f4.37" name="one" outParameterEdges="wires.12813b48b22.d" defaultValue="one" readOnly="true">
+    <values id="model.12813a548f4.37" name="one" outParameterEdges="wires.12813b48b22.d" defaultValue="one" readOnly="true">
       <parameterEdges id="wires.12813b48b22.d" name="select" parameterValue="model.12813a548f4.37" parameterTerm="wires.12813a54ad9.d"/>
-    </properties>
-    <properties id="model.12813a548f4.38" name="two" outParameterEdges="wires.12813b48b22.b wires.12813b48b22.f" defaultValue="two" readOnly="true">
+    </values>
+    <values id="model.12813a548f4.38" name="two" outParameterEdges="wires.12813b48b22.b wires.12813b48b22.f" defaultValue="two" readOnly="true">
       <parameterEdges id="wires.12813b48b22.b" name="select" parameterValue="model.12813a548f4.38" parameterTerm="wires.12813b48b22.a"/>
       <parameterEdges id="wires.12813b48b22.f" name="incorrect" parameterValue="model.12813a548f4.38" parameterTerm="wires.12813b48b22.e"/>
-    </properties>
+    </values>
     <children xsi:type="iaml.visual:Button" id="visual.12813a54a8b.37" name="one" listeners="wires.12813a54ad9.d">
       <ecaRules id="wires.12813a54ad9.d" inParameterEdges="wires.12813b48b22.d" name="onClick" trigger="visual.12813a54a8b.37" target="visual.12813a54a8b.c"/>
     </children>

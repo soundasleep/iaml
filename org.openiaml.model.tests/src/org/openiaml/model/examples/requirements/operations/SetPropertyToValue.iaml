@@ -14,7 +14,7 @@
       <executionEdges id="model.120acfde16a.828" from="model.120acfde16a.742" to="operations.120acfde225.1f7"/>
       <parameters id="model.120acfde16a.824" name="param" outFlows="model.120acfde16a.825"/>
     </operations>
-    <properties id="model.120acfde16a.783" name="some property"/>
+    <values id="model.120acfde16a.783" name="some property"/>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">
     <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>

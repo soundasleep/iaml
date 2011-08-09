@@ -9,7 +9,7 @@
     </functions>
     <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1283d80dfad.1" id="model.1283d80df01.a" name="Composite Operation">
       <parameterEdges id="wires.1283d98dcaf.b" parameterValue="model.1283d80df01.3b" parameterTerm="wires.1283d80dfad.73"/>
-      <properties id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" defaultValue="1" readOnly="true"/>
+      <values id="model.1283d80df01.14b" name="one" type="builtin_iamlInteger" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.1283d80df01.d5" outExecutions="model.1283d80df01.14a" inExecutions="model.1283d80df01.d6" outFlows="model.1283d80df01.d8" inFlows="model.1283d80df01.d7"/>
       <nodes xsi:type="iaml.operations:SetNode" id="model.1283d80df01.14d" outExecutions="model.1283d80df01.383" inExecutions="model.1283d80df01.382" outFlows="model.1283d80df01.150" inFlows="model.1283d80df01.14e"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1283d80dfbd.1" outExecutions="model.1283d80df01.ac"/>

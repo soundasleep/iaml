@@ -31,6 +31,10 @@ context model::components::LoginHandler ERROR "A login handler of type SECRET_KE
 	type != model::components::LoginHandlerTypes::SECRET_KEY ||
 	inParameterEdges.size == 1;
 
+context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY cannot have an incoming Role as a parameter":
+	!(type == model::components::LoginHandlerTypes::SECRET_KEY &&
+		!inParameterEdges.parameterValue.typeSelect(model::users::Role).isEmpty);
+
 context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainType":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
 	inParameterEdges.parameterValue.eContainer.typeSelect(model::domain::DomainType).toSet().size == 1;
@@ -177,12 +181,12 @@ context model::components::Gate ERROR "An exit Gate needs to have at least one i
 	|| (conditions.size >= 1
 		|| listeners.exists(w | w.name == "last"));
 
-context model::components::Gate ERROR "An entry Gate nneeds to have at least one outgoing ActionEdge" :
+context model::components::Gate ERROR "An entry Gate needs to have at least one outgoing ActionEdge" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).entryGate != this
 	|| !listeners.isEmpty;
 
-context model::components::Gate ERROR "An exit Gate nneeds to have at least one outgoing ActionEdge" :
+context model::components::Gate ERROR "An exit Gate needs to have at least one outgoing ActionEdge" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).exitGate != this
 	|| !listeners.isEmpty;

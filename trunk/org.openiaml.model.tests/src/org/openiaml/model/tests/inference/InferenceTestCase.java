@@ -26,7 +26,7 @@ import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.ComplexTerm;
 import org.openiaml.model.model.ContainsFunctions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsProperties;
+import org.openiaml.model.model.ContainsValues;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Function;
@@ -144,8 +144,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Value assertHasValue(
-			ContainsProperties element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getProperties(), string);
+			ContainsValues element, String string) throws JaxenException {
+		List<Object> results = nameSelect(element.getValues(), string);
 		assertEquals(1, results.size());
 		return (Value) results.get(0);
 	}
@@ -157,20 +157,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoValue(
-			ContainsProperties element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getProperties(), string, false);
-		assertEquals(0, results.size());
-	}
-
-	/**
-	 * Assert that the given element does not contains the given
-	 * Value.
-	 *
-	 * @return The element found
-	 */
-	public static void assertHasNoValue(
-			VisibleThing element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getProperties(), string, false);
+			ContainsValues element, String string) throws JaxenException {
+		List<Object> results = nameSelect(element.getValues(), string, false);
 		assertEquals(0, results.size());
 	}
 

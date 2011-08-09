@@ -547,7 +547,7 @@
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/results"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/currentPointer"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsValues/values"/>
       <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" id="" name="BuiltinOperation">
@@ -930,7 +930,7 @@
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/currentInput"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsValues/values"/>
       <classifier href="iaml.ecore#//Value"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="InputForm">

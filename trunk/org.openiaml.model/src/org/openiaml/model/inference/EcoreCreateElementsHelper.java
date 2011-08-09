@@ -22,7 +22,7 @@ import org.openiaml.model.model.BuiltinProperty;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.ContainsFunctions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsProperties;
+import org.openiaml.model.model.ContainsValues;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Event;
@@ -115,11 +115,11 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
-	public Value generatedValue(GeneratesElements by, ContainsProperties container) throws InferenceException {
-		return generatedValue(by, container, ModelPackage.eINSTANCE.getContainsProperties_Properties() );
+	public Value generatedValue(GeneratesElements by, ContainsValues container) throws InferenceException {
+		return generatedValue(by, container, ModelPackage.eINSTANCE.getContainsValues_Values() );
 	}
 	
-	public Value generatedValue(GeneratesElements by, ContainsProperties container, EReference reference) throws InferenceException {
+	public Value generatedValue(GeneratesElements by, ContainsValues container, EReference reference) throws InferenceException {
 		Value fieldValue = (Value) createElement( container, ModelPackage.eINSTANCE.getValue(), reference );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;

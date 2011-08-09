@@ -106,6 +106,15 @@
   % empty
 }
 
+% visual representation figure
+\newenvironment{modeldocVisualFigure}{
+  \begin{figure}[htb]
+  \centering
+}{
+  \end{figure}
+}
+
+
 % rationale behind visual representation
 \newenvironment{modeldocVisualRationale}{
   % empty  

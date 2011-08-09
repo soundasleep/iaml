@@ -176,11 +176,10 @@
 «ENDDEFINE»
 
 /**
- * Data sources - are the sources set? Only supports Property.
+ * Data sources - are the sources set? Only supports Value.
  *
- * @implementation DecisionCondition The 'is set?' {@model DecisionCondition} 
- *	only supports incoming {@model Property ApplicationElementProperties}
- *	as {@model DataFlowEdge parameters}.   
+ * @implementation DecisionNode The 'is set?' {@model DecisionNode} 
+ *	only supports incoming {@model Value}s as {@model DataFlowEdge parameters}.   
  */
 «DEFINE isSet(Boolean php) FOR model::operations::DataFlowEdgesSource»
 	«throwException("Unknown data flow edge source for isSet: " + this)»

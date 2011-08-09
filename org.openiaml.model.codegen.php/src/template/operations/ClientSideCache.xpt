@@ -1,7 +1,7 @@
 «IMPORT iaml»
 
 /**
- * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'empty') 
+ * If we are in Javascript and we are trying to get an operation on a DomainIterator (usually 'empty') 
  * and we are in a condition, we can't wait for an async result. In this case, we use
  * cached operation results (stored in Javascript) which can be updated through
  * callbacks, etc.

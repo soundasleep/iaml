@@ -56,8 +56,8 @@ end
 /**
  * @inference DomainSource,DomainType
  *		A {@model DomainSource} of {@model DomainSource#type} <code>PROPERTIES_FILE</code>
- *		will populate the 'properties' {@model DomainType} with string-{@model DomainAttribute#type typed} 
- *		{@model DomainAttributes} for each value in the source properties file.
+ *		will populate the 'properties' {@model DomainType} with string-{@model DomainAttribute#eType typed} 
+ *		{@model DomainAttribute}s for each value in the source properties file.
  */
 rule "Create DomainAttributes for Properties File DomainType"
 		

@@ -7,11 +7,11 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
- * @implementation DomainObjectInstance
- *		The current offset of browsing {@model DomainObjectInstance instances} is stored
+ * @implementation DomainIterator
+ *		The current offset of browsing {@model DomainIterator instances} is stored
  *		in the containing {@model Session} if there is one, otherwise globally.
- * @implementation DomainObjectInstance
- *		{@model DomainObjectInstance#empty} will return <code>true</code> even if
+ * @implementation DomainIterator
+ *		{@model DomainIterator#empty} will return <code>true</code> even if
  *		the current arguments are not even set; i.e. it will fail silently.
  */
 «DEFINE iterateDefinitions FOR model::domain::DomainIterator-»

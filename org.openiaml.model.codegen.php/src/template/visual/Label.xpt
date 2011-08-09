@@ -7,7 +7,7 @@
 
 /**
  * @implementation Label
- *   The value of {@model Property} 'fieldValue' of a {@model Label}
+ *   The value of {@model Value} 'fieldValue' of a {@model Label}
  *   overrides the value of the Label.defaultValue attribute.
  * @implementation Label
  *		Any {@model VisibleThing children} of a {@model Label} are also rendered

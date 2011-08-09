@@ -292,7 +292,7 @@
 
 	«REM»
 		if we are in javascript, and 
-		if the remote operation to call is part of a DomainObject, then
+		if the remote operation to call is part of a DomainIterator, then
 		we need to call it remotely. this is because the JS might be
 		out-of-date.
 		

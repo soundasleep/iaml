@@ -24,10 +24,10 @@ The {@model Changeable#canCast} {@model BuiltinProperty} is defined for all {@mo
 <h3>can save</h3>
 <p>
 <!-- TODO should also be defined for all DomainAttributeInstances -->
-The {@model DomainInstance#canSave} {@model BuiltinProperty} is defined for all {@model DomainInstance}s and {@model DomainAttributeInstance}s{@issue 230}. This {@model Predicate} is a successful condition if and only if the current {@model DomainInstance} or {@model DomainAttributeInstance} can be saved successfully, according to the semantics of the "save" {@model PrimitiveOperation}.
+The {@model DomainInstance#canSave} {@model BuiltinProperty} is defined for all {@model DomainInstance}s and {@model DomainAttributeInstance}s{@issue 230}. This {@model Predicate} is a successful condition if and only if the current {@model DomainInstance} or {@model DomainAttributeInstance} can be saved successfully, according to the semantics of the "save" {@model BuiltinOperation}.
 </p>
 
 <h3>has next, has previous</h3>
 <p>
-The {@model DomainIterator#hasNext} and {@model DomainIterator#hasPrevious} {@model BuiltinProperty}s are defined for all {@model DomainIterator}s. These {@model Predicate}s are successful if and only if an attempt to increment or decrement the current <i>instance pointer</i> of the {@model DomainIterator} -- according to the semantics defined by the `next' and `previous' {@model PrimitiveOperation}s -- will not result in an out-of-bounds exception which would trigger any <i>failure handlers</i>.
+The {@model DomainIterator#hasNext} and {@model DomainIterator#hasPrevious} {@model BuiltinProperty}s are defined for all {@model DomainIterator}s. These {@model Predicate}s are successful if and only if an attempt to increment or decrement the current <i>instance pointer</i> of the {@model DomainIterator} -- according to the semantics defined by the `next' and `previous' {@model BuiltinOperation}s -- will not result in an out-of-bounds exception which would trigger any <i>failure handlers</i>.
 </p>

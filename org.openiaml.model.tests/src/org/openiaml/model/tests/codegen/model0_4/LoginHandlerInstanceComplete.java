@@ -17,16 +17,16 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * @example LoginHandler
  * 		The complete {@model Wire wire-based} implementation of a
  * 		{@model LoginHandler} (selecting a
- * 		{@model DomainObject})
+ * 		{@model DomainType})
  *
  * @implementation LoginHandler
- * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
- * 		{@model NavigateAction navigation} to a {@model Frame} named 'logout', the successful
+ * 		If a {@model LoginHandler} (selecting a {@model DomainType}) has an outgoing
+ * 		{@model ECARule navigation} to a {@model Frame} named 'logout', the successful
  * 		logout of the current user will be redirected to this page.
  *
  * @implementation LoginHandler
- * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
- * 		{@model NavigateAction navigation} to a {@model Frame} named 'success', the successful
+ * 		If a {@model LoginHandler} (selecting a {@model DomainType}) has an outgoing
+ * 		{@model ECARule navigation} to a {@model Frame} named 'success', the successful
  * 		login of the current user will be redirected to this page.
  *
  * @author jmwright
@@ -290,7 +290,7 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		{
 			String loginId = getLabelIDForText("password");
 			setLabeledFormElementField(loginId, "test4");
-	
+
 			String emailId = getLabelIDForText("email");
 			setLabeledFormElementField(emailId, "test4@jevon.org");
 		}
@@ -325,7 +325,7 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 			String loginId = getLabelIDForText("password");
 			assertLabeledFieldEquals(loginId, "");	// the value is no longer persisted
 			setLabeledFormElementField(loginId, "test4");
-	
+
 			String emailId = getLabelIDForText("email");
 			assertLabeledFieldEquals(emailId, "");	// the value is no longer persisted
 			setLabeledFormElementField(emailId, "test4@jevon.org");

@@ -11,11 +11,11 @@ import org.openiaml.model.tests.CodegenTestCase;
  * Model Completion.
  *
  * @author jmwright
- * @example EntryGate
- * 		If a {@model EntryGate} is connected by a {@model NavigateAction} called "first",
+ * @example Gate
+ * 		If an entry {@model Gate} is connected by an {@model ECARule} called "first",
  * 		then the target {@model Frame} must be viewed at least once before proceeding.
- * @implementation EntryGate,NavigateAction
- * 		If a {@model EntryGate} is connected by a {@model NavigateAction} called "first",
+ * @implementation Gate,ECARule
+ * 		If an entry {@model Gate} is connected by an {@model ECARule} called "first",
  * 		then the target {@model Frame} must be viewed at least once before proceeding.
  */
 public class GateRequiredPage extends CodegenTestCase {

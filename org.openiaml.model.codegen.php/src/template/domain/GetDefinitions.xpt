@@ -86,7 +86,7 @@
 
 	/**
 	 * Get the domain object instance '«id»' as a basic associative array. 
-	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
+	 * If a remote {@model DomainSource}, this may refresh the remote data source.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
 		$iterator = DomainIterator_«safeName()»::getInstance();
@@ -100,9 +100,9 @@
 		
 	/**
 	 * Get the number of results for the current query.
-	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
+	 * If a remote {@model DomainSource}, this may refresh the remote data source.
 	 *
-	 * If parameters for this {@model DomainObjectInstance} aren't even available,
+	 * If parameters for this {@model DomainIterator} aren't even available,
 	 * returns <code>0</code> rather than crashing.
 	 */
 	function get_instance_count_«safeName()»() {
@@ -122,9 +122,9 @@
 	
 	/**
 	 * Does the domain object instance '«id»' exist yet in the database?
-	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
+	 * If a remote {@model DomainSource}, this may refresh the remote data source.
 	 *
-	 * If parameters for this {@model DomainObjectInstance} aren't even available,
+	 * If parameters for this {@model DomainIterator} aren't even available,
 	 * returns <code>false</code> rather than crashing.
 	 *
 	 * Returns true or false.

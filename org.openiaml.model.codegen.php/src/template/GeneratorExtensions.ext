@@ -551,8 +551,8 @@ List[model::components::Gate] getFrameEntryGates(emf::EObject this) :
  * gates at level 3 should be provided before level 2, etc.
  * The order should also be consistent across multiple calls.
  *
- * @implementation ExitGate
- * 		{@model ExitGate}s are executed in reverse order from their
+ * @implementation Gate
+ * 		Exit {@model Gate}s are executed in reverse order from their
  *		depth from the {@model InternetApplication root}; however, for
  *		gates at the same node depth, order is undefined.
  */
@@ -589,7 +589,7 @@ List[model::Function] getClientSideCacheConditions(model::InternetApplication th
 		.select(o | conditionUsed(o));
 
 /**
- * Get all {@model Property}s which the server needs to keep track of, and 
+ * Get all {@model Value}s which the server needs to keep track of, and 
  * the client needs to be updated.
  */
 List[model::Value] getClientSideCacheProperties(model::InternetApplication this) :

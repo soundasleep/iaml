@@ -394,7 +394,7 @@
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A particular runtime scope of a web application, which permits lifecycle modelling. Scopes may contain other {@model Scope}s through a {@model Scopes#scopes containment hierarchy}."/>
+      <details key="documentation" value="A particular runtime scope of a web application, which permits lifecycle modelling. Scopes may contain other {@model Scope}s through a {@model Scope#scopes containment hierarchy}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entryGate" eType="#//components/Gate"
         containment="true">
@@ -606,7 +606,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECARule" eSuperTypes="#//GeneratedElement #//wires/ConditionEdgeDestination #//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An {@model ECARule} defines how a triggering {@model Event} may execute a particular {@model Action}, as optionally restricted by incoming {@model Conditions}."/>
+      <details key="documentation" value="An {@model ECARule} defines how a triggering {@model Event} may execute a particular {@model Action}, as optionally restricted by incoming {@model Condition}s."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" lowerBound="1"
         eType="#//ActionEdgeSource" eOpposite="#//ActionEdgeSource/listeners">
@@ -1099,7 +1099,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//operations/ActivityParameter" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityOperation} as named {@model ActivityParameters}."/>
+          <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityOperation} as named {@model ActivityParameter}s."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1137,7 +1137,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//operations/ActivityParameter" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityPredicate} as named {@model ActivityParameters}."/>
+          <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityPredicate} as named {@model ActivityParameter}s."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1163,7 +1163,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//NamedElement #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination #//wires/ConditionEdgeDestination #//operations/DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Based on its {@model DecisionNode#name}, considers the incoming {@model ConditionEdge}s or {@model DataFlowEdge}s, and follows passing or failing {@model ExecutionEdge}s as appropriate."/>
+        <details key="documentation" value="Based on its {@model DecisionNode#name}, considers the incoming {@model Condition}s or {@model DataFlowEdge}s, and follows passing or failing {@model ExecutionEdge}s as appropriate."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SplitNode" eSuperTypes="#//ActivityNode #//operations/ExecutionEdgesSource #//operations/ExecutionEdgeDestination">
@@ -1227,7 +1227,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ActivityParameter" eSuperTypes="#//NamedElement #//operations/DataFlowEdgesSource #//wires/ParameterEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityOperation} or {@model ActivityPredicate} as named {@model ActivityParameters}."/>
+        <details key="documentation" value="Allows access to {@model Parameter}s provided to this {@model ActivityOperation} or {@model ActivityPredicate} as named {@model ActivityParameter}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EXSDDataType">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1449,7 +1449,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainFeature" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature #//GeneratedElement #//GeneratesElements #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//wires/ParameterEdgesSource #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainFeature" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature #//GeneratedElement #//GeneratesElements #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//wires/ParameterEdgesSource #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A particular feature of a {@model DomainType}, which may be an {@model DomainAttribute attribute}&lt;!-- or a {@model DomainReference reference}-->."/>
       </eAnnotations>
@@ -1580,25 +1580,25 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="onIterate" eType="#//Event"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This {@model Event} is triggered when the {@model #currentPointer current instance pointer} changes, or the {@model #currentInstance current instance} is reloaded."/>
+          <details key="documentation" value="This {@model Event} is triggered when the {@model DomainIterator#currentPointer current instance pointer} changes, or the {@model DomainIterator#currentInstance current instance} is reloaded."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Operation"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Navigate to the previous result. Will throw an error if {@model #hasPrevious} would return &lt;code>false&lt;/code>."/>
+          <details key="documentation" value="Navigate to the previous result. Will throw an error if {@model DomainIterator#hasPrevious} would return &lt;code>false&lt;/code>."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Operation"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Navigate to the next result. Will throw an error if {@model #hasNext} would return &lt;code>false&lt;/code>."/>
+          <details key="documentation" value="Navigate to the next result. Will throw an error if {@model DomainIterator#hasNext} would return &lt;code>false&lt;/code>."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Resets the {@model #currentPointer current instance pointer} and reloads the current instance."/>
+          <details key="documentation" value="Resets the {@model DomainIterator#currentPointer current instance pointer} and reloads the current instance."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="skip" eType="#//Operation"
@@ -1610,19 +1610,19 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrevious" eType="#//Function"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Returns &lt;code>true&lt;/code> if navigating to the {@model #previous} result will not be out-of-bounds for the given {@model #query}."/>
+          <details key="documentation" value="Returns &lt;code>true&lt;/code> if navigating to the {@model DomainIterator#previous} result will not be out-of-bounds for the given {@model DomainIterator#query}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" eType="#//Function"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Returns &lt;code>true&lt;/code> if navigating to the {@model #next} result will not be out-of-bounds for the given {@model #query}."/>
+          <details key="documentation" value="Returns &lt;code>true&lt;/code> if navigating to the {@model DomainIterator#next} result will not be out-of-bounds for the given {@model DomainIterator#query}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="empty" eType="#//Function"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Returns &lt;code>true&lt;/code> if the current result set is empty; that is, there are no matching {@model DomainInstance}s for the given {@model #query}."/>
+          <details key="documentation" value="Returns &lt;code>true&lt;/code> if the current result set is empty; that is, there are no matching {@model DomainInstance}s for the given {@model DomainIterator#query}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="results" eType="#//Value"
@@ -1640,13 +1640,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="canSave" eType="#//Function"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Returns &lt;code>true&lt;/code> if the {@model currentInstance current instance} can be saved to the specified {@model DomainSource} without throwing an error."/>
+          <details key="documentation" value="Returns &lt;code>true&lt;/code> if the {@model DomainIterator#currentInstance current instance} can be saved to the specified {@model DomainSource} without throwing an error."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="currentPointer" eType="#//Value"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The current value of the instance pointer. If there are no results or this is a {@model #query new query}, this will return -1. If there is one or many results, this will return a value between 0 and results-1."/>
+          <details key="documentation" value="The current value of the instance pointer. If there are no results or this is a {@model DomainIterator#query new query}, this will return -1. If there is one or many results, this will return a value between 0 and results-1."/>
         </eAnnotations>
         <eAnnotations source="http://openiaml.org/comment">
           <details key="added" value="0.5.3 for issue 219"/>
@@ -1655,7 +1655,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="currentInstance" eType="#//domain/DomainInstance"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The current {@model DomainInstance} as pointed to by the {@model #currentPointer current instance pointer}."/>
+          <details key="documentation" value="The current {@model DomainInstance} as pointed to by the {@model DomainIterator#currentPointer current instance pointer}."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1786,7 +1786,7 @@
   <eSubpackages name="messaging" nsURI="http://openiaml.org/model/messaging" nsPrefix="iaml.messaging">
     <eClassifiers xsi:type="ecore:EClass" name="Email" eSuperTypes="#//scopes/Message #//ContainsOperations #//ContainsWires #//ContainsFunctions #//ContainsValues #//CanBeSynced #//Accessible #//Wireable #//ActionEdgeSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@model Message} sent as an e-mail message to {@model Email#to a particular recipient}."/>
+        <details key="documentation" value="A {@model Message} sent as an e-mail message {@model Email#to} a particular recipient."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1822,7 +1822,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="onFailure" eType="#//Event"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This {@model Event} is triggered if the {@model Email#onSent sent e-mail} has failed to arrive at its destination, which may occur at any point after it is sent."/>
+          <details key="documentation" value="This {@model Event} is triggered if the sent e-mail has failed to arrive at its destination, which may occur at any point after it is sent."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" upperBound="-1"

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_5_3;
 
@@ -16,11 +16,11 @@ import org.openiaml.model.tests.codegen.model0_5.MapsCodegenTestCase;
 /**
  * Tests all of the visual elements in IAML; that is,
  * all {@model VisibleThing}s. This can therefore be useful for screenshots etc.
- * 
- * @example VisibleThing,InputForm,InputTextField,Label,Map,MapPoint,IteratorList,Hidden
+ *
+ * @example VisibleThing,InputForm,InputTextField,Label,Map,MapPoint,IteratorList
  * 		An example model to render all {@model VisibleThing}s in the
  * 		IAML metamodel.
- * 
+ *
  */
 public class IamlVisualElements extends MapsCodegenTestCase implements DatabaseCodegenTest {
 
@@ -30,12 +30,12 @@ public class IamlVisualElements extends MapsCodegenTestCase implements DatabaseC
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(getClass());
-		
+
 		// need to initialise the database as well
 		helper = new DatabaseCodegenHelper(this, this);
 		helper.initialiseDatabase();
 	}
-	
+
 	/**
 	 * Tests {@model Frame}.
 	 */
@@ -43,16 +43,16 @@ public class IamlVisualElements extends MapsCodegenTestCase implements DatabaseC
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
 	}
-	
+
 	/**
 	 * Tests {@model InputForm}.
 	 */
 	public void testInputForm() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		assertHasInputForm("Input Form");
-		
+
 	}
 
 	/**
@@ -61,12 +61,12 @@ public class IamlVisualElements extends MapsCodegenTestCase implements DatabaseC
 	public void testInputTextField() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		{
 			String target = getLabelIDForText("Input Text Field");
 			assertLabeledFieldEquals(target, "");
 		}
-		
+
 	}
 
 	/**
@@ -75,81 +75,81 @@ public class IamlVisualElements extends MapsCodegenTestCase implements DatabaseC
 	public void testButton() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		assertButtonPresentWithText("Button");
-		
+
 	}
-	
+
 	/**
 	 * Tests {@model Map}.
 	 */
 	public void testMap() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		assertHasMap("Map");
-		
+
 	}
-	
+
 	/**
 	 * Tests {@model MapPoint}.
 	 */
 	public void testMapPoint() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		IElement map = assertHasMap("Map");
 		assertHasMapPoint(map, "Map Point");
-		
+
 		// TODO no way to check the location of the map point?
 	}
-	
+
 	/**
-	 * Tests {@model Label}.
+	 * Tests visible {@model Label}.
 	 */
 	public void testLabel() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		assertLabelTextExactlyPresent("Label");
 	}
-	
+
 	/**
-	 * Tests {@model Hidden}.
+	 * Tests hidden {@model Label}s.
 	 */
 	public void testHidden() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		// Hidden things aren't visible!
 		assertLabelTextNotPresent("Hidden");
 	}
-	
+
 	/**
 	 * Tests {@model IteratorList}.
 	 */
 	public void testIteratorList() throws Exception {
 		beginAtSitemapThenPage("Frame");
 		assertNoProblem();
-		
+
 		assertLabelTextExactlyPresent("Scope");
 		assertLabelTextExactlyPresent("Frame");
 		assertLabelTextExactlyPresent("Visible Thing");
 		assertLabelTextExactlyPresent("Input Form");
 		assertLabelTextExactlyPresent("Label");
 	}
-	
+
 	/**
 	 * Assert that a named input form - that is, a form with a contained H2
 	 * element with the given name - exists.
-	 * 
+	 *
 	 * @see InputForm
 	 * @param string the form title to search for
 	 */
 	private void assertHasInputForm(String string) {
 		IElement found = null;
 		StringBuffer foundStrings = new StringBuffer();
-		
+
 		List<IElement> h2s = getElementsByXPath("//form/h2");
 		for (IElement h2 : h2s) {
 			foundStrings.append(h2.getTextContent()).append(", ");
@@ -176,5 +176,5 @@ public class IamlVisualElements extends MapsCodegenTestCase implements DatabaseC
 		return s;
 	}
 
-	
+
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openiaml.model.tests.codegen.model0_5_3;
 
@@ -8,9 +8,9 @@ import java.util.Date;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * @example SyncWire,Hidden
- * 		Connecting a {@model Hidden} element with a {@model SyncWire}.
- * 
+ * @example SyncWire,Label
+ * 		Connecting a hidden {@model Label} element with a {@model SyncWire}.
+ *
  */
 public class HiddenFieldSyncWire extends CodegenTestCase {
 
@@ -22,19 +22,19 @@ public class HiddenFieldSyncWire extends CodegenTestCase {
 
 	/**
 	 * The home page can be accessed.
-	 * 
-	 * @throws Exception 
+	 *
+	 * @throws Exception
 	 */
 	public void testHome() throws Exception {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 	}
-	
+
 	public void testInput() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
-		
+
 		// both fields are initially empty
 		{
 			String target = getLabelIDForText("input");
@@ -44,7 +44,7 @@ public class HiddenFieldSyncWire extends CodegenTestCase {
 			String target = getLabelIDForText("output");
 			assertLabeledFieldEquals(target, "");
 		}
-		
+
 		// change 'input'
 		String input = new Date().toString();
 		{
@@ -52,17 +52,17 @@ public class HiddenFieldSyncWire extends CodegenTestCase {
 			assertLabeledFieldEquals(target, "");
 			setLabeledFormElementField(target, input);
 		}
-		
+
 		// changes output
 		{
 			String target = getLabelIDForText("output");
 			assertLabeledFieldEquals(target, input);
 		}
 		assertNoProblem();
-		
+
 		// there is no label with the text anywhere
 		assertLabelTextNotPresent(input);
-				
+
 		// change 'output'
 		String output = input.substring(5).toLowerCase() + " test";
 		assertNotEqual(input, output);
@@ -71,7 +71,7 @@ public class HiddenFieldSyncWire extends CodegenTestCase {
 			assertLabeledFieldEquals(target, input);
 			setLabeledFormElementField(target, output);
 		}
-		
+
 		// changes input
 		{
 			String target = getLabelIDForText("input");
@@ -79,7 +79,7 @@ public class HiddenFieldSyncWire extends CodegenTestCase {
 		}
 
 		assertNoProblem();
-		
+
 	}
-	
+
 }

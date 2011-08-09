@@ -32,7 +32,7 @@ function add_permission_«safeName()»($iterator) {
  * Returns true if successful.
  *
  * @implementation UserInstance
- *		When a {@model Role} is removed from a {@model UserInstance}, the {@model UserInstance}
+ *		When a {@model Role} is removed from a {@model DomainIterator user instance}, the {@model DomainIterator user instance}
  *		is reloaded explicitly.
  */
 function remove_permission_«safeName()»($iterator) {

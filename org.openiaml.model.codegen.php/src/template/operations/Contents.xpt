@@ -89,7 +89,7 @@
  * @implementation DecisionNode
  *		For a {@model DecisionNode} named 'true?',
  *		if more than one {@model ConditionEdge} is incoming to an executed {@model DecisionNode},
- *		then all passing {@model ConditionEdgesSource} must be true for execution to pass.
+ *		then all incoming {@model Condition}s must be <code>true</code> for execution to pass.
  * @implementation DecisionNode
  *		For a {@model DecisionNode} named 'true?',
  *		if no {@model ConditionEdge}s are incoming to a {@model DecisionNode},
@@ -165,9 +165,9 @@
 «ENDDEFINE»
 
 /**
- * @implementation Changeable,Property
- *		When a {@model Changeable#fieldValue} is changed, the {@model Changeable#onChange} {@model EventTrigger}
- *		will be executed.
+ * @implementation Changeable,Value
+ *		When a {@model Changeable#fieldValue} is changed, the {@model Changeable#onChange} {@model Event}
+ *		will be triggered.
  */
 «DEFINE chainedEventFlow(Boolean php) FOR model::Value»
 	/* Chained event property: «this» */
@@ -507,7 +507,7 @@
 				save_queued_store_domain_object_«safeNameString(instance.id)-»();
 			«ELSE»
 				/*
-				 * Calling 'save' on a DomainObjectInstance will NOT
+				 * Calling 'save' on a DomainIterator will NOT
 				 * block a Javascript-side call, so there is no way to get
 				 * the result from the server.
 				 */
@@ -544,7 +544,7 @@
 				new_domain_instance_«safeNameString(instance.id)»();
 			«ELSE»
 				/*
-				 * Calling 'new' on a DomainObjectInstance will NOT
+				 * Calling 'new' on a DomainIterator will NOT
 				 * block a Javascript-side call, so there is no way to get
 				 * the result from the server.
 				 */

@@ -11,16 +11,16 @@ import org.openiaml.model.tests.CodegenTestCase;
  * Scope without first viewing a disclaimer page.
  *
  * @author jmwright
- * @example EntryGate
- * 		Using a {@model EntryGate} to prevent access to a {@model Scope} without
+ * @example Gate
+ * 		Using an entry {@model Gate} to prevent access to a {@model Scope} without
  * 		first viewing a disclaimer {@model Frame}.
  * @implementation EntryGate
  * 		If a {@model Frame} is contained within a {@model Session} that contains
- * 		a {@model EntryGate}, any incoming {@model Condition Conditions} on that Gate
+ * 		an entry {@model Gate}, any incoming {@model Condition}s on that Gate
  * 		must first be satisfied in order to proceed.
- * @implementation EntryGate,NavigateAction
- *		A {@model NavigateAction} may be used to resume {@model Frame} access
- *		previously limited by a {@model EntryGate}.
+ * @implementation Gate,ECARule
+ *		An {@model ECARule} may be used to resume {@model Frame} access
+ *		previously limited by an entry {@model Gate}.
  */
 public class GateDisclaimer extends CodegenTestCase {
 

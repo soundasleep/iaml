@@ -2,7 +2,7 @@
  * Rules relating to {@model DomainIterator}s.
  */
 # Update the attributes in "new instance" objects when they
-# are connected to DomainObjects.
+# are connected to DomainTypes.
 package org.openiaml.model.drools.rules.new_instance
 
 #list any import classes here.

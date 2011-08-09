@@ -596,7 +596,7 @@ List[model::Value] getClientSideCacheProperties(model::InternetApplication this)
 	eAllContents.typeSelect(model::domain::DomainIterator)
 		.select(o | o.results != null)
 		.results.toSet()
-	.addAll(eAllContents.typeSelect(model::VisibleThing).properties.toSet())
+	.addAll(eAllContents.typeSelect(model::VisibleThing).values.toSet())
 	.addAll(eAllContents.typeSelect(model::Value).select(p|p.readOnly));
 
 /**

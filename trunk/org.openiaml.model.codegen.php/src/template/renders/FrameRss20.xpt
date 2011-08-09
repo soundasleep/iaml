@@ -149,8 +149,8 @@ header("Content-Type: application/xml");
 	«IF direct != null-»
 		$«argName» = "«escapePhpString(direct)-»";
 	«ELSE-»
-		«IF !properties.select(p|p.name.toLowerCase() == propertyName.toLowerCase()).isEmpty-»
-			$«argName» = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(p|p.name.toLowerCase() == propertyName.toLowerCase())»;
+		«IF !values.select(p|p.name.toLowerCase() == propertyName.toLowerCase()).isEmpty-»
+			$«argName» = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR values.selectFirst(p|p.name.toLowerCase() == propertyName.toLowerCase())»;
 		«ELSE-»
 			«IF !children.select(p|p.name.toLowerCase() == propertyName.toLowerCase()).isEmpty-»
 				$value = null;

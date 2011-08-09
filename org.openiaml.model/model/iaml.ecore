@@ -1714,105 +1714,129 @@
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//domain/DomainType #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A particular Role that a user may have; may be {@model ExtendsEdge inherited} from other Roles."/>
+        <details key="documentation" value="A specific role of a user within a web application using Role-Based Access Control, prodiving a particular set of {@model Permission}s."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A single Permission that a user may have; may also be {@model ProvidesEdge provided} by a {@model Role}."/>
+        <details key="documentation" value="A specific permission, which may or may not be associated with a {@model Role}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProvidesEdgesSource" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the source of a {@model ProvidesEdge}."/>
+        <details key="documentation" value="An element which may be used as the source of a {@model ProvidesEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outProvidesEdges" upperBound="-1"
-          eType="#//wires/ProvidesEdge" eOpposite="#//wires/ProvidesEdge/from"/>
+          eType="#//wires/ProvidesEdge" eOpposite="#//wires/ProvidesEdge/from">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of outgoing {@model ProvidesEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProvidesEdgeDestination" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the destination of a {@model ProvidesEdge}."/>
+        <details key="documentation" value="An element which may be used as the destination of a {@model ProvidesEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inProvidesEdges" upperBound="-1"
-          eType="#//wires/ProvidesEdge" eOpposite="#//wires/ProvidesEdge/to"/>
+          eType="#//wires/ProvidesEdge" eOpposite="#//wires/ProvidesEdge/to">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model ProvidesEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RequiresEdgesSource" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the source of a {@model RequiresEdge}."/>
+        <details key="documentation" value="An element which may be used as the source of a {@model RequiresEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outRequiresEdges" upperBound="-1"
-          eType="#//wires/RequiresEdge" eOpposite="#//wires/RequiresEdge/from"/>
+          eType="#//wires/RequiresEdge" eOpposite="#//wires/RequiresEdge/from">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of outgoing {@model RequiresEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RequiresEdgeDestination" abstract="true"
         interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Something which may be used as the destination of a {@model RequiresEdge}."/>
+        <details key="documentation" value="An element which may be used as the destination of a {@model RequiresEdge}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4.3"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inRequiresEdges" upperBound="-1"
-          eType="#//wires/RequiresEdge" eOpposite="#//wires/RequiresEdge/to"/>
+          eType="#//wires/RequiresEdge" eOpposite="#//wires/RequiresEdge/to">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of incoming {@model RequiresEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="messaging" nsURI="http://openiaml.org/model/messaging" nsPrefix="iaml.messaging">
     <eClassifiers xsi:type="ecore:EClass" name="Email" eSuperTypes="#//scopes/Message #//ContainsOperations #//ContainsWires #//ContainsFunctions #//ContainsValues #//CanBeSynced #//Accessible #//Wireable #//ActionEdgeSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents an e-mail. The lifecycle is as follows: {@model PrimitiveOperation send} -> {@model EventTrigger sent} or {@model EventTrigger failed}."/>
+        <details key="documentation" value="A {@model Message} sent as an e-mail message to {@model Email#to a particular recipient}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The destination e-mail address for this {@model Email}. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+          <details key="documentation" value="The recipient e-mail address for this {@model Email}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="subject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The subject for this {@model Email}. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+          <details key="documentation" value="The subject for this {@model Email}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="toName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The destination name for this {@model Email}, which is optional. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+          <details key="documentation" value="The recipient name for this {@model Email}, which is optional."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The source e-mail address for this {@model Email}. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+          <details key="documentation" value="The sender e-mail address for this {@model Email}."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The source name for this {@model Email}, which is optional. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+          <details key="documentation" value="The sender name for this {@model Email}, which is optional."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="onSent" eType="#//Event"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model Email} is sent, however it is not guaranteed that it has been &lt;em>successfully&lt;/em> sent."/>
+          <details key="documentation" value="This {@model Event} is triggered when the {@model Email} is sent, however it is not guaranteed that it has been &lt;em>successfully&lt;/em> sent."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="onFailure" eType="#//Event"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This {@model EventTrigger event} is called if the {@model Email#onSent sent e-mail} has failed to arrive at its destination, which may occur at any point after it is sent."/>
+          <details key="documentation" value="This {@model Event} is triggered if the {@model Email#onSent sent e-mail} has failed to arrive at its destination, which may occur at any point after it is sent."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" upperBound="-1"
-          eType="#//visual/Button" containment="true"/>
+          eType="#//visual/Button" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Within an {@model Email}, all {@model Button}s will be represented as hyperlinks."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
-          eType="#//visual/Label" containment="true"/>
+          eType="#//visual/Label" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Within an {@model Email}, all {@model Label}s will be represented as text labels."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

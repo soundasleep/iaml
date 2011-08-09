@@ -6,9 +6,9 @@
       <onAccess id="model.1203bbadb5b.53c" listeners="wires.1203bbadbb8.152">
         <ecaRules id="wires.1203bbadbb8.152" inParameterEdges="wires.1203bbadbb8.153" name="run" trigger="model.1203bbadb5b.53c" target="model.1203bbadb5b.53d"/>
       </onAccess>
-      <properties id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" defaultValue="value goes here" readOnly="true">
+      <values id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" defaultValue="value goes here" readOnly="true">
         <parameterEdges id="wires.1203bbadbb8.153" parameterValue="model.1203bbadb5b.53e" parameterTerm="wires.1203bbadbb8.152"/>
-      </properties>
+      </values>
     </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

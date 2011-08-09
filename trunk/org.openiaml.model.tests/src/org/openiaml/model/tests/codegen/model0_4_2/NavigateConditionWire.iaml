@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <functions xsi:type="iaml.operations:ActivityPredicate" id="model.126aaf83900.478" name="is value = 1?" conditioned="wires.126aaf8398c.11e">
       <conditionEdges id="wires.126aaf8398c.11e" function="model.126aaf83900.478" conditioned="wires.126aaf8398c.11d"/>
-      <properties id="model.126aaf83900.49b" name="1" defaultValue="1" readOnly="true"/>
+      <values id="model.126aaf83900.49b" name="1" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.126aaf8398c.113" name="equal?" outExecutions="model.126aaf83900.4a4 model.126aaf83900.4a5" inExecutions="model.126aaf83900.4a2" inFlows="model.126aaf83900.4a6 model.126aaf83900.4a8"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126aaf8398c.111" outExecutions="model.126aaf83900.4a2"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.126aaf8398c.118" inExecutions="model.126aaf83900.4a4"/>

@@ -6,7 +6,7 @@
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1bb" name="execute">
       <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.12542c56428.1b" id="model.12542c563bb.170" name="do operation">
-        <properties id="model.12542c563bb.19c" name="static value" defaultValue="hello42" readOnly="true"/>
+        <values id="model.12542c563bb.19c" name="static value" defaultValue="hello42" readOnly="true"/>
         <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12542c563bb.230">
           <externalValueEdges id="eve1" value="model.12542c563bb.19c"/>
         </nodes>

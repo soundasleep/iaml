@@ -17,7 +17,7 @@
       <executionEdges id="model.126b0cb5dec.68" name="n" from="operations.126b0cb5e69.15" to="operations.126b0cb5e69.14"/>
       <executionEdges id="model.126b0cb5dec.69" from="operations.126b0cb5e69.12" to="operations.126b0cb5e69.15"/>
     </functions>
-    <properties id="model.126b0cb5dec.3e" name="ad viewed?" defaultValue="false"/>
+    <values id="model.126b0cb5dec.3e" name="ad viewed?" defaultValue="false"/>
     <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" conditions="wires.126b0cb5e5a.17" listeners="wires.126b0cb5e5a.e" rules="wires.126b0cb5e5a.10e">
       <ecaRules id="wires.126b0cb5e5a.e" name="view ad" trigger="components.126b0cb5e69.5" target="visual.126b0cb5e5a.4a"/>
     </exitGate>
@@ -26,7 +26,7 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.32" name="Page 3"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.4a" name="Advertisement" rules="wires.126b0cb5e5a.e">
       <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.126b0cb5e5a.4b" id="model.126b0cb5dec.d8" name="set flag to true">
-        <properties id="model.126b0cb5dec.178" name="true" defaultValue="true" readOnly="true"/>
+        <values id="model.126b0cb5dec.178" name="true" defaultValue="true" readOnly="true"/>
         <nodes xsi:type="iaml.operations:SetNode" id="model.126b0cb5dec.176" outExecutions="model.126b0cb5dec.17f" inExecutions="model.126b0cb5dec.17d" outFlows="model.126b0cb5dec.182" inFlows="model.126b0cb5dec.180"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.8a" outExecutions="model.126b0cb5dec.17d"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.126b0cb5e69.8c" inExecutions="model.126b0cb5dec.17f"/>

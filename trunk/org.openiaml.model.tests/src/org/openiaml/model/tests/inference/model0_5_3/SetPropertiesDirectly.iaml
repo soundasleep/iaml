@@ -2,8 +2,8 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.messaging="http://openiaml.org/model/messaging" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.129ab1d156e.8228">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <messages xsi:type="iaml.messaging:Email" id="scopes.129ab1d1649.62b" name="Target" inWires="wires.129ab1d1639.16d2">
-      <properties id="model.129ab1d156e.8247" name="set directly" inWires="wires.129ab1d1639.16df"/>
-      <properties id="model.129ab1d156e.8248" name="not set"/>
+      <values id="model.129ab1d156e.8247" name="set directly" inWires="wires.129ab1d1639.16df"/>
+      <values id="model.129ab1d156e.8248" name="not set"/>
       <labels outWires="wires.129ab1d1639.16df" id="visual.129ab1d161a.1ace" name="field 1">
         <wires xsi:type="iaml.wires:SetWire" id="wires.129ab1d1639.16df" name="set" from="visual.129ab1d161a.1ace" to="model.129ab1d156e.8247"/>
       </labels>

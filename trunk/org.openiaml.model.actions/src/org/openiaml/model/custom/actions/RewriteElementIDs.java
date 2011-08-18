@@ -118,12 +118,17 @@ public class RewriteElementIDs extends IamlFileAction {
 		rewriteClassNameMap.put("setwire", "set");
 		rewriteClassNameMap.put("detailwire", "detail");
 		rewriteClassNameMap.put("autocompletewire", "acw");
+		rewriteClassNameMap.put("ecarule", "eca");
+		rewriteClassNameMap.put("simplecondition", "condition");
 		rewriteClassNameMap.put("internetapplication", "root");
 		rewriteClassNameMap.put("domainiterator", "iterator");
+		rewriteClassNameMap.put("domaininstance", "instance");
 		rewriteClassNameMap.put("domainattribute", "attribute");
 		rewriteClassNameMap.put("domainattributeinstance", "ai");
-		rewriteClassNameMap.put("domainschema", "schema");
+		rewriteClassNameMap.put("domaintype", "type");
 		rewriteClassNameMap.put("domainsource", "source");
+		rewriteClassNameMap.put("queryparameter", "qp");
+		rewriteClassNameMap.put("schemaedge", "schema");
 	}
 
 	/**

@@ -20,6 +20,8 @@ import org.openiaml.emf.properties.library.metamodel.AllMetamodelPropertiesLibra
 import org.openiaml.emf.properties.library.metamodel.MMClassesCount;
 import org.openiaml.model.model.ModelPackage;
 
+import de.lmu.ifi.pst.uwe.uwe.UWEPackage;
+
 /**
  * Test the metamodel metrics against those defined by 
  * Monperrus et al.
@@ -89,6 +91,13 @@ public class TestEMFMetamodelProperties extends TestCase implements IEMFElementS
 	 */
 	public void testGetGMFRuntimeNotationValues() {
 		investigatePackage(NotationPackage.eINSTANCE);
+	}
+	
+	/**
+	 * Calculates the values for UWE.
+	 */
+	public void testGetUWEValues() {
+		investigatePackage(UWEPackage.eINSTANCE);
 	}
 	
 	public void disabled_testNoC() {

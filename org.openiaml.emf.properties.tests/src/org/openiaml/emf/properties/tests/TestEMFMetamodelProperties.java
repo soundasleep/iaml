@@ -20,6 +20,8 @@ import org.openiaml.emf.properties.library.metamodel.AllMetamodelPropertiesLibra
 import org.openiaml.emf.properties.library.metamodel.MMClassesCount;
 import org.openiaml.model.model.ModelPackage;
 
+import aspectWebML.webML.WebMLPackage;
+
 import de.lmu.ifi.pst.uwe.uwe.UWEPackage;
 
 /**
@@ -98,6 +100,14 @@ public class TestEMFMetamodelProperties extends TestCase implements IEMFElementS
 	 */
 	public void testGetUWEValues() {
 		investigatePackage(UWEPackage.eINSTANCE);
+	}
+	
+	/**
+	 * Calculates the values for WebML, as derived from the AspectWebML
+	 * metamodel package of WebML.
+	 */
+	public void testGetWebMLValues() {
+		investigatePackage(WebMLPackage.eINSTANCE);
 	}
 	
 	public void disabled_testNoC() {

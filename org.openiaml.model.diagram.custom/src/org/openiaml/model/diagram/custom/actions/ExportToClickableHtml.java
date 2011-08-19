@@ -89,11 +89,11 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 
 	/**
 	 * We want to render much more of the entire model; we
-	 * render up to 100 images.
+	 * render up to 500 images.
 	 */
 	@Override
 	public int getMaxImages() {
-		return 100;
+		return 500;
 	}
 
 	/**

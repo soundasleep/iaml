@@ -15,5 +15,6 @@ Require-Bundle: org.junit,
  org.eclipse.uml2.uml;bundle-version="3.0.1",
  org.openiaml.docs;bundle-version="0.5.2",
  org.eclipse.gmf.runtime.notation;bundle-version="1.2.0",
- de.lmu.ifi.pst.uwe.uwe;bundle-version="1.9.1"
+ de.lmu.ifi.pst.uwe.uwe;bundle-version="1.9.1",
+ at.ac.tuwien.wit.aspectwebml.model;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

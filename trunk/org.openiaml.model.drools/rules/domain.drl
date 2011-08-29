@@ -41,7 +41,7 @@ rule "Create a default primary key for DomainTypes which do not have one"
 		// create a new one
 		DomainAttribute da2 = handler.generatedDomainAttribute(object, object);
 		handler.setName(da2, "generated primary key");
-		handler.setValue(da2, DomainPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), true);
+		handler.setValue(da2, DomainPackage.eINSTANCE.getDomainFeature_PrimaryKey(), true);
 		handler.setEType(da2, type);
 		queue.add(da2, drools);
 
@@ -70,7 +70,7 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 	then
 		DomainAttribute copy = handler.generatedDomainAttribute(ext, targetObject);
 		handler.setName(copy, sourceAttribute.getName());
-		handler.setValue(copy, DomainPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), sourceAttribute.isPrimaryKey());
+		handler.setValue(copy, DomainPackage.eINSTANCE.getDomainFeature_PrimaryKey(), sourceAttribute.isPrimaryKey());
 		handler.setEType(copy, sourceAttribute.getEType());		// copy over type
 		queue.add(copy, drools);
 		

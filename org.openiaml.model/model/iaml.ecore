@@ -1457,6 +1457,15 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A particular feature of a {@model DomainType}, which may be an {@model DomainAttribute attribute}&lt;!-- or a {@model DomainReference reference}-->."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="comment" value="added in 0.4"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Any number of {@model DomainFeature}s may be specified as the &lt;i>primary key&lt;/i> for the containing {@model DomainType}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//domain/DomainFeature">
       <eAnnotations source="http://openiaml.org/comment">
@@ -1466,15 +1475,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single domain-specific {@model DomainAttribute#eType typed} attribute of a particular {@model DomainType}."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-          defaultValueLiteral="false">
-        <eAnnotations source="http://openiaml.org/comment">
-          <details key="comment" value="added in 0.4"/>
-        </eAnnotations>
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Any number of {@model DomainAttribute}s may be specified as the &lt;i>primary key&lt;/i> for the containing {@model DomainType}."/>
-        </eAnnotations>
-      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -374,10 +374,10 @@
             ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainType/inSchemas"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainType/permissions"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//domain/DomainFeature"/>
-      <genClasses ecoreClass="iaml.ecore#//domain/DomainAttribute">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainAttribute/primaryKey"/>
+      <genClasses ecoreClass="iaml.ecore#//domain/DomainFeature">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainFeature/primaryKey"/>
       </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//domain/DomainAttribute"/>
       <genClasses ecoreClass="iaml.ecore#//domain/DomainSource">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainSource/file"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainSource/type"/>

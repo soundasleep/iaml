@@ -40,6 +40,17 @@ public class LatexCodegenFunctions {
 		return buf.toString();
 	}
 	
+	
+	/**
+	 * Turn a string like "addPermission" into "add permission".
+	 * 
+	 * @param s addPermission
+	 * @return add permission
+	 */
+	public static String humaniseProperty(String s) {
+		return humanise(s).toLowerCase();
+	}
+	
 	/**
 	 * Turn a string like "InputTextField" into "input-text-field".
 	 * 

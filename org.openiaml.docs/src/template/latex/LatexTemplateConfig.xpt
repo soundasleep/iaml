@@ -39,6 +39,8 @@
 \newcommand{\includeInference}{yes}
 \newcommand{\includeConstraints}{yes}
 \newcommand{\includeImplementationNotes}{yes}
+\newcommand{\includeOpposites}{yes}
+\newcommand{\includeExpandEnumerations}{yes}
 
 % Templates
 \newcommand{\modeldocAbstractInterface}{\noindent Abstract interface.}
@@ -57,6 +59,7 @@
 \newcommand{\modeldocNoDirectImplementationNotes}{} % empty
 \newcommand{\modeldocAttributeType}[1]{\code{#1}}
 \newcommand{\modeldocOpposite}[1]{ (opposite: #1)}
+\newcommand{\modeldocEnumerationValue}[1]{\code{#1}}
 
 % #1 - property name, e.g. name
 % #2 - property parent, e.g. NamedElement
@@ -251,6 +254,18 @@
 
 \newenvironment{modeldocVisualMissing}{
   % empty
+}{
+  % empty
+}
+
+\newenvironment{modeldocOpposites}{
+  % empty 
+}{
+  % empty
+}
+
+\newenvironment{modeldocExpandEnumerations}{
+  \item Possible values: 
 }{
   % empty
 }

@@ -6,12 +6,12 @@
  * Macros for if/then/else
  */ 
 «DEFINE ifThenOpen(String key) FOR emf::EObject»
-\ifthenelse{\equal{\include«key»}{yes}}{
-\begin{modeldoc«key»}
+\ifthenelse{\equal{\include«key»}{yes}}{%
+\begin{modeldoc«key»}%
 «ENDDEFINE»
 
 «DEFINE ifThenClose(String key) FOR emf::EObject»
-\end{modeldoc«key»}
+\end{modeldoc«key»}%
 }{}% if «key»
 «ENDDEFINE»
 
@@ -151,9 +151,14 @@
 		  \item
 		  \hypertarget{model reference:«humanise(name)»:«attribute.name»}{}
 		  \modeldocName{«humanise(name)»}{«convertHTMLIntoLatex(attribute.name)»} : «EXPAND bounds(true, attribute.lowerBound, attribute.upperBound)»\modeldocAttributeType{«convertHTMLIntoLatex(attribute.type)»}
-			«IF attribute.tagline != null»
+			«IF attribute.tagline != null || !attribute.acceptedValues.isEmpty»
 			  \begin{modeldocList}
-				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»
+			  	«IF attribute.tagline != null-»
+				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline-»
+				«ENDIF-»
+			  	«IF !attribute.acceptedValues.isEmpty-»
+		  		«EXPAND ifThenOpen("ExpandEnumerations")-»«FOREACH attribute.acceptedValues.convertHTMLIntoLatex() AS v SEPARATOR ", "»\modeldocEnumerationValue{«v»}«ENDFOREACH»«EXPAND ifThenClose("ExpandEnumerations")-»
+				«ENDIF»
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
@@ -351,7 +356,9 @@
 
 «DEFINE oppositeLink FOR modeldoc::EMFReference-»
 «IF opposite != null-»
-\modeldocOpposite{\modeldocName{«humanise(opposite.containingType.name)»}{«humaniseProperty(opposite.name)»}}
+«EXPAND ifThenOpen("Opposites")-»
+\modeldocOpposite{\modelProperty{«humanise(opposite.containingType.name)»}{«humaniseProperty(opposite.name)»}}
+«EXPAND ifThenClose("Opposites")-»
 «ENDIF-»
 «ENDDEFINE»
 

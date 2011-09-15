@@ -38,6 +38,9 @@ public class TestLatexFunctions extends TestCase {
 		assertEquals("input text field", LatexCodegenFunctions.humaniseProperty("inputTextField"));
 		assertEquals("e object", LatexCodegenFunctions.humaniseProperty("eObject"));
 		assertEquals("e xsd data type", LatexCodegenFunctions.humaniseProperty("eXSDDataType"));
+		
+		// events should NOT be modified
+		assertEquals("onEvent", LatexCodegenFunctions.humaniseProperty("onEvent"));
 	}
 	
 	/**

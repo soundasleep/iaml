@@ -34,6 +34,7 @@ If the {@model DomainIterator#query} is set to the value "new", then this {@mode
 </p>
 
 <h3>Containing Scope</h3>
+<!--index containing scope-->
 
 <p>
 Each {@model DomainIterator} has an associated <i>containing scope</i> that represents the scope that a particular instance can be accessed:
@@ -50,6 +51,7 @@ Each {@model DomainIterator} has an associated <i>containing scope</i> that repr
 </p>
 
 <h3>Failure Handlers</h3>
+<!--index failure handlers-->
 
 <p>
 An outgoing {@model ECARule} from a particular {@model DomainIterator} with the {@model ECARule#name} "<code>fail</code>" is defined as a <i>failure handler</i> for the given iterator. If a {@model DomainIterator} does not have such a handler, then the failure handler semantics of the containing {@model Scope} are used instead throughout the scope containment hierarchy.
@@ -74,6 +76,7 @@ An outgoing {@model ECARule} from a particular {@model DomainIterator} with the 
 
   <dd>
     <p>
+    <!--index new domain data-->
     The {@model DomainIterator#new} {@model Operation} of a {@model DomainIterator} forces a new result {@model DomainInstance} to be created, regardless of the current state of the contained {@model DomainInstance}. If the {@model DomainInstance} has not been {@model DomainIterator#save}d, then the changes will be lost.
     </p>
   </dd>
@@ -112,6 +115,7 @@ An outgoing {@model ECARule} from a particular {@model DomainIterator} with the 
   <dt>save</dt>
   <dd>
     <p>
+    <!--index saving domain data-->
     The {@model DomainIterator#save} {@model Operation} of a {@model DomainIterator} forces the current {@model DomainInstance} to be saved to the specified {@model DomainSource} of that iterator. Saving the current {@model DomainInstance} will not modify the current <i>instance pointer</i>. If the save is unsuccessful, an exception will be thrown and handled through the associated <i>failure handler</i> of the iterator.
     </p>
   </dd>

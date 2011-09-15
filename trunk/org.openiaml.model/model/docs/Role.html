@@ -7,5 +7,6 @@ A {@model Role} may also define role-specific attributes by defining {@model Dom
 </p>
 
 <p>
-An IAML model instance will have one {@model Role} with the {@model Role#name} of "User", representing the root {@model Role} type in an application, and this constraint may be satisfied through model completion. All {@model Role} instances in a model instance must inherit this {@model Role}. By default, this "User" role instance will contain a {@model DomainAttribute} with a {@model DomainAttribute#name} of "email" and a {@model DomainAttribute} with a {@model DomainAttribute#name} of "password", representing the e-mail address and user password of a user's profile respectively.
+<!--index default role-->
+An IAML model instance will have one {@model Role} with the {@model Role#name} of "User", representing the root {@model Role} type in an application, and this constraint may be satisfied through model completion. All {@model Role} instances in a model instance must inherit this {@model Role}. As the <i>default role</i>, this "User" role will contain a {@model DomainAttribute} with a {@model DomainAttribute#name} of "email" and a {@model DomainAttribute} with a {@model DomainAttribute#name} of "password", representing the e-mail address and user password of a user's profile respectively.
 </p>

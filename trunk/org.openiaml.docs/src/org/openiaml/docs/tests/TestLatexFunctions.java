@@ -29,6 +29,18 @@ public class TestLatexFunctions extends TestCase {
 	}
 	
 	/**
+	 * Tests {@link LatexCodegenFunctions#humanise(String)}.
+	 * 
+	 * @throws Exception
+	 */
+	public void testHumaniseProperty() throws Exception {
+		// lowercase first character means everything remains lowercase
+		assertEquals("input text field", LatexCodegenFunctions.humaniseProperty("inputTextField"));
+		assertEquals("e object", LatexCodegenFunctions.humaniseProperty("eObject"));
+		assertEquals("e xsd data type", LatexCodegenFunctions.humaniseProperty("eXSDDataType"));
+	}
+	
+	/**
 	 * Tests {@link LatexCodegenFunctions#convertHTMLIntoLatex(String)}.
 	 * 
 	 * @throws Exception

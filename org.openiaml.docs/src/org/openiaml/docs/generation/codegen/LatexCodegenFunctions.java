@@ -48,6 +48,11 @@ public class LatexCodegenFunctions {
 	 * @return add permission
 	 */
 	public static String humaniseProperty(String s) {
+		// ignore events
+		if (s.substring(0, 2).equals("on") && s.length() > 3 && Character.isUpperCase(s.charAt(2))) {
+			return s;
+		}
+		
 		return humanise(s).toLowerCase();
 	}
 	

@@ -94,7 +94,7 @@ end
 
 /**
  * @inference SyncWire
- *		When a {@model Changeable} is connected to an {@model ContainsOperations} by a
+ *		When a {@model Changeable} is connected to a {@model ContainsOperations} by a
  *		{@model SyncWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
  *		target when the source {@model Changeable#onChange changes}.
  */
@@ -121,7 +121,7 @@ end
 
 /**
  * @inference SyncWire
- *		When a {@model InputTextField} is connected to an {@model ContainsOperations} by an {@model SyncWire#executeOnInput instant}
+ *		When an {@model InputTextField} is connected to a {@model ContainsOperations} by a {@model SyncWire#executeOnInput instant}
  *		{@model SyncWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
  *		target when the source {@model InputTextField#onInput input changes}.
  */
@@ -658,7 +658,7 @@ end
 /**
  * @inference SyncWire,DomainInstance
  *		An empty {@model InputForm} connected to a {@model DomainIterator} with a {@model SyncWire}
- *		will create a {@model InputTextField} in that form for every {@model DomainAttributeInstance}
+ *		will create an {@model InputTextField} in that form for every {@model DomainAttributeInstance}
  *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model ExtendsEdge foreign key}.
  * @implementation DomainAttributeInstance
  *		Currently, it is not possible to modify a {@model DomainAttributeInstance}
@@ -702,7 +702,7 @@ end
 /**
  * @inference SyncWire,InputForm,InputTextField
  *		An {@model InputForm} connected to another {@model InputForm} with a {@model SyncWire}
- *		will create a {@model InputTextField} in the target form for every {@model InputTextField} in the
+ *		will create an {@model InputTextField} in the target form for every {@model InputTextField} in the
  *		source form with the same {@model InputTextField#name}.
  */
 rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"

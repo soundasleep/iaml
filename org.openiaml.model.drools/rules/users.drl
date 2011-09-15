@@ -77,7 +77,7 @@ end
  * Issue 206: Allow AccessControlHandlers to specify target Login pages.
  *
  * @inference AccessControlHandler
- *		If a {@model AccessControlHandler} specifies a 'login' {@model ECARule}
+ *		If an {@model AccessControlHandler} specifies a 'login' {@model ECARule}
  *		that goes to a {@model Frame}, the same Frame will be used as the login Frame
  *		for the generated {@model LoginHandler}.
  */
@@ -105,7 +105,7 @@ end
  * Allow AccessControlHandlers to specify target Logout pages.
  *
  * @inference AccessControlHandler
- *		If a {@model AccessControlHandler} specifies a 'logout' {@model ECARule}
+ *		If an {@model AccessControlHandler} specifies a 'logout' {@model ECARule}
  *		that navigates to a {@model Frame}, the same Frame will be used as the logout Frame
  *		for the generated {@model LoginHandler}.
  */
@@ -133,7 +133,7 @@ end
  * Allow AccessControlHandlers to specify target Success pages.
  *
  * @inference AccessControlHandler
- *		If a {@model AccessControlHandler} specifies a 'success' {@model ECARule}
+ *		If an {@model AccessControlHandler} specifies a 'success' {@model ECARule}
  *		that navigates to a {@model Frame}, the same Frame will be used as the successful login Frame
  *		for the generated {@model LoginHandler}.
  */
@@ -159,7 +159,7 @@ end
 
 /**
  * @inference AccessControlHandler,Frame,ActivityOperation
- *		A {@model Frame} within a {@model Session} protected by a {@model AccessControlHandler}
+ *		A {@model Frame} within a {@model Session} protected by an {@model AccessControlHandler}
  *		will have an {@model Operation} named 'permissions check'.
  */
 rule "A page within a session protected by an ACH should have a 'permissions check' operation"
@@ -181,7 +181,7 @@ end
 
 /**
  * @inference AccessControlHandler,Frame,ActivityOperation
- *		A {@model Frame} protected by a {@model AccessControlHandler}
+ *		A {@model Frame} protected by an {@model AccessControlHandler}
  *		will have an {@model Operation} named 'page permissions check'.
  */
 rule "A page protected by an ACH should have a 'permissions check' operation"
@@ -202,7 +202,7 @@ end
 
 /**
  * @inference AccessControlHandler,Frame,ActivityOperation
- *		A {@model Frame} within a {@model Session} protected by a {@model AccessControlHandler}
+ *		A {@model Frame} within a {@model Session} protected by an {@model AccessControlHandler}
  *		will {@model ECARule execute} the 'permissions check' {@model Operation}
  *		when the frame is {@model Frame#onAccess accessed}.
  */
@@ -227,7 +227,7 @@ end
 
 /**
  * @inference AccessControlHandler,Frame,ActivityOperation
- *		A {@model Frame} protected by a {@model AccessControlHandler}
+ *		A {@model Frame} protected by an {@model AccessControlHandler}
  *		will {@model ECARule execute} the 'page permissions check' {@model Operation}
  *		when the frame is {@model Frame#onAccess accessed}.
  */
@@ -251,7 +251,7 @@ end
 
 /**
  * @inference AccessControlHandler,Frame,ActivityOperation
- *		The 'permissions check' {@model Operation} defined by a {@model AccessControlHandler} protecting
+ *		The 'permissions check' {@model Operation} defined by an {@model AccessControlHandler} protecting
  *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
  *		defined login {@model Frame} in the same {@model Session} if the check fails.
  */
@@ -279,7 +279,7 @@ end
 
 /**
  * @inference AccessControlHandler,Frame,ActivityOperation
- *		The 'permissions check' {@model Operation} defined by a {@model AccessControlHandler} protecting
+ *		The 'permissions check' {@model Operation} defined by an {@model AccessControlHandler} protecting
  *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
  *		defined login {@model Frame} in a <em>separate</em> login {@model Session} if the check fails.
  */
@@ -381,7 +381,7 @@ end
  * method.
  *
  * @inference AccessControlHandler,Parameter,LoginHandler
- *		A {@model AccessControlHandler} protecting a {@model Session} with a defined
+ *		An {@model AccessControlHandler} protecting a {@model Session} with a defined
  *		{@model Role}-based {@model RequiresEdge access requirement} will provide
  *		the <em>default {@model Role}</em> as a {@model Parameter} to the created {@model LoginHandler}.  
  */
@@ -576,7 +576,7 @@ end
 
 /**
  * @inference AccessControlHandler,Parameter,LoginHandler
- *		The {@model DomainIterator} representing the current instance of a {@model AccessControlHandler} check,
+ *		The {@model DomainIterator} representing the current instance of an {@model AccessControlHandler} check,
  *		protecting a {@model Session},
  *		will be provided as a {@model Parameter} to the generated {@model LoginHandler}.
  */
@@ -601,7 +601,7 @@ end
 
 /**
  * @inference AccessControlHandler,Parameter,LoginHandler
- *		The {@model DomainIterator} representing the current instance of a {@model AccessControlHandler} check,
+ *		The {@model DomainIterator} representing the current instance of an {@model AccessControlHandler} check,
  *		protecting a {@model Frame} within a {@model Session},
  *		will be provided as a {@model Parameter} to the generated {@model LoginHandler}.
  */

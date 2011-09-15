@@ -33,6 +33,7 @@ boolean isOperation(modeldoc::EMFReference this) :
 boolean isCondition(modeldoc::EMFReference this) :
 	type.name.endsWith("Condition") ||
 		type.name.endsWith("Predicate") ||
+		type.name.endsWith("Function") ||
 		type.name.endsWith("Property");
 
 

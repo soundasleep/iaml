@@ -189,7 +189,7 @@
 				.sortBy(a|a.name) AS ref»
 		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»«EXPAND oppositeLink FOR ref»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -229,7 +229,7 @@
 				.sortBy(a|a.name) AS ref»
 		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»«EXPAND oppositeLink FOR ref»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -265,7 +265,7 @@
 		«FOREACH references.select(r|r.isEvent()).sortBy(a|a.name) AS ref»
 		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»«EXPAND oppositeLink FOR ref»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -297,7 +297,7 @@
 		«FOREACH references.select(r|r.isCondition()).sortBy(a|a.name) AS ref»
 		  \item
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»«EXPAND oppositeLink FOR ref»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -329,7 +329,7 @@
 		«FOREACH references.select(r|r.isOperation()).sortBy(a|a.name) AS ref»
 		  \item 
 		  \hypertarget{model reference:«humanise(name)»:«ref.name»}{}
-		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»
+		  \modeldocName{«name»}{«ref.name»} : «EXPAND bounds(false, ref.lowerBound, ref.upperBound)»«EXPAND modelLink FOR ref.type»«EXPAND oppositeLink FOR ref»
 			«IF ref.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
@@ -347,6 +347,12 @@
 	«ENDIF»
 	«EXPAND ifThenClose("Operations")»
 «ENDIF»
+«ENDDEFINE»
+
+«DEFINE oppositeLink FOR modeldoc::EMFReference-»
+«IF opposite != null-»
+\modeldocOpposite{\modelProperty{«humanise(opposite.containingType.name)»}{«opposite.name»}}
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE bounds(boolean attribute, int lowerBound, int upperBound) FOR emf::EObject-»

@@ -3,6 +3,7 @@ An {@model ActivityOperation} may contain any number of {@model JoinNode}s. Each
 </p>
 
 <p>
+<!--index multithreading-->
 If an executing thread arrives at a {@model JoinNode}, the thread will be removed from the associated <i>thread set</i> of that thread. If the <i>thread set</i> is not empty, execution of the thread will be suspended until such a point that the <i>thread set</i> is empty. If the <i>thread set</i> is empty, then the multithreaded execution originating from the original {@model SplitNode} will be considered complete, and the <i>execution flow</i> will continue from the {@model SplitNode} as normal. If an <i>unthreaded</i> <i>execution flow</i> arrives at a {@model JoinNode}, an exception must occur.
 </p>
 

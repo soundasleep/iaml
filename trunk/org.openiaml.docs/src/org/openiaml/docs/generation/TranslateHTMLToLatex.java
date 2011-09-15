@@ -81,6 +81,9 @@ public class TranslateHTMLToLatex {
 		// specifically enable LaTex sections
 		f = f.replaceAll("(?s) *<\\!--\\s*LaTeX(.+)--> *", "$1");
 
+		// keep indexes
+		f = f.replaceAll("<!--index ([^>]+)-->", "\\\\index{$1}");
+		
 		// remove any other HTML comments
 		f = f.replaceAll("(?s) *<\\!--([^>]+)--> *", "");
 
@@ -138,6 +141,7 @@ public class TranslateHTMLToLatex {
 		f = f.replaceAll("\\{@uml ([^}]+)\\}", "\\\\uml{$1}");
 		f = f.replaceAll("\\{@type ([^}]+)\\}", "\\\\type{$1}");
 		f = f.replaceAll("\\{@event ([^}]+)\\}", "\\\\event{$1}");
+		f = f.replaceAll("\\{@emf ([^}]+)\\}", "\\\\emf{$1}");
 		
 		// magic translations for tables
 		if (f.contains("<table>"))

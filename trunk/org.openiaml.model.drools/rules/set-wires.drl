@@ -108,7 +108,7 @@ end
 
 /**
  * @inference SetWire
- *		When a {@model Changeable} is connected to an {@model ContainsOperations} by a
+ *		When a {@model Changeable} is connected to a {@model ContainsOperations} by a
  *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
  *		target when the source {@model Changeable#onChange changes}.
  */
@@ -166,7 +166,7 @@ end
 
 /**
  * @inference SetWire
- *		When a {@model InputTextField} is connected to an {@model ContainsOperations} by an {@model SetWire#executeOnInput instant}
+ *		When an {@model InputTextField} is connected to a {@model ContainsOperations} by an {@model SetWire#executeOnInput instant}
  *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
  *		target when the source {@model InputTextField#onInput input changes}.
  */
@@ -807,7 +807,7 @@ end
 /**
  * @inference SetWire,DomainInstance
  *		An empty {@model InputForm} connected to a {@model DomainIterator} with a {@model SetWire}
- *		will create a {@model InputTextField} in that form for every {@model DomainAttributeInstance}
+ *		will create an {@model InputTextField} in that form for every {@model DomainAttributeInstance}
  *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model DomainAttribute#isGenerated generated}.
  */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
@@ -891,7 +891,7 @@ end
 
 /**
  * @inference SetWire,InputForm,Email
- *		A {@model InputForm} connected to an {@model Email} with a {@model SetWire}
+ *		An {@model InputForm} connected to an {@model Email} with a {@model SetWire}
  *		will create a {@model Label} in the target Email for every {@model InputTextField} in the
  *		source form with the same {@model Label#name}.
  */
@@ -918,7 +918,7 @@ end
 
 /**
  * @inference SetWire,InputForm,Email
- *		A {@model InputForm} connected to an {@model Email} with a {@model SetWire}
+ *		An {@model InputForm} connected to an {@model Email} with a {@model SetWire}
  *		will create a {@model Label} in the target Email for every {@model Label} in the
  *		source form with the same {@model Label#name}.
  */
@@ -945,7 +945,7 @@ end
 
 /**
  * @inference SetWire,InputForm,Email
- *		A {@model InputForm} connected to a {@model Map} with a {@model SetWire}
+ *		An {@model InputForm} connected to a {@model Map} with a {@model SetWire}
  *		will create a {@model MapPoint} in the target map for every {@model InputTextField} in the
  *		source form with the same {@model Label#name}.
  */

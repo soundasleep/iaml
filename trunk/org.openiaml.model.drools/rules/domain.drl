@@ -51,7 +51,7 @@ end
  * @inference DomainType,DomainAttribute,ExtendsEdge
  *		A non-{@model DomainAttribute#primaryKey} {@model DomainAttribute} in a {@model DomainType}, 
  *		represented as {@model ExtendsEdge a supertype} of another {@model DomainType},
- *		will be copied into the subtype schema and marked as a {@model ExtendsEdge subattribute}.
+ *		will be copied into the subtype schema and marked as an {@model ExtendsEdge subattribute}.
  */
 rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsEdges"
 	when

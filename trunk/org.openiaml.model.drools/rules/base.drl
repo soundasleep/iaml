@@ -62,16 +62,16 @@ end
  *
  * @inference Changeable,Value 
  *		A {@model Changeable} 
- * 		contains an untyped {@model Value} named 'fieldValue'.
+ * 		contains an untyped {@model Value} named {@model Changeable#fieldValue}.
  * @inference Changeable,Value 
  *		If set, the {@model Changeable#defaultValue defaultValue}
- *		is used as the default value of the created {@model Changeable#fieldValue } {@model Value}.
+ *		is used as the default value of the created {@model Changeable#fieldValue} {@model Value}.
  * @inference InputForm
  *		{@model InputForm}s do <em>not</em> have a {@model Value} 
- *		named 'fieldValue' created by default.
+ *		named {@model Changeable#fieldValue} created by default.
  * @inference DomainIterator
  *		{@model DomainIterator}s do <em>not</em> have a {@model Value} 
- *		named 'fieldValue' created by default.
+ *		named {@model Changeable#fieldValue} created by default.
  */
 rule "Create field value for Changeable (untyped)"
 	when
@@ -99,7 +99,7 @@ end
 /**
  * @inference Condition,Value 
  *		All {@model Value}s not {@model Value#name named} 'fieldValue'
- * 		will have a {@model ActivityPredicate} in its container named 'XXX is set'.
+ * 		will have an {@model ActivityPredicate} in its container named 'XXX is set'.
  */
 rule "Values will also have a related 'is set' condition (not fieldValue)"
 	when

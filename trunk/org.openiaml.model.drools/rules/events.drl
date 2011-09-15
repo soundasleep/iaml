@@ -22,7 +22,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference Changeable,DomainAttribute 
- *		A {@model Changeable} thing contains an {@model Event} '{@model Changeable#onChange}'. 
+ *		A {@model Changeable} thing contains an {@model Event} named {@model Changeable#onChange}. 
  */
 rule "Create 'onChange' event trigger for Changeable things"
 	when
@@ -40,7 +40,7 @@ end
 
 /**
  * @inference Accessible
- *		An {@model Accessible} thing contains an {@model Event} '{@model Accessible#onAccess}'.
+ *		An {@model Accessible} thing contains an {@model Event} named {@model Accessible#onAccess}.
  */
 rule "Create 'onAccess' event trigger for Accessible things"
 	when

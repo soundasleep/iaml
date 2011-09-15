@@ -26,7 +26,7 @@ global DroolsHelperFunctions functions;
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} has a {@model BuiltinOperation} 
- *		'{@model DomainIterator#previous}'.
+ *		named {@model DomainIterator#previous}.
  */
 rule "Create 'previous' BuiltinOperation"
 	when
@@ -46,7 +46,7 @@ end
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} has a {@model BuiltinOperation} 
- *		'{@model DomainIterator#next}'.
+ *		named {@model DomainIterator#next}.
  */
 rule "Create 'next' BuiltinOperation"
 	when
@@ -66,7 +66,7 @@ end
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} has a {@model BuiltinOperation} 
- *		'{@model DomainIterator#reset}'.
+ *		named {@model DomainIterator#reset}.
  */
 rule "Create 'reset' BuiltinOperation"
 	when
@@ -86,7 +86,7 @@ end
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} has a {@model BuiltinOperation} 
- *		'{@model DomainIterator#skip}'.
+ *		named {@model DomainIterator#skip}.
  */
 rule "Create 'skip' BuiltinOperation"
 	when
@@ -106,7 +106,7 @@ end
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} has a {@model BuiltinOperation} 
- *		'{@model DomainIterator#jump}'.
+ *		named {@model DomainIterator#jump}.
  */
 rule "Create 'jump' BuiltinOperation"
 	when
@@ -126,7 +126,7 @@ end
 /**
  * @inference DomainIterator,BuiltinProperty
  *		A {@model DomainIterator} has a {@model BuiltinProperty} 
- *		'{@model DomainIterator#hasNext}'.
+ *		named {@model DomainIterator#hasNext}.
  */
 rule "Create 'hasNext' BuiltinProperty"
 	when
@@ -151,7 +151,7 @@ end
 /**
  * @inference DomainIterator,BuiltinProperty
  *		A {@model DomainIterator} has a {@model BuiltinProperty} 
- *		'{@model DomainIterator#hasPrevious}'.
+ *		named {@model DomainIterator#hasPrevious}.
  */
 rule "Create 'hasPrevious' BuiltinProperty"
 	when
@@ -176,7 +176,7 @@ end
 /**
  * @inference DomainIterator,BuiltinProperty
  *		A {@model DomainIterator} has a {@model BuiltinProperty} 
- *		'{@model DomainIterator#hasNext}'.
+ *		named {@model DomainIterator#hasNext}.
  */
 rule "Create 'empty' BuiltinProperty"
 	when
@@ -201,7 +201,7 @@ end
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} has a {@model Value#readOnly} {@model Value} 
- *		'{@model DomainIterator#results}'.
+ *		named {@model DomainIterator#results}.
  */
 rule "Create 'results' Value"
 	when
@@ -222,8 +222,8 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model Event} 
- *		'{@model DomainIterator#onIterate}'.
+ *		A {@model DomainIterator} has an {@model Event} 
+ *		named {@model DomainIterator#onIterate}.
  */
 rule "Create 'onIterate' Event"
 	when
@@ -243,7 +243,7 @@ end
 /**
  * @inference DomainIterator
  *		A {@model DomainIterator} will contain a generated {@model Function}
- *		named 'not empty' - the inverse of the '{@model DomainIterator#empty}' condition.
+ *		named 'not empty' - the inverse of the {@model DomainIterator#empty} condition.
  */
 rule "Create 'not empty' composite condition"
 	when

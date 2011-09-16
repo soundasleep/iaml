@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.130cf3b9c6b.51">
-  <iterators id="domain.130cf3ba739.48" name="source iterator" outWires="wires.130cf3ba024.1a">
+  <iterators id="domain.130cf3ba739.48" name="source iterator" outWires="wires.130cf3ba024.1a" query="query">
     <wires xsi:type="iaml.wires:AutocompleteWire" id="wires.130cf3ba024.1a" name="Autocomplete" from="domain.130cf3ba739.48" to="visual.130cf3b9c6b.56"/>
   </iterators>
   <children xsi:type="iaml.visual:InputTextField" inWires="wires.130cf3ba024.1a" id="visual.130cf3b9c6b.56" name="target field"/>

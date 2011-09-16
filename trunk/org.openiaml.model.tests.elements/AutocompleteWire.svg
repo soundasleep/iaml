@@ -35,7 +35,7 @@
 <path d="M88 33 L180 33 L180 49 L88 49 L88 33 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath11">
-<path d="M88 52 L123 52 L123 68 L88 68 L88 52 Z"/>
+<path d="M88 52 L124 52 L124 68 L88 68 L88 52 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath12">
 <path d="M88 71 L126 71 L126 87 L88 87 L88 71 Z"/>
@@ -76,7 +76,7 @@
 <text xml:space="preserve" x="108" y="26" clip-path="url(#clipPath9)" stroke="none">source iterator</text>
 <text xml:space="preserve" x="89" y="46" clip-path="url(#clipPath10)" stroke="none">: DomainIterator</text>
 <line clip-path="url(#clipPath10)" fill="none" x1="89" x2="179" y1="47" y2="47" stroke-width="0.1"/>
-<text x="89" y="65" clip-path="url(#clipPath11)" font-style="italic" stroke="none" stroke-width="0.1" xml:space="preserve">&lt;...&gt;</text>
+<text x="89" y="65" clip-path="url(#clipPath11)" font-style="italic" stroke="none" stroke-width="0.1" xml:space="preserve">query</text>
 <text x="89" y="84" clip-path="url(#clipPath12)" stroke="none" stroke-width="0.1" xml:space="preserve">limit: 1</text>
 <text x="89" y="103" clip-path="url(#clipPath13)" stroke="none" stroke-width="0.1" xml:space="preserve">autosave: false</text>
 <line clip-path="url(#clipPath14)" fill="none" x1="138" x2="138" y1="108" y2="168" stroke-dasharray="6.6,3.3"/>

@@ -60,11 +60,17 @@
 \newcommand{\modeldocAttributeType}[1]{\code{#1}}
 \newcommand{\modeldocOpposite}[1]{ (opposite: #1)}
 \newcommand{\modeldocEnumerationValue}[1]{\code{#1}}
+\newcommand{\modeldocExternalClass}
 
 % #1 - property name, e.g. name
 % #2 - property parent, e.g. NamedElement
 % each parameter is already linked e.g. \modelLink
 \newcommand{\inheritedElement}[2]{{#1} (from {#2})}
+
+% #1 - package prefix
+% #2 - package name
+% #3 - class name
+\newcommand{\modeldocExternalClass}[3]{\textit{#3}}
 
 % Environment options
 \newenvironment{modeldocTagline}{

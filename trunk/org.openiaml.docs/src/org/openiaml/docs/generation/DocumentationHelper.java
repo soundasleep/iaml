@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.openarchitectureware.expression.ast.DeclaredParameter;
 import org.openarchitectureware.expression.ast.Identifier;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFExternalClass;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 
 /**
@@ -51,6 +52,26 @@ public abstract class DocumentationHelper implements ILoader {
 	 */
 	public EMFClass getEMFClassFor(ModelDocumentation root, EClass c) {
 		for (EMFClass cls : root.getClasses()) {
+			if (cls.getTargetClass().equals(c)) {
+				// found it
+				return cls;
+			}
+			
+		}
+		
+		return null;
+	}
+
+	
+	/**
+	 * Find an existing EMFExternalClass for the given class.
+	 * Does not create a new one.
+	 * 
+	 * @param o
+	 * @return the class found, or null
+	 */
+	public EMFExternalClass getEMFExternalClassFor(ModelDocumentation root, EClass c) {
+		for (EMFExternalClass cls : root.getExternalClasses()) {
 			if (cls.getTargetClass().equals(c)) {
 				// found it
 				return cls;

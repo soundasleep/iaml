@@ -261,6 +261,7 @@
 	«ENDFILE»
 «ENDDEFINE»
 
+«DEFINE supertypes FOR modeldoc::EMFExternalClass-»<span class="class_link">«name»</span>«ENDDEFINE»
 «DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND ModeldocTemplate::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
 
 «REM»if an EReference.type is not an EMFClass (in this project), we have typeName as a string instead«ENDREM»

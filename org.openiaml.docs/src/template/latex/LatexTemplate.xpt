@@ -423,6 +423,9 @@
 	\item «EXPAND javadocElementToLatex FOR description»
 «ENDDEFINE»
 
+«DEFINE modelLink FOR modeldoc::EMFExternalClass-»
+\modeldocExternalClass{«convertHTMLIntoLatex(packagePrefix)»}{«convertHTMLIntoLatex(packageName)»}{«convertHTMLIntoLatex(name)»}«ENDDEFINE»
+
 «DEFINE modelLink FOR modeldoc::EMFClass-»
 «IF this==null»\textbf{TODO} \code{null} class.«ELSE»\modelLink{«humanise(name)»}«ENDIF»«ENDDEFINE» 
 

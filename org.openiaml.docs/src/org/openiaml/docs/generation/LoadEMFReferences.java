@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFExternalClass;
 import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
@@ -56,6 +58,23 @@ public class LoadEMFReferences extends DocumentationHelper implements ILoader {
 				newRef.setContainment(ref.isContainment());
 				if (refDestEMF != null) {
 					newRef.setType(refDestEMF);
+				} else {
+					// is there an external class?
+					EMFExternalClass refExternalClass = getEMFExternalClassFor(root, refDest);
+					if (refExternalClass == null) {
+						// we need to create one
+						refExternalClass = factory.createEMFExternalClass();
+						refExternalClass.setName(refDest.getName());
+						EPackage pkg = refDest.getEPackage();
+						if (pkg != null) {
+							refExternalClass.setTargetClass(refDest);
+							refExternalClass.setPackageName(pkg.getName());
+							refExternalClass.setPackageURI(pkg.getNsURI());
+							refExternalClass.setPackagePrefix(pkg.getNsPrefix());
+						}
+						root.getExternalClasses().add(refExternalClass);
+					}
+					newRef.setType(refExternalClass);
 				}
 				newRef.setTypeName(refDest.getName());
 				

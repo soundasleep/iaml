@@ -110,7 +110,7 @@ end
 
 /**
  * @inference DomainIterator,BuiltinOperation
- *		A {@DomainIterator} contains an {@model Operation}
+ *		A {@model DomainIterator} contains an {@model Operation}
  *		named {@model DomainIterator#save}.
  */
 rule "Create 'save' operation for DomainIterators"

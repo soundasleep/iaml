@@ -248,7 +248,7 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 end
 
 /**
- * @inference InternetApplication,EXSDDataType
+ * @inference InternetApplication
  *		An {@model InternetApplication} will contain a {@model Value#readOnly}
  *		{@model Value}, named 'blank', which represents an empty string.
  */

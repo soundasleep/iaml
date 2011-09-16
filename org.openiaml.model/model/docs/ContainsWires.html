@@ -4,7 +4,7 @@ editor within EMF as GMF, by moving common containment relationships into a sing
 </p>
 
 <ol>
-  <li>Within EMF, all instances of model edges (such as {@model ECARule}s and {@modelWire}s)
+  <li>Within EMF, all instances of model edges (such as {@model ECARule}s and {@model Wire}s)
 should be contained within another model element to prevent the edges from polluting the top-level
 {@emf EResource} of the model instance (known as <i>phantom nodes</i> within EMF: see GMF bug 284135).</li>
   <li>Within GMF, it is much simplier to support the creation of edge elements if the edge

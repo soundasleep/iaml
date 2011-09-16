@@ -1455,7 +1455,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainFeature" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature #//GeneratedElement #//GeneratesElements #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//wires/ParameterEdgesSource #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A particular feature of a {@model DomainType}, which may be an {@model DomainAttribute attribute}&lt;!-- or a {@model DomainReference reference}-->."/>
+        <details key="documentation" value="A particular feature of a {@model DomainType}, which may be an {@model DomainAttribute attribute} or a {@model DomainReference reference}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false">

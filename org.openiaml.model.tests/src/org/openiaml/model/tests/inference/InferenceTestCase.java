@@ -440,7 +440,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static InputTextField assertHasInputTextField(Frame element, String string) throws JaxenException {
-		return (InputTextField) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), InputTextField.class), string);
+		assertEquals(1, list.size());
+		return (InputTextField) list.get(0);
 	}
 
 	/**
@@ -450,7 +452,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static InputTextField assertHasInputTextField(VisibleThing element, String string) throws JaxenException {
-		return (InputTextField) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), InputTextField.class), string);
+		assertEquals(1, list.size());
+		return (InputTextField) list.get(0);
 	}
 
 	/**
@@ -460,7 +464,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoInputTextField(Frame element, String string) throws JaxenException {
-		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']", InputTextField.class);
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), InputTextField.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -470,7 +475,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoInputTextField(VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", InputTextField.class);
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), InputTextField.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -480,7 +486,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static IteratorList assertHasIteratorList(Frame element, String string) throws JaxenException {
-		return (IteratorList) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), IteratorList.class), string);
+		assertEquals(1, list.size());
+		return (IteratorList) list.get(0);
 	}
 
 	/**
@@ -490,7 +498,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static IteratorList assertHasIteratorList(VisibleThing element, String string) throws JaxenException {
-		return (IteratorList) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), IteratorList.class), string);
+		assertEquals(1, list.size());
+		return (IteratorList) list.get(0);
 	}
 
 	/**
@@ -500,17 +510,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Label assertHasLabel(Frame element, String string) throws JaxenException {
-		return (Label) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * Label.
-	 *
-	 * @return The element found
-	 */
-	public static Label assertHasLabel(Session element, String string) throws JaxenException {
-		return (Label) queryOne(element, "iaml.scopes:labels[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Label.class), string);
+		assertEquals(1, list.size());
+		return (Label) list.get(0);
 	}
 
 	/**
@@ -532,7 +534,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Label assertHasLabel(VisibleThing element, String string) throws JaxenException {
-		return (Label) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Label.class), string);
+		assertEquals(1, list.size());
+		return (Label) list.get(0);
 	}
 
 	/**
@@ -542,7 +546,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoLabel(Frame element, String string) throws JaxenException {
-		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']", Label.class);
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Label.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -552,7 +557,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoLabel(VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Label.class);
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Label.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -562,7 +568,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static InputForm assertHasInputForm(VisibleThing element, String string) throws JaxenException {
-		return (InputForm) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), InputForm.class), string);
+		assertEquals(1, list.size());
+		return (InputForm) list.get(0);
 	}
 
 	/**
@@ -572,7 +580,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static InputForm assertHasInputForm(Frame element, String string) throws JaxenException {
-		return (InputForm) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), InputForm.class), string);
+		assertEquals(1, list.size());
+		return (InputForm) list.get(0);
 	}
 
 	/**
@@ -582,7 +592,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Button assertHasButton(VisibleThing element, String string) throws JaxenException {
-		return (Button) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Button.class), string);
+		assertEquals(1, list.size());
+		return (Button) list.get(0);
 	}
 
 	/**
@@ -592,7 +604,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Button assertHasButton(Frame element, String string) throws JaxenException {
-		return (Button) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Button.class), string);
+		assertEquals(1, list.size());
+		return (Button) list.get(0);
 	}
 
 	/**
@@ -602,7 +616,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoButton(VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Button.class);
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Button.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -612,7 +627,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoButton(Frame element, String string) throws JaxenException {
-		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']", Button.class);
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Button.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -622,7 +638,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static MapPoint assertHasMapPoint(VisibleThing element, String string) throws JaxenException {
-		return (MapPoint) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), MapPoint.class), string);
+		assertEquals(1, list.size());
+		return (MapPoint) list.get(0);
 	}
 
 	/**
@@ -632,7 +650,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static MapPoint assertHasMapPoint(Frame element, String string) throws JaxenException {
-		return (MapPoint) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), MapPoint.class), string);
+		assertEquals(1, list.size());
+		return (MapPoint) list.get(0);	
 	}
 
 	/**
@@ -642,7 +662,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Map assertHasMap(VisibleThing element, String string) throws JaxenException {
-		return (Map) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Map.class), string);
+		assertEquals(1, list.size());
+		return (Map) list.get(0);	
 	}
 
 	/**
@@ -652,7 +674,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static Map assertHasMap(Frame element, String string) throws JaxenException {
-		return (Map) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(element.getChildren(), Map.class), string);
+		assertEquals(1, list.size());
+		return (Map) list.get(0);	
 	}
 
 	/**
@@ -671,32 +695,38 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element contains the given
 	 * Frame.
 	 */
-	public static Frame assertHasFrame(Scope scope, String string) throws JaxenException {
-		return (Frame) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
+	public static Frame assertHasFrame(Scope element, String string) throws JaxenException {
+		List<Object> list = nameSelect(typeSelect(element.getScopes(), Frame.class), string);
+		assertEquals(1, list.size());
+		return (Frame) list.get(0);	
 	}
 
 	/**
 	 * Assert that the given element does not contain the given
 	 * Frame.
 	 */
-	public static void assertHasNoFrame(Scope scope, String string) throws JaxenException {
-		assertHasNone(scope, "iaml:scopes[iaml:name='" + string + "']");
+	public static void assertHasNoFrame(Scope element, String string) throws JaxenException {
+		List<Object> list = nameSelect(typeSelect(element.getScopes(), Frame.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
 	 * Assert that the given element contains the given
 	 * Frame.
 	 */
-	public static Frame assertHasFrame(InternetApplication scope, String string) throws JaxenException {
-		return (Frame) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
+	public static Frame assertHasFrame(InternetApplication element, String string) throws JaxenException {
+		List<Object> list = nameSelect(typeSelect(element.getScopes(), Frame.class), string);
+		assertEquals(1, list.size());
+		return (Frame) list.get(0);	
 	}
 
 	/**
 	 * Assert that the given element does not contain the given
 	 * Frame.
 	 */
-	public static void assertHasNoFrame(InternetApplication scope, String string) throws JaxenException {
-		assertHasNone(scope, "iaml:scopes[iaml:name='" + string + "']");
+	public static void assertHasNoFrame(InternetApplication element, String string) throws JaxenException {
+		List<Object> list = nameSelect(typeSelect(element.getScopes(), Frame.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -748,8 +778,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static Session assertHasSession(InternetApplication root, String string) throws JaxenException {
-		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");
+	public static Session assertHasSession(InternetApplication element, String string) throws JaxenException {
+		List<Object> list = nameSelect(typeSelect(element.getScopes(), Session.class), string);
+		assertEquals(1, list.size());
+		return (Session) list.get(0);	
 	}
 
 	/**
@@ -758,8 +790,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public static Session assertHasSession(Scope root, String string) throws JaxenException {
-		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");
+	public static Session assertHasSession(Scope element, String string) throws JaxenException {
+		List<Object> list = nameSelect(typeSelect(element.getScopes(), Session.class), string);
+		assertEquals(1, list.size());
+		return (Session) list.get(0);	
 	}
 
 	/**

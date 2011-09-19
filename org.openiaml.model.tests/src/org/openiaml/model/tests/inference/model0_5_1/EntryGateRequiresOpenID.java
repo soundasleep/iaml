@@ -41,15 +41,15 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Session session = assertHasSession(container, "Protected Session");
 		assertNotGenerated(session);
 
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		assertNotGenerated(see);
+
+		Label openid = assertHasLabel(see, "Current OpenID");
 		assertEqualType(openid.getType(), BuiltinDataTypes.getTypeOpenIDURL());
 		assertNotGenerated(openid);
 
 		Frame secure = assertHasFrame(session, "Secure Page");
 		assertNotGenerated(secure);
-
-		Frame see = assertHasFrame(session, "See Your OpenID");
-		assertNotGenerated(see);
 
 		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
@@ -73,7 +73,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		Label openid = assertHasLabel(see, "Current OpenID");
 		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
 
@@ -91,7 +92,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		assertHasNoSetWire(root, field, openid);
 
 		// the Frame is connected as a NavigateAction from the Gate
-		ECARule nav = assertHasNavigateAction(root, gate, enter);
+		ECARule nav = assertHasECARule(root, gate, enter);
 		assertGenerated(nav);
 
 	}
@@ -107,7 +108,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		Label openid = assertHasLabel(see, "Current OpenID");
 		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
 
@@ -141,7 +143,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Event click = button.getOnClick();
 		assertGenerated(click);
 
-		ECARule nav = assertHasNavigateAction(root, click, gate);
+		ECARule nav = assertHasECARule(root, click, gate);
 		assertGenerated(nav);
 
 	}
@@ -158,7 +160,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		Label openid = assertHasLabel(see, "Current OpenID");
 
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
@@ -179,7 +182,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		Label openid = assertHasLabel(see, "Current OpenID");
 
 		Event onAccess = session.getOnAccess();
 		assertGenerated(onAccess);
@@ -190,7 +194,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		assertGenerated(target);
 
 		// is run
-		ECARule run = assertHasRunAction(root, onAccess, target);
+		ECARule run = assertHasECARule(root, onAccess, target);
 		assertGenerated(run);
 
 		// with a value from the text field
@@ -212,11 +216,12 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		Label openid = assertHasLabel(see, "Current OpenID");
 
 		Event onAccess = session.getOnAccess();
 		Operation target = assertHasOperation(openid, "update");
-		ECARule run = assertHasRunAction(root, onAccess, target);
+		ECARule run = assertHasECARule(root, onAccess, target);
 
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
@@ -241,11 +246,12 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Label openid = assertHasLabel(session, "Current OpenID");
+		Frame see = assertHasFrame(session, "See Your OpenID");
+		Label openid = assertHasLabel(see, "Current OpenID");
 
 		Event onAccess = session.getOnAccess();
 		Operation target = assertHasOperation(openid, "update");
-		ECARule run = assertHasRunAction(root, onAccess, target);
+		ECARule run = assertHasECARule(root, onAccess, target);
 
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		InputTextField field = assertHasInputTextField(enter, "Current OpenID");

@@ -9,10 +9,10 @@
       <scopes xsi:type="iaml.visual:Frame" id="visual.128953a4590.19" name="Secure Page"/>
       <scopes xsi:type="iaml.visual:Frame" id="visual.128953a4590.1b" name="See Your OpenID">
         <children xsi:type="iaml.visual:Label" inWires="wires.128956eba24.1d" id="visual.12895522e6e.17" name="your current ID" defaultValue="undefined"/>
+        <children xsi:type="iaml.visual:Label" outWires="wires.128956eba24.1d" id="visual.12895659cec.c" name="Current OpenID" type="builtin_iamlOpenIDURL" inRequiresEdges="wires.128956eba24.5">
+          <wires xsi:type="iaml.wires:SetWire" id="wires.128956eba24.1d" name="set" from="visual.12895659cec.c" to="visual.12895522e6e.17"/>
+        </children>
       </scopes>
-      <labels outWires="wires.128956eba24.1d" id="visual.12895659cec.c" name="Current OpenID" type="builtin_iamlOpenIDURL" inRequiresEdges="wires.128956eba24.5">
-        <wires xsi:type="iaml.wires:SetWire" id="wires.128956eba24.1d" name="set" from="visual.12895659cec.c" to="visual.12895522e6e.17"/>
-      </labels>
     </scopes>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://openiaml.org/model0.5" nsPrefix="iaml">
+    nsURI="http://openiaml.org/model0.6" nsPrefix="iaml">
   <eClassifiers xsi:type="ecore:EClass" name="GeneratedElement" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An element which may be generated through &lt;i>model completion&lt;/i>, and may be generated due to the presence of {@model GeneratesElements other elements}."/>

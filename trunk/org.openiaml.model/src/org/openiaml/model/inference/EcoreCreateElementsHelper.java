@@ -70,7 +70,6 @@ import org.openiaml.model.model.operations.ExecutionEdge;
 import org.openiaml.model.model.operations.ExecutionEdgeDestination;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
 import org.openiaml.model.model.operations.ExternalValue;
-import org.openiaml.model.model.operations.ExternalValueEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
@@ -408,14 +407,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(node, by);
 		return node;
 	}
-	
-	public ExternalValueEdge generatedExternalValueEdge(GeneratesElements by, ExternalValue container, ExternalValue from, Value to) throws InferenceException {
-		ExternalValueEdge edge = (ExternalValueEdge) createElement( container, OperationsPackage.eINSTANCE.getExternalValueEdge(), OperationsPackage.eINSTANCE.getExternalValue_ExternalValueEdges() );
-		setGeneratedBy(edge, by);
-		setFrom(edge, from);
-		setTo(edge, to);
-		return edge;
-	}
 
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, ActivityOperation container) throws InferenceException {
 		DataFlowEdge edge = (DataFlowEdge) createElement( container, OperationsPackage.eINSTANCE.getDataFlowEdge(), OperationsPackage.eINSTANCE.getActivityOperation_DataEdges() );
@@ -669,16 +660,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_From(), value);
 	}
 	
-	public void setFrom(ExternalValueEdge element, ExternalValue value) throws InferenceException {
-		setValue(element, OperationsPackage.eINSTANCE.getExternalValueEdge_From(), value);
-	}
-
 	public void setTo(DataFlowEdge element, DataFlowEdgeDestination value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_To(), value);
 	}
 	
-	public void setTo(ExternalValueEdge element, Value value) throws InferenceException {
-		setValue(element, OperationsPackage.eINSTANCE.getExternalValueEdge_Value(), value);
+	public void setValue(ExternalValue element, Value value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getExternalValue_Value(), value);
 	}
 
 	public void setFrom(ExecutionEdge element, ExecutionEdgesSource value) throws InferenceException {

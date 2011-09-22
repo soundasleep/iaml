@@ -335,12 +335,8 @@
             ecoreFeature="ecore:EReference iaml.ecore#//operations/ExecutionEdgesSource/outExecutions"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/ExternalValue">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
-      </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//operations/ExternalValueEdge">
-        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValueEdge/from"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValueEdge/value"/>
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExternalValue/value"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"

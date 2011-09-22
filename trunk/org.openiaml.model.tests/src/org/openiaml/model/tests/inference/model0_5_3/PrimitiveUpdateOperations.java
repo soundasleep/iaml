@@ -126,7 +126,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		assertEquals(1, set.getOutFlows().size());
 		ExternalValue ev_f2 = (ExternalValue) set.getOutFlows().get(0).getTo();
-		Value f2 = ev_f2.getExternalValueEdges().getValue();
+		Value f2 = ev_f2.getValue();
 		assertEquals("fieldValue", f2.getName());
 
 	}
@@ -160,7 +160,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 		assertEquals(1, set.getOutFlows().size());
 		ExternalValue ev_f2 = (ExternalValue) set.getOutFlows().get(0).getTo();
-		Value f2 = ev_f2.getExternalValueEdges().getValue();
+		Value f2 = ev_f2.getValue();
 		assertEquals("fieldValue", f2.getName());
 
 	}
@@ -205,7 +205,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 			assertEquals(2, cast.getOutFlows().size());
 			assertEquals(1, cast.getInFlows().size());
 			ExternalValue ev = (ExternalValue) cast.getOutFlows().get(0).getTo();
-			assertEquals(integerValue, ev.getExternalValueEdges().getValue());
+			assertEquals(integerValue, ev.getValue());
 		}
 		
 		CancelNode cancel = assertHasCancelNode(canCast);
@@ -238,7 +238,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		{
 			assertEquals(1, check.getInFlows().size());
 			ExternalValue ev = (ExternalValue) check.getInFlows().get(0).getFrom();
-			assertEquals(value, ev.getExternalValueEdges().getValue());
+			assertEquals(value, ev.getValue());
 		}
 
 	}

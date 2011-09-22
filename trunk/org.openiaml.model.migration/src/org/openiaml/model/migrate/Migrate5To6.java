@@ -28,6 +28,7 @@ import org.w3c.dom.NodeList;
  *   <li>StaticValue is merged into {@model Property}[readOnly=true] ({@issue 179})
  *   <li>DomainSchema is now {@model DomainType} ({@issue 263})
  *   <li>ActivityFunction is now {@model ActivityPredicate} ({@issue 268})
+ *   <li>ExternalValueEdge has been removed ({@issue 277})
  *   <li>Others...
  * </ol>
  * 
@@ -444,6 +445,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return true;
 		}
 		
+		// issue 277: ExternalValueEdge removed from iaml
+		if ("externalValueEdges".equals(element.getNodeName())) {
+			// will be translated into a "value" reference on the parent node in handleElement()
+			return true;
+		}
+		
 		// super call
 		return super.shouldDeleteNode(element, parent, errors);
 	}
@@ -519,12 +526,6 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <children xsi:type="iaml.visual:Label" visible="false">
 		if ("iaml.visual:Hidden".equals(getXsiType(old))) {
 			element.setAttribute("visible", "false");
-		}
-		
-		// <values name="static">
-		// --> <properties name="static" readOnly="true">
-		if ("values".equals(old.getNodeName())) {
-			element.setAttribute("readOnly", "true");
 		}
 		
 		// <internetApplication>:
@@ -640,6 +641,22 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			}
 		}
 
+		// issue 277: ExternalValueEdge element removed
+		// <nodes xsi:type="ExternalValue"><externalValueEdges value="...">
+		// --> <nodes xsi:type="ExternalValue" value="...">
+		if ("iaml.operations:ExternalValue".equals(getXsiType(old))) {
+			int edgesFound = 0;
+			for (Element e : getChildElements(old)) {
+				if ("externalValueEdges".equals(e.getNodeName()) && e.hasAttribute("value")) {
+					edgesFound++;
+					element.setAttribute("value", e.getAttribute("value"));
+				}
+			}
+			
+			if (edgesFound != 1) {
+				errors.add(new ExpectedMigrationException(this, old, "Expected one ExternalValueEdge for this ExternalValue, found: " + edgesFound));
+			}
+		}
 	}
 
 	public Map<String, String> getXSDTypeMap() {

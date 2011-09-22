@@ -188,7 +188,7 @@ public class SetPropertiesDirectly extends ValidInferenceTestCase {
 
 		assertEquals(1, set.getOutFlows().size());
 		ExternalValue ev_f2 = (ExternalValue) set.getOutFlows().get(0).getTo();
-		Value f2 = ev_f2.getExternalValueEdges().getValue();
+		Value f2 = ev_f2.getValue();
 		assertEquals("set directly", f2.getName());
 
 	}

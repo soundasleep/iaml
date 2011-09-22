@@ -315,14 +315,14 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 				assertInstanceOf(ExternalValue.class, ee.getFrom());
 				ExternalValue ev = (ExternalValue) ee.getFrom();
 				
-				if (one.equals(ev.getExternalValueEdges().getValue())) {
+				if (one.equals(ev.getValue())) {
 					assertFalse(fromOne);
 					fromOne = true;
-				} else if (results.equals(ev.getExternalValueEdges().getValue())) {
+				} else if (results.equals(ev.getValue())) {
 					assertFalse(fromResults);
 					fromResults = true;
 				} else {
-					fail("Unknown source: " + ev.getExternalValueEdges().getValue());
+					fail("Unknown source: " + ev.getValue());
 				}
 			}
 			assertTrue(fromOne);
@@ -341,7 +341,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		{
 			assertEquals(1, set.getOutFlows().size());
 			ExternalValue ev = (ExternalValue) set.getOutFlows().get(0).getTo();
-			assertEquals(target, ev.getExternalValueEdges().getValue());
+			assertEquals(target, ev.getValue());
 		}
 
 	}

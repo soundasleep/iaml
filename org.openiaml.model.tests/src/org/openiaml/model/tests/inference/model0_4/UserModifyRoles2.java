@@ -5,7 +5,6 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
-import org.openiaml.model.model.BuiltinOperation;
 import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
@@ -13,10 +12,8 @@ import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.ActivityOperation;
 import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExternalValue;
-import org.openiaml.model.model.operations.ExternalValueEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.SetNode;
@@ -112,7 +109,7 @@ public class UserModifyRoles2 extends ValidInferenceTestCase {
 				assertEquals(1, set.getOutFlows().size());
 				ExternalValue ev = (ExternalValue) set.getOutFlows().get(0).getTo();
 				
-				assertEquals(ev.getExternalValueEdges().getValue(), email);
+				assertEquals(ev.getValue(), email);
 
 				emailSet = true;
 			} else if (hasDataFlowEdge(doLogin, ppassword, set)) {
@@ -122,7 +119,7 @@ public class UserModifyRoles2 extends ValidInferenceTestCase {
 				assertEquals(1, set.getOutFlows().size());
 				ExternalValue ev = (ExternalValue) set.getOutFlows().get(0).getTo();
 				
-				assertEquals(ev.getExternalValueEdges().getValue(), password);
+				assertEquals(ev.getValue(), password);
 
 				passwordSet = true;
 			} else {
@@ -273,7 +270,8 @@ public class UserModifyRoles2 extends ValidInferenceTestCase {
 		for (Object o : evs) {
 			ExternalValue ev = (ExternalValue) o;
 			
-			if (ev.getExternalValueEdges().getValue().equals(myNull)) {
+			assertNotNull(ev.getValue());
+			if (ev.getValue().equals(myNull)) {
 				// OK; should be the source of two 'set' nodes
 				assertFalse(set1);
 				
@@ -285,7 +283,7 @@ public class UserModifyRoles2 extends ValidInferenceTestCase {
 				assertNotSame(ev.getOutFlows().get(0).getTo(), ev.getOutFlows().get(1).getTo());
 				set1 = true;
 				
-			} else if (ev.getExternalValueEdges().getValue().equals(email)) {
+			} else if (ev.getValue().equals(email)) {
 				// OK; should be the target of a 'set' node
 				assertFalse(set2);
 				
@@ -295,7 +293,7 @@ public class UserModifyRoles2 extends ValidInferenceTestCase {
 				assertInstanceOf(SetNode.class, ev.getInFlows().get(0).getFrom());
 				set2 = true;
 
-			} else if (ev.getExternalValueEdges().getValue().equals(password)) {
+			} else if (ev.getValue().equals(password)) {
 				// OK; should be the target of a 'set' node
 				assertFalse(set3);
 				
@@ -306,7 +304,7 @@ public class UserModifyRoles2 extends ValidInferenceTestCase {
 				set3 = true;
 
 			} else {
-				fail("Unknown ExternalValue edge: " + ev.getExternalValueEdges() + " in ExternalValue: " + ev);
+				fail("Unknown ExternalValue: " + ev.getValue() + " in ExternalValue: " + ev);
 			}
 		}
 		

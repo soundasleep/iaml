@@ -154,14 +154,14 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		{
 			assertEquals(1, s.getInFlows().size());
 			ExternalValue ev = (ExternalValue) s.getInFlows().get(0).getFrom();
-			assertEquals(value, ev.getExternalValueEdges().getValue());
+			assertEquals(value, ev.getValue());
 		}
 		
 		// setnode -> externalValue -> property
 		{
 			assertEquals(1, s.getOutFlows().size());
 			ExternalValue ev = (ExternalValue) s.getOutFlows().get(0).getTo();
-			assertEquals(property, ev.getExternalValueEdges().getValue());
+			assertEquals(property, ev.getValue());
 		}
 		
 	}
@@ -219,7 +219,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		{
 			assertEquals(1, check.getInFlows().size());
 			ExternalValue ev = (ExternalValue) check.getInFlows().get(0).getFrom();
-			assertEquals(property, ev.getExternalValueEdges().getValue());
+			assertEquals(property, ev.getValue());
 		}
 		
 	}

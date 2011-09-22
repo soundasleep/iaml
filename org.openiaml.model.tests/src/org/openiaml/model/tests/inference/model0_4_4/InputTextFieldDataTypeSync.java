@@ -245,7 +245,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		{
 			assertEquals(1, cast.getInFlows().size());
 			ExternalValue ev = (ExternalValue) cast.getInFlows().get(0).getFrom();
-			assertEquals(fieldValue, ev.getExternalValueEdges().getValue());
+			assertEquals(fieldValue, ev.getValue());
 		}
 		
 		// cast -> ExternalValue -> fieldValue2
@@ -259,7 +259,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 				}
 			}
 			assertNotNull(ev);
-			assertEquals(fieldValue2, ev.getExternalValueEdges().getValue());
+			assertEquals(fieldValue2, ev.getValue());
 		}
 		
 		// cast -> check

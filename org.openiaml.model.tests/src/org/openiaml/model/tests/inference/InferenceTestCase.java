@@ -158,7 +158,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public static void assertHasNoValue(
 			ContainsValues element, String string) throws JaxenException {
-		List<Object> results = nameSelect(element.getValues(), string, false);
+		List<Object> results = nameSelect(element.getValues(), string);
 		assertEquals(0, results.size());
 	}
 
@@ -285,7 +285,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * {@link ActivityPredicate}.
 	 */
 	public static void assertHasNoActivityPredicate(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityPredicate.class), string, false);
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), ActivityPredicate.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -294,7 +294,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * {@link BuiltinProperty}.
 	 */
 	public static void assertHasNoBuiltinProperty(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), BuiltinProperty.class), string, false);
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), BuiltinProperty.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -303,7 +303,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Function.
 	 */
 	public static void assertHasNoFunction(ContainsFunctions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getFunctions(), Function.class), string, false);
+		List<Object> results = nameSelect(typeSelect(element.getFunctions(), Function.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -312,7 +312,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Operation.
 	 */
 	public static void assertHasNoOperation(ContainsOperations element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getOperations(), Operation.class), string, false);
+		List<Object> results = nameSelect(typeSelect(element.getOperations(), Operation.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -334,7 +334,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * DomainAttribute.
 	 */
 	public static void assertHasNoDomainAttribute(DomainType element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getEStructuralFeatures(), DomainAttribute.class), string, false);
+		List<Object> results = nameSelect(typeSelect(element.getEStructuralFeatures(), DomainAttribute.class), string);
 		assertEquals(0, results.size());
 	}
 	/**
@@ -358,7 +358,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public static void assertHasNoDomainAttributeInstance(DomainInstance obj,
 			String string) throws JaxenException {
-		List<Object> list = nameSelect(typeSelect(obj.getFeatureInstances(), DomainAttributeInstance.class), string, false);
+		List<Object> list = nameSelect(typeSelect(obj.getFeatureInstances(), DomainAttributeInstance.class), string);
 		assertEquals(0, list.size());
 	}
 
@@ -429,7 +429,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoDomainIterator(InternetApplication root, String string) throws JaxenException {
-		List<Object> results = nameSelect(root.getIterators(), string, false);
+		List<Object> results = nameSelect(root.getIterators(), string);
 		assertEquals(0, results.size());
 	}
 
@@ -768,7 +768,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public static void assertHasNoLoginHandler(Scope session, String string) throws JaxenException {
-		List<Object> results = nameSelect(session.getLoginHandlers(), string, false);
+		List<Object> results = nameSelect(session.getLoginHandlers(), string);
 		assertEquals(0, results.size());
 	}
 
@@ -1676,22 +1676,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Select elements in the given list with the given name.
-	 * Assert that the list is not empty.
+	 * Does <em>not</em> assert that the list is not empty.
 	 *
 	 * @param list
 	 * @param name
 	 * @return
 	 */
 	public static List<Object> nameSelect(List<?> list, String name) {
-		return nameSelect(list, name, true);
-	}
-
-	public static List<Object> nameSelect(List<?> list, String name, boolean checkEmpty) {
 		assertNotNull(name);
-		if (checkEmpty) {
-			assertFalse("List was empty", list.isEmpty());
-		}
-
+		
 		List<Object> results = new ArrayList<Object>();
 		for (Object o : list) {
 			if (o instanceof NamedElement && name.equals(((NamedElement) o).getName())) {

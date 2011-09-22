@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.messaging="http://openiaml.org/model/messaging" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.129ab1d156e.8228">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.messaging="http://openiaml.org/model/messaging" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.129ab1d156e.8228">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <messages xsi:type="iaml.messaging:Email" id="scopes.129ab1d1649.62b" name="Target" inWires="wires.129ab1d1639.16d2">
       <values id="model.129ab1d156e.8247" name="set directly" inWires="wires.129ab1d1639.16df"/>

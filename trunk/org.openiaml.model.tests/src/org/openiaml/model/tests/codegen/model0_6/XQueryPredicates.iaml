@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12fdcc0ca07.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12fdcc0ca07.1">
   <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.1a" name="fn:contains" slotTypes="xsd_string xsd_string" conditioned="model.12fdcc0ca07.212" func="FN_CONTAINS">
     <conditionEdges id="model.12fdcc0ca07.212" name="check" inParameterEdges="model.12fdcc0ca07.217 model.12fdcc0ca07.21a" function="model.12fdcc0ca07.1a" conditioned="model.12fdcc0ca07.20e"/>
     <slotNames>a</slotNames>

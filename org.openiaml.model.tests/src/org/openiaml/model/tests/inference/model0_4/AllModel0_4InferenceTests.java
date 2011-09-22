@@ -36,6 +36,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(NewInstanceWithoutId.class);
 		suite.addTestSuite(UserCreateRoles.class);
 		suite.addTestSuite(UserMultiplePermissions.class);
+		suite.addTestSuite(LoginHandlerInstanceBreadcrumb.class);
 		
 		return suite;
 	}

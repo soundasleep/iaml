@@ -213,7 +213,6 @@
   </palettes>
   <palettes name="Activity Modelling">
     <classifiers href="iaml.ecore#//ActivityNode"/>
-    <classifiers href="iaml.ecore#//operations/ExternalValueEdge"/>
   </palettes>
   <palettes name="Visual Elements">
     <classifiers href="iaml.ecore#//VisibleThing"/>
@@ -294,10 +293,6 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ExternalValueEdge">
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
-      <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="DataFlowEdge">
       <classifier href="iaml.ecore#//operations/DataFlowEdge"/>
@@ -678,10 +673,6 @@
     <elements xsi:type="sgmf:ContainedNode" name="Value">
       <classifier href="iaml.ecore#//Value"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ExternalValueEdge">
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValue/externalValueEdges"/>
-      <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
-    </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="ECARule">
       <classifier href="iaml.ecore#//ECARule"/>
     </elements>
@@ -1025,7 +1016,6 @@
   <edgeTypes href="iaml.ecore#//domain/SchemaEdge"/>
   <edgeTypes href="iaml.ecore#//domain/SelectEdge"/>
   <edgeTypes href="iaml.ecore#//Wire"/>
-  <edgeTypes href="iaml.ecore#//operations/ExternalValueEdge"/>
   <edgeReferences name="ECARule">
     <classifier href="iaml.ecore#//ECARule"/>
     <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//ECARule/trigger"/>
@@ -1040,10 +1030,5 @@
     <classifier href="iaml.ecore#//ComplexTerm"/>
     <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//ComplexTerm/function"/>
     <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//ComplexTerm/conditioned"/>
-  </edgeReferences>
-  <edgeReferences id="" name="ExternalValueEdge">
-    <classifier href="iaml.ecore#//operations/ExternalValueEdge"/>
-    <sourceFeature xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValueEdge/from"/>
-    <targetFeature xsi:type="ecore:EReference" href="iaml.ecore#//operations/ExternalValueEdge/value"/>
   </edgeReferences>
 </sgmf:GMFConfiguration>

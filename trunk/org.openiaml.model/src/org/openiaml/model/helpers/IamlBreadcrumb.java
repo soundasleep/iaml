@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.helpers;
 
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.NamedElement;
 
@@ -97,30 +98,22 @@ public class IamlBreadcrumb {
 	 * @return
 	 */
 	public static String getEObjectBreadcrumbString(EObject object) {
-		if (object.eContainer() == null) {
-			// root
-			if (object instanceof NamedElement) {
-				NamedElement e = (NamedElement) object;
-				if (e.getName() != null && !e.getName().isEmpty()) {
-					return e.eClass().getName() + ": '" + e.getName() + "'";		// InternetApplication: 'root'
-				} else {
-					return e.eClass().getName();			// InternetApplication
-				}
+		if (object instanceof NamedElement) {
+			NamedElement e = (NamedElement) object;
+			if (e.getName() != null && !e.getName().isEmpty()) {
+				return e.eClass().getName() + ": '" + e.getName() + "'";		// InternetApplication: 'root'
 			} else {
-				return object.eClass().getName();			// EObject
+				return e.eClass().getName();			// InternetApplication
+			}
+		} else if (object instanceof ENamedElement) {
+			ENamedElement e = (ENamedElement) object;
+			if (e.getName() != null && !e.getName().isEmpty()) {
+				return e.eClass().getName() + ": '" + e.getName() + "'";		// EClass: 'root'
+			} else {
+				return e.eClass().getName();			// EClass
 			}
 		} else {
-			// child
-			if (object instanceof NamedElement) {
-				NamedElement e = (NamedElement) object;
-				if (e.getName() != null && !e.getName().isEmpty()) {
-					return e.eClass().getName() + ": '" + e.getName() + "'";		// Page: 'foo'
-				} else {
-					return e.eClass().getName();		// Page
-				}
-			} else {
-				return object.eClass().getName();		// EObject
-			}
+			return object.eClass().getName();			// EObject
 		}
 	}
 	

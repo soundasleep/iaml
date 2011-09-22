@@ -354,7 +354,7 @@
 		«ENDIF»
 	«ELSEIF model::operations::ExternalValue.isInstance(outFlows.first().to)»
 		«REM»set a property«ENDREM»
-		«EXPAND setPropertyToValueOperation(start, php, ((model::operations::ExternalValue) outFlows.first().to).externalValueEdges.value) FOR this»
+		«EXPAND setPropertyToValueOperation(start, php, ((model::operations::ExternalValue) outFlows.first().to).value) FOR this»
 	«ELSE»
 		«throwException("Unexpected target to set: " + this)»
 	«ENDIF»

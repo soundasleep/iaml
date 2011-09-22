@@ -190,14 +190,12 @@ rule "Create contents of 'set flag' operation"
 		queue.add(set, drools);
 		
 		ExternalValue ev_property = handler.generatedExternalValue(gate, op);
+		handler.setValue(ev_property, property);
 		queue.add(ev_property, drools);
-		ExternalValueEdge edge1 = handler.generatedExternalValueEdge(gate, ev_property, ev_property, property);
-		queue.add(edge1, drools);
 		
 		ExternalValue ev_value = handler.generatedExternalValue(gate, op);
+		handler.setValue(ev_value, value);
 		queue.add(ev_value, drools);
-		ExternalValueEdge edge2 = handler.generatedExternalValueEdge(gate, ev_value, ev_value, value);
-		queue.add(edge2, drools);
 		
 		ExecutionEdge e1 = handler.generatedExecutionEdge(gate, op, start, set);
 		ExecutionEdge e2 = handler.generatedExecutionEdge(gate, op, set, finish);
@@ -304,9 +302,8 @@ rule "Create contents of 'check (gate)' condition"
 		handler.setName(e3, "n");
 		
 		ExternalValue ev_property = handler.generatedExternalValue(gate, cond);
+		handler.setValue(ev_property, property);
 		queue.add(ev_property, drools);
-		ExternalValueEdge edge1 = handler.generatedExternalValueEdge(gate, ev_property, ev_property, property);
-		queue.add(edge1, drools);
 		
 		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, cond, ev_property, cmp);
 		

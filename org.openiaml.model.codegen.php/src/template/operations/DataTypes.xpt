@@ -22,5 +22,5 @@
 
 «DEFINE getDataType(Boolean php) FOR model::operations::ExternalValue-»
 	/* external value */
-	«EXPAND getDataType(php) FOR externalValueEdges.value» 
+	«EXPAND getDataType(php) FOR value» 
 «ENDDEFINE»

@@ -90,9 +90,8 @@ rule "Create contents of 'can cast?' condition"
 		queue.add(finish, drools);
 		
 		ExternalValue ev_fieldValue = handler.generatedExternalValue(c, c);
+		handler.setValue(ev_fieldValue, fieldValue);
 		queue.add(ev_fieldValue, drools);
-		ExternalValueEdge edge = handler.generatedExternalValueEdge(c, ev_fieldValue, ev_fieldValue, fieldValue);
-		queue.add(edge, drools);
 		
 		DataFlowEdge castIn = handler.generatedDataFlowEdge(c, c, param, cast);
 		queue.add(castIn, drools);

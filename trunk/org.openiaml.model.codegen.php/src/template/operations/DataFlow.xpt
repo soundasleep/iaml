@@ -92,7 +92,7 @@
  * An external value.
  */
 «DEFINE dataSource(Boolean php) FOR model::operations::ExternalValue»
-	«EXPAND dataSource(php) FOR externalValueEdges.value»
+	«EXPAND dataSource(php) FOR value»
 «ENDDEFINE»
 
 /**

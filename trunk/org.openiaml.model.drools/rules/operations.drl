@@ -128,9 +128,8 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		queue.add(parameter, drools);
 
 		ExternalValue ev_field = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_field, field);
 		queue.add(ev_field, drools);
-		ExternalValueEdge edge = handler.generatedExternalValueEdge(o, ev_field, ev_field, field);
-		queue.add(edge, drools);
 		
 		// need to add 'cast' node
 		CastNode cast = handler.generatedCastNode(o, o);
@@ -213,9 +212,8 @@ rule "Create components of 'set value XXX' operations"
 		queue.add(parameter, drools);
 		
 		ExternalValue ev_field = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_field, field);
 		queue.add(ev_field, drools);
-		ExternalValueEdge edge = handler.generatedExternalValueEdge(o, ev_field, ev_field, field);
-		queue.add(edge, drools);
 		
 		// need to add 'cast' node
 		CastNode cast = handler.generatedCastNode(o, o);

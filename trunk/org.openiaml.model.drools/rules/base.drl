@@ -202,9 +202,8 @@ rule "Create contents of 'X is set' operation"
 		queue.add(cancel, drools);
 		
 		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_value, value);
 		queue.add(ev_value, drools);
-		ExternalValueEdge edge12 = handler.generatedExternalValueEdge(o, ev_value, ev_value, value);
-		queue.add(edge12, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
 		handler.setFrom(data1, ev_value);

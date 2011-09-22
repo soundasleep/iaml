@@ -494,19 +494,16 @@ rule "Create contents of 'update target' operation"
 		queue.add(subtract, drools);
 		
 		ExternalValue ev_results = handler.generatedExternalValue(op, op);
+		handler.setValue(ev_results, results);
 		queue.add(ev_results, drools);
-		ExternalValueEdge edge1 = handler.generatedExternalValueEdge(op, ev_results, ev_results, results);
-		queue.add(edge1, drools);
 		
 		ExternalValue ev_target = handler.generatedExternalValue(op, op);
+		handler.setValue(ev_target, target);
 		queue.add(ev_target, drools);
-		ExternalValueEdge edge2 = handler.generatedExternalValueEdge(op, ev_target, ev_target, target);
-		queue.add(edge2, drools);
 
 		ExternalValue ev_one = handler.generatedExternalValue(op, op);
+		handler.setValue(ev_one, one);
 		queue.add(ev_one, drools);
-		ExternalValueEdge edge3 = handler.generatedExternalValueEdge(op, ev_one, ev_one, one);
-		queue.add(edge3, drools);
 		
 		DataFlowEdge d1 = handler.generatedDataFlowEdge(op, op, ev_results, subtract);
 		DataFlowEdge d2 = handler.generatedDataFlowEdge(op, op, ev_one, subtract);

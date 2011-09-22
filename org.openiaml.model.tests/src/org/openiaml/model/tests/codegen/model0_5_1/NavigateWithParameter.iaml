@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12813a548f4.11">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12813a548f4.11">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <values id="model.12813a548f4.37" name="one" outParameterEdges="wires.12813b48b22.d" defaultValue="one" readOnly="true">
       <parameterEdges id="wires.12813b48b22.d" name="select" parameterValue="model.12813a548f4.37" parameterTerm="wires.12813a54ad9.d"/>

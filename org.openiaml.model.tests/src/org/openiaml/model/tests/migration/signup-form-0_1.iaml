@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires">
-  <children xsi:type="iaml.visual:Page" name="SignupForm" url="">
-    <children xsi:type="iaml.visual:InputForm" name="SignupForm">
-      <edges xsi:type="iaml.wires:SyncWire" to="//@domainStores.0/@children.0" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" name="firstName">
-        <operations xsi:type="iaml:ChainedOperation" inEdges="//@domainStores.0/@children.0/@attributes.0/@eventTriggers.0/@edges.0" name="refresh"/>
-        <eventTriggers name="edit">
-          <edges xsi:type="iaml.wires:RunWire" to="//@domainStores.0/@children.0/@attributes.0/@operations.0" name="run" inEdges="//@children.0/@children.0/@children.0/@properties.0/@edges.0" />
-        </eventTriggers>
-        <operations xsi:type="iaml.operations:StartNode"/>
-        <operations xsi:type="iaml.operations:FinishNode" inEdges="//@domainStores.0/@children.0/@attributes.0/@operations.0/@edges.0"/>
-        <edges xsi:type="iaml.wires:SyncWire" to="//@domainStores.0/@children.0/@attributes.0" name="sync"/>
-        <properties name="value">
-          <edges xsi:type="iaml.wires:PropertyToExecutionWire" to="//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0"/>
-          <edges xsi:type="iaml.wires:ProvidedParameterWire"/>
-        </properties>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="root">
+  <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="SignupForm" url="">
+    <children xsi:type="iaml.visual:InputForm" id="migrated2" name="SignupForm">
+      <wires xsi:type="iaml.wires:SyncWire" id="migrated4" name="sync"/>
+      <children xsi:type="iaml.visual:InputTextField" id="migrated5" name="firstName">
+        <operations xsi:type="iaml:BuiltinOperation" id="migrated7" name="refresh"/>
+        <operations xsi:type="iaml:BuiltinOperation" id="migrated12"/>
+        <operations xsi:type="iaml:BuiltinOperation" id="migrated14"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="migrated16" name="sync"/>
+        <values id="migrated17" name="value">
+          <parameterEdges id="migrated18"/>
+        </values>
+        <onChange id="migrated8" name="edit">
+          <ecaRules id="migrated11" name="run"/>
+        </onChange>
       </children>
-      <children xsi:type="iaml.visual:InputTextField" name="passWord">
-        <operations xsi:type="iaml:ChainedOperation" name="refresh"/>
-        <eventTriggers name="edit"/>
-        <edges xsi:type="iaml.wires:SyncWire" to="//@domainStores.0/@children.0/@attributes.1" name="sync"/>
-        <properties name="value"/>
+      <children xsi:type="iaml.visual:InputTextField" id="migrated19" name="passWord">
+        <operations xsi:type="iaml:BuiltinOperation" id="migrated20" name="refresh"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="migrated23" name="sync"/>
+        <values id="migrated24" name="value"/>
+        <onChange id="migrated21" name="edit"/>
       </children>
     </children>
-  </children>
-  <domainStores name="domain store">
-    <children name="UserObject" inEdges="//@children.0/@children.0/@edges.0">
-      <attributes name="f_name" inEdges="//@children.0/@children.0/@children.0/@edges.0">
-        <operations xsi:type="iaml:ChainedOperation" inEdges="//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0" name="update">
-          <edges xsi:type="iaml.wires:ExecutionWire" to="//@children.0/@children.0/@children.0/@eventTriggers.0/@edges.0/@operations.1"/>
-        </operations>
-        <eventTriggers name="change">
-          <edges xsi:type="iaml.wires:RunWire" to="//@children.0/@children.0/@children.0/@operations.0" name="run"/>
-        </eventTriggers>
-      </attributes>
-      <attributes name="pass_hash" inEdges="//@children.0/@children.0/@children.1/@edges.0">
-        <operations xsi:type="iaml:ChainedOperation" name="update"/>
-        <eventTriggers name="change"/>
-      </attributes>
-    </children>
-  </domainStores>
+  </scopes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
 </iaml:InternetApplication>

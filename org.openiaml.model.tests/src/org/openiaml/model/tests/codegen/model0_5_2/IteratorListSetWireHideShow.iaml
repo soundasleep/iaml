@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128a9b17d03.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128a9b17d03.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <iterators id="domain.128a9b17dce.34" name="select three news" outWires="wires.128a9b17daf.1" limit="3" outSelects="domain.128a9b17dce.42">
       <wires xsi:type="iaml.wires:SetWire" id="wires.128a9b17daf.1" name="set" from="domain.128a9b17dce.34" to="visual.128a9b17daf.17"/>

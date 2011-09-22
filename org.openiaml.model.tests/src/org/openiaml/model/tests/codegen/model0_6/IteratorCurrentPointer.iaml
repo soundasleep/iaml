@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12f76d0c22b.d">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12f76d0c22b.d">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <iterators id="domain.12f76f3ecf5.19" name="iterator" outWires="wires.12f948872c2.1" limit="7" outSelects="domain.12f948872d2.7b">
       <wires xsi:type="iaml.wires:SetWire" id="wires.12f948872c2.1" name="paginate" from="domain.12f76f3ecf5.19" to="visual.12f948872b2.30"/>

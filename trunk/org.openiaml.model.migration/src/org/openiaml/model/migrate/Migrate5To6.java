@@ -11,7 +11,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * <p>Migrate model version 0.5 to 0..
+ * <p>Migrate model version 0.5 to 0.6.
  *
  * <p>In the future most of this functionality should be refactored into an abstract superclass.
  *
@@ -506,12 +506,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	}
 
 	/**
-	 * TODO Models of version 0.6 will have a different namespace,
+	 * Models of version 0.6 will have a different namespace,
 	 * <code>http://openiaml.org/model0.6</code>.
 	 */
 	@Override
 	protected String getTargetNamespace() {
-		return "http://openiaml.org/model0.5";
+		return "http://openiaml.org/model0.6";
 	}
 
 	/* (non-Javadoc)
@@ -653,8 +653,8 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				}
 			}
 			
-			if (edgesFound != 1) {
-				errors.add(new ExpectedMigrationException(this, old, "Expected one ExternalValueEdge for this ExternalValue, found: " + edgesFound));
+			if (edgesFound > 1) {
+				errors.add(new ExpectedMigrationException(this, old, "Expected one or zero ExternalValueEdges for this ExternalValue, found: " + edgesFound));
 			}
 		}
 	}

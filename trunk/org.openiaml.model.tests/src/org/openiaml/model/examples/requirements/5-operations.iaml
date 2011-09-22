@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="migrated0">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="root">
   <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
       <values id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" defaultValue="hello" readOnly="true">
@@ -14,9 +14,7 @@
         <nodes xsi:type="iaml.operations:SetNode" id="model.1207ff82f9b.1fd" outExecutions="model.1207ff82f9b.1ff" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" inFlows="model.1207ff82f9b.269"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1207ff832b7.64" inExecutions="model.1207ff82f9b.1ff"/>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.1207ff82f9b.26a">
-          <externalValueEdges id="eve1" value="model.1207ff82f9b.22d"/>
-        </nodes>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.1207ff82f9b.26a" value="model.1207ff82f9b.22d"/>
         <dataEdges id="model.1207ff82f9b.269" from="model.1207ff82f9b.1f8" to="model.1207ff82f9b.1fd"/>
         <dataEdges id="model.1207ff82f9b.26a" from="model.1207ff82f9b.1fd" to="ev1"/>
         <executionEdges id="model.1207ff82f9b.1fe" from="operations.1207ff832b7.63" to="model.1207ff82f9b.1fd"/>

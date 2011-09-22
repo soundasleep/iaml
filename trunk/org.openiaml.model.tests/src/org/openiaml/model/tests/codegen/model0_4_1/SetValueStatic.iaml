@@ -7,12 +7,8 @@
     <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1bb" name="execute">
       <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.12542c56428.1b" id="model.12542c563bb.170" name="do operation">
         <values id="model.12542c563bb.19c" name="static value" defaultValue="hello42" readOnly="true"/>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12542c563bb.230">
-          <externalValueEdges id="eve1" value="model.12542c563bb.19c"/>
-        </nodes>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" inFlows="model.12542c563bb.231">
-          <externalValueEdges id="eve2" value="model.12542c563bb.1f0"/>
-        </nodes>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12542c563bb.230" value="model.12542c563bb.19c"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" inFlows="model.12542c563bb.231" value="model.12542c563bb.1f0"/>
         <nodes xsi:type="iaml.operations:SetNode" id="model.12542c563bb.22d" outExecutions="model.12542c563bb.22f" inExecutions="model.12542c563bb.22e" outFlows="model.12542c563bb.231" inFlows="model.12542c563bb.230"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.26" outExecutions="model.12542c563bb.22e"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.27" inExecutions="model.12542c563bb.22f"/>

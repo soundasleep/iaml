@@ -12,24 +12,12 @@
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.12311dd6093.3f" inExecutions="model.12311e69386.27"/>
       <nodes xsi:type="iaml.operations:SplitNode" id="operations.12311e693f4.7" outExecutions="model.12311e69386.21 model.12311e69386.22 model.12311e69386.23" inExecutions="model.12311e69386.1f"/>
       <nodes xsi:type="iaml.operations:JoinNode" id="operations.12311e693f4.9" outExecutions="model.12311e69386.27" inExecutions="model.12311e69386.24 model.12311e69386.25 model.12311e69386.26"/>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12311eb1e33.36">
-        <externalValueEdges id="eve1" value="model.12311eb1e33.2e"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.12311eb1e33.38">
-        <externalValueEdges id="eve2" value="model.12311eb1e33.33"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" outFlows="model.12311eb1e33.39">
-        <externalValueEdges id="eve3" value="model.12311eb1e33.34"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" inFlows="model.12311e69386.28">
-        <externalValueEdges id="eve4" value="model.12311dd5ff7.167"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev5" inFlows="model.12311e69386.2a">
-        <externalValueEdges id="eve5" value="model.12311dd5ff7.185"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev6" inFlows="model.12311e69386.2b">
-        <externalValueEdges id="eve6" value="model.12311dd5ff7.1ab"/>
-      </nodes>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12311eb1e33.36" value="model.12311eb1e33.2e"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.12311eb1e33.38" value="model.12311eb1e33.33"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" outFlows="model.12311eb1e33.39" value="model.12311eb1e33.34"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" inFlows="model.12311e69386.28" value="model.12311dd5ff7.167"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev5" inFlows="model.12311e69386.2a" value="model.12311dd5ff7.185"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev6" inFlows="model.12311e69386.2b" value="model.12311dd5ff7.1ab"/>
       <dataEdges id="model.12311e69386.28" from="model.12311e69386.13" to="ev4"/>
       <dataEdges id="model.12311e69386.2a" from="model.12311e69386.14" to="ev5"/>
       <dataEdges id="model.12311e69386.2b" from="model.12311e69386.15" to="ev6"/>

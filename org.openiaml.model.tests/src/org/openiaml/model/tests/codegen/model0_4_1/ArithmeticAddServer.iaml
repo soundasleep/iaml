@@ -7,15 +7,9 @@
       <nodes xsi:type="iaml.operations:StartNode" id="operations.125437f91eb.d" outExecutions="model.125437f916e.147"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.125437f91eb.f" inExecutions="model.125437f916e.149"/>
       <nodes xsi:type="iaml.operations:Arithmetic" id="operations.125437f91eb.44" inFlows="model.125437f916e.14a model.125437f916e.14c" outFlows="model.125437f916e.14d"/>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.125437f916e.14a">
-        <externalValueEdges id="eve1" value="model.125437f916e.76"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.125437f916e.14c">
-        <externalValueEdges id="eve2" value="model.125437f916e.146"/>
-      </nodes>
-      <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.125437f916e.14e">
-        <externalValueEdges id="eve3" value="model.125437f916e.11b"/>
-      </nodes>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.125437f916e.14a" value="model.125437f916e.76"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.125437f916e.14c" value="model.125437f916e.146"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.125437f916e.14e" value="model.125437f916e.11b"/>
       <dataEdges id="model.125437f916e.14a" from="ev1" to="operations.125437f91eb.44"/>
       <dataEdges id="model.125437f916e.14c" from="ev2" to="operations.125437f91eb.44"/>
       <dataEdges id="model.125437f916e.14d" from="operations.125437f91eb.44" to="model.125437f916e.145"/>
@@ -40,15 +34,9 @@
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
       <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
         <values id="model.1254759b7c1.20f" name="negative 1" defaultValue="-1" readOnly="true"/>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" outFlows="model.1254759b7c1.213">
-          <externalValueEdges id="eve4" value="model.125437f916e.11b"/>
-        </nodes>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev5" outFlows="model.1254759b7c1.215">
-          <externalValueEdges id="eve1" value="model.1254759b7c1.20f"/>
-        </nodes>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev6" inFlows="model.1254759b7c1.217">
-          <externalValueEdges id="eve1" value="model.1254759b7c1.548"/>
-        </nodes>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" outFlows="model.1254759b7c1.213" value="model.125437f916e.11b"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev5" outFlows="model.1254759b7c1.215" value="model.1254759b7c1.20f"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev6" inFlows="model.1254759b7c1.217" value="model.1254759b7c1.548"/>
         <nodes xsi:type="iaml.operations:SetNode" id="model.1254759b7c1.20e" outExecutions="model.1254759b7c1.212" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" inFlows="model.1254759b7c1.216"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1254759bd7e.6a" inExecutions="model.1254759b7c1.212"/>

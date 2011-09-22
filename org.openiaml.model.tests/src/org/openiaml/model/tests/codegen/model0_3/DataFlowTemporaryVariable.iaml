@@ -7,9 +7,7 @@
         <nodes xsi:type="iaml.operations:SetNode" id="model.120ac60dcea.3a6" outExecutions="model.120ac60dcea.3a8" inExecutions="model.120acfde16a.13a" outFlows="model.120ac60dcea.3aa" inFlows="model.120ac60dcea.3a9"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.120ac60dd48.4d" outExecutions="model.120ac60dcea.32f"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.120ac60dd48.74" inExecutions="model.120ac60dcea.3a8"/>
-        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.120ac60dcea.3aa">
-          <externalValueEdges id="eve1" value="model.120ac60dcea.17a"/>
-        </nodes>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" inFlows="model.120ac60dcea.3aa" value="model.120ac60dcea.17a"/>
         <dataEdges id="model.120ac60dcea.331" from="model.120ac60dcea.2a2" to="model.120ac60dcea.2df"/>
         <dataEdges id="model.120ac60dcea.332" from="model.120ac60dcea.2df" to="model.120ac60dcea.2e0"/>
         <dataEdges id="model.120ac60dcea.3a9" from="model.120ac60dcea.2e0" to="model.120ac60dcea.3a6"/>

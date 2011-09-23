@@ -9,9 +9,9 @@
  * Expand the failure edge. Assumes that the current exception is in
  * a variable called 'e'.
  *
- * @implementation ActionEdge
- *		Currently <code>fail</code> {@model ActionEdge}s cannot handle additional
- *		incoming {@model ParameterEdge}s.
+ * @implementation ECARule
+ *		Currently <code>fail</code> {@model ECARule}s cannot handle additional
+ *		incoming {@model Parameter}s.
  */
 «DEFINE failWire(Boolean php) FOR model::ECARule-»
 	«IF !model::visual::Frame.isInstance(target)»

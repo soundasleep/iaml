@@ -15,7 +15,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * 		to a {@model Value#readOnly} {@model Value static value}.
  * @implementation BuiltinOperation
  * 		If a {@model BuiltinOperation} is named 'set', it will
- * 		set the {@model Property target destination} to the value
+ * 		set the {@model Value target destination} to the value
  * 		of its {@model DataFlowEdge incoming edge}.
  */
 public class SetValueStatic extends CodegenTestCase {

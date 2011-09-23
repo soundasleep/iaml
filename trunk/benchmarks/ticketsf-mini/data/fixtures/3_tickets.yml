@@ -1,0 +1,12 @@
+Ticket:
+  ticket1:
+    event_id: event1
+    user_id:  user1
+    
+  ticket2:
+    event_id: event2
+    user_id:  user1
+  
+  ticket3:
+    event_id: event2
+    user_id:  user1

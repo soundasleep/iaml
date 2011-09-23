@@ -352,9 +352,9 @@
 /**
  * Continue operations chained onto the current one.
  *
- * @implementation BuiltinOperation,ExecutionEdge 
- * 		After a {@model BuiltinOperation} has completed, all outgoing {@model ActionEdge}s 
- *		are executed in oirder of {@model ActionEdge#priority}.
+ * @implementation BuiltinOperation,ECARule 
+ * 		After a {@model BuiltinOperation} has completed, all outgoing {@model ECARule}s 
+ *		are executed in order of {@model ECARule#priority}.
  */
 «DEFINE continueChainedOperations(Boolean php) FOR model::BuiltinOperation-»
 	«EXPAND continueChainedOperations(php) FOREACH listeners.sortBy(e|-e.priority)»

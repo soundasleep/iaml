@@ -22,8 +22,8 @@
 «ENDDEFINE»
 
 /**
- * @implementation ActionEdge
- *		An {@model ActionEdge} linking to a {@model Frame} or a {@model Gate} will
+ * @implementation ECARule
+ *		An {@model ECARule} linking to a {@model Frame} or a {@model Gate} will
  *		implicitly be a navigation, rather than executing an {@model Operation}.
  */
 «DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
@@ -175,8 +175,8 @@
 /**
  * Resuming navigation to a entry Gate.
  *
- * @semantics Action,EntryGate
- *		When an {@model ActionEdge} executes a {@model Scope#entryGate entry} {@model Gate}, the user is
+ * @implementation Action,Gate
+ *		When an {@model ECARule} executes a {@model Scope#entryGate entry} {@model Gate}, the user is
  *		redirected to the resumption of the given {@model Gate}.
  */
 «DEFINE getNavigateActionDestinationEntryGate(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
@@ -216,8 +216,8 @@
 /**
  * Resuming navigation to an exit Gate.
  *
- * @semantics Action,Gate
- *		When an {@model ActionEdge} executes a {@model Scope#exitGate exit} {@model Gate}, the user is
+ * @implementation Action,Gate
+ *		When an {@model ECARule} executes a {@model Scope#exitGate exit} {@model Gate}, the user is
  *		redirected to the resumption of the given {@model Gate}.
  */
 «DEFINE getNavigateActionDestinationExitGate(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
@@ -257,8 +257,8 @@
 /**
  * Navigate to a frame.
  *
- * @semantics Action,Frame
- *		When an {@model ActionEdge} executes a {@model Frame}, the user is
+ * @implementation Action,Frame
+ *		When an {@model ECARule} executes a {@model Frame}, the user is
  *		redirected to the location of the given {@model Frame}.
  */
 «DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::visual::Frame»

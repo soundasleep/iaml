@@ -204,7 +204,7 @@ end
 /**
  * @inference AutocompleteWire,IteratorList,Parameter
  *		Every {@model Label} within the <em>results {@model IteratorList}</em> of an {@model AutocompleteWire}
- *		search will be provided an {@model ECARule} to {@model VisibleThing#update} the {@model Autocomplete#to target}
+ *		search will be provided an {@model ECARule} to {@model VisibleThing#update} the {@model AutocompleteWire#to target}
  *		of the wire with the {@model AutocompleteWire#match matching attribute} instance value, when the {@model Label} 
  *		is {@model Label#onClick clicked}. 
  */

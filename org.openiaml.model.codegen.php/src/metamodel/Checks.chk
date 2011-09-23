@@ -76,9 +76,9 @@ context model::Wire ERROR "A Wire must have a 'from'" :
 context model::Wire ERROR "A Wire must have a 'to'" :
 	to != null;
 
-context model::ECARule ERROR "An ActionEdge must have a 'trigger'" :
+context model::ECARule ERROR "An ECARule must have a 'trigger'" :
 	trigger != null;
-context model::ECARule ERROR "An ActionEdge must have a 'target'" :
+context model::ECARule ERROR "An ECARule must have a 'target'" :
 	target != null;
 
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
@@ -93,7 +93,7 @@ context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
  * i.e.: "name != 'single_values'"
  */
 
-context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one ActionEdge connecting it to an Operation" :
+context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one ECARule connecting it to an Operation" :
 	listeners.size == 1
 		&& model::Operation.isInstance(listeners.first().target);
 
@@ -181,12 +181,12 @@ context model::components::Gate ERROR "An exit Gate needs to have at least one i
 	|| (conditions.size >= 1
 		|| listeners.exists(w | w.name == "last"));
 
-context model::components::Gate ERROR "An entry Gate needs to have at least one outgoing ActionEdge" :
+context model::components::Gate ERROR "An entry Gate needs to have at least one outgoing ECARule" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).entryGate != this
 	|| !listeners.isEmpty;
 
-context model::components::Gate ERROR "An exit Gate needs to have at least one outgoing ActionEdge" :
+context model::components::Gate ERROR "An exit Gate needs to have at least one outgoing ECARule" :
 	!model::Scope.isInstance(eContainer)
 	|| ((model::Scope) eContainer).exitGate != this
 	|| !listeners.isEmpty;

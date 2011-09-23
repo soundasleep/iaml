@@ -50,6 +50,7 @@ import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.docs.modeldoc.Reference;
+import org.openiaml.docs.modeldoc.TemplateFile;
 import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.model.ModelPackage;
@@ -373,10 +374,26 @@ public class GenerateModeldocTestCase extends TestCase {
 	 * @return
 	 */
 	private String getDescription(JavadocTagElement tag) {
+		// get EObject path
+		EObject cur = tag;
+		String parentPath = "";
+		while (cur != null) {
+			String extra = " ";
+			if (cur instanceof JavaClass) {
+				extra = ((JavaClass) cur).getName();
+			} else if (cur instanceof TemplateFile) {
+				extra = ((TemplateFile) cur).getName();
+			} else if (cur instanceof DroolsPackage) {
+				extra = ((DroolsPackage) cur).getName();
+			}
+			parentPath = " > " + cur.eClass().getName() + "[" + extra + "]" + parentPath; 				
+			cur = cur.eContainer();
+		}
+		
 		if (tag.getJavaParent() == null) {
-			return tag.toString();
+			return tag.toString() + parentPath;
 		} else {
-			return getDescription(tag.getJavaParent()) + " @ " + tag;
+			return getDescription(tag.getJavaParent()) + " @ " + tag + parentPath;
 		}
 	}
 

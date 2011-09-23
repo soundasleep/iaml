@@ -1,0 +1,232 @@
+body,html {
+	font-family: Arial;
+	font-size: 0.9em;
+}
+
+h1 {
+	font-family: Calibri;
+	font-size: 2.3em;
+	line-height: 1.5em;
+}
+
+div.notice {
+	width: 60%;
+	background: #ccf;
+	border: 1px solid #99f;
+	margin: 10px;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+div.error {
+	width: 60%;
+	background: #fcc;
+	border: 1px solid #f99;
+	margin: 10px;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* default form */
+form.view {
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 50%;
+	background: #eee;
+	line-height: 1.5em;
+	margin-bottom: 12px;
+}
+
+/* all form labels are displayed with icons */
+form.view label:before {
+	display: inline-block;
+	width: 125px;
+	font-weight: bold;
+	padding-left: 24px;
+	background: url("../images/icons/page_white.png") center left no-repeat;
+}
+
+/* text boxes in forms are also displayed with icons */
+form.view div label {
+	display: inline-block;
+	width: 125px;
+	font-weight: bold;
+	padding-left: 24px;
+	background: url("../images/icons/page_white.png") center left no-repeat;
+}
+form.view div label input {
+	position: absolute;
+	left: 160px;
+}
+
+form.view h2 {
+	padding: 0; margin: 0;
+	font-size: 100%;
+	line-height: 1em;
+	padding-bottom: 0.5em;
+	margin-bottom: 0.3em;
+	border-bottom: 1px solid #ccc;
+	color: #666;
+}
+
+form.view label {
+	display: block;
+	line-height: 1.8em;
+}
+form { margin: 0; padding: 0; }
+
+/* default table colours */
+table { border: 1px solid #79b; border-collapse: collapse; }
+table th { background: #bdf; }
+table th, table td { padding: 4px; border: 1px solid #79b; }
+table tr:nth-child(odd) { background: #eef6ff; }
+
+/* common styles */
+label.label_Information {
+	display: block;
+	border: 1px solid #79b;
+	background: #bdf url("../images/icons/messagebox_info_32.png") 5px 5px no-repeat;
+	width: 60%;
+	margin: 10px auto 10px auto;
+	padding: 12px;
+	padding-left: 42px;
+}
+
+/* navigation */
+div.navigation {
+	width: auto;
+	padding: 10px 10px 10px 8px;
+	width: 750px;
+}
+div#user_navigation {
+	border: 1px inset #666;
+	background: #ddd;
+}
+div#manager_navigation {
+	border: 1px inset #567;
+	background: #cde;
+}
+div.navigation ul {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 0;
+}
+div.navigation li {
+	padding: 4px 7px 4px 7px;
+	margin-right: 2px;
+	border: 1px outset #eee;
+	background: #eee;
+	display: inline;
+}
+div.navigation li a {
+	text-decoration: none;
+}
+div.navigation li.disabled {
+	color: gray;
+}
+div.navigation li.nav_home {
+	background: #eee url("../images/icons/house.png") 4px center no-repeat;
+	padding-left: 24px;
+}
+
+h1 { margin-top: 5px; margin-bottom: 10px; }
+
+/* database dump */
+body#database_dump h1 { background: #fbb; padding: 5px; margin: 0; margin-top: 10px; border-top: 1px solid #933; }
+body#database_dump h2 { background: #ffeeee; padding: 5px; margin: 0; border-top: 1px solid #fbb; }
+body#database_dump table + h2 { margin-top: 10px; }
+
+/* 'all events' page */
+table.list_events_list {
+	width: 69%;
+	float: left;
+	clear: left;
+}
+
+div#map_canvas {
+	width: 30%;
+	float: right;
+}
+
+div.map_canvas {
+	width: 100% !important;
+}
+
+label.event_search {
+	display: block;
+	border: 1px solid #79b;
+	background: #bdf url("../images/icons/magnifier.png") 10px center no-repeat;
+	padding: 5px;
+	padding-left: 31px; /* to allow for icon */
+	margin-bottom: 0.7em;
+}
+
+label.event_search input.event_search_query  {
+	margin-left: 5px;
+	width: 260px;
+}
+
+div#map_canvas {
+	border: 1px solid #79b;
+	background: #bdf;
+}
+
+/* remove all text from list */
+table.list_events_list th { text-indent: -3000em; overflow: hidden; }
+
+table.list_events_list th.list_heading_venue { background: #bdf url("../images/icons/house.png") 5px center no-repeat; }
+table.list_events_list th.list_heading_link { }
+table.list_events_list th.list_heading_title { background: #bdf url("../images/icons/page_white.png") 5px center no-repeat; }
+table.list_events_list th.list_heading_tickets_left { background: #bdf url("../images/icons/page_white_stack.png") 5px center no-repeat;  }
+table.list_events_list th.list_heading_event_date { background: #bdf url("../images/icons/clock.png") 5px center no-repeat;  }
+
+/* 'view event' page */
+form.view_event label.label_venue:before { content: "Venue: "; background: url("../images/icons/house.png") center left no-repeat; }
+form.view_event label.label_title:before { content: "Title: "; }
+form.view_event label.label_description:before { content: "Description: "; }
+form.view_event label.label_created:before { content: "Created: "; background: url("../images/icons/calendar_add.png") center left no-repeat; }
+form.view_event label.label_updated:before { content: "Updated: "; background: url("../images/icons/calendar_edit.png") center left no-repeat; }
+form.view_event label.label_tickets_left:before { content: "Tickets Left: "; background: url("../images/icons/page_white_stack.png") center left no-repeat; }
+form.view_event label.label_event_date:before { content: "Date: "; background: url("../images/icons/clock.png") center left no-repeat; }
+form.view_event label.label_id { display: none; }
+
+div.map_canvas {
+	float: right;
+	width: 48%;
+	border: 1px solid #ccc;
+	background: #eee;
+}
+label.iaml_point_label {
+	display: none;
+}
+
+/* 'your tickets' page */
+table.list_events_list th.list_heading_generated_primary_key,
+table.list_events_list td.list_item_generated_primary_key {
+	display: none;
+}
+
+/* 'view ticket' page */
+form.ticket_details label.label_event:before { content: "Event: "; }
+form.ticket_details label.label_date:before { content: "Ticket Purchase: "; background: url("../images/icons/clock.png") center left no-repeat; }
+form.ticket_details label.label_venue:before { content: "Venue: "; background: url("../images/icons/house.png") center left no-repeat; }
+
+/* 'create new event' page */
+form.form_New_Event label.text_label_venue { background: url("../images/icons/house.png") center left no-repeat; }
+form.form_New_Event label.text_label_title { }
+form.form_New_Event label.text_label_description { }
+form.form_New_Event label.text_label_created { background: url("../images/icons/calendar_add.png") center left no-repeat; }
+form.form_New_Event label.text_label_updated { background: url("../images/icons/calendar_edit.png") center left no-repeat; }
+form.form_New_Event label.text_label_tickets_left { background: url("../images/icons/page_white_stack.png") center left no-repeat; }
+form.form_New_Event label.text_label_event_date { background: url("../images/icons/clock.png") center left no-repeat; }
+
+/* 'edit event' page */
+form.form_Edit_Event label.text_label_venue { background: url("../images/icons/house.png") center left no-repeat; }
+form.form_Edit_Event label.text_label_title { }
+form.form_Edit_Event label.text_label_description { }
+form.form_Edit_Event label.text_label_created { background: url("../images/icons/calendar_add.png") center left no-repeat; }
+form.form_Edit_Event label.text_label_updated { background: url("../images/icons/calendar_edit.png") center left no-repeat; }
+form.form_Edit_Event label.text_label_tickets_left { background: url("../images/icons/page_white_stack.png") center left no-repeat; }
+form.form_Edit_Event label.text_label_event_date { background: url("../images/icons/clock.png") center left no-repeat; }

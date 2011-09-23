@@ -1,0 +1,28 @@
+Event:
+  event1:
+    title:        Event one
+    description:  The first event with twelve tickets.
+    venue:        123 Main St, Palmerston North, New Zealand
+    date:         2011-11-01 19:30:00
+    tickets_left: 12
+
+  event2:
+    title:        Event two
+    description:  The second event with no tickets.
+    venue:        234 Main St, Palmerston North, New Zealand
+    date:         2011-11-02 19:30:00
+    tickets_left: 0
+
+  event3:
+    title:        Event three
+    description:  The third event with one ticket.
+    venue:        123 Main St, Palmerston North, New Zealand
+    date:         2011-12-01 19:30:00
+    tickets_left: 1
+
+  event4:
+    title:        Event four
+    description:  The expired fourth event with two tickets.
+    venue:        234 Main St, Palmerston North, New Zealand
+    date:         2011-01-01 19:30:00
+    tickets_left: 2

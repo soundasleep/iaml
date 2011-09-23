@@ -1,0 +1,29 @@
+# database schema for ticketsf-mini
+# the schema is particularly basic
+
+propel:
+  event:
+    id:             ~
+    title:          { type: varchar(255), required: true }
+    description:    { type: clob }
+    venue:          { type: varchar(255), required: true }  # ticketiaml doesn't support foreign keys yet
+    date:           { type: timestamp, required: true }
+    tickets_left:   { type: integer, required: true, default: 0 }
+    created_at:     ~
+    updated_at:     ~
+  
+  user:
+    id:             ~
+    email:          { type: varchar(255), required: true }
+    password:       { type: varchar(64), required: true }         # ticketiaml has not yet implemented password hashing
+    is_manager:     { type: boolean, required: true, default: 0 }
+    is_admin:       { type: boolean, required: true, default: 0 }
+    created_at:     ~
+    updated_at:     ~
+
+  # must occur after both event and user
+  ticket:
+    id:             ~
+    event_id:       { type: integer, foreignTable: event, foreignReference: id, onDelete: setnull }
+    user_id:        { type: integer, foreignTable: user, foreignReference: id, onDelete: setnull }
+    created_at:     ~

@@ -1,0 +1,5 @@
+User:
+  user1:
+    email:        manager@openiaml.org
+    password:     manager   # ticketiaml has not yet implemented password hashing
+    is_manager:   1

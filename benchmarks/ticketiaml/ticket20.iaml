@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.messaging="http://openiaml.org/model/messaging" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="root" name="Ticket 2.0">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="session_signup" name="Signup Session">
+    <scopes xsi:type="iaml.visual:Frame" id="signup" name="Signup">
+      <values id="value1" name="successful signup message" outParameterEdges="parameter1" defaultValue="Your account has been created, you may now login.">
+        <parameterEdges id="parameter1" name="message" parameterValue="value1" parameterTerm="eca4"/>
+      </values>
+      <messages xsi:type="iaml.messaging:Email" id="email_signup" name="Signup Email" inWires="set1" subject="New account created" from="ticket20@openiaml.org" fromName="Ticket 2.0">
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca2" id="builtinoperation1" name="send"/>
+        <values id="signup_email_to" name="to" type="builtin_iamlEmail" inWires="set3"/>
+        <values id="signup_email_to_name" name="toName" inWires="set4"/>
+        <onFailure id="signup_email_onFailure" name="onFailure" listeners="eca1">
+          <ecaRules id="eca1" name="navigate" trigger="signup_email_onFailure" target="signup_email_failed"/>
+        </onFailure>
+      </messages>
+      <iterators id="iterator1" name="new user instance" outWires="sync1 set1" query="new" outSelects="edge1">
+        <wires xsi:type="iaml.wires:SyncWire" id="sync1" name="sync" from="iterator1" to="form1"/>
+        <wires xsi:type="iaml.wires:SetWire" id="set1" name="set" from="iterator1" to="email_signup"/>
+        <selectEdges id="edge1" from="iterator1" to="named_users_db"/>
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca3" id="signup_user_save" name="save" listeners="eca4 eca2">
+          <ecaRules id="eca2" name="run" trigger="signup_user_save" target="builtinoperation1" priority="100"/>
+        </operations>
+      </iterators>
+      <children xsi:type="iaml.visual:InputForm" inWires="sync1" id="form1" name="Signup Form">
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca5" id="signup_form_hide" name="hide"/>
+        <children xsi:type="iaml.visual:InputTextField" outWires="set2 set3" id="signup_email" name="email" type="builtin_iamlEmail">
+          <wires xsi:type="iaml.wires:SetWire" id="set2" name="set" from="signup_email" to="label1"/>
+          <wires xsi:type="iaml.wires:SetWire" id="set3" name="set" from="signup_email" to="signup_email_to"/>
+        </children>
+        <children xsi:type="iaml.visual:InputTextField" outWires="set4" id="text1" name="name" type="xsd_string">
+          <wires xsi:type="iaml.wires:SetWire" id="set4" name="set" from="text1" to="signup_email_to_name"/>
+        </children>
+      </children>
+      <children xsi:type="iaml.visual:Button" id="signup_create" name="Create Account" listeners="eca3 eca5">
+        <ecaRules id="eca3" name="onClick" trigger="signup_create" target="signup_user_save" priority="100"/>
+        <ecaRules id="eca4" inParameterEdges="parameter1" name="run" trigger="signup_user_save" target="user_login"/>
+        <ecaRules id="eca5" name="click" trigger="signup_create" target="signup_form_hide"/>
+      </children>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="signup_email_failed" name="Email Sending Failed" rules="eca1">
+      <children xsi:type="iaml.visual:Label" id="email_label1" name="label1" defaultValue="An e-mail could not be sent to the e-mail address" renderOrder="1"/>
+      <children xsi:type="iaml.visual:Label" id="email_label2" name="label3" defaultValue="and you may wish to try signing up again." renderOrder="3"/>
+      <children xsi:type="iaml.visual:Label" inWires="set2" id="label1" name="&lt;email address>" type="builtin_iamlEmail" renderOrder="2"/>
+    </scopes>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="session_user" name="User Session">
+    <scopes xsi:type="iaml.visual:Frame" id="login" name="Login"/>
+    <scopes xsi:type="iaml.visual:Frame" id="user_logout" name="logout"/>
+    <scopes xsi:type="iaml.visual:Frame" id="user_invalid" name="Invalid Credentials" rules="eca11"/>
+    <scopes xsi:type="iaml.visual:Frame" id="user_tickets" name="Your Tickets">
+      <iterators id="user_tickets_iterator" name="ticket iterator" outWires="set5" inParameterEdges="parameter4" query="user_id = :id" limit="5" outSelects="edge2">
+        <wires xsi:type="iaml.wires:SetWire" id="set5" name="set" from="user_tickets_iterator" to="user_tickets_list"/>
+        <selectEdges id="edge2" from="user_tickets_iterator" to="tickets_db"/>
+      </iterators>
+      <children xsi:type="iaml.visual:IteratorList" outWires="detail1" inWires="set5" id="user_tickets_list" name="Your Ticket List">
+        <wires xsi:type="iaml.wires:DetailWire" id="detail1" name="detail" from="user_tickets_list" to="view_ticket"/>
+        <overriddenNames>user_id</overriddenNames>
+      </children>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="view_ticket" name="View Ticket" inWires="detail1">
+      <children xsi:type="iaml.visual:InputForm" id="form2" name="View Ticket">
+        <overriddenNames>user_id</overriddenNames>
+        <children xsi:type="iaml.visual:Label" id="label2" name="event_id" outParameterEdges="parameter2" type="xsd_integer">
+          <parameterEdges id="parameter2" name="id" parameterValue="label2" parameterTerm="eca6"/>
+        </children>
+        <children xsi:type="iaml.visual:Button" id="button1" name="View Event" renderOrder="100" listeners="eca6">
+          <ecaRules id="eca6" inParameterEdges="parameter2" name="onClick" trigger="button1" target="view_event"/>
+        </children>
+      </children>
+    </scopes>
+    <iterators id="user_iterator" name="current instance" outSelects="edge3">
+      <selectEdges id="edge3" from="user_iterator" to="named_users_db"/>
+      <functions xsi:type="iaml.operations:ActivityPredicate" id="user_logged_in" name="not empty"/>
+      <currentInstance id="user_instance" name="instance">
+        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" outParameterEdges="parameter3 parameter4" id="ai1" type="xsd_integer" outExtendsEdges="edge4" name="id">
+          <parameterEdges id="parameter3" name="id" parameterValue="ai1" parameterTerm="manager_instance"/>
+          <parameterEdges id="parameter4" name="id" parameterValue="ai1" parameterTerm="user_tickets_iterator"/>
+          <extendsEdges id="edge4" from="ai1" to="named_user_id"/>
+        </featureInstances>
+      </currentInstance>
+    </iterators>
+    <accessHandlers id="user_ach" name="Require Named User" outRequiresEdges="edge5">
+      <requiresEdges id="edge5" from="user_ach" to="role_user"/>
+    </accessHandlers>
+    <loginHandlers id="user_login_handler" name="Session Login Handler" inParameterEdges="parameter12" type="USER"/>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="session1" name="Session Login Handler login">
+    <scopes xsi:type="iaml.visual:Frame" id="user_login" name="login" rules="eca4">
+      <parameters id="qp1" name="message" outParameterEdges="parameter5" defaultValue="">
+        <parameterEdges id="parameter5" name="message" parameterValue="qp1" parameterTerm="eca9"/>
+      </parameters>
+      <children xsi:type="iaml.visual:Label" id="login_message" name="message">
+        <operations xsi:type="iaml.operations:ActivityOperation" rules="eca9" id="login_message_init" name="initialise or hide message label">
+          <nodes xsi:type="iaml.operations:StartNode" id="startnode1" outExecutions="edge10"/>
+          <nodes xsi:type="iaml.operations:DecisionNode" id="decisionnode1" name="empty?" outExecutions="edge11 edge12" inExecutions="edge10" inFlows="edge9"/>
+          <nodes xsi:type="iaml.operations:FinishNode" id="finishnode1" inExecutions="edge14 edge15"/>
+          <nodes xsi:type="iaml.operations:SetNode" id="setnode1" name="set value" outExecutions="edge13" inExecutions="edge11" outFlows="edge8" inFlows="edge7"/>
+          <nodes xsi:type="iaml.operations:ExternalValue" id="externalvalue1" inFlows="edge8" value="login_message_value"/>
+          <nodes xsi:type="iaml.operations:OperationCallNode" id="operationcallnode1" outExecutions="edge14" inExecutions="edge13" name="call show" listeners="eca7">
+            <ecaRules id="eca7" name="run" trigger="operationcallnode1" target="login_message_show"/>
+          </nodes>
+          <nodes xsi:type="iaml.operations:OperationCallNode" id="operationcallnode2" outExecutions="edge15" inExecutions="edge12" name="call hide" listeners="eca8">
+            <ecaRules id="eca8" name="run" trigger="operationcallnode2" target="login_message_hide"/>
+          </nodes>
+          <dataEdges id="edge7" from="activityparameter1" to="setnode1"/>
+          <dataEdges id="edge8" from="setnode1" to="externalvalue1"/>
+          <dataEdges id="edge9" from="activityparameter1" to="decisionnode1"/>
+          <executionEdges id="edge10" from="startnode1" to="decisionnode1"/>
+          <executionEdges id="edge11" name="n" from="decisionnode1" to="setnode1"/>
+          <executionEdges id="edge12" name="y" from="decisionnode1" to="operationcallnode2"/>
+          <executionEdges id="edge13" from="setnode1" to="operationcallnode1"/>
+          <executionEdges id="edge14" from="operationcallnode1" to="finishnode1"/>
+          <executionEdges id="edge15" from="operationcallnode2" to="finishnode1"/>
+          <parameters id="activityparameter1" name="message" outFlows="edge7 edge9"/>
+        </operations>
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca8" id="login_message_hide" name="hide"/>
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca7" id="login_message_show" name="show"/>
+        <onAccess id="login_message_onAccess" name="onAccess" listeners="eca9">
+          <ecaRules id="eca9" inParameterEdges="parameter5" name="run" trigger="login_message_onAccess" target="login_message_init"/>
+        </onAccess>
+        <fieldValue id="login_message_value" name="fieldValue"/>
+      </children>
+    </scopes>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="all_events" name="Browse Events">
+    <iterators id="all_events_iterator" name="list events iterator" outWires="set6" inParameterEdges="parameter6" query="(matches(title, :query) or matches(description, :query) or matches(venue, :query)) and event_date > now()" limit="5" outSelects="edge16">
+      <wires xsi:type="iaml.wires:DetailWire" id="detail2" name="detail" from="all_events_list" to="view_event"/>
+      <wires xsi:type="iaml.wires:SetWire" id="set6" name="set" from="all_events_iterator" to="all_events_list"/>
+      <selectEdges id="edge16" from="all_events_iterator" to="events_db"/>
+    </iterators>
+    <children xsi:type="iaml.visual:IteratorList" outWires="detail2" inWires="set6" id="all_events_list" name="events list" renderOrder="100">
+      <overriddenNames>created</overriddenNames>
+      <overriddenNames>updated</overriddenNames>
+      <overriddenNames>description</overriddenNames>
+      <children xsi:type="iaml.visual:Label" outWires="set7" id="all_events_venue" name="venue" type="builtin_iamlAddress" renderOrder="30">
+        <wires xsi:type="iaml.wires:SetWire" id="set7" name="set" from="all_events_venue" to="all_events_map"/>
+      </children>
+      <children xsi:type="iaml.visual:Label" id="label3" name="title" renderOrder="20"/>
+      <children xsi:type="iaml.visual:Button" id="button2" name="link" renderOrder="10"/>
+      <children xsi:type="iaml.visual:Label" id="label4" name="event_date" renderOrder="40"/>
+      <children xsi:type="iaml.visual:Label" id="label5" name="tickets_left" renderOrder="50"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="all_events_search" name="Event Search" outParameterEdges="parameter6">
+      <parameterEdges id="parameter6" name="query" parameterValue="all_events_search" parameterTerm="all_events_iterator"/>
+    </children>
+    <children xsi:type="iaml.visual:Map" inWires="set7" id="all_events_map" name="Events Map"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="view_event" name="View Event" inWires="detail2" rules="eca10 eca16 eca6">
+    <children xsi:type="iaml.visual:InputForm" id="view_event_form" name="View Event">
+      <overriddenNames>created</overriddenNames>
+      <overriddenNames>updated</overriddenNames>
+      <overriddenNames>id</overriddenNames>
+      <children xsi:type="iaml.visual:Label" id="view_event_title" name="title" type="xsd_string"/>
+      <children xsi:type="iaml.visual:Label" id="view_event_description" name="description" type="xsd_string"/>
+      <children xsi:type="iaml.visual:Label" outWires="set8" id="view_event_venue" name="venue" type="xsd_string">
+        <wires xsi:type="iaml.wires:SetWire" id="set8" name="set" from="view_event_venue" to="view_event_map_point"/>
+      </children>
+      <children xsi:type="iaml.visual:Label" id="view_event_date" name="event_date" type="builtin_iamlDateTime"/>
+      <children xsi:type="iaml.visual:Label" id="view_event_tickets" name="tickets_left" type="xsd_integer"/>
+    </children>
+    <children xsi:type="iaml.visual:MapPoint" inWires="set8" id="view_event_map_point" name="Event Map"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="events_rss" name="New Events" render="RSS20">
+    <iterators id="events_rss_iterator" name="new events" outWires="set9" limit="5" orderBy="attribute3" orderAscending="false" outSelects="edge17">
+      <wires xsi:type="iaml.wires:SetWire" id="set9" name="set" from="events_rss_iterator" to="events_rss_item"/>
+      <selectEdges id="edge17" from="events_rss_iterator" to="events_db"/>
+    </iterators>
+    <children xsi:type="iaml.visual:InputForm" inWires="set9" id="events_rss_item" name="Feed Item">
+      <children xsi:type="iaml.visual:Button" id="events_rss_link" name="link" listeners="eca10">
+        <ecaRules id="eca10" inParameterEdges="parameter7" name="onClick" trigger="events_rss_link" target="view_event"/>
+      </children>
+      <children xsi:type="iaml.visual:Label" id="events_rss_id" name="id" outParameterEdges="parameter7" type="xsd_integer">
+        <parameterEdges id="parameter7" name="id" parameterValue="events_rss_id" parameterTerm="eca10"/>
+      </children>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="session_manager" name="Manager Session">
+    <entryGate id="session_manager_gate" name="require manager instance" conditions="condition1" listeners="eca11">
+      <ecaRules id="eca11" name="fail" trigger="session_manager_gate" target="user_invalid"/>
+    </entryGate>
+    <scopes xsi:type="iaml.visual:Frame" id="manager_logout" name="logout"/>
+    <scopes xsi:type="iaml.visual:Frame" id="manager_login" generatedRule="" name="Login"/>
+    <scopes xsi:type="iaml.visual:Frame" id="event_new" name="Create New Event">
+      <iterators id="event_new_iterator" name="new event" inWires="sync2" query="new" outSelects="edge18">
+        <selectEdges id="edge18" from="event_new_iterator" to="events_db"/>
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca13" id="event_new_save" name="save" listeners="eca12">
+          <ecaRules id="eca12" name="run" trigger="event_new_save" target="builtinoperation2"/>
+        </operations>
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca12" id="builtinoperation2" name="new"/>
+      </iterators>
+      <children xsi:type="iaml.visual:InputForm" outWires="sync2" id="event_new_form" name="New Event">
+        <wires xsi:type="iaml.wires:SyncWire" id="sync2" name="sync" from="event_new_form" to="event_new_iterator"/>
+        <children xsi:type="iaml.visual:Button" id="event_new_save_button" name="Save" renderOrder="100" listeners="eca13">
+          <ecaRules id="eca13" name="onClick" trigger="event_new_save_button" target="event_new_save"/>
+        </children>
+      </children>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="events_list" name="All Events">
+      <iterators id="iterator2" name="all events iterator" outWires="set10" query="any" limit="5" orderBy="attribute6" orderAscending="false" outSelects="edge19">
+        <wires xsi:type="iaml.wires:SetWire" id="set10" name="set" from="iterator2" to="all_events_list2"/>
+        <selectEdges id="edge19" from="iterator2" to="events_db"/>
+      </iterators>
+      <children xsi:type="iaml.visual:IteratorList" inWires="set10" id="all_events_list2" name="All Events">
+        <overriddenNames>created</overriddenNames>
+        <overriddenNames>updated</overriddenNames>
+        <overriddenNames>description</overriddenNames>
+        <children xsi:type="iaml.visual:Label" id="all_events_event_id" name="id" outParameterEdges="parameter8">
+          <parameterEdges id="parameter8" name="id" parameterValue="all_events_event_id" parameterTerm="eca14"/>
+        </children>
+        <children xsi:type="iaml.visual:Button" id="all_events_edit" name="edit" listeners="eca14">
+          <ecaRules id="eca14" inParameterEdges="parameter8" name="onClick" trigger="all_events_edit" target="event_edit"/>
+        </children>
+      </children>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="event_edit" name="Edit Event" rules="eca14">
+      <operations xsi:type="iaml:BuiltinOperation" rules="eca15" id="builtinoperation3" name="set current id"/>
+      <onAccess id="event1" name="onAccess" listeners="eca15">
+        <ecaRules id="eca15" inParameterEdges="parameter11" name="run" trigger="event1" target="builtinoperation3"/>
+      </onAccess>
+      <values id="value2" name="current id" type="xsd_integer" outParameterEdges="parameter10 parameter9" defaultValue="0">
+        <parameterEdges id="parameter9" name="id" parameterValue="value2" parameterTerm="eca16"/>
+      </values>
+      <parameters id="qp2" name="id" outParameterEdges="parameter11">
+        <parameterEdges id="parameter10" name="id" parameterValue="value2" parameterTerm="iterator3"/>
+        <parameterEdges id="parameter11" name="id" parameterValue="qp2" parameterTerm="eca15"/>
+      </parameters>
+      <iterators id="iterator3" name="selected event" outWires="sync3" inParameterEdges="parameter10" query="id = :id" outSelects="edge20">
+        <wires xsi:type="iaml.wires:SyncWire" id="sync3" name="sync" from="iterator3" to="edit_event_form"/>
+        <selectEdges id="edge20" from="iterator3" to="events_db"/>
+        <operations xsi:type="iaml:BuiltinOperation" rules="eca17" id="builtinoperation4" name="save" listeners="eca16">
+          <ecaRules id="eca16" inParameterEdges="parameter9" name="navigate" trigger="builtinoperation4" target="view_event"/>
+        </operations>
+      </iterators>
+      <children xsi:type="iaml.visual:InputForm" inWires="sync3" id="edit_event_form" name="Edit Event">
+        <overriddenNames>id</overriddenNames>
+        <children xsi:type="iaml.visual:Button" id="edit_event_save" name="Save" renderOrder="100" listeners="eca17">
+          <ecaRules id="eca17" name="onClick" trigger="edit_event_save" target="builtinoperation4"/>
+        </children>
+      </children>
+    </scopes>
+    <iterators id="manager_instance" name="current instance" inParameterEdges="parameter3" query="named_user.id = :id" outSelects="edge21">
+      <selectEdges id="edge21" from="manager_instance" to="source1"/>
+      <functions xsi:type="iaml.operations:ActivityPredicate" id="manager_logged_in" name="not empty" conditioned="condition1">
+        <conditionEdges id="condition1" name="condition" function="manager_logged_in" conditioned="session_manager_gate"/>
+      </functions>
+    </iterators>
+  </scopes>
+  <types xsi:type="iaml.users:Role" name="named_user" id="role_user" outExtendsEdges="edge22" inExtendsEdges="edge24" inSchemas="schema1" inRequiresEdges="edge5">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" eType="xsd_string" id="named_user_name"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="xsd_integer" id="named_user_id" inExtendsEdges="edge4" primaryKey="true"/>
+    <parameterEdges id="parameter12" name="required" parameterValue="role1" parameterTerm="user_login_handler"/>
+    <extendsEdges id="edge22" from="role_user" to="role1"/>
+  </types>
+  <types xsi:type="iaml.users:Role" name="admin" id="role_admin" outExtendsEdges="edge23" inSchemas="schema3">
+    <extendsEdges id="edge23" from="role_admin" to="role_manager"/>
+  </types>
+  <types xsi:type="iaml.users:Role" name="manager" id="role_manager" outExtendsEdges="edge24" inExtendsEdges="edge23" inSchemas="schema2">
+    <extendsEdges id="edge24" from="role_manager" to="role_user"/>
+  </types>
+  <types xsi:type="iaml.users:Role" name="User" id="role1" outParameterEdges="parameter12" inExtendsEdges="edge22" inSchemas="schema4"/>
+  <types name="Event" id="type_event" inSchemas="schema5">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="venue" eType="builtin_iamlAddress" id="event_venue"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" eType="xsd_string" id="attribute1"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" eType="xsd_string" id="attribute2"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="created" eType="builtin_iamlDateTime" id="attribute3"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="updated" eType="builtin_iamlDateTime" id="attribute4"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="tickets_left" eType="xsd_integer" id="attribute5"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="event_date" eType="builtin_iamlDateTime" id="attribute6"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="xsd_integer" id="attribute7" primaryKey="true"/>
+  </types>
+  <types name="Ticket" id="type1" inSchemas="schema6">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="user_id" eType="xsd_integer" id="attribute8"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="event_id" eType="xsd_integer" id="attribute9"/>
+  </types>
+  <sources id="named_users_db" name="users.db (named user)" file="users.db" outSchemas="schema1" inSelects="edge1 edge3">
+    <schemaEdges id="schema1" from="named_users_db" to="role_user"/>
+    <schemaEdges id="schema2" from="source1" to="role_manager"/>
+    <schemaEdges id="schema3" from="source2" to="role_admin"/>
+  </sources>
+  <sources id="source1" name="users.db (manager)" file="users.db" outSchemas="schema2" inSelects="edge21"/>
+  <sources id="source2" name="users.db (admin)" file="users.db" outSchemas="schema3"/>
+  <sources id="users_db" name="users.db (user)" file="users.db" outSchemas="schema4">
+    <schemaEdges id="schema4" from="users_db" to="role1"/>
+  </sources>
+  <sources id="events_db" name="events.db" file="events.db" outSchemas="schema5" inSelects="edge16 edge17 edge18 edge19 edge20">
+    <schemaEdges id="schema5" from="events_db" to="type_event"/>
+  </sources>
+  <sources id="tickets_db" name="tickets.db" file="tickets.db" outSchemas="schema6" inSelects="edge2">
+    <schemaEdges id="schema6" from="tickets_db" to="type1"/>
+  </sources>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

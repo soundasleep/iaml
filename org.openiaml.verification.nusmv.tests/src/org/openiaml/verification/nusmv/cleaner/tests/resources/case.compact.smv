@@ -1,0 +1,10 @@
+-- should pass
+MODULE main
+VAR a:boolean;
+ASSIGN
+init( a ):=0;
+next( a ):=case a=1:case a=1:case a=0:1;a=1:0;esac;1:1;esac;1:0;esac;
+LTLSPEC
+  -- comment
+  G ((!(operation_start != null -> !(F operation_end != null))) U operation_start
+  = null)

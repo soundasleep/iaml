@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.openiaml.verification.crocopat.feature"
-      label="Iaml Verification with Crocopat"
-      version="0.4.1.qualifier"
+      label="IAML Verification with Crocopat"
+      version="0.6.0.qualifier"
       provider-name="www.openiaml.org"
       os="win32">
 
    <description url="http://www.openiaml.org/">
-      This is the implementation of a Crocopat layer of verification for models in the Internet Application Modelling
-Language (IAML), a PhD project at Massey University, New Zealand.
+      This is the CrocoPat implementation of model instance verification
+for the Internet Application Modelling Language (IAML).
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="http://openiaml.org/copyright">
+      Copyright (c) 2007, 2011 Jevon Wright and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License
+v1.0 which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      Licensed under the Eclipse Public License v1.0.
+Portions of this software are also licensed under the Lesser
+GNU Public License.
    </license>
 
    <url>

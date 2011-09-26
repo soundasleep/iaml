@@ -42,7 +42,7 @@ When you click Finish, a new model will be created, and the [http://iaml.googlec
 
 =Editing the Application=
 
-As you can see in this initial application, we are provided with a single initial page called "Home". This is, by default, the starting point of your new web application.
+As you can see in this initial application, we are provided with a single initial page (termed a [http://openiaml.org/model/Frame Frame]) called "Home". This is, by default, the starting point of your new web application.
 
 In this _Hello World_ application, we will create a web site which shows two text fields that are synchronous with each other. This is a fairly basic use case of Rich Internet Applications.
 
@@ -50,13 +50,13 @@ Double click the "Home" page. This will open up a new editor. To reduce clutter,
 
 [http://iaml.googlecode.com/svn/wiki/tutorial/editor-2.png]
 
-Create two new text fields in this Page, naming them "Hello", and "World". The available new elements are rendered in a Palette to the side of the editor; text fields are called _InputTextField_, and are under the _Visual Elements_ section of the editor.
+Create two new text fields in this Page, naming them "Hello", and "World". The available new elements are rendered in a Palette to the side of the editor; text fields are called [http://openiaml.org/model/InputTextField InputTextFields], and are under the _Visual Elements_ section of the editor.
 
 [http://iaml.googlecode.com/svn/wiki/tutorial/palette-small-select.png]
 
 [http://iaml.googlecode.com/svn/wiki/tutorial/editor-3.png]
 
-By default, these text fields would do nothing. So, we will connect these two fields up with a _Synchronisation Wire_, called a _SyncWire_. When a SyncWire is connected between two elements, it will keep the values of these elements equal when they change.
+By default, these text fields would do nothing. So, we will connect these two fields up with a _Synchronisation Wire_, called a [http://openiaml.org/model/SyncWire SyncWire]. When a [http://openiaml.org/model/SyncWire SyncWire] is connected between two elements, it will keep the values of these elements equal when they change.
 
 [http://iaml.googlecode.com/svn/wiki/tutorial/editor-4.png]
 
@@ -107,8 +107,6 @@ We can now access the generated application from any web browser. If http://loca
 Now, for the magic test: if you change the field of one value, it should automatically update the second value.
 
 [http://iaml.googlecode.com/svn/wiki/tutorial/web-2.png]
-
-(Ignore the content at the bottom of generated pages; this is simply debug information until [http://code.google.com/p/iaml/issues/detail?id=115 issue 115] is resolved.)
 
 =What Next?=
 

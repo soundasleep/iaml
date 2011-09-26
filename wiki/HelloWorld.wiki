@@ -102,11 +102,11 @@ This step only needs to be executed once per application. If you have multiple p
 
 We can now access the generated application from any web browser. If http://localhost:8080/hello-world/ points to the "output" folder above, we can visit this address.
 
-[http://iaml.googlecode.com/svn/wiki/tutorial/web-1.png]
+[http://iaml.googlecode.com/svn/wiki/tutorial/generated-initial.png]
 
 Now, for the magic test: if you change the field of one value, it should automatically update the second value.
 
-[http://iaml.googlecode.com/svn/wiki/tutorial/web-2.png]
+[http://iaml.googlecode.com/svn/wiki/tutorial/generated-changed.png]
 
 =What Next?=
 

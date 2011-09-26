@@ -1,10 +1,10 @@
 
 RedirectsTo(a, b) :=
   Frame(a) & a != "null" &
-  EX(e, EventTrigger(e) &
+  EX(e, Event(e) &
   onAccess(a, e) &
   Frame(b) & b != "null" &
-  EX(w, ActionEdge(w) & from(w, e) & to(w, b)));
+  EX(w, ECARule(w) & trigger(w, e) & target(w, b)));
 
 RedirectsTo(a, b) :=
   Frame(a) & Frame(b) & TC(RedirectsTo(a, b));

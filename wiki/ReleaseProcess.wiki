@@ -40,6 +40,7 @@ The environment has now been successfully built, so now the release process can 
 
   # Commit the built plugins in [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.update?r=3133 org.openiaml.update] to SVN.
   # [http://code.google.com/p/iaml/source/browse/trunk/tags?r=3133 Tag] the build on SVN.
+  # Update all [http://code.google.com/p/iaml/issues/list outstanding issues] to use new versions, and tag fixed issues to the correct version.
   # Write release documentation on the wiki, for example [Model0_6].
   # Write a new release entry on [http://journals.jevon.org/users/jevon-phd/tag/iaml/ the development blog].
   # Tag the release on the [https://www.google.com/calendar/embed?mode=AGENDA&src=bio39kbr7stcjntgk061ck3uts@group.calendar.google.com&ctz=Pacific/Auckland&wkst=1&gsessionid=LqGCYu0wL7Q1Gv0HBJC4Qg development calendar] (using the format `IAML Plugin v 0.x.y`).

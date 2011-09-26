@@ -1,0 +1,37 @@
+<p>
+When the results of a {@model SelectWire} are evaluated, the resulting result set
+is not stored in memory. That is, if the underlying view changes (objects are inserted
+or removed), the users' view will be updated accordingly. For example,
+{@model DomainIterator#next} will skip over deleted results, possibly undesirably.
+</p>
+
+<p>
+You are therefore advised to use the "hasNext" and "hasPrevious" {@model PrimitiveCondition}s
+that are provided in the {@model DomainIterator}, and connecting a {@model NavigateAction}
+as a fail wire if necessary.
+</p>
+
+<p>
+A variety of database-independent query functions are provided:
+
+<table latexAlign="|l|X|">
+<thead>
+<tr>
+  <th>Function</th>
+  <th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>matches(a,b)</code></td>
+  <td>Performs a case-insensitive text search of <code>a</code> against the query <code>b</code>. Every word in <code>b</code> is matched, usually using a SQL keyword or function <code>LIKE</code>, against <code>a</code>.</td>
+</tr>
+<tr>
+  <td><code>now()</code></td>
+  <td>Returns the current date and time.</td>
+</tr>
+</tbody>
+</table>
+</p>
+
+

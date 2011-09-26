@@ -1,0 +1,26 @@
+«IMPORT iaml»
+
+/**
+ * Various templates for data types. 
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Get the representation of the data type of the given data destination.
+ */
+«DEFINE getDataType(Boolean php) FOR model::operations::DataFlowEdgeDestination-»
+	«throwException("Unknown data type container '" + this + "'")»
+«ENDDEFINE»
+
+«DEFINE getDataType(Boolean php) FOR model::Value-»
+	/* xsd type '«type.name»' */ «EXPAND template::operations::Parameters::getTypeURI FOR type»
+«ENDDEFINE»
+
+«DEFINE getDataType(Boolean php) FOR model::operations::TemporaryVariable-»
+	/* xsd type '«type.name»' */ «EXPAND template::operations::Parameters::getTypeURI FOR type»
+«ENDDEFINE»
+
+«DEFINE getDataType(Boolean php) FOR model::operations::ExternalValue-»
+	/* external value */
+	«EXPAND getDataType(php) FOR value» 
+«ENDDEFINE»

@@ -1,0 +1,130 @@
+/**
+ * Rules relating to {@model DomainIterator}s.
+ */
+# Update the attributes in "new instance" objects when they
+# are connected to DomainTypes.
+package org.openiaml.model.drools.rules.new_instance
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.*;
+import org.openiaml.model.model.*;	// for ModelPackage
+import org.openiaml.model.model.domain.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.operations.*;
+import org.eclipse.emf.ecore.*;
+
+import org.openiaml.model.inference.*;		// for handler
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference DomainIterator,DomainInstance
+ *		All {@model DomainIterator}s will be populated with a single
+ *		instance of a {@model DomainInstance}, representing the
+ *		{@model DomainIterator#currentInstance} of that iterator.
+ */
+rule "Create Current Instance for all Domain Iterators"
+	when
+		iterator : DomainIterator ( )
+		
+		not ( DomainInstance ( eContainer == iterator ))
+
+		eval ( handler.veto( iterator ))
+		
+	then
+		DomainInstance inst = handler.generatedDomainInstance(iterator, iterator);
+		handler.setName(inst, "Current instance");
+		queue.add(inst, drools);
+
+end
+
+/**
+ * @inference DomainInstance,DomainAttribute,DomainAttributeInstance
+ *		An {@model DomainInstance} will be populated with {@model DomainAttributeInstance}s
+ *		for every {@model DomainAttribute} in the defining
+ *		{@model DomainType} of the instance's containing {@model DomainIterator}.
+ */
+rule "Refresh Iterator Object mappings"
+	when
+		schema : DomainType ( )
+		source : DomainSource ( )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		
+		schemaEdge : SchemaEdge ( from == source, to == schema )
+		selectEdge : SelectEdge ( from == iterator, to == source )
+		attribute : DomainAttribute ( eContainer == schema )
+		
+		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
+
+		eval ( handler.veto( instance ))
+		
+	then
+		# create a new one
+		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(instance, instance);
+		handler.setName(attr, attribute.getName());
+		# set type
+		handler.setType(attr, (EDataType) attribute.getEType());
+		queue.add(attr, drools);
+		
+		# mark it as an extension
+		ExtendsEdge ex = handler.generatedExtendsEdge(instance, attr, attr, attribute);
+		queue.add(ex, drools); 
+
+end
+
+/**
+ * @inference DomainAttributeInstance,ExtendsEdge
+ *		A {@model DomainAttributeInstance} created within a {@model DomainInstance}
+ *		referencing a particular {@model DomainAttribute} will be marked
+ *		as an extension of that attribute through an {@model ExtendsEdge}.  
+ */
+rule "Mark AttributeInstances as extensions of the identically-named Attributes (NewInstanceWire)"
+	when
+		schema : DomainType ( )
+		source : DomainSource ( )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+				
+		schemaEdge : SchemaEdge ( from == source, to == schema )
+		selectEdge : SelectEdge ( from == iterator, to == source )
+
+		attribute : DomainAttribute ( eContainer == schema )
+		attrinst : DomainAttributeInstance( eContainer == instance, name == attribute.name ) 
+		
+		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
+		
+		eval ( handler.veto( attrinst ))
+		
+	then
+		# mark it as an extension
+		ExtendsEdge w = handler.generatedExtendsEdge(attrinst, attrinst, attrinst, attribute);
+		queue.add(w, drools);
+	
+end
+
+/**
+ * @inference DomainIterator,BuiltinOperation
+ *		A {@model DomainIterator} contains an {@model Operation}
+ *		named {@model DomainIterator#save}.
+ */
+rule "Create 'save' operation for DomainIterators"
+	when
+		instance : DomainIterator ( )
+		
+		not ( Operation( eContainer == instance, name == "save" ))
+		
+		eval ( handler.veto( instance ))
+		
+	then
+		# create a new one
+		BuiltinOperation op = handler.generatedBuiltinOperation(instance, instance);
+		handler.setName(op, "save");
+		queue.add(op, drools);
+
+end

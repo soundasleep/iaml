@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.operations:ActivityOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.operations="http://openiaml.org/model/operations" id="operations.130cf3ba276.3d">
+  <nodes xsi:type="iaml.operations:DecisionNode" id="operations.130cf3ba276.44" name="target" inFlows="operations.130cf3ba276.42"/>
+  <dataEdges id="operations.130cf3ba276.42" from="operations.130cf3ba276.40" to="operations.130cf3ba276.44"/>
+  <parameters id="operations.130cf3ba276.40" name="source" outFlows="operations.130cf3ba276.42"/>
+</iaml.operations:ActivityOperation>

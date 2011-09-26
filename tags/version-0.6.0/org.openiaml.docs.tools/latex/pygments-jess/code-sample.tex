@@ -1,0 +1,54 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small]{jess}
+;; Jess cannot support multiple interface inheritance, so must refer to
+;; EMF-created Impl classes directly
+(import org.openiaml.model.test.iaml.impl.*)
+(deftemplate BooleanPropertyImpl       (declare (from-class BooleanPropertyImpl)))
+(deftemplate CheckboxImpl       (declare (from-class CheckboxImpl)))
+(deftemplate PageImpl       (declare (from-class PageImpl)))
+
+;; factory
+(deftemplate IamlTestFactoryImpl       (declare (from-class IamlTestFactoryImpl)))
+
+;; invalid package imports are OK
+(import org.openiaml.model.test.iaml.invalid.*)
+
+;; uncomment to print out debug of engine activity
+(watch all)
+
+(defrule model-completion-example
+  "Example rule of model completion."
+  (BooleanPropertyImpl (OBJECT ?property))
+  (PageImpl (OBJECT ?container))
+  (IamlTestFactoryImpl (OBJECT ?factory))
+  (test
+    ((?container getChildren) contains ?property)
+  )
+  (test
+    (eq (?property getEditor) nil)
+  )
+  =>
+  ((System.out) println "Creating checkbox for:")
+  ((System.out) println ?property)
+  (bind ?o (?factory createCheckbox))   ;; need to use EMF factory to create new instances
+  (?o setFor ?property)
+  (?o setIsGenerated TRUE)
+  ((?container getEditors) add ?o)    ;; add to model
+  (add ?o)                ;; add to working memory
+  ((System.out) println "Done")
+)
+
+(defglobal ?*time* = (time))
+(set-reset-globals FALSE)
+(deffunction run-n-times (?n)
+  (while (> ?n 0) do
+         (reset)
+         (bind ?n (- ?n 1))))
+
+(run-n-times 1)
+
+(printout t "Elapsed time: " (integer (- (time) ?*time*)) crlf)
+;; (exit)
+\end{minted}

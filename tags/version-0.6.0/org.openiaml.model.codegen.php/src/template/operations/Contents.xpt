@@ -1,0 +1,624 @@
+«IMPORT iaml»
+
+/**
+ * The contents of primitive operation types.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::Operation-»
+	«throwException("Unknown primitive operation to expand: " + this)»
+«ENDDEFINE»
+
+/**
+ * Expand the definition of an operation, assumed to be called 
+ * as part of an existing function call.
+ *
+ * @implementation AccessControlHandler,BuiltinOperation
+ *		A {@model AccessControlHandler} has a {@model BuiltinOperation} named 'check permissions'.
+ * @implementation BuiltinOperation
+ *		A {@model BuiltinOperation} can only accept a single argument or {@model Parameter} at most. 
+ */
+«DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	«REM»special primitive operation names«ENDREM»
+	«IF name == "hide"»
+		«EXPAND hideOperation(start, php) FOR this»
+	«ELSEIF name == "show"»
+		«EXPAND showOperation(start, php) FOR this»
+	«ELSEIF name == "send"»
+		«EXPAND sendOperation(start, php) FOR this» 
+	«ELSEIF name == "save"»
+		«EXPAND saveOperation(start, php) FOR this» 
+	«ELSEIF name == "new"»
+		«EXPAND newOperation(start, php) FOR this» 
+	«ELSEIF name == "alert"»
+		«EXPAND alertOperation(start, php) FOR this» 
+	«ELSEIF name == "check permissions"»
+		«IF model::components::AccessControlHandler.isInstance(eContainer)»
+			«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, null, (model::components::AccessControlHandler) eContainer)»
+			;
+		«ELSE»
+			«throwException("Unexpected 'check permissions' container: " + eContainer)»
+		«ENDIF»
+	«ELSEIF name == "add permission"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'add permission' without a RunAction")»
+	«ELSEIF name == "remove permission"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'remove permission' without a RunAction")»
+	«ELSEIF name == "add role"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'add role' without a RunAction")»
+	«ELSEIF name == "remove role"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'remove role' without a RunAction")»
+	«ELSEIF name == "update" || name == "init"»
+		«REM»Issue 210: Change 'update' CompositeOperation to BuiltinOperation.«ENDREM»
+		«EXPAND updateOperation(php) FOR this»
+	«ELSEIF name.startsWith("set ") && eContainer.eContents.typeSelect(model::Value).exists(p|"set " + p.name == name)»
+		«REM»Issue 223: create 'set XXX' operation for all properties«ENDREM»
+		«LET eContainer.eContents.typeSelect(model::Value).selectFirst(p|"set " + p.name == name) AS property»
+			«REM»primitive operations only have access to a single argument, currently«ENDREM»
+			«IF php»
+				$arg0 = $default_arg;
+			«ELSE»
+				var arg0 = default_arg;
+			«ENDIF»
+			«EXPAND setFieldValue(php) FOR property»
+		«ENDLET»
+	«ELSE»
+		«throwException("Unknown function to expand '" + name + "': " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Issue 160: DecisionOperation and DecisionCondition were all merged together
+ * into DecisionNode.
+ *
+ * @implementation DecisionNode#name
+ *		A {@model DecisionNode} named 'equal?' passes if all incoming {@model DataFlowEdge}s
+ *		are considered equal. 
+ * @implementation DecisionNode#name
+ *		A {@model DecisionNode} named 'true?' passes if all incoming {@model DataFlowEdge}s
+ *		are considered true.
+ * @implementation DecisionNode#name
+ *		A {@model DecisionNode} named 'is set?' passes if all incoming {@model DataFlowEdge}s
+ *		are set.
+ * @implementation DecisionNode#name
+ *		A {@model DecisionNode} named 'empty?' passes if all incoming {@model DataFlowEdge}s
+ *		are considered empty when converted to <code>iamlString</code>s.
+ * @implementation DecisionNode
+ *		For a {@model DecisionNode} named 'true?',
+ *		if more than one {@model Condition} is incoming to an executed {@model DecisionNode},
+ *		then all incoming {@model Condition}s must be <code>true</code> for execution to pass.
+ * @implementation DecisionNode
+ *		For a {@model DecisionNode} named 'true?',
+ *		if no {@model Condition}s are incoming to a {@model DecisionNode},
+ *		then execution will ignore the pass/fail outgoing edges.
+ */
+«DEFINE operationContents(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»
+	«REM»compare operations«ENDREM»
+	if (
+	«IF name=="xpathMatch" || name == "xpathMatch?"»
+		xpathMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
+	«ELSEIF name=="is set" || name == "is set?"»
+		«EXPAND DataFlow::isSet(php) FOREACH inFlows.from SEPARATOR " && "»
+	«ELSEIF name == "equal" || name == "equal?"-»
+		«REM»check all inflow targets are identical«ENDREM»
+		«IF php»
+			«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR " == "»
+		«ELSE»
+			is_array_equal(new Array(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ", "»))
+		«ENDIF»
+	«ELSEIF name == "true" || name == "true?" || /* no name is the same as 'true?' */ name == null-»
+		«IF conditions.isEmpty»
+			«IF php»
+				«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
+			«ELSE»
+				is_array_true(new Array(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR ", "»))
+			«ENDIF»
+		«ELSE»
+			«EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH conditions SEPARATOR " && "»
+		«ENDIF»
+	«ELSEIF name == "empty" || name == "empty?"-»
+		(«IF php»
+			(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " . "»)
+		«ELSE»
+			(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»)
+		«ENDIF»
+		== "")
+	«ELSEIF name == "can cast" || name == "can cast?"-»
+		«REM»inflow should be a CastNode; ask the CastNode about the success of the cast.«ENDREM»
+		«IF inFlows.from.typeSelect(model::operations::CastNode).isEmpty»
+			«throwException("'can cast?' check needs to have at least one incoming CastNode")»
+		«ENDIF»
+		«EXPAND getCastCanCast(php) FOREACH inFlows.from.typeSelect(model::operations::CastNode) SEPARATOR " && "»
+	«ELSE»
+		«REM»??? who knows«ENDREM»
+		«throwException("Unknown Decision to expand '" + name + "': " + this)»
+	«ENDIF»
+	) {
+		// passes
+		«IF hasPassFlow(this)»
+			«FOREACH getPassFlows() AS e-»
+				«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+			«ENDFOREACH»
+		«ELSE»
+			// no pass flow
+		«ENDIF»
+	} else {
+		// fails
+		«IF hasFailFlow(this)»
+			«FOREACH getFailFlows() AS e-»
+				«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+			«ENDFOREACH»
+		«ELSE»
+			// no fail flow
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE chainedEventFlow(Boolean php) FOR model::operations::DataFlowEdgeDestination»
+	/**
+	 * Unexpected data flow edge destination: «this».
+	 * Will not continue chained event trigger expansion. 
+	 */
+«ENDDEFINE»
+
+/**
+ * @implementation Changeable,Value
+ *		When a {@model Changeable#fieldValue} is changed, the {@model Changeable#onChange} {@model Event}
+ *		will be triggered.
+ */
+«DEFINE chainedEventFlow(Boolean php) FOR model::Value»
+	/* Chained event property: «this» */
+	«IF model::Changeable.isInstance(eContainer)»
+		«LET ((model::Changeable) eContainer) AS c»
+		«IF c.onChange != null && c.fieldValue == this»
+			/* A property has changed - call any event triggers in its parent called "edit" */
+			/* We assume the value to pass is stored in 'value' */
+			«EXPAND chainedEvent(php, true, "edit") FOR c.onChange»
+		«ENDIF»
+		«ENDLET»
+	«ELSE»
+		/* A property has changed, but is not contained within something with Event Triggers */
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Chained events?
+ * @param type the type of event, i.e. "edit", "access"
+ */
+«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, String type) FOR model::Event»
+	// expanding chained event trigger «name»
+	«IF type=="edit"»
+		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH listeners.sortBy(e|-e.priority)»
+	«ELSEIF type=="access"»
+		// we don't expand 'access' events as part of a chain
+	«ELSE»
+		«throwException("Unknown event trigger: " + type + " (" + this + ")")»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Specific operation templates.
+ */
+«DEFINE getDataValue(Boolean php) FOR model::operations::DataFlowEdge-»
+	«EXPAND DataFlow::dataSource(php) FOR from-»
+«ENDDEFINE»
+
+
+/**
+ * Get all the inflows for a DecisionOperation[equal], which are
+ * then compared for equality.
+ */
+«DEFINE trueDecisionOperationSource(Boolean php) FOR model::operations::DataFlowEdge-»
+	make_into_boolean(«EXPAND DataFlow::dataSource(php) FOR from-»)
+«ENDDEFINE»
+
+/**
+ * Can the given cast node cast successfully? 
+ */
+«DEFINE getCastCanCast(Boolean php) FOR model::operations::CastNode-»
+	can_cast(
+		«IF inFlows.size != 1»
+			«throwException("Incorrect number of arguments for cast source:" + inFlows.size)»
+		«ENDIF»
+		«EXPAND DataFlow::dataSource(php) FOREACH inFlows.from-»,
+
+		«LET outFlows.select(o | isCastDestination(o.to)) AS targets»
+			«IF targets.size == 0»
+				«throwException("No cast targets found for castNode " + this + ": " + targets.size)»
+			«ELSEIF targets.size > 1»
+				«throwException("Too many cast targets for castNode " + this + ": " + targets.size)»
+			«ENDIF»
+			«EXPAND DataTypes::getDataType(php) FOREACH targets.to-»
+		«ENDLET»
+	)
+«ENDDEFINE»
+
+/**
+ * Assumes that $arg0 has been already set.
+ */
+«DEFINE setFieldValue(Boolean php) FOR model::Value»
+	«IF php»
+		// cast it to something we can actually represent it as first
+		// this make sure we don't accidentally call Javascript's toString() method
+		$arg0 = do_cast(do_cast($arg0, «EXPAND template::operations::Parameters::getTypeURI FOR type»), 'http://openiaml.org/model/datatypes#iamlString');
+
+		«IF containingSession(this) != null»
+			$_SESSION["«safeName(containingSession(this))»_«safeName(this)-»"] = $arg0;
+		«ELSE»
+			set_application_value("«safeName(this)»", $arg0);
+		«ENDIF»
+	«ELSE»
+		var value = arg0;
+		
+			// cast it to something we can actually represent it as first
+			// this make sure we don't accidentally call Javascript's toString() method
+			value = do_cast(value, 'http://openiaml.org/model/datatypes#iamlString');
+		
+			«IF canBeSet(eContainer)»
+				if (containing_frame("«safeName(this)»") == get_frame_id() &&
+						containing_email("«safeName(this)»") == null) {
+					«IF isFieldValue(this)»
+						// set a variable in the current frame
+						«EXPAND DataFlow::dataTarget(php) FOR this» = value;
+					«ELSE»
+						// not a field value
+					«ENDIF»
+					
+					// call client-side onChange manually
+					«EXPAND DataFlow::dataTargetOnChange(php) FOR this»
+					
+					// set server/session variables too
+					«EXPAND OutgoingValues::outgoingValue(eContainer) FOR this»
+				} else {
+					«IF containingSession(this) != null»
+						// the target is a session variable
+						set_session("«safeName(containingSession(this))»_«safeName(this)»", 
+							value, 
+							function_queue);
+						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+						
+					«ELSE»
+						// the target is a remote variable
+	
+						set_application_value("«safeName(this)»", 
+							value, 
+							function_queue);
+						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+					«ENDIF»
+				}
+			«ELSEIF containingSession(this) == null»
+				«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
+				set_application_value("«safeName(this)»", 
+					value, 
+					function_queue);
+				function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+			«ELSE»
+				«REM»contained in a Session: a session value«ENDREM»
+				set_session("«safeName(containingSession(this))»_«safeName(this)»", 
+					value, 
+					function_queue);
+				function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+			«ENDIF»
+	«ENDIF»
+«ENDDEFINE» 
+
+/**
+ * outflowTarget <-- inflowTarget
+ */
+«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Value property) FOR model::operations::SetNode-»
+	«IF inFlows.isEmpty»
+		«throwException("Trying to call a BuiltinOperation with no incoming flows: " + this)»
+	«ENDIF»
+	«IF php»
+		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		if (true) {
+			«EXPAND setFieldValue(php) FOR property»
+	«ELSE»
+		var arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		if (arg0 !== null) {
+			«EXPAND setFieldValue(php) FOR property»
+	«ENDIF»
+
+	«REM»
+		in the future, we might want to make this into a function that is passed
+		to ajax calls and executed once the call is successful.
+	«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+	«ENDFOREACH»
+	
+	}
+	«IF !php» else {
+		// we ignored a null parameter: set the operation as completed
+		// (so we don't fall off the stack)
+		completed = true;
+	}«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Set temporary variable <-- inFlow
+ *
+ * @implementation BuiltinOperation
+ *		There is a global {@model BuiltinOperation} named 'set'. 
+ */
+«DEFINE setOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::SetNode-»
+	«IF model::operations::TemporaryVariable.isInstance(outFlows.first().to)»
+		«REM»set a temporary variable«ENDREM»
+		«IF php»
+			$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«ELSE»
+			temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«ENDIF»
+	«ELSEIF model::operations::ExternalValue.isInstance(outFlows.first().to)»
+		«REM»set a property«ENDREM»
+		«EXPAND setPropertyToValueOperation(start, php, ((model::operations::ExternalValue) outFlows.first().to).value) FOR this»
+	«ELSE»
+		«throwException("Unexpected target to set: " + this)»
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Hide a visible thing.
+ * TODO Remove this method and replace with setVisibility(boolean) : see issue 223
+ *
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'hide'. 
+ */
+«DEFINE hideOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	/* hide a visible thing: «this» */
+	«IF php»
+		// server-side: set property for later
+		«IF containingSession(eContainer) != null»
+			$_SESSION["«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden"] = true;
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", true);
+		«ENDIF»
+	«ELSE»
+		// client-side
+		if (containing_frame("«safeName(eContainer)»") == get_frame_id() &&
+				containing_email("«safeName(eContainer)»") == null) {
+			// it exists on this page
+			document.getElementById('«safeName(eContainer)»').style.display = "none";
+		} else {
+			// it doesn't exist on this page
+		}
+		
+		// persist properties
+		«IF containingSession(eContainer) != null»
+			set_session("«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden", true);
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", true);
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Show a visible thing.
+ * TODO Remove this method and replace with setVisibility(boolean) : see issue 223
+ *
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'show'. 
+ */
+«DEFINE showOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	/* show a visible thing: «this» */
+	«IF php»
+		// server-side: set property for later
+		«IF containingSession(eContainer) != null»
+			$_SESSION["«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden"] = false;
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", false);
+		«ENDIF»
+	«ELSE»
+		// client-side
+		if (containing_frame("«safeName(eContainer)»") == get_frame_id() &&
+				containing_email("«safeName(eContainer)»") == null) {
+			// it exists on this page
+			document.getElementById('«safeName(eContainer)»').style.display = "";
+		} else {
+			// it doesn't exist on this page
+		}
+		
+		// persist properties
+		«IF containingSession(eContainer) != null»
+			set_session("«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden", false);
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", false);
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Send an e-mail.
+ *
+ * @implementation Email,BuiltinOperation
+ *		An {@model Email} has a {@model BuiltinOperation} named 'send'. 
+ */
+«DEFINE sendOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	«IF model::messaging::Email.isInstance(eContainer)»
+		/* send an e-mail: «this» */
+		«LET (model::messaging::Email) eContainer AS email»
+			«EXPAND template::emails::Email::actualEmailOperationCall(php, email)»;
+		«ENDLET»
+	«ELSE»
+		«throwException("Send operation " + this + " is not contained within an expected type: " + eContainer)»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Throw a Javascript alert box on the client-side.
+ * Fails on the server-side.
+ *
+ * TODO remove this and replace with a generic 'alert()' method.
+ *
+ * @implementation BuiltinOperation
+ *		There is a global {@model BuiltinOperation} named 'alert'. 
+ */
+«DEFINE alertOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	«IF php»
+		/*
+		 * Alert: We can only alert on the server-side if we can pass instructions
+		 * onto the client.
+		 */
+		if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
+			«REM»
+				this BuiltinOperation is being called from an ECA rule, 
+				not within an operation; use the passed parameter as input
+			«ENDREM» 
+			$message = $default_arg;
+			log_message("[alert] $message");
+			echo "alert " . escape_parameter_string($message) . "\n";
+		} else {
+			«REM»how are we supposed to throw an alert on the client from an entirely server-side call?«ENDREM»
+			throw new IamlRuntimeException("Cannot call a Javascript alert from server-side");
+		}
+	«ELSE»
+		// throw an alert box
+		«REM»
+		// NOTE: alert boxes currently aren't owned by any element; they are a direct
+		// hack to display something immediately. eventually, this should be replaced
+		// with a generic alert(), that will render an alert box in the most appropriate
+		// way for the alert container. 
+		«ENDREM»
+		alert_without_repeat(
+				«REM»
+					this BuiltinOperation is being called from an ECA rule, 
+					not within an operation; use the passed parameter as input
+				«ENDREM» 
+				default_arg);
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Save a domain object instance.
+ */
+«DEFINE saveOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	«IF model::domain::DomainIterator.isInstance(eContainer)»
+		/* save object instance */
+		«LET (model::domain::DomainIterator) eContainer AS instance»
+			«IF php»
+				save_queued_store_domain_object_«safeNameString(instance.id)-»();
+			«ELSE»
+				/*
+				 * Calling 'save' on a DomainIterator will NOT
+				 * block a Javascript-side call, so there is no way to get
+				 * the result from the server.
+				 */
+				save_queued_store_domain_object('«safeNameString(instance.id)-»');
+			«ENDIF»
+		«ENDLET»
+	«ELSEIF domain::DomainAttributeInstance.isInstance(eContainer)»
+		/* save attribute instance */
+		«LET (domain::DomainAttributeInstance) eContainer AS instance»
+			«IF php»
+				save_queued_store_domain_attribute_«safeNameString(instance.id)-»();
+			«ELSE»
+				/*
+				 * Calling 'save' on a DomainAttributeInstance will NOT
+				 * block a Javascript-side call, so there is no way to get
+				 * the result from the server.
+				 */
+				save_queued_store_domain_attribute('«safeNameString(instance.id)-»');
+			«ENDIF»
+		«ENDLET»
+	«ELSE»
+		«throwException("Save operation " + this + " is not contained within an expected type: " + eContainer)»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Create a new domain object instance.
+ */
+«DEFINE newOperation(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::BuiltinOperation-»
+	«IF model::domain::DomainIterator.isInstance(eContainer)»
+		/* new instance */
+		«LET (model::domain::DomainIterator) eContainer AS instance»
+			«IF php»
+				new_domain_instance_«safeNameString(instance.id)»();
+			«ELSE»
+				/*
+				 * Calling 'new' on a DomainIterator will NOT
+				 * block a Javascript-side call, so there is no way to get
+				 * the result from the server.
+				 */
+				queued_new_domain_instance('«safeNameString(instance.id)-»');
+			«ENDIF»
+		«ENDLET»
+	«ELSE»
+		«throwException("New operation " + this + " is not contained within an expected type: " + eContainer)»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Issue 210: Change 'update' CompositeOperation inference to a BuiltinOperation.
+ *
+ * IMPORTANT: We must provide identical semantics for both the Primitive and
+ * the generated Composite operations. 
+ */
+«DEFINE updateOperation(Boolean php) FOR model::BuiltinOperation»
+	«EXPAND updateOperationForContainer(php, this) FOR eContainer»
+«ENDDEFINE»
+«DEFINE initOperation(Boolean php) FOR model::BuiltinOperation»
+	«EXPAND updateOperationForContainer(php, this) FOR eContainer»
+«ENDDEFINE»
+
+«DEFINE updateOperationForContainer(Boolean php, model::BuiltinOperation operation) FOR emf::EObject»
+	«throwException("'update' BuiltinOperation not defined for container " + this)»
+«ENDDEFINE»
+
+/**
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'update'. 
+ * @implementation VisibleThing,BuiltinOperation
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named 'init'. 
+ */
+«DEFINE updateOperationForContainer(Boolean php, model::BuiltinOperation operation) FOR model::VisibleThing»
+	«IF fieldValue == null»
+		«throwException("Cannot set a null fieldValue: " + this)»
+	«ENDIF»
+	/* 'update' BuiltinOperation */
+	«IF php»
+		$arg0 = $default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ELSE»
+		var arg0 = default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ENDIF»
+	
+	«IF operation.name == "update"»
+		// call outgoing event triggers (if any) 
+		«EXPAND chainedEventFlow(php) FOR fieldValue-»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * @implementation DomainAttributeInstance,BuiltinOperation
+ *		A {@model DomainAttributeInstance} has a {@model BuiltinOperation} named 'update'. 
+ * @implementation DomainAttributeInstance,BuiltinOperation
+ *		A {@model DomainAttributeInstance} has a {@model BuiltinOperation} named 'init'. 
+ */
+«DEFINE updateOperationForContainer(Boolean php, model::BuiltinOperation operation) FOR domain::DomainAttributeInstance»
+	«IF fieldValue == null»
+		«throwException("Cannot set a null fieldValue: " + this)»
+	«ENDIF»
+	/* 'update' BuiltinOperation */
+	«IF php»
+		$arg0 = $default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ELSE»
+		var arg0 = default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ENDIF»
+
+	«IF operation.name == "update"»
+		// call outgoing event triggers (if any) 
+		«EXPAND chainedEventFlow(php) FOR fieldValue-»
+	«ENDIF»
+«ENDDEFINE»

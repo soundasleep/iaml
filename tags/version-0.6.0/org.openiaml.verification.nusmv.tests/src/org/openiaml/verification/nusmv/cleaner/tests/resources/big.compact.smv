@@ -1,0 +1,10 @@
+-- should pass
+MODULE main
+VAR
+operation_start:{null,start1,start2};operation_end:{null,end1,end2};current_step:{null,start1,start2,o1_1,o1_2,o1_3,end1,o2_1,o2_2,end2};in_operation:boolean;
+current_page:{page1,page2};click_button_1:boolean;click_button_2:boolean;temp_var:0..15;y:0..15;
+ASSIGN
+init(operation_start):=null;init(operation_end):=null;init(current_step):=null;init(in_operation):=0;init(temp_var):=0;
+LTLSPEC
+-- comment
+G ((!(operation_start != null -> !(F operation_end != null))) U operation_start = null)

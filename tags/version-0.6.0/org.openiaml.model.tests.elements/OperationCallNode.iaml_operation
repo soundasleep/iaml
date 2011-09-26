@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.operations:ActivityOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.operations="http://openiaml.org/model/operations" id="operations.130cf3ba276.51" name="Container">
+  <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.130cf3ba276.54" name="Call name"/>
+</iaml.operations:ActivityOperation>

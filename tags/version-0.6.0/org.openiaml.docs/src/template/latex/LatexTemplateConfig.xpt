@@ -1,0 +1,286 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexTemplateConfig FOR modeldoc::ModelDocumentation»
+	«FILE "output/latex/config.tex"»
+% Default configuration file for each ModelElement.tex
+% All commands can be renewed to be overridden, i.e. \renewcommand, \renewenvironment
+
+% Include sections options
+\newcommand{\includeTagline}{yes}
+\newcommand{\includeRationale}{yes}
+\newcommand{\includeModeldocStructure}{yes}
+\newcommand{\includeStructure}{yes}
+\newcommand{\includeStructureExtends}{yes}
+\newcommand{\includeStructureSubtypes}{yes}
+\newcommand{\includeStructureAllSubtypes}{yes}
+\newcommand{\includeVisual}{yes}
+\newcommand{\includeVisualMissing}{yes}
+\newcommand{\includeVisualRationale}{yes}
+\newcommand{\includeAttributes}{yes}
+\newcommand{\includeAttributesDirect}{yes}
+\newcommand{\includeAttributesInherited}{yes}
+\newcommand{\includeChildren}{yes}
+\newcommand{\includeChildrenDirect}{yes}
+\newcommand{\includeChildrenInherited}{yes}
+\newcommand{\includeReferences}{yes}
+\newcommand{\includeReferencesDirect}{yes}
+\newcommand{\includeReferencesInherited}{yes}
+\newcommand{\includeOperations}{yes}
+\newcommand{\includeOperationsDirect}{yes}
+\newcommand{\includeOperationsInherited}{yes}
+\newcommand{\includeConditions}{yes}
+\newcommand{\includeConditionsDirect}{yes}
+\newcommand{\includeConditionsInherited}{yes}
+\newcommand{\includeEvents}{yes}
+\newcommand{\includeEventsDirect}{yes}
+\newcommand{\includeEventsInherited}{yes}
+\newcommand{\includeInference}{yes}
+\newcommand{\includeConstraints}{yes}
+\newcommand{\includeImplementationNotes}{yes}
+\newcommand{\includeOpposites}{yes}
+\newcommand{\includeExpandEnumerations}{yes}
+
+% Templates
+\newcommand{\modeldocAbstractInterface}{\noindent Abstract interface.}
+\newcommand{\modeldocAbstract}{\noindent Abstract.}
+\newcommand{\modeldocInterface}{\noindent Interface.}
+\newcommand{\modeldocVisualCaption}[1]{\caption{#1}}
+\newcommand{\modeldocVisualReference}[1]{
+  A visual representation of this element is provided in Figure~\ref{#1}.
+}
+\newcommand{\modeldocName}[2]{\code{#2}}
+\newcommand{\modeldocSection}[1]{\section{#1}}
+\newcommand{\constraintWarning}{\textbf{W:} } % for constraints that give a warning
+\newcommand{\constraintError}{\textbf{E:} } % for constraints that give an error
+\newcommand{\modeldocNoInferenceSemantics}{} % empty
+\newcommand{\modeldocNoDirectConstraints}{} % empty
+\newcommand{\modeldocNoDirectImplementationNotes}{} % empty
+\newcommand{\modeldocAttributeType}[1]{\code{#1}}
+\newcommand{\modeldocOpposite}[1]{ (opposite: #1)}
+\newcommand{\modeldocEnumerationValue}[1]{\code{#1}}
+
+% #1 - property name, e.g. name
+% #2 - property parent, e.g. NamedElement
+% each parameter is already linked e.g. \modelLink
+\newcommand{\inheritedElement}[2]{{#1} (from {#2})}
+
+% #1 - package prefix
+% #2 - package name
+% #3 - class name
+\newcommand{\modeldocExternalClass}[3]{\textit{#3}}
+
+% Environment options
+\newenvironment{modeldocTagline}{
+  % empty
+}{
+  % empty
+}
+
+\newenvironment{modeldocRationale}{
+  \subsection{Rationale}
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructure}{
+  \subsection{Structure}
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructureExtends}{
+  \noindent \textbf{Extends:} 
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructureSubtypes}{
+  \noindent \textbf{Direct subtypes:} 
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructureAllSubtypes}{
+  \noindent \textbf{Additional subtypes:}  
+}{
+  % empty
+}
+
+% visual representation
+\newenvironment{modeldocVisual}{
+  \subsection{Visual Representation}
+}{
+  % empty
+}
+
+% visual representation figure
+\newenvironment{modeldocVisualFigure}{
+  \begin{figure}[htb]
+  \centering
+}{
+  \end{figure}
+}
+
+
+% rationale behind visual representation
+\newenvironment{modeldocVisualRationale}{
+  % empty  
+}{
+  % empty
+}
+
+\newenvironment{modeldocAttributes}{
+  \subsection{Attributes}
+}{
+  % empty
+}
+
+\newenvironment{modeldocAttributesDirect}{
+  \subsubsection{Direct Attributes}
+}{
+  % empty
+}
+
+\newenvironment{modeldocAttributesInherited}{
+  \subsubsection{Inherited Attributes}  
+}{
+  % empty
+}
+
+\newenvironment{modeldocChildren}{
+  \subsection{Children}
+}{
+  % empty
+}
+
+\newenvironment{modeldocChildrenDirect}{
+  \subsubsection{Direct Children}
+}{
+  % empty
+}
+
+\newenvironment{modeldocChildrenInherited}{
+  \subsubsection{Inherited Children}
+}{
+  % empty
+}
+
+\newenvironment{modeldocReferences}{
+  \subsection{References}
+}{
+  % empty
+}
+
+\newenvironment{modeldocReferencesDirect}{
+  \subsubsection{Direct References}
+}{
+  % empty
+}
+
+\newenvironment{modeldocReferencesInherited}{
+  \subsubsection{Inherited References}
+}{
+  % empty
+}
+
+\newenvironment{modeldocOperations}{
+  \subsection{Operations}
+}{
+  % empty
+}
+
+\newenvironment{modeldocOperationsDirect}{
+  \subsubsection{Direct Operations}
+}{
+  % empty
+}
+
+\newenvironment{modeldocOperationsInherited}{
+  \subsubsection{Inherited Operations}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConditions}{
+  \subsection{Conditions}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConditionsDirect}{
+  \subsubsection{Direct Conditions}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConditionsInherited}{
+  \subsubsection{Inherited Conditions}
+}{
+  % empty
+}
+
+\newenvironment{modeldocEvents}{
+  \subsection{Events}
+}{
+  % empty
+}
+
+\newenvironment{modeldocEventsDirect}{
+  \subsubsection{Direct Events}
+}{
+  % empty
+}
+
+\newenvironment{modeldocEventsInherited}{
+  \subsubsection{Inherited Events}
+}{
+  % empty
+}
+
+\newenvironment{modeldocInference}{
+  \subsection{Inference Rules}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConstraints}{
+  \subsection{Constraints}
+}{
+  % empty
+}
+
+\newenvironment{modeldocImplementationNotes}{
+  \subsection{Implementation Notes}
+}{
+  % empty
+}
+
+\newenvironment{modeldocVisualMissing}{
+  % empty
+}{
+  % empty
+}
+
+\newenvironment{modeldocOpposites}{
+  % empty 
+}{
+  % empty
+}
+
+\newenvironment{modeldocExpandEnumerations}{
+  \item Possible values: 
+}{
+  % empty
+}
+
+% a general list environment
+\newenvironment{modeldocList}{
+  \begin{itemize}[leftmargin=0.75cm,parsep=0pt]
+}{
+  \end{itemize}
+}
+
+	«ENDFILE»
+«ENDDEFINE»

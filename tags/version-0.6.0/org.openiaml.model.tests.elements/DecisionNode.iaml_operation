@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.operations:ActivityOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.operations="http://openiaml.org/model/operations" id="operations.130cf3ba276.5d">
+  <nodes xsi:type="iaml.operations:DecisionNode" id="operations.130cf3ba276.60" name="true?"/>
+</iaml.operations:ActivityOperation>

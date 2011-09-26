@@ -1,0 +1,60 @@
+1:
+admin_id: null
+name: null
+user_id: null
+email: null
+admin_user_id: null
+2:
+admin_id: 1
+name: null
+user_id: 1
+email: test@openiaml.org
+admin_user_id: 1
+3:
+admin_id: 1
+name: Test User
+user_id: 1
+email: test@openiaml.org
+admin_user_id: 1
+4:
+admin_id: 1
+name: Test User
+user_id: 1
+email: test@openiaml.org
+admin_user_id: 1
+5:
+admin_id: 1
+name: Test User
+user_id: 1
+email: another@openiaml.org
+admin_user_id: 1
+6:
+admin_id: 1
+name: Test User
+user_id: 1
+email: another@openiaml.org
+admin_user_id: 1
+7:
+admin_id: 1
+name: Test User
+user_id: 1
+email: another@openiaml.org
+admin_user_id: 1
+8:
+admin_id: null
+name: null
+user_id: null
+email: null
+admin_user_id: null
+9:
+admin_id: 2
+name: Changed Name
+user_id: 2
+email: null
+admin_user_id: 2
+9:
+admin_id: 2
+name: Changed Name
+user_id: 2
+email: null
+admin_user_id: 2

@@ -1,0 +1,11 @@
+How to install the Checks mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mapping.py
+
+You should then see 'checks, chk' listed:
+
+  $ pygmentize -L lexers

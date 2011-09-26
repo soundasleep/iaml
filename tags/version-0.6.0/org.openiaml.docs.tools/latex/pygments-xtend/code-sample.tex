@@ -1,0 +1,40 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small]{xtend}
+import iaml;
+
+// initial def
+cached List[model::visual::Frame] redirectsTo(model::visual::Frame this) :
+	onAccess.outActions.to.typeSelect(model::visual::Frame);
+
+// transitivity
+// this approach infinite loops for Inf2
+/*
+cached Boolean doesRedirectTo(model::visual::Page a, model::visual::Page b) :
+	a.redirectsTo().exists( c | c == b|| doesRedirectTo(c, b));
+*/
+
+// we need to keep track of which nodes we have visited
+cached Boolean doesRedirectTo(model::visual::Frame a, model::visual::Frame b, Set[model::visual::Frame] visited) :
+	visited.contains(b) || a.redirectsTo().exists( c | c == b || 
+		doesRedirectTo(c, b, (visited.add(a)).toSet())
+	);
+
+// definition
+infiniteRedirect(model::visual::Frame this) :
+	doesRedirectTo(this, this, {}.toSet());
+	
+model::visual::Frame containingFrame(model::NamedElement this) :
+	if (eContainer == null || name == "empty") 
+		then null
+		else containingFrame(eContainer);
+
+/* default for any EObject */
+model::visual::Frame containingFrame(emf::EObject this) :
+	null;
+	
+isAccessibleOnFrame(model::visual::Frame f, model::Wire wire) :
+	containingFrame(wire.from) == f ||
+	containingFrame(wire.to) == f;
+/**\end{minted}

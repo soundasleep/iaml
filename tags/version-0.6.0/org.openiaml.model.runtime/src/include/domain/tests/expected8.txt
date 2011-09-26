@@ -1,0 +1,112 @@
+1:
+id: null
+student_id: null
+degree: null
+user_id: null
+email: null
+student_user_id: null
+admin_id: null
+name: null
+admin_user_id: null
+2:
+id: 1
+student_id: 1
+degree: null
+user_id: 5
+email: test@openiaml.org
+student_user_id: 5
+admin_id: 5
+name: null
+admin_user_id: 5
+2 (full):
+StudentAdmins.id: 1
+Students.student_id: 1
+Students.degree: null
+Users.user_id: 5
+Users.email: test@openiaml.org
+Students.student_user_id: 5
+StudentAdmins.student_id: 1
+Admins.admin_id: 5
+Admins.name: null
+Admins.admin_user_id: 5
+StudentAdmins.admin_id: 5
+3:
+id: 1
+student_id: 1
+degree: B.Sc.
+user_id: 5
+email: test@openiaml.org
+student_user_id: 5
+admin_id: 5
+name: Test User
+admin_user_id: 5
+4:
+id: 1
+student_id: 1
+degree: B.Sc.
+user_id: 5
+email: test@openiaml.org
+student_user_id: 5
+admin_id: 5
+name: Test User
+admin_user_id: 5
+5:
+id: 1
+student_id: 1
+degree: B.Sc.
+user_id: 5
+email: another@openiaml.org
+student_user_id: 5
+admin_id: 5
+name: Test User
+admin_user_id: 5
+6:
+id: 1
+student_id: 1
+degree: B.Sc.
+user_id: 5
+email: another@openiaml.org
+student_user_id: 5
+admin_id: 5
+name: Test User
+admin_user_id: 5
+7:
+id: 1
+student_id: 1
+degree: B.Sc.
+user_id: 5
+email: another@openiaml.org
+student_user_id: 5
+admin_id: 5
+name: Test User
+admin_user_id: 5
+8:
+id: null
+student_id: null
+degree: null
+user_id: null
+email: null
+student_user_id: null
+admin_id: null
+name: null
+admin_user_id: null
+9:
+id: 2
+student_id: 2
+degree: B.A.
+user_id: 6
+email: null
+student_user_id: 6
+admin_id: 6
+name: Changed Name
+admin_user_id: 6
+9:
+id: 2
+student_id: 2
+degree: B.A.
+user_id: 6
+email: null
+student_user_id: 6
+admin_id: 6
+name: Changed Name
+admin_user_id: 6

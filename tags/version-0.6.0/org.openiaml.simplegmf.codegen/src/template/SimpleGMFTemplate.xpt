@@ -1,0 +1,19 @@
+«IMPORT simplegmf»
+«IMPORT ecore»
+
+«EXTENSION metamodel::SimpleGMFExtensions»
+
+«DEFINE main FOR simplegmf::GMFConfiguration»
+	«EXPAND GmfGraph::generateGmfGraph FOR this»
+	
+	«EXPAND GmfTool::generateGmfTool(this) FOREACH diagramEditors»
+
+	«EXPAND GmfMap::generateGmfMap(this) FOREACH diagramEditors»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

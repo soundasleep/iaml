@@ -1,0 +1,32 @@
+<p>
+A {@model Scope} may contain at most one {@model LoginHandler}. All access to elements within this {@model Scope}, or its children {@model Scope}s, must first <i>satisfy</i> the {@model LoginHandler}. The method in which a {@model LoginHandler} may be <i>satisfied</i> depends on the {@model LoginHandler#type} of the {@model LoginHandler}. A {@model LoginHandler} must have at least one incoming {@model Parameter} in order to specify the necessary credentials.
+<!-- more than one incoming edge necessary for domain object, as it selects multiple attributes -->
+</p>
+
+<p>
+A {@model LoginHandler} must provide a <i>login</i> interface, in which the current user can provide credentials in order to satisfy the {@model LoginHandler}. A {@model LoginHandler} must also provide a <i>logout</i> interface, in which the current user can remove credentials used to satisfy the {@model LoginHandler}. Any credentials supplied by the user to satisfy the {@model LoginHandler} are stored according to the <i>storage semantics</i> of the protected {@model Scope}.
+</p>
+
+<!-- discussed further in \sectionref{section:model-scopes}. -->
+
+<h3>Secret Key</h3>
+
+<p>
+<!-- TODO it should be possible to have dynamic passwords, e.g. an incoming edge from a text field -->
+<!-- (\sectionref{section:model-property-storage}) -->
+A <i>secret key</i> {@model LoginHandler} must have exactly one incoming {@model Parameter} from a value instance element, specifying a particular password. When accessing a {@model Scope} protected by a <i>secret key</i> {@model LoginHandler}, this password must first be provided by the user.
+</p>
+
+<h3>Domain Object</h3>
+
+<p>
+A <i>domain object</i> {@model LoginHandler} must have at least one incoming {@model Parameter}, each from a {@model DomainAttribute} instance. All incoming {@model DomainAttribute}s must belong either directly or indirectly (through inheritance) to a single {@model DomainType} (the <i>target schema</i>).
+</p>
+
+<p>
+The <i>login</i> interface for this {@model LoginHandler} must therefore provide one user interface element per incoming {@model DomainAttribute} in order to provide query values. When accessing a {@model Scope} protected by a <i>domain object</i> {@model LoginHandler}, these query values will be used in order to select a valid instance. A <i>domain object</i> {@model LoginHandler} will only be satisfied if there exists at least one valid instance for these query values.
+</p>
+
+<p>
+A <i>domain object</i> {@model LoginHandler} may have any number of outgoing {@model SetWire}s to {@model DomainIterator}s. When a {@model LoginHandler} is satisfied, all of these {@model DomainIterator}s will be populated with the valid {@model DomainType} instances selected. If this {@model LoginHandler} is not satisfied, these {@model DomainIterator}s will be {@model DomainIterator#empty}.
+</p>

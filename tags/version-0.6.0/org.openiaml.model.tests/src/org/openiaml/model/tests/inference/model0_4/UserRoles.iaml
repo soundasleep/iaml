@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233afe61d2.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
+    <accessHandlers id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.1052"/>
+    </accessHandlers>
+  </scopes>
+  <types xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.1052" inSchemas="domain.128807fbeba.1054" inRequiresEdges="wires.1233afe62eb.2d"/>
+  <sources id="domain.128807fbeba.1053" outSchemas="domain.128807fbeba.1054">
+    <schemaEdges id="domain.128807fbeba.1054" from="domain.128807fbeba.1053" to="domain.128807fbeba.1052"/>
+  </sources>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

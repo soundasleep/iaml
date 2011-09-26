@@ -1,0 +1,23 @@
+import iaml;
+
+// initial def
+Set[model::visual::Frame] incomingPages(model::visual::Frame this) :
+	listeners.select(w|w.name == "onClick")
+		.trigger.typeSelect(model::visual::Button)
+		.eContainer.typeSelect(model::visual::Frame)
+		
+	.union(
+		rules
+		.trigger.typeSelect(model::Event).select(e|e.name == "click" || e.name == "onClick")
+		.eContainer.typeSelect(model::visual::Button)
+		.eContainer.typeSelect(model::visual::Frame)		
+	);
+
+// transitivity
+Boolean connectedToHomePage(model::visual::Frame this) :
+	name == "Home" ||
+	(!incomingPages().isEmpty && incomingPages().exists(p | connectedToHomePage(p)));
+	
+// definition
+accessible(model::visual::Frame this) :
+	connectedToHomePage(this);

@@ -1,0 +1,11 @@
+<p>
+Every <i>visitor</i> to a web application is assigned a unique identifier in order to promote them to a <i>user</i>. If a {@model Session} is accessed by a user and no association exists between the users' unique identifier and the given {@model Session}, then a new relationship is created and stored as part of the {@model InternetApplication}. The current user now <i>owns</i> that {@model Session}. When this occurs, the {@event onInit} event for that {@model Session} is triggered.
+</p>
+
+<p>
+If the current <i>user</i> restarts their web browser, the <i>user</i> will lose their unique identifier and will be demoted back into a <i>visitor</i>. Once a unique identifier has been lost, there is no way to regain access to a particular {@model Session}, and a new {@model Session} relationship will have to be defined. Sessions may also <i>time out</i> after a specified period of activity, and this period of activity should be configurable by the model developer.
+</p>
+
+<p>
+An IAML model instance may contain any number of {@model Session}s. The <i>storage semantics</i> for a {@model Session} are as follows: For a {@model Value} directly contained within a {@model Session}, any stored value is only accessible to the user that <i>owns</i> the containing {@model Session}. Once the {@model Session} ownership has been lost, any stored value is no longer accessible. Similarly, the values stored within a {@model DomainIterator} (including the current <i>instance pointer</i>) are only accessible to the current <i>user</i>.
+</p>

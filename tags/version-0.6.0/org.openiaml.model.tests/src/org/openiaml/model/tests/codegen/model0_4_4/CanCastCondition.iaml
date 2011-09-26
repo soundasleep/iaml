@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1274f76bcd9.36">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.1274f76bcd9.50" name="can cast?" conditioned="wires.1274f76c1da.6a">
+      <conditionEdges id="wires.1274f76c1da.6a" name="bar" function="model.1274f76bcd9.50" conditioned="wires.1274f76c1da.64"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.62" name="can cast?" outExecutions="model.1274f8f028d.33 model.1274f8f028d.35" inExecutions="model.1274f8f028d.36" inFlows="model.1274f8f028d.2e"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f877c61.31" outExecutions="model.1274f8f028d.36"/>
+      <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f877c61.3b" inExecutions="model.1274f8f028d.33"/>
+      <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.3c" inExecutions="model.1274f8f028d.35"/>
+      <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4b" outFlows="model.1274f8f028d.2d model.1274f8f028d.2e" inFlows="model.1274f8f028d.2b"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.1274f8f028d.2b" value="model.1274f76bcd9.69"/>
+      <dataEdges id="model.1274f8f028d.2b" from="ev1" to="operations.127503c4bc5.4b"/>
+      <dataEdges id="model.1274f8f028d.2d" from="operations.127503c4bc5.4b" to="model.1274f877ba5.c9"/>
+      <dataEdges id="model.1274f8f028d.2e" from="operations.127503c4bc5.4b" to="operations.1274f877c61.62"/>
+      <executionEdges id="model.1274f8f028d.33" name="y" from="operations.1274f877c61.62" to="operations.1274f877c61.3b"/>
+      <executionEdges id="model.1274f8f028d.35" name="n" from="operations.1274f877c61.62" to="operations.1274f877c61.3c"/>
+      <executionEdges id="model.1274f8f028d.36" from="operations.1274f877c61.31" to="operations.1274f877c61.62"/>
+      <variables id="model.1274f877ba5.c9" name="target" inFlows="model.1274f8f028d.2d" type="builtin_iamlInteger"/>
+    </functions>
+    <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.1274f76c1da.64" id="model.1274f76bcd9.47" name="convert and insert">
+      <nodes xsi:type="iaml.operations:SetNode" id="model.1274f8533f5.28" outExecutions="model.1274f8533f5.2b" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" inFlows="model.1274f8f028d.3a4"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.10" name="can cast?" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27" inExecutions="model.1274f8f028d.25a" inFlows="model.1274f8f028d.3a3"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f8534e0.1" outExecutions="model.1274f8f028d.25a"/>
+      <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4e" outFlows="model.1274f8f028d.3a3 model.1274f8f028d.3a4 model.1274f8f028d.3a7" inFlows="model.1274f8533f5.25"/>
+      <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f8534e0.3" inExecutions="model.1274f8533f5.2b"/>
+      <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.7" inExecutions="model.1274f877ba5.26" exceptionText="unexpectedly had a conversion failure"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.1274f8533f5.25" value="model.1274f76bcd9.69"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.1274f8533f5.2a" value="model.1274f76bcd9.95"/>
+      <nodes xsi:type="iaml.operations:ExternalValue" id="ev4" inFlows="model.1274f8f028d.3a7" value="model.1274f76bcd9.95"/>
+      <dataEdges id="model.1274f8533f5.25" from="ev2" to="operations.127503c4bc5.4e"/>
+      <dataEdges id="model.1274f8533f5.2a" from="model.1274f8533f5.28" to="ev3"/>
+      <dataEdges id="model.1274f8f028d.3a3" from="operations.127503c4bc5.4e" to="operations.1274f877c61.10"/>
+      <dataEdges id="model.1274f8f028d.3a4" from="operations.127503c4bc5.4e" to="model.1274f8533f5.28"/>
+      <dataEdges id="model.1274f8f028d.3a7" from="operations.127503c4bc5.4e" to="ev4"/>
+      <executionEdges id="model.1274f8533f5.2b" from="model.1274f8533f5.28" to="operations.1274f8534e0.3"/>
+      <executionEdges id="model.1274f877ba5.26" name="n" from="operations.1274f877c61.10" to="operations.1274f877c61.7"/>
+      <executionEdges id="model.1274f877ba5.27" name="y" from="operations.1274f877c61.10" to="model.1274f8533f5.28"/>
+      <executionEdges id="model.1274f8f028d.25a" from="operations.1274f8534e0.1" to="operations.1274f877c61.10"/>
+    </operations>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.123" name="String" type="builtin_iamlString">
+      <fieldValue id="model.1274f76bcd9.69" name="fieldValue" type="builtin_iamlString"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.129" name="Target" type="builtin_iamlInteger">
+      <fieldValue id="model.1274f76bcd9.95" name="fieldValue" type="builtin_iamlInteger"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.1274f76c0e0.131" name="Run" listeners="wires.1274f76c1da.64">
+      <ecaRules id="wires.1274f76c1da.64" conditions="wires.1274f76c1da.6a" name="onClick" trigger="visual.1274f76c0e0.131" target="model.1274f76bcd9.47"/>
+    </children>
+  </scopes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

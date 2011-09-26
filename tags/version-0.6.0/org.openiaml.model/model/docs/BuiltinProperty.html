@@ -1,0 +1,33 @@
+<h3>empty, not empty</h3>
+<p>
+The {@model Changeable#empty} and {@model Changeable#notEmpty} {@model BuiltinProperty}s are defined for all {@model Changeable} elements; that is, elements which contain a {@model Changeable#fieldValue}. A particular value is considered <i>empty</i> if and only if the instance cannot be cast to a {@type boolean} value, or if the casted {@type boolean} value is <code>false</code>.
+</p>
+
+<p>
+The {@model Changeable#empty} {@model Predicate} is a successful condition if and only if, with respect to the {@model Changeable} element that contains the {@model Predicate}, the {@model Changeable#fieldValue} is either not set (according to the ``fieldValue is set?'' {@model BuiltinProperty} below), or can be considered <i>empty</i>. Conversely, the '{@model Changeable#notEmpty} {@model Predicate} is a successful condition if and only if the {@model Changeable#empty} {@model Predicate} is not successful.
+</p>
+
+<p>
+The {@model DomainIterator#empty} element is also defined for all {@model DomainIterator} elements, and this {@model Predicate} is considered successful if and only if there are no valid results for the current {@model DomainIterator} {@model DomainIterator#query}.
+</p>
+
+<h3>fieldValue is set</h3>
+<p>
+The "fieldValue is set?" {@model BuiltinProperty} is defined for all {@model Changeable} elements. This {@model Predicate} is a successful condition if and only if, with respect to the {@model Changeable} element that contains the {@model Predicate}, the {@model Changeable#fieldValue} is <i>not set</i> as described in {@model Value}. This {@model Predicate} is therefore successful even if the current {@model Changeable#fieldValue} can be considered <i>empty</i>.
+</p>
+
+<h3>can cast</h3>
+<p>
+The {@model Changeable#canCast} {@model BuiltinProperty} is defined for all {@model Changeable} elements, and accepts one incoming value <i>value</i> as a {@model ActivityParameter}.  This {@model Predicate} is a successful condition if and only if the given <i>value</i> can be successfully cast to the type of the {@model Changeable#fieldValue} of the {@model Changeable} that contains the {@model Predicate}.
+</p>
+
+<h3>can save</h3>
+<p>
+<!-- TODO should also be defined for all DomainAttributeInstances -->
+The {@model DomainInstance#canSave} {@model BuiltinProperty} is defined for all {@model DomainInstance}s and {@model DomainAttributeInstance}s{@issue 230}. This {@model Predicate} is a successful condition if and only if the current {@model DomainInstance} or {@model DomainAttributeInstance} can be saved successfully, according to the semantics of the "save" {@model BuiltinOperation}.
+</p>
+
+<h3>has next, has previous</h3>
+<p>
+The {@model DomainIterator#hasNext} and {@model DomainIterator#hasPrevious} {@model BuiltinProperty}s are defined for all {@model DomainIterator}s. These {@model Predicate}s are successful if and only if an attempt to increment or decrement the current <i>instance pointer</i> of the {@model DomainIterator} -- according to the semantics defined by the `next' and `previous' {@model BuiltinOperation}s -- will not result in an out-of-bounds exception which would trigger any <i>failure handlers</i>.
+</p>

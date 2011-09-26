@@ -1,0 +1,169 @@
+/**
+ * Creates the default {@model Event}s and {@model Condition}s of
+ * {@model VisibleThing}s.
+ */
+package org.openiaml.model.drools.rules.visible
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference VisibleThing
+ *		{@model VisibleThing}s have an {@model Event} named {@model VisibleThing#onInput}.
+ */
+rule "VisibleThings have an event onInput"
+	when
+		field : VisibleThing ( )
+		not ( event : Event ( field.onInput == event ))
+	
+		eval ( handler.veto( field ))
+	
+	then
+		Event event = handler.generatedEventOnInput(field, field);
+		handler.setName(event, "onInput");
+		queue.add(event, drools);
+
+end
+
+/**
+ * We only create currentInput for things that can actually use it, to
+ * simplify the completed model; i.e. only text fields.
+ *
+ * @inference InputTextField
+ *		{@model InputTextField}s have an {@model Value} named {@model InputTextField#currentInput}.
+ */
+rule "InputTextFields have a Value currentInput"
+	when
+		field : InputTextField ( )
+		type : EXSDDataType( definition != null, 
+			definition.URI == "http://openiaml.org/model/datatypes#iamlString" )
+		not ( property : Value ( field.currentInput == property ))
+	
+		eval ( handler.veto( field ))
+	
+	then
+		Value property = handler.generatedValueCurrentInput(field, field);
+		handler.setName(property, "currentInput");
+		handler.setType(property, type);
+		queue.add(property, drools);
+
+end
+
+/**
+ * @inference VisibleThing
+ *		{@model VisibleThing}s have an {@model Event} named {@model VisibleThing#onClick}.
+ */
+rule "VisibleThings have an event onClick"
+	when
+		f : VisibleThing( )
+		not (event : Event( f.onClick == event ))
+				
+		eval ( handler.veto( f ))
+			
+	then
+		Event event = handler.generatedEventOnClick(f, f);
+		queue.add(event, drools);
+		
+end
+
+/**
+ * @inference VisibleThing
+ *		{@model VisibleThing}s have an {@model BuiltinProperty} named {@model VisibleThing#empty}.
+ */
+rule "VisibleThings have a BuiltinProperty 'empty'"
+	when
+		f : VisibleThing( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
+		not (condition : Function( f.empty == condition ))
+				
+		eval ( handler.veto( f ))
+			
+	then
+		BuiltinProperty condition = handler.generatedBuiltinProperty(f, f,
+			ModelPackage.eINSTANCE.getVisibleThing_Empty());
+		handler.setName(condition, "empty");
+		handler.setType(condition, type);
+		queue.add(condition, drools);
+		
+end
+
+/**
+ * @inference VisibleThing
+ *		{@model VisibleThing}s have an {@model BuiltinProperty} named {@model VisibleThing#notEmpty}.
+ */
+rule "VisibleThings have a BuiltinProperty 'not empty'"
+	when
+		f : VisibleThing( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
+		not (condition : Function( f.notEmpty == condition ))
+				
+		eval ( handler.veto( f ))
+			
+	then
+		BuiltinProperty condition = handler.generatedBuiltinProperty(f, f,
+			ModelPackage.eINSTANCE.getVisibleThing_NotEmpty());
+		handler.setName(condition, "not empty");
+		handler.setType(condition, type);
+		queue.add(condition, drools);
+		
+end
+
+/**
+ * @inference VisibleThing
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named {@model BuiltinOperation#hide}.
+ */
+rule "Create 'hide' BuiltinOperation for VisibleThing"
+	when
+		tf : VisibleThing( )
+		not ( op : Operation ( name == "hide", eContainer == tf ))
+		
+		eval ( handler.veto( tf ))
+	
+	then
+		BuiltinOperation warning = handler.generatedBuiltinOperation(tf, tf);
+		handler.setName(warning, "hide");
+		queue.add(warning, drools);
+	
+end
+
+/**
+ * @inference VisibleThing
+ *		A {@model VisibleThing} has a {@model BuiltinOperation} named {@model BuiltinOperation#show}.
+ */
+rule "Create 'show' BuiltinOperation for VisibleThing"
+	when
+		tf : VisibleThing( )
+		not ( op : Operation ( name == "show", eContainer == tf ))
+		
+		eval ( handler.veto( tf ))
+	
+	then
+		BuiltinOperation warning = handler.generatedBuiltinOperation(tf, tf);
+		handler.setName(warning, "show");
+		queue.add(warning, drools);
+	
+end
+

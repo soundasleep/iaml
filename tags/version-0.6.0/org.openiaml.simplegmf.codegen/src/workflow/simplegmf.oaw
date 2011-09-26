@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- a runtime-based workflow -->
+<workflow>
+	<!-- property model: part of caller -->
+	<!-- property src-gen: part of caller -->
+	
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
+		<platformUri value=".."/>
+       	<registerGeneratedEPackage value="org.openiaml.simplegmf.model.simplegmf.SimpleGMFPackage" /><!-- loads subpackages -->
+       	<registerGeneratedEPackage value="org.eclipse.emf.ecore.EcorePackage" /><!-- loads subpackages -->
+	</bean>
+
+	<!-- get model already loaded in memory, and store it in slot 'model' -->
+	<component class="org.openiaml.simplegmf.codegen.CurrentModel">
+		<modelSlot value="model" />
+	</component>
+	
+	<!-- check model (and load metamodel) -->
+	<component class="oaw.check.CheckComponent">
+		<metaModel id="mm"
+			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
+		<checkFile value="metamodel::SimpleGMFChecks" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+
+	<!-- generate code -->
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="mm"/>
+		<expand
+			value="template::SimpleGMFTemplate::main FOR model" />
+		<outlet path="${src-gen}" >
+			<postprocessor class="org.openiaml.simplegmf.codegen.XMLBeautifier"/>
+		</outlet>
+	</component>
+
+</workflow>

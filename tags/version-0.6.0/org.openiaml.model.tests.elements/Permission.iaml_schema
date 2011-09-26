@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.domain:DomainType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.130cf3ba739.4d">
+  <permissions id="users.130cf3ba833.15" name="Permission name"/>
+</iaml.domain:DomainType>

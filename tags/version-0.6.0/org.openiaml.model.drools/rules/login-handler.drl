@@ -1,0 +1,2371 @@
+/**
+ * Secures {@model Scope}s based on {@model LoginHandler}s and
+ * {@model AccessControlHandler}s.
+ */
+package org.openiaml.model.drools.rules.login_handler
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * See: Issue 118.
+ *
+ * @inference LoginHandler
+ *		A {@model Scope} protected by a {@model LoginHandler} will define a separate
+ *		<em>login {@model Session}</em>, allowing session-unique authentication.
+ */
+rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
+	when
+		container : InternetApplication( )
+		scope : Scope( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		not ( login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) ))
+			
+		eval ( handler.veto( login_handler ))
+	
+	then
+		Session login_session = handler.generatedSession(login_handler, container);
+		handler.setName(login_session, login_handler.getName() + " login");
+		queue.add(login_session, drools);	
+	
+end
+
+/**
+ * @inference LoginHandler,Frame
+ *		A {@model Scope} protected by a {@model LoginHandler} will create a
+ *		<em>login {@model Frame}</em> named 'login' within the <em>login {@model Session}</em>.
+ */
+rule "Create default 'login' page for LoginHandlers"
+	when
+		container : InternetApplication( )
+		scope : Scope( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		not ( Frame ( eContainer == login_session, name == "login" ))
+		not ( ECARule ( trigger == login_handler, name == "login" ))
+			
+		eval ( handler.veto( login_handler ))
+		
+	then
+
+		Frame login = handler.generatedFrame(login_handler, login_session);
+		handler.setName(login, "login");
+		queue.add(login, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,Frame
+ *		The <em>login {@model Frame}</em> created for a {@model LoginHandler} protecting a {@model Scope} 
+ *		will be provided as the {@model ECARule login rule} for the {@model LoginHandler} if none is specified.
+ */
+rule "Connect default 'login' page to LoginHandler"
+	when
+		container : InternetApplication( )
+		scope : Scope( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login_page : Frame ( eContainer == login_session, name == "login" )
+		
+		not ( ECARule ( trigger == login_handler, target == login_page, name == "login" ))
+			
+		eval ( handler.veto( login_handler ))
+		
+	then
+	
+		ECARule edge = handler.generatedECARule(login_handler, login_session, login_handler, login_page);
+		handler.setName(edge, "login");
+		queue.add(edge, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,Frame
+ *		A {@model Scope} protected by a {@model LoginHandler} will create a
+ *		<em>logout {@model Frame}</em> named 'logout' within the same {@model Scope}.
+ */
+rule "Create 'logout' page for LoginHandlers"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		not (Frame (eContainer == scope, name=="logout" ))
+				
+		eval ( handler.veto( login_handler ))
+		
+	then
+
+		Frame logout = handler.generatedFrame(login_handler, scope);
+		handler.setName(logout, "logout");
+		queue.add(logout, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ECARule
+ *		If a {@model LoginHandler} has an outgoing {@model ECARule navigation rule} named 'logout',
+ *		then this navigation rule will be {@model ECARule executed} when the <em>logout {@model Frame}</em>
+ *		is {@model Frame#onAccess accessed}.
+ */
+rule "Instruct 'logout' page to follow to the actual logout destination if set"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		logout : Frame (eContainer == scope, name=="logout" )
+		
+		destination : Frame ( this != logout )
+		navigate : ECARule ( trigger == login_handler, target == destination, name == "logout")
+
+		access : Event ( eContainer == logout, logout.onAccess == access )
+		not (ECARule ( trigger == access, target == destination ))
+		
+		eval ( handler.veto( login_handler ))
+	
+	then
+		ECARule wire = handler.generatedECARule(login_handler, logout, access, destination);
+		handler.setName(wire, "redirect to intended logout page");
+		handler.setPriority(wire, -100);
+		queue.add(wire, drools);
+
+end
+
+/**
+ * @inference LoginHandler,Value
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will define a {@model Value}
+ *		named 'current login key' in the protected {@model Session} as the <em>stored key</em>, if no 
+ *		outgoing {@model SetWire} named 'set' from the {@model LoginHandler} is defined.
+ */
+rule "Create 'key attribute' property for LoginHandler[type = key]s"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+
+		not (Value (eContainer == scope, 
+			name=="current login key" ) )
+
+		# the value may not be named "current login key"
+		not (
+			exists ( actual_key : Value ( )
+				and SetWire ( name == "set", from == login_handler, to == actual_key )
+			)
+		) 
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+
+		Value key = handler.generatedValue(login_handler, scope);
+		handler.setName(key, "current login key");
+		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
+		handler.setValue(key, ModelPackage.eINSTANCE.getValue_DefaultValue(), "");
+		queue.add(key, drools);
+		
+end
+
+/**
+ * @inference LoginHandler
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will connect to a
+ *		{@model Value} named 'current login key' as the <em>stored key</em> using a {@model SetWire} named 'set'.
+ */
+rule "Connect 'key' property to LoginHandler"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope )
+		key : Value (eContainer == scope,
+			name == "current login key")
+		not (SetWire( from == login_handler, to == key, name == "set") )
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+
+		SetWire wire = handler.generatedSetWire(login_handler, scope, login_handler, key);
+		handler.setName(wire, "set");
+		queue.add(wire, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will create an
+ *		{@model ActivityOperation} 'check key' within the protected {@model Session}.
+ */
+rule "Create 'check key' operation for LoginHandler[type = key]"
+	when
+		scope : Session( ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		not (Operation( eContainer == scope, name == "check key") )
+					
+		eval ( handler.veto( login_handler ))
+					
+	then
+		ActivityOperation op = handler.generatedActivityOperation( login_handler, scope );
+		handler.setName(op, "check key");
+		queue.add(op, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ECARule
+ *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
+ *		will {@model ECARule execute} the 'check key' {@model Operation} with a high {@model ECARule#priority}
+ *		when the frame is {@model Frame#onAccess accessed}.
+ */
+rule "Connect 'access' event to 'check' operations"
+	when
+		scope : Session( )
+		page : Frame( eContainer == scope )
+		access : Event( page.onAccess == access, eContainer == page )
+		check : ActivityOperation( name == "check key" || name == "check instance", eContainer == scope )
+		not (ECARule( trigger == access, target == check ))
+				
+		eval ( handler.veto( scope ))
+		
+	then
+		ECARule wire = handler.generatedECARule(scope, page, access, check);
+		handler.setName(wire, "run");
+		handler.setPriority(wire, 100); // high priority
+		queue.add(wire, drools);	
+	
+end
+
+/**
+ * @inference LoginHandler,Parameter
+ *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
+ *		will provide the <em>stored key</em> as a {@model Parameter} to the executed 'check key' {@model Operation}.
+ */
+rule "Connect 'login key' parameter to 'check key' operation run wire"
+	when
+		scope : Session( )
+		page : Frame( eContainer == scope )
+		access : Event( page.onAccess == access, eContainer == page )
+		check : ActivityOperation( name == "check key", eContainer == scope )
+		
+		login_handler : LoginHandler( eContainer == scope )
+		value : Value( )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
+		
+		wire : ECARule( trigger == access, target == check )
+		not ( Parameter ( parameterValue == value, parameterTerm == wire ))
+				
+		eval ( handler.veto( scope ))
+		
+	then
+		Parameter param = handler.generatedParameter(scope, page, value, wire);
+		handler.setName(param, "[sessions] 'login key' parameter to 'check key'");
+		queue.add(param, drools);
+
+end
+
+/**
+ * @inference LoginHandler,Parameter
+ *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
+ *		will {@model ECARule navigate} to the <em>login {@model Frame}</em> if the 'check key'  {@model Operation} fails.
+ */
+rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Frame"
+	when
+		container : ContainsWires( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+		check : ActivityOperation( name == "check key" || name == "check instance", eContainer == scope )
+		not (ECARule( trigger == check, target == login, name == "fail") )
+			
+		eval ( handler.veto( scope ))
+	
+	then
+		ECARule fail = handler.generatedECARule(scope, scope, check, login);
+		handler.setName(fail, "fail");
+		queue.add(fail, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'check key', used to check the status
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> against an incoming {@model Parameter} to the handler,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'check key' operation [type=secret_key]"
+	when
+		scope : Session( )
+		o : ActivityOperation( name == "check key", eContainer == scope )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		
+		expected : Value( ) 
+		expected_param : Parameter ( parameterValue == expected, parameterTerm == login_handler )
+		
+		not (StartNode( eContainer == o))
+		# not (FinishNode( eContainer == o)) - not necessary
+			
+		eval ( handler.veto( o ))
+	
+	then
+		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
+		handler.setName(parameter, "current key value");
+		queue.add(parameter, drools);
+		
+		DecisionNode op = handler.generatedDecisionNode(o, o);
+		handler.setName(op, "equal?");
+		queue.add(op, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Error: Key check failed. You may need to login.");
+		queue.add(cancel, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, parameter);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+		
+		ExternalValue ev_expected = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_expected, expected);
+		queue.add(ev_expected, drools);
+		
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, ev_expected);
+		handler.setTo(data2, op);
+		queue.add(data2, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setName(edge2, "yes");
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+		
+		# not ok	
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
+		handler.setName(edge3, "no");
+		handler.setFrom(edge3, op);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'check instance', used to check the status
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> that a {@model DomainIterator} is not {@model DomainIterator#empty},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'check instance', used to check the status
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> that a {@model DomainIterator} is not {@model DomainIterator#empty},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'check instance' operation [type=domain_object or user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		instance : DomainIterator ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+		
+		ex : Function ( instance.empty == ex )
+				
+		checkOperation : ActivityOperation ( eContainer == scope, name == "check instance" )
+
+		not ( StartNode ( eContainer == checkOperation ))
+		
+		eval ( handler.veto( checkOperation ))
+
+	then
+		StartNode start = handler.generatedStartNode(checkOperation, checkOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(checkOperation, checkOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(checkOperation, checkOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid domain instance, you need to login.");
+		queue.add(cancel, drools);
+		
+		# a conditional check		
+		DecisionNode check = handler.generatedDecisionNode(checkOperation, checkOperation);
+		handler.setName(check, "true?");
+		queue.add(check, drools);
+		
+		# connect with a SimpleCondition
+		SimpleCondition ce = handler.generatedSimpleCondition(checkOperation, checkOperation, ex, check);
+		queue.add(ce, drools);
+		
+		ExecutionEdge edge0 = handler.generatedExecutionEdge(checkOperation, checkOperation);
+		handler.setFrom(edge0, start);
+		handler.setTo(edge0, check);		
+		queue.add(edge0, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(checkOperation, checkOperation);
+		handler.setName(edge1, "no");
+		handler.setFrom(edge1, check);
+		handler.setTo(edge1, finish);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(checkOperation, checkOperation);
+		handler.setName(edge2, "yes");
+		handler.setFrom(edge2, check);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+end
+
+/*
+We don't want the expected login key to connect to the operation: it is already
+explicitly defined in the Operation itself.
+disabled-rule "Connect expected login key as parameter to check key operation"
+	when 
+		scope : Session( )
+		page : Frame( eContainer == scope )
+		access : Event( name == "access", eContainer == page )
+		check : ActivityOperation( name == "check key", eContainer == scope )
+		wire : ECARule( trigger == access, to == check )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		expected : StaticValue( ) 
+		expected_param : Parameter( from == expected, to == login_handler )
+		
+		not (ParameterEdge(from == expected, to == check ))	
+	
+	then
+		Parameter param = handler.generatedParameter(login_handler, page, expected, wire);
+		queue.add(param, drools);
+	
+end
+*/
+
+/**
+ * @inference LoginHandler,InputForm
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		contain an {@model InputForm} named 'login form'.
+ */
+rule "Create login form for 'login' pages"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+
+		not (InputForm( eContainer == login ))
+				
+		eval ( handler.veto( login_handler ))
+		
+	then
+		InputForm form = handler.generatedInputForm(login_handler, login);
+		handler.setName(form, "login form");
+		queue.add(form, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,Button
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		contain an {@model Button} named 'login'.
+ */
+rule "Create 'Login' button for login form"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+		
+		form : InputForm ( name == "login form", eContainer == login )
+
+		not (Button( name == "Login", eContainer == form ))
+				
+		eval ( handler.veto( login_handler ))
+		
+	then
+		Button button = handler.generatedButton(form, form);
+		handler.setName(button, "Login");
+		handler.setRenderOrder(button, 60);		// at the end of the form
+		queue.add(button, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,Button
+ *		The 'login' {@model Button} in the <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		{@model ECARule execute} the 'do login' {@model Operation} within the {@model LoginHandler}
+ *		when the button is {@model Button#onClick clicked}.
+ */
+rule "Connect 'Login' button to 'do login' operation"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+
+		form : InputForm ( eContainer == login, name == "login form" )
+		button : Button ( eContainer == form, name == "Login" )
+		
+		operation : Operation ( eContainer == login_session, name == "do login" )
+		
+		not (ECARule ( trigger == button, target == operation, name == "onClick"))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ECARule run = handler.generatedECARule(login_handler, login, button, operation);
+		handler.setName(run, "onClick");
+		queue.add(run, drools);
+
+end
+
+/**
+ * @inference LoginHandler,Button
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will
+ *		contain an {@model InputTextField} named 'login key'.
+ */
+rule "Create text fields for login form of 'login' pages [type=secret_key]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		not ( InputTextField ( eContainer == form, name == "login key" ))
+					
+		eval ( handler.veto( form ))
+		
+	then
+
+		InputTextField field = handler.generatedInputTextField(form, form);
+		handler.setName(field, "login key");		# login field name
+		queue.add(field, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do login', used to actually implement the login operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'do login' operation [type=secret_key]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+
+		value : Value( )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
+
+		expected : Value( ) 
+		expected_param : Parameter( parameterValue == expected, parameterTerm == login_handler )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		button : Button ( eContainer == form, name == "Login" )
+		
+		field : InputTextField ( eContainer == form, name == "login key" )
+		fieldValue : Value( field.fieldValue == fieldValue )
+		
+		loginOperation : ActivityOperation ( eContainer == login_session, name == "do login" )
+		runClick : ECARule ( trigger == button, target == loginOperation, name == "onClick" )
+		
+		not ( StartNode ( eContainer == loginOperation ))
+		
+		eval ( handler.veto( loginOperation ))
+			
+	then
+		
+		# connect field value as parameter
+		Parameter clickParam = handler.generatedParameter(loginOperation, login, fieldValue, runClick);
+		handler.setName(clickParam, "[sessions] field value as param");
+		queue.add(clickParam, drools);
+		
+		# create contents of login operation
+		ActivityParameter parameter = handler.generatedActivityParameter(loginOperation, loginOperation);
+		handler.setName(parameter, "provided key");
+		queue.add(parameter, drools);
+		
+		DecisionNode op = handler.generatedDecisionNode(loginOperation, loginOperation);
+		handler.setName(op, "equal?");
+		queue.add(op, drools);
+		
+		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(loginOperation, loginOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid key.");
+		queue.add(cancel, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		handler.setFrom(data1, parameter);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+		
+		ExternalValue ev_expected = handler.generatedExternalValue(loginOperation, loginOperation);
+		handler.setValue(ev_expected, expected);
+		queue.add(ev_expected, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		handler.setFrom(data2, ev_expected);
+		handler.setTo(data2, op);
+		queue.add(data2, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+		
+		# not ok	
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setName(edge2, "no");
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+		# ok: set value operation
+		SetNode setProperty = handler.generatedSetNode(loginOperation, loginOperation);
+		queue.add(setProperty, drools);
+		
+		DataFlowEdge data3 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		handler.setFrom(data3, parameter);
+		handler.setTo(data3, setProperty);
+		queue.add(data3, drools);
+		
+		ExternalValue ev_value = handler.generatedExternalValue(loginOperation, loginOperation);
+		handler.setValue(ev_value, value);
+		queue.add(ev_value, drools);
+
+		DataFlowEdge data4 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
+		handler.setFrom(data4, setProperty);
+		handler.setTo(data4, ev_value);
+		queue.add(data4, drools);
+
+		# ok
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setName(edge3, "yes");
+		handler.setFrom(edge3, op);
+		handler.setTo(edge3, setProperty);
+		queue.add(edge3, drools);
+
+		# finish
+		ExecutionEdge edge4 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge4, setProperty);
+		handler.setTo(edge4, finish);
+		queue.add(edge4, drools);
+				
+end
+
+/**
+ * @inference LoginHandler,InputTextField,Parameter,DomainAttribute
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will
+ *		contain an {@model InputTextField} for every {@model DomainAttribute} defined as a {@model Parameter} to that {@model LoginHandler}. 
+ */
+rule "Create text fields for login form of 'login' pages [type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		# from a domain object
+		attribute : DomainAttribute ( )
+		param : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		not ( InputTextField ( eContainer == form, name == attribute.name ))
+		
+		eval ( handler.veto( form ))
+
+	then
+		InputTextField field = handler.generatedInputTextField(form, form);
+		# login field name
+		handler.setName(field, attribute.getName());		
+		queue.add(field, drools);		
+		
+end
+
+/**
+ * A LoginHandler[user] uses all of the fields from the given
+ * DomainType parameter as input fields, except for 
+ * any generated primary keys.
+ *
+ * @inference LoginHandler,InputTextField,Parameter,DomainAttribute,Role
+ *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will
+ *		contain an {@model InputTextField} for every non-{@model DomainAttribute#primaryKey primary key}
+ *		{@model DomainAttribute} within the {@model Role} defined as a {@model Parameter} to that {@model LoginHandler}.  
+ */
+rule "Create text fields for login form of 'login' pages [type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+
+		# from a role		
+		role : Role ( )
+		param : Parameter ( parameterValue == role, parameterTerm == login_handler )
+		
+		# an attribute in that role
+		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
+		
+		not ( InputTextField ( eContainer == form, name == attribute.name ))
+		
+		eval ( handler.veto( form ))
+
+	then
+		InputTextField field = handler.generatedInputTextField(form, form);
+		# login field name
+		handler.setName(field, attribute.getName());
+		
+		# if password, this should always be last
+		if ("password".equals(attribute.getName())) {
+			handler.setRenderOrder(field, 20);
+		}
+				
+		queue.add(field, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,Parameter
+ *		Every {@model InputTextField} defined in the login form for the
+ *		<em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be provided as a named {@model Parameter} to the 'do login' {@model Operation} of the handler. 
+ */
+rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+		
+		operation : Operation( eContainer == login_session, name == "do login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		# from a domain object
+		attribute : DomainAttribute ( )
+		param : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		field : InputTextField ( eContainer == form, name == attribute.name )
+		fieldValue : Value ( field.fieldValue == fieldValue )
+		
+		button : Button ( eContainer == form, name == "Login" )
+		run : ECARule ( trigger == button, target == operation, name == "onClick" )
+		
+		not ( Parameter ( parameterValue == fieldValue, parameterTerm == run, name == attribute.name )) 
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		Parameter param2 = handler.generatedParameter(login_handler, fieldValue, fieldValue, run);
+		handler.setName(param2, attribute.getName());
+		queue.add(param2, drools); 
+		
+end
+
+/**
+ * @inference LoginHandler,Parameter
+ *		Every {@model InputTextField} defined in the login form for the
+ *		<em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be provided as a named {@model Parameter} to the 'do login' {@model Operation} of the handler. 
+ */
+rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+		
+		operation : Operation( eContainer == login_session, name == "do login" )
+
+		form : InputForm( eContainer == login, name == "login form" )
+		
+		# from a role
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		param : Parameter ( parameterValue == role, parameterTerm == login_handler )
+		
+		field : InputTextField ( eContainer == form, name == attribute.name )
+		fieldValue : Value ( field.fieldValue == fieldValue )		
+		
+		button : Button ( eContainer == form, name == "Login" )
+		run : ECARule ( trigger == button, target == operation, name == "onClick" )
+		
+		not ( Parameter ( parameterValue == fieldValue, parameterTerm == run, name == attribute.name )) 
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		Parameter param2 = handler.generatedParameter(login_handler, fieldValue, fieldValue, run);
+		handler.setName(param2, attribute.getName());
+		queue.add(param2, drools); 
+		
+end
+
+/**
+ * The 'do login' page must be OUTSIDE the Scope, otherwise it might
+ * not be possible to actually call it from outside (since Session.onAccess
+ * may require a valid domain instance, for example - even though it hasn't been
+ * set yet).
+ *
+ * @implementation Operation,OperationCallNode,Scope
+ *		All {@model OperationCallNode operation calls} to {@model Operation}s contained
+ *		within {@model Scope}s are first evaluated for any
+ * 		{@model Scope#onAccess} {@model Event events}.
+ * @implementation LoginHandler
+ *		The generated {@model Value} containing the current password
+ *		for a {@model LoginHandler} is set before it is evaluated whether
+ *		the instance actually exists, thus the Value may not be
+ *		valid.
+ * @inference LoginHandler
+ *		A {@model LoginHandler} will have an {@model Operation} named 'do login'.
+ */
+rule "Create 'do login' operation within all login_handlers"
+	when
+		container : InternetApplication( )
+		session : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == session )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		not ( Operation ( eContainer == login_session, name == "do login" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ActivityOperation loginOperation = handler.generatedActivityOperation(login_handler, login_session);
+		handler.setName(loginOperation, "do login");
+		queue.add(loginOperation, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do login', used to actually implement the login operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_KEY</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'do login' operation [type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		instance : DomainIterator ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+		
+		ex : Function ( instance.empty == ex )
+				
+		loginOperation : ActivityOperation ( eContainer == login_session, name == "do login" )
+
+		not ( StartNode ( eContainer == loginOperation ))
+		
+		eval ( handler.veto( loginOperation ))
+
+	then
+		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(loginOperation, loginOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "No such instance found.");
+		queue.add(cancel, drools);
+		
+		// make a split/join
+		SplitNode split = handler.generatedSplitNode(loginOperation, loginOperation);
+		queue.add(split, drools);
+		JoinNode join = handler.generatedJoinNode(loginOperation, loginOperation);
+		queue.add(join, drools);
+				
+		ExecutionEdge edge0 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge0, start);
+		handler.setTo(edge0, split);		
+		queue.add(edge0, drools);
+		
+		// we will leave the other rules to generate the contents
+
+		# a conditional check		
+		DecisionNode check = handler.generatedDecisionNode(loginOperation, loginOperation);
+		handler.setName(check, "true?");
+		queue.add(check, drools);
+		
+		# connect with a SimpleCondition
+		SimpleCondition ce = handler.generatedSimpleCondition(loginOperation, loginOperation, ex, check);
+		queue.add(ce, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge1, join);
+		handler.setTo(edge1, check);
+		queue.add(edge1, drools);
+		
+		# not ok	
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setName(edge2, "yes");
+		handler.setFrom(edge2, check);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+		# ok
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setName(edge3, "no");
+		handler.setFrom(edge3, check);
+		handler.setTo(edge3, finish);
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation,ActivityParameter
+ *		Every {@model DomainAttribute} provided as a {@model Parameter} to
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be available as a named {@model ActivityParameter} of the 'do login' {@model ActivityOperation}. 
+ */
+rule "Create parameter for 'do login' operation inside login handler[type=domain_object]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		attribute : DomainAttribute ( )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		instance : DomainIterator ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+
+		operation : ActivityOperation ( eContainer == login_session, name == "do login" )
+		split : SplitNode ( eContainer == operation )
+		join : JoinNode ( eContainer == operation )
+		
+		target : Value ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
+
+		not ( Parameter ( eContainer == operation, name == attribute.name ))
+		
+		eval ( handler.veto( operation ))
+
+	then
+		ActivityParameter param = handler.generatedActivityParameter(operation, operation);
+		handler.setName(param, attribute.getName());
+		queue.add(param, drools);
+		
+		SetNode setValue = handler.generatedSetNode(operation, operation);
+		queue.add(setValue, drools);
+		
+		// split to set value
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, setValue);
+		queue.add(edge1, drools);
+		
+		// set value to join
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge2, setValue);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+		
+		// flow from param to value
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data1, param);
+		handler.setTo(data1, setValue);
+		queue.add(data1, drools);
+		
+		ExternalValue ev_target = handler.generatedExternalValue(operation, operation);
+		handler.setValue(ev_target, target);
+		queue.add(ev_target, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data2, setValue);
+		handler.setTo(data2, ev_target);
+		queue.add(data2, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do login', used to actually implement the login operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'do login' operation [type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		instance : DomainIterator ( eContainer == scope )
+		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
+		
+		ex : Function ( instance.empty == ex )
+				
+		loginOperation : ActivityOperation ( eContainer == login_session, name == "do login" )
+
+		not ( StartNode ( eContainer == loginOperation ))
+		
+		eval ( handler.veto( loginOperation ))
+
+	then
+		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(loginOperation, loginOperation);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(loginOperation, loginOperation);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "No such user found.");
+		queue.add(cancel, drools);
+		
+		// make a split/join
+		SplitNode split = handler.generatedSplitNode(loginOperation, loginOperation);
+		queue.add(split, drools);
+		JoinNode join = handler.generatedJoinNode(loginOperation, loginOperation);
+		queue.add(join, drools);
+				
+		ExecutionEdge edge0 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge0, start);
+		handler.setTo(edge0, split);		
+		queue.add(edge0, drools);
+		
+		// we will leave the other rules to generate the contents
+
+		# a conditional check		
+		DecisionNode check = handler.generatedDecisionNode(loginOperation, loginOperation);
+		handler.setName(check, "true?");
+		queue.add(check, drools);
+		
+		# connect with a SimpleCondition
+		SimpleCondition ce = handler.generatedSimpleCondition(loginOperation, loginOperation, ex, check);
+		queue.add(ce, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setFrom(edge1, join);
+		handler.setTo(edge1, check);
+		queue.add(edge1, drools);
+		
+		# not ok	
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setName(edge2, "yes");
+		handler.setFrom(edge2, check);
+		handler.setTo(edge2, cancel);
+		queue.add(edge2, drools);
+
+		# ok
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
+		handler.setName(edge3, "no");
+		handler.setFrom(edge3, check);
+		handler.setTo(edge3, finish);
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation,ActivityParameter
+ *		Every {@model DomainAttribute} of the {@model Role} provided as a {@model Parameter} to
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be available as a named {@model ActivityParameter} of the 'do login' {@model ActivityOperation}. 
+ */
+rule "Create parameter for 'do login' operation inside login handler[type=user]"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		paramWire : Parameter( parameterValue == role, parameterTerm == login_handler )
+		
+		operation : ActivityOperation ( eContainer == login_session, name == "do login" )
+		split : SplitNode ( eContainer == operation )
+		join : JoinNode ( eContainer == operation )
+		
+		target : Value ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
+
+		not ( Parameter ( eContainer == operation, name == attribute.name ))
+		
+		eval ( handler.veto( operation ))
+
+	then
+		ActivityParameter param = handler.generatedActivityParameter(operation, operation);
+		handler.setName(param, attribute.getName());
+		queue.add(param, drools);
+		
+		SetNode setValue = handler.generatedSetNode(operation, operation);
+		queue.add(setValue, drools);
+		
+		// split to set value
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, setValue);
+		queue.add(edge1, drools);
+		
+		// set value to join
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(operation, operation);
+		handler.setFrom(edge2, setValue);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+		
+		// flow from param to value
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data1, param);
+		handler.setTo(data1, setValue);
+		queue.add(data1, drools);
+		
+		ExternalValue ev_target = handler.generatedExternalValue(operation, operation);
+		handler.setValue(ev_target, target);
+		queue.add(ev_target, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(operation, operation);
+		handler.setFrom(data2, setValue);
+		handler.setTo(data2, ev_target);
+		queue.add(data2, drools);
+
+end
+
+/**
+ * it's possible in the future that this method should be split up.
+ *
+ * @inference LoginHandler
+ *		If a {@model LoginHandler} has a defined outgoing {@model ECARule} named 'success',
+ *		then this rule should be executed after a successful 'do login' {@model ActivityOperation}.
+ */
+rule "Connect successful login operation ('success') to navigate to final 'login' page"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+		
+		login_operation : ActivityOperation( eContainer == login_session, name == "do login" )		
+		login_target : Frame ( ) 
+		login_wire : ECARule( trigger == login_handler, target == login_target, name == "success" )
+
+		not (ECARule(trigger == login_operation, target == login_target))
+		
+		eval ( handler.veto( login_handler ))
+			
+	then
+		ECARule wire = handler.generatedECARule(login_handler, scope, login_operation, login_target);
+		handler.setName(wire, "navigate on successful login");
+		queue.add(wire, drools);
+				
+end
+
+/**
+ * @inference LoginHandler
+ *		If a {@model LoginHandler} has a defined outgoing {@model ECARule} named 'fail',
+ *		then this rule should be executed after a failed 'do login' {@model ActivityOperation}.
+ */
+rule "Connect failed login operation ('fail') to navigate back to 'login'"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ECARule ( trigger == login_handler, target == login, name == "login" )
+		login_operation : ActivityOperation( eContainer == login_session, name == "do login" )		
+
+		not (ECARule( trigger == login_operation, target == login, name == "fail"))
+		
+		eval ( handler.veto( login_handler ))
+			
+	then
+		ECARule wire = handler.generatedECARule(login_handler, scope, login_operation, login);
+		handler.setName(wire, "fail");
+		queue.add(wire, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} will define an {@model Operation} named 'do logout' within the protected {@model Scope}.
+ */
+rule "Create 'do logout' operation in session"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		logout : Frame ( eContainer == scope, name == "logout" )
+	
+		not (ActivityOperation ( eContainer == scope, name == "do logout" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ActivityOperation operation = handler.generatedActivityOperation(login_handler, scope);
+		handler.setName(operation, "do logout");
+		queue.add(operation, drools); 
+		
+end 
+
+/**
+ * @inference LoginHandler,ECARule
+ *		When the <em>logout {@model Frame}</em> for a {@model LoginHandler} is {@model Frame#onAccess accessed},
+ *		the 'do logout' {@model Operation} will be {@model ECARule called}.
+ */
+rule "Connect 'access' operation for logout page to 'do logout' operation"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		logout : Frame ( )
+		wire : ECARule ( trigger == login_handler, target == logout, name == "logout" )
+		
+		logout_operation : Operation ( eContainer == scope, name == "do logout" )
+		access : Event ( eContainer == logout, logout.onAccess == access )
+		# we can't add it to the end of the 'check key' operation, because then
+		# all operations will have to run it as well.
+		# add it to the end of the access operation chain
+		
+		not (ECARule( trigger == access, target == logout_operation ))
+		
+		eval ( handler.veto( login_handler ))
+	
+	then 
+		ECARule run = handler.generatedECARule(login_handler, logout, access, logout_operation);
+		handler.setName(run, "run logout operation");
+		queue.add(run, drools);
+
+end 
+
+/**
+ * @inference LoginHandler,ECARule
+ *		If a {@model LoginHandler} has a defined outgoing {@model ECARule} named 'logout',
+ *		then this rule should be executed after a successful 'do logout' {@model ActivityOperation}.
+ */
+rule "Connect new navigate wire from logout to logout destination"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		logout : Frame ( eContainer == scope, name == "logout" )
+		logout_operation : ActivityOperation ( eContainer == scope, name == "do logout" )
+		# add it at the end of the operation chain (final_operation may == logout_operation)
+		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
+		final_operation : ActivityOperation ( eval(final_operation.equals(functions.lastChainedOperation(logout_operation))) )
+		destination : Frame ( )
+		logout_wire : ECARule( trigger == login_handler, target == destination, name == "logout" )
+		
+		not (ECARule( trigger == final_operation, target == destination ))
+		
+		eval ( handler.veto( login_handler ))
+	
+	then
+		ECARule wire = handler.generatedECARule(login_handler, scope, final_operation, destination);
+		handler.setName(wire, "navigate on successful logout");
+		queue.add(wire, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout', used to actually implement the logout operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'do logout' operation [type=secret_key]"
+	when
+		scope : Session( )
+		o : ActivityOperation( name == "do logout", eContainer == scope )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
+
+		value : Value( )
+		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
+		
+		not (StartNode( eContainer == o))
+		not (FinishNode( eContainer == o))
+		
+		eval ( handler.veto( o ))
+	
+	then
+		# create a 'null' value
+		Value myNull = handler.generatedValue(o, o);
+		handler.setReadOnly(myNull, true);
+		handler.setName(myNull, "reset value");
+		handler.setDefaultValue(myNull, "null");
+		queue.add(myNull, drools);
+				
+		ExternalValue ev_null = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_null, myNull);
+		queue.add(ev_null, drools);
+		
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_value, value);
+		queue.add(ev_value, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		# set
+		SetNode op = handler.generatedSetNode(o, o);
+		queue.add(op, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, ev_null);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, ev_value);
+		queue.add(data2, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout', used to actually implement the logout operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout', used to actually implement the logout operation
+ *		of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>,
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents (initial) of 'do logout' operation [type=object or user]"
+	when
+		scope : Session( )
+		o : ActivityOperation( name == "do logout", eContainer == scope )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+
+		not (StartNode( eContainer == o))
+		not (FinishNode( eContainer == o))
+		
+		eval ( handler.veto( o ))
+	
+	then
+		# create a 'null' value
+		Value myNull = handler.generatedValue(o, o);
+		handler.setReadOnly(myNull, true);
+		handler.setDefaultValue(myNull, "null");
+		handler.setName(myNull, "reset value");
+		queue.add(myNull, drools);
+	
+		ExternalValue ev_null = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_null, myNull);
+		queue.add(ev_null, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		SplitNode split = handler.generatedSplitNode(o, o);
+		queue.add(split, drools);
+		
+		JoinNode join = handler.generatedJoinNode(o, o);
+		queue.add(join, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, split);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, join);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout' of a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will reset all of the stored keys for each {@model DomainAttribute} used as a {@model Parameter} to the handler
+ *		to an empty {@model Value}.
+ */
+rule "Create contents (specific keys) of 'do logout' operation [type=object]"
+	when
+		session : Session( )
+		o : ActivityOperation( name == "do logout", eContainer == session )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+
+		attribute : DomainAttribute ( )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		targetValue : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(targetValue, attribute) ) )
+
+		myNull : Value ( eContainer == o, name == "reset value" )
+		split : SplitNode ( eContainer == o )
+		join : JoinNode ( eContainer == o )
+		
+		ev_null : ExternalValue ( value == myNull )
+		
+		not ( ev : ExternalValue ( eContainer == o, value == targetValue ) ) 
+		
+		eval ( handler.veto( o ))
+	
+	then
+
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_value, targetValue);
+		queue.add(ev_value, drools);
+	
+		# set
+		SetNode op = handler.generatedSetNode(o, o);
+		queue.add(op, drools);
+	
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, ev_null);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, ev_value);
+		queue.add(data2, drools);
+
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		An {@model ActivityOperation} named 'do logout' of a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will reset all of the stored keys for each {@model DomainAttribute} of the {@model Role} used as a {@model Parameter} to the handler
+ *		to an empty {@model Value}.
+ */
+rule "Create contents (specific keys) of 'do logout' operation [type=user]"
+	when
+		session : Session( )
+		o : ActivityOperation( name == "do logout", eContainer == session )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
+		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
+		
+		targetValue : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(targetValue, attribute) ) )
+
+		myNull : Value ( eContainer == o, name == "reset value" )
+		split : SplitNode ( eContainer == o )
+		join : JoinNode ( eContainer == o )
+
+		ev_null : ExternalValue ( value == myNull )
+
+		not ( ev : ExternalValue ( eContainer == o, value == targetValue ) ) 
+		
+		eval ( handler.veto( o ))
+	
+	then
+		
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_value, targetValue);
+		queue.add(ev_value, drools);
+	
+		# set
+		SetNode op = handler.generatedSetNode(o, o);
+		queue.add(op, drools);
+	
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, ev_null);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, ev_value);
+		queue.add(data2, drools);
+	
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, split);
+		handler.setTo(edge1, op);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge2, op);
+		handler.setTo(edge2, join);
+		queue.add(edge2, drools);
+
+end
+
+/**
+ * @inference LoginHandler,Frame
+ *		If no 'success' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		a default 'login successful' {@model Frame} will be created.
+ */
+rule "Create default login successful page"
+	when
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		not ( Frame ( eContainer == scope, name == "Login Successful" ) )
+		not ( wire : ECARule (trigger == login_handler, name == "success" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		Frame page = handler.generatedFrame(login_handler, scope);
+		handler.setName(page, "Login Successful");
+		queue.add(page, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ECARule
+ *		If no 'success' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		the 'login successful' {@model Frame} will be defined as the 'success' {@model ECARule}.
+ */
+rule "Connect default login successful page to LoginHandler"
+	when
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		success : Frame ( eContainer == scope, name == "Login Successful" )
+		
+		not ( wire : ECARule (trigger == login_handler, name == "success" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ECARule wire = handler.generatedECARule(login_handler, login_handler, login_handler, success);
+		handler.setName(wire, "success");
+		queue.add(wire, drools);
+
+end
+
+/**
+ * @inference LoginHandler,Frame
+ *		If no 'logout' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		a default 'logout successful' {@model Frame} will be created.
+ */
+rule "Create default logout successful page"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		not ( wire : ECARule ( trigger == login_handler, name == "logout" ))
+		not ( logout : Frame ( eContainer == container, name == "Logout Successful", eval( functions.isGeneratedBy(logout, login_handler)) ) ) 
+				
+		eval ( handler.veto( login_handler ))
+
+	then
+		Frame page = handler.generatedFrame(login_handler, container);
+		handler.setName(page, "Logout Successful");
+		queue.add(page, drools);
+
+end
+
+/**
+ * @inference LoginHandler,ECARule
+ *		If no 'logout' {@model ECARule} is defined for a {@model LoginHandler}, then
+ *		the 'logout successful' {@model Frame} will be defined as the 'logout' {@model ECARule}.
+ */
+rule "Connect default logout successful page to LoginHandler"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
+		
+		logout : Frame ( eContainer == container, name == "Logout Successful", eval( functions.isGeneratedBy(logout, login_handler)) )
+		
+		not ( wire : ECARule ( trigger == login_handler, name == "logout" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ECARule wire = handler.generatedECARule(login_handler, login_handler, login_handler, logout);
+		handler.setName(wire, "logout");
+		queue.add(wire, drools);
+
+end
+
+/**
+ * If we have multiple incoming ParameterEdges, we need special logic to
+ * only instantiate this rule once (thanks to queued insertions).
+ *
+ * Essentially, we create only SelectWire for each DomainType
+ * linked by a ParameterEdge, and then use Java to generate the
+ * actual query from the Attributes.
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> 
+ *		will be updated according to the {@model DomainType} of the handler.
+ */
+rule "Update query parameters for LoginHandler [object]"
+	when
+		scope : Session ( )
+		dobj : DomainType ( )
+		
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == dobj ))
+		
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.DOMAIN_OBJECT,
+			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
+		)
+		
+		instance : DomainIterator ( query == null )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		// find all the attributes as incoming parameter wires for the
+		// given DomainType
+		String q = functions.getQueryString(login_handler, dobj);
+		
+		handler.setQuery(instance, q);
+
+end
+
+/**
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be set according to the {@model DomainAttribute}s provided as {@model Parameter}s to the handler.
+ */
+rule "Create Query from a DomainAttribute [user]"
+	when
+		scope : Session ( )
+		role : Role ( )
+
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER,
+			eval(functions.hasIncomingParameterEdgesFrom(login_handler, role)) 
+		)
+
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == role ))
+
+		instance : DomainIterator ( query == null )
+		setWire : SetWire ( from == login_handler, to == instance )
+			
+		eval ( handler.veto( login_handler ))
+		
+	then
+		// find all the attributes as incoming parameter wires for the
+		// given DomainType (including superclasses)
+		String q = functions.getUserQueryString(role);
+		handler.setQuery(instance, q);
+
+end
+
+/**
+ * If the attributes have changed, we need to update the
+ * query string.
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be <em>updated</em> according to the {@model DomainAttribute}s provided as {@model Parameter}s to the handler.
+ */
+rule "Update Query from a DomainAttribute [user]"
+	when
+		scope : Session ( )
+		dobj : Role ( )
+		
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER,
+			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
+		)
+		
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == dobj ))
+		
+		instance : DomainIterator ( query != null )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		String q = functions.getUserQueryString(dobj);
+		handler.setQuery(instance, q);
+
+end
+
+/**
+ * the Role is the incoming parameter, not just a DomainAttribute
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be <em>updated</em> according to the {@model Role} of the handler.
+ */
+rule "Create Query from a DomainType [user]"
+	when
+		scope : Session ( )
+		role : Role ( )
+
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER
+		)
+		
+		# the Role is the incoming parameter, not just a DomainAttribute
+		param : Parameter ( parameterValue == role, parameterTerm == login_handler )
+
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == role ))
+
+		instance : DomainIterator ( query == null )
+		setWire : SetWire ( from == login_handler, to == instance )
+			
+		eval ( handler.veto( login_handler ))
+		
+	then
+		// find all the attributes as incoming parameter wires for the
+		// given DomainType (including superclasses)
+		String q = functions.getUserQueryString(role);
+		handler.setQuery(instance, q);
+
+end
+
+/**
+ * If the attributes have changed, we need to update the
+ * query string.
+ *
+ * @notModelCompletion TODO
+ * @inference LoginHandler,DomainIterator
+ *		The {@model DomainIterator#query} of a {@model DomainIterator} used to {@model SetWire set}
+ *		a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be <em>updated</em> according to the {@model Role} of the handler.
+ */
+rule "Update Query from a DomainType [user]"
+	when
+		scope : Session ( )
+		dobj : Role ( )
+		
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER
+		)
+		
+		# the Role is the incoming parameter, not just a DomainAttribute
+		param : Parameter ( parameterValue == dobj, parameterTerm == login_handler )
+
+		# with at least one attribute (trigger)
+		DomainAttribute ( eContainer == dobj )
+		
+		instance : DomainIterator ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		String q = functions.getUserQueryString(dobj);
+		handler.setQuery(instance, q);
+
+end
+
+/**
+ * @inference LoginHandler,Value
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will define a {@model Value}
+ *		named 'current XXX' in the protected {@model Session} for each {@model DomainAttribute} used as a
+ *		{@model Parameter} to the handler.
+ */
+rule "Create 'key attribute' property for LoginHandler[type = object]s"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		attribute : DomainAttribute ( )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		not ( p : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(p, attribute) ) ) )
+		
+		eval ( handler.veto( login_handler ))
+				
+	then
+		Value key = handler.generatedValue(login_handler, session);
+		handler.setName(key, "current " + attribute.getName());
+		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
+		handler.setValue(key, ModelPackage.eINSTANCE.getValue_DefaultValue(), "");
+		queue.add(key, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,Value
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will define a {@model Value}
+ *		named 'current XXX' in the protected {@model Session} for each {@model DomainAttribute} used as a
+ *		{@model Parameter} to the handler.
+ */
+rule "Create 'key attribute' property for LoginHandler[type = user]s"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
+		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
+		
+		not ( p : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(p, attribute) ) ) )
+		
+		eval ( handler.veto( login_handler ))
+				
+	then
+		Value key = handler.generatedValue(login_handler, session);
+		handler.setName(key, "current " + attribute.getName());
+		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
+		handler.setValue(key, ModelPackage.eINSTANCE.getValue_DefaultValue(), "");
+		queue.add(key, drools);
+		
+end
+
+/**
+ * @inference LoginHandler,SetWire
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will connect each
+ *		{@model Value} named 'current XXX' using {@model SetWire}s named 'set'.
+ */
+rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		object : DomainType ( )
+		attribute : DomainAttribute ( eContainer == object )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		instance : DomainIterator ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		# select : SelectWire ( from == object, to == instance )
+		
+		key : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(key, attribute) ) )
+			
+		not ( SetWire ( from == login_handler, to == key ))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		SetWire wire = handler.generatedSetWire(login_handler, session, login_handler, key);
+		handler.setName(wire, "set");
+		queue.add(wire, drools); 
+	
+end
+
+/**
+ * @inference LoginHandler,Parameter
+ *		Each {@model Value} 'current XXX' {@model SetWire set} by a a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be provided as a {@model Parameter} to the handler.
+ */
+rule "Connect key properties to SelectWire for LoginHandler[type = object]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		object : DomainType ( )
+		attribute : DomainAttribute ( eContainer == object )
+		paramWire : Parameter ( parameterValue == attribute, parameterTerm == login_handler )
+		
+		instance : DomainIterator ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		# select : SelectWire ( from == object, to == instance )
+		
+		key : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(key, attribute) ) )
+			
+		not ( Parameter ( parameterValue == key, parameterTerm == instance ))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		Parameter wire = handler.generatedParameter(login_handler, session, key, instance);
+		handler.setName(wire, attribute.getName());
+		queue.add(wire, drools); 
+	
+end
+
+/**
+ * @inference LoginHandler,SetWire
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will connect each
+ *		{@model Value} named 'current XXX' using {@model SetWire}s named 'set'.
+ */
+rule "Connect key properties to SelectWire for LoginHandler[type = user]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		role : Role ( )
+		attribute : DomainAttribute ( eContainer == role )
+		paramWire : Parameter ( parameterValue == role, parameterTerm == login_handler )
+		
+		instance : DomainIterator ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		# select : SelectWire ( from == role, to == instance )
+		
+		key : Value ( eContainer == session, 
+			eval(functions.loginAttributeMatches(key, attribute) ) )
+			
+		not ( Parameter ( parameterValue == key, parameterTerm == instance ))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		Parameter wire = handler.generatedParameter(login_handler, session, key, instance);
+		handler.setName(wire, attribute.getName());
+		queue.add(wire, drools); 
+	
+end
+
+/**
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will create an
+ *		{@model ActivityOperation} 'check instance' within the protected {@model Session}.
+ * @inference LoginHandler,ActivityOperation
+ *		A {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will create an
+ *		{@model ActivityOperation} 'check instance' within the protected {@model Session}.
+ */
+rule "Create 'check instance' operation for LoginHandler[type = object or user]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		not (Operation( eContainer == session, name == "check instance") )
+		
+		eval ( handler.veto( login_handler ))
+					
+	then
+		ActivityOperation op = handler.generatedActivityOperation( login_handler, session );
+		handler.setName(op, "check instance");
+		queue.add(op, drools);
+		
+end
+
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,DomainIterator
+ *		A {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will contain a {@model DomainIterator} 'current instance' to represent the current domain object instance.
+ */ 
+rule "Create 'current instance' for LoginHandler[type=object]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		not (DomainIterator ( eContainer == session ))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
+		handler.setName(instance, "current instance");
+		queue.add(instance, drools);
+
+end
+
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,SetWire
+ *		A {@model DomainIterator} 'current instance' created for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		will be provided as the {@model SetWire set target} of the handler.
+ */ 
+rule "Create 'current instance' for LoginHandler[type=object] - connect SetWire"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		
+		instance : DomainIterator ( eContainer == session, name == "current instance" )
+		
+		not (set : SetWire ( from == login_handler, to == instance ) )
+		
+		eval ( handler.veto( login_handler ))
+		
+	then	
+		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
+		handler.setName(setWire, "set");
+		queue.add(setWire, drools);
+
+end
+
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,DomainIterator
+ *		A {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will contain a {@model DomainIterator} 'current instance' to represent the current domain object instance.
+ */ 
+rule "Create 'current instance' for LoginHandler[type=user]"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		not (DomainIterator ( eContainer == session ))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
+		handler.setName(instance, "current instance");
+		queue.add(instance, drools);
+
+end
+
+/**
+ * TODO merge these two rules (object, user) together
+ *
+ * @inference LoginHandler,SetWire
+ *		A {@model DomainIterator} 'current instance' created for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		will be provided as the {@model SetWire set target} of the handler.
+ */ 
+rule "Create 'current instance' for LoginHandler[type=user] - connect SetWire"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
+		
+		instance : DomainIterator ( eContainer == session, name == "current instance" )
+		
+		not (set : SetWire ( from == login_handler, to == instance ) )
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		// connect with SetWire
+		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
+		handler.setName(setWire, "set");
+		queue.add(setWire, drools);
+
+end
+
+/**
+ * @inference LoginHandler,SelectEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by a 
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
+ *		as the {@model DomainType} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
+ * @inference LoginHandler,SelectEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by a 
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
+ *		as the {@model DomainType} that defines the {@model DomainAttribute} used as a {@model Parameter} to that handler.
+ */
+rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainAttribute)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+		
+		schema : DomainType ( )
+		
+		# LoginHandler selecting from a DomainAttribute
+		exists (
+			sourceAttribute : DomainAttribute ( eContainer == schema ) and
+			param : Parameter ( parameterValue == sourceAttribute, parameterTerm == login_handler )
+		)
+		
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == source, to == schema )
+		
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
+		# and this source isn't being used for anything else
+		not ( s2 : SelectEdge ( to == source ) )
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(login_handler, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+
+/**
+ * @inference LoginHandler,SelectEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by a 
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code> 
+ *		without a specified {@model SelectEdge} will use the same {@model DomainSource}
+ *		as the {@model DomainType} used as a {@model Parameter} to that handler.
+ */
+rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainType)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+		
+		schema : DomainType ( )
+		
+		# LoginHandler selecting from a DomainType
+		param : Parameter ( parameterValue == schema, parameterTerm == login_handler )
+		
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == source, to == schema )
+		
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
+		# and this source isn't being used for anything else
+		not ( s2 : SelectEdge ( to == source ) )
+		
+		# but will not be provided by the ACH later
+		not (
+			ach : AccessControlHandler ( eContainer == session )
+		)
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(login_handler, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+
+/**
+ * The above rule will only connect the created Instance if there is no extension, i.e. the LoginHandler and the
+ * AccessControlHandler both point to the same Schema. However, if the AccessControlHandler requires [role],
+ * the LoginHandler has an incoming parameter from the root User, because the permission check is actually
+ * handled by the method call. But the 'current instance' is expected to be of type '[role]'; thus, we 
+ * use this as the expected schema.
+ *
+ * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the handlers
+ *		both use different {@model DomainType}s (for example, with {@model ExtendsEdge inheritance}), and
+ *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
+ *		as the {@model DomainType} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ */
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (inherited)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		ach : AccessControlHandler ( eContainer == session )
+		
+		expected_schema : DomainType ( )
+		requires : RequiresEdge ( from == ach, to == expected_schema )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+	
+		# this will also cover if there is a Role and a Permission
+
+		# but a <em>different</em> schema is connected to the login handler
+		other_schema : DomainType ( )
+		param : Parameter ( parameterValue == other_schema, parameterTerm == login_handler )
+		eval ( other_schema != expected_schema )
+		
+		# and our expected schema has a source
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == source, to == expected_schema )
+
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
+		eval ( handler.veto( ach ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+
+/**
+ * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the handlers
+ *		both use the same {@model DomainType}s, and
+ *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
+ *		as the {@model DomainType} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ */
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (direct)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		ach : AccessControlHandler ( eContainer == session )
+		
+		expected_schema : DomainType ( )
+		requires : RequiresEdge ( from == ach, to == expected_schema )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+	
+		# this will also cover if there is a Role and a Permission
+
+		# but the same schema is selected		
+		param : Parameter ( parameterValue == expected_schema, parameterTerm == login_handler )
+		
+		# and our expected schema has a source
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == source, to == expected_schema )
+
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
+		eval ( handler.veto( ach ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
+		queue.add(select, drools);
+	
+end
+
+/**
+ * @inference LoginHandler,AccessControlHandler,SelectEdge,ExtendsEdge
+ *		A {@model DomainIterator} within a {@model Session} protected by both an {@model AccessControlHandler} and
+ *		{@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> or <code>USER</code>, but the {@model AccessControlHandler}
+ *		{@model RequiresEdge requires} a {@model Permission} without a {@model Role}, and
+ *		which does not specify a {@model SelectEdge}, will use the same {@model DomainSource}
+ *		as the {@model DomainType} used as a {@model Parameter} to the {@model AccessControlHandler}.
+ */
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (Permission)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		ach : AccessControlHandler ( eContainer == session )
+		
+		# the ACH requires at least one permission
+		exists (
+			permission : Permission ( ) and
+			requires : RequiresEdge ( from == ach, to == permission )
+		)
+		
+		# and this isn't using a DomainType
+		not ( exists (
+			role : DomainType ( ) and
+			requires : RequiresEdge ( from == ach, to == role )
+		) )
+		
+		# we select against the default schema
+		default_schema : Role ( name == "User", eContainer == root )
+			
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+		
+		# the expected schema is connected		
+		param : Parameter ( parameterValue == default_schema, parameterTerm == login_handler )
+		
+		# and our expected schema has a source
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == source, to == default_schema )
+
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
+		eval ( handler.veto( ach ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+

@@ -1,0 +1,11 @@
+<p>
+An {@model ActivityOperation} may be defined through the composition of a number of {@model ActivityNode}s, connected by {@model ExecutionEdge}s and {@model DataFlowEdge}s. {@model ExecutionEdge}s represent the execution flow of the particular operation, and {@model DataFlowEdge}s represent the flow of data within the particular operation.
+</p>
+
+<p>
+Each {@model DecisionNode} and {@model OperationCallNode} defines a set of <i>failure edges</i> and <i>success edges</i>. For each node, all outgoing {@model ExecutionEdge}s with a {@model ExecutionEdge#name} beginning with the characters <code>n</code> or <code>f</code> represent the <i>failure edges</i>. All other {@model ExecutionEdge}s from each node, including those with no name, represent the <i>success edges</i>.
+</p>
+
+<p>
+A {@model ActivityOperation} must contain exactly one {@model StartNode}, which must have at least one outgoing {@model ExecutionEdge}. When the {@model ActivityOperation} is executed, the <i>execution flow</i> will begin from this {@model StartNode}, and will follow each outgoing {@model ExecutionEdge} sequentially.
+</p>

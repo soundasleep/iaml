@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.users="http://openiaml.org/model/users" id="model.128a8c323c0.6">
+  <types xsi:type="iaml.users:Role" name="Role Name" id="users.128a8c3249b.3">
+    <inRequiresEdges href="ConstraintEdge.iaml_session#wires.128a8ccc925.9b"/>
+    <inRequiresEdges href="RequiresEdge.iaml_session#wires.128a8ccc925.aa"/>
+    <inRequiresEdges href="ConstraintEdge.iaml_session#wires.130cf3ba024.20"/>
+    <inRequiresEdges href="RequiresEdge.iaml_session#wires.130cf3ba024.3f"/>
+  </types>
+</iaml:InternetApplication>

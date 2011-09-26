@@ -1,0 +1,16 @@
+
+RedirectsTo(a, b) :=
+  Frame(a) & a != "null" &
+  EX(e, Event(e) &
+  onAccess(a, e) &
+  Frame(b) & b != "null" &
+  EX(w, ECARule(w) & trigger(w, e) & target(w, b)));
+
+RedirectsTo(a, b) :=
+  Frame(a) & Frame(b) & TC(RedirectsTo(a, b));
+
+InfiniteRedirect(p) := 
+  Frame(p) & p != "null" &
+  RedirectsTo(p, p);
+  
+PRINT ["Infinite redirection"] InfiniteRedirect(p);

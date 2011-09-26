@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.openiaml.simplegmf;singleton:=true
+Bundle-Version: 0.6.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: www.openiaml.org
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.openiaml.simplegmf.model.simplegmf,
+ org.openiaml.simplegmf.model.simplegmf.impl,
+ org.openiaml.simplegmf.model.simplegmf.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy

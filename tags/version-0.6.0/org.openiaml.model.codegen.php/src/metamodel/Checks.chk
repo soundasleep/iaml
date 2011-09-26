@@ -1,0 +1,362 @@
+import iaml;
+
+// NOTE: checks cannot have a semicolon in the exception, otherwise the 
+// OAW parser won't be able to parse beyond it
+extension metamodel::Extensions;
+
+// TODO add test cases for model validation
+// both through Eclipse and through manual test cases (code generation)
+context model::InternetApplication ERROR "No frames in internet application" :
+	!(scopes.typeSelect(model::visual::Frame).isEmpty &&
+		scopes.scopes.typeSelect(model::visual::Frame).isEmpty);
+
+context model::visual::Frame ERROR "Frame must have a name" :
+	name.length > 0;
+	
+context model::Operation ERROR "Operation must have a name" :
+	name.length > 0;
+	
+context model::components::LoginHandler ERROR "A login handler must have an incoming parameter to check against" :
+	!inParameterEdges.isEmpty;
+	
+context model::components::LoginHandler ERROR "A login handler of type USER must have at least one incoming parameter of type Role or Permission":
+	type != model::components::LoginHandlerTypes::USER ||
+	!(inParameterEdges.parameterValue.typeSelect(model::users::Role).isEmpty && inParameterEdges.parameterValue.typeSelect(model::users::Permission).isEmpty);
+
+context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OBJECT must have at least one incoming parameter of type DomainAttribute":
+	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
+	!inParameterEdges.parameterValue.typeSelect(domain::DomainAttribute).isEmpty;
+
+context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY must have exactly one incoming parameter":
+	type != model::components::LoginHandlerTypes::SECRET_KEY ||
+	inParameterEdges.size == 1;
+
+context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY cannot have an incoming Role as a parameter":
+	!(type == model::components::LoginHandlerTypes::SECRET_KEY &&
+		!inParameterEdges.parameterValue.typeSelect(model::users::Role).isEmpty);
+
+context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainType":
+	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
+	inParameterEdges.parameterValue.eContainer.typeSelect(model::domain::DomainType).toSet().size == 1;
+
+context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
+	(name == "equal?" && inFlows.size >= 2) 
+	|| (name != "equal?"); 
+
+context model::operations::DecisionNode ERROR "A DecisionNode can only have at most two out execution edges" :
+	outExecutions.size <= 2;
+	
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a read-only Property":
+	!(model::Value.isInstance(from) && ((model::Value) from).readOnly) && 
+	!(model::Value.isInstance(to) && ((model::Value) to).readOnly);
+	
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a QueryParameter":
+	!model::QueryParameter.isInstance(from) &&
+	!model::QueryParameter.isInstance(to);
+
+context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
+	from != to;
+
+context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two Values":
+	!(model::Value.isInstance(from) && 
+	model::Value.isInstance(to));
+	
+context model::domain::DomainType ERROR "You cannot have a DomainType called single_values (reserved word)" :
+	toString(name) != "single_values";
+	
+/**
+ * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
+ */	
+context model::Wire ERROR "A Wire must have a 'from'" :
+	from != null;
+
+/**
+ * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
+ */	
+context model::Wire ERROR "A Wire must have a 'to'" :
+	to != null;
+
+context model::ECARule ERROR "An ECARule must have a 'trigger'" :
+	trigger != null;
+context model::ECARule ERROR "An ECARule must have a 'target'" :
+	target != null;
+
+context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
+	from != to;
+
+/*
+ * isInstance() definitely works in OAW checks for abstract supertypes.
+ * if a check isn't working, make sure that you are following the OAW
+ * checks logic correctly; the predicate is expected to be _true_,
+ * and will only throw an exception if the predicate is false.
+ *
+ * i.e.: "name != 'single_values'"
+ */
+
+context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one ECARule connecting it to an Operation" :
+	listeners.size == 1
+		&& model::Operation.isInstance(listeners.first().target);
+
+context model::ECARule WARNING "This ECA Rule will not do anything: consider naming it 'onClick'" :
+	!(model::VisibleThing.isInstance(trigger) && !(name == "click" || name == "onClick"));
+
+context model::Value WARNING "A session value used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
+	!(defaultValue == null && inWires.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
+
+context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
+	(type != model::components::LoginHandlerTypes::USER) || inParameterEdges.size <= 1; 
+
+context model::domain::DomainIterator ERROR "A DomainIterator has incoming Parameters, but does not have a query to use them" :
+	inParameterEdges.isEmpty || (query != null && query.length > 0); 
+
+context model::scopes::Session ERROR "A Session can only contain one LoginHandler" :
+	loginHandlers.size <= 1;
+
+context model::visual::Frame ERROR "A Frame cannot contain a LoginHandler" :
+	loginHandlers.size == 0;
+
+context model::operations::ActivityOperation ERROR "An ActivityOperation can only contain one StartNode" :
+	nodes.typeSelect(model::operations::StartNode).size <= 1;
+
+context model::operations::ActivityPredicate ERROR "An ActivityPredicate can only contain one StartNode" :
+	nodes.typeSelect(model::operations::StartNode).size <= 1;
+
+// issue 98: unused BuiltinOperation names should issue a warning
+// issue 136: CompositeOperations should not have this warning
+context model::BuiltinOperation WARNING "Unknown builtin operation name '" + name + "'" :
+	model::operations::ActivityOperation.isInstance(this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).next == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).previous == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).reset == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).skip == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) ||
+	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::domain::DomainAttribute.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::domain::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") ||
+	
+	// primitive operations defined with no parent	
+	(name == "set" ||
+		name == "alert" || name == "save" ||
+		name == "new" ||
+		name == "equal?" || name == "add role" ||
+		name == "add permission" || name == "remove role" ||
+		name == "remove permission" || name == "check permissions" ||
+		(model::VisibleThing.isInstance(eContainer) &&
+			(name == "hide" || name == "show")) || 
+		(model::messaging::Email.isInstance(eContainer) &&
+			(name == "send")) ||
+		name == "true?" || name == "can cast?") ||
+
+	// a Value 'XXX' will generate a PrimitiveOperation named 'set XXX'		
+	(eContainer != null && eContainer.eContents.typeSelect(model::Value).exists(p|name == "set " + p.name));
+
+context model::BuiltinProperty WARNING "Unknown builtin property name '" + name + "'" :
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).hasNext == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).hasPrevious == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).canSave == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).empty == this) ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "fieldValue is set?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "fieldValue is set") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "can cast?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "can cast") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "empty?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "empty") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "not empty?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "not empty");		
+
+context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
+	inFlows.size > 0;
+
+context model::components::Gate ERROR "An entry Gate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' rule, or it will never permit access" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).entryGate != this
+	|| (conditions.size >= 1
+		|| outRequiresEdges.size >= 1
+		|| listeners.exists(w | w.name == "first"));
+
+context model::components::Gate ERROR "An exit Gate needs to have at least one incoming Condition, or one outgoing 'last' rule, or it will never permit access" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).exitGate != this
+	|| (conditions.size >= 1
+		|| listeners.exists(w | w.name == "last"));
+
+context model::components::Gate ERROR "An entry Gate needs to have at least one outgoing ECARule" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).entryGate != this
+	|| !listeners.isEmpty;
+
+context model::components::Gate ERROR "An exit Gate needs to have at least one outgoing ECARule" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).exitGate != this
+	|| !listeners.isEmpty;
+	
+context model::operations::DecisionNode ERROR "A 'can cast?' DecisionNode needs to have an incoming DataFlowEdge from a CastNode" :
+	name != "can cast?" || 
+	(inFlows.size == 1 && model::operations::CastNode.isInstance(inFlows.first().from));
+
+context model::operations::DecisionNode ERROR "A 'can cast?' DecisionNode needs to have an incoming DataFlowEdge from a CastNode" :
+	name != "can cast?" || 
+	(inFlows.size == 1 && model::operations::CastNode.isInstance(inFlows.first().from));
+
+context model::operations::CastNode ERROR "A CastNode needs exactly one incoming data flow edge, had: " + inFlows.size :
+	inFlows.size == 1;
+
+/**
+ * To quickly identify problems related to issue 170: making an explicit Property called 'fieldValue'
+ */
+context model::ContainsValues WARNING "You should not have a contained Property named 'fieldValue', unless it is contained within the fieldValue containment feature" :
+	values.select(e | e.name == "fieldValue").isEmpty; 
+
+/**
+ * Two types are specified to be incompatible if they are different.
+ * TODO this should be changed, because e.g. email is compatible with string in one direction. 
+ */
+context model::Changeable ERROR "Type '" + toString(type.name) + "' is incompatible with contained fieldValue type '" + toString(fieldValue.type.name) + "'":
+	type == null ||
+	fieldValue == null ||
+	fieldValue.type == null ||
+	type == fieldValue.type;
+
+context model::Changeable ERROR "Contained fieldValue property has a default value, even though container already specifies one" :
+	defaultValue == null ||
+	fieldValue == null ||
+	fieldValue.defaultValue == null ||
+	defaultValue == fieldValue.defaultValue;
+
+context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
+	!model::messaging::Email.isInstance(to) &&
+	!model::messaging::Email.isInstance(from);
+
+context model::domain::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
+	!outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).isEmpty;
+	
+context model::domain::DomainSource ERROR "A DomainSource can only have one Schema" :
+	outSchemas.size <= 1;
+
+context model::domain::DomainIterator ERROR "A DomainIterator can only have one Source" :
+	outSelects.size <= 1;
+
+context model::domain::DomainType WARNING "A DomainType should have at least one DomainSource specified" :
+	inSchemas.size >= 1;
+
+// TODO should this become an Error?
+context model::domain::DomainIterator WARNING "A DomainIterator should have one DomainSource specified" :
+	outSelects.size == 1;
+
+context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this AccessControlHandler" :
+	(!model::components::AccessControlHandler.isInstance(trigger)) ||
+		(name == "login" || name == "logout" || name == "success");
+	
+context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this LoginHandler" :
+	(!model::components::LoginHandler.isInstance(trigger)) ||
+		(name == "login" || name == "logout" || name == "success");
+
+/*
+context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name + "'" :
+	name == "xpathMatch" || name == "emailAddress" || name == "is set"
+		|| name == "equal" || name == "true" || name == "can cast"
+		|| name == "empty"
+	|| name == "xpathMatch?" || name == "emailAddress?" || name == "is set?"
+		|| name == "equal?" || name == "true?" || name == "can cast?"
+		|| name == "empty?";
+*/
+
+context model::operations::DataFlowEdge ERROR "Readonly Properties can not be set" :
+	!(to != null 
+		&& model::operations::ExternalValue.isInstance(to)
+		&& ((model::operations::ExternalValue) to).value != null
+		&& ((model::operations::ExternalValue) to).value.readOnly);
+
+context model::Value ERROR "Readonly Values must have a default value set" :
+	!(readOnly && defaultValue == null);
+
+/**
+ * Based on SQLite docs. This should be the list of reserved words in SQL99
+ * (or a related standard); however, different RDBMSes allow different reserved
+ * words to also be column names. TODO IAML should instead allow all names, but
+ * modify their runtime name if they are a reserved word (issue 211).
+ */
+context model::domain::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttribute name" :
+	!{"alter", "analyze", "attach", "begin", "commit", "create", 
+	"delete", "detach", "drop", "end", "explain", "from", "group", "having", "indexed", 
+	"insert", "limit", "not", "on", "order", "pragma", "reindex", "release", "replace", 
+	"rollback", "savepoint", "select", "union", "update", "using", "vacuum", "where"}.contains(toString(name).toLowerCase());
+
+/**
+ * A 'login' ECARule for an AccessControlHandler should not be in the 
+ * same Scope as the handler; this will cause an infinite redirection, 
+ * as the login page can never be accessed.
+ */
+context model::ECARule ERROR "A 'login' ECARule for an AccessControlHandler should not be in the same Scope as the handler; this will cause an infinite redirection, as the login page can never be accessed." :
+	!(trigger != null && target != null && model::components::AccessControlHandler.isInstance(trigger) 
+		&& name == "login" && target.eContainer != null && trigger.eContainer != null
+		&& target.eContainer == trigger.eContainer);
+
+context model::ActionEdgeSource ERROR "Some of the ECARules defined for this trigger may not be executed, as an unconditional navigation will occur due to the priority order, halting ECARule execution" :
+	model::components::LoginHandler.isInstance(this) || /* LoginHandlers are designed to have multiple ECA rules */
+	!listeners.exists( r |
+		model::visual::Frame.isInstance(r.target) /* navigates */
+			&& r.conditions.isEmpty /* and is unconditional */
+			&& r.name != "fail" /* and is not a fail wire */
+			&& listeners.exists(r2 | 
+				r != r2 /* not the same wire */
+				&& r2.name != "fail" /* and not a fail wire */ 
+				&& r2.priority <= r.priority) /* and another rule will not be executed */ 
+	);
+
+/* --- Metamodel-specific checks, as per issue 235 --- */
+
+context model::Value ERROR "A Value must be of type XSDSimpleTypeDefinition":
+	type != null ||
+	(!model::EXSDDataType.isInstance(type)
+		|| xsd::XSDSimpleTypeDefinition.isInstance(((model::EXSDDataType) type).definition));
+
+context model::ComplexTerm ERROR "A ComplexTerm must define a Function":
+	function != null;
+
+context model::ComplexTerm ERROR "A ComplexTerm must have the same function type as its referenced Function":
+	type == null
+		|| function.type == null
+		|| type == function.type;
+
+context model::ComplexTerm ERROR "Mismatched number of slots and parameters (" + function.slotNames.size + ", " + inParameterEdges.name.size + ")":
+	function.slotNames.size == inParameterEdges.name.size;
+
+context model::ComplexTerm ERROR "Parameter edge defined a named parameter that was not defined in the function, expected: (" + function.slotNames + "), was: (" + inParameterEdges.name + ")":
+	inParameterEdges.forAll(p | p.name == null || function.slotNames.contains(p.name));
+
+context model::ComplexTerm ERROR "Non-unique parameter names provided to ComplexTerm":
+	inParameterEdges.name.toSet().size == inParameterEdges.name.size;
+
+context model::Function ERROR "Non-unique slot names defined in Function":
+	slotNames.size == slotNames.toSet().size;
+
+context model::Function ERROR "Slot names and types mismatch":
+	slotTypes.size == slotNames.size;
+
+context model::Predicate ERROR "Predicate types must be boolean":
+	type == null ||
+	(model::EXSDDataType.isInstance(type) &&
+	(
+		((model::EXSDDataType) type).definition.uRI == "http://www.w3.org/2001/XMLSchema.xsd#//boolean"
+		|| ((model::EXSDDataType) type).definition.uRI == "platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlBoolean"
+		|| ((model::EXSDDataType) type).definition.uRI == "http://www.w3.org/2001/XMLSchema#boolean"
+		|| ((model::EXSDDataType) type).definition.name == "boolean"
+	));
+
+context model::BooleanProperty ERROR "A BooleanProperty must have a defined container":
+	eContainer != null;
+
+context model::BuiltinProperty ERROR "An 'is visible' BuiltinProperty must be contained by a VisibleThing":
+	property.toString() != 'IS_VISIBLE' 
+		|| model::VisibleThing.isInstance(eContainer);
+		
+context model::BuiltinProperty ERROR "A 'can save' BuiltinProperty must be contained by a DomainIterator":
+	property.toString() != 'CAN_SAVE'
+		|| model::domain::DomainIterator.isInstance(eContainer);
+
+// TODO more BuiltinProperties
+
+context model::SimpleCondition ERROR "A SimpleCondition must use a Predicate as a Function, was using: " + function:
+	model::Predicate.isInstance(function);

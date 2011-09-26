@@ -1,0 +1,380 @@
+/**
+ * Completes the functionality of {@model DetailWire}s.
+ */
+package org.openiaml.model.drools.rules.detail_wires
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference DetailWire
+ *		When a {@model DetailWire} is connected from a {@model Frame} that contains a
+ *		{@model DomainIterator} to a <em>target {@model Frame}</em>,
+ *		a {@model QueryParameter} will be created in the <em>target {@model Frame}</em> to provide a value of a primary key.
+ */
+rule "Create QueryParameter for target container of DetailWire"
+	when
+		container : Frame( )
+
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( )
+		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+		
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		instanceSet : SetWire ( from == instance, to == source )
+
+		detail : DetailWire ( from == source, to == target )
+		
+		pk : DomainAttribute ( eContainer == schema, primaryKey == true ) 
+
+		not ( queryPk : QueryParameter ( eContainer == target, name == pk.name ) )
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		QueryParameter qp = handler.generatedQueryParameter(detail, target);
+		handler.setName(qp, pk.getName());
+		queue.add(qp, drools);
+	
+end
+
+/**
+ * @inference DetailWire,Parameter
+ *		When a {@model DetailWire} is connected from a {@model Frame} that contains a
+ *		{@model DomainIterator} to a <em>target {@model Frame}</em>,
+ *		a new <em>selected {@model DomainIterator}</em> will be used to select content based on primary key.
+ */
+rule "Create a relevant DomainIterator, with SelectWire, in the destination for the DetailWire"
+	when
+		container : Frame( )
+
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+		
+		pk : DomainAttribute ( eContainer == schema, primaryKey == true )
+		
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		instanceSet : SetWire ( from == instance, to == source )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		queryPk : QueryParameter ( eContainer == target, name == pk.name )
+		
+		not ( DomainIterator ( eContainer == target,
+			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) ))
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		DomainIterator i2 = handler.generatedDomainIterator(detail, target);
+		handler.setName(i2, "Current " + schema.getName() + " instance");
+		// set the query
+		handler.setLimit(i2, 1);
+		handler.setQuery(i2, functions.safeNameString(pk.getName()) + " = :pk");				
+		queue.add(i2, drools);
+		
+		// connect QueryParameter
+		Parameter param = handler.generatedParameter(detail, target, queryPk, i2);
+		handler.setName(param, "pk");
+		queue.add(param, drools);
+	
+end
+
+/**
+ * @inference DetailWire
+ *		If a {@model VisibleThing} to browse the <em>selected {@model DomainIterator}</em> from a
+ *		{@model DetailWire} does not exist in the <em>target {@model Frame}</em>, 
+ *		a <em>view instance {@model InputForm}</em> will be created.
+ */
+rule "Create a View Instance Form for target of DetailWire"
+	when
+		container : Frame( )
+		
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		instanceSet : SetWire ( from == instance, to == source )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		i2 : DomainIterator ( eContainer == target,
+			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
+
+		not ( VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) ) )
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		InputForm form = handler.generatedInputForm(detail, target);
+		handler.setName(form, "View " + schema.getName());
+		queue.add(form, drools);
+
+end
+
+/**
+ * @inference DetailWire
+ *		A <em>view instance {@model InputForm}</em> generated by a {@model DetailWire}
+ *		will be connected with a {@model SetWire} from the <em>selected {@model DomainIterator}</em>.
+ */
+rule "Connect View Instance Form with a SetWire to the DomainIterator"
+	when
+		container : Frame( )
+		
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+	
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		i2 : DomainIterator ( eContainer == target,
+			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
+
+		form : VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) )
+		
+		not ( set : SetWire ( from == i2, to == form ) )
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		SetWire set = handler.generatedSetWire(detail, target, i2, form);
+		handler.setName(set, "set");
+		queue.add(set, drools);
+	
+end
+
+/**
+ * @inference DetailWire
+ *		A <em>link {@model Button}</em> will be created in the container of the source {@model DomainIterator} for a {@model DetailWire},
+ *		in order to browse to the <em>target {@model Frame}</em>.
+ */
+rule "Create a Link Button for the source of a DetailWire"
+	when
+		container : Frame( )
+		
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		not ( button : VisibleThing ( eContainer == source, name == "link" )) 
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		Button link = handler.generatedButton(detail, source);
+		handler.setName(link, "link");
+		queue.add(link, drools);
+	
+end
+
+/**
+ * @inference DetailWire
+ *		The <em>link {@model Button}</em> generated for a {@model DetailWire} will be connected with an
+ *		{@model ECARule} to navigate to the <em>target {@model Frame}</em> when {@model Button#onClick clicked}.
+ */
+rule "Create a Link Button for the source of a DetailWire: Connect ECARule"
+	when
+		container : Frame( )
+		
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		button : VisibleThing ( eContainer == source, name == "link" )
+		onClick : Event ( button.onClick == onClick )
+		
+		not ( ECARule ( trigger == onClick, target == target )) 
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		ECARule nav = handler.generatedECARule(detail, source, onClick, target);
+		handler.setName(nav, "View detail");
+		queue.add(nav, drools);
+		
+end
+
+/**
+ * @inference DetailWire,Parameter
+ *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
+ *		not contained by an {@model IteratorList},
+ *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},
+ *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainType}.
+ */
+rule "Create a Link Button for the source of a DetailWire (not IteratorList): Add Parameter from AttributeInstance"
+	when
+		container : Frame( )
+		
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator ( eContainer == container )
+		inst2 : DomainInstance ( instance.currentInstance == inst2 )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
+		source : VisibleThing ( eContainer == container )
+		# ignoring IteratorLists
+		not ( IteratorList ( this == source )) 
+		target : Frame ( )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		button : VisibleThing ( eContainer == source, name == "link" )
+		onClick : Event ( button.onClick == onClick )
+		nav : ECARule ( trigger == onClick, target == target )
+
+		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
+		pkInstance : DomainAttributeInstance ( eContainer == inst2 )
+		ExtendsEdge ( from == pkInstance, to == pkAttribute )
+		
+		pk : Value ( pkInstance.fieldValue == pk ) 
+		
+		not ( Parameter ( parameterValue == pk, parameterTerm == nav ))
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		Parameter param = handler.generatedParameter(detail, source, pk, nav);
+		handler.setName(param, pkAttribute.getName());
+		queue.add(param, drools);
+	
+end
+
+/**
+ * @inference DetailWire,Parameter
+ *		The {@model ECARule navigation rule} from the <em>link {@model Button}</em> generated for a {@model DetailWire},
+ *		as contained by an {@model IteratorList},
+ *		will be supplied the {@model DomainAttributeInstance current value} within the source {@model DomainInstance},
+ *		representing the {@model DomainAttribute#primaryKey} of the source {@model DomainType}.
+ */
+rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Parameter from AttributeInstance"
+	when
+		container : Frame( )
+		
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator ( eContainer == container )
+		inst2 : DomainInstance ( instance.currentInstance == inst2 )
+		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
+		source : IteratorList ( eContainer == container )
+		target : Frame ( )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		button : VisibleThing ( eContainer == source, name == "link" )
+		onClick : Event ( button.onClick == onClick )
+		nav : ECARule ( trigger == onClick, target == target )
+
+		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
+		pkInstance : DomainAttributeInstance ( eContainer == inst2 )
+		ExtendsEdge ( from == pkInstance, to == pkAttribute )
+		
+		# attribute instance is connected to the Container by a SetWire or SyncWire to a Hidden
+		hidden : Label ( eContainer == source, visible == false )
+		set : SetWire ( from == pkInstance, to == hidden )
+		
+		pk : Value ( hidden.fieldValue == pk ) 
+		
+		not ( Parameter ( parameterValue == pk, parameterTerm == nav ))
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		Parameter param = handler.generatedParameter(detail, source, pk, nav);
+		handler.setName(param, pkAttribute.getName());
+		queue.add(param, drools);
+	
+end
+
+/**
+ * @inference DetailWire,DomainIterator
+ *		The <em>selected {@model DomainIterator}</em> used to select one instance of a
+ *		{@model DetailWire} source is given the same {@model DomainSource} as the
+ *		source {@model DomainIterator}.
+ */
+rule "The view one DomainIterator is connected to the same DomainSource as the view many DomainIterator"
+	when
+		container : Frame( )
+
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		instanceSet : SetWire ( from == instance, to == source )
+		
+		detail : DetailWire ( from == source, to == target )
+
+		iterator2 : DomainIterator ( eContainer == target,
+			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
+		
+		not ( SelectEdge ( from == iterator2 ))		
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		SelectEdge select = handler.generatedSelectEdge(detail, iterator2, iterator2, domainSource);
+		queue.add(select, drools); 
+	
+end

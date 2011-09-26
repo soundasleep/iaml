@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12fdcc0ca07.1">
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.1a" name="fn:contains" slotTypes="xsd_string xsd_string" conditioned="model.12fdcc0ca07.212" func="FN_CONTAINS">
+    <conditionEdges id="model.12fdcc0ca07.212" name="check" inParameterEdges="model.12fdcc0ca07.217 model.12fdcc0ca07.21a" function="model.12fdcc0ca07.1a" conditioned="model.12fdcc0ca07.20e"/>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
+  </functions>
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.85" name="fn:codepoint-equal" slotTypes="xsd_string xsd_string" conditioned="model.12fdcc0ca07.3c8" func="FN_CODEPOINT_EQUAL">
+    <conditionEdges id="model.12fdcc0ca07.3c8" name="check" inParameterEdges="model.12fdcc0ca07.613 model.12fdcc0ca07.615" function="model.12fdcc0ca07.85" conditioned="model.12fdcc0ca07.3c4"/>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
+  </functions>
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.87" name="op:numeric-equal" slotTypes="xsd_integer xsd_integer" conditioned="model.12fdcc0ca07.bed" func="OP_NUMERIC_EQUAL">
+    <conditionEdges id="model.12fdcc0ca07.bed" name="check" inParameterEdges="model.12fdcc0ca07.bf6 model.12fdcc0ca07.bf8" function="model.12fdcc0ca07.87" conditioned="model.12fdcc0ca07.be9"/>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
+  </functions>
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.89" name="op:numeric-less-than" slotTypes="xsd_integer xsd_integer" conditioned="model.12fdcc0ca07.bee" func="OP_NUMERIC_LESS_THAN">
+    <conditionEdges id="model.12fdcc0ca07.bee" name="check" inParameterEdges="model.12fdcc0ca07.bfa model.12fdcc0ca07.bfc" function="model.12fdcc0ca07.89" conditioned="model.12fdcc0ca07.beb"/>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
+  </functions>
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.8b" name="op:numeric-greater-than" slotTypes="xsd_integer xsd_integer" conditioned="model.12fdcc0ca07.bf1" func="OP_NUMERIC_GREATER_THAN">
+    <conditionEdges id="model.12fdcc0ca07.bf1" name="check" inParameterEdges="model.12fdcc0ca07.bfe model.12fdcc0ca07.c00" function="model.12fdcc0ca07.8b" conditioned="model.12fdcc0ca07.bec"/>
+    <slotNames>a</slotNames>
+    <slotNames>b</slotNames>
+  </functions>
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.e28" name="fn:not (integer)" slotTypes="xsd_integer" conditioned="model.12fdcc0ca07.1c3d" func="FN_NOT">
+    <conditionEdges id="model.12fdcc0ca07.1c3d" name="check" inParameterEdges="model.12fdcc0ca07.1c3f" function="model.12fdcc0ca07.e28" conditioned="model.12fdcc0ca07.1c3b"/>
+    <slotNames>a</slotNames>
+  </functions>
+  <functions xsi:type="iaml:XQueryPredicate" id="model.12fdcc0ca07.e28b" name="fn:not (string)" slotTypes="xsd_string" conditioned="model.12fdcc0ca07.15e4" func="FN_NOT">
+    <conditionEdges id="model.12fdcc0ca07.15e4" name="check" inParameterEdges="model.12fdcc0ca07.15e6" function="model.12fdcc0ca07.e28b" conditioned="model.12fdcc0ca07.142a"/>
+    <slotNames>a</slotNames>
+  </functions>
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12fdcc0cca7.4" name="String Predicates">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.2d" name="arg1" outParameterEdges="model.12fdcc0ca07.217 model.12fdcc0ca07.613 model.12fdcc0ca07.15e6" type="xsd_string">
+      <parameterEdges id="model.12fdcc0ca07.217" name="a" parameterValue="visual.12fdcc0cca7.2d" parameterTerm="model.12fdcc0ca07.212"/>
+      <parameterEdges id="model.12fdcc0ca07.613" name="a" parameterValue="visual.12fdcc0cca7.2d" parameterTerm="model.12fdcc0ca07.3c8"/>
+      <parameterEdges id="model.12fdcc0ca07.15e6" name="a" parameterValue="visual.12fdcc0cca7.2d" parameterTerm="model.12fdcc0ca07.15e4"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.35" name="arg2" outParameterEdges="model.12fdcc0ca07.21a model.12fdcc0ca07.615" type="xsd_string">
+      <parameterEdges id="model.12fdcc0ca07.21a" name="b" parameterValue="visual.12fdcc0cca7.35" parameterTerm="model.12fdcc0ca07.212"/>
+      <parameterEdges id="model.12fdcc0ca07.615" name="b" parameterValue="visual.12fdcc0cca7.35" parameterTerm="model.12fdcc0ca07.3c8"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.36" name="contains">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.20b" id="model.12fdcc0ca07.189" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.20e" id="model.12fdcc0ca07.18b" name="show"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.37" name="codepoint equal">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.3c2" id="model.12fdcc0ca07.300" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.3c4" id="model.12fdcc0ca07.308" name="show"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.38" name="execute" listeners="model.12fdcc0ca07.20b model.12fdcc0ca07.20e model.12fdcc0ca07.3c2 model.12fdcc0ca07.3c4 model.12fdcc0ca07.1426 model.12fdcc0ca07.142a">
+      <ecaRules id="model.12fdcc0ca07.20b" name="onClick" trigger="visual.12fdcc0cca7.38" target="model.12fdcc0ca07.189" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.20e" conditions="model.12fdcc0ca07.212" name="onClick" trigger="visual.12fdcc0cca7.38" target="model.12fdcc0ca07.18b"/>
+      <ecaRules id="model.12fdcc0ca07.3c2" name="onClick" trigger="visual.12fdcc0cca7.38" target="model.12fdcc0ca07.300" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.3c4" conditions="model.12fdcc0ca07.3c8" name="onClick" trigger="visual.12fdcc0cca7.38" target="model.12fdcc0ca07.308"/>
+      <ecaRules id="model.12fdcc0ca07.1426" name="onClick" trigger="visual.12fdcc0cca7.38" target="model.12fdcc0ca07.120c" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.142a" conditions="model.12fdcc0ca07.15e4" name="onClick" trigger="visual.12fdcc0cca7.38" target="model.12fdcc0ca07.120d"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.550" name="not arg1">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.1426" id="model.12fdcc0ca07.120c" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.142a" id="model.12fdcc0ca07.120d" name="show"/>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12fdcc0cca7.13" name="Numeric Predicates">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.251" name="arg1" outParameterEdges="model.12fdcc0ca07.bf6 model.12fdcc0ca07.bfa model.12fdcc0ca07.bfe model.12fdcc0ca07.1c3f" type="xsd_integer" defaultValue="0">
+      <parameterEdges id="model.12fdcc0ca07.bf6" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.bed"/>
+      <parameterEdges id="model.12fdcc0ca07.bfa" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.bee"/>
+      <parameterEdges id="model.12fdcc0ca07.bfe" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.bf1"/>
+      <parameterEdges id="model.12fdcc0ca07.1c3f" name="a" parameterValue="visual.12fdcc0cca7.251" parameterTerm="model.12fdcc0ca07.1c3d"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12fdcc0cca7.252" name="arg2" outParameterEdges="model.12fdcc0ca07.bf8 model.12fdcc0ca07.bfc model.12fdcc0ca07.c00" type="xsd_integer" defaultValue="0">
+      <parameterEdges id="model.12fdcc0ca07.bf8" name="b" parameterValue="visual.12fdcc0cca7.252" parameterTerm="model.12fdcc0ca07.bed"/>
+      <parameterEdges id="model.12fdcc0ca07.bfc" name="b" parameterValue="visual.12fdcc0cca7.252" parameterTerm="model.12fdcc0ca07.bee"/>
+      <parameterEdges id="model.12fdcc0ca07.c00" name="b" parameterValue="visual.12fdcc0cca7.252" parameterTerm="model.12fdcc0ca07.bf1"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.253" name="numeric-equal">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.bdd" id="model.12fdcc0ca07.833" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.be9" id="model.12fdcc0ca07.834" name="show"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.254" name="numeric-greater-than">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.be2" id="model.12fdcc0ca07.95f" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.bec" id="model.12fdcc0ca07.960" name="show"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.255" name="numeric-less-than">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.bdf" id="model.12fdcc0ca07.a9d" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.beb" id="model.12fdcc0ca07.a9e" name="show"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.419" name="execute" listeners="model.12fdcc0ca07.bdd model.12fdcc0ca07.bdf model.12fdcc0ca07.be2 model.12fdcc0ca07.be9 model.12fdcc0ca07.beb model.12fdcc0ca07.bec model.12fdcc0ca07.1c3a model.12fdcc0ca07.1c3b">
+      <ecaRules id="model.12fdcc0ca07.bdd" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.833" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.bdf" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.a9d" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.be2" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.95f" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.be9" conditions="model.12fdcc0ca07.bed" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.834"/>
+      <ecaRules id="model.12fdcc0ca07.beb" conditions="model.12fdcc0ca07.bee" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.a9e"/>
+      <ecaRules id="model.12fdcc0ca07.bec" conditions="model.12fdcc0ca07.bf1" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.960"/>
+      <ecaRules id="model.12fdcc0ca07.1c3a" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.1a63" priority="100"/>
+      <ecaRules id="model.12fdcc0ca07.1c3b" conditions="model.12fdcc0ca07.1c3d" name="onClick" trigger="visual.12fdcc0cca7.419" target="model.12fdcc0ca07.1a64"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12fdcc0cca7.7a4" name="not arg1">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.1c3a" id="model.12fdcc0ca07.1a63" name="hide"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fdcc0ca07.1c3b" id="model.12fdcc0ca07.1a64" name="show"/>
+    </children>
+  </scopes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

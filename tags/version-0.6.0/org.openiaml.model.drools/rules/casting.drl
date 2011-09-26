@@ -1,0 +1,255 @@
+/**
+ * Rules related to types and casting, and the 'can cast?' {@model Condition}.
+ */
+package org.openiaml.model.drools.rules.casting
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+import org.eclipse.emf.ecore.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * Similar to issue 210: Create PrimitiveConditions by default, but
+ * allow later overriding using the same semantics if it was a ActivityPredicate.
+ *
+ * <p>Issue 221: Add 'can cast?' Primitive Function to all Changeable elements
+ *
+ * @inference Changeable,BuiltinProperty
+ *		{@model Changeable}s will contain a {@model BuiltinProperty} named 'can cast?'.
+ */
+rule "Create 'can cast?' condition for Changeables"
+	when
+		tf : Changeable( )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
+		not ( condition : Function ( name == "can cast?", eContainer == tf ))
+		
+		eval ( handler.veto( tf ))
+	
+	then
+		BuiltinProperty condition = handler.generatedBuiltinProperty(tf, tf);
+		handler.setName(condition, "can cast?");
+		handler.setType(condition, type);
+		handler.setSlotNames(condition, new String[] { "value" });
+		handler.setSlotTypes(condition, new EClassifier[] { EcorePackage.eINSTANCE.getEClassifier() });
+		queue.add(condition, drools);
+
+end
+
+/**
+ * @inference ActivityPredicate,Changeable
+ *		An {@model ActivityPredicate} named 'can cast?', used to check casting for a {@model Changeable} {@model Changeable#fieldValue},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'can cast?' condition"
+	when
+		tf : Changeable( )
+		fieldValue : Value ( tf.fieldValue == fieldValue )
+		c : ActivityPredicate ( name == "can cast?", eContainer == tf )
+		
+		not ( start : StartNode ( eContainer == c ))
+		
+		eval ( handler.veto( c ))
+	
+	then
+		StartNode start = handler.generatedStartNode(c, c);		
+		queue.add(start, drools);
+		
+		ActivityParameter param = handler.generatedActivityParameter(c, c);
+		handler.setName(param, "value");
+		queue.add(param, drools);
+		
+		CastNode cast = handler.generatedCastNode(c, c);
+		queue.add(cast, drools);
+		
+		DecisionNode check = handler.generatedDecisionNode(c, c);
+		handler.setName(check, "can cast?");
+		queue.add(check, drools);
+		
+		CancelNode cancel = handler.generatedCancelNode(c, c);
+		queue.add(cancel, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(c, c);
+		queue.add(finish, drools);
+		
+		ExternalValue ev_fieldValue = handler.generatedExternalValue(c, c);
+		handler.setValue(ev_fieldValue, fieldValue);
+		queue.add(ev_fieldValue, drools);
+		
+		DataFlowEdge castIn = handler.generatedDataFlowEdge(c, c, param, cast);
+		queue.add(castIn, drools);
+
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(c, c, cast, ev_fieldValue);
+		queue.add(castOut, drools);
+
+		DataFlowEdge castCheck = handler.generatedDataFlowEdge(c, c, cast, check);
+		queue.add(castCheck, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(c, c, start, check);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(c, c, check, cancel);
+		handler.setName(edge2, "no");
+		queue.add(edge2, drools);
+
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(c, c, check, finish);
+		handler.setName(edge3, "yes");
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference InputTextField,SyncWire,Parameter
+ *		A {@model SyncWire} connecting two elements with a {@model Function} 'can sync?'
+ *		will only {@model SimpleCondition permit} synchronisation if the value can be {@model CastNode cast successfully}.
+ */
+rule "Add 'can cast?' condition check for onChange connecting to Update"
+	when
+		source : Changeable ( )
+		target : ContainsOperations ( )
+		
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, source, target) )
+		
+		fieldValue : Value ( source.fieldValue == fieldValue )		
+
+		event : Event ( source.onChange == event )
+		upd : Operation ( name == "update", eContainer == target )
+		
+		run : ECARule ( trigger == event, target == upd )
+		
+		condition : Function ( name == "can cast?", eContainer == target )
+		
+		not ( ce : SimpleCondition ( function == condition, conditioned == run )) 
+		
+		eval ( handler.veto( sw ))
+	
+	then
+		SimpleCondition ce = handler.generatedSimpleCondition(sw, sw, condition, run);
+		handler.setName(ce, "prevent incompatible types");
+		queue.add(ce, drools);
+		
+		Parameter param = handler.generatedParameter(sw, sw, fieldValue, ce);
+		queue.add(param, drools);		
+	
+end
+
+/**
+ * @inference SyncWire,Parameter
+ *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model Event} executing the 'init' {@model Operation}
+ *		will {@model SimpleCondition only execute} if the source {@model Value fieldValue} can be {@model CastNode cast successfully}.  
+ */
+rule "Add 'can cast?' condition check for onAccess connecting to Init"
+	when
+		source : Accessible ( )
+		target : CanBeSynced ( )
+		targetc : Changeable ( this == target )
+		
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, source, target) )
+		
+		fieldValue : Value ( targetc.fieldValue == fieldValue )		
+
+		event : Event ( source.onAccess == event )
+		upd : Operation ( name == "init", eContainer == source )
+		
+		run : ECARule ( trigger == event, target == upd )
+		p2 : Parameter ( parameterValue == fieldValue, parameterTerm == run )
+		
+		condition : Function ( name == "can cast?", eContainer == source )
+		
+		not ( ce : SimpleCondition ( function == condition, conditioned == run )) 
+		
+		eval ( handler.veto( sw ))
+	
+	then
+		SimpleCondition ce = handler.generatedSimpleCondition(sw, sw, condition, run);
+		handler.setName(ce, "prevent incompatible types");
+		queue.add(ce, drools);
+		
+		Parameter param = handler.generatedParameter(sw, sw, fieldValue, ce);
+		queue.add(param, drools);		
+	
+end
+
+/**
+ * @inference SyncWire,CanBeSynced
+ *		For elements connected by a {@model SyncWire}, the {@model Accessible#onAccess} {@model Event} {@model ECARule executing} the 'init' {@model Operation}
+ *		will {@model SimpleCondition only execute} if the source {@model Value fieldValue} can be {@model CastNode cast successfully}.  
+ */
+rule "After 'init' has been called on a typed element, call 'validate'"
+	when
+		source : CanBeSynced ( )
+		accessible : Accessible ( )
+		eval ( source == accessible )
+		
+		event : Event ( source.onAccess == event )
+		upd : Operation ( name == "init", eContainer == source )
+		
+		run : ECARule ( trigger == event, target == upd )
+		
+		validate : Operation ( name == "validate", eContainer == source )
+		
+		not ( runValidate : ECARule ( trigger == event, target == validate ))
+		
+		eval ( handler.veto( source ))
+	
+	then
+		ECARule runValidate = handler.generatedECARule(source, source, event, validate);
+		handler.setName(runValidate, "call validate after init");
+		// must be a lower priority 		
+		handler.setPriority(runValidate, run.getPriority() - 10);
+		queue.add(runValidate, drools);
+
+end
+
+/**
+ * onInit->Validate() is only called if the fieldValue has been set.
+ *
+ * @inference SyncWire,CanBeSynced
+ *		For elements connected by a {@model SyncWire}, the {@model Accessible#onAccess} {@model Event} will only call
+ *		the 'validate' {@model Operation} if the relevant {@model Changeable#fieldValue} {@model Function is set}. 
+ */
+rule "Only call 'validate' operation onAccess if fieldValue has been set"
+	when
+		source : CanBeSynced ( )
+		accessible : Accessible ( )
+		eval ( source == accessible )
+		
+		event : Event ( source.onAccess == event )
+		upd : Operation ( name == "init", eContainer == source )
+		
+		run : ECARule ( trigger == event, target == upd )
+		
+		validate : Operation ( name == "validate", eContainer == source )
+		runValidate : ECARule ( trigger == event, target == validate )
+		
+		isSet : Function ( name == "fieldValue is set", eContainer == source )
+		
+		not ( edge : SimpleCondition ( function == isSet, conditioned == runValidate) )
+		
+		eval ( handler.veto( runValidate ))
+	
+	then
+		SimpleCondition edge = handler.generatedSimpleCondition(runValidate, source, isSet, runValidate);
+		handler.setName(edge, "only validate if set");
+		queue.add(edge, drools);
+
+end

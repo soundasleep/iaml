@@ -1,0 +1,151 @@
+/**
+ * Because we reference XSD, it is very slow to save GMF diagrams, as EMF
+ * must first download the XSD definitions every time to see if the file
+ * is read-only (which it obviously is). 
+ * 
+ * We can override this in two ways:
+ * - Extend the default EditingDomain to override isReadOnly()
+ * - Add a cheap URI check before saving the model
+ *
+ * The simplest solution is to simply add an additional URI check.
+ * TODO when issue 30 is resolved, reimplement isReadOnly and remove this template.  
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::editor::Utils»
+
+/**
+ * There's no way to specify the definition any further, so we override
+ * the entire command.
+ */
+«AROUND doSaveDocument FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment»
+protected void doSaveDocument(org.eclipse.core.runtime.IProgressMonitor monitor, Object element, org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument document, boolean overwrite) throws org.eclipse.core.runtime.CoreException {
+	ResourceSetInfo info = getResourceSetInfo(element);
+	if (info != null) {
+		if (!overwrite && !info.isSynchronized()) {
+			throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, 
+				«IF null = editorGen.application»org.eclipse.core.resources.IResourceStatus.OUT_OF_SYNC_LOCAL«ELSE»org.eclipse.core.runtime.IStatus.ERROR«ENDIF», 
+				«EXPAND xpt::Externalizer::accessorCall(i18nKeyForDocumentUnsynchronizedFileSaveError(self)) FOR editorGen», 
+				null));
+		}
+	«IF null = editorGen.application-»
+		info.stopResourceListening();
+	«ENDIF-»
+		fireElementStateChanging(element);
+		try {
+			monitor.beginTask(«EXPAND xpt::Externalizer::accessorCall(i18nKeyForDocumentSaveDiagramTask(self)) FOR editorGen», info.getResourceSet().getResources().size() + 1); //"Saving diagram"
+			for (java.util.Iterator/*<org.eclipse.emf.ecore.resource.Resource>*/ it = info.getLoadedResourcesIterator(); it.hasNext();) {
+				org.eclipse.emf.ecore.resource.Resource nextResource = (org.eclipse.emf.ecore.resource.Resource) it.next();
+				monitor.setTaskName(org.eclipse.osgi.util.NLS.bind(
+						«EXPAND xpt::Externalizer::accessorCall(i18nKeyForDocumentSaveNextResourceTask(self)) FOR editorGen», 
+						nextResource.getURI()));
+				if (nextResource.isLoaded()
+					«REM»modification starts here«ENDREM»
+					/* jevon modification: the XSD definition is always assumed to be readonly; we don't need to download the definitions every time */
+					&& (nextResource.getURI() == null || !"http://www.w3.org/2001/xml.xsd".equals(nextResource.getURI().toString()))
+					/* end jevon modification */ 
+					«REM»modification ends here«ENDREM»
+					&& !info.getEditingDomain().isReadOnly(nextResource)) {
+					try {
+						nextResource.save(«EXPAND xpt::Common::getSaveOptions»);
+					} catch (java.io.IOException e) {
+						fireElementStateChangeFailed(element);
+						throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, org.eclipse.gmf.runtime.diagram.ui.resources.editor.internal.EditorStatusCodes.RESOURCE_FAILURE, e.getLocalizedMessage(), null));
+					}
+				}
+				monitor.worked(1);
+			}
+			monitor.done();
+			info.setModificationStamp(computeModificationStamp(info));
+		} catch (RuntimeException x) {
+			fireElementStateChangeFailed(element);
+			throw x;
+		} «IF null = editorGen.application» finally {
+			info.startResourceListening();
+		} «ENDIF»
+	} else {
+		org.eclipse.emf.common.util.URI newResoruceURI;
+		java.util.List affectedFiles = null;
+		«IF null = editorGen.application»if (element instanceof «EXPAND fileEditorInputClassFQName») {
+			org.eclipse.core.resources.IFile newFile = ((«EXPAND fileEditorInputClassFQName») element).getFile();
+			affectedFiles = java.util.Collections.singletonList(newFile);
+			newResoruceURI = org.eclipse.emf.common.util.URI.createPlatformResourceURI(newFile.getFullPath().toString(), true);
+		} else «ENDIF»if(element instanceof «EXPAND uriEditorInputClassFQName») {
+			newResoruceURI = ((«EXPAND uriEditorInputClassFQName») element).getURI();
+		} else {
+			fireElementStateChangeFailed(element);
+			«EXPAND throwIncorrectInputException-»
+		}
+		if (false == document instanceof org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument) {
+			fireElementStateChangeFailed(element);
+			throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, 0,
+			"Incorrect document used: " + document + " instead of org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument", null));«EXPAND xpt::Common::nonNLS(1)»«EXPAND xpt::Common::nonNLS(2)»
+		}
+		org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument diagramDocument = (org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument) document;
+		final org.eclipse.emf.ecore.resource.Resource newResource = diagramDocument.getEditingDomain().getResourceSet().createResource(newResoruceURI);
+		final org.eclipse.gmf.runtime.notation.Diagram diagramCopy = (org.eclipse.gmf.runtime.notation.Diagram) org.eclipse.emf.ecore.util.EcoreUtil.copy(diagramDocument.getDiagram());
+		try {
+			new org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand(diagramDocument.getEditingDomain(), org.eclipse.osgi.util.NLS.bind(«EXPAND xpt::Externalizer::accessorCall(i18nKeyForDocumentSaveAs(self)) FOR editorGen», diagramCopy.getName()), affectedFiles) {
+				protected org.eclipse.gmf.runtime.common.core.command.CommandResult doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor monitor, org.eclipse.core.runtime.IAdaptable info) throws org.eclipse.core.commands.ExecutionException {
+					newResource.getContents().add(diagramCopy);					
+					return org.eclipse.gmf.runtime.common.core.command.CommandResult.newOKCommandResult();
+				}
+			}.execute(monitor, null);
+			newResource.save(«EXPAND xpt::Common::getSaveOptions»);
+		} catch (org.eclipse.core.commands.ExecutionException e) {
+			fireElementStateChangeFailed(element);
+			throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, 0, e.getLocalizedMessage(), null));
+		} catch (java.io.IOException e) {
+			fireElementStateChangeFailed(element);
+			throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, 0, e.getLocalizedMessage(), null));
+		}
+		newResource.unload();
+	}
+}
+«ENDAROUND»
+
+«AROUND setDocumentContent FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: wraps the original method in a class wrapper")»
+	private class OriginalDocumentProvider {
+	«targetDef.proceed()»
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon extension: disable full loading of references")»
+	protected void setDocumentContent(org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument document, org.eclipse.ui.IEditorInput element) throws org.eclipse.core.runtime.CoreException {
+		
+		org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument diagramDocument = (org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument) document;
+		org.eclipse.emf.transaction.TransactionalEditingDomain domain = diagramDocument.getEditingDomain();
+		
+		try {
+			// essentially calls a super method
+			org.openiaml.model.EXSDDataTypeTransactionHandler.getInstance().setLoadingDiagram(true);
+			new OriginalDocumentProvider().setDocumentContent(document, element);
+		} finally {
+			org.openiaml.model.EXSDDataTypeTransactionHandler.getInstance().setLoadingDiagram(false);
+			final org.eclipse.emf.ecore.EObject diagramObject = diagramDocument.getDiagram().getElement();
+			org.eclipse.emf.common.command.Command command = new org.eclipse.emf.transaction.RecordingCommand(domain, "Resolve all outstanding cross-references") {
+				
+				«EXPAND xpt::Common::generatedMemberComment("Jevon extension: it is necessary to resolve missing references once the model has loaded.")»
+				@Override
+				protected void doExecute() {
+					org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(diagramObject.eResource().getResourceSet());
+				}
+				
+			};
+			domain.getCommandStack().execute(command);
+		}
+	}
+«ENDAROUND»
+
+/**
+ * Other definitions that don't seem to be dynamic properly.
+ */
+«DEFINE fileEditorInputClassFQName FOR gmfgen::GenDiagram»org.eclipse.ui.part.FileEditorInput«ENDDEFINE»
+«DEFINE uriEditorInputClassFQName FOR gmfgen::GenDiagram»org.eclipse.emf.common.ui.URIEditorInput«ENDDEFINE»
+«DEFINE throwIncorrectInputException FOR gmfgen::GenDiagram-»
+throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, 0, 
+		org.eclipse.osgi.util.NLS.bind(
+			«EXPAND xpt::Externalizer::accessorCall(i18nKeyForDocumentProviderIncorrectInputError(self)) FOR editorGen»,
+			new Object[] {element, «IF null = editorGen.application»"«EXPAND fileEditorInputClassFQName»", «ENDIF»"«EXPAND uriEditorInputClassFQName»"}),«EXPAND xpt::Common::nonNLS(1)»«IF null = editorGen.application»«EXPAND xpt::Common::nonNLS(2)»«ENDIF» 
+		null));
+«ENDDEFINE»

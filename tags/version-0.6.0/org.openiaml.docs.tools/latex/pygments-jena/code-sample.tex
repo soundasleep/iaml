@@ -1,0 +1,34 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small]{jena}
+# Example rule file
+@prefix pre: <http://jena.hpl.hp.com/prefix#>.
+@include <RDFS>.
+
+[rule1: (?f pre:father ?a) (?u pre:brother ?f) -> (?u pre:uncle ?a)]
+
+[allID: (?C rdf:type owl:Restriction), (?C owl:onProperty ?P), 
+     (?C owl:allValuesFrom ?D)  -> (?C owl:equivalentClass all(?P, ?D)) ]
+
+[all2: (?C rdfs:subClassOf all(?P, ?D)) -> print('Rule for ', ?C)
+    [all1b: (?Y rdf:type ?D) <- (?X ?P ?Y), (?X rdf:type ?C) ] ]
+
+[max1: (?A rdf:type max(?P, 1)), (?A ?P ?B), (?A ?P ?C) 
+      -> (?B owl:sameAs ?C) ]
+
+(?a ?q ?b) <- (?p rdfs:subPropertyOf ?q), (?a ?p ?b) .
+
+[exampleModelCompletion:
+  (?P rdf:type iaml:BooleanProperty)
+  (?C iaml:children ?P)
+  noValue(?E iaml:for ?P)
+  makeSkolem(?A, ?P, ?C)
+  ->
+  (?A rdf:type iaml:Checkbox)
+  (?A iaml:id 'generated')
+  (?A iaml:isGenerated 'true')
+  (?A iaml:for ?P)
+  (?C iaml:children ?A)
+]
+\end{minted}

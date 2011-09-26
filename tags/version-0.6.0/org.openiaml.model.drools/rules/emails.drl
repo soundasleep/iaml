@@ -1,0 +1,132 @@
+/**
+ * Completes the default {@model Value}s of {@model Email}s.
+ */
+package org.openiaml.model.drools.rules.email
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.domain.*;
+import org.openiaml.model.model.messaging.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference Email,Value
+ *		An {@model Email} contains a {@model Value} named
+ *		'to'.
+ */
+rule "Create 'to' property for Email"
+	when
+		f : Email ( to != null )
+		not ( Value ( eContainer == f, name == "to" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Value p = handler.generatedValue(f, f);
+		handler.setName(p, "to");
+		if (f.getTo() != null) {
+			handler.setDefaultValue(p, f.getTo());
+		}
+		queue.add(p, drools);
+		
+end
+
+/**
+ * @inference Email,Value 
+ *		An {@model Email} contains a {@model Value} named
+ *		'toName'.
+ */
+rule "Create 'toName' property for Email"
+	when
+		f : Email ( toName != null )
+		not ( Value ( eContainer == f, name == "toName" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Value p = handler.generatedValue(f, f);
+		handler.setName(p, "toName");
+		if (f.getToName() != null) {
+			handler.setDefaultValue(p, f.getToName());
+		}
+		queue.add(p, drools);
+		
+end
+
+/**
+ * @inference Email,Value
+ *		An {@model Email} contains a {@model Value} named
+ *		'from'.
+ */
+rule "Create 'from' property for Email"
+	when
+		f : Email ( from != null )
+		not ( Value ( eContainer == f, name == "from" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Value p = handler.generatedValue(f, f);
+		handler.setName(p, "from");
+		if (f.getFrom() != null) {
+			handler.setDefaultValue(p, f.getFrom());
+		}
+		queue.add(p, drools);
+		
+end
+
+/**
+ * @inference Email,Value
+ *		An {@model Email} contains a {@model Value} named
+ *		'fromName'.
+ */
+rule "Create 'fromName' property for Email"
+	when
+		f : Email ( fromName != null )
+		not ( Value ( eContainer == f, name == "fromName" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Value p = handler.generatedValue(f, f);
+		handler.setName(p, "fromName");
+		if (f.getFromName() != null) {
+			handler.setDefaultValue(p, f.getFromName());
+		}
+		queue.add(p, drools);
+		
+end
+
+/**
+ * @inference Email,Value 
+ *		An {@model Email} contains a {@model Value} named
+ *		'subject'.
+ */
+rule "Create 'subject' property for Email"
+	when
+		f : Email ( subject != null )
+		not ( Value ( eContainer == f, name == "subject" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Value p = handler.generatedValue(f, f);
+		handler.setName(p, "subject");
+		if (f.getSubject() != null) {
+			handler.setDefaultValue(p, f.getSubject());
+		}
+		queue.add(p, drools);
+		
+end

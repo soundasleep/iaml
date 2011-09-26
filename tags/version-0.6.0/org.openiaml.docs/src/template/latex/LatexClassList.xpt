@@ -1,0 +1,13 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexClassList FOR modeldoc::ModelDocumentation»
+	«FILE "output/latex/all.tex"»
+		% Generated list of all classes in the modeldoc
+	
+		«FOREACH classes.sortBy(c|c.name) AS cls»
+			\input{modeldoc/«cls.name»}
+		«ENDFOREACH»
+	«ENDFILE»
+«ENDDEFINE»

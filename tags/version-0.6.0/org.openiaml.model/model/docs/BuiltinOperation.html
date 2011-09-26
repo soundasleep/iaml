@@ -1,0 +1,59 @@
+<h3>hide, show</h3>
+<p>
+The {@model VisibleThing#hide} and {@model VisibleThing#show} {@model BuiltinOperation}s are defined for all {@model VisibleThing}s. When executed, the {@model Operation} hides or shows its parent element respectively. The current visibility is stored within a {@model Value} contained within the field, and thus persists according to the containing {@model Scope}.
+</p>
+
+<h3>init, update</h3>
+<p>
+The {@model VisibleThing#init} and {@model VisibleThing#update} {@model BuiltinOperation}s are defined for all {@model DomainAttributeInstance}s and {@model VisibleThing}s. The {@model Operation} accepts one {@model ActivityParameter}, <i>value</i>. When executed, the operation updates the {@model Changeable#fieldValue} of the parent element to the provided <i>value</i>.
+</p>
+
+<h3>send</h3>
+<p>
+The {@model Email#send} {@model BuiltinOperation} is defined for all {@model Email}s. When executed, the {@model Operation} attempts to send the current {@model Email}. If the e-mail can successfully be delivered, the {@event onSuccess} event is triggered; if the e-mail cannot be successfully received, the {@event onFailure} event is triggered.
+</p>
+
+<h3>next, previous</h3>
+<p>
+The {@model DomainIterator#next} and {@model DomainIterator#previous} {@model BuiltinOperation}s are defined for all {@model DomainIterator}s. When executed, the {@model Operation} attempts to increment or decrement the current <i>instance pointer</i> of the {@model DomainIterator}, and the current instance is reloaded from the {@model DomainSource}. If the resulting <i>instance pointer</i> is out-of-bounds for the {@model DomainIterator}, an exception is thrown, and any defined <i>failure handlers</i> are triggered.
+</p>
+
+<h3>skip, jump</h3>
+<p>
+The {@model DomainIterator#skip} and {@model DomainIterator#jump} {@model BuiltinOperation}s are defined for all {@model DomainIterator}s. The {@model Operation} accepts one {@model ActivityParameter}, <i>value</i>. When executed, the {@model Operation} attempts to increment or set the current <i>instance pointer</i> of the {@model DomainIterator} according to <i>value</i>, and the current instance is reloaded from the {@model DomainSource}. If the resulting <i>instance pointer</i> is out-of-bounds for the {@model DomainIterator}, an exception is thrown, and any defined <i>failure handlers</i> are triggered.
+</p>
+
+<h3>reset</h3>
+<p>
+The {@model DomainIterator#reset} {@model BuiltinOperation} is defined for all {@model DomainIterator}s. When executed, the {@model Operation} attempts to reset the current <i>instance pointer</i> of the {@model DomainIterator} to zero, and the current instance is reloaded from the {@model DomainSource}. If the resulting <i>instance pointer</i> is out-of-bounds for the {@model DomainIterator}, an exception is thrown, and any defined <i>failure handlers</i> are triggered.
+</p>
+
+<h3>save</h3>
+<p>
+The {@model DomainIterator#save} {@model BuiltinOperation} is defined for all {@model DomainIterator}s and {@model DomainAttributeInstance}s. When executed, the {@model Operation} attempts to save the current {@model DomainIterator} or {@model DomainAttributeInstance} to the {@model DomainSource} from which the {@model DomainIterator} is connected to. If the save is unsuccessful, an exception is thrown, and any defined <i>failure handlers</i> are triggered.
+</p>
+
+<h3>new</h3>
+<p>
+The {@model DomainIterator#new} {@model BuiltinOperation} is defined for all {@model DomainIterator}s. When executed, the {@model Operation} clears the value of each contained {@model DomainAttributeInstance}s according to the semantics defined by {@model DomainIterator}, and marks the current <i>instance pointer</i> as <i>new</i>.
+</p>
+
+<h3>add permission, remove permission</h3>
+<p>
+The {@model DomainIterator#addPermission} and {@model DomainIterator#removePermission} {@model BuiltinOperation}s are defined for all {@model DomainIterator}s.  The {@model Operation} accepts one {@model ActivityParameter} of type {@model Permission}, <i>permission</i>. When executed, the {@model Operation} attempts to add or remove the given {@model Permission} to the current <i>user instance</i> as selected by the {@model DomainIterator}. If the current {@model DomainIterator} does not refer to a valid <i>user instance</i>, then an exception is thrown.
+</p>
+
+<h3>add role, remove role</h3>
+<p>
+The {@model DomainIterator#addRole} and {@model DomainIterator#removeRole} {@model BuiltinOperation}s are defined for all {@model DomainIterator}s.  The {@model Operation} accepts one {@model ActivityParameter} of type {@model Role}, <i>role</i>. When executed, the {@model Operation} attempts to add or remove the given {@model Role} to the current <i>user instance</i> as selected by the {@model DomainIterator}. If the current {@model DomainIterator} does not refer to a valid <i>user instance</i>, then an exception is thrown.
+</p>
+
+<p>
+<!-- TODO shouldn't a remove role only remove the permissions that are unique to that role? -->
+When a {@model Role} is added to the current <i>user instance</i>, all {@model Permission}s provided by that {@model Role} through {@model ProvidesEdge}s are also given to that <i>user instance</i>. If the <i>user instance</i> already possesses a given {@model Permission}, then there is no effect. Similarly, when a {@model Role} is removed from a <i>user instance</i>, all {@model Permission}s provided by that {@model Role} through {@model ProvidesEdge}s are also removed from that <i>user instance</i>.
+</p>
+
+<h3>check permissions</h3>
+<p>
+The {@model AccessControlHandler#checkPermissions} {@model BuiltinOperation} is defined for all {@model AccessControlHandler}s. When executed, the {@model Operation} validates the current user according to the requirements of the {@model AccessControlHandler}. If the user cannot be successfully validated, an exception is thrown.
+</p>

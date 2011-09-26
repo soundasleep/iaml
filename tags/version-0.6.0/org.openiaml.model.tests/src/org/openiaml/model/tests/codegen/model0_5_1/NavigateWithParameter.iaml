@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12813a548f4.11">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <values id="model.12813a548f4.37" name="one" outParameterEdges="wires.12813b48b22.d" defaultValue="one" readOnly="true">
+      <parameterEdges id="wires.12813b48b22.d" name="select" parameterValue="model.12813a548f4.37" parameterTerm="wires.12813a54ad9.d"/>
+    </values>
+    <values id="model.12813a548f4.38" name="two" outParameterEdges="wires.12813b48b22.b wires.12813b48b22.f" defaultValue="two" readOnly="true">
+      <parameterEdges id="wires.12813b48b22.b" name="select" parameterValue="model.12813a548f4.38" parameterTerm="wires.12813b48b22.a"/>
+      <parameterEdges id="wires.12813b48b22.f" name="incorrect" parameterValue="model.12813a548f4.38" parameterTerm="wires.12813b48b22.e"/>
+    </values>
+    <children xsi:type="iaml.visual:Button" id="visual.12813a54a8b.37" name="one" listeners="wires.12813a54ad9.d">
+      <ecaRules id="wires.12813a54ad9.d" inParameterEdges="wires.12813b48b22.d" name="onClick" trigger="visual.12813a54a8b.37" target="visual.12813a54a8b.c"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12813a54a8b.38" name="two">
+      <onClick id="model.12813a548f4.58" listeners="wires.12813b48b22.a">
+        <ecaRules id="wires.12813b48b22.a" inParameterEdges="wires.12813b48b22.b" name="navigate" trigger="model.12813a548f4.58" target="visual.12813a54a8b.c"/>
+      </onClick>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12813a54a8b.39" name="none" listeners="wires.12813a54ad9.f">
+      <ecaRules id="wires.12813a54ad9.f" name="onClick" trigger="visual.12813a54a8b.39" target="visual.12813a54a8b.c"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12813b48b12.18" name="wrong param name" listeners="wires.12813b48b22.e">
+      <ecaRules id="wires.12813b48b22.e" inParameterEdges="wires.12813b48b22.f" name="onClick" trigger="visual.12813b48b12.18" target="visual.12813a54a8b.c"/>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12813a54a8b.c" name="Target" rules="wires.12813a54ad9.d wires.12813a54ad9.f wires.12813b48b22.a wires.12813b48b22.e">
+    <onAccess id="model.12fc42b4f75.1e7" listeners="model.12fc42b4f75.1fc">
+      <ecaRules id="model.12fc42b4f75.1fc" inParameterEdges="wires.12fc42b52ff.34" name="run" trigger="model.12fc42b4f75.1e7" target="model.12fc42b4f75.1c4"/>
+    </onAccess>
+    <parameters id="model.12813a548f4.2e" name="select" outParameterEdges="wires.12fc42b52ff.34">
+      <parameterEdges id="wires.12fc42b52ff.34" parameterValue="model.12813a548f4.2e" parameterTerm="model.12fc42b4f75.1fc"/>
+    </parameters>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12813a54a8b.20" name="parameter:">
+      <operations xsi:type="iaml:BuiltinOperation" rules="model.12fc42b4f75.1fc" id="model.12fc42b4f75.1c4" name="update"/>
+    </children>
+  </scopes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

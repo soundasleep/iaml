@@ -1,0 +1,264 @@
+«IMPORT simplegmf»
+«IMPORT ecore»
+
+«EXTENSION metamodel::SimpleGMFExtensions»
+
+/**
+ * Generates the .gmfgraph
+ */
+«DEFINE generateGmfGraph FOR simplegmf::GMFConfiguration»
+	«FILE toString(id) + ".gmfgraph"-»
+<?xml version="1.0" encoding="UTF-8"?>
+<gmfgraph:Canvas xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="model">
+  <figures
+      name="Default">
+    <figures
+        xsi:type="gmfgraph:PolylineDecoration"
+        name="MyArrowDecorator"/>
+    «gmfmapLabelMapReset()»
+	«counterReset("descriptors")»
+	«EXPAND generateGmfGraphPackage(this) FOR rootElement.ePackage»
+  </figures>
+	
+«EXPAND generateAllNodeReferences(this) FOR rootElement.ePackage»
+«EXPAND generateAllEdgeReferences(this) FOR rootElement.ePackage»
+«EXPAND generateAllLabelReferences»
+</gmfgraph:Canvas>
+	«ENDFILE»
+«ENDDEFINE»
+
+«REM»node references«ENDREM»
+«DEFINE generateAllNodeReferences(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
+	«EXPAND generateNodeReferences(root) FOREACH getAllNonAbstractElements().select(c|!isEdgeType(root, c))»
+	«EXPAND generateAllNodeReferences(root) FOREACH eSubpackages»
+«ENDDEFINE»
+
+«DEFINE generateNodeReferences(simplegmf::GMFConfiguration root) FOR ecore::EClass»
+  <nodes
+      name="«name»"
+      figure="«name»Figure"/>
+«ENDDEFINE»
+
+«REM»edge references«ENDREM»
+«DEFINE generateAllEdgeReferences(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
+	«EXPAND generateEdgeReferences(root) FOREACH getAllNonAbstractElements().select(c|isEdgeType(root, c))»
+	«EXPAND generateAllEdgeReferences(root) FOREACH eSubpackages»
+«ENDDEFINE»
+
+«DEFINE generateEdgeReferences(simplegmf::GMFConfiguration root) FOR ecore::EClass»
+  <connections
+      name="«name»"
+      figure="«name»Figure"/>
+«ENDDEFINE»
+
+«DEFINE generateGmfGraphPackage(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
+	<!-- package «name» «nsPrefix» «nsURI» -->
+	«EXPAND generateGmfGraphClass(root) FOREACH getAllNonAbstractElements()»
+	«EXPAND generateGmfGraphPackage(root) FOREACH eSubpackages»
+«ENDDEFINE»
+
+«REM»Figures based on the type of Figure«ENDREM»
+«DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::AbstractFigure»
+	«throwException("Unexpected AbstractFigure type: " + this)»
+«ENDDEFINE»
+
+«REM»for Nodes«ENDREM»
+«DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::FigureConfiguration»
+	<actualFigure
+«IF getCustomShape(root, classifier) != null»
+		xsi:type="gmfgraph:ScalablePolygon"
+«ELSEIF getShapeType(root, classifier) == "RECTANGLE"»
+  		xsi:type="gmfgraph:Rectangle"
+«ELSEIF getShapeType(root, classifier) == "ROUNDED_RECTANGLE"»
+  		xsi:type="gmfgraph:RoundedRectangle"
+«ELSEIF getShapeType(root, classifier) == "ELLIPSE"»
+  		xsi:type="gmfgraph:Ellipse"
+«ELSE»
+	«throwException("Unknown shape for classifier " + classifier + ": " + shape.toString())»
+«ENDIF»
+  		name="«classifier.name»Figure">
+  	«IF getCustomShape(root, classifier) != null»
+  	«LET getCustomShape(root, classifier) AS cs»
+  		«FOREACH cs.points AS p»
+  			<template x="«p.x»" y="«p.y»" />
+  		«ENDFOREACH»
+  	«ENDLET»
+  	«ENDIF»
+«ENDDEFINE»
+
+«REM»for Edges«ENDREM»
+«DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::EdgeConfiguration»
+	<actualFigure
+		xsi:type="gmfgraph:PolylineConnection"
+		name="«classifier.name»Figure"
+
+		«IF !allProperties.typeSelect(simplegmf::LinePattern).isEmpty»
+		«FOREACH {allProperties.typeSelect(simplegmf::LinePattern).first()} AS p»
+			«IF p.linePattern.toString() == "SOLID"»
+				«REM»empty«ENDREM»
+			«ELSEIF p.linePattern.toString() == "DASH"»
+				lineKind="LINE_DASH"
+			«ELSEIF p.linePattern.toString() == "DOT"»
+				lineKind="LINE_DOT"
+			«ELSE»
+				«throwException("Unknown line pattern: " + p.linePattern)»
+			«ENDIF»
+		«ENDFOREACH»
+		«ENDIF»
+	
+		«IF toBoolean(sourceArrow)»
+		sourceDecoration="//@figures.0/@figures.0"
+		«ENDIF»
+		«IF toBoolean(targetArrow)»
+		targetDecoration="//@figures.0/@figures.0"
+		«ENDIF»
+		>
+«ENDDEFINE»
+
+«DEFINE generateGmfGraphClass(simplegmf::GMFConfiguration root) FOR ecore::EClass»
+	«LET deriveFigureConfiguration(root, this) AS fc»
+    <descriptors
+        name="«name»Figure">
+
+«LET fc.properties.toSet().addAll(defaultFigureProperties(root, this)) AS allProperties»
+	«EXPAND selectActualFigure(root, this, allProperties) FOR fc»
+
+	«FOREACH allProperties AS p»
+	<!-- «p.metaType.name»: «p» -->
+	«ENDFOREACH»
+	
+	«IF !allProperties.typeSelect(simplegmf::FlowLayout).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::FlowLayout).first()} AS p»
+		«IF toBoolean(p.flowLayout)»
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"
+            majorAlignment="«p.majorAlignment.toString()»"
+            minorAlignment="«p.minorAlignment.toString()»"
+            />
+		«ENDIF»
+	«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !allProperties.typeSelect(simplegmf::ForegroundColor).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::ForegroundColor).first()} AS p»
+        <foregroundColor
+        	«EXPAND toColor FOR toString(p.color)»
+		/>
+	«ENDFOREACH»
+	«ENDIF»	
+	
+	«IF !allProperties.typeSelect(simplegmf::BackgroundColor).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::BackgroundColor).first()} AS p»
+        <backgroundColor
+        	«EXPAND toColor FOR toString(p.color)»
+		/>
+	«ENDFOREACH»
+	«ENDIF»	
+	
+	«IF !allProperties.typeSelect(simplegmf::FigureMargin).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::FigureMargin).first()} AS p»
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="«p.margin»"
+              left="«p.margin»"
+              bottom="«p.margin»"
+              right="«p.margin»"/>
+        </border>
+	«ENDFOREACH»
+	«ENDIF»
+	
+«ENDLET»
+
+«FOREACH root.labelConfigurations.select(lc|lc.feature != null && toBoolean(lc.feature.eIsProxy())) AS proxylc-»
+<!-- warning: label configuration feature '«proxylc.feature»' is a proxy feature -->
+«ENDFOREACH-»
+
+«LET root.labelConfigurations.select(lc |
+	(lc.classifiers.isEmpty && lc.feature == null) || /* no classifiers or features set */
+	(lc.classifiers.exists(c | toBoolean(c.isSuperTypeOf(this))) && ( /* matching classifiers */
+		lc.feature == null || /* no feature to match */
+		eAllStructuralFeatures.contains(lc.feature)) /* matching a feature */
+	))
+	AS labels»
+	«FOREACH labels AS label»
+		«gmfmapLabelMapSet(this, label)»
+	    <children
+	        xsi:type="gmfgraph:Label"
+	        name="«name»«label.name»Figure"
+	        text="«label.prefix»«IF toString(label.defaultText).length > 0»«label.defaultText»«ELSE»«IF label.specialLabel.toString() == "CONTAINMENT_NAME"»&lt;containment>«ELSEIF label.specialLabel.toString() == "METACLASS_NAME"»«name»«ELSE»&lt;...>«ENDIF»«ENDIF»«label.suffix»">
+			«FOREACH label.properties.typeSelect(simplegmf::ForegroundColor) AS p»
+		        <foregroundColor
+		        	«EXPAND toColor FOR toString(p.color)»
+				/>
+			«ENDFOREACH»
+			«IF !label.properties.typeSelect(simplegmf::LabelBold).isEmpty»
+	          <font
+	              xsi:type="gmfgraph:BasicFont"
+	              style="BOLD"/>
+	        «ENDIF»
+			«IF !label.properties.typeSelect(simplegmf::LabelItalic).isEmpty»
+	          <font
+	              xsi:type="gmfgraph:BasicFont"
+	              style="ITALIC"/>
+	        «ENDIF»
+	    </children>
+	«ENDFOREACH»
+
+	</actualFigure>
+	«counterReset("labels")»
+	«FOREACH labels AS label»
+	    <accessors
+	        figure="//@figures.0/@descriptors.«counterGet("descriptors")»/@actualFigure/@children.«counterGet("labels")»"/>
+
+		«REM»save this label for <labels> later«ENDREM»
+		«labelSave(
+			toString(name) + "Figure", /* figure name */ 
+			toString(name) + toString(label.name) + "Figure", /* label name */
+			"//@figures.0/@descriptors." + counterGet("descriptors") + "/@accessors." + counterGet("labels"), /* href */
+			labels.first() == label ? true : false /* element icon */)» 
+
+	  «counterIncrement("labels")»
+	«ENDFOREACH»
+«ENDLET»
+		
+    </descriptors>
+    «counterIncrement("descriptors")»
+
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE toColor FOR String»
+	«IF startsWith("(")»
+		«LET subString(1,length-1).split(",") AS rgb2»
+	    xsi:type="gmfgraph:RGBColor"
+	    red="«rgb2.get(0)»"
+	    green="«rgb2.get(1)»"
+	    blue="«rgb2.get(2)»"
+		«ENDLET»
+	«ELSE»
+	    xsi:type="gmfgraph:ConstantColor"
+	    value="«this»"
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE generateAllLabelReferences FOR simplegmf::GMFConfiguration»
+«FOREACH savedLabelList() AS i»
+  <labels
+      name="«savedLabelName(i)»"
+      figure="«savedLabelFigureName(i)»"
+      accessor="«savedLabelHref(i)»"
+      elementIcon="«IF savedLabelElementIcon(i)»true«ELSE»false«ENDIF»"/>
+«ENDFOREACH»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

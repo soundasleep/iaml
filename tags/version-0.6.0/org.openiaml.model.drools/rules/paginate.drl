@@ -1,0 +1,642 @@
+/**
+ * Creates interface elements to paginate across many {@model DomainIterator} results.
+ */
+package org.openiaml.model.drools.rules.paginate
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference DomainIterator,InputForm,SetWire
+ *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
+ *		with a {@model DomainIterator#limit} set (not 1), will contain
+ * 		{@model Button}s named 'Next', 'Previous', 'First' and 'Last', in order
+ *		to support navigation through the {@model DomainIterator}.
+ */
+rule "Create navigation buttons for InputForms when connected to DomainIterators with many results"
+	when
+		object : DomainType ( )
+		instance : DomainIterator ( limit != 1 )
+		
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == domainSource, to == object )
+		select : SelectEdge ( from == instance, to == domainSource )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+				
+		not ( button : VisibleThing ( eContainer == form, name == "Next" ) )
+		not ( button : VisibleThing ( eContainer == form, name == "Previous" ) )
+		not ( button : VisibleThing ( eContainer == form, name == "First" ) )
+		not ( button : VisibleThing ( eContainer == form, name == "Last" ) )
+
+		eval ( handler.veto( select ))
+		
+	then
+		Button next = handler.generatedButton(select, form);
+		handler.setName(next, "Next");
+		queue.add(next, drools);
+
+		Button previous = handler.generatedButton(select, form);
+		handler.setName(previous, "Previous");
+		queue.add(previous, drools);
+
+		Button first = handler.generatedButton(select, form);
+		handler.setName(first, "First");
+		queue.add(first, drools);
+
+		Button last = handler.generatedButton(select, form);
+		handler.setName(last, "Last");
+		queue.add(last, drools);
+
+end
+
+/**
+ * @inference DomainIterator,InputForm,SetWire
+ *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
+ *		with a {@model DomainIterator#limit} set (not 1), will contain
+ * 		a {@model Label} named 'Results'.
+ */
+rule "Create 'Results' Label for InputForms when connected to DomainIterators with many results"
+	when
+		object : DomainType ( )
+		instance : DomainIterator ( limit != 1 )
+		
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == domainSource, to == object )
+		select : SelectEdge ( from == instance, to == domainSource )
+				
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		not ( button : VisibleThing ( eContainer == form, name == "Results" ) )
+
+		eval ( handler.veto( select ))
+		
+	then
+		Label label = handler.generatedLabel(select, form);
+		handler.setName(label, "Results");
+		queue.add(label, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'next' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#next} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
+rule "Connect Next button to 'next' operation on DomainIterator"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		next : Button ( eContainer == form, name == "Next" )
+		onClick : Event ( next.onClick == onClick )
+		
+		nextOp : Operation ( instance.next == nextOp )
+	
+		not ( run : ECARule ( trigger == onClick, target == nextOp ))  
+		
+		eval ( handler.veto( next ))
+
+	then
+		ECARule run = handler.generatedECARule(next, next, onClick, nextOp);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'next' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#hasNext} {@model Function} returns <code>true</code>. 
+ */
+rule "Connect 'hasNext' condition to Next button action"
+	when
+		instance : DomainIterator (  )
+		hasNext : Function ( instance.hasNext == hasNext )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		next : Button ( eContainer == form, name == "Next" )
+		onClick : Event ( next.onClick == onClick )
+		
+		nextOp : Operation ( instance.next == nextOp )
+		run : ECARule ( trigger == onClick, target == nextOp )
+	
+		not ( ce : SimpleCondition ( function == hasNext, conditioned == run ) )  
+		
+		eval ( handler.veto( run ))
+
+	then
+		SimpleCondition ce = handler.generatedSimpleCondition(run, next, hasNext, run);
+		queue.add(ce, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'previous' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#previous} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
+rule "Connect Previous button to 'previous' operation on DomainIterator"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		prev : Button ( eContainer == form, name == "Previous" )
+		onClick : Event ( prev.onClick == onClick )
+		
+		prevOp : Operation ( instance.previous == prevOp )
+	
+		not ( run : ECARule ( trigger == onClick, target == prevOp ))  
+		
+		eval ( handler.veto( prev ))
+
+	then
+		ECARule run = handler.generatedECARule(prev, prev, onClick, prevOp);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'previous' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#hasPrevious} {@model Function} returns <code>true</code>. 
+ */
+rule "Connect 'hasPrevious' condition to Previous button action"
+	when
+		instance : DomainIterator (  )
+		hasPrevious : Function ( instance.hasPrevious == hasPrevious )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		prev : Button ( eContainer == form, name == "Previous" )
+		onClick : Event ( prev.onClick == onClick )
+		
+		prevOp : Operation ( instance.previous == prevOp )
+		run : ECARule ( trigger == onClick, target == prevOp )
+	
+		not ( ce : SimpleCondition ( function == hasPrevious, conditioned == run ) )  
+		
+		eval ( handler.veto( run ))
+
+	then
+		SimpleCondition ce = handler.generatedSimpleCondition(run, prev, hasPrevious, run);
+		queue.add(ce, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'first' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#reset} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
+rule "Connect First button to 'reset' operation on DomainIterator"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		first : Button ( eContainer == form, name == "First" )
+		onClick : Event ( first.onClick == onClick )
+		
+		resetOp : Operation ( instance.reset == resetOp )
+	
+		not ( run : ECARule ( trigger == onClick, target == resetOp ))  
+		
+		eval ( handler.veto( first ))
+
+	then
+		ECARule run = handler.generatedECARule(first, first, onClick, resetOp);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'first' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#notEmpty} {@model Function} returns <code>true</code>. 
+ */
+rule "Connect 'not empty' condition to First button action"
+	when
+		instance : DomainIterator (  )
+		notEmpty : Function ( eContainer == instance, name == "not empty" ) 
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		first : Button ( eContainer == form, name == "First" )
+		onClick : Event ( first.onClick == onClick )
+		
+		resetOp : Operation ( instance.reset == resetOp )
+		run : ECARule ( trigger == onClick, target == resetOp )
+	
+		not ( ce : SimpleCondition ( function == notEmpty, conditioned == run ) )  
+		
+		eval ( handler.veto( run ))
+
+	then
+		SimpleCondition ce = handler.generatedSimpleCondition(run, first, notEmpty, run);
+		queue.add(ce, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will {@model ECARule execute} the {@model DomainIterator#jump} {@model Operation}
+ *		on that iterator when {@model Button#onClick clicked}.
+ */
+rule "Connect Last button to 'jump' operation on DomainIterator"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		onClick : Event ( last.onClick == onClick )
+		
+		jumpOp : Operation ( instance.jump == jumpOp )
+	
+		not ( run : ECARule ( trigger == onClick, target == jumpOp ))  
+		
+		eval ( handler.veto( last ))
+
+	then
+		ECARule run = handler.generatedECARule(last, last, onClick, jumpOp);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model SimpleCondition conditionally executed}
+ *		only if the iterator's {@model DomainIterator#notEmpty} {@model Function} returns <code>true</code>. 
+ */
+rule "Connect 'not empty' condition to Last button action"
+	when
+		instance : DomainIterator (  )
+		notEmpty : Function ( eContainer == instance, name == "not empty" ) 
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		onClick : Event ( last.onClick == onClick )
+		
+		jumpOp : Operation ( instance.jump == jumpOp )
+		run : ECARule ( trigger == onClick, target == jumpOp )
+	
+		not ( ce : SimpleCondition ( function == notEmpty, conditioned == run ) )  
+		
+		eval ( handler.veto( run ))
+
+	then
+		SimpleCondition ce = handler.generatedSimpleCondition(run, last, notEmpty, run);
+		queue.add(ce, drools);
+
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will contain a {@model Value} named 'target'.
+ */
+rule "Create 'target' property in Last button"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		
+		not ( property : Value ( eContainer == last, name == "target" ))
+		
+		eval ( handler.veto( last ))
+
+	then
+		Value property = handler.generatedValue(last, last);
+		handler.setName(property, "target");
+		handler.setDefaultValue(property, "not set");	// set empty to prevent session crashes
+		queue.add(property, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire,Parameter
+ *		The 'target' {@model Value} defined in a 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be used as a {@model Parameter} for executing
+ *		the {@model DomainIterator#jump} {@model Operation} on that iterator.
+ */
+rule "Connect 'target' property to ECARule in Last button"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		onClick : Event ( last.onClick == onClick )
+		property : Value ( eContainer == last, name == "target" )
+		
+		jumpOp : Operation ( instance.jump == jumpOp )
+		run : ECARule ( trigger == onClick, target == jumpOp )
+		
+		not ( param : Parameter ( parameterValue == property, parameterTerm == run ))
+		
+		eval ( handler.veto( run ))
+
+	then
+		Parameter param = handler.generatedParameter(run, last, property, run);
+		queue.add(param, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire,ActivityOperation
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will contain an {@model ActivityOperation} named 'update target'.
+ */
+rule "'Last' button will have a ActivityOperation named 'update target'"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		
+		not ( op : Operation ( eContainer == last, name == "update target" )) 
+		
+		eval ( handler.veto( last ))
+
+	then
+		ActivityOperation op = handler.generatedActivityOperation(last, last);
+		handler.setName(op, "update target");
+		queue.add(op, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire
+ *		The 'last' {@model Button} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, needs to {@model ECARule execute} the 'update target' {@model Operation}
+ *		within that {@model Button} {@model ECARule#priority before} calling {@model DomainIterator#jump} on the iterator.
+ */
+rule "'Last' button needs to call 'update target' before calling 'reset'"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		onClick : Event ( last.onClick == onClick )
+		property : Value ( eContainer == last, name == "target" )
+		
+		jumpOp : Operation ( instance.jump == jumpOp )
+		run : ECARule ( trigger == onClick, target == jumpOp )
+		
+		op : Operation ( eContainer == last, name == "update target" )
+		
+		not ( run2 : ECARule ( trigger == onClick, target == op ) ) 
+		
+		eval ( handler.veto( last ))
+
+	then
+		ECARule run2 = handler.generatedECARule(last, last, onClick, op);
+		handler.setName(run2, "update target");
+		handler.setPriority(run2, run.getPriority() + 100); 	// higher = run earlier
+		queue.add(run2, drools);
+		
+end
+
+/**
+ * @inference ActivityPredicate
+ *		An {@model ActivityPredicate} named 'update target', used to set the 'target' {@model Value} 
+ *		within the 'last' {@model Button} generated by a {@model DomainIterator},
+ *		will be completed with the necessary {@model ActivityNode}s to update the {@model Value}
+ *		with the current {@model DomainIterator#results results count} of that iterator.
+ */
+rule "Create contents of 'update target' operation"
+	when
+		instance : DomainIterator (  )
+		results : Value ( instance.results == results )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		last : Button ( eContainer == form, name == "Last" )
+		target : Value ( eContainer == last, name == "target" )
+
+		op : ActivityOperation ( eContainer == last, name == "update target" )
+
+		type : EXSDDataType( definition != null, 
+			definition.URI == "http://openiaml.org/model/datatypes#iamlInteger" )
+		
+		not ( StartNode ( eContainer == op ))
+
+	then
+		StartNode start = handler.generatedStartNode(op, op);
+		FinishNode finish = handler.generatedFinishNode(op, op);
+		queue.add(start, drools);
+		queue.add(finish, drools);
+		
+		SetNode setOp = handler.generatedSetNode(op, op);
+		queue.add(setOp, drools);
+		
+		Value one = handler.generatedValue(op, op);
+		handler.setReadOnly(one, true);
+		handler.setName(one, "one");
+		handler.setDefaultValue(one, "1");
+		handler.setType(one, type);
+		queue.add(one, drools);
+		
+		Arithmetic subtract = handler.generatedArithmetic(op, op);
+		handler.setType(subtract, ArithmeticOperationTypes.SUBTRACT);
+		queue.add(subtract, drools);
+		
+		ExternalValue ev_results = handler.generatedExternalValue(op, op);
+		handler.setValue(ev_results, results);
+		queue.add(ev_results, drools);
+		
+		ExternalValue ev_target = handler.generatedExternalValue(op, op);
+		handler.setValue(ev_target, target);
+		queue.add(ev_target, drools);
+
+		ExternalValue ev_one = handler.generatedExternalValue(op, op);
+		handler.setValue(ev_one, one);
+		queue.add(ev_one, drools);
+		
+		DataFlowEdge d1 = handler.generatedDataFlowEdge(op, op, ev_results, subtract);
+		DataFlowEdge d2 = handler.generatedDataFlowEdge(op, op, ev_one, subtract);
+		DataFlowEdge d3 = handler.generatedDataFlowEdge(op, op, subtract, setOp);
+		DataFlowEdge d4 = handler.generatedDataFlowEdge(op, op, setOp, ev_target);
+		
+		queue.add(d1, drools);
+		queue.add(d2, drools);
+		queue.add(d3, drools);
+		queue.add(d4, drools);
+		
+		ExecutionEdge e1 = handler.generatedExecutionEdge(op, op, start, setOp);
+		ExecutionEdge e2 = handler.generatedExecutionEdge(op, op, setOp, finish);
+		
+		queue.add(e1, drools);
+		queue.add(e2, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire,Event
+ *		The 'results' {@model Label} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model ECARule updated} whenever
+ *		the iterator {@model DomainIterator#onChange changes}.
+ */
+rule "Connect Instance.onChange to Results.update"
+	when
+		instance : DomainIterator (  )
+		event : Event ( instance.onChange == event )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+	
+		label : VisibleThing ( eContainer == form, name == "Results" )
+		updateOp : Operation ( eContainer == label, name == "update" )
+		
+		not ( run : ECARule ( trigger == event, target == updateOp ) )
+		
+		eval ( handler.veto( set ))
+		
+	then
+		ECARule run = handler.generatedECARule(set, set, event, updateOp);
+		handler.setName(run, "update");
+		queue.add(run, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire,Event,Parameter
+ *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
+ *		will be used as a {@model Parameter} to update the 'results' {@model Label}
+ *		defined for navigating a {@model DomainIterator} with a {@model SetWire}
+ *		when the iterator {@model DomainIterator#onChange changes}.
+ */
+rule "Connect results parameter to Results label update (onChange)"
+	when
+		instance : DomainIterator (  )
+		event : Event ( instance.onChange == event )
+		
+		form : InputForm ( )
+		set : SetWire ( from == instance, to == form )
+
+		label : VisibleThing ( eContainer == form, name == "Results" )
+		updateOp : Operation ( eContainer == label, name == "update" )
+		
+		run : ECARule ( trigger == event, target == updateOp )
+		property : Value ( instance.results == property )
+		
+		not ( param : Parameter ( parameterValue == property, parameterTerm == run ))
+		
+		eval ( handler.veto( set ))
+		
+	then
+		Parameter param = handler.generatedParameter(set, set, property, run);
+		queue.add(param, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire,Event
+ *		The 'results' {@model Label} defined for navigating a {@model DomainIterator},
+ *		as defined by a {@model SetWire}, will be {@model ECARule updated} whenever
+ *		the containing {@model InputForm} is {@model InputForm#onAccess accessed}.
+ */
+rule "Connect Instance.onAccess to Results.update"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		event : Event ( form.onAccess == event )
+		set : SetWire ( from == instance, to == form )
+	
+		label : VisibleThing ( eContainer == form, name == "Results" )
+		updateOp : Operation ( eContainer == label, name == "update" )
+		
+		not ( run : ECARule ( trigger == event, target == updateOp ) )
+		
+		eval ( handler.veto( set ))
+		
+	then
+		ECARule run = handler.generatedECARule(set, set, event, updateOp);
+		handler.setName(run, "update");
+		queue.add(run, drools);
+		
+end
+
+/**
+ * @inference DomainIterator,SetWire,Event,Parameter
+ *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
+ *		will be used as a {@model Parameter} to update the 'results' {@model Label}
+ *		defined for navigating a {@model DomainIterator} with a {@model SetWire}
+ *		when the containing {@model InputForm} is {@model InputForm#onAccess accessed}.
+ */
+rule "Connect results parameter to Results label update (onAccess)"
+	when
+		instance : DomainIterator (  )
+		
+		form : InputForm ( )
+		event : Event ( form.onAccess == event )
+		set : SetWire ( from == instance, to == form )
+
+		label : VisibleThing ( eContainer == form, name == "Results" )
+		updateOp : Operation ( eContainer == label, name == "update" )
+		
+		run : ECARule ( trigger == event, target == updateOp )
+		property : Value ( instance.results == property )
+		
+		not ( param : Parameter ( parameterValue == property, parameterTerm == run ))
+		
+		eval ( handler.veto( set ))
+		
+	then
+		Parameter param = handler.generatedParameter(set, set, property, run);
+		queue.add(param, drools);
+		
+end

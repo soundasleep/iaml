@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.130cf3ba351.a" name="root">
+  <operations xsi:type="iaml:BuiltinOperation" rules="model.130cf3b9806.e7" id="model.130cf3b9806.e5" name="operation"/>
+  <onAccess id="model.130cf3b9806.e6" name="event" listeners="model.130cf3b9806.e7">
+    <ecaRules id="model.130cf3b9806.e7" name="Rule name" trigger="model.130cf3b9806.e6" target="model.130cf3b9806.e5"/>
+  </onAccess>
+</iaml.scopes:Session>

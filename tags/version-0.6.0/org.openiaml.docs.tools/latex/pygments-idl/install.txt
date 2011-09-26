@@ -1,0 +1,11 @@
+How to install the IDL mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mapping.py
+
+You should then see 'idl' listed:
+
+  $ pygmentize -L lexers

@@ -1,0 +1,20 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small,mathescape=true]{xpand}
+/**
+ * @implementation Action
+ *    {@model Action}s are run in order of descending priority; that is,
+ *    a higher priority {@model Action} will execute first.
+ */
+\!!\text\!!{\!!\guillemotleft\!!}DEFINE runFrameEvents(String eventName) FOR model::Event-\!!\text\!!{\!!\guillemotright\!!}
+  // Frame EventTrigger \!!\text\!!{\!!\guillemotleft\!!}this\!!\text\!!{\!!\guillemotright\!!}
+  \!!\text\!!{\!!\guillemotleft\!!}IF eventName == "init" || eventName == "access"-\!!\text\!!{\!!\guillemotright\!!}
+    // Actions sorted by priority
+    \!!\text\!!{\!!\guillemotleft\!!}EXPAND template::operations::OperationCall::callOperation(true, false)
+      FOREACH listeners.sortBy(e|-e.priority)-\!!\text\!!{\!!\guillemotright\!!}    
+  \!!\text\!!{\!!\guillemotleft\!!}ELSE-\!!\text\!!{\!!\guillemotright\!!}
+    \!!\text\!!{\!!\guillemotleft\!!}throwException("I don't know what to do with frame event " + name)\!!\text\!!{\!!\guillemotright\!!}
+  \!!\text\!!{\!!\guillemotleft\!!}ENDIF-\!!\text\!!{\!!\guillemotright\!!}
+\!!\text\!!{\!!\guillemotleft\!!}ENDDEFINE\!!\text\!!{\!!\guillemotright\!!}
+\end{minted}

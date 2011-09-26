@@ -1,0 +1,46 @@
+MODULE main
+
+VAR
+  currentPage : { home, page1, page2 };
+  goto1 : boolean;
+  goto2 : boolean;
+  redirectSource : { null, home, page1, page2 };
+  redirectTarget : { null, home, page1, page2 };
+
+ASSIGN
+  init(redirectSource) := null;
+  init(redirectTarget) := null;
+  
+  next(currentPage) := case
+    redirectTarget != null : redirectTarget;
+    currentPage = home : case
+      goto1 = 1 : page1;
+      goto2 = 1 : page2;
+      1 : home;
+    esac;
+    1 : currentPage;
+  esac;
+  
+  next(redirectTarget) := case
+    currentPage = home : null;
+    currentPage = page1 : page2;
+    currentPage = page2 : null;
+    1 : null;
+  esac;
+  
+  next(redirectSource) := case
+    redirectSource != null : case
+      -- need to set it back to null once we have stopped redirecting
+      currentPage = home : null;
+      1 : redirectSource;
+    esac;
+    1 : case 
+      currentPage = home : null;
+      currentPage = page1 : page1;
+      currentPage = page2 : page2;
+      1 : null;
+    esac;
+  esac;   
+
+LTLSPEC
+  G (!(redirectSource != null & redirectTarget != null & redirectSource = redirectTarget))

@@ -1,0 +1,706 @@
+import iaml;
+
+extension metamodel::Extensions reexport;
+
+frameTitle(model::InternetApplication this) :
+	if name == null || name == "" then "(untitled application)" else name.toFirstUpper();
+
+frameTitle(model::visual::Frame this) :
+	if name == null || name == "" then id else name;
+
+formName(model::visual::InputForm this) :
+	if (name == null || name == "") then "(untitled form)" else name;
+	
+textFieldName(model::visual::InputTextField this) :
+	if (name == null || name == "") then "(untitled field)" else name;
+
+buttonName(model::visual::Button this) :
+	if (name == null || name == "") then "Submit Query" else name;
+	
+simpleName(model::NamedElement this) :
+	safeNameString(name);
+simpleName(emf::EObject this) :
+	safeName();
+
+/**
+ * Get a safe string name of the given element; that is, one that only consists
+ * of alpha-numeric characters, and the underscore character.
+ *
+ * <p>NOTE: if you are getting this with a newly created model element, the ID
+ * may not be getting generated automatically in XXXFactoryImpl. See issue 165.
+ *
+ * @pseudocode
+ *   if id = null then
+ *     throw exception
+ *   else
+ *     return element.id.replace('[^A-Za-z0-9]', '_')
+ *   endif
+ */	
+safeName(model::GeneratedElement this) :
+	if (id == null) then
+		throwException("Cannot get the safeName of an element with no ID: " + this)
+	else
+		safeNameString(id);
+
+safeName(emf::EObject this) :
+	throwException("Cannot get the safeName of an EObject: " + this);
+
+safeNameString(ecore::EString s) :
+	s.toString().replaceAll("[^A-Za-z0-9]", "_");
+
+safeNameString(String s) :
+	s.replaceAll("[^A-Za-z0-9]", "_");
+
+escapeString(ecore::EString s) :
+	s.toString().replaceAll("[\"]", "\\\"");
+
+escapeString(String s) :
+	s.replaceAll("[\"]", "\\\"");
+	
+/* TODO not a complete encoding, misses \r\n\t\v\f\[0-7]{1,3}\x[0-9A-Fa-f]{1,2} and perhaps unicode too */
+escapePhpString(String s):
+	s.replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
+
+escapePhpString(ecore::EString s):
+	s.toString().replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
+
+// TODO this should be used everywhere
+/**
+ * Escape an arbitrary unsafe string so it may be used within HTML output.
+ */
+escapeHtmlString(String s) :
+	s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+
+escapeXmlString(String s) :
+	escapeHtmlString(s).replaceAll("'", "&apos;");
+
+operationName(model::Action this) : 
+	throwException("Invalid operation: " + this);
+
+operationName(model::Operation this) :
+	safeName(this);
+
+conditionName(emf::EObject this ) :
+	throwException("Invalid condition: " + this);
+
+conditionName(model::Function this) :
+	safeName(this);
+	
+attributeName(model::domain::DomainAttribute this) :
+	safeNameString(name);
+
+attributeName(model::domain::DomainAttributeInstance this) :
+	safeNameString(name);
+	
+attributeName(Void v) :
+	throwException("Invalid attribute (Void)");
+	
+/**
+ * Get the {@model Frame} which can contain the given {@model Operation}.
+ */
+model::visual::Frame frameContainingOperation(model::visual::Frame this) :
+	this;
+	
+model::visual::Frame frameContainingOperation(model::NamedElement this) :
+	if (eContainer == null)
+		then null
+		else frameContainingOperation(eContainer);
+
+/* any frame in the Session will contain all the operations for the Session */
+model::visual::Frame frameContainingOperation(model::scopes::Session this) :
+	scopes.typeSelect( model::visual::Frame ).first();
+
+/* default for any EObject */
+model::visual::Frame frameContainingOperation(emf::EObject this) :
+	null;
+
+/* is [target] on the same frame as [source]? */ 
+onCurrentFrame(model::WireSource source, model::WireDestination target) :
+	containingFrame(source) != null && 
+	containingFrame(source) == containingFrame(target);
+
+onCurrentFrame(emf::EObject source, model::WireDestination target) :
+	containingFrame(source) != null && 
+	containingFrame(source) == containingFrame(target);
+
+onCurrentFrameAction(emf::EObject source, model::Action target) :
+	containingFrame(source) != null && 
+	containingFrame(source) == containingFrame(target);
+
+/* is [target] in the same session as [source]? */ 
+onCurrentSession(model::WireSource source, model::WireDestination target) :
+	containingSession(source) != null && 
+	containingSession(source) == containingSession(target);
+
+/**
+ * is [target] available in the same _script_ as [source]?
+ * this is true if onCurrentFrame() is true, or
+ * it is an operation that will also be included in the current frame.
+ *
+ * all operations contained within a session are NOT available to all
+ * elements outside that session.
+ *
+ * all operations and properties that are contained with an Email
+ * are NOT available for the current script.
+ *
+ * this is based on allContainerOperations() and possibleParentOperations().
+ *
+ * @implementation Operation
+ *		An {@model Operation} will <strong>only</strong> be executed on the client-side
+ *		if it is contained within the same {@model Frame} as the current
+ *		{@model Frame}.
+ */
+availableInCurrentScript(model::WireSource source, model::WireDestination target) :
+	containingEmail(target) == null && 
+	(onCurrentFrame(source, target));
+		
+availableInCurrentScriptAction(model::ActionEdgeSource source, model::Action target) :
+	containingEmail(target) == null &&
+	(onCurrentFrameAction(source, target));
+
+/**
+ * Get all the operations that may be referenced in a container. In particular:
+ * - Any operations in the frame/container
+ * - Any operations in the elements contained in this frame/container
+ * - Any operations contained in the direct parent scope (if any)
+ */
+List[model::Operation] allContainerOperations(model::Scope this) :
+	operations.toSet().union( scopes.allContainerOperations() )
+		.union( messages.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
+		
+List[model::Operation] allContainerOperations(model::scopes::Message this) :
+	{};
+		
+List[model::Operation] allContainerOperations(model::messaging::Email this) :
+	operations.toSet()
+		.union( labels.allContainerOperations() )
+		.union( buttons.allContainerOperations() )
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
+
+List[model::Operation] allContainerOperations(model::visual::Frame this) :
+	operations.toSet().union( scopes.allContainerOperations() )
+		.union( messages.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
+		.union( children.allContainerOperations() )
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
+
+List[model::Operation] allContainerOperations(model::VisibleThing this) :
+	operations.toSet().union( children.allContainerOperations() )
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
+
+List[model::Operation] allContainerOperations(model::ContainsOperations this) :
+	operations.select(o | operationUsed(o));
+
+List[model::Operation] allContainerOperations(model::InternetApplication this) :
+	 operations.toSet()
+		.union( scopes.allContainerOperations() )
+		.union( iterators.allContainerOperations() )
+		.union( loginHandlers.allContainerOperations() )
+		.union( accessHandlers.allContainerOperations() )
+	 	.select(o | operationUsed(o));	 
+		
+/** All of the Values stored within this InternetApplication */
+List[model::Value] allProperties(model::InternetApplication this) :
+	eAllContents.typeSelect(model::Value);
+
+/* for a frame that is part of a session/scope */
+possibleParentOperations(model::scopes::Session this ) :
+	operations;
+
+possibleParentOperations(emf::EObject this ) :
+	{};
+
+/* get the start node for an operation */
+startNode(model::operations::ActivityOperation this) :
+	nodes.typeSelect(model::operations::StartNode).first();
+
+startNodeCondition(model::operations::ActivityPredicate this) :
+	nodes.typeSelect(model::operations::StartNode).first();
+
+/* get the next execution flow for a Node that has passed */
+passedExectionFlow(model::operations::ExecutionEdgesSource this) :	
+	outExecutions.selectFirst( e | isPassFlow(e) );
+
+/* get the next execution flow for a Node that has failed */
+failedExectionFlow(model::operations::ExecutionEdgesSource this) :
+	outExecutions.selectFirst( e | isFailFlow(e) );
+
+hasFailFlow(model::operations::ExecutionEdgesSource this) :
+	getFailFlows(this).size > 0; 
+hasPassFlow(model::operations::ExecutionEdgesSource this) :
+	getPassFlows(this).size > 0;
+
+/**
+ * @implementation ExecutionEdge
+ *		A "failure" {@model ExecutionEdge} is any edge with a lowercase {@model ExecutionEdge#name} starting
+ *		with 'n' or 'f'.
+ * @implementation ExecutionEdge
+ *		A "passing" {@model ExecutionEdge} is any edge that is not a "failure" edge.
+ */
+isFailFlow(model::operations::ExecutionEdge e) :
+	e.name != null && (e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f"));
+isPassFlow(model::operations::ExecutionEdge e) :
+	!isFailFlow(e);
+
+/* get failed/passed out edges from a given DecisionCondition */
+getFailFlows(model::operations::ExecutionEdgesSource this):
+	outExecutions.select( e | isFailFlow(e) );
+
+getPassFlows(model::operations::ExecutionEdgesSource this):
+	outExecutions.select( e | isPassFlow(e) );
+
+/** does this operation have a "fail" edge? */
+getFailEdge(model::operations::ActivityOperation this) :
+	listeners.selectFirst( e | e.isFailEdge() ) ;
+	
+isFailEdge(model::ECARule this ) :
+	name == "fail" ;
+
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   if container == null
+ *		then return null 
+ *		else return containingSession(container)
+ */	
+model::scopes::Session containingSession(emf::EObject this) :
+	if (eContainer == null)
+		then null
+		else containingSession(eContainer);
+
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   return self
+ */		
+model::scopes::Session containingSession(model::scopes::Session this) :
+	this;
+	
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   return null
+ */	
+model::scopes::Session containingSession(model::InternetApplication this) :
+	null;
+
+model::messaging::Email containingEmail(model::messaging::Email this) :
+	this;
+
+model::messaging::Email containingEmail(emf::EObject this) :
+	if (eContainer == null) then
+		null
+	else
+		containingEmail(eContainer);
+
+/**
+ * Get the containing {@model Scope} of the given element, 
+ * or <code>null</code> if none.
+ */
+model::Scope containingScope(emf::EObject this) :
+	null;
+
+model::Scope containingScope(model::NamedElement this) :
+	containingScope(eContainer);
+	
+model::Scope containingScope(model::Scope this) :
+	this;
+	
+model::Scope containingScope(model::InternetApplication this) :
+	null;
+
+model::domain::DomainType getDomainType(model::domain::DomainType this) :
+	this;
+model::domain::DomainType getDomainType(model::domain::DomainAttribute this) :
+	if eContainer == null
+		then null
+		else getDomainType(eContainer);
+model::domain::DomainType getDomainType(emf::EObject this) :
+	null;
+	
+/**
+ * This is designed to return <code>true</code> if the current Operation
+ * is 'set', and within an Operation called 'update'.
+ */
+shouldExpandEventTriggers(model::BuiltinOperation this ) :
+	model::Operation.isInstance(eContainer) &&
+		getOperationName( eContainer ) == "update";
+	
+shouldExpandEventTriggersServer(model::BuiltinOperation this ) :
+	shouldExpandEventTriggers(this);
+	
+getOperationName(model::Operation this) :
+	name;
+getOperationName(emf::EObject this) :
+	throwException("Cannot get the operationName for an EObject: " + this);
+	
+isVisibleThing(emf::EObject this) :
+	model::VisibleThing.isInstance(this);
+isDomainAttribute(emf::EObject this) :
+	model::domain::DomainAttribute.isInstance(this);	
+isDomainAttributeInstance(emf::EObject this) :
+	model::domain::DomainAttributeInstance.isInstance(this);
+isDomainIterator(emf::EObject this) :
+	model::domain::DomainIterator.isInstance(this);
+isSession(emf::EObject this) :
+	model::scopes::Session.isInstance(this);	
+isFrame(emf::EObject this) :
+	model::visual::Frame.isInstance(this);
+canBeSet(emf::EObject this) :
+	model::VisibleThing.isInstance(this);
+isInputTextField(emf::EObject this) :
+	model::visual::InputTextField.isInstance(this);	
+isLabel(emf::EObject this) :
+	model::visual::Label.isInstance(this);	
+
+isPropertiesFile(model::domain::DomainSource store) :
+	store != null && store.type != null && store.type.toString() == "PROPERTIES_FILE";
+
+/* get the root InternetApplication */
+model::InternetApplication getRoot(emf::EObject this) :
+	getRoot(eContainer);
+
+model::InternetApplication getRoot(model::InternetApplication this) :
+	this;
+
+/** 
+ * Get all {@model Function}s in the InternetApplication.
+ **/
+cached List[model::Function] getAllConditions(model::InternetApplication this) :
+	eAllContents.typeSelect(model::Function)
+		.select(o | conditionUsed(o));
+		
+/** get all Frames in the InternetApplication */
+cached List[model::visual::Frame] getAllFrames(model::InternetApplication this) :
+	eAllContents.typeSelect(model::visual::Frame);
+
+/** get all Emails in the InternetApplication */
+cached List[model::messaging::Email] getAllEmails(model::InternetApplication this) :
+	eAllContents.typeSelect(model::messaging::Email);
+
+/** get all Domain Attribute Instances in the InternetApplication */
+List[domain::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
+	eAllContents.typeSelect( model::domain::DomainAttributeInstance );
+
+/** get all Domain Object Instances in the InternetApplication */
+List[model::domain::DomainIterator] getAllDomainIterators(model::InternetApplication this) :
+	eAllContents.typeSelect(model::domain::DomainIterator);
+
+getAllDomainTypes(emf::EObject this) :
+	eAllContents.typeSelect(model::domain::DomainType);
+
+getFailHandler(model::ActionEdgeSource this) :
+	listeners.select( w | w.isFailEdge()).first();
+
+isAutosaveOff(domain::DomainAttributeInstance this) :
+	isAutosaveOff(eContainer);
+
+isAutosaveOff(model::domain::DomainInstance this) :
+	isAutosaveOff(eContainer);
+
+isAutosaveOff(model::domain::DomainIterator this) :
+	autosave == false;
+	
+isAutosaveOff(emf::EObject this):
+	false;
+
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainAttributeInstance this) :
+	if model::domain::DomainIterator.isInstance(eContainer)
+		then getPrimaryKey((model::domain::DomainIterator) eContainer)
+		else null;
+
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainType this) :
+	eStructuralFeatures.typeSelect(model::domain::DomainAttribute).selectFirst( e | e.primaryKey );
+
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainAttribute this) :
+	getPrimaryKey(eContainer);
+
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainIterator this) :
+	getPrimaryKey( outSelects.to.outSchemas.to.first() ); 
+
+model::domain::DomainAttribute getPrimaryKey(emf::EObject this) :
+	null;
+	
+isInDomainIterator(model::domain::DomainAttributeInstance this) :
+	model::domain::DomainInstance.isInstance(eContainer) && model::domain::DomainIterator.isInstance(eContainer.eContainer);
+	
+model::domain::DomainIterator getDomainIterator(model::domain::DomainAttributeInstance this) :
+	if isInDomainIterator()
+		then ((model::domain::DomainIterator) (eContainer.eContainer))
+		else null;
+
+/**
+ * Does this given attribute instance represent a generated primary key?
+ */	
+isGeneratedPrimaryKey(domain::DomainAttributeInstance this) :
+	isGenerated && !outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|a.primaryKey).isEmpty ;
+
+List[model::domain::DomainType] allSubtypes(model::domain::DomainType this):
+	inExtendsEdges.from.typeSelect(model::domain::DomainType).collect(e|allSubtypes(e)).flatten().add(this);
+
+model::operations::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
+	(model::operations::ExecutionEdgesSource) this;
+
+/**
+ * If this extension fails, then you are trying to find the defining attribute for an AttributeInstance
+ * which isn't actually defined as an extension in the system, so we can't find the containing DomainType
+ * for it.
+ */
+model::domain::DomainAttribute getAttributeForAttributeInstance(domain::DomainAttributeInstance this) :
+	if outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).first() == null
+		then throwException("Tried to get the parent attribute of an attribute instance that is not an extension: " + this)
+		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).first());
+	
+/**
+ * Get the defined attribute for the given attribute. That is:
+ * - any attribute which extends a primary key (i.e. is a foreign key)
+ * - any attribute that does not extend anything
+ */
+model::domain::DomainAttribute getDefinedAttribute(model::domain::DomainAttribute this) :
+	if !outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|a.primaryKey).isEmpty
+	then this
+	else 
+		if outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).isEmpty
+		then this
+		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).first());
+
+/**
+ * Get a list of all the possible execution states from the given node.
+ * Cached to prevent loops causing infinite loops in logic.
+ */
+// for a destination that is actually a source: recurse
+List[model::operations::ExecutionEdgeDestination] allDestinations(model::operations::ExecutionEdgesSource this, Collection[model::operations::ExecutionEdgesSource] visited) :
+	if visited.contains(this) then
+		{}
+	else
+		outExecutions.to.toSet().addAll (
+			outExecutions.to.collect(e | allDestinations(e, visited.toSet().add(this)) )
+		).flatten().toSet()
+	;
+
+// default for an execution edge destination: empty
+List[model::operations::ExecutionEdgeDestination] allDestinations(Object this, Collection[model::operations::ExecutionEdgesSource] visited) :
+	{};
+
+model::operations::JoinNode findFinalJoinNode(model::operations::SplitNode this) :
+	if outExecutions.to.select(t | findFinalJoinNode(t) != null).isEmpty
+		then null
+		else findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
+
+model::operations::JoinNode findFinalJoinNode(emf::EObject this) :
+	null;
+
+model::operations::JoinNode findFinalJoinNode(model::operations::ExecutionEdgesSource this) :
+	findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
+
+model::operations::JoinNode findFinalJoinNode(model::operations::JoinNode this) :
+	this;
+
+/**
+ * Get all necessary gates for the given scope, in order that they
+ * need to be applied.
+ */
+/*
+TODO is this necessary?
+List[model::components::EntryGate] getFrameEntryGates(model::visual::Frame this) :
+	getFrameEntryGates(eContainer);
+*/
+
+List[model::components::Gate] getFrameEntryGates(model::Scope this) :
+	if eContainer == null then
+		(if entryGate == null then
+			{}
+		else
+			{entryGate})
+	else (if entryGate == null then
+			getFrameEntryGates(eContainer)
+		else
+			getFrameEntryGates(eContainer).toSet().add( entryGate ));
+
+List[model::components::Gate] getFrameEntryGates(emf::EObject this) :
+	if eContainer == null 
+		then {}
+		else getFrameEntryGates(eContainer);
+
+/**
+ * Get all exit gates that may apply to the given frame.
+ * They should be provided in a reverse order by depth, i.e.
+ * gates at level 3 should be provided before level 2, etc.
+ * The order should also be consistent across multiple calls.
+ *
+ * @implementation Gate
+ * 		Exit {@model Gate}s are executed in reverse order from their
+ *		depth from the {@model InternetApplication root}; however, for
+ *		gates at the same node depth, order is undefined.
+ */
+getAllExitGates(model::visual::Frame this) :
+	getRoot().eAllContents.typeSelect(model::components::Gate)
+		.select( g | model::Scope.isInstance(g.eContainer) && ((model::Scope) g.eContainer).exitGate == g )
+		.sortBy( n | -getNodeDepth(n) );
+
+int getNodeDepth(emf::EObject this) :
+	if eContainer == null 
+		then 0
+		else 1 + getNodeDepth(eContainer);
+
+/** Get all possible resume targets for this gate. */
+getEntryResumeTargets(model::components::Gate this) :
+	eContainer.eContents.typeSelect(model::visual::Frame);
+
+/** 
+ * For possible exit targets, we will just select all frames.
+ * Technically this should be all frames that are _not_ protected by a Gate,
+ * but I don't think it matters.
+ */
+getExitResumeTargets(model::components::Gate this) :
+	getRoot().eAllContents.typeSelect(model::visual::Frame);
+
+/**
+ * Get all {@model BuiltinProperty}s which the server needs to keep track of, and 
+ * the client needs to be updated.
+ * <strong>All of these operations need to be consequence-free.</strong>
+ */
+List[model::Function] getClientSideCacheConditions(model::InternetApplication this) :
+	eAllContents.typeSelect(model::BuiltinProperty)
+		.select(o | model::domain::DomainIterator.isInstance(o.eContainer))
+		.select(o | conditionUsed(o));
+
+/**
+ * Get all {@model Value}s which the server needs to keep track of, and 
+ * the client needs to be updated.
+ */
+List[model::Value] getClientSideCacheProperties(model::InternetApplication this) :
+	eAllContents.typeSelect(model::domain::DomainIterator)
+		.select(o | o.results != null)
+		.results.toSet()
+	.addAll(eAllContents.typeSelect(model::VisibleThing).values.toSet())
+	.addAll(eAllContents.typeSelect(model::Value).select(p|p.readOnly));
+
+/**
+ * Should the given exit gate be activated/enabled on the given frame?
+ */
+exitGateNeedsActivating(model::components::Gate gate, model::visual::Frame frame) :
+	frame.eContainer != null &&
+	(frame.eContainer.eContents.contains( gate ) /* we aren't exiting if we are in the same scope */
+		|| exitGateNeedsActivatingRecurse(gate, frame.eContainer));
+
+exitGateNeedsActivatingRecurse(model::components::Gate gate, model::Scope scope) :
+	scope.eContainer != null && 
+	(scope.eContainer.eContents.contains( gate )
+		|| exitGateNeedsActivatingRecurse(gate, scope.eContainer));
+
+exitGateNeedsActivatingRecurse(model::components::Gate gate, emf::EObject obj) :
+	false;
+
+/**
+ * Does the given exit gate need to block access to the given frame if necessary?
+ * This should return false if the gate is contained in the parent scope or session
+ * of the frame, or likewise.
+ */
+exitGateNeedsToRedirect(model::components::Gate gate, model::visual::Frame frame) :
+	exitGateNeedsToRedirectRecurse(gate, frame);
+		
+exitGateNeedsToRedirectRecurse(model::components::Gate gate, model::Scope scope) :
+	if scope.eContents.contains(gate) 
+		then false		// we're in the same scope; don't need to redirect
+		else 
+			if scope.eContainer == null 
+				then true		// we're not within any possible scope
+				else exitGateNeedsToRedirectRecurse(gate, scope.eContainer);
+					// otherwise check the scope's container 
+
+exitGateNeedsToRedirectRecurse(model::components::Gate gate, model::InternetApplication root) :
+	true;
+exitGateNeedsToRedirectRecurse(model::components::Gate gate, emf::EObject obj) :
+	true;
+
+/**
+ * Get the containing parent Map of the given point, or <code>null</code>
+ * if there is none.
+ */
+model::visual::Map getParentMap(emf::EObject this) :
+	if eContainer == null 
+		then null
+		else getParentMap(eContainer);
+
+model::visual::Map getParentMap(model::visual::Map this) :
+	this;
+	
+isDomainIteratorResults(model::Value this) :
+	eContainer != null && 
+	model::domain::DomainIterator.isInstance(eContainer) 
+		&& ((model::domain::DomainIterator) eContainer).results == this;
+
+isDomainIteratorCurrentPointer(model::Value this) :
+	eContainer != null && 
+	model::domain::DomainIterator.isInstance(eContainer) 
+		&& ((model::domain::DomainIterator) eContainer).currentPointer == this;
+
+/**
+ * Is the given type numeric?
+ * This returns true if this type is, or is recursively restricted, from
+ * 		<code>http://www.w3.org/2001/XMLSchema#decimal</code>.
+ */
+boolean isNumericXSD(xsd::XSDSimpleTypeDefinition this) :
+	uRI != "http://www.w3.org/2001/XMLSchema#anySimpleType"
+	&& uRI != "http://www.w3.org/2001/XMLSchema#anyType"
+	&& (
+		uRI == "http://www.w3.org/2001/XMLSchema#decimal"
+		|| (baseTypeDefinition != null && isNumericXSD(baseTypeDefinition))
+	);
+
+boolean isNumeric(ecore::EClassifier this) :
+	throwException("Cannot check isNumeric on EClassifiers");
+
+boolean isNumeric(model::EXSDDataType this) :
+	isNumericXSD(definition);
+
+operationUsed(model::Operation this) :
+	!(rules.isEmpty) || !isGenerated; 
+
+conditionUsed(model::Function this) :
+	!(conditioned.isEmpty && outWires.isEmpty) || !isGenerated;
+
+/**
+ * Is the given property the fieldValue property of its containing object?
+ */
+isFieldValue(model::Value this) :
+	name == "fieldValue" || (model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this); 
+
+/**
+ * Get the current version of the IAML code generation platform.
+ */
+String iamlVersion() :
+	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.getIamlVersion();
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540
+ * to use: «EXPAND exception FOR throwException("Your message goes here")»
+ * AND add this anywhere in your template file: (very important)
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+   
+ */
+String throwException(String message) :
+	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.throwException(java.lang.String);
+
+String resolveFileReference(model::domain::DomainSource source) :
+	JAVA org.openiaml.model.impl.FileReferenceImpl.resolveFileReference(org.openiaml.model.model.domain.DomainSource);
+
+String _instrument(String destination, String filename, String location) :
+	JAVA org.openiaml.model.codegen.php.coverage.InstrumentOawCode.instrument(java.lang.String, java.lang.String, java.lang.String);

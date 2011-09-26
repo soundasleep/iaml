@@ -1,0 +1,65 @@
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«EXTENSION xpt::diagram::Utils»
+
+/**
+ * Originally, if you created a shortcut to ApplicationElementProperty in
+ * a CompositeOperation diagram editor, and you tried to create a
+ * DataFlowEdge _from_ that ApplicationElementProperty, it couldn't
+ * be created -- the AEP cannot contain DataFlowEdges, even though the
+ * source CompositeOperation contains them.
+ *
+ * This extension makes GMF consider the host element for link containment,
+ * and not just the target element.
+ *
+ * See http://code.google.com/p/iaml/issues/detail?id=34
+ */
+
+/**
+ * A bit of a hack to extend the command with a new constructor.
+ *
+ * See http://code.google.com/p/iaml/issues/detail?id=34
+ */
+«AROUND doConfigure(gmfgen::GenLink link) FOR gmfgen::TypeLinkModelFacet-»
+	«targetDef.proceed()»
+
+	«EXPAND xpt::Common::generatedMemberComment(
+		"Extends {@link #deduceContainer(EObject, EObject)} to also consider a list of potential EObjects.\n" +
+		"This is necessary because container is now marked as final.")»
+		
+	private static «EXPAND MetaModel::QualifiedClassName FOR containmentMetaFeature.genClass» deduceContainer(org.eclipse.emf.ecore.EObject source, 
+		org.eclipse.emf.ecore.EObject target,
+		java.util.List<org.eclipse.emf.ecore.EObject> potentialHostElements) {
+
+		// try default
+		«EXPAND MetaModel::QualifiedClassName FOR containmentMetaFeature.genClass» container;
+		container = deduceContainer(source, target);
+		if (container != null)
+			return container;
+			
+		// cycle through additional potential objects, trying all
+		// of their parents in a likewise fashion
+		for (org.eclipse.emf.ecore.EObject object : potentialHostElements) {
+			container = deduceContainer(object, target);
+			if (container != null)
+				return container; 
+		}
+		
+		// failed
+		return null;
+	}
+
+	«EXPAND xpt::Common::generatedMemberComment("Jevon custom command: Allow links to be contained in non-direct elements")»
+	public «link.createCommandClassName»(org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest request,
+			org.eclipse.emf.ecore.EObject source, 
+			org.eclipse.emf.ecore.EObject target,
+			java.util.List<org.eclipse.emf.ecore.EObject> potentialHostElements) {
+		
+		super(request.getLabel(), null, request);
+		this.source = source;
+		this.target = target;
+		this.container = deduceContainer(source, target, potentialHostElements);
+		
+	}
+
+«ENDAROUND»

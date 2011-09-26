@@ -1,0 +1,28 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE queueStoreDomainAttribute FOR model::InternetApplication-»
+<?php
+/**
+ * For setting a queued domain attribute instance.
+ */
+ 
+«EXPAND template::Template::commonHeader("", "Queue Store Domain Attribute")»
+
+«EXPAND template::domain::Definitions::domainDefinitions»
+
+log_message("queue_store_domain_attribute.php? " . print_r($_GET, true));
+$id = require_get("id");
+$arg0 = require_get("arg0");
+
+log_message("queue_store_domain_attribute.php: setting id=$id, arg0=$arg0");
+
+// TODO probably a security risk
+$function_name = "queue_store_domain_attribute_" . $id;
+$function_name($arg0);
+
+log_message("queue_store_domain_attribute.php: completed");
+echo "ok";
+
+«ENDDEFINE»

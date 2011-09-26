@@ -1,0 +1,118 @@
+/**
+ * Rules relating to {@model DomainType}s.
+ */
+#created on: 4/11/2008
+package org.openiaml.model.drools.rules.domain
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference DomainAttribute,DomainType
+ *		A {@model DomainType} which does not contain a {@model DomainAttribute#primaryKey primary key}
+ *		{@model DomainAttribute} will contain one named 'generated primary key'.
+ */
+rule "Create a default primary key for DomainTypes which do not have one"
+
+	when
+		object : DomainType ( )
+		type : EXSDDataType( definition != null, 
+			definition.URI == "http://openiaml.org/model/datatypes#iamlInteger" )
+		not (da : DomainAttribute ( eContainer == object, primaryKey == true ) )
+	
+		eval ( handler.veto( object ))
+	
+	then	
+		// create a new one
+		DomainAttribute da2 = handler.generatedDomainAttribute(object, object);
+		handler.setName(da2, "generated primary key");
+		handler.setValue(da2, DomainPackage.eINSTANCE.getDomainFeature_PrimaryKey(), true);
+		handler.setEType(da2, type);
+		queue.add(da2, drools);
+
+end 
+
+/**
+ * @inference DomainType,DomainAttribute,ExtendsEdge
+ *		A non-{@model DomainAttribute#primaryKey} {@model DomainAttribute} in a {@model DomainType}, 
+ *		represented as {@model ExtendsEdge a supertype} of another {@model DomainType},
+ *		will be copied into the subtype schema and marked as an {@model ExtendsEdge subattribute}.
+ */
+rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsEdges"
+	when
+		sourceObject : DomainType( )
+		# don't copy primary keys
+		sourceAttribute : DomainAttribute ( eContainer == sourceObject, primaryKey == false )
+		
+		targetObject : DomainType ( this != sourceObject )
+		
+		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
+		
+		not ( DomainAttribute ( eContainer == targetObject, name == sourceAttribute.name )) 
+
+		eval ( handler.veto( ext ))
+	
+	then
+		DomainAttribute copy = handler.generatedDomainAttribute(ext, targetObject);
+		handler.setName(copy, sourceAttribute.getName());
+		handler.setValue(copy, DomainPackage.eINSTANCE.getDomainFeature_PrimaryKey(), sourceAttribute.isPrimaryKey());
+		handler.setEType(copy, sourceAttribute.getEType());		// copy over type
+		queue.add(copy, drools);
+		
+		// extends wire to maintain relationship
+		ExtendsEdge ext2 = handler.generatedExtendsEdge(ext, sourceAttribute, copy, sourceAttribute);
+		queue.add(ext2, drools);
+
+end
+
+/**
+ * @inference DomainType,DomainAttribute,ExtendsEdge
+ *		A {@model DomainAttribute#primaryKey} {@model DomainAttribute} in a {@model DomainType}, 
+ *		represented as {@model ExtendsEdge a supertype} of another {@model DomainType},
+ *		will be copied into a new 'ID' {@model DomainAttribute} and marked as a {@model ExtendsEdge foreign key}.
+ */
+rule "Domain objects that extend each other should include an indexable reference to the source primary key"
+	when
+		sourceObject : DomainType( )
+		
+		targetObject : DomainType ( this != sourceObject )
+		
+		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
+		
+		sourceId : DomainAttribute ( eContainer == sourceObject, primaryKey == true )
+		
+		not ( 
+		da : DomainAttribute ( eContainer == targetObject, primaryKey == false )
+		and 
+		ExtendsEdge ( from == da, to == sourceId ) ) 
+
+		eval ( handler.veto( ext ))
+
+	then
+		# create the target ID attribute
+		DomainAttribute id_ref = handler.generatedDomainAttribute(ext, targetObject);
+		handler.setName(id_ref, sourceObject.getName() + "." + sourceId.getName());
+		handler.setEType(id_ref, sourceId.getEType());	// copy over type of ID
+		queue.add(id_ref, drools);
+		
+		# and set it as extends to signify relationship
+		ExtendsEdge ext2 = handler.generatedExtendsEdge(ext, sourceId, id_ref, sourceId);
+		queue.add(ext2, drools);		
+
+end		
+

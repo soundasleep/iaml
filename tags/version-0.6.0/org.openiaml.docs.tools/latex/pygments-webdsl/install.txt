@@ -1,0 +1,11 @@
+How to install the WebDSL mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mapping.py
+
+You should then see 'webdsl' listed:
+
+  $ pygmentize -L lexers

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.domain:DomainIterator xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.131aca7610c.3" name="Iterator">
+  <hasNext xsi:type="iaml:BuiltinProperty" id="model.131aca76070.35" name="hasNext?"/>
+</iaml.domain:DomainIterator>

@@ -1,0 +1,164 @@
+import simplegmf;
+import ecore;
+
+List[ecore::EClass] getAllNonAbstractElements(ecore::EPackage this) :
+	eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface));
+
+simplegmf::GMFConfiguration getRoot(simplegmf::GMFConfiguration this) :
+	this;
+
+simplegmf::GMFConfiguration getRoot(emf::EObject this) :
+	if eContainer == null
+		then null
+		else getRoot(eContainer);
+
+/**
+ * Is the given EClass an edge type?
+ */
+isEdgeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	root.edgeTypes.exists(et|toBoolean(et.isSuperTypeOf(cls)));
+
+/**
+ * Try and derive the source feature using the following logic:
+ * 1. See if any direct classifier exists
+ * 2. See if any derived classifier exists
+ * 3. Try "from" or "source" named features
+ */
+ecore::EStructuralFeature deriveSourceMetaElement(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if root.edgeReferences.exists(r|r.classifier == cls)
+		then root.edgeReferences.selectFirst(r|r.classifier == cls).sourceFeature
+		else if root.edgeReferences.exists(r|toBoolean(r.classifier.isSuperTypeOf(cls)))
+			then root.edgeReferences.selectFirst(r|toBoolean(r.classifier.isSuperTypeOf(cls))).sourceFeature
+			else cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "from" || toString(f.name) == "source");
+
+ecore::EStructuralFeature deriveTargetMetaElement(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if root.edgeReferences.exists(r|r.classifier == cls)
+		then root.edgeReferences.selectFirst(r|r.classifier == cls).targetFeature
+		else if root.edgeReferences.exists(r|toBoolean(r.classifier.isSuperTypeOf(cls)))
+			then root.edgeReferences.selectFirst(r|toBoolean(r.classifier.isSuperTypeOf(cls))).targetFeature
+			else cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "to" || toString(f.name) == "target");
+
+/**
+ * Get the derived FigureConfiguration for this element.
+ * Selects the first FigureConfiguration that is an instance of the given classifier,
+ * or the <default> classifier if there are none.
+ */
+simplegmf::AbstractFigure deriveFigureConfiguration(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if isEdgeType(root, cls)
+		then
+			(if possibleEdgeConfigurations(root, cls).isEmpty
+				then defaultEdgeConfiguration(root)
+				else possibleEdgeConfigurations(root, cls).first())
+		else
+			(if possibleFigureConfigurations(root, cls).isEmpty
+				then defaultFigureConfiguration(root)
+				else possibleFigureConfigurations(root, cls).first());
+
+List[simplegmf::FigureProperty] defaultFigureProperties(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if isEdgeType(root, cls)
+		then
+			defaultEdgeConfiguration(root).properties
+		else
+			defaultFigureConfiguration(root).properties;
+
+simplegmf::FigureConfiguration defaultFigureConfiguration(simplegmf::GMFConfiguration root) :
+	root.figureConfigurations.selectFirst(fc|fc.isDefault);
+
+simplegmf::FigureConfiguration defaultEdgeConfiguration(simplegmf::GMFConfiguration root) :
+	root.edgeConfigurations.selectFirst(fc|fc.isDefault);
+		
+// all figure configurations of which the given figure (e.g. VisibleThing) is a supertype of the given classifier (e.g. InputTextField)
+// may return the empty set 
+List[simplegmf::FigureConfiguration] possibleFigureConfigurations(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	root.figureConfigurations.select(c | c.classifier.isSuperTypeOf(cls) ); 
+
+List[simplegmf::FigureConfiguration] possibleEdgeConfigurations(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	root.edgeConfigurations.select(c | c.classifier.isSuperTypeOf(cls) ); 
+
+String getShapeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getShapeType(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);
+
+simplegmf::CustomShape getCustomShape(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getCustomShape(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);
+
+/**
+ * Get the URI of the containing resource of this EObject.
+ */
+String getResourceFileName(emf::EObject object) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getResourceFileName(org.eclipse.emf.ecore.EObject);
+
+/**
+ * Is the given EObject a valid reference?
+ */
+boolean isValidEObject(emf::EObject object) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.isValidEObject(org.eclipse.emf.ecore.EObject);
+
+/**
+ * Extensions to satisfy OAW's bugs.
+ */
+String toString(ecore::EString s) :
+	toStringOrNull(s);
+
+boolean toBoolean(ecore::EBoolean b) :
+	b;
+
+String toStringOrNull(ecore::EString s) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.toStringOrNull(java.lang.String);
+
+String throwException(String message) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator.throwException(java.lang.String);
+
+String debug(emf::EObject obj) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.debug(org.eclipse.emf.ecore.EObject);
+
+/* counters, to hack around EMF elements that do not have iDs set */
+Void counterReset(String id):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterReset(java.lang.String);
+
+Void counterIncrement(String id):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterIncrement(java.lang.String);
+	
+String counterGet(String id):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterGet(java.lang.String);
+	
+/* for saving references back to labels */
+
+Void labelSave(String figureName, String labelName, String href, boolean elementIcon):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.labelSave(java.lang.String, java.lang.String, java.lang.String, java.lang.Boolean);
+	
+List[int] savedLabelList():
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelList();
+
+String savedLabelFigureName(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelFigureName(java.lang.Integer);
+
+String savedLabelName(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelName(java.lang.Integer);
+	
+String savedLabelHref(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelHref(java.lang.Integer);
+
+boolean savedLabelElementIcon(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelElementIcon(java.lang.Integer);
+
+/* for saving references between EClasses and Labels */
+Void gmfmapLabelMapReset() :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.gmfmapLabelMapReset();
+
+Void gmfmapLabelMapSet(ecore::EClass classifier, simplegmf::LabelConfiguration label) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.gmfmapLabelMapSet(org.eclipse.emf.ecore.EClass, org.openiaml.simplegmf.model.simplegmf.LabelConfiguration);
+
+List[simplegmf::LabelConfiguration] gmfmapLabelMapGet(ecore::EClass classifier) : 
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.gmfmapLabelMapGet(org.eclipse.emf.ecore.EClass);
+
+/* for saving references between .gmftool and .gmfmap for creation tools */
+String getCreationToolMapping(String id, ecore::EClass classifier, ecore::EStructuralFeature feature) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getCreationToolMapping(java.lang.String, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature);
+
+Void putCreationToolMappingFeature(String id, ecore::EClass classifier, ecore::EStructuralFeature feature, String href) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.putCreationToolMappingFeature(java.lang.String, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature, java.lang.String);
+
+Void putCreationToolMappingDefault(String id, ecore::EClass classifier, String href) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.putCreationToolMappingDefault(java.lang.String, org.eclipse.emf.ecore.EClass, java.lang.String);
+
+

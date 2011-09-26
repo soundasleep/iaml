@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" id="scopes.130cf3ba351.37">
+  <accessHandlers id="components.130cf3ba47a.c" name="handler" outRequiresEdges="wires.130cf3ba024.20 wires.130cf3ba024.201">
+    <requiresEdges id="wires.130cf3ba024.20" outConstraintEdges="wires.130cf3ba024.34" from="components.130cf3ba47a.c">
+      <constraintEdges id="wires.130cf3ba024.34" from="wires.130cf3ba024.20" to="wires.130cf3ba024.201" type="OR"/>
+      <to xsi:type="iaml.users:Role" href="Role.iaml#users.128a8c3249b.3"/>
+    </requiresEdges>
+    <requiresEdges id="wires.130cf3ba024.201" inConstraintEdges="wires.130cf3ba024.34" from="components.130cf3ba47a.c">
+      <to xsi:type="iaml.users:Permission" href="Permission.iaml_schema#users.130cf3ba833.15"/>
+    </requiresEdges>
+  </accessHandlers>
+</iaml.scopes:Session>

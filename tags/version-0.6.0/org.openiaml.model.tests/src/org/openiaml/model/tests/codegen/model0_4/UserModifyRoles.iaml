@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
+    <wires xsi:type="iaml.wires:SyncWire" id="sync" name="sync" from="domain.128807fbeba.cd9" to="new"/>
+    <iterators id="domain.128807fbeba.cd9" name="new instance" outWires="sync" query="new" outSelects="domain.128807fbeba.ce4">
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.1233b53a3ce.a" id="model.1233b53a1ca.14" name="save"/>
+    </iterators>
+    <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" listeners="wires.1233b53a3ce.a">
+      <ecaRules id="wires.1233b53a3ce.a" name="onClick" trigger="visual.1233b53a313.1a" target="model.1233b53a1ca.14"/>
+    </children>
+    <children xsi:type="iaml.visual:InputForm" inWires="sync" id="new" name="create a new user form"/>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.7d" name="add new roles">
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ec" name="add role 1" listeners="wires.1233b53a3ce.a8">
+        <ecaRules id="wires.1233b53a3ce.a8" inParameterEdges="wires.1233b53a3ce.a9" name="onClick" trigger="visual.1233b53a313.ec" target="model.1233b53a1ca.71"/>
+      </children>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ed" name="add role 2" listeners="wires.1233b53a3ce.a7">
+        <ecaRules id="wires.1233b53a3ce.a7" inParameterEdges="wires.1233b53a3ce.aa" name="onClick" trigger="visual.1233b53a313.ed" target="model.1233b53a1ca.71"/>
+      </children>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.ee" name="add permission 1" listeners="wires.1233b53a3ce.a6">
+        <ecaRules id="wires.1233b53a3ce.a6" inParameterEdges="wires.1233b53a3ce.ab" name="onClick" trigger="visual.1233b53a313.ee" target="model.1233b53a1ca.73"/>
+      </children>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.117" name="remove roles">
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15a" name="remove all roles" listeners="wires.1233b53a3ce.168 wires.1233b53a3ce.169">
+        <ecaRules id="wires.1233b53a3ce.168" inParameterEdges="wires.1233b53a3ce.16a" name="onClick" trigger="visual.1233b53a313.15a" target="model.1233b53a1ca.72"/>
+        <ecaRules id="wires.1233b53a3ce.169" inParameterEdges="wires.1233b53a3ce.16b" name="onClick" trigger="visual.1233b53a313.15a" target="model.1233b53a1ca.72"/>
+      </children>
+      <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.15b" name="remove all permissions" listeners="wires.1233b53a3ce.16c">
+        <ecaRules id="wires.1233b53a3ce.16c" inParameterEdges="wires.1233b53a3ce.16d" name="onClick" trigger="visual.1233b53a313.15b" target="model.1233b53a1ca.74"/>
+      </children>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">
+      <accessHandlers id="components.1233b53a67e.9a" name="require role 1" outRequiresEdges="wires.1233b53a3ce.23a">
+        <requiresEdges id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="domain.128807fbeba.cde"/>
+      </accessHandlers>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.361" name="requires permission 1">
+      <accessHandlers id="components.1233b53a67e.110" name="requires permission 1" outRequiresEdges="wires.1233b53a3ce.453">
+        <requiresEdges id="wires.1233b53a3ce.453" from="components.1233b53a67e.110" to="users.1233b53a814.6f"/>
+      </accessHandlers>
+    </scopes>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.421" name="requires inherited permission">
+      <accessHandlers id="components.1233b53a67e.153" name="requires inherited permission" outRequiresEdges="wires.1233b53a3ce.544">
+        <requiresEdges id="wires.1233b53a3ce.544" from="components.1233b53a67e.153" to="users.1233b53a814.70"/>
+      </accessHandlers>
+    </scopes>
+    <iterators id="domain.128807fbeba.cda" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8" id="model.1233b53a1ca.71" name="add role"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.1233b53a3ce.168 wires.1233b53a3ce.169" id="model.1233b53a1ca.72" name="remove role"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.1233b53a3ce.a6" id="model.1233b53a1ca.73" name="add permission"/>
+      <operations xsi:type="iaml:BuiltinOperation" rules="wires.1233b53a3ce.16c" id="model.1233b53a1ca.74" name="remove permission"/>
+    </iterators>
+    <accessHandlers id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.cdb"/>
+    </accessHandlers>
+    <loginHandlers id="components.1233b53a67e.19" name="current user" inParameterEdges="wires.1233b53a3ce.5a" outWires="wires.1233b53a3ce.5c" type="USER">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" name="set" from="components.1233b53a67e.19" to="domain.128807fbeba.cda"/>
+    </loginHandlers>
+  </scopes>
+  <types xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.cdb" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.cdd" inRequiresEdges="wires.1233afe62eb.2d">
+    <parameterEdges id="wires.1233b53a3ce.5a" parameterValue="domain.128807fbeba.cdb" parameterTerm="components.1233b53a67e.19"/>
+    <parameterEdges id="wires.1233b53a3ce.ab" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.a6"/>
+    <parameterEdges id="wires.1233b53a3ce.16d" parameterValue="users.1233b53a814.6f" parameterTerm="wires.1233b53a3ce.16c"/>
+    <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453"/>
+    <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
+  </types>
+  <types xsi:type="iaml.users:Role" name="additional role 1" id="domain.128807fbeba.cde" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inSchemas="domain.128807fbeba.ce0" inRequiresEdges="wires.1233b53a3ce.23a">
+    <parameterEdges id="wires.1233b53a3ce.a9" parameterValue="domain.128807fbeba.cde" parameterTerm="wires.1233b53a3ce.a8"/>
+    <parameterEdges id="wires.1233b53a3ce.16a" parameterValue="domain.128807fbeba.cde" parameterTerm="wires.1233b53a3ce.168"/>
+  </types>
+  <types xsi:type="iaml.users:Role" name="additional role 2" id="domain.128807fbeba.ce1" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" inSchemas="domain.128807fbeba.ce3" outProvidesEdges="wires.1233b53a3ce.36">
+    <parameterEdges id="wires.1233b53a3ce.aa" parameterValue="domain.128807fbeba.ce1" parameterTerm="wires.1233b53a3ce.a7"/>
+    <parameterEdges id="wires.1233b53a3ce.16b" parameterValue="domain.128807fbeba.ce1" parameterTerm="wires.1233b53a3ce.169"/>
+    <providesEdges id="wires.1233b53a3ce.36" from="domain.128807fbeba.ce1" to="users.1233b53a814.70"/>
+  </types>
+  <sources id="domain.128807fbeba.cdc" outSchemas="domain.128807fbeba.cdd" inSelects="domain.128807fbeba.ce4">
+    <schemaEdges id="domain.128807fbeba.cdd" from="domain.128807fbeba.cdc" to="domain.128807fbeba.cdb"/>
+    <selectEdges id="domain.128807fbeba.ce4" from="domain.128807fbeba.cd9" to="domain.128807fbeba.cdc"/>
+  </sources>
+  <sources id="domain.128807fbeba.cdf" outSchemas="domain.128807fbeba.ce0">
+    <schemaEdges id="domain.128807fbeba.ce0" from="domain.128807fbeba.cdf" to="domain.128807fbeba.cde"/>
+  </sources>
+  <sources id="domain.128807fbeba.ce2" outSchemas="domain.128807fbeba.ce3">
+    <schemaEdges id="domain.128807fbeba.ce3" from="domain.128807fbeba.ce2" to="domain.128807fbeba.ce1"/>
+  </sources>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

@@ -1,0 +1,688 @@
+/**
+ * Completes the functionality of {@model Role}s when connected to
+ * {@model LoginHandler}s or {@model AccessControlHandler}s.
+ */
+package org.openiaml.model.drools.rules.users
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference AccessControlHandler,Session,LoginHandler
+ *		A {@model LoginHandler} is generated for a {@model Session} that contains an
+ *		{@model AccessControlHandler}.
+ */
+rule "When a session is protected by an AccessControlHandler with no login handler[type=user], add it"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		
+		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
+				
+		eval ( handler.veto( ach ))
+
+	then
+		LoginHandler lh = handler.generatedLoginHandler(ach, session);
+		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
+		handler.setName(lh, "role-based login handler for " + session.getName());
+		queue.add(lh, drools);
+
+end
+
+/**
+ * @inference AccessControlHandler,Frame,LoginHandler
+ *		A {@model LoginHandler} is generated for a {@model Frame} contained within a {@model Session} that contains an
+ *		{@model AccessControlHandler}.
+ */
+rule "When a Frame is protected by an AccessControlHandler with no login handler[type=user], add it"
+	when
+		session : Session ( )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == page )
+		
+		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
+		
+		# no AccessControlHandler within the session too (the above rule will create one)
+		not (AccessControlHandler ( eContainer == session ))
+				
+		eval ( handler.veto( ach ))
+
+	then
+		LoginHandler lh = handler.generatedLoginHandler(ach, session);
+		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
+		handler.setName(lh, "role-based login handler for " + session.getName());
+		queue.add(lh, drools);
+
+end
+
+/**
+ * Issue 206: Allow AccessControlHandlers to specify target Login pages.
+ *
+ * @inference AccessControlHandler
+ *		If an {@model AccessControlHandler} specifies a 'login' {@model ECARule}
+ *		that goes to a {@model Frame}, the same Frame will be used as the login Frame
+ *		for the generated {@model LoginHandler}.
+ */
+rule "If an AccessControlHandler specifies a Login page, connect this to the generated LoginHandler"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		login_page : Frame ( )
+		login_edge : ECARule ( trigger == ach, target == login_page, name == "login" )
+		
+		not ( ECARule( trigger == login_handler, name == "login" ))
+		
+		eval ( handler.veto( ach ))
+
+	then
+		ECARule edge = handler.generatedECARule(ach, session, login_handler, login_page);
+		handler.setName(edge, "login");
+		queue.add(edge, drools);
+
+end
+
+/**
+ * Allow AccessControlHandlers to specify target Logout pages.
+ *
+ * @inference AccessControlHandler
+ *		If an {@model AccessControlHandler} specifies a 'logout' {@model ECARule}
+ *		that navigates to a {@model Frame}, the same Frame will be used as the logout Frame
+ *		for the generated {@model LoginHandler}.
+ */
+rule "If an AccessControlHandler specifies a Logout page, connect this to the generated LoginHandler"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		login_page : Frame ( )
+		login_edge : ECARule ( trigger == ach, target == login_page, name == "logout" )
+		
+		not ( ECARule( trigger == login_handler, name == "logout" ))
+		
+		eval ( handler.veto( ach ))
+
+	then
+		ECARule edge = handler.generatedECARule(ach, session, login_handler, login_page);
+		handler.setName(edge, "logout");
+		queue.add(edge, drools);
+
+end
+
+/**
+ * Allow AccessControlHandlers to specify target Success pages.
+ *
+ * @inference AccessControlHandler
+ *		If an {@model AccessControlHandler} specifies a 'success' {@model ECARule}
+ *		that navigates to a {@model Frame}, the same Frame will be used as the successful login Frame
+ *		for the generated {@model LoginHandler}.
+ */
+rule "If an AccessControlHandler specifies a Success page, connect this to the generated LoginHandler"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		login_page : Frame ( )
+		login_edge : ECARule ( trigger == ach, target == login_page, name == "success" )
+		
+		not ( ECARule( trigger == login_handler, name == "success" ))
+		
+		eval ( handler.veto( ach ))
+
+	then
+		ECARule edge = handler.generatedECARule(ach, session, login_handler, login_page);
+		handler.setName(edge, "success");
+		queue.add(edge, drools);
+
+end
+
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} within a {@model Session} protected by an {@model AccessControlHandler}
+ *		will have an {@model Operation} named 'permissions check'.
+ */
+rule "A page within a session protected by an ACH should have a 'permissions check' operation"
+	when
+		session : Session ( )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
+
+		not ( Operation ( eContainer == page, name == "permissions check" ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		ActivityOperation check = handler.generatedActivityOperation(ach, page);
+		handler.setName(check, "permissions check");
+		queue.add(check, drools);	
+
+end
+
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} protected by an {@model AccessControlHandler}
+ *		will have an {@model Operation} named 'page permissions check'.
+ */
+rule "A page protected by an ACH should have a 'permissions check' operation"
+	when
+		page : Frame ( )
+		ach : AccessControlHandler ( eContainer == page )
+
+		not ( Operation ( eContainer == page, name == "page permissions check" ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		ActivityOperation check = handler.generatedActivityOperation(ach, page);
+		handler.setName(check, "page permissions check");
+		queue.add(check, drools);	
+
+end
+
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} within a {@model Session} protected by an {@model AccessControlHandler}
+ *		will {@model ECARule execute} the 'permissions check' {@model Operation}
+ *		when the frame is {@model Frame#onAccess accessed}.
+ */
+rule "Connect 'permissions check' up to the 'access' event of the session (ACH in session)"
+	when
+		session : Session ( )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
+		access : Event ( eContainer == page, page.onAccess == access ) 
+		check : Operation ( eContainer == page, name == "permissions check" )
+		
+		not ( ECARule ( trigger == access, target == check ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		ECARule run = handler.generatedECARule(ach, page, access, check);
+		handler.setName(run, "run");
+		queue.add(run, drools); 	
+
+end 
+
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		A {@model Frame} protected by an {@model AccessControlHandler}
+ *		will {@model ECARule execute} the 'page permissions check' {@model Operation}
+ *		when the frame is {@model Frame#onAccess accessed}.
+ */
+rule "Connect 'permissions check' up to the 'access' event of the page (ACH in page)"
+	when
+		page : Frame ( )
+		ach : AccessControlHandler ( eContainer == page )
+		access : Event ( eContainer == page, page.onAccess == access )
+		check : Operation ( eContainer == page, name == "page permissions check" )
+		
+		not ( ECARule ( trigger == access, target == check ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		ECARule run = handler.generatedECARule(ach, page, access, check);
+		handler.setName(run, "run");
+		queue.add(run, drools); 	
+
+end 
+
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		The 'permissions check' {@model Operation} defined by an {@model AccessControlHandler} protecting
+ *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
+ *		defined login {@model Frame} in the same {@model Session} if the check fails.
+ */
+rule "Connect fail wire from 'permissions check' to 'login page'"
+	when
+		root : InternetApplication ( )
+		session : Session ( eContainer == root )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
+		access : Event ( eContainer == page, page.onAccess == access )
+		check : ActivityOperation ( eContainer == page, name == "permissions check" )
+		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		login : Frame ( name == "login", eContainer == root ) 
+		
+		not ( ECARule ( trigger == check, target == login, name == "fail" ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		ECARule nav = handler.generatedECARule(ach, page, check, login);
+		handler.setName(nav, "fail");
+		queue.add(nav, drools);
+
+end
+
+/**
+ * @inference AccessControlHandler,Frame,ActivityOperation
+ *		The 'permissions check' {@model Operation} defined by an {@model AccessControlHandler} protecting
+ *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
+ *		defined login {@model Frame} in a <em>separate</em> login {@model Session} if the check fails.
+ */
+rule "Connect fail wire from 'permissions check' to 'login page' (in separate login session)"
+	when
+		root : InternetApplication ( )
+		session : Session ( eContainer == root )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
+		access : Event ( eContainer == page, page.onAccess == access )
+		check : ActivityOperation ( eContainer == page, name == "permissions check" )
+		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		login_session : Session ( eContainer == root, eval(functions.loginHandlerScopeMatches( login_session, lh )) )
+		login : Frame ( name == "login", eContainer == login_session ) 
+		
+		not ( ECARule ( trigger == check, target == login, name == "fail" ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		ECARule nav = handler.generatedECARule(ach, page, check, login);
+		handler.setName(nav, "fail");
+		queue.add(nav, drools);
+
+end
+
+/**
+ * @inference Role
+ *		A <em>default {@model Role}</em> named 'User' is defined for all {@model InternetApplication}s.
+ */
+rule "If a Role is defined, a default role User is also defined"
+	when
+		root : InternetApplication ( )
+		exists ( r : Role ( eContainer == root ))
+		
+		not ( Role ( name == "User", eContainer == root ))
+					
+		eval ( handler.veto( root ))
+	
+	then
+		Role user = handler.generatedRole(root, root);
+		handler.setName(user, "User");
+		queue.add(user, drools);
+
+end
+
+/**
+ * @inference Role
+ *		The <em>default {@model Role}</em> will contain an
+ *		{@model DomainAttribute} {@model DomainAttribute#name named} 'email'.
+ */
+rule "'User' role contains a default attribute 'email'"
+	when
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
+
+		type : EXSDDataType( definition != null, 
+			definition.URI == "http://openiaml.org/model/datatypes#iamlEmail" )
+		
+		not ( DomainAttribute ( name == "email", eContainer == user ))
+					
+		eval ( handler.veto( user ))
+	
+	then
+		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
+		handler.setName(attr, "email");
+		handler.setEType(attr, type);
+		queue.add(attr, drools);
+
+end
+
+/**
+ * @inference Role
+ *		The <em>default {@model Role}</em> will contain an
+ *		{@model DomainAttribute} {@model DomainAttribute#name named} 'password'.
+ */
+rule "'User' role contains a default attribute 'password'"
+	when
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
+		
+		not ( DomainAttribute ( name == "password", eContainer == user ))
+					
+		eval ( handler.veto( user ))
+	
+	then
+		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
+		handler.setName(attr, "password");
+		// TODO set type to iamlPassword
+		queue.add(attr, drools);
+
+end
+
+# TODO can we refactor these from [User/Session] pairs into an abstract 'Scope'?
+/**
+ * It doesn't matter whether the ACH is in the Session or in a Frame; 
+ * the LoginHandler will always have the same input class (User role),
+ * as the actual check logic is handled by the 'permissions check'
+ * method.
+ *
+ * @inference AccessControlHandler,Parameter,LoginHandler
+ *		An {@model AccessControlHandler} protecting a {@model Session} with a defined
+ *		{@model Role}-based {@model RequiresEdge access requirement} will provide
+ *		the <em>default {@model Role}</em> as a {@model Parameter} to the created {@model LoginHandler}.  
+ */
+rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User"
+	when
+		root : InternetApplication ( )
+		session : Session( ) 
+		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
+
+		exists ( 
+			// it doesn't matter if the ACH is in the session or the page
+			ach : AccessControlHandler ( eContainer == session 
+				|| eval(functions.containingSession(ach).equals(session)) ) and
+
+			// the store contains either the roles or the permissions
+			// referenced by the ACH; we only want one
+			obj : RequiresEdgeDestination ( ) and
+			/*
+				TODO This code doesn't work - it allows two incoming Permission/Roles to create
+				multiple outgoing ParameterEdges.
+				
+				(( p : Permission ( ) and eval (obj == p) ) or
+				( r : Role ( ) and eval (obj == r )) ) and
+				*/
+
+			RequiresEdge ( from == ach, to == obj )
+		)
+		
+		# default Role
+		user : Role ( eContainer == root, name == "User" )
+	
+		# if there is already an incoming parameter wire, don't connect up User
+		not (Parameter ( parameterTerm == login_handler ))
+		
+		not (Parameter ( parameterValue == user, parameterTerm == login_handler ))
+		
+		eval ( handler.veto( login_handler ))
+	
+	then
+		Parameter param = handler.generatedParameter(login_handler, session, user, login_handler);
+		queue.add(param, drools);
+
+end
+
+/**
+ * @inference AccessControlHandler,BuiltinOperation
+ *		An {@model AccessControlHandler} has a {@model BuiltinOperation} named 'check permissions'.
+ */ 
+rule "Create 'check permissions' operation in AccessControlHandler"
+	when
+		ach : AccessControlHandler( )
+		
+		not ( Operation ( name == "check permissions", eContainer == ach ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		BuiltinOperation op = handler.generatedBuiltinOperation(ach, ach);
+		handler.setName(op, "check permissions");
+		queue.add(op, drools);
+
+end
+
+/**
+ * @inference ActivityOperation,Changeable
+ *		An {@model ActivityOperation} named 'permissions check' within an {@model AccessControlHandler} 
+ *		protecting a {@model Session}-contained {@model Frame}, used to check the status of the
+ *		'check permissions' {@model Operation} within the same handler, 
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'permissions check' operation in a Frame (session)"
+	when
+		session : Session ( )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
+
+		check : ActivityOperation ( eContainer == page, name == "permissions check" )
+		ach_check : Operation ( eContainer == ach, name == "check permissions" )
+		
+		not ( StartNode( eContainer == check ))	
+				
+		eval ( handler.veto( check ))
+
+	then
+			
+		StartNode start = handler.generatedStartNode(check, check);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(check, check);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(check, check);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Error: You do not have valid permissions. You may need to login.");
+		queue.add(cancel, drools);
+		
+		# virtual operation call
+		OperationCallNode opCall = handler.generatedOperationCallNode(check, check);
+		handler.setName(opCall, "call permissions operation");
+		queue.add(opCall, drools);
+		
+		# run wire to this call
+		ECARule run = handler.generatedECARule(check, check, opCall, ach_check);
+		handler.setName(run, "run");
+		queue.add(run, drools); 
+	
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(check, check);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, opCall);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge2, "pass");
+		handler.setFrom(edge2, opCall);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+		
+		# not ok	
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge3, "fail");
+		handler.setFrom(edge3, opCall);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference ActivityPredicate,Changeable
+ *		An {@model ActivityPredicate} named 'permissions check' within an {@model AccessControlHandler} 
+ *		protecting a {@model Frame}, used to check the status of the
+ *		'check permissions' {@model Operation} within the same handler, 
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'permissions check' operation in a Frame (page)"
+	when
+		page : Frame ( )
+		ach : AccessControlHandler ( eContainer == page )
+
+		check : ActivityOperation ( eContainer == page, name == "page permissions check" )
+		ach_check : Operation ( eContainer == ach, name == "check permissions" )
+		
+		not ( StartNode( eContainer == check ))	
+				
+		eval ( handler.veto( check ))
+
+	then
+			
+		StartNode start = handler.generatedStartNode(check, check);
+		queue.add(start, drools);
+		
+		# ok
+		FinishNode finish = handler.generatedFinishNode(check, check);
+		queue.add(finish, drools);
+		
+		# not ok
+		CancelNode cancel = handler.generatedCancelNode(check, check);
+		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Error: You do not have valid permissions. You may need to login.");
+		queue.add(cancel, drools);
+		
+		# virtual operation call
+		OperationCallNode opCall = handler.generatedOperationCallNode(check, check);
+		handler.setName(opCall, "call permissions operation");
+		queue.add(opCall, drools);
+		
+		# run wire to this call
+		ECARule run = handler.generatedECARule(check, check, opCall, ach_check);
+		handler.setName(run, "run");
+		queue.add(run, drools); 
+	
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(check, check);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, opCall);
+		queue.add(edge1, drools);
+
+		# ok
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge2, "pass");
+		handler.setFrom(edge2, opCall);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+		
+		# not ok	
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(check, check);
+		handler.setName(edge3, "fail");
+		handler.setFrom(edge3, opCall);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference AccessControlHandler,Parameter,LoginHandler
+ *		The {@model DomainIterator} representing the current instance of an {@model AccessControlHandler} check,
+ *		protecting a {@model Session},
+ *		will be provided as a {@model Parameter} to the generated {@model LoginHandler}.
+ */
+rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (session)"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		instance : DomainIterator ( eContainer == session )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		not ( Parameter ( parameterValue == instance, parameterTerm == ach )) 
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		Parameter param = handler.generatedParameter(ach, ach, instance, ach);
+		queue.add(param, drools);
+
+end
+
+/**
+ * @inference AccessControlHandler,Parameter,LoginHandler
+ *		The {@model DomainIterator} representing the current instance of an {@model AccessControlHandler} check,
+ *		protecting a {@model Frame} within a {@model Session},
+ *		will be provided as a {@model Parameter} to the generated {@model LoginHandler}.
+ */
+rule "A separate AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (page within a session)"
+	when
+		session : Session ( )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == page )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		instance : DomainIterator ( eContainer == session )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		not ( Parameter ( parameterValue == instance, parameterTerm == ach )) 
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		Parameter param = handler.generatedParameter(ach, ach, instance, ach);
+		queue.add(param, drools);
+
+end
+
+/**
+ * @inference Role,ExtendsEdge
+ *		All {@model Role}s that do not {@model ExtendsEdge extend} another {@model Role}
+ *		will {@model ExtendsEdge extend} the <em>default {@model Role}</em>.
+ */
+rule "Any role should extend the default User role"
+	when
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
+		
+		another : Role ( this != user )
+		
+		not ( ExtendsEdge ( from == another, to == user ))
+						
+		eval ( handler.veto( user ))
+		
+	then
+		ExtendsEdge ext = handler.generatedExtendsEdge(user, root, another, user);
+		queue.add(ext, drools);
+
+end
+
+/**
+ * @inference Role,ExtendsEdge,DomainSource
+ *		A {@model Role} {@model ExtendsEdge extending} the <em>default {@model Role}</em>
+ *		will be provided the same {@model DomainSource}.
+ */
+rule "The generated default User has an identical DomainSource as the extended Role"
+	when
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
+
+		exists (
+			original : DomainSource ( ) and
+					 
+			another : Role ( this != user ) and
+			
+			extends : ExtendsEdge ( from == another, to == user ) and
+			
+			# there's a schema edge from the original source to the subclassed role
+			schemaEdge : SchemaEdge ( from == original, to == another )
+		)
+			
+		not ( SchemaEdge ( to == user ))
+						
+		eval ( handler.veto( user ))
+
+	then
+		DomainSource original = functions.getOriginalDomainSource(user);
+	
+		DomainSource source = handler.generatedDomainSource(user, root);
+		handler.setFile(source, original.getFile());
+		handler.setType(source, original.getType());
+		handler.setUrl(source, original.getUrl());
+		handler.setCache(source, original.getCache());
+		queue.add(source, drools);
+		
+		SchemaEdge edge = handler.generatedSchemaEdge(user, root, source, user);
+		queue.add(edge, drools);
+	
+end

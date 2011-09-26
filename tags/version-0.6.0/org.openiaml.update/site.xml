@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.openiaml.model.editor_0.2.0.jar" id="org.openiaml.model.editor" version="0.2.0">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.3.0.jar" id="org.openiaml.model.editor" version="0.3.0">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.3.1.jar" id="org.openiaml.model.editor" version="0.3.1">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.4.0.200910061641.jar" id="org.openiaml.model.editor" version="0.4.0.200910061641">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.4.1.200912071441.jar" id="org.openiaml.model.editor" version="0.4.1.200912071441">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.verification.crocopat.feature_0.4.1.200912071441.jar" id="org.openiaml.verification.crocopat.feature" version="0.4.1.200912071441" os="win32">
+      <category name="org.openiaml.verification.crocopat.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.4.2.201002121351.jar" id="org.openiaml.model.editor" version="0.4.2.201002121351">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.4.3.201002241142.jar" id="org.openiaml.model.editor" version="0.4.3.201002241142">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.4.4.201003191800.jar" id="org.openiaml.model.editor" version="0.4.4.201003191800">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.5.0.201004171754.jar" id="org.openiaml.model.editor" version="0.5.0.201004171754">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.5.1.201005181449.jar" id="org.openiaml.model.editor" version="0.5.1.201005181449">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.5.2.201007051557.jar" id="org.openiaml.model.editor" version="0.5.2.201007051557">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/ca.ecliptical.emf.xpath_2.0.1.20071218052038.jar" id="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038">
+      <category name="ca-ecliptical-emf-xpath"/>
+   </feature>
+   <feature url="features/ca.ecliptical.emf.xpath.sdk_2.0.1.20071218052038.jar" id="ca.ecliptical.emf.xpath.sdk" version="2.0.1.20071218052038">
+      <category name="ca-ecliptical-emf-xpath"/>
+   </feature>
+   <feature url="features/ca.ecliptical.emf.xpath.source_2.0.1.20071218052038.jar" id="ca.ecliptical.emf.xpath.source" version="2.0.1.20071218052038">
+      <category name="ca-ecliptical-emf-xpath"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.5.3.201103081642.jar" id="org.openiaml.model.editor" version="0.5.3.201103081642">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.model.feature_0.6.0.201109262140.jar" id="org.openiaml.model.feature" version="0.6.0.201109262140">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.verification.crocopat.feature_0.6.0.201109262140.jar" id="org.openiaml.verification.crocopat.feature" version="0.6.0.201109262140" os="win32">
+      <category name="org.openiaml.verification.crocopat.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.verification.nusmv.feature_0.6.0.201109262140.jar" id="org.openiaml.verification.nusmv.feature" version="0.6.0.201109262140" os="win32">
+      <category name="org.openiaml.verification.nusmv.feature"/>
+   </feature>
+   <category-def name="org.openiaml.model.feature" label="IAML Modelling Environment"/>
+   <category-def name="org.openiaml.verification.crocopat.feature" label="Verification with CrocoPat (Win-only)"/>
+   <category-def name="ca-ecliptical-emf-xpath" label="EMF XPath Support">
+      <description>
+         A local mirror of the ca.ecliptical.emf.xpath features.
+      </description>
+   </category-def>
+   <category-def name="org.openiaml.verification.nusmv.feature" label="Verification with NuSMV (Win-only)"/>
+</site>

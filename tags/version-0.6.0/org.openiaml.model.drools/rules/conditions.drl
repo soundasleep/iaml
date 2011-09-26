@@ -1,0 +1,354 @@
+/**
+ * Connects {@model SimpleCondition}s and {@model Parameter}s due to {@model Wire} completion.
+ */
+package org.openiaml.model.drools.rules.conditions
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+# TODO can we put this function into something global?
+function boolean connects(Wire wire, Object a, Object b) {
+	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
+		(wire.getFrom().equals(b) && wire.getTo().equals(a));
+}
+
+/**
+ * TODO these rules should be refactored somehow.
+ *
+ * @inference SyncWire,ECARule,SimpleCondition
+ *		All {@model SimpleCondition conditions} against a {@model SyncWire} will be
+ *		copied to each subsequently created {@model Changeable#onChange} {@model ECARule}.  
+ */
+rule "Connect SimpleConditions to ECARules created by SyncWires (edit/update) (onChange)"
+	when
+		# we have a sync wire
+		sw : SyncWire( )
+		source : Changeable( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# which has a run wire between event and operation (generated)
+		event : Event( source.onChange == event )
+		operation : Operation( eContainer == target, name=="update" )		
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+		
+		# and the sync wire had a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# but our run wire doesn't 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		# copy the condition
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
+		queue.add(cw, drools);
+
+end
+
+/**
+ * @inference SyncWire,ECARule,SimpleCondition
+ *		All {@model SimpleCondition conditions} against a {@model SyncWire} will be
+ *		copied to each subsequently created {@model Accessible#onAccess} {@model ECARule}.  
+ */
+rule "Connect SimpleConditions to ECARules created by SyncWires (access/init) (onAccess)"
+	when
+		# we have a sync wire
+		sw : SyncWire( )
+		source : Accessible( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# which has a run wire between event and operation (generated)
+		event : Event( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )		
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+		
+		# and targets' value is being used for source's init
+		fvalue : Value ( target.fieldValue == fvalue )
+		param : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
+		
+		# and the sync wire had a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# but our run wire doesn't 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		# copy the condition
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
+		queue.add(cw, drools);
+
+end
+
+/**
+ * @inference SyncWire,ECARule,SimpleCondition,Parameter
+ *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SyncWire} will be
+ *		copied to each {@model SimpleCondition} subsequently created for each {@model Changeable#onChange} {@model ECARule}.  
+ */
+rule "Connect Parameters to SimpleConditions connected to ECARules created by SyncWires (edit/update) (onChange)"
+	when
+		# we have a syncwire
+		sw : SyncWire( )
+		source : Changeable( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# that has created a ECARule
+		event : Event( source.onChange == event )
+		operation : Operation( eContainer == target, name=="update" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+
+		# and this SyncWire has a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition ( function == condition, conditioned == sw )
+		
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
+		
+		# and the SyncWire had a parameter
+		param : ParameterEdgesSource ( )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
+
+		# but this wire does not have it
+		not ( Parameter ( parameterValue == param, parameterTerm == targetCw ))
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		queue.add(pw, drools);
+
+end
+
+/**
+ * @inference SyncWire,ECARule,SimpleCondition,Parameter
+ *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SyncWire} will be
+ *		copied to each {@model SimpleCondition} subsequently created for each {@model Accessible#onAccess} {@model ECARule}.  
+ */
+rule "Connect Parameters to SimpleConditions connected to ECARules created by SyncWires (access/init) (onAccess)"
+	when
+		# we have a syncwire
+		sw : SyncWire( )
+		source : Accessible( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# that has created a ECARule
+		event : Event( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+
+		# and targets' value is being used for source's init
+		fvalue : Value ( target.fieldValue == fvalue ) 
+		param2 : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
+
+		# and this SyncWire has a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
+		
+		# and the SyncWire had a parameter
+		param : ParameterEdgesSource ( )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
+
+		# but this wire does not have it
+		not ( Parameter ( parameterValue == param, parameterTerm == targetCw ))
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		queue.add(pw, drools);
+
+end
+
+// -- the following rules are duplicated, using SetWire instead of SyncWire --
+
+/**
+ * @inference SetWire,ECARule,SimpleCondition
+ *		All {@model SimpleCondition conditions} against a {@model SetWire} will be
+ *		copied to each subsequently created {@model Changeable#onChange} {@model ECARule}.  
+ */
+rule "Connect SimpleConditions to ECARules created by SetWires (edit/update) (onChange)"
+	when
+		# we have a sync wire
+		sw : SetWire( )
+		source : Changeable( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# which has a run wire between event and operation (generated)
+		event : Event( source.onChange == event )
+		operation : Operation( eContainer == target, name=="update" )		
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+		
+		# and the sync wire had a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# but our run wire doesn't 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		# copy the condition
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
+		queue.add(cw, drools);
+
+end
+
+/**
+ * @inference SetWire,ECARule,SimpleCondition
+ *		All {@model SimpleCondition conditions} against a {@model SetWire} will be
+ *		copied to each subsequently created {@model Accessible#onAccess} {@model ECARule}.  
+ */
+rule "Connect SimpleConditions to ECARules created by SetWires (access/init) (onAccess)"
+	when
+		# we have a sync wire
+		sw : SetWire( )
+		source : Accessible( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# which has a run wire between event and operation (generated)
+		event : Event( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )		
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+		
+		# and targets' value is being used for source's init
+		fvalue : Value ( target.fieldValue == fvalue )
+		param : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
+		
+		# and the sync wire had a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# but our run wire doesn't 
+		not (SimpleCondition ( function == condition, conditioned == run )) 
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		# copy the condition
+		SimpleCondition cw = handler.generatedSimpleCondition( sourceCw, sw, condition, run );
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
+		queue.add(cw, drools);
+
+end
+
+/**
+ * @inference SetWire,ECARule,SimpleCondition,Parameter
+ *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SetWire} will be
+ *		copied to each {@model SimpleCondition} subsequently created for each {@model Changeable#onChange} {@model ECARule}.  
+ */
+rule "Connect Parameters to SimpleConditions connected to ECARules created by SetWires (edit/update) (onChange)"
+	when
+		# we have a syncwire
+		sw : SetWire( )
+		source : Changeable( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# that has created a ECARule
+		event : Event( source.onChange == event )
+		operation : Operation( eContainer == target, name=="update" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+
+		# and this SyncWire has a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition ( function == condition, conditioned == sw )
+		
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
+		
+		# and the SyncWire had a parameter
+		param : ParameterEdgesSource ( )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
+
+		# but this wire does not have it
+		not ( Parameter ( parameterValue == param, parameterTerm == targetCw ))
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		queue.add(pw, drools);
+
+end
+
+/**
+ * @inference SetWire,ECARule,SimpleCondition,Parameter
+ *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SetWire} will be
+ *		copied to each {@model SimpleCondition} subsequently created for each {@model Accessible#onAccess} {@model ECARule}.  
+ */
+rule "Connect Parameters to SimpleConditions connected to ECARules created by SetWires (access/init) (onAccess)"
+	when
+		# we have a syncwire
+		sw : SetWire( )
+		source : Accessible( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# that has created a ECARule
+		event : Event( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+
+		# and targets' value is being used for source's init
+		fvalue : Value ( target.fieldValue == fvalue ) 
+		param2 : Parameter ( parameterValue == fvalue, parameterTerm == run ) 
+
+		# and this SyncWire has a condition
+		condition : Function ( )
+		sourceCw : SimpleCondition ( function == condition, conditioned == sw )
+		
+		# and the ECARule has the same condition 
+		targetCw : SimpleCondition ( function == condition, conditioned == run ) 
+		
+		# and the SyncWire had a parameter
+		param : ParameterEdgesSource ( )
+		paramWire : Parameter( parameterValue == param, parameterTerm == sourceCw )
+
+		# but this wire does not have it
+		not (Parameter ( parameterValue == param, parameterTerm == targetCw ))
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		Parameter pw = handler.generatedParameter( sourceCw, sw, param, targetCw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		queue.add(pw, drools);
+
+end

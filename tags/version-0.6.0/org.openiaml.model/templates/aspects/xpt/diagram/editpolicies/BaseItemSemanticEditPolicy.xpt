@@ -1,0 +1,29 @@
+/**
+ * [issue 130]
+ * Automatically mark containers of deleted generated elements as
+ * overridden.
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::diagram::updater::Utils»
+
+«AROUND additions FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 130] If we are deleting a generated element from a container that generates elements, mark the container as <em>overridden</em>.\n\nThis is done by adding another command to the current Command queue, if necessary.")»
+	protected void possiblyMakeOverridden(org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest req, 
+			org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand cmd) {
+		// NOTE: model-specific
+		if (req.getElementToDestroy() instanceof org.openiaml.model.model.GeneratedElement) {
+			org.openiaml.model.model.GeneratedElement ge = (org.openiaml.model.model.GeneratedElement) req.getElementToDestroy();
+			if (ge.eContainer() != null && ge.eContainer() instanceof org.openiaml.model.model.GeneratesElements) {
+				org.openiaml.model.model.GeneratesElements container = (org.openiaml.model.model.GeneratesElements) ge.eContainer();
+				
+				if (ge.isIsGenerated() && !container.isOverridden()) {
+					cmd.add(new org.openiaml.model.diagram.helpers.inference.SetValueCommand(
+							getEditingDomain(),
+							container,
+							org.openiaml.model.model.ModelPackage.eINSTANCE.getGeneratesElements_Overridden(),
+							true));
+				}
+			}
+		}
+	}
+«ENDAROUND»

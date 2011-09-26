@@ -1,0 +1,25 @@
+<p>
+<!--index mail messages-->
+An {@model Email} is designed to be used in the composition and delivery of mail messages<!-- , according to RFC 2821 \cite{rfc2821}-->. An {@model Email} may specify five directly contained {@model Value}s, all of which must be {@model Value#type} {@type string}. If the following {@model Email} attributes are defined as {@model Value}s, they may be set at runtime to programatically control the sender, recipient or subject of the {@model Email}:
+</p>
+
+<ul>
+  <li>{@model Email#from}, representing the e-mail address of the sender. This {@model Value} <i>must</i> be set for an {@model Email} to be sent.
+  <li>{@model Email#fromName}, representing a human-readable name of the sender. This {@model Value} is optional.
+  <li>{@model Email#to}, representing the e-mail address of the receiver. This {@model Value} <i>must</i> be set for an {@model Email} to be sent.
+  <li>{@model Email#toName}, representing a human-readable name of the receiver. This {@model Value} is optional.
+  <li>{@model Email#subject}, representing the subject of the mail message. This {@model Value} <i>must</i> be set for an {@model Email} to be sent.
+</ul>
+
+<p>
+An {@model Email} contains the {@model Operation} {@model Email#send}, which will attempt to deliver the current {@model Email} instance as described by {@model BuiltinOperation}. When an {@model Email} is composed, the <i>body</i> of the {@model Email} will be composed of all contained {@model Value}s and their values at the time the {@model Email} was sent. The format of this body may use a <i>custom template</i> if this template is specified.
+</p>
+
+<p>
+An {@model Email} contains the {@model Event}s {@event onSent} and {@event onFailure}. These events are triggered once an {@model Email} has been successfully delivered and when an {@model Email} is unsuccessfully received, as discussed by {@model Event}.
+</p>
+
+<p>
+<!-- TODO Email.onInit is never actually defined in the code templates -->
+An IAML model instance may contain any number of {@model Email}s. The <i>storage semantics</i> for a {@model Email} follow the storage semantics for its <i>containing scope</i>, similar to the <i>storage semantics</i> for the {@model Frame} element.
+</p>

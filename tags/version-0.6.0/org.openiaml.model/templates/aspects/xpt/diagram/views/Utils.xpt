@@ -1,0 +1,25 @@
+/**
+ * GMF 2.2 removed the diagram.view.factories package, so we have
+ * to insert in our OpenDiagramPolicy information somewhere else.
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::diagram::ViewmapAttributesUtils»
+«EXTENSION xpt::diagram::Utils»
+
+/**
+ * When this method is called with stylesVar='edge.getStyles()', we
+ * are within a Link view factory. This is where we will add
+ * the linked diagram information.
+ */
+«AROUND addCustomStyles(stylesVar : String) FOR gmfgen::GenCommonBase-»
+	«targetDef.proceed()-»
+	
+	«IF stylesVar = 'edge.getStyles()'»
+		// [eclipse bug 244386] add support for OpenDiagramPolicies with edges  
+		«EXPAND xpt::diagram::views::Utils::addLinkedDiagramStyle(stylesVar)-»
+		
+		// [eclipse bug 244386] add support for OpenDiagramPolicies with edges
+		// see xpt/providers/ViewProvider.xpt#additions
+		stampShortcut(containerView, edge);
+	«ENDIF»
+«ENDAROUND»

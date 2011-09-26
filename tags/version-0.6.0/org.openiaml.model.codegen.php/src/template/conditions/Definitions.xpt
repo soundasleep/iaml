@@ -1,0 +1,167 @@
+«IMPORT iaml»
+
+/**
+ * Condition definitions.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE conditionDefinitionFiles(Boolean php) FOR model::InternetApplication»
+	«IF php»
+	«FILE "output/all_conditions.php"»
+		<?php				
+			«EXPAND template::Template::phpCheck»
+			
+			// a list of all operations required
+			«FOREACH getAllConditions().reject(c|model::XQueryFunction.isInstance(c)) AS o»
+				require_once(ROOT_PATH . "conditions/«safeName(o)».php");
+			«ENDFOREACH»
+	«ENDFILE»
+	«ENDIF»
+
+	«FOREACH getAllConditions().reject(c|model::XQueryFunction.isInstance(c)) AS c»
+		«IF php»
+			«FILE "output/conditions/" + safeName(c) + ".php"»
+			<?php				
+				«EXPAND template::Template::phpCheck»
+				
+				«EXPAND conditionDefinition(php) FOR c» 
+			«ENDFILE»
+		«ELSE»
+			«FILE "output/conditions/" + safeName(c) + "_js.php"»
+			<?php
+				/**
+				 * This condition needs to be executed by PHP first, to allow
+				 * server-side variables (such as values from databases) to be included.
+				 */
+
+				«EXPAND template::Template::commonHeader("../", "Condition: " + c.id + " (js)")»
+				
+				// references to other conditions, operations
+				«EXPAND template::Common::commonPHPIncludes FOR getRoot()-»
+				
+				«EXPAND template::Template::typeJavascript»
+			?>
+				«EXPAND conditionDefinition(php) FOR c» 
+			«ENDFILE»
+		«ENDIF»
+	«ENDFOREACH» 
+«ENDDEFINE»
+
+«DEFINE conditionIncludes(Boolean php) FOR model::InternetApplication-»
+	«IF php»
+		require_once(ROOT_PATH . "all_conditions.php");
+	«ELSE»
+		«EXPAND conditionInclude(php) FOREACH getAllConditions().reject(c|model::XQueryFunction.isInstance(c))-»
+	«ENDIF»
+«ENDDEFINE»
+
+/* operation includes */
+«DEFINE conditionInclude(Boolean php) FOR model::Function-»
+	«IF php»
+		require_once(ROOT_PATH . "conditions/«safeName()».php");
+	«ELSE»
+		<script language="Javascript" type="application/javascript" src="conditions/«safeName()»_js.php"></script>
+	«ENDIF»
+«ENDDEFINE»
+
+/* expand out the conditions for the frame */
+/* this includes Frame and Session */
+«DEFINE conditionDefinition(Boolean php) FOR model::Function-»
+	«throwException("Cannot expand an abstract Condition: " + this)»
+«ENDDEFINE»
+
+// XQueryFunctions should not be defined; they are provided as part
+// of the runtime library
+
+/**
+ *
+ * @implementation Changeable,BuiltinProperty
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'can cast?'. 
+ * @implementation Changeable,BuiltinProperty
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'fieldValue is set?'. 
+ * @implementation Changeable,BuiltinProperty
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'empty?'. 
+ * @implementation Changeable,PrimitiveCondition
+ *		A {@model Changeable} has a {@model BuiltinProperty} named 'not empty?'. 
+ */
+«DEFINE conditionDefinition(Boolean php) FOR model::BuiltinProperty»
+	/** primitive condition "«name»" */
+	function condition_«safeName()»(
+	«IF php»
+		$default_arg = null
+	«ELSE»
+		default_arg
+	«ENDIF»
+	) {
+		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
+		«IF model::domain::DomainIterator.isInstance(eContainer)»
+			«IF php»
+			return «EXPAND template::domain::DomainInstance::domainInstanceCondition(php, (model::domain::DomainIterator) eContainer)»;
+			«ELSE»
+			return cached_result_«safeName()»();
+			«ENDIF»
+		«ELSEIF (name == "can cast?" || name == "can cast") && model::Changeable.isInstance(eContainer)»
+			«EXPAND conditionDefinition_canCast(php, this) FOR (model::Changeable) eContainer»
+		«ELSEIF (name == "fieldValue is set?" || name == "fieldValue is set") && model::Changeable.isInstance(eContainer)»
+			«EXPAND conditionDefinition_fieldValueIsSet(php, this) FOR (model::Changeable) eContainer»
+		«ELSEIF model::VisibleThing.isInstance(eContainer)»
+			«REM»TODO merge this into Changeable below«ENDREM»
+			«LET (model::VisibleThing) eContainer AS changeable»
+			«IF this == changeable.empty»
+			return
+				!(«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»)
+				|| !(«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSEIF this == changeable.notEmpty»
+			return 
+				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
+				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSE»
+				«throwException("Unknown primitive condition: '" + name + "'")»
+			«ENDIF»
+			«ENDLET»
+		«ELSEIF model::Changeable.isInstance(eContainer)»
+			«LET (model::Changeable) eContainer AS changeable»
+			«IF name == "empty" || name == "empty?"»
+			return
+				!(«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»)
+				|| !(«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSEIF name == "not empty" || name == "not empty?"»
+			return 
+				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
+				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSE»
+				«throwException("Unknown primitive condition: '" + name + "'")»
+			«ENDIF»
+			«ENDLET»
+		«ELSE»
+			«throwException("Unknown primitive condition: '" + name + "'")»
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE conditionDefinition(Boolean php) FOR model::operations::ActivityPredicate»
+	/** composite condition "«name»" */
+	function condition_«safeName()»(«EXPAND template::operations::Parameters::signatures(php) FOREACH parameters SEPARATOR ", "-») {
+		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
+				
+		«EXPAND ConditionFlow::conditionFlow(php) FOR startNodeCondition()-»
+
+		return false;
+	}
+«ENDDEFINE»
+
+«DEFINE conditionDefinition_canCast(Boolean php, model::BuiltinProperty condition) FOR model::Changeable»
+	/* BuiltinOperation 'can cast?' */
+	«IF php»
+		$type = «EXPAND template::operations::Parameters::getTypeURI FOR fieldValue.type»; 
+		return can_cast($default_arg, $type);
+	«ELSE»
+		var type = «EXPAND template::operations::Parameters::getTypeURI FOR fieldValue.type»;
+		return can_cast(default_arg, type);
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE conditionDefinition_fieldValueIsSet(Boolean php, model::BuiltinProperty condition) FOR model::Changeable»
+	/* BuiltinOperation 'fieldValue is set?' */
+	return «EXPAND template::operations::DataFlow::isSet(php) FOR fieldValue»;
+«ENDDEFINE»

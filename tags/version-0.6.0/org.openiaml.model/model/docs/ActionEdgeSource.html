@@ -1,0 +1,11 @@
+<p>
+This abstract interface is provided to simplify the implementation of {@model ECARule}s,
+as EMF does not support type unions in metamodel definitions. It is also provided as a form
+of syntactic sugar for using {@model ECARule}s.
+</p>
+
+<p>
+For example, a {@model Button}
+is an {@model ActionEdgeSource} to allow "onClick" {@model ECARule}s to be attached directly to the
+{@model Button}, rather than the contained {@event onClick} {@model Event}.
+</p>

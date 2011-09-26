@@ -1,0 +1,503 @@
+/**
+ * Completes the functionality of {@model AutocompleteWire}s.
+ */
+package org.openiaml.model.drools.rules.autocomplete_wires
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference AutocompleteWire
+ *		An {@model AutocompleteWire}, connecting an {@model DomainIterator} to a {@model VisibleThing}, 
+ *		will populate the containing {@model Frame} with an {@model InputForm} to contain autocompleted results. 
+ */
+rule "Create a containing InputForm for Autocomplete list and input"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		not ( form : InputForm ( eContainer == container, name == iterator.name ) )
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		InputForm form = handler.generatedInputForm(wire, container);
+		handler.setName(form, iterator.getName());
+		queue.add(form, drools);
+	
+end
+
+/**
+ * @inference AutocompleteWire
+ * 		An {@model AutocompleteWire}, connecting an {@model DomainIterator} to a {@model VisibleThing}, 
+ *		will also create a <em>query {@model InputTextField}</em> to accept user input, which will be used to search the {@model DomainIterator}.		
+ */
+rule "Create an input field for Autocomplete"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		not ( VisibleThing ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) )
+		
+		eval ( handler.veto( wire ))
+		
+	then
+		InputTextField text = handler.generatedInputTextField(wire, form);
+		handler.setName(text, functions.getAutocompleteInputName(attribute));
+		queue.add(text, drools);
+		
+end
+
+/**
+ * @inference AutocompleteWire,Parameter
+ *		The <em>query {@model InputTextField}</em> created by an {@model AutocompleteWire} will be connected
+ *		as a {@model Parameter} to the connected {@model DomainIterator}.
+ */
+rule "Connect parameter for input field for Autocomplete"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
+		fieldValue : Value ( text.fieldValue == fieldValue )
+		
+		not ( Parameter ( parameterValue == fieldValue, parameterTerm == iterator ) )
+		
+		eval ( handler.veto( wire ))
+		
+	then
+		Parameter param = handler.generatedParameter(wire, text, fieldValue, iterator);
+		handler.setName(param, attribute.getName());
+		queue.add(param, drools);
+		
+end
+
+/**
+ * @notModelCompletion TODO
+ * @inference AutocompleteWire
+ *		An {@model AutocompleteWire} connected to a {@model DomainIterator} will automatically
+ *		override the {@model DomainIterator#query} of the Iterator based on what the wire {@model AutocompleteWire#match}es.
+ */
+rule "Update DomainIterator query if it is not set"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+	
+		eval ( !functions.getAutocompleteIteratorQuery(wire).equals(iterator.getQuery()) )
+				
+		eval ( handler.veto( wire ))
+		
+	then
+		handler.setQuery(iterator, functions.getAutocompleteIteratorQuery(wire));
+	
+end
+
+/**
+ * @inference AutocompleteWire,Parameter
+ *		The <em>query {@model InputTextField}</em> created by an {@model AutocompleteWire}
+ *		will {@model InputTextField#update} the field whenever {@model InputTextField#onInput it receives input}.
+ */
+rule "Input field for Autocomplete should update instantly"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
+	
+		onInput : Event ( text.onInput == onInput )
+		currentInput : Value ( text.currentInput == currentInput )
+		
+		updateOperation : Operation ( eContainer == text, name == "update" )
+		
+		not ( ECARule ( trigger == onInput, target == updateOperation ))
+		
+		eval ( handler.veto( wire ))
+		
+	then
+		ECARule run = handler.generatedECARule(wire, text, onInput, updateOperation);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		// add a parameter
+		Parameter param = handler.generatedParameter(wire, text, currentInput, run);
+		queue.add(param, drools);
+		
+end
+
+/**
+ * @inference AutocompleteWire,IteratorList
+ *		The {@model InputForm} results container generated by an {@model AutocompleteWire} will be
+ *		populated with a <em>results {@model IteratorList}</em> to display matched results in a list, using a {@model SetWire}.
+ */
+rule "Create IteratorList"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		not ( list : IteratorList ( eContainer == form, name == iterator.name ) )
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		IteratorList list = handler.generatedIteratorList(wire, form);
+		handler.setName(list, iterator.getName());
+		queue.add(list, drools);
+		
+		// connected by SetWire
+		SetWire set = handler.generatedSetWire(wire, iterator, iterator, list);
+		handler.setName(set, "autocomplete set");
+		queue.add(set, drools);
+	
+end
+
+/**
+ * @inference AutocompleteWire,IteratorList,Parameter
+ *		Every {@model Label} within the <em>results {@model IteratorList}</em> of an {@model AutocompleteWire}
+ *		search will be provided an {@model ECARule} to {@model VisibleThing#update} the {@model AutocompleteWire#to target}
+ *		of the wire with the {@model AutocompleteWire#match matching attribute} instance value, when the {@model Label} 
+ *		is {@model Label#onClick clicked}. 
+ */
+rule "IteratorList labels update the target of the Autocomplete Wire"
+	when
+		attribute : DomainAttribute ( )
+		container : Frame ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		# VisibleThing with the same name as the given attribute
+		target : VisibleThing ( name == attribute.name )
+		updateOperation : Operation ( eContainer == target, name == "update" )
+		
+		wire : AutocompleteWire ( from == iterator, to == target ) 
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		# containing list
+		list : IteratorList ( eContainer == form )
+		set : SetWire ( from == iterator, to == list )
+
+		# the value of the given label
+		targetLabel : VisibleThing ( eContainer == list, name == attribute.name )
+		value : Value ( targetLabel.fieldValue == value )
+			
+		# for every label within (including target label)
+		label : VisibleThing ( eContainer == list )
+		onClick : Event ( label.onClick == onClick )
+		
+		not ( ECARule ( trigger == onClick, target == updateOperation ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		ECARule run = handler.generatedECARule(wire, label, onClick, updateOperation);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		Parameter param = handler.generatedParameter(wire, label, value, run);
+		queue.add(param, drools);
+	
+end
+
+/**
+ * @inference InternetApplication
+ *		An {@model InternetApplication} will contain a {@model Value#readOnly}
+ *		{@model Value}, named 'blank', which represents an empty string.
+ */
+rule "InternetApplication has a readonly Value 'blank' created"
+	when
+		container : InternetApplication ( )
+		type : EXSDDataType( definition != null,
+			// eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))
+			// remove eval() to reduce memory usage  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlString" )
+	
+		not ( Value ( eContainer == container, defaultValue == "" ))
+		
+		eval ( handler.veto( container ))
+		
+	then
+		Value blank = handler.generatedValue(container, container);
+		handler.setName(blank, "blank");
+		handler.setReadOnly(blank, true);
+		handler.setType(blank, type);
+		handler.setDefaultValue(blank, "");
+		queue.add(blank, drools);
+			
+end
+
+/**
+ * @inference AutocompleteWire,Parameter
+ *		When a matching {@model Label} result is clicked from an {@model AutocompleteWire} search, the
+ *		<em>query {@model InputTextField}</em> will be cleared to a blank {@model Value}.
+ */
+rule "IteratorList labels clear the input onClick"
+	when
+		ia : InternetApplication ( )
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+
+		attribute : DomainAttribute ( )
+
+		wire : AutocompleteWire ( from == iterator, to == target ) 
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		# containing list
+		list : IteratorList ( eContainer == form )
+		set : SetWire ( from == iterator, to == list )
+
+		# input		
+		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		updateOperation : Operation ( eContainer == input, name == "update" )
+		
+		blank : Value ( eContainer == ia, defaultValue == "" )
+		
+		# for every label within
+		label : VisibleThing ( eContainer == list )
+		onClick : Event ( label.onClick == onClick )
+		
+		not ( ECARule ( trigger == onClick, target == updateOperation ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		ECARule run = handler.generatedECARule(wire, label, onClick, updateOperation);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		Parameter param = handler.generatedParameter(wire, label, blank, run);
+		queue.add(param, drools);
+	
+end
+
+/**
+ * @inference AutocompleteWire
+ *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#empty}, 
+ *		{@model Frame#onAccess accessing} the containing {@model Frame} will {@model IteratorList#hide} the
+ *		<em>results {@model IteratorList}</em>.
+ */
+rule "Frame.onAccess hides the IteratorList if the input is empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		# input
+		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Function ( input.empty == condition )
+		
+		# containing list
+		list : IteratorList ( eContainer == form )
+		set : SetWire ( from == iterator, to == list )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "hide" )
+		
+		# Frame.onAccess
+		onAccess : Event ( container.onAccess == onAccess )
+		
+		not ( ECARule ( trigger == onAccess, target == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		ECARule run = handler.generatedECARule(wire, container, onAccess, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+/**
+ * @inference AutocompleteWire
+ *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#notEmpty}, 
+ *		{@model Frame#onAccess accessing} the containing {@model Frame} will {@model IteratorList#show} the
+ *		<em>results {@model IteratorList}</em>.
+ */
+rule "Frame.onAccess shows the IteratorList if the input is not empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		# input
+		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Function ( eContainer == input, name == "not empty" ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == form )
+		set : SetWire ( from == iterator, to == list )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "show" )
+		
+		# Frame.onAccess
+		onAccess : Event ( container.onAccess == onAccess )
+		
+		not ( ECARule ( trigger == onAccess, target == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		ECARule run = handler.generatedECARule(wire, container, onAccess, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+/**
+ * @inference AutocompleteWire
+ *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#onChange changed}
+ *		and {@model InputTextField#empty}, the <em>results {@model IteratorList}</em> will {@model IteratorList#hide be hidden}.
+ */
+rule "Input.onChange hides the IteratorList if the input is empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		# input
+		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Function ( input.empty == condition )
+		
+		# containing list
+		list : IteratorList ( eContainer == form )
+		set : SetWire ( from == iterator, to == list )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "hide" )
+		
+		# Frame.onAccess
+		onChange : Event ( input.onChange == onChange )
+		
+		not ( ECARule ( trigger == onChange, target == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		ECARule run = handler.generatedECARule(wire, container, onChange, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+/**
+ * @inference AutocompleteWire
+ *		If the <em>query {@model InputTextField}</em> for an {@model AutocompleteWire} is {@model InputTextField#onChange changed}
+ *		and {@model InputTextField#notEmpty}, the <em>results {@model IteratorList}</em> will {@model IteratorList#show be shown}.
+ */
+rule "Input.onChange shows the IteratorList if the input is not empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( eContainer == container )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		form : InputForm ( eContainer == container, name == iterator.name )
+		
+		# input
+		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Function ( eContainer == input, name == "not empty" ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == form )
+		set : SetWire ( from == iterator, to == list )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "show" )
+		
+		# Frame.onAccess
+		onChange : Event ( input.onChange == onChange )
+		
+		not ( ECARule ( trigger == onChange, target == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		ECARule run = handler.generatedECARule(wire, container, onChange, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# SimpleCondition
+		SimpleCondition edge = handler.generatedSimpleCondition(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+

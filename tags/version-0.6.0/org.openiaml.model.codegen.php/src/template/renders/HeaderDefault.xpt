@@ -1,0 +1,82 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * The default header for a particular Frame.
+ */
+«DEFINE headerDefault FOR model::InternetApplication-»
+<?php
+/*
+ * The default header for all Frames in the InternetApplication.
+ * 
+ * <p>If a header file exists in CUSTOM_PATH/templates/header/<frame id>.php,
+ * this header file will be used instead; otherwise, if a default
+ * header file exists in CUSTOM_PATH/templates/header/default.php, this
+ * header file will be used instead.
+ */
+?>
+<body id="<?php echo $body_id; ?>" class="frame_<?php echo $body_name; ?>" onLoad="loadStoredEvents()">
+	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
+		
+	<h1><?php echo htmlspecialchars($body_title); ?></h1>
+		
+	<div id="runtime_errors"><!-- any runtime errors go into here --></div>
+		
+	<?php
+	/* expand any fail error messages */
+	if (has_get("fail")) { 
+	?>
+		<div class="error">
+			<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
+		</div>
+	<?php } ?>
+«ENDDEFINE»
+
+/**
+ * The default footer for a particular Frame.
+ */
+«DEFINE footerDefault FOR model::InternetApplication-»
+<?php
+/*
+ * The default footer for all Frames in the InternetApplication. This is always
+ * the last thing to be included in a generated application.
+ * 
+ * <p>If a footer file exists in CUSTOM_PATH/templates/footer/<frame id>.php,
+ * this footer file will be used instead; otherwise, if a default
+ * footer file exists in CUSTOM_PATH/templates/footer/default.php, this
+ * footer file will be used instead.
+ */
+?>
+</body>
+</html>
+«ENDDEFINE»
+
+/**
+ * The default meta include for a particular Frame.
+ */
+«DEFINE metaDefault FOR model::InternetApplication-»
+<?php
+/*
+ * The default meta include for all Frames in the InternetApplication. This is always
+ * the first thing to be included in a generated application.
+ * 
+ * <p>If a meta include file exists in CUSTOM_PATH/templates/meta/<frame id>.php,
+ * this meta include file will be used instead; otherwise, if a default
+ * meta include file exists in CUSTOM_PATH/templates/meta/default.php, this
+ * meta include file will be used instead.
+ */
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title><?php echo htmlspecialchars($body_title); ?></title>
+	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
+	<?php if (file_exists($body_id . ".css")) { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo $body_id; ?>.css">
+	<?php } ?>
+	<?php if (file_exists(CUSTOM_WEB_PATH . "default.css")) { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo CUSTOM_WEB_PATH; ?>default.css">
+	<?php } ?>
+«ENDDEFINE»

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.123172cef6c.2b" name="Home">
+    <parameters id="model.123172ceeef.92" name="user_id" outParameterEdges="wires.123172cef6c.15" defaultValue="1">
+      <parameterEdges id="wires.123172cef6c.15" parameterValue="model.123172ceeef.92" parameterTerm="domain.128807fbeba.dff"/>
+    </parameters>
+    <iterators id="domain.128807fbeba.dff" name="select" outWires="wires.123172cef6c.17" inParameterEdges="wires.123172cef6c.15" query="id = ?" outSelects="domain.128807fbeba.e03">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.123172cef6c.17" name="sync" from="domain.128807fbeba.dff" to="visual.123172cef6c.3f"/>
+    </iterators>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.123172cef6c.17" id="visual.123172cef6c.3f" name="current user"/>
+  </scopes>
+  <types name="User" id="domain.128807fbeba.e00" inSchemas="domain.128807fbeba.e02">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.123172ceeef.57" primaryKey="true"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.123172ceeef.59"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.123172ceeef.5f"/>
+  </types>
+  <sources id="domain.128807fbeba.e01" outSchemas="domain.128807fbeba.e02" inSelects="domain.128807fbeba.e03">
+    <schemaEdges id="domain.128807fbeba.e02" from="domain.128807fbeba.e01" to="domain.128807fbeba.e00"/>
+    <selectEdges id="domain.128807fbeba.e03" from="domain.128807fbeba.dff" to="domain.128807fbeba.e01"/>
+  </sources>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

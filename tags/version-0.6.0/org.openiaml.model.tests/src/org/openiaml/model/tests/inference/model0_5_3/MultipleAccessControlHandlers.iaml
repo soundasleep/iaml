@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.129d3dc57a7.1129">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.129d3dc5b9f.1d" name="Session A">
+    <accessHandlers id="components.129d3dc5c5a.b" name="ACH A" outRequiresEdges="wires.129d3dc5a28.286">
+      <requiresEdges id="wires.129d3dc5a28.286" from="components.129d3dc5c5a.b" to="users.129d3dc5df1.10"/>
+    </accessHandlers>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.129d3dc5b9f.1e" name="Session B">
+    <accessHandlers id="components.129d3dc5c5a.19" name="ACH B" outRequiresEdges="wires.129d3dc5a28.2a3">
+      <requiresEdges id="wires.129d3dc5a28.2a3" from="components.129d3dc5c5a.19" to="users.129d3dc5df1.12"/>
+    </accessHandlers>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.129d3dc5b9f.1f" name="Session C">
+    <accessHandlers id="components.129d3dc5c5a.26" name="ACH C" outRequiresEdges="wires.129d3dc5a28.2bc">
+      <requiresEdges id="wires.129d3dc5a28.2bc" from="components.129d3dc5c5a.26" to="users.129d3dc5df1.13"/>
+    </accessHandlers>
+  </scopes>
+  <types xsi:type="iaml.users:Role" name="Role A" id="users.129d3dc5df1.10" inExtendsEdges="wires.129d3dc5a28.27d wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.6f" inRequiresEdges="wires.129d3dc5a28.286"/>
+  <types xsi:type="iaml.users:Role" name="Role B" id="users.129d3dc5df1.12" outExtendsEdges="wires.129d3dc5a28.27f" inSchemas="domain.129d3dc5d26.72" inRequiresEdges="wires.129d3dc5a28.2a3">
+    <extendsEdges id="wires.129d3dc5a28.27f" from="users.129d3dc5df1.12" to="users.129d3dc5df1.10"/>
+  </types>
+  <types xsi:type="iaml.users:Role" name="Role C" id="users.129d3dc5df1.13" outExtendsEdges="wires.129d3dc5a28.27d" inSchemas="domain.129d3dc5d26.71" inRequiresEdges="wires.129d3dc5a28.2bc">
+    <extendsEdges id="wires.129d3dc5a28.27d" from="users.129d3dc5df1.13" to="users.129d3dc5df1.10"/>
+  </types>
+  <sources id="domain.129d3dc5d26.6c" name="source a" outSchemas="domain.129d3dc5d26.6f">
+    <schemaEdges id="domain.129d3dc5d26.6f" from="domain.129d3dc5d26.6c" to="users.129d3dc5df1.10"/>
+  </sources>
+  <sources id="domain.129d3dc5d26.6d" name="source b" outSchemas="domain.129d3dc5d26.72">
+    <schemaEdges id="domain.129d3dc5d26.72" from="domain.129d3dc5d26.6d" to="users.129d3dc5df1.12"/>
+  </sources>
+  <sources id="domain.129d3dc5d26.6e" name="source c" outSchemas="domain.129d3dc5d26.71">
+    <schemaEdges id="domain.129d3dc5d26.71" from="domain.129d3dc5d26.6e" to="users.129d3dc5df1.13"/>
+  </sources>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

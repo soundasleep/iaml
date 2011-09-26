@@ -1,0 +1,23 @@
+edit:
+  is_secure:   true
+  credentials: manager
+
+create:
+  is_secure:   true
+  credentials: manager
+
+new:
+  is_secure:   true
+  credentials: manager
+
+update:
+  is_secure:   true
+  credentials: manager
+
+delete:
+  is_secure:   true
+  credentials: manager
+
+allEvents:
+  is_secure:   true
+  credentials: manager

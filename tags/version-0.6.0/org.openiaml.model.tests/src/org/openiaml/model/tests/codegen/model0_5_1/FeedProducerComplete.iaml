@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1280b46d146.74">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" render="RSS20">
+    <iterators id="domain.128807fbeba.dbf" name="select" outWires="wires.1280b46d1f2.5d" query="" limit="10" orderBy="model.1280b46d146.a5" orderAscending="false" outSelects="domain.128807fbeba.dc5">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" name="set" from="domain.128807fbeba.dbf" to="visual.1280b46d1e2.6e"/>
+    </iterators>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item">
+      <children xsi:type="iaml.visual:Button" id="visual.1280b46d1e2.9f" name="link" listeners="wires.1280b46d1f2.ae">
+        <ecaRules id="wires.1280b46d1f2.ae" inParameterEdges="wires.1281e15c5ee.d4" name="onClick" trigger="visual.1280b46d1e2.9f" target="visual.1280b46d1e2.46"/>
+      </children>
+      <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.248" name="id" outParameterEdges="wires.1281e15c5ee.d4" type="builtin_iamlInteger">
+        <parameterEdges id="wires.1281e15c5ee.d4" name="id" parameterValue="visual.1281e15c5ee.248" parameterTerm="wires.1280b46d1f2.ae"/>
+      </children>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News" rules="wires.1280b46d1f2.ae">
+    <parameters id="model.1280b46d146.f5" name="id" outParameterEdges="wires.1280b46d1f2.3a">
+      <parameterEdges id="wires.1280b46d1f2.3a" parameterValue="model.1280b46d146.f5" parameterTerm="domain.128807fbeba.dc0"/>
+    </parameters>
+    <iterators id="domain.128807fbeba.dc0" name="select" outWires="wires.1280b46d1f2.3c" inParameterEdges="wires.1280b46d1f2.3a" query="id = ?" outSelects="domain.128807fbeba.dc4">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" name="set" from="domain.128807fbeba.dc0" to="visual.1280b46d1e2.58"/>
+    </iterators>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
+  </scopes>
+  <types name="News" id="domain.128807fbeba.dc1" inSchemas="domain.128807fbeba.dc3">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1280b46d146.a2"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1280b46d146.a4"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="updated" eType="builtin_iamlDateTime" id="model.1280b46d146.a5"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="builtin_iamlInteger" id="model.1280b46d146.a6" primaryKey="true"/>
+  </types>
+  <sources id="domain.128807fbeba.dc2" outSchemas="domain.128807fbeba.dc3" inSelects="domain.128807fbeba.dc4 domain.128807fbeba.dc5">
+    <schemaEdges id="domain.128807fbeba.dc3" from="domain.128807fbeba.dc2" to="domain.128807fbeba.dc1"/>
+    <selectEdges id="domain.128807fbeba.dc4" from="domain.128807fbeba.dc0" to="domain.128807fbeba.dc2"/>
+    <selectEdges id="domain.128807fbeba.dc5" from="domain.128807fbeba.dbf" to="domain.128807fbeba.dc2"/>
+  </sources>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

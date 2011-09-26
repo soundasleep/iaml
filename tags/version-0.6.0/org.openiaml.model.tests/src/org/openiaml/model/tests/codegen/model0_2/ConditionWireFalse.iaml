@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120698370f1.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.120698371ac.1e" name="container">
+    <functions xsi:type="iaml.operations:ActivityPredicate" id="model.120698f1e7b.1c" name="Always False" conditioned="wires.120698f1f46.e">
+      <conditionEdges id="wires.120698f1f46.e" name="condition" function="model.120698f1e7b.1c" conditioned="wires.120698371ac.2"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.120698f1f46.1" outExecutions="model.120698f1e7b.2f"/>
+      <nodes xsi:type="iaml.operations:CancelNode" id="operations.120698f1f46.6" inExecutions="model.120698f1e7b.2f" exceptionText="this condition is always false."/>
+      <executionEdges id="model.120698f1e7b.2f" from="operations.120698f1f46.1" to="operations.120698f1f46.6"/>
+    </functions>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.120698371ac.2" id="visual.120698371ac.25" name="source">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.120698371ac.2" name="sync" conditions="wires.120698f1f46.e" from="visual.120698371ac.25" to="visual.120698371ac.27"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.120698371ac.2" id="visual.120698371ac.27" name="target"/>
+  </scopes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

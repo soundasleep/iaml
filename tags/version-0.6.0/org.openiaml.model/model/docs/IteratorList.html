@@ -1,0 +1,7 @@
+<p>
+An {@model IteratorList} represents a list of elements retrieved from a particular {@model DomainIterator}. An {@model IteratorList} must be connected to a {@model DomainIterator} via either a {@model SetWire} or {@model SyncWire}; this iterator becomes the <i>connected iterator</i>. An {@model IteratorList} may accept and lose focus. The {@event onInput} {@model Event} can never be triggered for an {@model IteratorList}.
+</p>
+
+<p>
+When an {@model IteratorList} is rendered, the number of results from the <i>connected iterator</i> is obtained; all of the children directly contained in this {@model IteratorList} will be rendered as many times. These elements will be rendered in a table or grid style, with the {@model VisibleThing#name} of each child element used as a heading.
+</p>

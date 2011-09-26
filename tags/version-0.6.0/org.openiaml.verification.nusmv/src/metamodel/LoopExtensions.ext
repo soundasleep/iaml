@@ -1,0 +1,71 @@
+import iaml;
+
+safeName(model::GeneratedElement this) :
+	if (id == null) then
+		throwException("Cannot get the safeName of an element with no ID: " + this)
+	else
+		safeNameString(id);
+
+safeName(emf::EObject this) :
+	throwException("Cannot get the safeName of an EObject: " + this);
+
+safeNameString(String s) :
+	s.replaceAll("[^A-Za-z0-9]", "_");
+
+escapeString(String s) :
+	s.replaceAll("[\"]", "\\\"");
+
+/** 0 ... <max size> */
+maximumIntegerSize() : 15;
+
+/**
+ * Get all of the buttons on a particular page.
+ */
+allButtonsOnPage(model::visual::Frame this) :
+	eAllContents.typeSelect(model::visual::Button);
+
+/** get all failing edges */
+getFailFlow(model::operations::ExecutionEdgesSource this) :
+	outExecutions.select(e | e.name.toLowerCase().startsWith("f") 
+		|| e.name.toLowerCase().startsWith("n"));
+
+/** get all passing edges */
+getPassFlow(model::operations::ExecutionEdgesSource this) :
+	outExecutions.reject(e | getFailFlow(this).contains(e)) ;
+
+selectStartNode(model::operations::ActivityOperation this) :
+	nodes.typeSelect(model::operations::StartNode).first() ;
+
+selectStartNode(model::operations::ActivityPredicate this) :
+	nodes.typeSelect(model::operations::StartNode).first() ;
+
+/*
+ * all application properties stored in the InternetApplication; i.e.
+ * those outside Sessions. 
+ */
+List[model::Value] allApplicationProperties(model::InternetApplication this) :
+	values.toSet().union( scopes.typeSelect(model::visual::Frame).collect(e|allApplicationProperties(e)).flatten());
+
+List[model::Value] allApplicationProperties(model::visual::Frame this) :
+	values.toSet().union( scopes.typeSelect(model::visual::Frame).collect(e|allApplicationProperties(e)).flatten());
+
+model::InternetApplication getRoot(model::InternetApplication this) :
+	this;
+model::InternetApplication getRoot(model::NamedElement this) :
+	getRoot(eContainer);
+model::InternetApplication getRoot(emf::EObject this) :
+	null;
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540
+ * to use: «EXPAND exception FOR throwException("Your message goes here")»
+ * AND add this anywhere in your template file: (very important)
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+   
+ */
+String throwException(String message) :
+	JAVA org.openiaml.verification.nusmv.oaw.OAWGenerator.throwException(java.lang.String);
+	

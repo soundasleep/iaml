@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12d9744b5d0.1">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Frame">
+    <iterators id="domain.12d9744c1a7.1c" name="Select contents" outWires="wires.12d9744bb4e.1" limit="10" outSelects="domain.12d9744c1a7.37">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.12d9744bb4e.1" name="set" from="domain.12d9744c1a7.1c" to="visual.12d9744b831.aa"/>
+      <selectEdges id="domain.12d9744c1a7.37" from="domain.12d9744c1a7.1c" to="domain.12d9744c1a7.12"/>
+    </iterators>
+    <children xsi:type="iaml.visual:InputForm" id="visual.12d9744b831.13" name="Input Form">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.12d9744b831.28" name="Input Text Field"/>
+      <children xsi:type="iaml.visual:Button" id="visual.12d9744b831.2a" name="Button"/>
+    </children>
+    <children xsi:type="iaml.visual:Label" id="visual.12d9744b831.56" name="Label" defaultValue="Label"/>
+    <children xsi:type="iaml.visual:Map" id="visual.12d9744b831.57" name="Map">
+      <children xsi:type="iaml.visual:MapPoint" id="visual.12d9744b831.83" name="Map Point" defaultValue="Palmerston North, New Zealand">
+        <children xsi:type="iaml.visual:Label" id="visual.12d9744b831.21a" name="Map Point" defaultValue="Map Point"/>
+      </children>
+    </children>
+    <children xsi:type="iaml.visual:IteratorList" inWires="wires.12d9744bb4e.1" id="visual.12d9744b831.aa" name="Iterator List"/>
+    <children xsi:type="iaml.visual:Label" id="visual.12d9744b831.ab" name="Hidden" visible="false"/>
+  </scopes>
+  <types name="Iterator List contents" id="domain.12d9744c1a7.8" inSchemas="domain.12d9744c1a7.13">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="value" id="model.12d9744b5d0.3f"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="key" id="model.12d9744b5d0.41"/>
+  </types>
+  <sources id="domain.12d9744c1a7.12" name="Iterator List database" outSchemas="domain.12d9744c1a7.13" inSelects="domain.12d9744c1a7.37">
+    <schemaEdges id="domain.12d9744c1a7.13" from="domain.12d9744c1a7.12" to="domain.12d9744c1a7.8"/>
+  </sources>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

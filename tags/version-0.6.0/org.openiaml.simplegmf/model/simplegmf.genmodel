@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.openiaml.simplegmf/src"
+    modelPluginID="org.openiaml.simplegmf" modelName="Simplegmf" modelPluginClass=""
+    rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>simplegmf.ecore</foreignModel>
+  <genPackages prefix="SimpleGMF" basePackage="org.openiaml.simplegmf.model" disposableProviderFactory="true"
+      ecorePackage="simplegmf.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinShapes">
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/DEFAULT"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/RECTANGLE"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/ELLIPSE"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/ROUNDED_RECTANGLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinPatterns">
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/SOLID"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/DASH"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/DOT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinLabels">
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/DEFAULT"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/CONTAINMENT_NAME"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/METACLASS_NAME"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinAlignments">
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/BEGINNING"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/CENTER"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/END"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/FILL"/>
+    </genEnums>
+    <genClasses ecoreClass="simplegmf.ecore#//GMFConfiguration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/figureConfigurations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/edgeConfigurations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/customShapes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/labelConfigurations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//GMFConfiguration/defaultPaletteTitle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//GMFConfiguration/iconBundle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/palettes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/diagramEditors"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/rootElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/edgeTypes"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/edgeReferences"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="simplegmf.ecore#//AbstractFigure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//AbstractFigure/isDefault"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//AbstractFigure/classifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//AbstractFigure/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//FigureConfiguration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FigureConfiguration/shape"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//FigureConfiguration/customShape"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//EdgeConfiguration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//EdgeConfiguration/sourceArrow"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//EdgeConfiguration/targetArrow"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//CustomShape">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//CustomShape/points"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//Point">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//Point/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//Point/y"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//LabelConfiguration" labelFeature="#//simplegmf/NamedElement/name">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/classifiers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/readOnly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/prefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/suffix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/defaultText"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/parentFeature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/properties"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/specialLabel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/viewPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/editPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/editorPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/providedAtRuntime"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//PaletteGroup">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//PaletteGroup/classifiers"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//DiagramEditor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//DiagramEditor/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//DiagramEditor/classifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//DiagramEditor/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//DiagramElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//DiagramElement/containmentFeatures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//DiagramElement/classifier"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference simplegmf.ecore#//DiagramElement/editor"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//ContainedNode"/>
+    <genClasses ecoreClass="simplegmf.ecore#//ReferencedNode"/>
+    <genClasses ecoreClass="simplegmf.ecore#//ContainedEdge"/>
+    <genClasses ecoreClass="simplegmf.ecore#//ReferencedEdge"/>
+    <genClasses image="false" ecoreClass="simplegmf.ecore#//FigureProperty"/>
+    <genClasses image="false" ecoreClass="simplegmf.ecore#//LabelProperty"/>
+    <genClasses ecoreClass="simplegmf.ecore#//LinePattern">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LinePattern/linePattern"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//FlowLayout">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FlowLayout/flowLayout"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FlowLayout/majorAlignment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FlowLayout/minorAlignment"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//LineWidth">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LineWidth/width"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//FigureMargin">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FigureMargin/margin"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//BackgroundColor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//BackgroundColor/color"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//ForegroundColor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//ForegroundColor/color"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//LabelBold">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelBold/value"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//LabelUnderline">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelUnderline/value"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//LabelItalic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelItalic/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="simplegmf.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//NamedElement/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="simplegmf.ecore#//EdgeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//EdgeReference/classifier"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//EdgeReference/sourceFeature"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//EdgeReference/targetFeature"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.6" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12542c563bb.1b">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.18" name="op1">
+      <fieldValue id="model.12542c563bb.35" name="fieldValue"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1a" name="op2">
+      <fieldValue id="model.12542c563bb.46" name="fieldValue"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1e" name="calculate">
+      <operations xsi:type="iaml.operations:ActivityOperation" rules="wires.12542c56428.3" id="model.12542c563bb.81" name="do calculation">
+        <nodes xsi:type="iaml.operations:SetNode" id="model.12542c563bb.dc" outExecutions="model.12542c563bb.e8" inExecutions="model.12542c563bb.e6" outFlows="model.12542c563bb.e5" inFlows="model.12542c563bb.e4"/>
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.5" outExecutions="model.12542c563bb.e6"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.7" inExecutions="model.12542c563bb.e8"/>
+        <nodes xsi:type="iaml.operations:Arithmetic" id="operations.12542c56428.10" inFlows="model.12542c563bb.e1 model.12542c563bb.e3" outFlows="model.12542c563bb.e4" operationType="DIVIDE"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev1" outFlows="model.12542c563bb.e1" value="model.12542c563bb.35"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev2" outFlows="model.12542c563bb.e3" value="model.12542c563bb.46"/>
+        <nodes xsi:type="iaml.operations:ExternalValue" id="ev3" inFlows="model.12542c563bb.e5" value="model.12542c563bb.5f"/>
+        <dataEdges id="model.12542c563bb.e1" from="ev1" to="operations.12542c56428.10"/>
+        <dataEdges id="model.12542c563bb.e3" from="ev2" to="operations.12542c56428.10"/>
+        <dataEdges id="model.12542c563bb.e4" from="operations.12542c56428.10" to="model.12542c563bb.dc"/>
+        <dataEdges id="model.12542c563bb.e5" from="model.12542c563bb.dc" to="ev3"/>
+        <executionEdges id="model.12542c563bb.e6" from="operations.12542c56428.5" to="model.12542c563bb.dc"/>
+        <executionEdges id="model.12542c563bb.e8" from="model.12542c563bb.dc" to="operations.12542c56428.7"/>
+      </operations>
+      <onClick id="model.12542c563bb.80" listeners="wires.12542c56428.3">
+        <ecaRules id="wires.12542c56428.3" name="run" trigger="model.12542c563bb.80" target="model.12542c563bb.81"/>
+      </onClick>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1f" name="result">
+      <fieldValue id="model.12542c563bb.5f" name="fieldValue"/>
+    </children>
+  </scopes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
+</iaml:InternetApplication>

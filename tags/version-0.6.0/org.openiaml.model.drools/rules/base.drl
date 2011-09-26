@@ -1,0 +1,230 @@
+/**
+ * Creates 'field value' {@model Value}s and the related 'is set' {@model Condition}.
+ */
+#created on: 4/11/2008
+package org.openiaml.model.drools.rules.base
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+rule "Create empty domain schema for 'test' InternetApplication"
+	when
+		a : InternetApplication ( name == "test" )
+		not (DomainType ( name=="test domain schema", eContainer == a ) )
+
+		eval ( handler.veto( a ))
+
+	then 
+		#actions
+		// DomainStore ds = (DomainStore) handler.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
+		// ds.setIsGenerated(true);
+		// ds.setGeneratedBy(a);
+		
+		DomainType ds = handler.generatedDomainType( a, a );
+		handler.setName(ds, "test domain schema");
+		
+		queue.add(ds, drools); // possibly infer new knowledge (this is necessary)
+		
+		# a schema also requires a DomainSource
+		DomainSource source = handler.generatedDomainSource(a, a);
+		handler.setName(source, "test domain schema source");
+		queue.add(source, drools);
+		
+		SchemaEdge edge = handler.generatedSchemaEdge(a, a, source, ds);
+		queue.add(edge, drools); 
+		
+end
+
+/**
+ * Since an InputForm can not yet support having a fieldValue accessible at
+ * runtime (although in the future, this could be something like the title 
+ * of the InputForm: TODO), we prevent the fieldValue from even being created
+ * to prevent a target onAccess.init using a fieldValue that can't ever be
+ * completed.
+ *
+ * <p>A DomainIterator also can not have a fieldValue, because it doesn't make
+ * any sense at the moment. Both DomainIterator and InputForm should have this
+ * incorrect inheritance of Changeable removed.
+ *
+ * @inference Changeable,Value 
+ *		A {@model Changeable} 
+ * 		contains an untyped {@model Value} named {@model Changeable#fieldValue}.
+ * @inference Changeable,Value 
+ *		If set, the {@model Changeable#defaultValue defaultValue}
+ *		is used as the default value of the created {@model Changeable#fieldValue} {@model Value}.
+ * @inference InputForm
+ *		{@model InputForm}s do <em>not</em> have a {@model Value} 
+ *		named {@model Changeable#fieldValue} created by default.
+ * @inference DomainIterator
+ *		{@model DomainIterator}s do <em>not</em> have a {@model Value} 
+ *		named {@model Changeable#fieldValue} created by default.
+ */
+rule "Create field value for Changeable (untyped)"
+	when
+		f : Changeable( )
+		not ( InputForm ( this == f ))
+		not ( DomainIterator ( this == f ))
+		not (prop : Value( eContainer == f, f.fieldValue != null, f.fieldValue == prop ))
+			
+		eval ( handler.veto( f ))
+		
+	then
+		Value fieldValue = handler.generatedValueFieldValue(f, f);
+		handler.setName(fieldValue, "fieldValue");
+		handler.setType(fieldValue, f.getType());
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getDefaultValue() != null) {
+			handler.setDefaultValue(fieldValue, f.getDefaultValue());
+		}
+		
+		queue.add(fieldValue, drools);
+		
+end
+
+/**
+ * @inference Condition,Value 
+ *		All {@model Value}s not {@model Value#name named} 'fieldValue'
+ * 		will have an {@model ActivityPredicate} in its container named 'XXX is set'.
+ */
+rule "Values will also have a related 'is set' condition (not fieldValue)"
+	when
+		container : ContainsFunctions ( )
+		containerGe : GeneratesElements ( this == container )
+		value : Value ( eContainer == container, name != "fieldValue" )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
+		not ( Function ( eval(name.equals(value.getName() + " is set")), eContainer == container ))
+	
+		eval ( handler.veto( containerGe ))
+	
+	then
+		ActivityPredicate cond = handler.generatedActivityPredicate(containerGe, container);
+		handler.setName(cond, value.getName() + " is set");
+		handler.setType(cond, type);
+		queue.add(cond, drools);
+
+end
+
+/**
+ * @inference Condition,Value 
+ *		All {@model Value}s {@model Value#name named} 'fieldValue'
+ * 		will have a {@model BuiltinProperty} in its container named 'fieldValue is set'.
+ */ 
+rule "Values will also have a related 'is set' BuiltinProperty (fieldValue)"
+	when
+		container : ContainsFunctions ( )
+		containerGe : GeneratesElements ( this == container )
+		value : Value ( eContainer == container, name == "fieldValue" )
+
+		type : EXSDDataType( definition != null,
+			definition.name == "boolean" )
+		
+		not ( Function ( name == "fieldValue is set", eContainer == container ))
+	
+		eval ( handler.veto( containerGe ))
+	
+	then
+		BuiltinProperty cond = handler.generatedBuiltinProperty(containerGe, container);
+		handler.setName(cond, "fieldValue is set");
+		handler.setType(cond, type);
+		queue.add(cond, drools);
+
+end
+
+/**
+ * @inference Operation,Value 
+ *		All non-{@model Value#readOnly} {@model Value}s, other than those {@model Value#name named} 'fieldValue',
+ * 		will have an {@model BuiltinOperation} in its container named 'set XXX'.
+ */
+rule "Properties will have a related 'set XXX' operation"
+	when
+		container : ContainsOperations ( )
+		containerGe : GeneratesElements ( this == container )
+		value : Value ( eContainer == container, name != "fieldValue", readOnly == false )
+		
+		not ( Operation( eval(name.equals("set " + value.getName())), eContainer == container ))
+	
+		eval ( handler.veto( containerGe ))
+	
+	then
+		BuiltinOperation op = handler.generatedBuiltinOperation(containerGe, container);
+		handler.setName(op, "set " + value.getName());
+		queue.add(op, drools);
+
+end
+
+/**
+ * @inference ActivityPredicate
+ *		An {@model ActivityPredicate} named 'XXX is set', used to set a {@model Value#name named} {@model Value},
+ *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
+ */
+rule "Create contents of 'X is set' operation"
+	when
+		container : ContainsFunctions ( )
+		value : Value ( eContainer == container )
+		
+		o : ActivityPredicate( eval(name.equals(value.getName() + " is set")), eContainer == container )
+		
+		not ( StartNode ( eContainer == o ))
+		
+		eval ( handler.veto( o ))
+	
+	then
+		
+		DecisionNode decision = handler.generatedDecisionNode(o, o);
+		handler.setName(decision, "is set?");
+		queue.add(decision, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		queue.add(cancel, drools);
+		
+		ExternalValue ev_value = handler.generatedExternalValue(o, o);
+		handler.setValue(ev_value, value);
+		queue.add(ev_value, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, ev_value);
+		handler.setTo(data1, decision);
+		queue.add(data1, drools);
+
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
+		handler.setFrom(edge1, start);
+		handler.setTo(edge1, decision);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
+		handler.setName(edge2, "yes");
+		handler.setFrom(edge2, decision);
+		handler.setTo(edge2, finish);
+		queue.add(edge2, drools);
+
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(o, o);
+		handler.setName(edge3, "no");
+		handler.setFrom(edge3, decision);
+		handler.setTo(edge3, cancel);
+		queue.add(edge3, drools);
+
+end

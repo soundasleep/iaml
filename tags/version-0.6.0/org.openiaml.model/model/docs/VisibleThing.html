@@ -1,0 +1,7 @@
+<p>
+A {@model VisibleThing} is the abstract type for interface modelling, and may directly contain other {@model VisibleThing}s as its {@model VisibleThing#children}. All {@model VisibleThing}s may be <i>rendered</i> to a user. When a {@model VisibleThing} is rendered to a user, all children {@model VisibleThing}s must also be rendered in order according to their {@model VisibleThing#renderOrder}. A {@model VisibleThing} that is currently <i>hidden</i> must not be rendered until that {@model VisibleThing} is subsequently <i>shown</i>. The {@model VisibleThing#name} of the {@model VisibleThing} may be used as a label for the rendered element.
+</p>
+
+<p>
+All {@model VisibleThing}s define the {@model VisibleThing#hide}, {@model VisibleThing#show}, {@model VisibleThing#init} and {@model VisibleThing#update} {@model Operation}s, which are implemented as {@model BuiltinOperation}s. All {@model VisibleThing}s also define the {@model VisibleThing#empty} and {@model VisibleThing#notEmpty} {@model Predicate}s, which are implemented as {@model BuiltinProperty}s.
+</p>

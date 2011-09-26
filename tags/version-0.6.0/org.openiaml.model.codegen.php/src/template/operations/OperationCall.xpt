@@ -1,0 +1,368 @@
+«IMPORT iaml»
+
+/**
+ * Calling an operation.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/* default: don't know what to do */
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::Wire»
+	«throwException("Unknown wire to expand: " + this)»
+«ENDDEFINE»
+
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::ECARule»
+	«IF conditions.size > 0» 
+		/* expand conditions */
+		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb) FOREACH conditions SEPARATOR " && "») {
+			«EXPAND callOperationContents(php, inStoreDb) FOR this»
+		}
+	«ELSE»
+		«EXPAND callOperationContents(php, inStoreDb) FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * @implementation ECARule
+ *		An {@model ECARule} linking to a {@model Frame} or a {@model Gate} will
+ *		implicitly be a navigation, rather than executing an {@model Operation}.
+ */
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
+	«IF model::visual::Frame.isInstance(target) || model::components::Gate.isInstance(target)»
+		«REM»implicit: a NavigateAction«ENDREM»
+		«EXPAND callOperationContentsNavigate(php, inStoreDb) FOR this»
+	«ELSE»
+		«REM»explicit: a RunAction«ENDREM»
+		«EXPAND callOperationContentsRun(php, inStoreDb) FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+/* 
+ * Run a command with some parameters.
+ * RunAction: event --> operation 
+ *
+ * @param inStoreDb is set if we are calling operations as a result of storing a value
+ * in the database. instead of defining a new function 'get_db_param(...)' and
+ * using this as a parameter source,
+ * we instead use '$arg0', which we expect will be set already.
+ * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
+ * @implementation ECARule
+ *		When {@model ECARule running} an {@model Operation}, the {@model Parameter}s are
+ *		provided in alphabetical order according to their {@model Parameter#name}.
+ * @implementation Action,ECARule
+ *		When a {@model Action} is executed through a {@model ECARule},
+ *		the type of activity executed is dependent on the subtype of the given {@model Action}.
+ */
+«DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
+	/* eContainer == «target.eContainer» */
+	
+	«IF php»
+		$result = null;
+	«ELSE»
+		var result = null;
+	«ENDIF»
+
+	«IF php»
+		$result =
+	«ELSE»
+		result = 
+	«ENDIF»
+
+	«IF model::VisibleThing.isInstance(target.eContainer) || model::visual::Frame.isInstance(target.eContainer)-»
+		«REM»VisibleThing includes InputTextField«ENDREM»
+		«REM»
+			is both source and target on the same frame? NOTE this
+			will also return true for Event-->Operation if they are
+			both on the same frame.
+		«ENDREM»
+		«IF php || availableInCurrentScriptAction(trigger, target)-»
+			«REM»// on current frame (wire id = «id»)«ENDREM»
+			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current frame (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(frameContainingOperation(target).id)»', '«operationName(target)-»'
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
+			);
+		«ENDIF-»
+	«ELSEIF model::scopes::Session.isInstance(target.eContainer)-»
+		«IF php || availableInCurrentScriptAction(trigger, target)-»
+			«REM»// on current frame (wire id = «id»)«ENDREM»
+			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current frame (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(frameContainingOperation(target).id)»', '«operationName(target)-»'
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
+			);
+		«ENDIF-»
+	«ELSEIF model::operations::ActivityOperation.isInstance(target) && model::messaging::Email.isInstance(target.eContainer)-»
+		«IF php || availableInCurrentScriptAction(trigger, target)-»
+			«REM»// on current frame (wire id = «id»)«ENDREM»
+			do_«operationName(target)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current frame (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(frameContainingOperation(target).id)»', '«operationName(target)-»'
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
+			);
+		«ENDIF-»		
+	«ELSEIF isDomainAttributeInstance(target.eContainer)-»
+		«REM»direct field --> domain attribute instance«ENDREM»
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::domain::DomainAttributeInstance) target.eContainer) FOR target»;
+	«ELSEIF isDomainIterator(target.eContainer)-»
+		«REM»direct field --> domain object instance«ENDREM»
+		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::domain::DomainIterator) target.eContainer) FOR target»;
+	«ELSEIF model::components::AccessControlHandler.isInstance(target.eContainer)-»
+		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) target.eContainer) FOR target»;
+	«ELSEIF model::messaging::Email.isInstance(target.eContainer)-»
+		«EXPAND template::emails::Email::emailOperationCall(php, this, (model::messaging::Email) target.eContainer) FOR target»;
+	«ELSE-»
+		alert('unknown target operation type in «target.eContainer.metaType.name»');
+		«throwException("Unknown target operation type in '" + target.eContainer.metaType.name + "' (this=" + this + ")")»
+	«ENDIF-»
+
+«ENDDEFINE»
+
+/**
+ * NavigateAction: browse to a new destination.
+ * We need to switch on the target, because we could navigate to many different types
+ * of new destinations?
+ */
+«DEFINE callOperationContentsNavigate(Boolean php, Boolean inStoreDb) FOR model::ECARule»
+	«EXPAND navigateTo(php, inStoreDb, this) FOR target» 
+«ENDDEFINE»
+
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ECARule wire) FOR model::Action»
+	«IF php»
+		$url = null;
+		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»
+		if ($url !== null) {
+			// navigate to another frame
+			log_message("[redirect] Redirecting to '$url'");
+			server_redirect($url);
+			shutdown();
+		}
+	«ELSE»
+		var url = null;
+		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»	
+		debug("[redirect] Redirecting to '" + url + "'");
+		window.location = url;
+		ajaxIncrement();	// prevent other events from executing
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Get the destination for the given {@model NavigateAction} and put it into
+ * a variable '<code>$url</code>'.
+ *
+ * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
+ */
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::Action»
+	«throwException("Unknown NavigateAction destination: " + this)»
+«ENDDEFINE»
+
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
+	«IF model::Scope.isInstance(eContainer)»
+		«IF ((model::Scope) eContainer).entryGate == this»
+			«EXPAND getNavigateActionDestinationEntryGate(php, inStoreDb, wire, includeSession)»
+		«ELSEIF ((model::Scope) eContainer).exitGate == this»
+			«EXPAND getNavigateActionDestinationExitGate(php, inStoreDb, wire, includeSession)»
+		«ELSE»
+			«throwException("Unknown container for Gate: " + this)»
+		«ENDIF»
+	«ELSE»
+		«throwException("Gate was not contained within a Scope: " + this)»
+	«ENDIF» 
+«ENDDEFINE»
+
+/**
+ * Resuming navigation to a entry Gate.
+ *
+ * @implementation Action,Gate
+ *		When an {@model ECARule} executes a {@model Scope#entryGate entry} {@model Gate}, the user is
+ *		redirected to the resumption of the given {@model Gate}.
+ */
+«DEFINE getNavigateActionDestinationEntryGate(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
+	«IF php»
+		/* navigating back to resume a gate */
+		// get the resume ID
+		«EXPAND template::scopes::EntryGate::getEntryResumeTarget('resume')»
+		if (!$resume) {
+			// nowhere to resume; select somewhere random
+			«EXPAND template::scopes::EntryGate::getEntryAnyTarget('resume')»
+		}
+		
+		if (!defined('CURRENT_PAGE') || $resume != CURRENT_PAGE) {
+			// navigate to another frame
+			$url = "$resume.php";
+			«IF includeSession»
+				$url .= "?" . get_sid();		// need to pass session on server-side
+			«ENDIF»
+			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
+		}
+	«ELSE»
+		var url = "<?php
+			/* navigating back to resume a gate */
+			// get the resume ID
+			«EXPAND template::scopes::EntryGate::getEntryResumeTarget('resume')»
+			if (!$resume) {
+				// nowhere to resume; select somewhere random
+				«EXPAND template::scopes::EntryGate::getEntryAnyTarget('resume')»
+			}
+			
+			echo $resume;
+		?>.php";
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»
+	«ENDIF»
+«ENDDEFINE» 
+
+/**
+ * Resuming navigation to an exit Gate.
+ *
+ * @implementation Action,Gate
+ *		When an {@model ECARule} executes a {@model Scope#exitGate exit} {@model Gate}, the user is
+ *		redirected to the resumption of the given {@model Gate}.
+ */
+«DEFINE getNavigateActionDestinationExitGate(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
+	«IF php»
+		/* navigating back to resume a gate */
+		// get the resume ID
+		«EXPAND template::scopes::ExitGate::getExitResumeTarget('resume')»
+		if (!$resume) {
+			// nowhere to resume; select somewhere random
+			«EXPAND template::scopes::ExitGate::getExitAnyTarget('resume')»
+		}
+		
+		if (!defined('CURRENT_PAGE') || $resume != CURRENT_PAGE) {
+			// navigate to another frame
+			$url = "$resume.php";
+			«IF includeSession»
+				$url .= "?" . get_sid();		// need to pass session on server-side
+			«ENDIF»
+			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
+		}
+	«ELSE»
+		var url = "<?php
+			/* navigating back to resume a gate */
+			// get the resume ID
+			«EXPAND template::scopes::ExitGate::getExitResumeTarget('resume')»
+			if (!$resume) {
+				// nowhere to resume; select somewhere random
+				«EXPAND template::scopes::ExitGate::getExitAnyTarget('resume')»
+			}
+			
+			echo $resume;
+		?>.php";
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
+	«ENDIF»
+«ENDDEFINE» 
+
+/**
+ * Navigate to a frame.
+ *
+ * @implementation Action,Frame
+ *		When an {@model ECARule} executes a {@model Frame}, the user is
+ *		redirected to the location of the given {@model Frame}.
+ */
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::visual::Frame»
+	«IF php»
+		/* prevent infinite loops on the current frame */
+		if (!defined('CURRENT_PAGE') || "«safeNameString(id)-»" != CURRENT_PAGE) {
+			// navigate to another frame
+			$url = "«safeName()».php";
+			«IF includeSession»
+				$url .= "?" . get_sid();		// need to pass session on server-side
+			«ENDIF»
+			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
+		}
+	«ELSE»
+		// navigating to a new frame
+		var url = "«safeName()».php";
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Add any named parameters to the given URL (in $argName).
+ *
+ * @implementation ECARule,Parameter
+ * 		Any incoming named {@model Parameter}s to a {@model ECARule} to a {@model Frame} will be
+ * 		passed along as named <code>GET</code> parameters to the destination.
+ */
+«DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::ECARule»
+	«IF !inParameterEdges.isEmpty»
+		// add named parameters
+		«FOREACH inParameterEdges.select(p|p.name != null && p.name.length != 0) AS param»
+			«IF php»
+			{
+				$add_url = urlencode("«escapePhpString(safeNameString(param.name))»") . "=" .
+					urlencode(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOR param»)
+					;
+					
+				if (strpos($«argName-», "?") === false) {
+					$«argName-» .= "?" . $add_url;
+				} else {
+					$«argName-» .= "&" . $add_url;
+				}
+			}
+			«ELSE»
+			{
+				var add_url = encodeURIComponent("«escapePhpString(safeNameString(param.name))»") + "=" +
+					encodeURIComponent(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOR param»)
+					;
+					
+				if («argName-».indexOf("?") == -1) {
+					«argName-» += "?" + add_url;
+				} else {
+					«argName-» += "&" + add_url;
+				}
+			}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Assumes that there is a function call waiting in 'function_queue'.
+ * This function will be executed with the response as a parameter.
+ */
+«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
+	«IF inParameterEdges.size > 0» 
+		var arg0 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(0)»;
+	«ELSE»
+		var arg0 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 1»
+		var arg1 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(1)»;
+	«ELSE»
+		var arg1 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 2»
+		var arg2 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(2)»;
+	«ELSE»
+		var arg2 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 3»
+		var arg3 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(3)»;
+	«ELSE»
+		var arg3 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 4»
+		var arg4 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(4)»;
+	«ELSE»
+		var arg4 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 5»
+		var arg5 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(5)»;
+	«ELSE»
+		var arg5 = null;	/* no parameter */
+	«ENDIF»
+	call_remote_event(
+		'«safeNameString(containingFrame(target).id)»', 
+		'«operationName(target)-»',
+		arg0,
+		arg1,
+		arg2,
+		arg3,
+		arg4,
+		arg5,
+		function_queue
+	);
+«ENDDEFINE»

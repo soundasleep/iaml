@@ -1,0 +1,28 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexMetrics FOR modeldoc::ModelDocumentation»
+	«FILE "output/latex/metrics.tex"»
+% Generated summary of some metrics of the current project
+
+\def\modeldocRuleCount{«getTotalRuleCount(this)»}
+\def\modeldocRuleFileCount{«references.typeSelect(modeldoc::DroolsPackage).size»}
+\def\modeldocConstraintCount{«getTotalConstraintCount(this)»}
+
+% List of all metrics
+«FOREACH metrics.sortBy(m|m.name) AS metric-»
+\def\modeldoc«camelcase(metric.name).replaceAll("[^A-Za-z]","")»{«metric.value»}
+«IF isFloat(metric.value)»
+\def\modeldoc«camelcase(metric.name).replaceAll("[^A-Za-z]","")»Float{«formatFloat(metric.value)»}
+«ENDIF» 
+«ENDFOREACH»
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

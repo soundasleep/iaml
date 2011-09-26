@@ -1,0 +1,1188 @@
+/**
+ * Completes the functionality of {@model SetWire}s.
+ */
+package org.openiaml.model.drools.rules.set_wires
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.domain.*;
+import org.openiaml.model.model.messaging.*;
+
+import org.eclipse.emf.ecore.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference SetWire,CanBeSynced
+ *		A {@model SetWire} connecting two objects will create sub-{@model SetWire}s between
+ *		every contained object within these parent objects which have matching {@model CanBeSynced#name names}.
+ */
+rule "Set wires between objects should create set wires between all elements inside each object that matches [set]"
+	when
+		p1 : CanBeSynced( )
+		p2 : CanBeSynced( this != p1 )
+		source : SetWire( from == p1, to == p2, overriddenNames not contains "set" )
+		
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+	
+		not (sw : SetWire( eContainer == source, from == e1, to == e2 ))
+				
+		eval ( handler.veto( source ))
+		
+	then
+		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
+		handler.setName(sw, "set");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
+		queue.add(sw, drools);
+		
+end
+
+/**
+ * @inference SetWire,CanBeSynced
+ *		A {@model SetWire} connecting an {@model DomainIterator} to a {@model CanBeSynced} object
+ *		will create sub-{@model SetWire}s between every contained object within the contained {@model DomainInstance}
+ *		to every contained {@model CanBeSynced} object which have matching {@model CanBeSynced#name names}.
+ */
+rule "Copy set wires: Domain Instances (source)"
+	when
+		p1_container : DomainIterator ( )
+		p1 : DomainInstance( p1_container.currentInstance == p1 )
+		p2 : CanBeSynced( this != p1 )
+		source : SetWire( from == p1_container, to == p2, overriddenNames not contains "set" )
+		
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+	
+		not (sw : SetWire( eContainer == source, from == e1, to == e2 ))
+				
+		eval ( handler.veto( source ))
+		
+	then
+		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
+		handler.setName(sw, "set");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
+		queue.add(sw, drools);
+		
+end
+
+/**
+ * @inference SetWire,CanBeSynced
+ *		A {@model SetWire} connecting an {@model CanBeSynced} object to a {@model DomainIterator}
+ *		will create sub-{@model SetWire}s between every contained {@model CanBeSynced} object to 
+ *		every contained object within the contained {@model DomainInstance} 
+ *		which have matching {@model CanBeSynced#name names}.
+ */
+rule "Copy set wires: Domain Instances (target)"
+	when
+		p1 : CanBeSynced( )
+		p2_container : DomainIterator ( )
+		p2 : DomainInstance( p2_container.currentInstance == p2, this != p1 )
+		source : SetWire( from == p1, to == p2_container, overriddenNames not contains "set" )
+		
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+	
+		not (sw : SetWire( eContainer == source, from == e1, to == e2 ))
+				
+		eval ( handler.veto( source ))
+		
+	then
+		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
+		handler.setName(sw, "set");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
+		queue.add(sw, drools);
+		
+end
+
+/**
+ * @inference SetWire
+ *		When a {@model Changeable} is connected to a {@model ContainsOperations} by a
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
+ *		target when the source {@model Changeable#onChange changes}.
+ */
+rule "Run instance wire from edit to update (onChange) [set]"
+	when
+		source : Changeable( )
+		target : ContainsOperations( )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "run" )
+		
+		event : Event( source.onChange == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (ECARule( eContainer == sw, trigger == event, target == operation ))
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+/**
+ * Solves issue 209: Allow Properties to be set directly by SetWires or SyncWires.
+ * 
+ * @inference SetWire,Value
+ *		When a {@model Changeable} is connected to a {@model Value} by a
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'set value XXX' {@model Operation} on the 
+ *		target when the source {@model Changeable#onChange changes}.
+ */
+rule "Run instance wire from edit to Value update (onChange) [set]"
+	when
+		source : Changeable( )
+		
+		targetContainer : ContainsOperations ( )
+		target : Value ( eContainer == targetContainer )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "run" )
+
+		event : Event( source.onChange == event ) 
+		operation : Operation( eContainer == targetContainer, 
+			name != null, 
+			eval( ("set value " + target.getName()).equals(operation.getName()) ) )
+		
+		not (ECARule( eContainer == sw, trigger == event, target == operation ))
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+/**
+ * @inference SetWire
+ *		When an {@model InputTextField} is connected to a {@model ContainsOperations} by an {@model SetWire#executeOnInput instant}
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
+ *		target when the source {@model InputTextField#onInput input changes}.
+ */
+rule "Run instance wire from edit to update, instant SetWire (onInput)"
+	when
+		source : InputTextField( )
+		target : ContainsOperations( )
+		sw : SetWire( from == source, to == target, executeOnInput == true, overriddenNames not contains "run" ) 
+		
+		event : Event( source.onInput == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (ECARule( eContainer == sw, trigger == event, target == operation, name == "run" ))
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SetWire,CanBeSynced,Parameter
+ *		When a {@model CanBeSynced} element is connected to an {@model CanBeSynced} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
+rule "Connect parameter wire to: run instance wire from source.edit to target.update [set]"
+	when
+		source : CanBeSynced( )
+		target : CanBeSynced( )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.edit)" )
+	
+		event : Event( eContainer == source, name=="edit" )
+		operation : Operation( eContainer == target, name=="update" )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
+		
+		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
+		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
+		queue.add(pw, drools);
+
+end
+
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SetWire,CanBeSynced,Changeable,Parameter
+ *		When a {@model Changeable} element is connected to an {@model CanBeSynced} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
+rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onChange)"
+	when
+		source : Changeable( )
+		target : CanBeSynced( )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.edit)" )
+	
+		event : Event( source.onChange == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
+		
+		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
+		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
+		queue.add(pw, drools);
+
+end
+
+/**
+ * @inference SetWire,Changeable,Value,Parameter
+ *		When a {@model Changeable} element is connected to a {@model Value} by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
+rule "Connect parameter wire to: Run instance wire from edit to Value update (onChange)"
+	when
+		source : Changeable( )
+		
+		targetContainer : ContainsOperations ( )
+		target : Value ( eContainer == targetContainer )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.edit)" )
+		
+		event : Event( source.onChange == event ) 
+		operation : Operation( eContainer == targetContainer, 
+			name != null, 
+			eval( ("set value " + target.getName()).equals(operation.getName()) ) )
+
+		field : Value( source.fieldValue == field )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
+				
+		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
+		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
+		queue.add(pw, drools);
+
+
+end
+
+/**
+ * @inference SetWire,Changeable,Value,Parameter
+ *		When an {@model InputTextField} is connected to a {@model CanBeSynced} element by an {@model SetWire#executeOnInput instant}
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
+ *		will be provided as a {@model Parameter} to the updating {@model ECARule}.
+ */
+rule "Connect parameter wire to: run instance wire from source.edit to target.update [set], instant SetWire (onInput)"
+	when
+		source : InputTextField( )
+		target : CanBeSynced( )
+		sw : SetWire( executeOnInput == true, from == source, to == target, overriddenNames not contains "[set] run instance parameter, instant SetWire (source.edit)" )
+	
+		event : Event( source.onInput == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		field : Value( source.currentInput == field )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
+		
+		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
+		handler.setName(pw, "[set] run instance parameter, instant SetWire (source.edit)"); 
+		queue.add(pw, drools);
+
+end
+
+/**
+ * TODO Ideally, these two commands would be joined together into one
+ *
+ * @inference SetWire
+ *		When a {@model ContainsOperations} element is connected to an {@model Accessible} element by a
+ *		{@model SetWire}, the source element will {@model ECARule call} the 'init' {@model Operation} on the 
+ *		target when the target {@model Accessible#onAccess is accessed}.
+ */
+rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set] (onAccess)"
+	when
+		source : ContainsOperations( )
+		target : Accessible( )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "run" )
+		
+		event : Event( target.onAccess == event )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Value( source.fieldValue == field )
+		
+		not (ECARule( eContainer == sw, trigger == event, target == operation, name == "run" ))
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		ECARule rw = handler.generatedECARule(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		When a {@model ContainsOperations} element is connected to an {@model Accessible} element by a
+ *		{@model SetWire}, the target element will {@model SimpleCondition only} be initialised if the source value is set.
+ */
+rule "Run instance wire from target.access to target.init, adding SimpleCondition to check it is set [set] (onAccess)"
+	when
+		source : ContainsOperations( )
+		target : Accessible( )
+		sw : SetWire( from == source, to == target )
+		
+		event : Event( target.onAccess == event )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Value( source.fieldValue == field )
+		
+		run : ECARule( eContainer == sw, trigger == event, target == operation, name == "run" )
+		param : Parameter( parameterValue == field, parameterTerm == run )
+		
+		# condition check
+		condition : Function ( eContainer == source, name == "fieldValue is set" )
+		
+		not ( SimpleCondition ( function == condition, conditioned == run ))
+					
+		eval ( handler.veto( sw ))
+	
+	then
+		SimpleCondition cw = handler.generatedSimpleCondition(sw, sw, condition, run);
+		queue.add(cw, drools);
+		
+end	
+
+/**
+ * @inference SetWire,Parameter
+ *		When a {@model CanBeSynced} element is connected to an {@model Accessible} element by a
+ *		{@model SetWire}, the {@model CanBeSynced#fieldValue} of the source element will be used as a 
+ *		{@model Parameter} to initialise the target through the 'init' {@model Operation}.
+ */
+rule "Connect parameter wire to: run instance wire from target.access to target.init [set] (onAccess)"
+	when
+		source : CanBeSynced( )
+		target : Accessible( )
+		sw : SetWire( from == source, to == target, overriddenNames not contains "[set] run instance parameter (source.access)" )
+	
+		event : Event( target.onAccess == event ) 
+		operation : Operation( eContainer == target, name=="init" )
+		field : Value( source.fieldValue == field )
+		wire : ECARule( trigger == event, target == operation, name == "run", eContainer == sw )
+		
+		not (Parameter( eContainer == sw, parameterValue == field, parameterTerm == wire )) 
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw = handler.generatedParameter(sw, sw, field, wire); 
+		handler.setName(pw, "[set] run instance parameter (source.access)"); 
+		queue.add(pw, drools);
+
+end
+
+/**
+ * I think that chained SetWires are generally impossible. Consider:
+ * 
+ *   page1 <--> page2 <--> unrelated
+ *   condition on both SetWires, matching (page1, page2)
+ * 
+ * If we allow for chaining, then the condition 
+ *   condition[page2, unrelated]
+ * will be copied onto
+ *   condition[page1, page2]
+ * which means the SetWires will never satisfy all its conditions.
+ *
+ * --
+ *
+ * I think that chained SetWires are only possible *when* each
+ * SetWires has identical Conditions, so we don't have to combine
+ * the two conditions together into something impossible.
+ *
+ * However, trying to implement this did nothing. I think it is because
+ * without adding more information to the model, you cannot chain.
+ * The information you'd be adding is stuff like ChainedSetWire, but
+ * this defeats the purpose of having it in the model, because this should
+ * be handled by the code generation instead.
+ */
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		A sub-{@model SetWire} generated for a parent {@model SetWire}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
+rule "Cascaded SetWires: Conditions from parent to child [set]"
+	when
+
+		# the containing elements	
+		source : CanBeSynced( )
+		target : CanBeSynced( )
+		sw : SetWire ( from == source, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Function ( )
+		cw : SimpleCondition( function == condition, conditioned == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		SimpleCondition ecw = handler.generatedSimpleCondition( cw, sw, condition, esw );
+		handler.setName(ecw, "[copied] from: " + cw.getId());
+		queue.add(ecw, drools);
+
+end
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		A sub-{@model SetWire} generated for a parent {@model SetWire} connected from a {@model DomainIterator}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
+rule "Cascaded SetWires: Conditions: Domain Iterator (source)"
+	when
+
+		# the containing elements	
+		source_container : DomainIterator( )
+		source : DomainInstance( eContainer == source_container )
+		target : CanBeSynced( )
+		sw : SetWire ( from == source_container, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Function ( )
+		cw : SimpleCondition( function == condition, conditioned == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		SimpleCondition ecw = handler.generatedSimpleCondition( cw, sw, condition, esw );
+		handler.setName(ecw, "[copied] from: " + cw.getId());
+		queue.add(ecw, drools);
+
+end
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		A sub-{@model SetWire} generated for a parent {@model SetWire} connected to a {@model DomainIterator}
+ *		will also be restricted with all of the {@model SimpleCondition}s of the parent wire.
+ */
+rule "Cascaded SetWires: Conditions: Domain Iterator (target)"
+	when
+
+		# the containing elements	
+		source : CanBeSynced( )
+		target_container : DomainIterator( )
+		target : DomainInstance( eContainer == target_container )
+		sw : SetWire ( from == source, to == target_container )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Function ( )
+		cw : SimpleCondition( function == condition, conditioned == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : SimpleCondition( function == condition, conditioned == esw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		SimpleCondition ecw = handler.generatedSimpleCondition( cw, sw, condition, esw );
+		handler.setName(ecw, "[copied] from: " + cw.getId());
+		queue.add(ecw, drools);
+
+end
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SetWire}s
+ *		to their sub-{@model SetWire}s will also be provided with the same {@model Parameter}s.
+ */
+rule "Cascaded SetWires: Parameters from parent to child [set]"
+	when
+
+		# the containing elements
+		source : CanBeSynced( )
+		target : CanBeSynced( )
+		sw : SetWire ( from == source, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Function ( )
+		cw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# the generated condition wire
+		ecw : SimpleCondition( function == condition, conditioned == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : ParameterEdgesSource( )
+		pw : Parameter( parameterValue == parameter, parameterTerm == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : Parameter( parameterValue == parameter, parameterTerm == ecw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		# create it
+		Parameter epw = handler.generatedParameter( cw, sw, parameter, ecw );
+		handler.setName(epw, "[copied] from: " + pw.getId());
+		queue.add(epw, drools);
+
+end
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SetWire}s from a {@model DomainIterator}
+ *		to their sub-{@model SetWire}s will also be provided with the same {@model Parameter}s.
+ */
+rule "Cascaded SetWires: Parameters: Domain Iterator (source)"
+	when
+
+		# the containing elements
+		source_container : DomainIterator( )
+		source : DomainInstance( eContainer == source_container )
+		target : CanBeSynced( )
+		sw : SetWire ( from == source_container, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Function ( )
+		cw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# the generated condition wire
+		ecw : SimpleCondition( function == condition, conditioned == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : ParameterEdgesSource( )
+		pw : Parameter( parameterValue == parameter, parameterTerm == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : Parameter( parameterValue == parameter, parameterTerm == ecw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		# create it
+		Parameter epw = handler.generatedParameter( cw, sw, parameter, ecw );
+		handler.setName(epw, "[copied] from: " + pw.getId());
+		queue.add(epw, drools);
+
+end
+
+/**
+ * @inference SetWire,SimpleCondition
+ *		All restrictions derived by copying the {@model SimpleCondition}s of parent {@model SetWire}s to a {@model DomainIterator}
+ *		to their sub-{@model SetWire}s will also be provided with the same {@model Parameter}s.
+ */
+rule "Cascaded SetWires: Parameters: Domain Iterator (target)"
+	when
+
+		# the containing elements
+		source : CanBeSynced( )
+		target_container : DomainIterator( )
+		target : DomainInstance( eContainer == target_container )
+		sw : SetWire ( from == source, to == target_container )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Function ( )
+		cw : SimpleCondition( function == condition, conditioned == sw )
+		
+		# the generated condition wire
+		ecw : SimpleCondition( function == condition, conditioned == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : ParameterEdgesSource( )
+		pw : Parameter( parameterValue == parameter, parameterTerm == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : Parameter( parameterValue == parameter, parameterTerm == ecw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		# create it
+		Parameter epw = handler.generatedParameter( cw, sw, parameter, ecw );
+		handler.setName(epw, "[copied] from: " + pw.getId());
+		queue.add(epw, drools);
+
+end
+
+/**
+ * SetWires do not just connect the fields together; they can _also_
+ * connect the Frames together.
+ *
+ * @inference SetWire,Session
+ *		A parent {@model SetWire} connecting a {@model Session}-contained {@model VisibleThing} to a {@model ContainsOperations} element
+ *		outside of that {@model Session}, will {@model ECARule call} the 'init' {@model Operation} generated by each sub-{@model SetWire}
+ *		when the {@model Session} is {@model Session#onInit initialised}.
+ */
+rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
+	when
+		session : Session (  )
+		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		sw : SetWire( from == sourceFrame, to == targetFrame )
+
+		sourceElement : Changeable( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw, overriddenNames not contains "run" )
+
+		event : Event( sourceElement.onChange == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
+		
+		not (ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" ))
+						
+		eval ( handler.veto( sw2 ))
+		
+	then
+		ECARule rw2 = handler.generatedECARule(sw2, sw2, inite, operation);
+		handler.setName(rw2, "run");
+		queue.add(rw2, drools);
+		
+end
+
+/**
+ * VisibleThing != Frame
+ *
+ * @inference SetWire,Session
+ *		A parent {@model SetWire} connecting a {@model Session}-contained {@model Frame} to a {@model ContainsOperations} element
+ *		outside of that {@model Session}, will {@model ECARule call} the 'init' {@model Operation} generated by each sub-{@model SetWire}
+ *		when the {@model Session} is {@model Session#onInit initialised}.
+ */
+rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
+	when
+		session : Session (  )
+		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		sw : SetWire( from == sourceFrame, to == targetFrame )
+
+		sourceElement : Changeable( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw, overriddenNames not contains "run" )
+
+		event : Event( sourceElement.onChange == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
+		
+		not (ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" ))
+						
+		eval ( handler.veto( sw2 ))
+		
+	then
+		ECARule rw2 = handler.generatedECARule(sw2, sw2, inite, operation);
+		handler.setName(rw2, "run");
+		queue.add(rw2, drools);
+		
+end
+
+/**
+ * @inference SetWire,Session,Parameter
+ *		Every 'init' {@model Operation} executed when a {@model Session} is {@model Session#onInit initialised} due to
+ *		a {@model SetWire} between a {@model VisibleThing} within that session, to {@model ContainsOperations another element}
+ *		outside of that session, will be provided the {@model Changeable#fieldValue} of the source element as a {@model Parameter}.
+ */
+rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
+	when
+		session : Session (  )
+		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		sw : SetWire( from == sourceFrame, to == targetFrame )
+
+		sourceElement : Changeable( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw)
+
+		event : Event( sourceElement.onChange == event )
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
+
+		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
+		
+		field : Value( sourceElement.fieldValue == field )
+		pw : Parameter( eContainer == sw2, parameterValue == field, parameterTerm == rw ) 
+
+		not( Parameter ( eContainer == sw2, parameterValue == field, parameterTerm == initrw ))  
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw2 = handler.generatedParameter(sw, sw, field, initrw);
+		queue.add(pw2, drools);		
+end
+
+/**
+ * @inference SetWire,Session,Parameter
+ *		Every 'init' {@model Operation} executed when a {@model Session} is {@model Session#onInit initialised} due to
+ *		a {@model SetWire} between a {@model Frame} within that session, to {@model ContainsOperations another element}
+ *		outside of that session, will be provided the {@model Changeable#fieldValue} of the source element as a {@model Parameter}.
+ */
+rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
+	when
+		session : Session (  )
+		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		sw : SetWire( from == sourceFrame, to == targetFrame )
+
+		sourceElement : Changeable( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		sw2 : SetWire ( from == sourceElement, to == targetElement, eContainer == sw )
+
+		event : Event( sourceElement.onChange == event )
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : ECARule( eContainer == sw2, trigger == event, target == operation, name == "run" )
+		inite : Event (eContainer == session, session.onInit == inite )
+
+		initrw : ECARule( eContainer == sw2, trigger == inite, target == operation, name == "run" )
+		
+		field : Value( sourceElement.fieldValue == field )
+		pw : Parameter( eContainer == sw2, parameterValue == field, parameterTerm == rw ) 
+
+		not( Parameter ( eContainer == sw2, parameterValue == field, parameterTerm == initrw ))  
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		Parameter pw2 = handler.generatedParameter(sw, sw, field, initrw);
+		queue.add(pw2, drools);		
+end
+
+/**
+ * @inference SetWire,DomainInstance
+ *		An empty {@model InputForm} connected to a {@model DomainIterator} with a {@model SetWire}
+ *		will create an {@model InputTextField} in that form for every {@model DomainAttributeInstance}
+ *		that is not a {@model DomainAttribute#primaryKey primary key} or {@model DomainAttribute#isGenerated generated}.
+ */
+rule "Refresh New Instance Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
+	when
+		form : InputForm (  )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		sync : SetWire( from == form, to == iterator )
+	
+		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
+		
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		
+		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		InputTextField text = handler.generatedInputTextField(sync, form);
+		handler.setName(text, attribute.getName());
+		queue.add(text, drools);
+
+end
+
+/**
+ * @inference SetWire,InputForm,Label
+ *		An {@model InputForm} connected to another {@model InputForm} with a {@model SetWire}
+ *		will create a {@model Label} in the target form for every {@model InputTextField} in the
+ *		source form with the same {@model Label#name}.
+ */
+rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"
+	when
+		source : InputForm (  )
+		target : InputForm (  )
+		sync : SetWire( from == source, to == target )
+		
+		sf : InputTextField ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+		
+		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+/**
+ * @inference SetWire,InputForm,Label
+ *		An {@model InputForm} connected to another {@model InputForm} with a {@model SetWire}
+ *		will create a {@model Label} in the target form for every {@model Label} in the
+ *		source form with the same {@model Label#name}.
+ */
+rule "Refresh mappings between InputForms connected to InputForms containing Labels [set]"
+	when
+		source : InputForm (  )
+		target : InputForm (  )
+		sync : SetWire( from == source, to == target )
+		
+		sf : Label ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+						
+		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+/**
+ * @inference SetWire,InputForm,Email
+ *		An {@model InputForm} connected to an {@model Email} with a {@model SetWire}
+ *		will create a {@model Label} in the target Email for every {@model InputTextField} in the
+ *		source form with the same {@model Label#name}.
+ */
+rule "Refresh mappings between InputForms connected to Emails containing InputTextFields [set]"
+	when
+		source : InputForm (  )
+		target : Email (  )
+		sync : SetWire( from == source, to == target )
+		
+		sf : InputTextField ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+
+		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+/**
+ * @inference SetWire,InputForm,Email
+ *		An {@model InputForm} connected to an {@model Email} with a {@model SetWire}
+ *		will create a {@model Label} in the target Email for every {@model Label} in the
+ *		source form with the same {@model Label#name}.
+ */
+rule "Refresh mappings between InputForms connected to Emails containing Labels [set]"
+	when
+		source : InputForm (  )
+		target : Email (  )
+		sync : SetWire( from == source, to == target )
+		
+		sf : Label ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+
+		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+/**
+ * @inference SetWire,InputForm,Email
+ *		An {@model InputForm} connected to a {@model Map} with a {@model SetWire}
+ *		will create a {@model MapPoint} in the target map for every {@model InputTextField} in the
+ *		source form with the same {@model Label#name}.
+ */
+rule "Refresh mappings between InputForms connected to Maps containing InputTextFields [set]"
+	when
+		source : InputForm (  )
+		target : Map (  )
+		sync : SetWire( from == source, to == target )
+
+		sf : InputTextField ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+
+		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		MapPoint tf = handler.generatedMapPoint(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+
+/**
+ * <strong>Depending on the orientation of a SetWire</strong>,
+ * SyncWires create InputTextFields; SetWires should create Labels, because they cannot
+ * be edited.
+ *
+ * @inference SetWire,Label
+ *		When a {@model DomainIterator} is connected to an {@model InputForm} by a {@model SetWire},
+ *		{@model Label}s will be generated for its non-generated, non-primary key {@model DomainAttributeInstance}s.
+ */
+rule "Refresh New Instance Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
+	when
+		form : InputForm (  )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		sync : SetWire( from == iterator, to == form )	// backwards
+		
+		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
+		
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+
+		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label text = handler.generatedLabel(sync, form);
+		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
+		queue.add(text, drools);
+
+end
+
+/**
+ * <strong>Depending on the orientation of a SetWire</strong>,
+ * SyncWires create InputTextFields; SetWires should create Labels, because they cannot
+ * be edited.
+ *
+ * @inference SetWire,DomainIterator
+ *		When a {@model DomainIterator} is connected to an {@model IteratorList} by a {@model SetWire},
+ *		{@model Label}s will be generated for its non-generated, non-primary key {@model DomainAttributeInstance}s.
+ */
+rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a IteratorList: create labels"
+	when
+		form : IteratorList (  )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		sync : SetWire( from == iterator, to == form )	// backwards
+
+		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
+
+		// not extending ANY kind of primary key
+		eval( functions.notExtendingPrimaryKey( originalAttribute ) )
+		
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+
+		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label text = handler.generatedLabel(sync, form);
+		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
+		queue.add(text, drools);
+
+end
+
+/**
+ * @inference SetWire,DomainIterator
+ *		When a {@model DomainIterator} is connected to an {@model IteratorList} by a {@model SetWire},
+ *		a {@model Label#visible hidden} {@model Label} will be generated for the {@model DomainAttribute#primaryKey primary key}
+ *		{@model DomainAttributeInstance}.
+ */
+rule "Refresh Domain Object mappings (primary keys) when Instance sets a IteratorList: create hiddens"
+	when
+		form : IteratorList (  )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		sync : SetWire( from == iterator, to == form )	// backwards
+
+		// only generated primary keys
+		originalAttribute : DomainAttribute ( primaryKey == true )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
+		
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+
+		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new Label[visible = false]
+		Label text = handler.generatedLabel(sync, form);
+		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
+		handler.setVisible(text, false);
+		queue.add(text, drools);
+
+end
+
+/**
+ * @inference SetWire,DomainIterator
+ *		A {@model SetWire} connecting a {@model DomainIterator} to an {@model InputForm} should only
+ *		execute the 'init' {@model Operation} on the created {@model Label}s when the label is {@model Label#onAccess accessed}
+ *		if the {@model DomainInstance} is {@model Function not empty}. 
+ */
+rule "A SetWire between Attributes passed to a DomainIterator need to check that the attribute exists before initialising (onAccess)"
+	when
+		form : VisibleThing ( )		# InputForm, IteratorList
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		
+		# form -> Iterator
+		sync : SetWire( from == form, to == iterator )
+		
+		# the instance is created through a NewInstanceWire
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+		
+		selectEdge : SelectEdge ( from == iterator, to == domainSource )
+		
+		# contained attribute/field
+		attribute : DomainAttributeInstance( eContainer == instance )
+		tf : Label ( eContainer == form )
+
+		# Label -> attribute
+		sync2 : SetWire ( from == tf, to == attribute, overriddenNames not contains "check new instance exists" )
+		
+		# text field access/init events
+		access : Event ( tf.onAccess == access ) 
+		initOp : Operation ( eContainer == tf, name == "init" )
+		run : ECARule ( trigger == access, target == initOp )
+		
+		attributeValue : Value ( attribute.fieldValue == attributeValue )
+		
+		param : Parameter ( parameterValue == attributeValue, parameterTerm == run )  
+		
+		# 'not empty' condition in the instance
+		existsCondition : Function ( eContainer == iterator, name == "not empty" )
+		
+		# but not connected		
+		not (SimpleCondition ( function == existsCondition, conditioned == run ))
+						
+		eval ( handler.veto( sync2 ))
+		
+	then
+		# connect it
+		SimpleCondition cw = handler.generatedSimpleCondition(sync2, sync2, existsCondition, run);
+		handler.setName(cw, "check new instance exists");
+		queue.add(cw, drools);
+
+end
+
+/**
+ * @inference SetWire,DomainIterator
+ *		A {@model SetWire} connecting a {@model DomainIterator} to an {@model InputForm} should only
+ *		execute the 'update' {@model Operation} on the created {@model Label}s when the label is {@model Label#onChange changed}
+ *		if the {@model DomainInstance} is {@model Function not empty}. 
+ */
+rule "A SetWire between Attributes selected from a DomainIterator need to check that the attribute exists before initialising (onChange)"
+	when
+		form : VisibleThing ( )		# InputForm, IteratorList
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
+		
+		# Iterator -> Form
+		sync : SetWire( from == iterator, to == form )
+		
+		# the instance is created through a NewInstanceWire
+		schema : DomainType ( )
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+		
+		selectEdge : SelectEdge ( from == iterator, to == domainSource )
+		
+		# contained attribute/field
+		attribute : DomainAttributeInstance( eContainer == instance )
+		tf : Label ( eContainer == form )
+
+		# Attribute -> Label
+		sync2 : SetWire ( from == attribute, to == tf, overriddenNames not contains "check new instance exists" )
+		
+		# text field access/init events
+		onChange : Event ( attribute.onChange == onChange ) 
+		initOp : Operation ( eContainer == tf, name == "update" )
+		run : ECARule ( trigger == onChange, target == initOp )
+		
+		attributeValue : Value ( attribute.fieldValue == attributeValue )
+		
+		param : Parameter ( parameterValue == attributeValue, parameterTerm == run )  
+		
+		# 'not empty' condition in the instance
+		existsCondition : Function ( eContainer == iterator, name == "not empty" )
+		
+		# but not connected		
+		not (SimpleCondition ( function == existsCondition, conditioned == run ))
+						
+		eval ( handler.veto( sync2 ))
+		
+	then
+		# connect it
+		SimpleCondition cw = handler.generatedSimpleCondition(sync2, sync2, existsCondition, run);
+		handler.setName(cw, "check new instance exists");
+		queue.add(cw, drools);
+
+end
+

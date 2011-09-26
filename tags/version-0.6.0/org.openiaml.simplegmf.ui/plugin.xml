@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<!-- .iaml file extensions -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.simplegmf.ui.id1"
+            nameFilter="*.simplegmf"
+            objectClass="org.eclipse.core.resources.IFile">
+
+         <menu
+               id="org.openiaml.simplegmf.ui.menu1"
+               path="additions"
+               label="&amp;SimpleGMF">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.simplegmf.ui.GenerateGMFMappingsAction"
+               id="org.openiaml.simplegmf.ui.generate"
+               label="&amp;Generate GMF Mappings"
+               menubarPath="org.openiaml.simplegmf.ui.menu1/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+
+</plugin>

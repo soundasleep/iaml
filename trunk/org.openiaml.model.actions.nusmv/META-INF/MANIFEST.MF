@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Actions (NuSMV Verification)
 Bundle-SymbolicName: org.openiaml.model.actions.nusmv;singleton:=true
-Bundle-Version: 0.4.2.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: NuSMV Verification
 Bundle-SymbolicName: org.openiaml.verification.nusmv;singleton:=true
-Bundle-Version: 0.4.2.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.core.resources;bundle-version="3.5.0",

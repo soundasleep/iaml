@@ -6,6 +6,8 @@ digraph {
 "org.openiaml.emf.properties";
 "org.openiaml.model";
 "org.openiaml.model.actions";
+"org.openiaml.model.actions.crocopat";
+"org.openiaml.model.actions.nusmv";
 "org.openiaml.model.codegen.php";
 "org.openiaml.model.diagram.custom";
 "org.openiaml.model.diagram.helpers";
@@ -20,6 +22,8 @@ digraph {
 "org.openiaml.simplegmf.edit";
 "org.openiaml.simplegmf.editor";
 "org.openiaml.simplegmf.ui";
+"org.openiaml.verification.crocopat";
+"org.openiaml.verification.nusmv";
 "org.openiaml.verification.ocl";
   node [style=filled, fillcolor="#cc7766"];
 "org.openiaml.model.diagram";
@@ -35,6 +39,11 @@ digraph {
   "org.openiaml.model.actions" -> "org.openiaml.model.codegen.php";
   "org.openiaml.model.actions" -> "org.openiaml.model.drools";
   "org.openiaml.model.actions" -> "org.openiaml.model.runtime";
+  "org.openiaml.model.actions.crocopat" -> "org.openiaml.model";
+  "org.openiaml.model.actions.crocopat" -> "org.openiaml.verification.crocopat";
+  "org.openiaml.model.actions.nusmv" -> "org.openiaml.model";
+  "org.openiaml.model.actions.nusmv" -> "org.openiaml.model.actions";
+  "org.openiaml.model.actions.nusmv" -> "org.openiaml.verification.nusmv";
   "org.openiaml.model.codegen.php" -> "org.openiaml.model";
   "org.openiaml.model.codegen.php" -> "org.openiaml.model.runtime";
   "org.openiaml.model.codegen.php" -> "org.openiaml.model.runtime.phpmailer";

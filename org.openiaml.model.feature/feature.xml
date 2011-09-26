@@ -184,13 +184,6 @@ GNU Public License.
          unpack="false"/>
 
    <plugin
-         id="org.openiaml.model.diagram.element"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.openiaml.model.diagram.email"
          download-size="0"
          install-size="0"

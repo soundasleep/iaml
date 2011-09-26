@@ -48,11 +48,21 @@
    <feature url="features/org.openiaml.model.editor_0.5.3.201103081642.jar" id="org.openiaml.model.editor" version="0.5.3.201103081642">
       <category name="org.openiaml.model.feature"/>
    </feature>
+   <feature url="features/org.openiaml.model.feature_0.6.0.201109262140.jar" id="org.openiaml.model.feature" version="0.6.0.201109262140">
+      <category name="org.openiaml.model.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.verification.crocopat.feature_0.6.0.201109262140.jar" id="org.openiaml.verification.crocopat.feature" version="0.6.0.201109262140" os="win32">
+      <category name="org.openiaml.verification.crocopat.feature"/>
+   </feature>
+   <feature url="features/org.openiaml.verification.nusmv.feature_0.6.0.201109262140.jar" id="org.openiaml.verification.nusmv.feature" version="0.6.0.201109262140" os="win32">
+      <category name="org.openiaml.verification.nusmv.feature"/>
+   </feature>
    <category-def name="org.openiaml.model.feature" label="IAML Modelling Environment"/>
-   <category-def name="org.openiaml.verification.crocopat.feature" label="Verification with Crocopat (Win-only)"/>
+   <category-def name="org.openiaml.verification.crocopat.feature" label="Verification with CrocoPat (Win-only)"/>
    <category-def name="ca-ecliptical-emf-xpath" label="EMF XPath Support">
       <description>
          A local mirror of the ca.ecliptical.emf.xpath features.
       </description>
    </category-def>
+   <category-def name="org.openiaml.verification.nusmv.feature" label="Verification with NuSMV (Win-only)"/>
 </site>

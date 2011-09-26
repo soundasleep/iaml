@@ -43,6 +43,8 @@ public class PluginsTestCase extends XmlTestCase {
 		"org.openiaml.model.tests.elements",
 		"org.openiaml.model.feature",
 		"org.openiaml.update",
+		"org.openiaml.verification.crocopat.feature",
+		"org.openiaml.verification.nusmv.feature",
 	};
 	
 	/**

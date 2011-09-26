@@ -27,6 +27,8 @@ public class LicenceTest extends TestCase {
 	
 	protected List<String> LGPL_PLUGINS = Arrays.asList(
 		"org.openiaml.model.runtime.phpmailer"
+		// "it.itc.irst.nusmv.cli", -- not ever tested
+		// "org.sosy_lab.crocopat.cli" -- not ever tested
 	);
 	
 	/**

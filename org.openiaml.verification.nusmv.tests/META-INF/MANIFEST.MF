@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: NuSMV Integration Tests
 Bundle-SymbolicName: org.openiaml.verification.nusmv.tests;singleton:=true
-Bundle-Version: 0.4.2.qualifier
+Bundle-Version: 0.6.0.qualifier
 Export-Package: org.openiaml.verification.nusmv.tests
 Require-Bundle: org.junit,
  org.openiaml.verification.nusmv;bundle-version="0.4.2",

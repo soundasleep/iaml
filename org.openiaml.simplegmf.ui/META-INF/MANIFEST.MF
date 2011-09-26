@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SimpleGMF Eclipse UI
 Bundle-SymbolicName: org.openiaml.simplegmf.ui;singleton:=true
-Bundle-Version: 0.5.3.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Activator: org.openiaml.simplegmf.ui.SimpleGMFUIPlugin
 Bundle-Vendor: www.openiaml.org
 Require-Bundle: org.eclipse.core.runtime,

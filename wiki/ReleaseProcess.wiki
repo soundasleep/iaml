@@ -1,0 +1,27 @@
+#summary Technical guideline on the IAML release process
+#labels Development,Phase-Implementation
+
+[Development < Development]
+
+=Introduction=
+
+This is a brief technical guideline on the process necessary to release a new version of the IAML plugin.
+
+The release process has been automated as much as possible (for example, through [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/AllReleaseTests.java?r=3111 AllReleaseTests]), but there are certain steps that are still impossible to run programatically.
+
+See also issue 37.
+
+  # Update the version of `org.openiaml.model` plugin to `0.6.0.qualifier`.
+  # Run [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/AllReleaseTests.java?r=3111 AllReleaseTests].
+    # This will automatically update the `.gmfgen`s with new versions, and update other version references throughout the plugin.
+  # Delete the generated model source code in `org.openiaml.model/src-generated`.
+  # Delete the generated edit source code in `org.openiaml.model.edit/src`
+  # Reload and regenerate the model and edit source code from `iaml.genmodel`.
+  # Delete all of the generated diagram editors (for example, with [http://code.google.com/p/iaml/source/browse/trunk/cleanup_diagram_editors.bat?r=3111 cleanup_diagram_editors.bat]).
+  # Regenerate all of the diagram editors from the source `.gmfgen`s.
+  # Run [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.runtime/src/web/index.html?r=3111 AllReleaseTests] again, to update the versions in generated diagram editor `MANIFEST.MF`s.
+    # Update the plugin version in [http://code.google.com/p/iaml/source/browse/trunk/cleanup_diagram_editors.bat?r=3111 runtime/index.html].
+    # Resolve any failing test cases.
+  # Refresh all plugins, and force a clean rebuild of the entire workspace - mostly to identify any lingering errors from Drools/OAW templates.
+  # Commit all of these changes to SVN (for example, rX).
+  # _to be continued..._

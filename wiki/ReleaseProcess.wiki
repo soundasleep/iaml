@@ -38,7 +38,7 @@ The whole environment is now ready to be built and released.
 
 The environment has now been successfully built, so now the release process can conclude.
 
-  # Commit the built plugins in `[http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.update?r=3133 org.openiaml.update]` to SVN.
+  # Commit the built plugins in [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.update?r=3133 org.openiaml.update] to SVN.
   # [http://code.google.com/p/iaml/source/browse/trunk/tags?r=3133 Tag] the build on SVN.
   # Write release documentation on the wiki, for example [Model0_6].
   # Write a new release entry on [http://journals.jevon.org/users/jevon-phd/tag/iaml/ the development blog].

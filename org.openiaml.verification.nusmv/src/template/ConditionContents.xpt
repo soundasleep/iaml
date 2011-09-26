@@ -3,13 +3,13 @@
 «EXTENSION metamodel::LoopExtensions»
 
 
-«DEFINE conditionContents FOR model::CompositeCondition»
+«DEFINE conditionContents FOR model::operations::ActivityPredicate»
 «LET nodes.typeSelect(model::operations::StartNode) AS startNodes»
 «LET nodes.typeSelect(model::operations::FinishNode) AS finishNodes»
 «LET nodes.typeSelect(model::operations::CancelNode) AS cancelNodes»
 «LET nodes.typeSelect(model::ActivityNode) AS allNodes»
 «LET operations.typeSelect(model::Operation) AS allOperations»
-«LET conditions.typeSelect(model::Condition) AS allConditions»
+«LET functions.typeSelect(model::Predicate) AS allConditions»
 «LET variables AS allTemporaryVariables»
 
 -- definitions for split nodes
@@ -67,15 +67,15 @@ ASSIGN
 		
 		-- operation is running
 		«REM»we cannot yet support two layers of split/join«ENDREM»
-		«FOREACH allNodes.reject(n|model::operations::SplitNode.isInstance(n)).typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+		«FOREACH allNodes.reject(n|model::operations::SplitNode.isInstance(n)).typeSelect(model::operations::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
 			current_step = «safeName(n)» :
 				«EXPAND Flow::nextStep FOR n»;
 		«ENDFOREACH»
-		«FOREACH allOperations.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+		«FOREACH allOperations.typeSelect(model::operations::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
 			current_step = «safeName(n)» :
 				«EXPAND Flow::nextStep FOR n»;
 		«ENDFOREACH»
-		«FOREACH allConditions.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+		«FOREACH allConditions.typeSelect(model::operations::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
 			current_step = «safeName(n)» :
 				«EXPAND Flow::nextStep FOR n»;
 		«ENDFOREACH»
@@ -91,7 +91,7 @@ ASSIGN
 			flag = 1 : case
 			
 				-- are we on a step which modifies it?
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
+				«FOREACH allOperations.typeSelect(model::operations::SetNode)
 						.select(n|n.outFlows.to.contains(v)) AS n»
 					current_step = «safeName(n)» : («EXPAND Flow::getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
 				«ENDFOREACH»	
@@ -108,7 +108,7 @@ ASSIGN
 	next(value_overflow) := case
 		flag = 1 : case
 			«FOREACH allTemporaryVariables AS v»
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
+				«FOREACH allOperations.typeSelect(model::operations::SetNode)
 						.select(n|n.outFlows.to.contains(v)) AS n»
 					current_step = «safeName(n)» : case
 						(«EXPAND Flow::getTemporaryVariableValue FOR n.inFlows.from.first()») = («EXPAND Flow::getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1» : 0;
@@ -171,7 +171,7 @@ VAR
 	«ENDFOREACH»
 	
 	-- operation calls
-	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).outActions.select(a|model::Operation.isInstance(a.to)).to AS call»
+	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).listeners.select(a|model::Operation.isInstance(a.target)).target AS call»
 		run_call_«safeName(call)» : boolean;
 		call_«safeName(call)» : process operation_«safeName(call)»(run_call_«safeName(call)»«REM»operation calls have their own variable instances«ENDREM», navigation_finished);
 	«ENDFOREACH»
@@ -219,15 +219,15 @@ ASSIGN
 		esac;
 		
 		-- operation is running
-		«FOREACH allNodes.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+		«FOREACH allNodes.typeSelect(model::operations::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
 			current_step = «safeName(n)» :
 				«EXPAND Flow::nextStep FOR n»;
 		«ENDFOREACH»
-		«FOREACH allOperations.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+		«FOREACH allOperations.typeSelect(model::operations::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
 			current_step = «safeName(n)» :
 				«EXPAND Flow::nextStep FOR n»;
 		«ENDFOREACH»
-		«FOREACH allConditions.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
+		«FOREACH allConditions.typeSelect(model::operations::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
 			current_step = «safeName(n)» :
 				«EXPAND Flow::nextStep FOR n»;
 		«ENDFOREACH»
@@ -243,7 +243,7 @@ ASSIGN
 			flag = 1 : case
 			
 				-- are we on a step which modifies it?
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
+				«FOREACH allOperations.typeSelect(model::operations::SetNode)
 						.select(n|n.outFlows.to.contains(v)) AS n»
 					current_step = «safeName(n)» : («EXPAND Flow::getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
 				«ENDFOREACH»	
@@ -268,7 +268,7 @@ ASSIGN
 
 	-- operation calls
 	«FOREACH nodes.typeSelect(model::operations::OperationCallNode) AS call»
-		«FOREACH call.outActions.select(a|model::Operation.isInstance(a.to)).to AS target»
+		«FOREACH call.listeners.select(a|model::Operation.isInstance(a.target)).target AS target»
 		next(run_call_«safeName(target)») := case
 			current_step = «safeName(call)» : 1;
 			1 : 0;
@@ -301,7 +301,7 @@ ASSIGN
 	next(value_overflow) := case
 		flag = 1 : case
 			«FOREACH allTemporaryVariables AS v»
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
+				«FOREACH allOperations.typeSelect(model::operations::SetNode)
 						.select(n|n.outFlows.to.contains(v)) AS n»
 					current_step = «safeName(n)» : case
 						(«EXPAND Flow::getTemporaryVariableValue FOR n.inFlows.from.first()») = («EXPAND Flow::getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1» : 0;
@@ -321,8 +321,7 @@ ASSIGN
 	«FOREACH allApplicationProperties(getRoot()) AS p»
 	next(property_«safeName(p)») := case
 		«REM»find all operations that change it«ENDREM»
-		«FOREACH operations.typeSelect(model::PrimitiveOperation)
-				.select(o | o.name == "setPropertyToValue")
+		«FOREACH operations.typeSelect(model::operations::SetNode)
 				.select(o | !o.outFlows.select(f|f.to == p).isEmpty) AS setOp»
 			current_step = «safeName(setOp)» :
 				(«EXPAND Flow::getTemporaryVariableValue FOR setOp.inFlows.from.first()») mod «maximumIntegerSize() + 1»;

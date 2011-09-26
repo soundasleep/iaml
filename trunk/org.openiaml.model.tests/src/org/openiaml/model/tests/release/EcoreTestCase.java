@@ -27,7 +27,24 @@ public class EcoreTestCase extends XmlTestCase {
 	public void testOawEcore() throws Exception {
 		File source = new File("../org.openiaml.model/model/iaml.ecore");
 		File target = new File("../org.openiaml.model.codegen.php/src/metamodel/iaml-current.ecore");
-		
+		checkSynchronised(source, target);
+	}
+	
+	/**
+	 * Check the ecore stored in the NuSMV plugin.
+	 * @throws Exception 
+	 */
+	public void testNuSMVEcore() throws Exception {
+		File source = new File("../org.openiaml.model/model/iaml.ecore");
+		File target = new File("../org.openiaml.verification.nusmv/src/metamodel/iaml-current.ecore");
+		checkSynchronised(source, target);
+	}
+	
+	/**
+	 * Checks that the source file is identical to the target file.
+	 * Replaces the target file if necessary.
+	 */
+	private void checkSynchronised(File source, File target) throws Exception {
 		assertFileExists(source);
 		if (!target.exists()) {
 			String sourceString = readFile(source);

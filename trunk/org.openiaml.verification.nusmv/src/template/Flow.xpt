@@ -2,7 +2,7 @@
 
 «EXTENSION metamodel::LoopExtensions»
 
-«DEFINE nextStep FOR model::ExecutionEdgesSource»
+«DEFINE nextStep FOR model::operations::ExecutionEdgesSource»
 	«safeName(outExecutions.to.first())»
 «ENDDEFINE»
 
@@ -18,6 +18,12 @@
 			1 : «safeName(getFailFlow(this).to.first())»;
 		esac
 		«ENDIF»
+	«ELSEIF name == "can cast?"»
+		-- assume can always cast all values
+		«safeName(getPassFlow(this).to.first())»
+	«ELSEIF name == "is set?"»
+		-- assume all values are always set
+		«safeName(getPassFlow(this).to.first())»
 	«ELSE»
 		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
 	«ENDIF»
@@ -36,7 +42,7 @@
 «DEFINE nextStep FOR model::operations::OperationCallNode»
 	-- wait for operation call to complete; then we can resume
 	case 
-		«FOREACH outActions.select(a|model::Operation.isInstance(a.to)).to AS call SEPARATOR " & "»
+		«FOREACH listeners.select(a|model::Operation.isInstance(a.target)).target AS call SEPARATOR " & "»
 			call_«safeName(call)».finished
 		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
 		1 : current_step;
@@ -46,14 +52,14 @@
 /**
  * Changes to temporary variables.
  */
-«DEFINE nextTemporaryVariable FOR model::TemporaryVariable»
+«DEFINE nextTemporaryVariable FOR model::operations::TemporaryVariable»
 next(«safeName()») := case
 	in_operation = 1 : case
 		-- start of operations
 		current_step = «safeName(eContainer)» : 0; -- init
 
 		-- incoming flows
-		«FOREACH inFlows.from.typeSelect(model::PrimitiveOperation).select(o | o.name == "set" || o.name == "setValue") AS set»
+		«FOREACH inFlows.from.typeSelect(model::operations::SetNode) AS set»
 		current_step = «safeName(set)» :
 			-- work out the incoming variable
 			«IF set.inFlows.from.size != 1»
@@ -72,7 +78,7 @@ next(«safeName()») := case
 esac;
 «ENDDEFINE»
 
-«DEFINE getTemporaryVariableValue FOR model::DataFlowEdgesSource»
+«DEFINE getTemporaryVariableValue FOR model::operations::DataFlowEdgesSource»
 	«EXPAND exception FOR throwException("Unknown data flow source: " + this)»
 «ENDDEFINE»
 
@@ -90,19 +96,23 @@ esac;
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE getTemporaryVariableValue FOR model::TemporaryVariable»
+«DEFINE getTemporaryVariableValue FOR model::operations::ExternalValue»
+	«EXPAND getTemporaryVariableValue FOR value»
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::operations::TemporaryVariable»
 	«safeName(this)»
 	-- another temporary variable
 «ENDDEFINE»
 
-«DEFINE getTemporaryVariableValue FOR model::Property»
-	«REM»we pass all property values by reference to each operation/condition«ENDREM»
-	property_«safeName(this)»
-«ENDDEFINE»
-
-«DEFINE getTemporaryVariableValue FOR model::StaticValue»
-	«value» 
-	-- static value
+«DEFINE getTemporaryVariableValue FOR model::Value»
+	«IF readOnly»
+		«defaultValue» 
+		-- static value
+	«ELSE»
+		«REM»we pass all property values by reference to each operation/condition«ENDREM»
+		property_«safeName(this)»
+	«ENDIF»
 «ENDDEFINE»
 
 /** 

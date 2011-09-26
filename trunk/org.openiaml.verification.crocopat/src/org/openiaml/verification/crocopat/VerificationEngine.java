@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.sosy_lab.crocopat.cli.ExecuteCrocopat;
 import org.sosy_lab.crocopat.cli.ExecuteCrocopat.CrocopatException;
 
@@ -87,9 +88,13 @@ public class VerificationEngine {
 			// export types to rsf
 			monitor.subTask("Exporting meta-model to RSF");
 			exportTypes(model.eClass().getEPackage(), rsf);
+			// and ecore metamodel as well
+			exportTypes(EcorePackage.eINSTANCE, rsf);
 			
 			// export references
 			exportReferences(model.eClass().getEPackage(), rsf);
+			// and ecore metamodel as well
+			exportReferences(EcorePackage.eINSTANCE, rsf);
 			
 			// export the rest of the universe to rsf
 			exportUniverses(rsf);
@@ -107,6 +112,8 @@ public class VerificationEngine {
 			// export inheritance to rml
 			monitor.subTask("Exporting RML");
 			exportInheritance(model.eClass().getEPackage(), rml);
+			// and ecore metamodel as well
+			exportInheritance(EcorePackage.eINSTANCE, rml);
 			
 			// export all the rules to rml
 			exportRules(rml);

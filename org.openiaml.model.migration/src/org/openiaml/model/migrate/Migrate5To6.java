@@ -85,7 +85,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <nodes xsi:type="iaml.operations:SetNode">
 		if (("iaml:BuiltinOperation".equals(xsiType) || "iaml:PrimitiveOperation".equals(xsiType)) 
 				&& element.hasAttribute("name") &&
-				"set".equals(element.getAttribute("name"))) {
+				("set".equals(element.getAttribute("name")) || "setValue".equals(element.getAttribute("name")))) {
 			return "iaml.operations:SetNode";
 		}
 		
@@ -246,7 +246,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// <operations xsi:type="iaml:BuiltinOperation" name="set">
 		// --> <nodes xsi:type="iaml.operations:SetNode">
 		if ("operations".equals(element.getNodeName()) && element.hasAttribute("name") &&
-				"set".equals(element.getAttribute("name"))) {
+				("set".equals(element.getAttribute("name")) || "setValue".equals(element.getAttribute("name")))) {
 			return "nodes";
 		}
 		
@@ -817,7 +817,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// <operations xsi:type="iaml:BuiltinOperation" name="set">
 		// --> <nodes xsi:type="iaml.operations:SetNode">
 		if ("operations".equals(element.getNodeName()) && "name".equals(name)
-				&& "set".equals(value)) {
+				&& ("set".equals(value) || "setValue".equals(value))) {
 			return true;
 		}
 

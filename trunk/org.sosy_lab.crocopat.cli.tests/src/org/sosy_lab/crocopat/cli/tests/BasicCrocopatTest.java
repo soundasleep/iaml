@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 
 import org.sosy_lab.crocopat.cli.ExecuteCrocopat;
 import org.sosy_lab.crocopat.cli.ExecuteCrocopat.CrocopatException;
+import org.sosy_lab.crocopat.cli.ExecuteCrocopat.CrocopatStderrException;
 
 /**
  * @author jmwright
@@ -38,7 +39,16 @@ public class BasicCrocopatTest extends TestCase {
 
 		// get the crocopat output
 		ExecuteCrocopat exec = new ExecuteCrocopat();
-		List<String> result = exec.execute(rml.openStream(), rsf.openStream());
+		List<String> result = null;
+		try {
+			 result = exec.execute(rml.openStream(), rsf.openStream());
+		} catch (CrocopatStderrException e) {
+			// print out list of errors to stderr
+			for (String error : e.getErrors()) {
+				System.err.println(error);
+			}
+			throw e;
+		}
 		
 		assertNotNull("Result should not be null", result);
 		assertEquals(3, result.size());

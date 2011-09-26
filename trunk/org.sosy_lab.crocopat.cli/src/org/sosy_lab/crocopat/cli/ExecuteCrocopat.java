@@ -79,21 +79,24 @@ public class ExecuteCrocopat {
 		private InputStream in;
 		private OutputStream stdout;
 		private OutputStream stderr;
+		private String[] envp;
 
 		/**
 		 * 
 		 * @param in can be null if there is no input stream
 		 * @param stdout output stream to write stdout to
 		 * @param stderr output stream to write stderr to
+		 * @param envp environment variables, in key=value format. may be <code>null</code>
 		 */
-		public ProcessWrapper(InputStream in, OutputStream stdout, OutputStream stderr) {
+		public ProcessWrapper(InputStream in, OutputStream stdout, OutputStream stderr, String[] envp) {
 			this.in = in;
 			this.stdout = stdout;
 			this.stderr = stderr;
+			this.envp = envp;
 		}
 		
 		public ProcessWrapper(OutputStream stdout, OutputStream stderr) {
-			this(null, stdout, stderr);
+			this(null, stdout, stderr, null);
 		}
 		
 		/**
@@ -103,7 +106,7 @@ public class ExecuteCrocopat {
 		 * @throws IOException 
 		 */
 		public int execute(String[] command) throws IOException {
-			Process proc = Runtime.getRuntime().exec(command);
+			Process proc = Runtime.getRuntime().exec(command, envp /* may be null */);
 			
 			// check for any output/error stream
 			checkStreamNonBlocking(proc.getInputStream(), stdout);
@@ -198,7 +201,7 @@ public class ExecuteCrocopat {
 		
 		ByteArrayOutputStream stdout = new ByteArrayOutputStream();
 		ByteArrayOutputStream stderr = new ByteArrayOutputStream();
-		ProcessWrapper pw = new ProcessWrapper(rsf, stdout, stderr);
+		ProcessWrapper pw = new ProcessWrapper(rsf, stdout, stderr, getEnvironmentVariables());
 		
 		// this will block until all stdout/stderr has been saved
 		int exit = pw.execute(command);
@@ -220,6 +223,33 @@ public class ExecuteCrocopat {
 		return output;
 	}
 	
+	/**
+	 * Get a list of environment variables that are necessary, in
+	 * key=value format. May return <code>null</code>.
+	 * 
+	 * @return
+	 */
+	protected String[] getEnvironmentVariables() {
+		/*
+		cygwin warning:
+			  MS-DOS style path detected: C:\DOCUME~1\JMWRIG~1.MAS\LOCALS~1\Temp\temp3312.rml
+			  Preferred POSIX equivalent is: /cygdrive/c/DOCUME~1/JMWRIG~1.MAS/LOCALS~1/Temp/temp3312.rml
+			  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+		*/
+		
+		// need to get all of the current runtime variables too
+		List<String> envp = new ArrayList<String>();
+		for (String key : System.getenv().keySet()) {
+			envp.add(key + "=" + System.getenv(key));
+		}
+		
+		// add CYGWIN runtime variable
+		envp.add("CYGWIN=nodosfilewarning");
+
+		// return as a list of strings
+		return envp.toArray(new String[]{});
+	}
+
 	/**
 	 * Convert the given array of bytes into a list of strings; 
 	 * list separator is newline character '\n'. Does not add

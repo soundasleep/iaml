@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.openiaml.verification.crocopat.feature"
+      label="Iaml Verification with Crocopat"
+      version="0.4.1.qualifier"
+      provider-name="www.openiaml.org"
+      os="win32">
+
+   <description url="http://www.openiaml.org/">
+      This is the implementation of a Crocopat layer of verification for models in the Internet Application Modelling
+Language (IAML), a PhD project at Massey University, New Zealand.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <discovery label="IAML Modelling Platform" url="http://iaml.googlecode.com/svn/trunk/org.openiaml.update/"/>
+   </url>
+
+   <requires>
+      <import plugin="org.openiaml.verification.crocopat" version="0.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.validation" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model" version="0.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.actions" version="0.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.sosy_lab.crocopat.cli" version="0.0.1" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.openiaml.model.actions.crocopat"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.verification.crocopat"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.sosy_lab.crocopat.cli"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

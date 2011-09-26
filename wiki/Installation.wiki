@@ -43,6 +43,7 @@ URL:  http://iaml.googlecode.com/svn/trunk/org.openiaml.update/
 }}}
 
 [http://iaml.googlecode.com/svn/wiki/install/update-site.png]
+
 Once the update site has been added, you should be able to select the latest version of the IAML Modelling Platform to install. You will also need to install the *EMF XPath Support*.
 
 [http://iaml.googlecode.com/svn/wiki/install/software-select.png]

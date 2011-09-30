@@ -1,6 +1,6 @@
 <p>
 <!--index mail messages-->
-An {@model Email} is designed to be used in the composition and delivery of mail messages<!-- , according to RFC 2821 \cite{rfc2821}-->. An {@model Email} may specify five directly contained {@model Value}s, all of which must be {@model Value#type} {@type string}. If the following {@model Email} attributes are defined as {@model Value}s, they may be set at runtime to programatically control the sender, recipient or subject of the {@model Email}:
+An {@model Email} is designed to be used in the composition and delivery of mail messages<!-- according to RFC 2821 \cite{rfc2821}-->. An {@model Email} may specify five directly contained {@model Value}s, all of which must be {@model Value#type} {@type string}. If the following {@model Email} attributes are defined as {@model Value}s, they may be set at runtime to programatically control the sender, recipient or subject of the {@model Email}:
 </p>
 
 <ul>
@@ -16,7 +16,7 @@ An {@model Email} contains the {@model Operation} {@model Email#send}, which wil
 </p>
 
 <p>
-An {@model Email} contains the {@model Event}s {@event onSent} and {@event onFailure}. These events are triggered once an {@model Email} has been successfully delivered and when an {@model Email} is unsuccessfully received, as discussed by {@model Event}.
+An {@model Email} contains the {@model Event}s {@event onSent} and {@event onFailure}. These events are triggered once an {@model Email} has been successfully delivered and when an {@model Email} is unsuccessfully received, as discussed in {@model Event}.
 </p>
 
 <p>

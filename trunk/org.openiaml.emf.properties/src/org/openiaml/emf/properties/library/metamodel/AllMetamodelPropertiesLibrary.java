@@ -40,6 +40,9 @@ public class AllMetamodelPropertiesLibrary {
 		investigators.add(new MMPackagesCount(selector));
 		investigators.add(new MMPrimitiveDatatypesCount(selector));
 		investigators.add(new MMReferencesCount(selector));
+		investigators.add(new MMAttributeInheritanceFactor(selector));
+		investigators.add(new MMReferenceInheritanceFactor(selector));
+		investigators.add(new MMMethodInheritanceFactor(selector));
 		
 		return investigators;
 	}

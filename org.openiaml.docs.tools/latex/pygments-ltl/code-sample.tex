@@ -1,0 +1,43 @@
+\chapter{LTL/NuSMV Code Sample}
+
+\begin{ltlcode}
+-- main module
+MODULE main
+
+VAR
+  -- all pages
+  current_page : {null, page1, index, page2};
+  -- allowing NuSMV to select pages at random
+  browse_to_page : {null, page1, index, page2};
+  -- flags
+  operation_running : boolean;
+  operation_finished : boolean;
+  navigation_running : boolean;
+  navigation_finished : boolean;
+
+ASSIGN
+  init (operation_running) := 0;
+  init (operation_finished) := 0;
+  init (navigation_finished) := 1;
+  -- we start off without being on any page
+  init (current_page) := null;
+  -- click_button is chosen by nusmv
+  -- browse_to_page is chosen by nusmv
+  
+  next (operation_running) := case
+    1 : 0;
+  esac;
+  
+  next (operation_finished) := case
+    1 : 0;
+  esac;
+
+-- checks for infinite loops
+
+LTLSPEC
+  G (operation_running = 1 -> F operation_finished = 1) 
+  
+LTLSPEC
+  -- uses same format as loop.smv
+  G ((!(navigation_running = 1 -> !(F navigation_finished = 1))) U navigation_running = 0)
+\end{ltlcode}

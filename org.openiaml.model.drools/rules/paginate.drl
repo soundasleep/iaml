@@ -1,5 +1,6 @@
 /**
- * Creates interface elements to paginate across many {@model DomainIterator} results.
+ * Creates the interface necessary to permit pagination through {@model DomainIterator} 
+ * results when connected to an {@model InputForm}.
  */
 package org.openiaml.model.drools.rules.paginate
 

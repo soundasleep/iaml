@@ -1,5 +1,5 @@
 /**
- * Rules relating to {@model DomainSource}s of <code>.properties</code> files.
+ * Completes functionality necessary to use <code>.properties</code> files as {@model DomainSource}s.
  */
 package org.openiaml.model.drools.rules.file_domain_object
 

@@ -1,5 +1,5 @@
 /**
- * Creates the 'onInit' {@model Event} for {@model Session}s.
+ * Initialises the necessary contents {@model Session}s, including the {@event onInit} {@model Event}.
  */
 package org.openiaml.model.drools.rules.sessions
 

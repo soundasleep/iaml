@@ -1,5 +1,5 @@
 /**
- * Rules related to runtime input validation, including type checking.
+ * Rules related to runtime input validation, including {@model Changeable#type} checking.
  */
 package org.openiaml.model.drools.rules.validate
 

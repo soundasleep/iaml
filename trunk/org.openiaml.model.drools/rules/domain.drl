@@ -1,5 +1,5 @@
 /**
- * Rules relating to {@model DomainType}s.
+ * Completes the content of {@model DomainType}s with respect to {@model ExtendsEdge type inheritance}.
  */
 #created on: 4/11/2008
 package org.openiaml.model.drools.rules.domain

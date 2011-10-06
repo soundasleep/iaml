@@ -1,5 +1,7 @@
 /**
- * Rules relating to {@model DomainIterator}s.
+ * Creates the {@model DomainInstance}s within {@model DomainIterator}s and refreshes
+ * {@model DomainAttributeInstance} mappings with respect to the connecting {@model DomainType} 
+ * of the iterator.
  */
 # Update the attributes in "new instance" objects when they
 # are connected to DomainTypes.

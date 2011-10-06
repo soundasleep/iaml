@@ -1,6 +1,7 @@
 /**
  * Completes the functionality of {@model Role}s when connected to
- * {@model LoginHandler}s or {@model AccessControlHandler}s.
+ * {@model LoginHandler}s or {@model AccessControlHandler}s, including
+ * {@model ExtendsEdge role inheritance} and initialisation of the default 'User' {@model Role}.
  */
 package org.openiaml.model.drools.rules.users
 

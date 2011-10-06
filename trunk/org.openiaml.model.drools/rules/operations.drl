@@ -1,5 +1,6 @@
 /**
- * Creates default {@model Operation}s for {@model Value}s, and their contents.
+ * Creates the default {@model Operation}s for {@model Changeable} elements, and
+ * the implementation of certain {@model ActivityOperation}s.
  */
 package org.openiaml.model.drools.rules.operations
 

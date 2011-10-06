@@ -1,6 +1,6 @@
 /**
  * Secures {@model Scope}s based on {@model LoginHandler}s and
- * {@model AccessControlHandler}s.
+ * {@model AccessControlHandler}s contained within that {@model Scope}.
  */
 package org.openiaml.model.drools.rules.login_handler
 

@@ -1,5 +1,5 @@
 /**
- * Creates the default {@model Operation}s and {@model Condition}s for
+ * Creates the default {@model Operation}s and {@model Predicate}s for
  * {@model DomainIterator}s.
  */
 package org.openiaml.model.drools.rules.instance

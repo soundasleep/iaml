@@ -1,5 +1,5 @@
 /**
- * Connects {@model SimpleCondition}s and {@model Parameter}s due to {@model Wire} completion.
+ * Recursively connects {@model SimpleCondition}s and {@model Parameter}s with respect to model completion on {@model Wire}s.
  */
 package org.openiaml.model.drools.rules.conditions
 

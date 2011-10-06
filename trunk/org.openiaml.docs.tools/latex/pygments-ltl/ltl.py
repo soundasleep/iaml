@@ -42,7 +42,7 @@ class LtlLexer(RegexLexer):
             (r'\\\n', Text),
             (r'\\', Text),
             (r'(in|is|and|or|not)\b', Operator.Word),
-            (r':=|!=|[-~+/*%=<>&^|.!]', Operator),
+            (r':=|!=|[-~+/*%=<>&^|.!:]', Operator),
             include('keywords'),
             include('builtins'),
             include('name'),
@@ -53,9 +53,10 @@ class LtlLexer(RegexLexer):
         ],
         'keywords': [
           # TODO not yet populated
-            (r'(LTLSPEC|X|G|F|U|R|W|GF)\b', Keyword),
-#            (r'(Sequence|Set|Bag|OrderedSet)\b', Keyword.Type),
-#            (r'(true|false|null)\b', Keyword.Constant),
+            (r'(LTLSPEC|MODULE|VAR|ASSIGN|X|G|F|U|R|W|GF)\b', Keyword),
+            (r'(next|case|esac|init)\b', Keyword),
+            (r'(boolean)\b', Keyword.Type),
+#            (r'(null)\b', Keyword.Constant), -- NuSMV does not have 'null'; in the code sample, 'null' is a normal constant
         ],
         'builtins': [
           # TODO not yet populated

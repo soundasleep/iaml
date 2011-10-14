@@ -110,7 +110,7 @@ end
  * @notModelCompletion TODO
  * @inference AutocompleteWire
  *		An {@model AutocompleteWire} connected to a {@model DomainIterator} will automatically
- *		override the {@model DomainIterator#query} of the Iterator based on what the wire {@model AutocompleteWire#match}es.
+ *		override the {@model DomainIterator#query} of the Iterator based on what the wire {@model AutocompleteWire#match matches}.
  */
 rule "Update DomainIterator query if it is not set"
 	when

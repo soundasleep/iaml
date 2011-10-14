@@ -21,8 +21,8 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference Changeable,DomainAttribute 
- *		A {@model Changeable} thing contains an {@model Event} named {@model Changeable#onChange}. 
+ * @inference Changeable,Event
+ *		{@model Changeable} elements have an {@model Event} named {@model Changeable#onChange}.
  */
 rule "Create 'onChange' event trigger for Changeable things"
 	when
@@ -39,8 +39,8 @@ rule "Create 'onChange' event trigger for Changeable things"
 end
 
 /**
- * @inference Accessible
- *		An {@model Accessible} thing contains an {@model Event} named {@model Accessible#onAccess}.
+ * @inference Accessible,Event
+ *		{@model Accessible} elements have an {@model Event} named {@model Accessible#onAccess}.
  */
 rule "Create 'onAccess' event trigger for Accessible things"
 	when

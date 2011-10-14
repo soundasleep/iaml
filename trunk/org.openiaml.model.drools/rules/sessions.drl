@@ -22,7 +22,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference Scope,Event
- *    A {@model Scope} contains an 'onInit' {@model Event}.
+ *		{@model Scope}s have an {@model Event} named {@model Scope#onInit}.
  */
 rule "Create 'init' event for Sessions"
 	when

@@ -254,7 +254,7 @@ end
  * @inference AccessControlHandler,Frame,ActivityOperation
  *		The 'permissions check' {@model Operation} defined by an {@model AccessControlHandler} protecting
  *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
- *		defined login {@model Frame} in the same {@model Session} if the check fails.
+ *		'login' {@model Frame} within the same {@model Session} if the check fails.
  */
 rule "Connect fail wire from 'permissions check' to 'login page'"
 	when
@@ -282,7 +282,7 @@ end
  * @inference AccessControlHandler,Frame,ActivityOperation
  *		The 'permissions check' {@model Operation} defined by an {@model AccessControlHandler} protecting
  *		a {@model Frame} within a {@model Session} will {@model ECARule navigate} to the 
- *		defined login {@model Frame} in a <em>separate</em> login {@model Session} if the check fails.
+ *		'login' {@model Frame} within a <em>separate</em> login {@model Session} if the check fails.
  */
 rule "Connect fail wire from 'permissions check' to 'login page' (in separate login session)"
 	when

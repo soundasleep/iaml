@@ -110,7 +110,7 @@ end
 /**
  * @inference Changeable,ActivityOperation
  *		An empty {@model ActivityOperation} named "update", "refresh" or "init", contained within a
- *		{@model Changeable}, will automatically be completed with {@model ActivityNode}s to implement
+ *		{@model Changeable}, will be completed with {@model ActivityNode}s to implement
  *		the particular operation.
  */
 rule "Create components of 'update', 'refresh', 'init' operations"
@@ -193,7 +193,7 @@ end
  * @inference Changeable,ActivityOperation,Value
  *		An empty {@model ActivityOperation} named "set value XXX", contained within a
  *		{@model Changeable}, used to set a {@model Value} other than {@model Changeable#fieldValue},
- *		will automatically be completed with {@model ActivityNode}s to implement
+ *		will be completed with {@model ActivityNode}s to implement
  *		the particular operation.
  */
 rule "Create components of 'set value XXX' operations"

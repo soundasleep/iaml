@@ -27,7 +27,7 @@ global DroolsHelperFunctions functions;
  * @inference DetailWire
  *		When a {@model DetailWire} is connected from a {@model Frame} that contains a
  *		{@model DomainIterator} to a <em>target {@model Frame}</em>,
- *		a {@model QueryParameter} will be created in the <em>target {@model Frame}</em> to provide a value of a primary key.
+ *		a {@model QueryParameter} will be created in the <em>target {@model Frame}</em> to provide the primary key value.
  */
 rule "Create QueryParameter for target container of DetailWire"
 	when

@@ -30,7 +30,8 @@ function boolean connects(Wire wire, Object a, Object b) {
  *
  * @inference SyncWire,ECARule,SimpleCondition
  *		All {@model SimpleCondition conditions} against a {@model SyncWire} will be
- *		copied to each subsequently created {@model Changeable#onChange} {@model ECARule}.  
+ *		copied to each {@model ECARule} subsequently created as connected to the
+ *		{@model Changeable#onChange} {@model Event}s.
  */
 rule "Connect SimpleConditions to ECARules created by SyncWires (edit/update) (onChange)"
 	when
@@ -65,7 +66,8 @@ end
 /**
  * @inference SyncWire,ECARule,SimpleCondition
  *		All {@model SimpleCondition conditions} against a {@model SyncWire} will be
- *		copied to each subsequently created {@model Accessible#onAccess} {@model ECARule}.  
+ *		copied to each {@model ECARule} subsequently created as connected to the
+ *		{@model Accessible#onAccess} {@model Event}s.
  */
 rule "Connect SimpleConditions to ECARules created by SyncWires (access/init) (onAccess)"
 	when
@@ -104,7 +106,8 @@ end
 /**
  * @inference SyncWire,ECARule,SimpleCondition,Parameter
  *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SyncWire} will be
- *		copied to each {@model SimpleCondition} subsequently created for each {@model Changeable#onChange} {@model ECARule}.  
+ *		copied to each {@model ECARule} subsequently created as connected to the
+ *		{@model Changeable#onChange} {@model Event}s.
  */
 rule "Connect Parameters to SimpleConditions connected to ECARules created by SyncWires (edit/update) (onChange)"
 	when
@@ -146,7 +149,8 @@ end
 /**
  * @inference SyncWire,ECARule,SimpleCondition,Parameter
  *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SyncWire} will be
- *		copied to each {@model SimpleCondition} subsequently created for each {@model Accessible#onAccess} {@model ECARule}.  
+ *		copied to each {@model ECARule} subsequently created as connected to the
+ *		{@model Accessible#onAccess} {@model Event}s.
  */
 rule "Connect Parameters to SimpleConditions connected to ECARules created by SyncWires (access/init) (onAccess)"
 	when
@@ -194,7 +198,8 @@ end
 /**
  * @inference SetWire,ECARule,SimpleCondition
  *		All {@model SimpleCondition conditions} against a {@model SetWire} will be
- *		copied to each subsequently created {@model Changeable#onChange} {@model ECARule}.  
+ *		copied to each {@model ECARule} subsequently created as connected to the
+ *		{@model Changeable#onChange} {@model Event}s.
  */
 rule "Connect SimpleConditions to ECARules created by SetWires (edit/update) (onChange)"
 	when
@@ -229,7 +234,8 @@ end
 /**
  * @inference SetWire,ECARule,SimpleCondition
  *		All {@model SimpleCondition conditions} against a {@model SetWire} will be
- *		copied to each subsequently created {@model Accessible#onAccess} {@model ECARule}.  
+ *		copied to each {@model ECARule} subsequently created as connected to the
+ *		{@model Changeable#onChange} {@model Event}s.
  */
 rule "Connect SimpleConditions to ECARules created by SetWires (access/init) (onAccess)"
 	when
@@ -268,7 +274,8 @@ end
 /**
  * @inference SetWire,ECARule,SimpleCondition,Parameter
  *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SetWire} will be
- *		copied to each {@model SimpleCondition} subsequently created for each {@model Changeable#onChange} {@model ECARule}.  
+ *		copied to each {@model SimpleCondition} subsequently created for {@model ECARule}s connected to the
+ *		{@model Changeable#onChange} {@model Event}s.
  */
 rule "Connect Parameters to SimpleConditions connected to ECARules created by SetWires (edit/update) (onChange)"
 	when
@@ -310,7 +317,8 @@ end
 /**
  * @inference SetWire,ECARule,SimpleCondition,Parameter
  *		All {@model Parameter}s for each {@model SimpleCondition conditions} against a {@model SetWire} will be
- *		copied to each {@model SimpleCondition} subsequently created for each {@model Accessible#onAccess} {@model ECARule}.  
+ *		copied to each {@model SimpleCondition} subsequently created for {@model ECARule}s connected to the
+ *		{@model Accessible#onAccess} {@model Event}s.
  */
 rule "Connect Parameters to SimpleConditions connected to ECARules created by SetWires (access/init) (onAccess)"
 	when

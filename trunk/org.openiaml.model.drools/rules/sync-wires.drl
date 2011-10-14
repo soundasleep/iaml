@@ -178,7 +178,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 end
 
 /**
- * @inference SyncWire,Changeable,Value,Parameter
+ * @inference SyncWire,InputTextField,CanBeSynced,Parameter
  *		When an {@model InputTextField} is connected to a {@model CanBeSynced} element by an {@model SyncWire#executeOnInput instant}
  *		{@model SyncWire}, the {@model CanBeSynced#fieldValue value} of the source element
  *		will be provided as a {@model Parameter} to the updating {@model ECARule}.

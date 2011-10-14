@@ -104,9 +104,9 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 end
 
 /**
- * @inference ActivityOperation,Changeable
+ * @inference ActivityOperation,InputTextField,SyncWire
  *		An {@model ActivityOperation} named 'validate', used to check the validity of two
- *		type instances of two {@model InputTextField}s,
+ *		type instances of two {@model InputTextField}s conneced via a {@model SyncWire},
  *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
  */
 rule "Create contents of 'validate' operation"

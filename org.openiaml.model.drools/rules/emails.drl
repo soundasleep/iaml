@@ -130,3 +130,42 @@ rule "Create 'subject' property for Email"
 		queue.add(p, drools);
 		
 end
+
+
+/**
+ * @inference Email,Event
+ *		{@model Email}s have an {@model Event} named {@model Email#onSent}.
+ */
+rule "Create 'onSent' event trigger for Emails"
+	when
+		f : Email( )
+		g : GeneratesElements ( this == f )
+		not (event : Event( f.onSent == event ))
+				
+		eval ( handler.veto( g ))
+			
+	then
+		Event event = handler.generatedEventOnSent(g, f);
+		queue.add(event, drools);
+		
+end
+
+/**
+ * @inference Email,Event
+ *		{@model Email}s have an {@model Event} named {@model Email#onFailure}.
+ */
+rule "Create 'onFailure' event trigger for Emails"
+	when
+		f : Email( )
+		g : GeneratesElements ( this == f )
+		not (event : Event( f.onFailure == event ))
+				
+		eval ( handler.veto( g ))
+			
+	then
+		handler.veto(g);
+		Event event = handler.generatedEventOnFailure(g, f);
+		queue.add(event, drools);
+		
+end
+

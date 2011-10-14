@@ -189,7 +189,19 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(event, by);
 		return event;
 	}
+	
+	public Event generatedEventOnSent(GeneratesElements by, Email container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), MessagingPackage.eINSTANCE.getEmail_OnSent() );
+		setGeneratedBy(event, by);
+		return event;
+	}
 
+	public Event generatedEventOnFailure(GeneratesElements by, Email container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), MessagingPackage.eINSTANCE.getEmail_OnFailure() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+	
 	public Event generatedEvent(GeneratesElements by, EObject container, EReference reference) throws InferenceException {
 		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), reference);
 		setGeneratedBy(event, by);

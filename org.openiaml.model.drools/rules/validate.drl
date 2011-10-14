@@ -40,8 +40,9 @@ rule "Create 'Warning' Label for InputTextFields"
 end
 
 /**
- * @inference SyncWire,ActivityOperation
+ * @inference SyncWire,ActivityOperation,InputTextField
  *		Two differently-{@model InputTextField#type typed} {@model InputTextField}s
+ *		connected via a {@model SyncWire}
  *		will define an {@model Operation} within the first field
  *		named 'validate'.
  */
@@ -69,10 +70,11 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 end
 
 /**
- * @inference SyncWire,ECARule
+ * @inference SyncWire,InputTextField
  *		The 'validate' {@model Operation} defined to validate the type instances of
  *		two differently-{@model InputTextField#type typed} {@model InputTextField}s
- *		will be {@model ECARule executed} when one of the fields {@model InputTextField#onChange changes}.
+ *      connected via a {@model SyncWire}
+ *		will be {@model ECARule executed} when one of the fields {@model InputTextField#onChange change}.
  */
 rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onChange"
 	when

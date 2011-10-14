@@ -23,6 +23,7 @@
 
 % generated ModelDoc latex for class «name»
 
+\begin{samepage}
 \hypertarget{model reference:«humanise(name)»}{}
 \hypertarget{model reference:«humanise(name)»s}{}
 \modeldocSection{«humanise(name)»}
@@ -37,6 +38,7 @@
 	\textbf{TODO} Tagline for «EXPAND modelLink».
 	«ENDIF»
 «EXPAND ifThenClose("Tagline")»
+\end{samepage}
 
 «EXPAND ifThenOpen("Rationale")»
 	% Rationale

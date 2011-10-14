@@ -135,7 +135,7 @@ end
 /**
  * Solves issue 209: Allow Properties to be set directly by SetWires or SyncWires.
  * 
- * @inference SetWire,Value
+ * @inference SetWire,Changeable,Value
  *		When a {@model Changeable} is connected to a {@model Value} by a
  *		{@model SetWire}, the source element will {@model ECARule call} the 'set value XXX' {@model Operation} on the 
  *		target when the source {@model Changeable#onChange changes}.
@@ -165,7 +165,7 @@ rule "Run instance wire from edit to Value update (onChange) [set]"
 end
 
 /**
- * @inference SetWire
+ * @inference SetWire,InputTextField
  *		When an {@model InputTextField} is connected to a {@model ContainsOperations} by an {@model SetWire#executeOnInput instant}
  *		{@model SetWire}, the source element will {@model ECARule call} the 'update' {@model Operation} on the 
  *		target when the source {@model InputTextField#onInput input changes}.
@@ -285,7 +285,7 @@ rule "Connect parameter wire to: Run instance wire from edit to Value update (on
 end
 
 /**
- * @inference SetWire,Changeable,Value,Parameter
+ * @inference SetWire,InputTextField,CanBeSynced,Parameter
  *		When an {@model InputTextField} is connected to a {@model CanBeSynced} element by an {@model SetWire#executeOnInput instant}
  *		{@model SetWire}, the {@model CanBeSynced#fieldValue value} of the source element
  *		will be provided as a {@model Parameter} to the updating {@model ECARule}.

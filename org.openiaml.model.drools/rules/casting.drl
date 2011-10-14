@@ -30,7 +30,7 @@ global DroolsHelperFunctions functions;
  * <p>Issue 221: Add 'can cast?' Primitive Function to all Changeable elements
  *
  * @inference Changeable,BuiltinProperty
- *		{@model Changeable}s will contain a {@model BuiltinProperty} named 'can cast?'.
+ *		{@model Changeable} elements will contain a {@model BuiltinProperty} named 'can cast?'.
  */
 rule "Create 'can cast?' condition for Changeables"
 	when

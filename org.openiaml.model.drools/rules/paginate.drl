@@ -525,7 +525,7 @@ rule "Create contents of 'update target' operation"
 end
 
 /**
- * @inference DomainIterator,SetWire,Event
+ * @inference DomainIterator,SetWire
  *		The 'results' {@model Label} defined for navigating a {@model DomainIterator},
  *		as defined by a {@model SetWire}, will be {@model ECARule updated} whenever
  *		the iterator {@model DomainIterator#onChange changes}.
@@ -553,7 +553,7 @@ rule "Connect Instance.onChange to Results.update"
 end
 
 /**
- * @inference DomainIterator,SetWire,Event,Parameter
+ * @inference DomainIterator,SetWire,Parameter
  *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
  *		will be used as a {@model Parameter} to update the 'results' {@model Label}
  *		defined for navigating a {@model DomainIterator} with a {@model SetWire}
@@ -584,7 +584,7 @@ rule "Connect results parameter to Results label update (onChange)"
 end
 
 /**
- * @inference DomainIterator,SetWire,Event
+ * @inference DomainIterator,SetWire
  *		The 'results' {@model Label} defined for navigating a {@model DomainIterator},
  *		as defined by a {@model SetWire}, will be {@model ECARule updated} whenever
  *		the containing {@model InputForm} is {@model InputForm#onAccess accessed}.
@@ -612,7 +612,7 @@ rule "Connect Instance.onAccess to Results.update"
 end
 
 /**
- * @inference DomainIterator,SetWire,Event,Parameter
+ * @inference DomainIterator,SetWire,Parameter
  *		The current {@model DomainIterator#results results count} of the {@model DomainIterator}
  *		will be used as a {@model Parameter} to update the 'results' {@model Label}
  *		defined for navigating a {@model DomainIterator} with a {@model SetWire}

@@ -9,7 +9,8 @@ A {@model DomainIterator} is composed of a set of {@model DomainAttributeInstanc
 <h3>query</h3>
 
 <p>
-The {@model DomainIterator#query} attribute of the {@model DomainIterator} specifies the query that will be used to select {@model DomainInstance}s from the connected {@model DomainSource}. Parameters to this {@model DomainIterator#query} may be specified through {@model Parameter}s, and referenced within the {@model DomainIterator#query} as <i>named parameters</i> (for example, a query of "<code>:id = 1</code>" will use the incoming {@model Parameter} {@model Parameter#name}d "id"). A variety of database-independent query functions are provided:
+The {@model DomainIterator#query} attribute of the {@model DomainIterator} specifies the parameterised query that will be used to select {@model DomainInstance}s from the connected {@model DomainSource}. A {@model DomainIterator} does not permit the execution of raw SQL commands, in order to improve the security of modelled web applications. Parameters to this {@model DomainIterator#query} may be specified through {@model Parameter}s, and referenced within the {@model DomainIterator#query} as <i>named parameters</i> (for example, a query of "<code>:id = 1</code>" will use the incoming {@model Parameter} {@model Parameter#name}d "id"). A variety of database-independent query functions are provided:
+<!--index parameterised APIs-->
 </p>
 
 <p>

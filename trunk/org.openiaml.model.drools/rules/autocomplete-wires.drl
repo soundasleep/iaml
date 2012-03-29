@@ -72,6 +72,7 @@ rule "Create an input field for Autocomplete"
 	then
 		InputTextField text = handler.generatedInputTextField(wire, form);
 		handler.setName(text, functions.getAutocompleteInputName(attribute));
+		handler.setDefaultValue(text, "");
 		queue.add(text, drools);
 		
 end
@@ -204,9 +205,10 @@ end
 /**
  * @inference AutocompleteWire,IteratorList,Parameter
  *		Every {@model Label} within the <em>results {@model IteratorList}</em> of an {@model AutocompleteWire}
- *		search will be provided an {@model ECARule} to {@model VisibleThing#update} the {@model AutocompleteWire#to target}
- *		of the wire with the {@model AutocompleteWire#match matching attribute} instance value, when the {@model Label} 
- *		is {@model Label#onClick clicked}. 
+ *		search will be provided an {@model ECARule} to {@model VisibleThing#update} a {@model AutocompleteWire#to target}
+ *		element -- where the {@model DomainAttributeInstance#name} of the {@model DomainAttributeInstance}
+ *		matches the {@model VisibleThing#name} of the target {@model VisibleThing} -- 
+ *		when the {@model Label} is {@model Label#onClick clicked}. 
  */
 rule "IteratorList labels update the target of the Autocomplete Wire"
 	when
@@ -214,7 +216,10 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 		container : Frame ( )
 		iterator : DomainIterator ( eContainer == container )
 		
-		# VisibleThing with the same name as the given attribute
+		# VisibleThing with the same name as the given attribute, to allow for
+		# multiple Labels to be set by a single AutocompleteWire
+		# (that is, the name of the VisibleThing dictates the AttributeInstance that is
+		# extracted from the DomainIterator)
 		target : VisibleThing ( name == attribute.name )
 		updateOperation : Operation ( eContainer == target, name == "update" )
 		

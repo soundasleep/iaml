@@ -732,6 +732,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getValue_DefaultValue(), value);
 	}
 	
+	public void setDefaultValue(Changeable element, String value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getChangeable_DefaultValue(), value);
+	}
+	
 	public void setFile(DomainSource element, FileReference value) throws InferenceException {
 		setValue(element, DomainPackage.eINSTANCE.getDomainSource_File(), value);
 	}

@@ -244,6 +244,9 @@ context model::domain::DomainType WARNING "A DomainType should have at least one
 context model::domain::DomainIterator WARNING "A DomainIterator should have one DomainSource specified" :
 	outSelects.size == 1;
 
+context model::wires::AutocompleteWire WARNING "An AutocompleteWire should have a 'match' attribute specified" :
+	match != null;
+
 context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this AccessControlHandler" :
 	(!model::components::AccessControlHandler.isInstance(trigger)) ||
 		(name == "login" || name == "logout" || name == "success");

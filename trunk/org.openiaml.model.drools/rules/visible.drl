@@ -1,5 +1,5 @@
 /**
- * Creates the default {@model Event}s, {@model Operation}s and {@model Predicates}s of
+ * Creates the default {@model Event}s, {@model Operation}s and {@model Predicate}s of
  * {@model VisibleThing}s.
  */
 package org.openiaml.model.drools.rules.visible

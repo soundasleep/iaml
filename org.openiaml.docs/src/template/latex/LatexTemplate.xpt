@@ -113,10 +113,12 @@
 
 «IF !additionalLatex.isEmpty»
 % additional latex documentation
+\begin{modeldocAdditionalDocumentation}
 «FOREACH additionalLatex.description AS latex»
 «latex.value-»
 
 «ENDFOREACH»
+\end{modeldocAdditionalDocumentation}
 «ENDIF»
 
 «EXPAND latexAttributes»

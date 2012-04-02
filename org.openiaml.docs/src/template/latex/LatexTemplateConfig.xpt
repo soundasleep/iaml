@@ -275,6 +275,12 @@
   % empty
 }
 
+\newenvironment{modeldocAdditionalDocumentation}{
+  % empty
+}{
+  % empty
+}
+
 % a general list environment
 \newenvironment{modeldocList}{
   \begin{itemize}[leftmargin=0.75cm,parsep=0pt]

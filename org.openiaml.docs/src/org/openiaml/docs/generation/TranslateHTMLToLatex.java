@@ -166,11 +166,11 @@ public class TranslateHTMLToLatex {
 		// headings
 		f = f.replace("<h1>", "\n\n\\section{");
 		f = f.replace("</h1>", "}");
-		f = f.replace("<h2>", "\n\n\\subsection{");
+		f = f.replace("<h2>", "\n\n\\modeldocSubsection{");
 		f = f.replace("</h2>", "}");
-		f = f.replace("<h3>", "\n\n\\subsubsection{");
+		f = f.replace("<h3>", "\n\n\\modeldocSubsubsection{");
 		f = f.replace("</h3>", "}");
-		f = f.replace("<h4>", "\n\n\\subsubsubsection{");
+		f = f.replace("<h4>", "\n\n\\modeldocSubsubsubsection{");
 		f = f.replace("</h4>", "}");
 		
 		// lists

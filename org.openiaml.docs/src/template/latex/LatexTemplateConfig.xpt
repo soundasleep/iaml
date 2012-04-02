@@ -61,6 +61,10 @@
 \newcommand{\modeldocOpposite}[1]{ (opposite: #1)}
 \newcommand{\modeldocEnumerationValue}[1]{\code{#1}}
 
+\newcommand{\modeldocSubsection}[1]{\subsection{#1}}
+\newcommand{\modeldocSubsubsection}[1]{\subsubsection{#1}}
+\newcommand{\modeldocSubsubsubsection}[1]{\subsubsubsection{#1}}
+
 % #1 - property name, e.g. name
 % #2 - property parent, e.g. NamedElement
 % each parameter is already linked e.g. \modelLink
@@ -79,13 +83,13 @@
 }
 
 \newenvironment{modeldocRationale}{
-  \subsection{Rationale}
+  \modeldocSubsection{Rationale}
 }{
   % empty
 }
 
 \newenvironment{modeldocStructure}{
-  \subsection{Structure}
+  \modeldocSubsection{Structure}
 }{
   % empty
 }
@@ -110,7 +114,7 @@
 
 % visual representation
 \newenvironment{modeldocVisual}{
-  \subsection{Visual Representation}
+  \modeldocSubsection{Visual Representation}
 }{
   % empty
 }
@@ -132,127 +136,127 @@
 }
 
 \newenvironment{modeldocAttributes}{
-  \subsection{Attributes}
+  \modeldocSubsection{Attributes}
 }{
   % empty
 }
 
 \newenvironment{modeldocAttributesDirect}{
-  \subsubsection{Direct Attributes}
+  \modeldocSubsubsection{Direct Attributes}
 }{
   % empty
 }
 
 \newenvironment{modeldocAttributesInherited}{
-  \subsubsection{Inherited Attributes}  
+  \modeldocSubsubsection{Inherited Attributes}  
 }{
   % empty
 }
 
 \newenvironment{modeldocChildren}{
-  \subsection{Children}
+  \modeldocSubsection{Children}
 }{
   % empty
 }
 
 \newenvironment{modeldocChildrenDirect}{
-  \subsubsection{Direct Children}
+  \modeldocSubsubsection{Direct Children}
 }{
   % empty
 }
 
 \newenvironment{modeldocChildrenInherited}{
-  \subsubsection{Inherited Children}
+  \modeldocSubsubsection{Inherited Children}
 }{
   % empty
 }
 
 \newenvironment{modeldocReferences}{
-  \subsection{References}
+  \modeldocSubsection{References}
 }{
   % empty
 }
 
 \newenvironment{modeldocReferencesDirect}{
-  \subsubsection{Direct References}
+  \modeldocSubsubsection{Direct References}
 }{
   % empty
 }
 
 \newenvironment{modeldocReferencesInherited}{
-  \subsubsection{Inherited References}
+  \modeldocSubsubsection{Inherited References}
 }{
   % empty
 }
 
 \newenvironment{modeldocOperations}{
-  \subsection{Operations}
+  \modeldocSubsection{Operations}
 }{
   % empty
 }
 
 \newenvironment{modeldocOperationsDirect}{
-  \subsubsection{Direct Operations}
+  \modeldocSubsubsection{Direct Operations}
 }{
   % empty
 }
 
 \newenvironment{modeldocOperationsInherited}{
-  \subsubsection{Inherited Operations}
+  \modeldocSubsubsection{Inherited Operations}
 }{
   % empty
 }
 
 \newenvironment{modeldocConditions}{
-  \subsection{Conditions}
+  \modeldocSubsection{Conditions}
 }{
   % empty
 }
 
 \newenvironment{modeldocConditionsDirect}{
-  \subsubsection{Direct Conditions}
+  \modeldocSubsubsection{Direct Conditions}
 }{
   % empty
 }
 
 \newenvironment{modeldocConditionsInherited}{
-  \subsubsection{Inherited Conditions}
+  \modeldocSubsubsection{Inherited Conditions}
 }{
   % empty
 }
 
 \newenvironment{modeldocEvents}{
-  \subsection{Events}
+  \modeldocSubsection{Events}
 }{
   % empty
 }
 
 \newenvironment{modeldocEventsDirect}{
-  \subsubsection{Direct Events}
+  \modeldocSubsubsection{Direct Events}
 }{
   % empty
 }
 
 \newenvironment{modeldocEventsInherited}{
-  \subsubsection{Inherited Events}
+  \modeldocSubsubsection{Inherited Events}
 }{
   % empty
 }
 
 \newenvironment{modeldocInference}{
-  \subsection{Inference Rules}
+  \modeldocSubsection{Inference Rules}
 }{
   % empty
 }
 
 \newenvironment{modeldocConstraints}{
-  \subsection{Constraints}
+  \modeldocSubsection{Constraints}
 }{
   % empty
 }
 
 \newenvironment{modeldocImplementationNotes}{
-  \subsection{Implementation Notes}
+  \modeldocSubsection{Implementation Notes}
 }{
   % empty
 }

@@ -28,7 +28,7 @@ global DroolsHelperFunctions functions;
  *
  * @inference LoginHandler
  *		A {@model Scope} protected by a {@model LoginHandler} will define a separate
- *		<em>login {@model Session}</em>, allowing session-unique authentication.
+ *		<em>login</em> {@model Session}, allowing session-unique authentication.
  */
 rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
 	when
@@ -50,7 +50,7 @@ end
 /**
  * @inference LoginHandler,Frame
  *		A {@model Scope} protected by a {@model LoginHandler} will create a
- *		<em>login {@model Frame}</em> named 'login' within the <em>login {@model Session}</em>.
+ *		<em>login</em> {@model Frame} named 'login' within the <em>login</em> {@model Session}.
  */
 rule "Create default 'login' page for LoginHandlers"
 	when
@@ -75,7 +75,7 @@ end
 
 /**
  * @inference LoginHandler,Frame
- *		The <em>login {@model Frame}</em> created for a {@model LoginHandler} protecting a {@model Scope} 
+ *		The <em>login</em> {@model Frame} created for a {@model LoginHandler} protecting a {@model Scope} 
  *		will be provided as the {@model ECARule login rule} for the {@model LoginHandler} if none is specified.
  */
 rule "Connect default 'login' page to LoginHandler"
@@ -102,7 +102,7 @@ end
 /**
  * @inference LoginHandler,Frame
  *		A {@model Scope} protected by a {@model LoginHandler} will create a
- *		<em>logout {@model Frame}</em> named 'logout' within the same {@model Scope}.
+ *		<em>logout</em> {@model Frame} named 'logout' within the same {@model Scope}.
  */
 rule "Create 'logout' page for LoginHandlers"
 	when
@@ -124,7 +124,7 @@ end
 /**
  * @inference LoginHandler,ECARule
  *		If a {@model LoginHandler} has an outgoing {@model ECARule navigation rule} named 'logout',
- *		then this navigation rule will be {@model ECARule executed} when the <em>logout {@model Frame}</em>
+ *		then this navigation rule will be {@model ECARule executed} when the <em>logout</em> {@model Frame}
  *		is {@model Frame#onAccess accessed}.
  */
 rule "Instruct 'logout' page to follow to the actual logout destination if set"
@@ -281,7 +281,7 @@ end
 /**
  * @inference LoginHandler,Parameter
  *		A {@model Frame} contained by a {@model Session} protected by a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code>
- *		will {@model ECARule navigate} to the <em>login {@model Frame}</em> if the 'check key'  {@model Operation} fails.
+ *		will {@model ECARule navigate} to the <em>login</em> {@model Frame} if the 'check key'  {@model Operation} fails.
  */
 rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Frame"
 	when
@@ -472,7 +472,7 @@ end
 
 /**
  * @inference LoginHandler,InputForm
- *		A <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		A <em>login</em> {@model Frame} for a {@model LoginHandler} will
  *		contain an {@model InputForm} named 'login form'.
  */
 rule "Create login form for 'login' pages"
@@ -497,7 +497,7 @@ end
 
 /**
  * @inference LoginHandler,Button
- *		A <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		A <em>login</em> {@model Frame} for a {@model LoginHandler} will
  *		contain an {@model Button} named 'login'.
  */
 rule "Create 'Login' button for login form"
@@ -525,7 +525,7 @@ end
 
 /**
  * @inference LoginHandler,Button
- *		The 'login' {@model Button} in the <em>login {@model Frame}</em> for a {@model LoginHandler} will
+ *		The 'login' {@model Button} in the <em>login</em> {@model Frame} for a {@model LoginHandler} will
  *		{@model ECARule execute} the 'do login' {@model Operation} within the {@model LoginHandler}
  *		when the button is {@model Button#onClick clicked}.
  */
@@ -556,7 +556,7 @@ end
 
 /**
  * @inference LoginHandler,Button
- *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will
+ *		A <em>login</em> {@model Frame} for a {@model LoginHandler} of {@model LoginHandler#type} <code>SECRET_KEY</code> will
  *		contain an {@model InputTextField} named 'login key'.
  */
 rule "Create text fields for login form of 'login' pages [type=secret_key]"
@@ -705,7 +705,7 @@ end
 
 /**
  * @inference LoginHandler,InputTextField,Parameter,DomainAttribute
- *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will
+ *		A <em>login</em> {@model Frame} for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code> will
  *		contain an {@model InputTextField} for every {@model DomainAttribute} defined as a {@model Parameter} to that {@model LoginHandler}. 
  */
 rule "Create text fields for login form of 'login' pages [type=domain_object]"
@@ -741,7 +741,7 @@ end
  * any generated primary keys.
  *
  * @inference LoginHandler,InputTextField,Parameter,DomainAttribute,Role
- *		A <em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will
+ *		A <em>login</em> {@model Frame} for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code> will
  *		contain an {@model InputTextField} for every non-{@model DomainAttribute#primaryKey primary key}
  *		{@model DomainAttribute} within the {@model Role} defined as a {@model Parameter} to that {@model LoginHandler}.  
  */
@@ -784,7 +784,7 @@ end
 /**
  * @inference LoginHandler,Parameter
  *		Every {@model InputTextField} defined in the login form for the
- *		<em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
+ *		<em>login</em> {@model Frame} for a {@model LoginHandler} of {@model LoginHandler#type} <code>DOMAIN_OBJECT</code>
  *		will be provided as a named {@model Parameter} to the 'do login' {@model Operation} of the handler. 
  */
 rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=domain_object]"
@@ -824,7 +824,7 @@ end
 /**
  * @inference LoginHandler,Parameter
  *		Every {@model InputTextField} defined in the login form for the
- *		<em>login {@model Frame}</em> for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
+ *		<em>login</em> {@model Frame} for a {@model LoginHandler} of {@model LoginHandler#type} <code>USER</code>
  *		will be provided as a named {@model Parameter} to the 'do login' {@model Operation} of the handler. 
  */
 rule "Connect text fields for login form of 'login' pages to 'do login' run wire [type=user]"
@@ -1269,7 +1269,7 @@ end
 
 /**
  * @inference LoginHandler,ECARule
- *		When the <em>logout {@model Frame}</em> for a {@model LoginHandler} is {@model Frame#onAccess accessed},
+ *		When the <em>logout</em> {@model Frame} for a {@model LoginHandler} is {@model Frame#onAccess accessed},
  *		the 'do logout' {@model Operation} will be {@model ECARule called}.
  */
 rule "Connect 'access' operation for logout page to 'do logout' operation"

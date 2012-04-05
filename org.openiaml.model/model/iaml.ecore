@@ -277,7 +277,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsValues" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An element which can directly contain arbitrary {@model Value}s, which can be used to programatically set element attributes at runtime."/>
+      <details key="documentation" value="An element which can directly contain arbitrary {@model Value}s, which can be used to programmatically set element attributes at runtime."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Value" containment="true">
@@ -1534,7 +1534,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="A limit to the number of {@model DomainInstance}s retrived and kept in runtime memory."/>
+          <details key="documentation" value="A limit to the number of {@model DomainInstance}s retrieved and kept in runtime memory."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="orderBy" eType="#//domain/DomainAttribute">
@@ -1701,7 +1701,7 @@
     </eAnnotations>
     <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//domain/DomainType #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A specific role of a user within a web application using Role-Based Access Control, prodiving a particular set of {@model Permission}s."/>
+        <details key="documentation" value="A specific role of a user within a web application using Role-Based Access Control, providing a particular set of {@model Permission}s."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination">

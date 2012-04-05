@@ -106,7 +106,7 @@ end
 /**
  * @inference ActivityOperation,InputTextField,SyncWire
  *		An {@model ActivityOperation} named 'validate', used to check the validity of two
- *		type instances of two {@model InputTextField}s conneced via a {@model SyncWire},
+ *		type instances of two {@model InputTextField}s connected via a {@model SyncWire},
  *		will be completed with the necessary {@model ActivityNode}s to implement this functionality.
  */
 rule "Create contents of 'validate' operation"

@@ -1,5 +1,5 @@
 /**
- * We want an easy way to refer to commands programatically.
+ * We want an easy way to refer to commands programmatically.
  * This also allows us to remove the ".command" package export
  * requirement!
  *

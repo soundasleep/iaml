@@ -30,7 +30,7 @@
 	«IF php»
 		«IF name=="send"»
 			«REM»
-				the AccessControlHandler will have an incoming ParameterWire
+				the AccessControlHandler will have an incoming Parameter
 				with the UserInstance in which to validate against
 			«ENDREM»
 			email_«safeName(email)-»_send()

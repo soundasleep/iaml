@@ -103,7 +103,7 @@ context model::ECARule WARNING "This ECA Rule will not do anything: consider nam
 context model::Value WARNING "A session value used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
 	!(defaultValue == null && inWires.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
-context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
+context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming Parameter" :
 	(type != model::components::LoginHandlerTypes::USER) || inParameterEdges.size <= 1; 
 
 context model::domain::DomainIterator ERROR "A DomainIterator has incoming Parameters, but does not have a query to use them" :

@@ -17,4 +17,4 @@ More [documentation](http://code.google.com/p/iaml/w/list?q=label:EndUser) is fo
 been [released](http://journals.jevon.org/users/jevon-phd/entry/19917) (September 2011), 
 and can be [installed into Eclipse](https://code.google.com/p/iaml/wiki/Installation).
 
-*More information: http://openiaml.org *
+*More information: http://openiaml.org*
